@@ -236,7 +236,7 @@ export class MaskEngine {
   public checkVal(
     inputValue: string,
     allow: boolean,
-    keepBuffer: boolean
+    keepBuffer: boolean,
   ): { lastMatch: number; bufferValue: string; shouldClear: boolean } {
     let lastMatch: number = -1;
     let position: number = 0;

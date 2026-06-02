@@ -4,7 +4,7 @@ import type { SpeedDialDirection, SpeedDialType } from './speed-dial.types';
 
 function getCoordinates(transform: string): { x: number; y: number } {
   const match: RegExpMatchArray | null = transform.match(
-    /^translate\(([-\d.eE]+)px, ([-\d.eE]+)px\)$/
+    /^translate\(([-\d.eE]+)px, ([-\d.eE]+)px\)$/,
   );
   expect(match).not.toBeNull();
 
@@ -41,7 +41,7 @@ describe('computeSpeedDialLayout', (): void => {
         layout.forEach((position: { readonly transform: string }): void => {
           expect(position.transform).toBe('');
         });
-      }
+      },
     );
   });
 
@@ -101,14 +101,14 @@ describe('computeSpeedDialLayout', (): void => {
 
         const first: { x: number; y: number } = getCoordinates(layout[0]?.transform ?? '');
         const last: { x: number; y: number } = getCoordinates(
-          layout[layout.length - 1]?.transform ?? ''
+          layout[layout.length - 1]?.transform ?? '',
         );
 
         expect(first.x).toBeCloseTo(testCase.first.x, 5);
         expect(first.y).toBeCloseTo(testCase.first.y, 5);
         expect(last.x).toBeCloseTo(testCase.last.x, 5);
         expect(last.y).toBeCloseTo(testCase.last.y, 5);
-      }
+      },
     );
   });
 
@@ -140,14 +140,14 @@ describe('computeSpeedDialLayout', (): void => {
 
         const first: { x: number; y: number } = getCoordinates(layout[0]?.transform ?? '');
         const last: { x: number; y: number } = getCoordinates(
-          layout[layout.length - 1]?.transform ?? ''
+          layout[layout.length - 1]?.transform ?? '',
         );
 
         expect(first.x).toBeCloseTo(testCase.first.x, 5);
         expect(first.y).toBeCloseTo(testCase.first.y, 5);
         expect(last.x).toBeCloseTo(testCase.last.x, 5);
         expect(last.y).toBeCloseTo(testCase.last.y, 5);
-      }
+      },
     );
   });
 

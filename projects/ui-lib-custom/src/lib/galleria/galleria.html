@@ -16,7 +16,14 @@
       [attr.aria-label]="fullscreenAriaLabel"
       (click)="openFullScreen()"
     >
-      <svg class="uilib-galleria__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <svg
+        class="uilib-galleria__icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
         <polyline points="15 3 21 3 21 9" />
         <polyline points="9 21 3 21 3 15" />
         <line x1="21" y1="3" x2="14" y2="10" />
@@ -28,11 +35,7 @@
 
 <!-- ─── Fullscreen overlay ─────────────────────────────────────────────────── -->
 @if (fullScreen() && visible()) {
-  <div
-    class="uilib-galleria__mask"
-    role="presentation"
-    (click)="closeFullScreen()"
-  >
+  <div class="uilib-galleria__mask" role="presentation" (click)="closeFullScreen()">
     <div
       class="uilib-galleria__fullscreen-container"
       #fullScreenContainerElement
@@ -50,7 +53,14 @@
         [attr.aria-label]="closeAriaLabel"
         (click)="closeFullScreen()"
       >
-        <svg class="uilib-galleria__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <svg
+          class="uilib-galleria__icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
@@ -72,7 +82,6 @@
 
   <!-- Main content row / column depending on thumbnailsPosition -->
   <div class="uilib-galleria__content" [class.uilib-galleria__content--vertical]="isVertical()">
-
     <!-- Thumbnail strip BEFORE item (top / left) -->
     @if (showThumbnails() && isThumbnailBefore()) {
       <ng-container [ngTemplateOutlet]="thumbnailStrip" />
@@ -94,7 +103,14 @@
           [attr.aria-label]="previousItemAriaLabel()"
           (click)="navigatePrev($event)"
         >
-          <svg class="uilib-galleria__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <svg
+            class="uilib-galleria__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
             <polyline points="15 18 9 12 15 6" />
           </svg>
         </button>
@@ -126,7 +142,14 @@
           [attr.aria-label]="nextItemAriaLabel()"
           (click)="navigateNext($event)"
         >
-          <svg class="uilib-galleria__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <svg
+            class="uilib-galleria__icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </button>
@@ -135,10 +158,10 @@
       <!-- Caption overlay -->
       @if (captionTemplate()) {
         <div class="uilib-galleria__caption">
-            <ng-container
-              [ngTemplateOutlet]="captionTemplate()!"
-              [ngTemplateOutletContext]="{ $implicit: currentItem()! }"
-            />
+          <ng-container
+            [ngTemplateOutlet]="captionTemplate()!"
+            [ngTemplateOutletContext]="{ $implicit: currentItem()! }"
+          />
         </div>
       }
 
@@ -160,7 +183,10 @@
               @if (indicatorTemplate()) {
                 <ng-container
                   [ngTemplateOutlet]="indicatorTemplate()!"
-                  [ngTemplateOutletContext]="{ $implicit: $index, active: $index === activeIndex() }"
+                  [ngTemplateOutletContext]="{
+                    $implicit: $index,
+                    active: $index === activeIndex(),
+                  }"
                 />
               } @else {
                 <span class="uilib-galleria__indicator-dot" aria-hidden="true"></span>
@@ -175,8 +201,8 @@
     @if (showThumbnails() && !isThumbnailBefore()) {
       <ng-container [ngTemplateOutlet]="thumbnailStrip" />
     }
-
-  </div><!-- /content -->
+  </div>
+  <!-- /content -->
 
   <!-- Indicators below/above gallery (not on item) -->
   @if (showIndicators() && !showIndicatorsOnItem()) {
@@ -233,7 +259,14 @@
         [attr.aria-label]="thumbnailPrevAriaLabel"
         (click)="scrollThumbnailsPrev($event)"
       >
-        <svg class="uilib-galleria__icon uilib-galleria__icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <svg
+          class="uilib-galleria__icon uilib-galleria__icon--sm"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
           @if (isVertical()) {
             <polyline points="18 15 12 9 6 15" />
           } @else {
@@ -254,7 +287,9 @@
           <button
             type="button"
             class="uilib-galleria__thumbnail-item"
-            [class.uilib-galleria__thumbnail-item--active]="thumbnailFirstIndex() + $index === activeIndex()"
+            [class.uilib-galleria__thumbnail-item--active]="
+              thumbnailFirstIndex() + $index === activeIndex()
+            "
             [attr.data-thumbnail-index]="thumbnailFirstIndex() + $index"
             [attr.aria-label]="resolveThumbnailAriaLabel(item, thumbnailFirstIndex() + $index)"
             [attr.aria-current]="thumbnailFirstIndex() + $index === activeIndex() ? 'true' : null"
@@ -267,13 +302,11 @@
                 [ngTemplateOutletContext]="{ $implicit: item }"
               />
             } @else if (resolveThumbnailSrc(item); as thumbnailSrc) {
-              <img
-                [src]="thumbnailSrc"
-                [attr.alt]="resolveThumbnailAlt(item)"
-                loading="lazy"
-              />
+              <img [src]="thumbnailSrc" [attr.alt]="resolveThumbnailAlt(item)" loading="lazy" />
             } @else {
-              <span class="uilib-galleria__thumbnail-index">{{ thumbnailFirstIndex() + $index + 1 }}</span>
+              <span class="uilib-galleria__thumbnail-index">{{
+                thumbnailFirstIndex() + $index + 1
+              }}</span>
             }
           </button>
         </li>
@@ -290,7 +323,14 @@
         [attr.aria-label]="thumbnailNextAriaLabel"
         (click)="scrollThumbnailsNext($event)"
       >
-        <svg class="uilib-galleria__icon uilib-galleria__icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <svg
+          class="uilib-galleria__icon uilib-galleria__icon--sm"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
           @if (isVertical()) {
             <polyline points="6 9 12 15 18 9" />
           } @else {

@@ -13,23 +13,23 @@ Dialog component with modal/backdrop and responsive behavior.
 
 ### Inputs
 
-| Name              | Type                        | Default                            | Description                                                                         |
-| ----------------- | --------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------- |
-| `ariaDescribedBy` | `string | undefined`        | `undefined`                        | Optional aria-describedby pointing to an element that describes the dialog purpose. |
-| `ariaLabelledBy`  | `string | undefined`        | `undefined`                        | Optional aria-labelledby override.                                                  |
-| `blockScroll`     | `boolean`                   | `DIALOG_DEFAULTS.BlockScroll`      | Enables body scroll lock while a modal dialog is visible.                           |
-| `breakpoints`     | `Record<string, string>`    | `{ ...DIALOG_DEFAULTS.Breakpoints` | Responsive max-width -> width map, e.g. { '960px': '75vw', '640px': '90vw' }.       |
-| `closable`        | `boolean`                   | `DIALOG_DEFAULTS.Closable`         | Controls whether the close button is shown.                                         |
-| `closeOnEscape`   | `boolean`                   | `DIALOG_DEFAULTS.CloseOnEscape`    | Enables closing the dialog with Escape key.                                         |
-| `dismissableMask` | `boolean`                   | `DIALOG_DEFAULTS.DismissableMask`  | Enables closing the dialog by clicking the modal backdrop.                          |
-| `draggable`       | `boolean`                   | `DIALOG_DEFAULTS.Draggable`        | Enables dialog dragging (placeholder for v1 core behavior).                         |
-| `header`          | `string`                    | `DIALOG_DEFAULTS.Header`           | Optional header text fallback when no projected header is supplied.                 |
-| `headless`        | `boolean`                   | `DIALOG_DEFAULTS.Headless`         | Enables headless rendering mode.                                                    |
-| `maximizable`     | `boolean`                   | `DIALOG_DEFAULTS.Maximizable`      | Enables maximize/minimize controls.                                                 |
-| `modal`           | `boolean`                   | `DIALOG_DEFAULTS.Modal`            | Enables modal mode and backdrop rendering.                                          |
-| `position`        | `DialogPosition`            | `DIALOG_DEFAULTS.Position`         | Dialog viewport placement.                                                          |
-| `styleClass`      | `string | null`             | `null`                             | Optional additional CSS class(es) applied to the dialog panel element.              |
-| `variant`         | `DialogVariant | undefined` | `undefined`                        | Optional component variant override.                                                |
+| Name              | Type                     | Default                            | Description                                                                   |
+| ----------------- | ------------------------ | ---------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `ariaDescribedBy` | `string                  | undefined`                         | `undefined`                                                                   | Optional aria-describedby pointing to an element that describes the dialog purpose. |
+| `ariaLabelledBy`  | `string                  | undefined`                         | `undefined`                                                                   | Optional aria-labelledby override.                                                  |
+| `blockScroll`     | `boolean`                | `DIALOG_DEFAULTS.BlockScroll`      | Enables body scroll lock while a modal dialog is visible.                     |
+| `breakpoints`     | `Record<string, string>` | `{ ...DIALOG_DEFAULTS.Breakpoints` | Responsive max-width -> width map, e.g. { '960px': '75vw', '640px': '90vw' }. |
+| `closable`        | `boolean`                | `DIALOG_DEFAULTS.Closable`         | Controls whether the close button is shown.                                   |
+| `closeOnEscape`   | `boolean`                | `DIALOG_DEFAULTS.CloseOnEscape`    | Enables closing the dialog with Escape key.                                   |
+| `dismissableMask` | `boolean`                | `DIALOG_DEFAULTS.DismissableMask`  | Enables closing the dialog by clicking the modal backdrop.                    |
+| `draggable`       | `boolean`                | `DIALOG_DEFAULTS.Draggable`        | Enables dialog dragging (placeholder for v1 core behavior).                   |
+| `header`          | `string`                 | `DIALOG_DEFAULTS.Header`           | Optional header text fallback when no projected header is supplied.           |
+| `headless`        | `boolean`                | `DIALOG_DEFAULTS.Headless`         | Enables headless rendering mode.                                              |
+| `maximizable`     | `boolean`                | `DIALOG_DEFAULTS.Maximizable`      | Enables maximize/minimize controls.                                           |
+| `modal`           | `boolean`                | `DIALOG_DEFAULTS.Modal`            | Enables modal mode and backdrop rendering.                                    |
+| `position`        | `DialogPosition`         | `DIALOG_DEFAULTS.Position`         | Dialog viewport placement.                                                    |
+| `styleClass`      | `string                  | null`                              | `null`                                                                        | Optional additional CSS class(es) applied to the dialog panel element.              |
+| `variant`         | `DialogVariant           | undefined`                         | `undefined`                                                                   | Optional component variant override.                                                |
 
 ### Models (two-way bindable)
 
@@ -150,4 +150,3 @@ Dialog component with modal/backdrop and responsive behavior.
 - [Demo page](/components/dialog)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/dialog/README.md)
-

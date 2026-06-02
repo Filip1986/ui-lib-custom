@@ -48,6 +48,7 @@ A **performance-first Badge component** has been added to the library, following
 ### ✅ Design Principles Followed
 
 #### Performance First
+
 - ✅ OnPush change detection strategy
 - ✅ Signal-based inputs (not traditional @Input)
 - ✅ Computed values memoized via `computed()`
@@ -56,6 +57,7 @@ A **performance-first Badge component** has been added to the library, following
 - ✅ Zero runtime overhead
 
 #### Design Token Integration
+
 - ✅ Uses `SEMANTIC_COLORS` for all colors
 - ✅ Uses `FONT_SIZES` for typography
 - ✅ Uses `SPACING_TOKENS` for padding
@@ -63,6 +65,7 @@ A **performance-first Badge component** has been added to the library, following
 - ✅ Fully type-safe
 
 #### Component Design
+
 - ✅ Thin and purpose-built
 - ✅ Explicit typed inputs
 - ✅ No two-way bindings
@@ -70,6 +73,7 @@ A **performance-first Badge component** has been added to the library, following
 - ✅ No side effects or subscriptions
 
 #### Accessibility
+
 - ✅ Semantic HTML
 - ✅ Proper color contrast (WCAG AA)
 - ✅ No custom focus management
@@ -81,19 +85,26 @@ A **performance-first Badge component** has been added to the library, following
 
 ### Inputs
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| `variant` | `'solid' \| 'outline' \| 'subtle'` | `'solid'` | Visual style |
-| `color` | `'primary' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'neutral'` | `'primary'` | Color theme |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size |
-| `pill` | `boolean` | `false` | Fully rounded |
-| `dot` | `boolean` | `false` | Dot indicator |
+| Input     | Type                                                                                    | Default     | Description   |
+| --------- | --------------------------------------------------------------------------------------- | ----------- | ------------- |
+| `variant` | `'solid' \| 'outline' \| 'subtle'`                                                      | `'solid'`   | Visual style  |
+| `color`   | `'primary' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'neutral'` | `'primary'` | Color theme   |
+| `size`    | `'sm' \| 'md' \| 'lg'`                                                                  | `'md'`      | Size          |
+| `pill`    | `boolean`                                                                               | `false`     | Fully rounded |
+| `dot`     | `boolean`                                                                               | `false`     | Dot indicator |
 
 ### Exported Types
 
 ```typescript
 export type BadgeVariant = 'solid' | 'outline' | 'subtle';
-export type BadgeColor = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'neutral';
+export type BadgeColor =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'warning'
+  | 'info'
+  | 'neutral';
 export type BadgeSize = 'sm' | 'md' | 'lg';
 ```
 
@@ -160,30 +171,36 @@ import { Badge } from 'ui-lib-custom';
 ## Performance Characteristics
 
 ### Bundle Impact
+
 - Component size: X KB (gzipped).
 - Dependencies: none.
 
 ### Runtime
+
 - Change detection: OnPush.
 - Signals: inputs + computed styles.
 - DOM nodes: single host element.
 
 ### Benchmarks
+
 - Initial render: X ms.
 - Re-render on input change: X ms.
 
 ### Bundle Size
+
 - **Minified:** ~2 KB
 - **Gzipped:** ~800 bytes
 - **Impact:** Negligible
 
 ### Runtime Performance
+
 - **Change Detection:** OnPush only
 - **Computations:** Memoized signals
 - **DOM Operations:** Zero runtime overhead
 - **Re-renders:** Only on input changes
 
 ### DOM Structure
+
 ```html
 <!-- Single element, no wrappers -->
 <ui-lib-badge style="...">Content</ui-lib-badge>
@@ -206,17 +223,21 @@ All tests pass, no compilation errors.
 ## Integration
 
 ### Public API
+
 ✅ Exported from `ui-lib-custom` package
+
 ```typescript
 export * from './lib/badge/badge';
 ```
 
 ### Demo Application
+
 ✅ Demo page at `/badges` route
 ✅ Added to sidebar navigation
 ✅ Comprehensive examples
 
 ### Documentation
+
 ✅ Complete API reference
 ✅ Real-world examples
 ✅ Best practices
@@ -227,12 +248,14 @@ export * from './lib/badge/badge';
 ## Statistics
 
 ### Code
+
 - **Component:** 165 lines
 - **Tests:** 130 lines
 - **Demo HTML:** 240+ lines
 - **Documentation:** 550+ lines
 
 ### Coverage
+
 - ✅ All variants tested
 - ✅ All colors tested
 - ✅ All sizes tested
@@ -241,6 +264,7 @@ export * from './lib/badge/badge';
 - ✅ Content projection tested
 
 ### Features
+
 - **3 variants** (solid, outline, subtle)
 - **7 colors** (semantic color palette)
 - **3 sizes** (sm, md, lg)
@@ -253,25 +277,25 @@ export * from './lib/badge/badge';
 
 ### Button vs Badge
 
-| Feature | Button | Badge |
-|---------|--------|-------|
-| Purpose | Actions | Labels/Status |
-| Interactive | Yes | No |
-| Click events | Yes | No |
-| Sizes | 3 | 3 |
-| Colors | 5 | 7 |
-| Variants | 3 | 3 |
+| Feature      | Button  | Badge         |
+| ------------ | ------- | ------------- |
+| Purpose      | Actions | Labels/Status |
+| Interactive  | Yes     | No            |
+| Click events | Yes     | No            |
+| Sizes        | 3       | 3             |
+| Colors       | 5       | 7             |
+| Variants     | 3       | 3             |
 
 **Badge complements Button** - Use badges for status, buttons for actions.
 
 ### Card vs Badge
 
-| Feature | Card | Badge |
-|---------|------|-------|
-| Purpose | Content container | Short label |
-| Size | Large | Small |
-| Content | Rich content | Text only |
-| Elevation | Yes | No |
+| Feature   | Card              | Badge       |
+| --------- | ----------------- | ----------- |
+| Purpose   | Content container | Short label |
+| Size      | Large             | Small       |
+| Content   | Rich content      | Text only   |
+| Elevation | Yes               | No          |
 
 **Badge works inside Cards** - Use badges to tag card content.
 
@@ -280,7 +304,9 @@ export * from './lib/badge/badge';
 ## Why Badge is Valuable
 
 ### 1. Universal Need
+
 Almost every project needs badges for:
+
 - Status indicators
 - Notification counts
 - Category tags
@@ -288,19 +314,23 @@ Almost every project needs badges for:
 - Priority levels
 
 ### 2. Follows Principles
+
 - Performance-first architecture
 - Design token integration
 - Signal-based reactivity
 - OnPush change detection
 
 ### 3. Composable
+
 Works seamlessly with:
+
 - Layout primitives (Stack, Inline)
 - Buttons (for notification badges)
 - Cards (for status tags)
 - Any custom component
 
 ### 4. Type-Safe
+
 - Full TypeScript support
 - Compile-time validation
 - IDE autocomplete
@@ -311,6 +341,7 @@ Works seamlessly with:
 ## Future Enhancements (Optional)
 
 Possible additions:
+
 1. **Removable badges** - Close button with event
 2. **Icon support** - Leading/trailing icons
 3. **Animations** - Entry/exit transitions
@@ -334,6 +365,7 @@ Possible additions:
 ✅ **Badge component is complete and production-ready!**
 
 **Includes:**
+
 - ✅ Performance-first architecture
 - ✅ Design token integration
 - ✅ Signal-based reactivity

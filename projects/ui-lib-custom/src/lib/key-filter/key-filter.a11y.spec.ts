@@ -44,7 +44,7 @@ async function setup(): Promise<{
     announce: jest.Mock<Promise<void>, [string, AriaLivePoliteness?]>;
   } = {
     announce: jest.fn<Promise<void>, [string, AriaLivePoliteness?]>(
-      (): Promise<void> => Promise.resolve()
+      (): Promise<void> => Promise.resolve(),
     ),
   };
 
@@ -57,7 +57,7 @@ async function setup(): Promise<{
   }).compileComponents();
 
   const fixture: ComponentFixture<KeyFilterA11yHostComponent> = TestBed.createComponent(
-    KeyFilterA11yHostComponent
+    KeyFilterA11yHostComponent,
   );
   fixture.detectChanges();
   await fixture.whenStable();
@@ -115,7 +115,7 @@ describe('KeyFilter Accessibility', (): void => {
   it('links the host input to the generated hint with aria-describedby', async (): Promise<void> => {
     const { fixture, input } = await setup();
     const hint: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '[id^="ui-lib-key-filter-hint-"]'
+      '[id^="ui-lib-key-filter-hint-"]',
     ) as HTMLElement;
     const describedBy: string = input.getAttribute('aria-describedby') ?? '';
     expect(describedBy).toContain(hint.id);
@@ -135,7 +135,7 @@ describe('KeyFilter Accessibility', (): void => {
     await fixture.whenStable();
 
     expect(
-      (fixture.nativeElement as HTMLElement).querySelector('[id^="ui-lib-key-filter-hint-"]')
+      (fixture.nativeElement as HTMLElement).querySelector('[id^="ui-lib-key-filter-hint-"]'),
     ).toBeNull();
     expect(input.getAttribute('aria-describedby')).toBe('external-help');
   });
@@ -148,7 +148,7 @@ describe('KeyFilter Accessibility', (): void => {
     await fixture.whenStable();
 
     const hint: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '[id^="ui-lib-key-filter-hint-"]'
+      '[id^="ui-lib-key-filter-hint-"]',
     ) as HTMLElement;
     expect(hint.textContent).toBe('Uppercase letters only');
   });
@@ -180,7 +180,7 @@ describe('KeyFilter Accessibility', (): void => {
 
     expect(liveAnnouncer.announce).toHaveBeenCalledWith(
       'Characters not matching the allowed pattern were removed.',
-      'polite'
+      'polite',
     );
   });
 

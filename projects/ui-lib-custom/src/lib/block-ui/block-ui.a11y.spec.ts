@@ -10,7 +10,7 @@ import { BlockUI } from './block-ui';
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
@@ -36,7 +36,7 @@ class BlockUIA11yHostComponent {
 // ─── Setup helpers ────────────────────────────────────────────────────────────
 
 async function createFixture(
-  blocked: boolean = false
+  blocked: boolean = false,
 ): Promise<ComponentFixture<BlockUIA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [BlockUIA11yHostComponent],
@@ -101,7 +101,7 @@ describe('BlockUI Accessibility', (): void => {
       const fixture: ComponentFixture<BlockUIA11yHostComponent> = await createFixture();
       const mask: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-block-ui__mask'
+        '.ui-lib-block-ui__mask',
       ) as HTMLElement;
       expect(mask.getAttribute('role')).toBe('status');
     });
@@ -110,7 +110,7 @@ describe('BlockUI Accessibility', (): void => {
       const fixture: ComponentFixture<BlockUIA11yHostComponent> = await createFixture();
       const mask: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-block-ui__mask'
+        '.ui-lib-block-ui__mask',
       ) as HTMLElement;
       expect(mask.getAttribute('aria-live')).toBe('polite');
     });
@@ -119,7 +119,7 @@ describe('BlockUI Accessibility', (): void => {
       const fixture: ComponentFixture<BlockUIA11yHostComponent> = await createFixture(false);
       const mask: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-block-ui__mask'
+        '.ui-lib-block-ui__mask',
       ) as HTMLElement;
       expect(mask.getAttribute('aria-hidden')).toBe('true');
     });
@@ -128,7 +128,7 @@ describe('BlockUI Accessibility', (): void => {
       const fixture: ComponentFixture<BlockUIA11yHostComponent> = await createFixture(true);
       const mask: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-block-ui__mask'
+        '.ui-lib-block-ui__mask',
       ) as HTMLElement;
       expect(mask.getAttribute('aria-hidden')).toBeNull();
     });
@@ -141,7 +141,7 @@ describe('BlockUI Accessibility', (): void => {
       const fixture: ComponentFixture<BlockUIA11yHostComponent> = await createFixture(false);
       const content: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-block-ui__content'
+        '.ui-lib-block-ui__content',
       ) as HTMLElement;
       expect(content.hasAttribute('inert')).toBe(false);
     });
@@ -150,7 +150,7 @@ describe('BlockUI Accessibility', (): void => {
       const fixture: ComponentFixture<BlockUIA11yHostComponent> = await createFixture(true);
       const content: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-block-ui__content'
+        '.ui-lib-block-ui__content',
       ) as HTMLElement;
       expect(content.hasAttribute('inert')).toBe(true);
     });
@@ -159,7 +159,7 @@ describe('BlockUI Accessibility', (): void => {
       const fixture: ComponentFixture<BlockUIA11yHostComponent> = await createFixture(false);
       const btn: HTMLButtonElement = queryEl<HTMLButtonElement>(
         fixture,
-        '.inner-btn'
+        '.inner-btn',
       ) as HTMLButtonElement;
       btn.focus();
       expect(document.activeElement).toBe(btn);
@@ -169,7 +169,7 @@ describe('BlockUI Accessibility', (): void => {
       const fixture: ComponentFixture<BlockUIA11yHostComponent> = await createFixture(true);
       const content: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-block-ui__content'
+        '.ui-lib-block-ui__content',
       ) as HTMLElement;
       expect(content.hasAttribute('inert')).toBe(true);
 

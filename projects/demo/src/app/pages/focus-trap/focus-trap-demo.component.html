@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="FocusTrap"
@@ -18,9 +17,8 @@
   <!-- ── Section 1: Basic usage ── -->
   <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__desc">
-      Add <code>uiLibFocusTrap</code> to any container. Tab navigation is
-      constrained to focusable descendants of that element. Focus moves to the
-      first focusable child on activation.
+      Add <code>uiLibFocusTrap</code> to any container. Tab navigation is constrained to focusable
+      descendants of that element. Focus moves to the first focusable child on activation.
     </p>
     <div class="ft-demo-card">
       <p class="ft-hint">Tab between the fields — focus will not leave this box.</p>
@@ -50,15 +48,18 @@
   <!-- ── Section 2: Toggle on/off ── -->
   <app-doc-section id="toggle-trap" title="Toggle Trap">
     <p class="demo-section__desc">
-      Bind <code>[uiLibFocusTrap]</code> to a boolean signal to enable or disable
-      the trap at runtime. When disabled, Tab behaves normally and focus is restored
-      to the previously focused element.
+      Bind <code>[uiLibFocusTrap]</code> to a boolean signal to enable or disable the trap at
+      runtime. When disabled, Tab behaves normally and focus is restored to the previously focused
+      element.
     </p>
     <div class="ft-demo-card">
       <div class="ft-toggle-row">
         <span class="ft-status-label">
           Trap:
-          <strong [class.ft-status--active]="isTrapEnabled()" [class.ft-status--inactive]="!isTrapEnabled()">
+          <strong
+            [class.ft-status--active]="isTrapEnabled()"
+            [class.ft-status--inactive]="!isTrapEnabled()"
+          >
             {{ isTrapEnabled() ? 'Active' : 'Inactive' }}
           </strong>
         </span>
@@ -91,17 +92,11 @@
   <!-- ── Section 3: Modal overlay pattern ── -->
   <app-doc-section id="modal-overlay-pattern" title="Modal Overlay Pattern">
     <p class="demo-section__desc">
-      The most common use case: wrapping a modal dialog so that keyboard users
-      cannot interact with background content. When the modal closes, focus
-      returns to the trigger button automatically.
+      The most common use case: wrapping a modal dialog so that keyboard users cannot interact with
+      background content. When the modal closes, focus returns to the trigger button automatically.
     </p>
     <div class="ft-demo-card">
-      <ui-lib-button
-        id="open-modal-btn"
-        severity="primary"
-        type="button"
-        (click)="openModal()"
-      >
+      <ui-lib-button id="open-modal-btn" severity="primary" type="button" (click)="openModal()">
         Open Modal
       </ui-lib-button>
     </div>
@@ -115,7 +110,6 @@
 
   <!-- ── Section 4: API ── -->
   <app-doc-section id="api" title="API">
-
     <h3 class="ft-sub-title">Import</h3>
     <ui-lib-code-snippet
       language="typescript"
@@ -140,17 +134,19 @@
 
     <h3 class="ft-sub-title">Accessible elements included</h3>
     <p class="ft-section__desc">
-      The trap cycles through: <code>a[href]</code>, <code>button</code>,
-      <code>input</code>, <code>select</code>, <code>textarea</code>,
-      elements with a non-negative <code>tabindex</code>, and
-      <code>[contenteditable="true"]</code>. Disabled and
+      The trap cycles through: <code>a[href]</code>, <code>button</code>, <code>input</code>,
+      <code>select</code>, <code>textarea</code>, elements with a non-negative
+      <code>tabindex</code>, and <code>[contenteditable="true"]</code>. Disabled and
       <code>aria-hidden</code> elements are excluded.
     </p>
   </app-doc-section>
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section id="css-vars" title="CSS Custom Properties">
-    <p class="demo-section__description">This is a behavioral directive with no CSS custom properties. All visual styling is controlled by the wrapped component.</p>
+    <p class="demo-section__description">
+      This is a behavioral directive with no CSS custom properties. All visual styling is controlled
+      by the wrapped component.
+    </p>
   </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
@@ -171,7 +167,6 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>
 
 <!-- ── Modal overlay ── -->
@@ -193,12 +188,12 @@
           type="button"
           aria-label="Close dialog"
           (click)="closeModal()"
-        >×</ui-lib-button>
+          >×</ui-lib-button
+        >
       </div>
       <div class="ft-modal__body">
         <p class="ft-hint">
-          Tab between the fields below. Focus cannot leave this modal
-          until you close it.
+          Tab between the fields below. Focus cannot leave this modal until you close it.
         </p>
         <div class="ft-field-row">
           <label class="ft-label" for="modal-name">Name</label>
@@ -224,7 +219,9 @@
         </div>
       </div>
       <div class="ft-modal__footer">
-        <ui-lib-button appearance="ghost" type="button" (click)="closeModal()">Cancel</ui-lib-button>
+        <ui-lib-button appearance="ghost" type="button" (click)="closeModal()"
+          >Cancel</ui-lib-button
+        >
         <ui-lib-button severity="primary" type="button" (click)="closeModal()">Send</ui-lib-button>
       </div>
     </div>

@@ -34,7 +34,7 @@ export default meta;
 
 export const Default: Story = {
   render: (
-    args: PopoverStoryArgs
+    args: PopoverStoryArgs,
   ): {
     props: PopoverStoryArgs;
     moduleMetadata: { imports: unknown[] };

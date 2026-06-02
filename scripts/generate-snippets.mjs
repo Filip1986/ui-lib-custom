@@ -63,12 +63,12 @@ function processPage(pageDir) {
   const output = lines.join('\n');
   const outPath = join(pageDir, 'snippets.generated.ts');
   writeFileSync(outPath, output, 'utf8');
-  console.log(`  generated: projects/demo/src/app/pages/${basename(pageDir)}/snippets.generated.ts`);
+  console.log(
+    `  generated: projects/demo/src/app/pages/${basename(pageDir)}/snippets.generated.ts`,
+  );
 }
 
-const pages = readdirSync(pagesDir).filter((name) =>
-  statSync(join(pagesDir, name)).isDirectory(),
-);
+const pages = readdirSync(pagesDir).filter((name) => statSync(join(pagesDir, name)).isDirectory());
 
 console.log('Generating demo snippets...');
 for (const page of pages) {

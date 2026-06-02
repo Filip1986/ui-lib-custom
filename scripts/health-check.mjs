@@ -90,8 +90,11 @@ if (coverageOut !== null) {
       const lines = pct('lines');
       const allPass = stmts >= 90 && branches >= 85 && funcs >= 90 && lines >= 90;
       const status = allPass ? 'PASS' : 'FAIL';
-      record('Test coverage', status,
-        `Stmts: ${stmts}%, Branches: ${branches}%, Funcs: ${funcs}%, Lines: ${lines}%`);
+      record(
+        'Test coverage',
+        status,
+        `Stmts: ${stmts}%, Branches: ${branches}%, Funcs: ${funcs}%, Lines: ${lines}%`,
+      );
     } catch {
       record('Test coverage', 'WARN', 'Tests ran but could not parse coverage-summary.json');
     }
@@ -199,9 +202,12 @@ if (args.json) {
     const notes = r.notes ? `  — ${r.notes}` : '';
     console.log(`  ${icon}  ${pad}${notes}`);
   }
-  const overall = hasFail ? '❌ CRITICAL' : results.some((r) => r.status === 'WARN') ? '⚠️  CAUTION' : '✅ HEALTHY';
+  const overall = hasFail
+    ? '❌ CRITICAL'
+    : results.some((r) => r.status === 'WARN')
+      ? '⚠️  CAUTION'
+      : '✅ HEALTHY';
   console.log('\nOverall: ' + overall);
 }
 
 process.exit(hasFail ? 1 : 0);
-

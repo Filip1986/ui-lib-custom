@@ -914,7 +914,7 @@ when indeterminate). New name-required components should follow this from the st
 **Context:** Auditing the four locale bundles (`en/de/es/fr.ts`) for key drift.
 
 **Finding (2026-06-02):** `grep -c "': '"` reported en=322, de=321, es=322, **fr=299** — which
-*looks* like French is missing ~23 keys. It is not. All four bundles have an **identical 323-key
+_looks_ like French is missing ~23 keys. It is not. All four bundles have an **identical 323-key
 set**. The pattern `': '` (quote-colon-space-quote) only matches a key whose value is **single**-
 quoted; French has 22 values that use **double** quotes to embed an apostrophe (`'global.error':
 "Une erreur s'est produite"`), so those lines read `": "` and are skipped. **Count keys by the key
@@ -929,7 +929,7 @@ across mixed quoting silently lies about coverage. **Reference:** `i18n.bundles.
 
 **Finding (2026-06-02):** For `keyof typeof X` to yield the literal key union, `X` must be declared
 `as const` with **no type annotation** — an annotation (`: Record<string,string>`) widens the keys
-back to `string` and erases the union. But the repo's `@typescript-eslint/typedef` rule *requires*
+back to `string` and erases the union. But the repo's `@typescript-eslint/typedef` rule _requires_
 an annotation on every exported `const`. These are mutually exclusive, so the canonical bundle gets
 one scoped `// eslint-disable-next-line @typescript-eslint/typedef` with a rationale comment. Use
 `as const satisfies Record<string, string>` to keep value-type checking without losing the keys.
@@ -943,7 +943,7 @@ autocomplete on known keys while still accepting consumer-registered custom keys
 
 **Context:** `scripts/generate-i18n-catalogue.mjs` writes a GFM table between markers in a doc.
 
-**Finding (2026-06-02):** A generator that emits a raw, unpadded Markdown table will *never* agree
+**Finding (2026-06-02):** A generator that emits a raw, unpadded Markdown table will _never_ agree
 with the file on disk once `lint-staged`/Prettier runs, because Prettier re-aligns table columns to
 equal width. The `--check` (CI staleness) mode then always reports "stale". Fix: have the generator
 `import { format, resolveConfig } from 'prettier'` and pipe its spliced output through

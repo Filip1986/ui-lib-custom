@@ -13,18 +13,18 @@ Generic Chart.js wrapper component with theme-aware reactive updates.
 
 ### Inputs
 
-| Name                  | Type                             | Default | Description                                                                                 |
-| --------------------- | -------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
-| `ariaLabel`           | `string`                         | `''`    | ARIA label applied to the rendered canvas. Falls back to locale 'chart.label' when empty.   |
-| `data`                | `ChartData<ChartType> | null`    | `null`  | Data passed directly to Chart.js.                                                           |
-| `height`              | `string | null`                  | `null`  | Optional host height override.                                                              |
-| `maintainAspectRatio` | `boolean`                        | `true`  | Keeps chart aspect ratio when responsive sizing is enabled.                                 |
-| `options`             | `ChartOptions<ChartType> | null` | `null`  | Consumer chart options merged on top of theme-derived options.                              |
-| `plugins`             | `Plugin<ChartType>[]`            | `[]`    | Inline Chart.js plugins for this chart instance.                                            |
-| `responsive`          | `boolean`                        | `true`  | Enables responsive chart layout behavior.                                                   |
-| `showDataTable`       | `boolean`                        | `true`  | When true, renders a visually-hidden data table as an accessible alternative to the canvas. |
-| `size`                | `ChartSize`                      | `'md'`  | Wrapper size token.                                                                         |
-| `width`               | `string | null`                  | `null`  | Optional host width override.                                                               |
+| Name                  | Type                     | Default | Description                                                                                 |
+| --------------------- | ------------------------ | ------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `ariaLabel`           | `string`                 | `''`    | ARIA label applied to the rendered canvas. Falls back to locale 'chart.label' when empty.   |
+| `data`                | `ChartData<ChartType>    | null`   | `null`                                                                                      | Data passed directly to Chart.js.                              |
+| `height`              | `string                  | null`   | `null`                                                                                      | Optional host height override.                                 |
+| `maintainAspectRatio` | `boolean`                | `true`  | Keeps chart aspect ratio when responsive sizing is enabled.                                 |
+| `options`             | `ChartOptions<ChartType> | null`   | `null`                                                                                      | Consumer chart options merged on top of theme-derived options. |
+| `plugins`             | `Plugin<ChartType>[]`    | `[]`    | Inline Chart.js plugins for this chart instance.                                            |
+| `responsive`          | `boolean`                | `true`  | Enables responsive chart layout behavior.                                                   |
+| `showDataTable`       | `boolean`                | `true`  | When true, renders a visually-hidden data table as an accessible alternative to the canvas. |
+| `size`                | `ChartSize`              | `'md'`  | Wrapper size token.                                                                         |
+| `width`               | `string                  | null`   | `null`                                                                                      | Optional host width override.                                  |
 
 ### Outputs
 
@@ -124,4 +124,3 @@ _none_
 - [Demo page](/components/chart)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/chart/README.md)
-

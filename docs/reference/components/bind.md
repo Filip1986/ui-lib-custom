@@ -56,4 +56,3 @@ _No component-level CSS variables detected._
 - [Demo page](/components/bind)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/bind/README.md)
-

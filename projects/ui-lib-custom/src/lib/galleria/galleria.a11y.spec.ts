@@ -86,7 +86,7 @@ function getHostElement(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getFullscreenOpenButton(fixture: ComponentFixture<unknown>): HTMLButtonElement {
   return getHostElement(fixture).querySelector(
-    '.uilib-galleria__fullscreen-btn'
+    '.uilib-galleria__fullscreen-btn',
   ) as HTMLButtonElement;
 }
 
@@ -104,7 +104,7 @@ function getMainImage(fixture: ComponentFixture<unknown>): HTMLImageElement | nu
 
 function getThumbnailButtons(fixture: ComponentFixture<unknown>): NodeListOf<HTMLButtonElement> {
   return getHostElement(fixture).querySelectorAll<HTMLButtonElement>(
-    '.uilib-galleria__thumbnail-item'
+    '.uilib-galleria__thumbnail-item',
   );
 }
 
@@ -205,10 +205,10 @@ describe('Galleria Accessibility', (): void => {
     const host: HTMLElement = getHostElement(fixture);
 
     expect(host.querySelector('.uilib-galleria__item-nav--prev')?.getAttribute('aria-label')).toBe(
-      'Previous image'
+      'Previous image',
     );
     expect(host.querySelector('.uilib-galleria__item-nav--next')?.getAttribute('aria-label')).toBe(
-      'Next image'
+      'Next image',
     );
   });
 
@@ -221,10 +221,10 @@ describe('Galleria Accessibility', (): void => {
 
     const host: HTMLElement = getHostElement(fixture);
     expect(host.querySelector('.uilib-galleria__item-nav--prev')?.getAttribute('aria-label')).toBe(
-      'Go to previous photo'
+      'Go to previous photo',
     );
     expect(host.querySelector('.uilib-galleria__item-nav--next')?.getAttribute('aria-label')).toBe(
-      'Go to next photo'
+      'Go to next photo',
     );
   });
 
@@ -235,7 +235,7 @@ describe('Galleria Accessibility', (): void => {
     await fixture.whenStable();
 
     const thumbnailList: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.uilib-galleria__thumbnail-items'
+      '.uilib-galleria__thumbnail-items',
     );
     const thumbnailButtons: NodeListOf<HTMLButtonElement> = getThumbnailButtons(fixture);
     expect(thumbnailList?.getAttribute('role')).toBe('list');
@@ -255,7 +255,7 @@ describe('Galleria Accessibility', (): void => {
     const firstThumbnail: HTMLButtonElement = getThumbnailButtons(fixture)[0] as HTMLButtonElement;
     firstThumbnail.focus();
     firstThumbnail.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true })
+      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }),
     );
     fixture.detectChanges();
     await fixture.whenStable();
@@ -274,7 +274,7 @@ describe('Galleria Accessibility', (): void => {
     const firstThumbnail: HTMLButtonElement = getThumbnailButtons(fixture)[0] as HTMLButtonElement;
     firstThumbnail.focus();
     firstThumbnail.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true })
+      new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true }),
     );
     fixture.detectChanges();
     await fixture.whenStable();

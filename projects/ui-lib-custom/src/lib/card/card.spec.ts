@@ -120,7 +120,7 @@ describe('Card', (): void => {
   }
 
   const getCard: (fixture: ComponentFixture<CardHost>) => HTMLElement = (
-    fixture: ComponentFixture<CardHost>
+    fixture: ComponentFixture<CardHost>,
   ): HTMLElement =>
     (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-card') as HTMLElement;
 
@@ -159,13 +159,13 @@ describe('Card', (): void => {
     fixture.detectChanges();
 
     const header: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__header'
+      '.ui-lib-card__header',
     );
     const body: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__body'
+      '.ui-lib-card__body',
     );
     const footer: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__footer'
+      '.ui-lib-card__footer',
     );
 
     expect(header?.textContent).toContain('Header');
@@ -180,10 +180,10 @@ describe('Card', (): void => {
     });
 
     const header: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__header'
+      '.ui-lib-card__header',
     );
     const footer: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__footer'
+      '.ui-lib-card__footer',
     );
 
     expect(header).toBeNull();
@@ -282,7 +282,7 @@ describe('Card theme and header features', (): void => {
     freshFixture.detectChanges();
 
     const freshHost: HTMLElement = (freshFixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-card'
+      'ui-lib-card',
     ) as HTMLElement;
     expect(freshHost.getAttribute('data-theme')).toBeNull();
     expect(freshHost.getAttribute('data-variant')).toBeNull();
@@ -292,10 +292,10 @@ describe('Card theme and header features', (): void => {
     await setHeaderContent('info', 'Details');
 
     const iconEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__header-icon'
+      '.ui-lib-card__header-icon',
     );
     const subtitleEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__subtitle'
+      '.ui-lib-card__subtitle',
     );
 
     expect(iconEl).toBeTruthy();
@@ -306,7 +306,7 @@ describe('Card theme and header features', (): void => {
     await setClosable(true);
 
     const closeIcon: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__close-icon'
+      '.ui-lib-card__close-icon',
     );
     closeIcon?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();

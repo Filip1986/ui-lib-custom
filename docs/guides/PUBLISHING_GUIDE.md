@@ -24,11 +24,13 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
    - **IMPORTANT:** Copy and save the token immediately (you won't see it again!)
 
 2. **Configure npm to use the token:**
+
    ```bash
    npm config set //registry.npmjs.org/:_authToken YOUR_TOKEN_HERE
    ```
 
    Or create/edit `~/.npmrc` file and add:
+
    ```
    //registry.npmjs.org/:_authToken=YOUR_TOKEN_HERE
    ```
@@ -43,11 +45,12 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 #### Publishing Steps
 
 1. **Update package.json with your publishing details:**
-   
+
    > **IMPORTANT:** Edit the source package.json at `projects/ui-lib-custom/package.json`, NOT the dist version!
    > The dist version is regenerated on every build and any changes there will be lost.
 
    Update `projects/ui-lib-custom/package.json`:
+
    ```json
    {
      "name": "@yourusername/ui-components",
@@ -68,33 +71,38 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
    ```
 
 2. **Build the library:**
+
    ```bash
    cd ui-lib-custom
    ng build ui-lib-custom
    ```
+
    This will generate the dist folder with your updated package.json metadata.
 
 3. **Navigate to the dist folder:**
+
    ```bash
    cd dist/ui-lib-custom
    ```
 
-
 4. **Verify you're logged in:**
+
    ```bash
    npm whoami
    ```
 
 5. **Publish:**
+
    ```bash
    # For scoped packages (e.g., @yourusername/ui-lib-custom):
    npm publish --access public
-   
+
    # For unscoped packages:
    npm publish
    ```
 
    If using 2FA (Option B), you'll be prompted for your 2FA code:
+
    ```bash
    npm publish --otp=YOUR_2FA_CODE
    ```
@@ -102,12 +110,14 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 ### Option 2: Use as Local Package with npm link
 
 1. **Build the library:**
+
    ```bash
    cd ui-lib-custom
    ng build ui-lib-custom
    ```
 
 2. **Create npm link:**
+
    ```bash
    cd dist/ui-lib-custom
    npm link
@@ -122,6 +132,7 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 ### Option 3: Use from Git Repository
 
 1. **Build and commit:**
+
    ```bash
    ng build ui-lib-custom
    git add dist/ui-lib-custom
@@ -137,11 +148,13 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 ### Option 4: Use from Local File System
 
 1. **Build the library:**
+
    ```bash
    ng build ui-components
    ```
 
-3. **Use file path** (local development):
+2. **Use file path** (local development):
+
    ```json
    {
      "dependencies": {
@@ -178,7 +191,7 @@ import { Button, Card } from 'ui-lib-custom';
   standalone: true,
   imports: [Button, Card],
   templateUrl: './example.component.html',
-  styleUrls: ['./example.component.css']
+  styleUrls: ['./example.component.css'],
 })
 export class ExampleComponent {
   // Your component logic
@@ -189,49 +202,32 @@ export class ExampleComponent {
 
 ```html
 <!-- Button Examples -->
-<ui-lib-button variant="material" color="primary">
-  Click Me
-</ui-lib-button>
+<ui-lib-button variant="material" color="primary"> Click Me </ui-lib-button>
 
-<ui-lib-button 
-  variant="bootstrap" 
-  size="large" 
-  color="success"
-  (click)="onSubmit()">
+<ui-lib-button variant="bootstrap" size="large" color="success" (click)="onSubmit()">
   Submit Form
 </ui-lib-button>
 
-<ui-lib-button 
-  variant="minimal" 
-  [disabled]="isLoading"
-  [fullWidth]="true">
+<ui-lib-button variant="minimal" [disabled]="isLoading" [fullWidth]="true">
   {{ isLoading ? 'Loading...' : 'Process' }}
 </ui-lib-button>
 
 <!-- Card Examples -->
 <ui-lib-card variant="material" elevation="medium">
   <div card-header>User Information</div>
-  
+
   <div class="user-details">
     <p><strong>Name:</strong> {{ user.name }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
   </div>
-  
+
   <div card-footer>
-    <ui-lib-button variant="material" color="primary" size="small">
-      Edit
-    </ui-lib-button>
-    <ui-lib-button variant="minimal" color="secondary" size="small">
-      Cancel
-    </ui-lib-button>
+    <ui-lib-button variant="material" color="primary" size="small"> Edit </ui-lib-button>
+    <ui-lib-button variant="minimal" color="secondary" size="small"> Cancel </ui-lib-button>
   </div>
 </ui-lib-card>
 
-<ui-lib-card 
-  variant="bootstrap" 
-  [bordered]="true"
-  [hoverable]="true"
-  (click)="onCardClick()">
+<ui-lib-card variant="bootstrap" [bordered]="true" [hoverable]="true" (click)="onCardClick()">
   <p>Clickable card with hover effect</p>
 </ui-lib-card>
 ```
@@ -251,10 +247,10 @@ import { Button, Card } from 'ui-lib-custom';
   imports: [
     // Other modules
     Button,
-    Card
-  ]
+    Card,
+  ],
 })
-export class YourModule { }
+export class YourModule {}
 ```
 
 ## Complete Example Project Setup
@@ -288,6 +284,7 @@ ng generate component user-profile
 ### Step 4: Use the library components
 
 **user-profile.component.ts:**
+
 ```typescript
 import { Component } from '@angular/core';
 import { Button, Card } from 'ui-lib-custom';
@@ -298,13 +295,13 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, Button, Card],
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent {
   user = {
     name: 'John Doe',
     email: 'john@example.com',
-    role: 'Developer'
+    role: 'Developer',
   };
 
   isEditing = false;
@@ -316,6 +313,7 @@ export class UserProfileComponent {
 ```
 
 **user-profile.component.html:**
+
 ```html
 <div class="profile-container">
   <ui-lib-card variant="material" elevation="medium">
@@ -330,19 +328,16 @@ export class UserProfileComponent {
     </div>
 
     <div card-footer>
-      <ui-lib-button 
-        variant="material" 
-        color="primary" 
-        size="small"
-        (click)="toggleEdit()">
+      <ui-lib-button variant="material" color="primary" size="small" (click)="toggleEdit()">
         {{ isEditing ? 'Save' : 'Edit' }}
       </ui-lib-button>
-      <ui-lib-button 
-        variant="minimal" 
-        color="secondary" 
+      <ui-lib-button
+        variant="minimal"
+        color="secondary"
         size="small"
         *ngIf="isEditing"
-        (click)="toggleEdit()">
+        (click)="toggleEdit()"
+      >
         Cancel
       </ui-lib-button>
     </div>
@@ -355,12 +350,14 @@ export class UserProfileComponent {
 When actively developing the library and using it in another project:
 
 1. **Watch mode for library:**
+
    ```bash
    cd ui-lib-custom
    ng build ui-components --watch
    ```
 
 2. **In your consuming project, use npm link:**
+
    ```bash
    npm link ui-lib-custom
    ```
@@ -377,6 +374,7 @@ Changes to the library will be automatically reflected in your application!
 ### Issue: 403 Forbidden - Two-factor authentication required
 
 **Error:**
+
 ```
 npm error code E403
 npm error 403 403 Forbidden - PUT https://registry.npmjs.org/@yourname%2fpackage
@@ -410,12 +408,14 @@ npm error 403 Two-factor authentication or granular access token with bypass 2fa
 ### Issue: Package name already exists
 
 **Error:**
+
 ```
 npm error code E403
 npm error 403 You do not have permission to publish "ui-components"
 ```
 
-**Solution:** 
+**Solution:**
+
 - Use a scoped package name: `@yourusername/ui-components`
 - Update `package.json` in `projects/ui-lib-custom/package.json`:
   ```json
@@ -432,6 +432,7 @@ npm error 403 You do not have permission to publish "ui-components"
 ### Issue: Module not found
 
 **Solution:** Make sure the paths are correctly configured in `tsconfig.json`:
+
 ```json
 {
   "compilerOptions": {
@@ -449,6 +450,7 @@ npm error 403 You do not have permission to publish "ui-components"
 ### Issue: Type errors
 
 **Solution:** Make sure your TypeScript version is compatible:
+
 ```bash
 npm install --save-dev typescript@latest
 ```
@@ -466,6 +468,7 @@ Update version in `projects/ui-lib-custom/package.json` before publishing:
 ```
 
 Follow semantic versioning:
+
 - **MAJOR**: Breaking changes
 - **MINOR**: New features (backward compatible)
 - **PATCH**: Bug fixes
@@ -473,11 +476,13 @@ Follow semantic versioning:
 ## Best Practices
 
 1. **Always build before publishing:**
+
    ```bash
    ng build ui-components --configuration production
    ```
 
 2. **Test in demo app before publishing:**
+
    ```bash
    ng serve demo
    ```

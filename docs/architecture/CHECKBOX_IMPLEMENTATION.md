@@ -85,4 +85,3 @@
 - Add custom icon template slot parity (not only class-based `checkboxIcon`).
 - Consider comparator support for group mode object values.
 - Add maintainer benchmark notes after full library perf baselining.
-

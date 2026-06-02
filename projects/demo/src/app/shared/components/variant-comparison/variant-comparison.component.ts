@@ -82,7 +82,7 @@ export class VariantComparisonComponent {
 
   public readonly gridColumns: Signal<string> = computed<string>((): string => {
     const count: number = [this.showMaterial(), this.showBootstrap(), this.showMinimal()].filter(
-      (value: boolean): boolean => value
+      (value: boolean): boolean => value,
     ).length;
     return `repeat(${Math.max(count, 1)}, 1fr)`;
   });

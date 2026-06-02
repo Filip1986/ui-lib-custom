@@ -86,7 +86,7 @@ const renderMenubar: (args: Partial<MenubarStoryArgs>) => {
   moduleMetadata: { imports: unknown[] };
   template: string;
 } = (
-  args: Partial<MenubarStoryArgs>
+  args: Partial<MenubarStoryArgs>,
 ): {
   props: Partial<MenubarStoryArgs> & { model: MenubarItem[] };
   moduleMetadata: { imports: unknown[] };

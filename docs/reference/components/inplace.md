@@ -7,21 +7,21 @@
 
 ## Overview
 
-Inplace — inline editing component that toggles between a display and content slot. The display trigger is a native `<button>` with `aria-expanded` and `aria-controls` so screen readers announce the toggle state correctly.  On activation, focus moves to the first focusable element inside the content slot; on deactivation it returns to the display button.  Pressing Escape while the content is active also deactivates. Supports three design variants (material / bootstrap / minimal) and falls back to the global ThemeConfigService.
+Inplace — inline editing component that toggles between a display and content slot. The display trigger is a native `<button>` with `aria-expanded` and `aria-controls` so screen readers announce the toggle state correctly. On activation, focus moves to the first focusable element inside the content slot; on deactivation it returns to the display button. Pressing Escape while the content is active also deactivates. Supports three design variants (material / bootstrap / minimal) and falls back to the global ThemeConfigService.
 
 ## API
 
 ### Inputs
 
-| Name           | Type                    | Default         | Description                                                                                 |
-| -------------- | ----------------------- | --------------- | ------------------------------------------------------------------------------------------- |
-| `closable`     | `boolean`               | `false`         | When true, a close button is rendered inside the content slot to deactivate.                |
-| `closeIcon`    | `string`                | `'pi pi-times'` | Icon class for the close button (e.g. "pi pi-times").                                       |
-| `closeLabel`   | `string`                | `''`            | Accessible label for the close button. Falls back to locale 'inplace.close' when empty.     |
-| `disabled`     | `boolean`               | `false`         | When true, no interaction is allowed and the display slot appears disabled.                 |
-| `displayLabel` | `string`                | `''`            | Accessible label for the display button. Falls back to locale 'inplace.display' when empty. |
-| `styleClass`   | `string | null`         | `null`          | Additional CSS classes to attach to the host element.                                       |
-| `variant`      | `InplaceVariant | null` | `null`          | Visual variant — inherits from ThemeConfigService when not set.                             |
+| Name           | Type            | Default         | Description                                                                                 |
+| -------------- | --------------- | --------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `closable`     | `boolean`       | `false`         | When true, a close button is rendered inside the content slot to deactivate.                |
+| `closeIcon`    | `string`        | `'pi pi-times'` | Icon class for the close button (e.g. "pi pi-times").                                       |
+| `closeLabel`   | `string`        | `''`            | Accessible label for the close button. Falls back to locale 'inplace.close' when empty.     |
+| `disabled`     | `boolean`       | `false`         | When true, no interaction is allowed and the display slot appears disabled.                 |
+| `displayLabel` | `string`        | `''`            | Accessible label for the display button. Falls back to locale 'inplace.display' when empty. |
+| `styleClass`   | `string         | null`           | `null`                                                                                      | Additional CSS classes to attach to the host element.           |
+| `variant`      | `InplaceVariant | null`           | `null`                                                                                      | Visual variant — inherits from ThemeConfigService when not set. |
 
 ### Models (two-way bindable)
 
@@ -115,4 +115,3 @@ Inplace — inline editing component that toggles between a display and content 
 - [Demo page](/components/inplace)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/inplace/README.md)
-

@@ -10,28 +10,28 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `id` | `string \| null` | `null` | Forwarded to the native `<input>` id |
-| `name` | `string \| null` | `null` | Forwarded to the native `<input>` name |
-| `label` | `string` | `''` | Rendered as a `<label>` element above the input |
-| `ariaLabel` | `string \| null` | `null` | ARIA label on the native `<input>` — use when no visible label is rendered |
-| `ariaLabelledBy` | `string \| null` | `null` | Space-separated IDs of external elements that label the input |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme variant when null |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
-| `type` | `InputType` | `'text'` | Any valid HTML input type |
-| `labelFloat` | `'over' \| 'in' \| 'on'` | `'over'` | Label position / floating behaviour |
-| `placeholder` | `string` | `''` | |
-| `error` | `string \| null` | `null` | Error message rendered below the input; announces via live region; implies `aria-invalid` |
-| `hint` | `string \| null` | `null` | Helper text rendered below the input; linked via `aria-describedby` |
-| `invalid` | `boolean` | `false` | Marks the field invalid (sets `aria-invalid`) without requiring an error message |
-| `disabled` | `boolean` | `false` | |
-| `readonly` | `boolean` | `false` | Sets `readOnly` on the native input and `aria-readonly="true"`. The field remains in the tab order and its value is still submitted with a form, unlike `disabled`. |
-| `required` | `boolean` | `false` | |
-| `showCounter` | `boolean` | `false` | Shows character count; requires `maxLength` to display fraction |
-| `maxLength` | `number \| null` | `null` | |
-| `showClear` | `boolean` | `false` | Shows an inline clear button when the field has a value |
-| `showTogglePassword` | `boolean` | `false` | Only meaningful when `type="password"` |
+| Name                 | Type                                             | Default  | Notes                                                                                                                                                               |
+| -------------------- | ------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                 | `string \| null`                                 | `null`   | Forwarded to the native `<input>` id                                                                                                                                |
+| `name`               | `string \| null`                                 | `null`   | Forwarded to the native `<input>` name                                                                                                                              |
+| `label`              | `string`                                         | `''`     | Rendered as a `<label>` element above the input                                                                                                                     |
+| `ariaLabel`          | `string \| null`                                 | `null`   | ARIA label on the native `<input>` — use when no visible label is rendered                                                                                          |
+| `ariaLabelledBy`     | `string \| null`                                 | `null`   | Space-separated IDs of external elements that label the input                                                                                                       |
+| `variant`            | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`   | Falls back to global theme variant when null                                                                                                                        |
+| `size`               | `'sm' \| 'md' \| 'lg'`                           | `'md'`   |                                                                                                                                                                     |
+| `type`               | `InputType`                                      | `'text'` | Any valid HTML input type                                                                                                                                           |
+| `labelFloat`         | `'over' \| 'in' \| 'on'`                         | `'over'` | Label position / floating behaviour                                                                                                                                 |
+| `placeholder`        | `string`                                         | `''`     |                                                                                                                                                                     |
+| `error`              | `string \| null`                                 | `null`   | Error message rendered below the input; announces via live region; implies `aria-invalid`                                                                           |
+| `hint`               | `string \| null`                                 | `null`   | Helper text rendered below the input; linked via `aria-describedby`                                                                                                 |
+| `invalid`            | `boolean`                                        | `false`  | Marks the field invalid (sets `aria-invalid`) without requiring an error message                                                                                    |
+| `disabled`           | `boolean`                                        | `false`  |                                                                                                                                                                     |
+| `readonly`           | `boolean`                                        | `false`  | Sets `readOnly` on the native input and `aria-readonly="true"`. The field remains in the tab order and its value is still submitted with a form, unlike `disabled`. |
+| `required`           | `boolean`                                        | `false`  |                                                                                                                                                                     |
+| `showCounter`        | `boolean`                                        | `false`  | Shows character count; requires `maxLength` to display fraction                                                                                                     |
+| `maxLength`          | `number \| null`                                 | `null`   |                                                                                                                                                                     |
+| `showClear`          | `boolean`                                        | `false`  | Shows an inline clear button when the field has a value                                                                                                             |
+| `showTogglePassword` | `boolean`                                        | `false`  | Only meaningful when `type="password"`                                                                                                                              |
 
 ## Outputs
 
@@ -44,11 +44,7 @@ _none_
 <ui-lib-input label="Email" type="email" [(ngModel)]="email" />
 
 <!-- with hint text -->
-<ui-lib-input
-  label="Email"
-  hint="We'll never share your email"
-  [(ngModel)]="email"
-/>
+<ui-lib-input label="Email" hint="We'll never share your email" [(ngModel)]="email" />
 
 <!-- with prefix icon, error, and character counter -->
 <ui-lib-input
@@ -125,16 +121,16 @@ emailControl = new FormControl('', [Validators.required, Validators.email]);
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `--uilib-input-transition` | `border-color 0.15s ease, box-shadow 0.15s ease` | Field border/shadow transition; set to `none` when `prefers-reduced-motion: reduce` |
-| `--uilib-input-label-transition` | `transform 0.15s ease, font-size 0.15s ease, color 0.15s ease, padding 0.15s ease, background-color 0.15s ease` | Floating label animation; set to `none` when `prefers-reduced-motion: reduce` |
-| `--uilib-input-bg` | `var(--uilib-surface)` | Field background |
-| `--uilib-input-border` | `var(--uilib-border)` | Field border color |
-| `--uilib-input-border-focus` | `var(--uilib-color-primary-600)` | Field border color on focus |
-| `--uilib-input-text` | `var(--uilib-page-fg)` | Field text color |
-| `--uilib-input-placeholder` | `var(--uilib-muted)` | Placeholder / label resting color |
-| `--uilib-input-error` | `var(--uilib-color-danger-600)` | Error state color |
-| `--uilib-input-radius` | `var(--uilib-shape-base, 6px)` | Field border radius |
-| `--uilib-input-min-height` | `44px` | Minimum field height |
-| `--uilib-input-label-bg` | `var(--uilib-input-bg)` | Floating label background (used in `on` variant) |
+| Variable                         | Default                                                                                                         | Description                                                                         |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `--uilib-input-transition`       | `border-color 0.15s ease, box-shadow 0.15s ease`                                                                | Field border/shadow transition; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-input-label-transition` | `transform 0.15s ease, font-size 0.15s ease, color 0.15s ease, padding 0.15s ease, background-color 0.15s ease` | Floating label animation; set to `none` when `prefers-reduced-motion: reduce`       |
+| `--uilib-input-bg`               | `var(--uilib-surface)`                                                                                          | Field background                                                                    |
+| `--uilib-input-border`           | `var(--uilib-border)`                                                                                           | Field border color                                                                  |
+| `--uilib-input-border-focus`     | `var(--uilib-color-primary-600)`                                                                                | Field border color on focus                                                         |
+| `--uilib-input-text`             | `var(--uilib-page-fg)`                                                                                          | Field text color                                                                    |
+| `--uilib-input-placeholder`      | `var(--uilib-muted)`                                                                                            | Placeholder / label resting color                                                   |
+| `--uilib-input-error`            | `var(--uilib-color-danger-600)`                                                                                 | Error state color                                                                   |
+| `--uilib-input-radius`           | `var(--uilib-shape-base, 6px)`                                                                                  | Field border radius                                                                 |
+| `--uilib-input-min-height`       | `44px`                                                                                                          | Minimum field height                                                                |
+| `--uilib-input-label-bg`         | `var(--uilib-input-bg)`                                                                                         | Floating label background (used in `on` variant)                                    |

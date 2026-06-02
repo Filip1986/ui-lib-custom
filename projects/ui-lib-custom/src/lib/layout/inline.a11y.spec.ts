@@ -102,7 +102,7 @@ describe('Inline (a11y)', (): void => {
 
   it('default: no axe violations', async (): Promise<void> => {
     const fixture: ComponentFixture<DefaultInlineHostComponent> = await setup(
-      DefaultInlineHostComponent
+      DefaultInlineHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
@@ -114,14 +114,14 @@ describe('Inline (a11y)', (): void => {
 
   it('default: renders div content element', async (): Promise<void> => {
     const fixture: ComponentFixture<DefaultInlineHostComponent> = await setup(
-      DefaultInlineHostComponent
+      DefaultInlineHostComponent,
     );
     expect(getInlineContentElement(fixture).tagName.toLowerCase()).toBe('div');
   });
 
   it('default: has no spurious role on host or content element', async (): Promise<void> => {
     const fixture: ComponentFixture<DefaultInlineHostComponent> = await setup(
-      DefaultInlineHostComponent
+      DefaultInlineHostComponent,
     );
     const host: HTMLElement = getInlineHost(fixture);
     const contentElement: HTMLElement = getInlineContentElement(fixture);
@@ -141,24 +141,24 @@ describe('Inline (a11y)', (): void => {
 
   it('tag alias: renders requested tag when as is omitted', async (): Promise<void> => {
     const fixture: ComponentFixture<TagAliasInlineHostComponent> = await setup(
-      TagAliasInlineHostComponent
+      TagAliasInlineHostComponent,
     );
     expect(getInlineContentElement(fixture).tagName.toLowerCase()).toBe('ol');
   });
 
   it('as takes precedence over tag alias when both are provided', async (): Promise<void> => {
     const fixture: ComponentFixture<AsPrecedenceInlineHostComponent> = await setup(
-      AsPrecedenceInlineHostComponent
+      AsPrecedenceInlineHostComponent,
     );
     expect(getInlineContentElement(fixture).tagName.toLowerCase()).toBe('div');
   });
 
   it('projects items in DOM order to preserve reading order when wrapping', async (): Promise<void> => {
     const fixture: ComponentFixture<DefaultInlineHostComponent> = await setup(
-      DefaultInlineHostComponent
+      DefaultInlineHostComponent,
     );
     const items: HTMLElement[] = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-inline span')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-inline span'),
     );
     expect(items.map((item: HTMLElement): string | null => item.textContent)).toEqual([
       'Alpha',
@@ -169,10 +169,10 @@ describe('Inline (a11y)', (): void => {
 
   it('does not add order style that could desync visual and reading order', async (): Promise<void> => {
     const fixture: ComponentFixture<DefaultInlineHostComponent> = await setup(
-      DefaultInlineHostComponent
+      DefaultInlineHostComponent,
     );
     const items: HTMLElement[] = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-inline span')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-inline span'),
     );
     items.forEach((item: HTMLElement): void => {
       expect(item.style.order).toBe('');
@@ -181,7 +181,7 @@ describe('Inline (a11y)', (): void => {
 
   it('renders a single semantic content element (no unnecessary wrapper chain)', async (): Promise<void> => {
     const fixture: ComponentFixture<DefaultInlineHostComponent> = await setup(
-      DefaultInlineHostComponent
+      DefaultInlineHostComponent,
     );
     const host: HTMLElement = getInlineHost(fixture);
     expect(host.children.length).toBe(1);

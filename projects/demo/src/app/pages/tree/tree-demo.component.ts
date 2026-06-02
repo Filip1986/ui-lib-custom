@@ -312,7 +312,7 @@ export class TreeDemoComponent {
 
   public getSelectionLabel(
     selection: TreeNode | TreeNode[] | null,
-    mode: TreeSelectionMode
+    mode: TreeSelectionMode,
   ): string {
     if (!selection) {
       return 'None';

@@ -114,7 +114,7 @@ describe('InputGroupComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputGroupNativeInputHostComponent> = TestBed.createComponent(
-      InputGroupNativeInputHostComponent
+      InputGroupNativeInputHostComponent,
     );
     fixture.detectChanges();
 
@@ -128,7 +128,7 @@ describe('InputGroupComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputGroupNativeInputHostComponent> = TestBed.createComponent(
-      InputGroupNativeInputHostComponent
+      InputGroupNativeInputHostComponent,
     );
     fixture.detectChanges();
 
@@ -143,7 +143,7 @@ describe('InputGroupComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputGroupWithAddonHostComponent> = TestBed.createComponent(
-      InputGroupWithAddonHostComponent
+      InputGroupWithAddonHostComponent,
     );
     fixture.detectChanges();
 
@@ -158,7 +158,7 @@ describe('InputGroupComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputGroupWithTwoAddonsHostComponent> = TestBed.createComponent(
-      InputGroupWithTwoAddonsHostComponent
+      InputGroupWithTwoAddonsHostComponent,
     );
     fixture.detectChanges();
 
@@ -179,7 +179,7 @@ describe('InputGroupComponent', (): void => {
 
     expect(fixture.debugElement.query(By.css('[data-testid="button-addon"]'))).toBeTruthy();
     expect(
-      fixture.debugElement.query(By.css('[data-testid="button-addon"] ui-lib-button'))
+      fixture.debugElement.query(By.css('[data-testid="button-addon"] ui-lib-button')),
     ).toBeTruthy();
     expect(fixture.debugElement.query(By.css('[data-testid="coupon-input"]'))).toBeTruthy();
   });
@@ -193,7 +193,7 @@ describe('InputGroupAddonComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputGroupAddonTextHostComponent> = TestBed.createComponent(
-      InputGroupAddonTextHostComponent
+      InputGroupAddonTextHostComponent,
     );
     fixture.detectChanges();
 
@@ -208,7 +208,7 @@ describe('InputGroupAddonComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputGroupAddonTextHostComponent> = TestBed.createComponent(
-      InputGroupAddonTextHostComponent
+      InputGroupAddonTextHostComponent,
     );
     fixture.detectChanges();
 
@@ -223,7 +223,7 @@ describe('InputGroupAddonComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputGroupAddonIconHostComponent> = TestBed.createComponent(
-      InputGroupAddonIconHostComponent
+      InputGroupAddonIconHostComponent,
     );
     fixture.detectChanges();
 
@@ -239,13 +239,13 @@ describe('InputGroup integration', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputGroupWithTwoAddonsHostComponent> = TestBed.createComponent(
-      InputGroupWithTwoAddonsHostComponent
+      InputGroupWithTwoAddonsHostComponent,
     );
     fixture.detectChanges();
 
     const inputGroupElement: HTMLElement = getInputGroupElement(fixture);
     const childTagNames: string[] = Array.from(inputGroupElement.children).map(
-      (childElement: Element): string => childElement.tagName.toLowerCase()
+      (childElement: Element): string => childElement.tagName.toLowerCase(),
     );
 
     expect(childTagNames).toEqual([
@@ -262,12 +262,12 @@ describe('InputGroup integration', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputGroupFloatLabelHostComponent> = TestBed.createComponent(
-      InputGroupFloatLabelHostComponent
+      InputGroupFloatLabelHostComponent,
     );
     fixture.detectChanges();
 
     expect(
-      fixture.debugElement.query(By.css('ui-lib-input-group > ui-lib-float-label'))
+      fixture.debugElement.query(By.css('ui-lib-input-group > ui-lib-float-label')),
     ).toBeTruthy();
     expect(fixture.debugElement.query(By.css('[data-testid="float-input"]'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('ui-lib-float-label > label'))).toBeTruthy();
@@ -284,10 +284,10 @@ describe('InputGroup integration', (): void => {
     fixture.detectChanges();
 
     expect(
-      fixture.debugElement.query(By.css('ui-lib-input-group-addon ui-lib-button'))
+      fixture.debugElement.query(By.css('ui-lib-input-group-addon ui-lib-button')),
     ).toBeTruthy();
     expect(
-      fixture.debugElement.query(By.css('ui-lib-input-group-addon ui-lib-button button'))
+      fixture.debugElement.query(By.css('ui-lib-input-group-addon ui-lib-button button')),
     ).toBeTruthy();
   });
 });

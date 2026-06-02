@@ -63,7 +63,7 @@ export class SyntaxHighlighterDemoComponent {
     viewChild(DocPageLayoutComponent);
 
   public readonly activeSectionId: Signal<string | null> = computed<string | null>(
-    (): string | null => this.layout()?.activeSectionId() ?? null
+    (): string | null => this.layout()?.activeSectionId() ?? null,
   );
 
   public scrollTo(id: string): void {

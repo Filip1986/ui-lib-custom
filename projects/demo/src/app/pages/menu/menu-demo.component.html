@@ -6,11 +6,7 @@
       <strong>roving tabindex</strong> pattern for accessible keyboard navigation.
     </p>
     <div class="demo-page-header__preview">
-      <ui-lib-code-snippet
-        [code]="importTs"
-        language="typescript"
-        [showLineNumbers]="true"
-      />
+      <ui-lib-code-snippet [code]="importTs" language="typescript" [showLineNumbers]="true" />
     </div>
   </app-doc-page-header>
 
@@ -67,11 +63,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="separatorItems" />
     </div>
-    <ui-lib-code-snippet
-      [code]="separatorTs"
-      language="typescript"
-      [showLineNumbers]="true"
-    />
+    <ui-lib-code-snippet [code]="separatorTs" language="typescript" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── Disabled Items ────────────────────────────────────────────────────── -->
@@ -191,11 +183,7 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet
-      [code]="commandsTs"
-      language="typescript"
-      [showLineNumbers]="true"
-    />
+    <ui-lib-code-snippet [code]="commandsTs" language="typescript" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
@@ -207,11 +195,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="urlItems" />
     </div>
-    <ui-lib-code-snippet
-      [code]="urlItemsTs"
-      language="typescript"
-      [showLineNumbers]="true"
-    />
+    <ui-lib-code-snippet [code]="urlItemsTs" language="typescript" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
@@ -263,7 +247,6 @@
 
   <!-- ── API ───────────────────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API">
-
     <h3 class="demo-section__subtitle">Inputs</h3>
     <ui-lib-table [value]="inputRows" styleClass="demo-a11y-table">
       <ui-lib-table-column header="Name" field="name" width="160px">
@@ -351,7 +334,6 @@
 
   <!-- ── Accessibility ─────────────────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
-
     <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
     <app-doc-aria-table [rows]="ariaRows" />
 
@@ -381,7 +363,6 @@
     </ul>
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -390,7 +371,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

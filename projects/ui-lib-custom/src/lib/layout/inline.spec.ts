@@ -86,7 +86,7 @@ describe('Inline', (): void => {
     Object.assign(component, initial);
     fixture.detectChanges();
     const inlineElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-inline'
+      'ui-lib-inline',
     ) as HTMLElement;
     const inlineContentElement: HTMLElement = inlineElement.firstElementChild as HTMLElement;
     return { fixture, component, inlineElement, inlineContentElement };
@@ -143,7 +143,7 @@ describe('Inline', (): void => {
   it('creates with no inputs', (): void => {
     const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
     const inlineElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-inline'
+      'ui-lib-inline',
     ) as HTMLElement;
     expect(inlineElement).toBeTruthy();
   });
@@ -189,10 +189,10 @@ describe('Inline', (): void => {
       TestBed.createComponent(NestedLayoutHostComponent);
     fixture.detectChanges();
     const nestedInline: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-inline'
+      'ui-lib-inline',
     );
     const nestedItem: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-inline span'
+      'ui-lib-inline span',
     );
     expect(nestedInline).toBeTruthy();
     expect(nestedItem?.textContent).toBe('Nested Item');

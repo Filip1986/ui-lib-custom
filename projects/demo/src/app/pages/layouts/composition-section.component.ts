@@ -116,15 +116,15 @@ export class LayoutCompositionSectionComponent {
       } => ({
         label: `${key} (${value})`,
         value: key as Exclude<InsetToken, 'xs'>,
-      })
+      }),
     );
   public readonly spacingOptions: Array<{ label: string; value: StackToken }> = this.buildOptions(
-    this.stackTokens
+    this.stackTokens,
   );
   public readonly inlineSpacingOptions: Array<{ label: string; value: InlineToken }> =
     this.buildOptions(this.inlineTokens);
   private readonly gridColumnsList: GridColumns[] = Object.keys(this.gridColumnsMap).map(
-    (key: string): GridColumns => Number(key) as GridColumns
+    (key: string): GridColumns => Number(key) as GridColumns,
   );
   public readonly gridColumnOptions: Array<{ label: string; value: GridColumns }> =
     this.gridColumnsList.map((value: GridColumns): { label: string; value: GridColumns } => ({
@@ -151,31 +151,31 @@ export class LayoutCompositionSectionComponent {
   ];
 
   public readonly sizeLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.containerSize(), this.sizeOptions)
+    this.displayLabel(this.containerSize(), this.sizeOptions),
   );
   public readonly insetLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.containerInset(), this.insetOptions)
+    this.displayLabel(this.containerInset(), this.insetOptions),
   );
   public readonly stackLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.stackSpacing(), this.spacingOptions)
+    this.displayLabel(this.stackSpacing(), this.spacingOptions),
   );
   public readonly gridSpacingLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.gridSpacing(), this.spacingOptions)
+    this.displayLabel(this.gridSpacing(), this.spacingOptions),
   );
   public readonly gridColumnsLabel: Signal<string> = computed<string>(
-    (): string => `${this.gridColumns()} cols`
+    (): string => `${this.gridColumns()} cols`,
   );
   public readonly gridMinWidthLabel: Signal<string> = computed<string>((): string =>
-    this.gridMinWidth() ? this.gridMinWidth() : 'Fixed'
+    this.gridMinWidth() ? this.gridMinWidth() : 'Fixed',
   );
   public readonly gridAlignLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.gridAlign(), this.alignOptions)
+    this.displayLabel(this.gridAlign(), this.alignOptions),
   );
   public readonly gridJustifyLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.gridJustify(), this.justifyOptions)
+    this.displayLabel(this.gridJustify(), this.justifyOptions),
   );
   public readonly inlineSpacingLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.inlineSpacing(), this.inlineSpacingOptions)
+    this.displayLabel(this.inlineSpacing(), this.inlineSpacingOptions),
   );
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
@@ -240,16 +240,16 @@ export class LayoutCompositionSectionComponent {
       ([key, value]: [string, string]): { label: string; value: T } => ({
         label: `${key} (${this.toPx(value)})`,
         value: key as T,
-      })
+      }),
     );
   }
 
   private displayLabel<T extends string | number>(
     value: T,
-    options: { label: string; value: T }[]
+    options: { label: string; value: T }[],
   ): string {
     const match: { label: string; value: T } | undefined = options.find(
-      (option: { label: string; value: T }): boolean => option.value === value
+      (option: { label: string; value: T }): boolean => option.value === value,
     );
     return match ? match.label : String(value);
   }

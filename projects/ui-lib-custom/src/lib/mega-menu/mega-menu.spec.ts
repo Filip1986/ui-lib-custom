@@ -24,15 +24,15 @@ function getHost(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getInstance(fixture: ComponentFixture<unknown>): MegaMenu {
   return fixture.debugElement.query(
-    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof MegaMenu
+    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof MegaMenu,
   ).componentInstance as MegaMenu;
 }
 
 function getRootLinks(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-mega-menu__root-link'
-    )
+      '.ui-lib-mega-menu__root-link',
+    ),
   );
 }
 
@@ -43,8 +43,8 @@ function getPanel(fixture: ComponentFixture<unknown>): HTMLElement | null {
 function getSubLinks(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-mega-menu__sub-link'
-    )
+      '.ui-lib-mega-menu__sub-link',
+    ),
   );
 }
 
@@ -649,7 +649,7 @@ describe('MegaMenu', (): void => {
       const links: HTMLElement[] = getRootLinks(fixture);
       expect(links.length).toBe(1);
       const labelEl: HTMLElement | null = (links[0] as HTMLElement).querySelector<HTMLElement>(
-        '.ui-lib-mega-menu__root-label'
+        '.ui-lib-mega-menu__root-label',
       );
       expect((labelEl?.textContent ?? '').trim()).toBe('New Item');
     });

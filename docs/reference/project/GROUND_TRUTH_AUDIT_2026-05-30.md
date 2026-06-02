@@ -9,29 +9,29 @@
 **The foundation is real.** Every objective gate is green. 8,571 automated tests pass, the
 library builds clean with zero warnings, all five tsconfigs type-check, ESLint is clean at
 `--max-warnings 0`, and all 105 entry points are within their gzip budgets. The 9.0 scores are
-*over-uniform as a measurement* (see below), but they are not masking a broken codebase.
+_over-uniform as a measurement_ (see below), but they are not masking a broken codebase.
 
 The **only red gate is the axe-core e2e suite — and that failure is a false negative** caused by
 a port collision, not an accessibility regression (see Finding 1).
 
 ## Results
 
-| Gate | Command | Result |
-|------|---------|--------|
-| Library build | `npm run build` | ✅ Clean — 0 warnings, 105 entry points, 93 s |
-| Unit tests | `npm test` | ✅ **228 suites / 6,148 tests** passing (76 s) |
-| A11y unit tests | `npm run test:a11y` | ✅ **100 suites / 2,423 tests** passing (39 s) |
-| Typecheck | `npm run typecheck` | ✅ Clean — all 5 tsconfigs |
-| ESLint | `eslint . --max-warnings 0` | ✅ Clean |
-| Bundle budgets | `npm run bundlesize:check` | ✅ All 105 entry points within budget |
-| Demo build | `npm run build:demo` | ✅ Builds; 3 non-blocking budget warnings |
-| A11y e2e (axe-core) | `npm run test:a11y:e2e` | ⚠️ 3 passed / 2 failed / 1 skipped — **false negative, see Finding 1** |
-| A11y e2e (clean re-run) | real demo on :4321, `reuseExistingServer:false` | ✅ **5 passed / 0 failed / 1 skipped** — confirms the 2 failures were the port collision |
-| **Interaction-state e2e suite** | `e2e/a11y-interactions.spec.ts` (new) | ✅ **17 passed / 0 failed / 2 skipped** (dialog tests fixme) |
+| Gate                            | Command                                         | Result                                                                                   |
+| ------------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Library build                   | `npm run build`                                 | ✅ Clean — 0 warnings, 105 entry points, 93 s                                            |
+| Unit tests                      | `npm test`                                      | ✅ **228 suites / 6,148 tests** passing (76 s)                                           |
+| A11y unit tests                 | `npm run test:a11y`                             | ✅ **100 suites / 2,423 tests** passing (39 s)                                           |
+| Typecheck                       | `npm run typecheck`                             | ✅ Clean — all 5 tsconfigs                                                               |
+| ESLint                          | `eslint . --max-warnings 0`                     | ✅ Clean                                                                                 |
+| Bundle budgets                  | `npm run bundlesize:check`                      | ✅ All 105 entry points within budget                                                    |
+| Demo build                      | `npm run build:demo`                            | ✅ Builds; 3 non-blocking budget warnings                                                |
+| A11y e2e (axe-core)             | `npm run test:a11y:e2e`                         | ⚠️ 3 passed / 2 failed / 1 skipped — **false negative, see Finding 1**                   |
+| A11y e2e (clean re-run)         | real demo on :4321, `reuseExistingServer:false` | ✅ **5 passed / 0 failed / 1 skipped** — confirms the 2 failures were the port collision |
+| **Interaction-state e2e suite** | `e2e/a11y-interactions.spec.ts` (new)           | ✅ **17 passed / 0 failed / 2 skipped** (dialog tests fixme)                             |
 
 Total automated tests passing: **8,571** (6,148 unit + 2,423 a11y unit).
 
-**Clean a11y e2e re-run (2026-05-30):** Re-running the same suite against the *real* component demo
+**Clean a11y e2e re-run (2026-05-30):** Re-running the same suite against the _real_ component demo
 on a dedicated port (`ng serve demo --port 4321`, `reuseExistingServer:false`) passed
 **5 / 6** — including `tabs … keyboard navigable` (4.4 s) and `select … no violations when open`
 (5.0 s), the two that "failed" in the default run. The 6th (`modal focus trap`) **skipped** because
@@ -72,7 +72,7 @@ Until then, the a11y proof rests on unit-level jest-axe plus manual clean re-run
 `npm run check:i18n` prints `❌ Hardcoded English strings found` for
 `paginator.component.html:114` (`placeholder="Page"`) yet **exits 0**, so it cannot gate CI. The
 Paginator is scored **I18n 9/10**, but its jump-to-page input placeholder is a hardcoded English
-string (the `aria-label` on the same element *is* translated). Fix: expose the placeholder as a
+string (the `aria-label` on the same element _is_ translated). Fix: expose the placeholder as a
 translatable input, and make the script exit non-zero on findings.
 
 ### 3. The scorecard no longer discriminates (Priority: Medium — process)
@@ -102,21 +102,21 @@ A new `e2e/a11y-interactions.spec.ts` was created covering 13 hard interactive w
 open/active state — the state where real ARIA bugs hide, which the full-sweep misses because it
 never interacts before scanning. Final result: **17 passed / 2 skipped**.
 
-| Widget | What is tested |
-|--------|----------------|
-| Select | open listbox + `aria-activedescendant` moves on ArrowDown + axe on open panel |
-| AutoComplete | type → suggestions + `aria-activedescendant` + axe on open panel |
-| CascadeSelect | open + first listbox visible + axe on open panel |
-| DatePicker | open + `role=grid` present + axe on open panel |
-| **Dialog** | **FIXME** — `test.fixme`: panel never renders in e2e env after signal mutation; static axe covered by full-sweep |
-| Drawer | open + focus inside panel + Escape closes |
-| Menubar | open submenu + ArrowDown nav + axe |
-| TieredMenu | inline always-visible + ArrowDown nav + axe |
-| ContextMenu | right-click + roving-tabindex nav + axe |
-| Tree | expand toggle + `aria-expanded` changes + ArrowDown nav + axe |
-| TreeSelect | open + tree visible inside panel + axe |
-| Slider | `ArrowLeft` decreases + `ArrowRight` increases + axe |
-| ColorPicker | open popup + `tabindex=0` panel focused + axe on open panel |
+| Widget        | What is tested                                                                                                   |
+| ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Select        | open listbox + `aria-activedescendant` moves on ArrowDown + axe on open panel                                    |
+| AutoComplete  | type → suggestions + `aria-activedescendant` + axe on open panel                                                 |
+| CascadeSelect | open + first listbox visible + axe on open panel                                                                 |
+| DatePicker    | open + `role=grid` present + axe on open panel                                                                   |
+| **Dialog**    | **FIXME** — `test.fixme`: panel never renders in e2e env after signal mutation; static axe covered by full-sweep |
+| Drawer        | open + focus inside panel + Escape closes                                                                        |
+| Menubar       | open submenu + ArrowDown nav + axe                                                                               |
+| TieredMenu    | inline always-visible + ArrowDown nav + axe                                                                      |
+| ContextMenu   | right-click + roving-tabindex nav + axe                                                                          |
+| Tree          | expand toggle + `aria-expanded` changes + ArrowDown nav + axe                                                    |
+| TreeSelect    | open + tree visible inside panel + axe                                                                           |
+| Slider        | `ArrowLeft` decreases + `ArrowRight` increases + axe                                                             |
+| ColorPicker   | open popup + `tabindex=0` panel focused + axe on open panel                                                      |
 
 **One real component bug found and fixed:** CascadeSelect had `aria-expanded="false"` on
 `role="option"` elements — invalid per WAI-ARIA (axe `aria-allowed-attr`, WCAG 4.1.2 critical).

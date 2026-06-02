@@ -60,7 +60,7 @@ function setReducedMotionPreference(preferReducedMotion: boolean): void {
         addListener: jest.fn(),
         removeListener: jest.fn(),
         dispatchEvent: jest.fn().mockReturnValue(false),
-      }) as MediaQueryList
+      }) as MediaQueryList,
   );
 }
 
@@ -71,7 +71,7 @@ async function createFixture(): Promise<ComponentFixture<AnimateOnScrollA11yHost
   }).compileComponents();
 
   const fixture: ComponentFixture<AnimateOnScrollA11yHostComponent> = TestBed.createComponent(
-    AnimateOnScrollA11yHostComponent
+    AnimateOnScrollA11yHostComponent,
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
@@ -80,7 +80,7 @@ async function createFixture(): Promise<ComponentFixture<AnimateOnScrollA11yHost
 }
 
 function getAnimatedElement(
-  fixture: ComponentFixture<AnimateOnScrollA11yHostComponent>
+  fixture: ComponentFixture<AnimateOnScrollA11yHostComponent>,
 ): HTMLElement {
   const rootElement: HTMLElement = fixture.nativeElement as HTMLElement;
   return rootElement.querySelector('.ui-lib-animate-on-scroll') as HTMLElement;
@@ -103,7 +103,7 @@ describe('AnimateOnScroll (a11y)', (): void => {
       (callback: IntersectionObserverCallback): IntersectionObserver => {
         intersectionCallback = callback;
         return mockObserver as unknown as IntersectionObserver;
-      }
+      },
     ) as unknown as typeof IntersectionObserver;
 
     globalThis.requestAnimationFrame = jest.fn((callback: FrameRequestCallback): number => {
@@ -150,7 +150,7 @@ describe('AnimateOnScroll (a11y)', (): void => {
 
     intersectionCallback(
       [entry as IntersectionObserverEntry],
-      mockObserver as unknown as IntersectionObserver
+      mockObserver as unknown as IntersectionObserver,
     );
     expect(requestAnimationFrameMock).toHaveBeenCalled();
     expect(host.enterCount).toBe(1);

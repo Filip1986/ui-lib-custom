@@ -58,7 +58,7 @@ async function createFixture(): Promise<ComponentFixture<MeterGroupA11yHostCompo
     providers: [provideZonelessChangeDetection()],
   }).compileComponents();
   const fixture: ComponentFixture<MeterGroupA11yHostComponent> = TestBed.createComponent(
-    MeterGroupA11yHostComponent
+    MeterGroupA11yHostComponent,
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
@@ -80,7 +80,7 @@ describe('MeterGroup Accessibility', (): void => {
   it('should expose role="group" on the meter container', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const container: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__meters'
+      '.ui-lib-meter-group__meters',
     );
     expect(container?.getAttribute('role')).toBe('group');
   });
@@ -88,7 +88,7 @@ describe('MeterGroup Accessibility', (): void => {
   it('should apply aria-label to the meter container', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const container: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__meters'
+      '.ui-lib-meter-group__meters',
     );
     expect(container?.getAttribute('aria-label')).toBe('Storage usage');
   });
@@ -96,7 +96,7 @@ describe('MeterGroup Accessibility', (): void => {
   it('should expose role="meter" on each segment', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const segments: NodeListOf<HTMLElement> = getHostElement(fixture).querySelectorAll(
-      '.ui-lib-meter-group__meter'
+      '.ui-lib-meter-group__meter',
     );
     segments.forEach((segment: HTMLElement): void => {
       expect(segment.getAttribute('role')).toBe('meter');
@@ -106,7 +106,7 @@ describe('MeterGroup Accessibility', (): void => {
   it('should expose aria-valuenow/min/max on each segment', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const first: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__meter'
+      '.ui-lib-meter-group__meter',
     );
     expect(first?.getAttribute('aria-valuenow')).toBe('20');
     expect(first?.getAttribute('aria-valuemin')).toBe('0');
@@ -116,7 +116,7 @@ describe('MeterGroup Accessibility', (): void => {
   it('should expose descriptive aria-label text on each segment', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const first: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__meter'
+      '.ui-lib-meter-group__meter',
     );
     expect(first?.getAttribute('aria-label')).toBe('Apps: 20 of 100');
   });
@@ -127,7 +127,7 @@ describe('MeterGroup Accessibility', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const first: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__meter'
+      '.ui-lib-meter-group__meter',
     );
     expect(first?.getAttribute('aria-label')).toBe('Segment 1: 7 of 100');
   });
@@ -135,7 +135,7 @@ describe('MeterGroup Accessibility', (): void => {
   it('should render the legend with aria-label when labels are visible', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const legend: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__labels'
+      '.ui-lib-meter-group__labels',
     );
     expect(legend?.getAttribute('aria-label')).toBe('Legend');
   });
@@ -146,7 +146,7 @@ describe('MeterGroup Accessibility', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const legend: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__labels'
+      '.ui-lib-meter-group__labels',
     );
     expect(legend).toBeNull();
   });
@@ -154,10 +154,10 @@ describe('MeterGroup Accessibility', (): void => {
   it('should keep decorative swatch and icon elements hidden from assistive tech', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const swatch: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__label-swatch'
+      '.ui-lib-meter-group__label-swatch',
     );
     const icon: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__label-swatch .pi'
+      '.ui-lib-meter-group__label-swatch .pi',
     );
     expect(swatch?.getAttribute('aria-hidden')).toBe('true');
     expect(icon?.getAttribute('aria-hidden')).toBe('true');
@@ -166,7 +166,7 @@ describe('MeterGroup Accessibility', (): void => {
   it('should render a polite total live region', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const total: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__sr-total'
+      '.ui-lib-meter-group__sr-total',
     );
     expect(total?.getAttribute('aria-live')).toBe('polite');
     expect(total?.getAttribute('aria-atomic')).toBe('true');
@@ -175,7 +175,7 @@ describe('MeterGroup Accessibility', (): void => {
   it('should announce the initial total value', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const total: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__sr-total'
+      '.ui-lib-meter-group__sr-total',
     );
     expect((total?.textContent ?? '').trim()).toBe('Total: 50');
   });
@@ -189,7 +189,7 @@ describe('MeterGroup Accessibility', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const total: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__sr-total'
+      '.ui-lib-meter-group__sr-total',
     );
     expect((total?.textContent ?? '').trim()).toBe('Total: 60');
   });
@@ -203,7 +203,7 @@ describe('MeterGroup Accessibility', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const total: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__sr-total'
+      '.ui-lib-meter-group__sr-total',
     );
     expect((total?.textContent ?? '').trim()).toBe('Total: 100');
   });
@@ -211,7 +211,7 @@ describe('MeterGroup Accessibility', (): void => {
   it('should render non-focusable segments for keyboard users', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const segments: NodeListOf<HTMLElement> = getHostElement(fixture).querySelectorAll(
-      '.ui-lib-meter-group__meter'
+      '.ui-lib-meter-group__meter',
     );
     segments.forEach((segment: HTMLElement): void => {
       expect(segment.getAttribute('tabindex')).toBeNull();
@@ -221,7 +221,7 @@ describe('MeterGroup Accessibility', (): void => {
   it('should keep the group container non-focusable', async (): Promise<void> => {
     const fixture: ComponentFixture<MeterGroupA11yHostComponent> = await createFixture();
     const container: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-meter-group__meters'
+      '.ui-lib-meter-group__meters',
     );
     expect(container?.getAttribute('tabindex')).toBeNull();
   });
@@ -232,7 +232,7 @@ describe('MeterGroup Accessibility', (): void => {
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
     const fixture: ComponentFixture<MeterGroupDualHostComponent> = TestBed.createComponent(
-      MeterGroupDualHostComponent
+      MeterGroupDualHostComponent,
     );
     document.body.appendChild(fixture.nativeElement);
     fixture.detectChanges();

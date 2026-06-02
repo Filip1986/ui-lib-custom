@@ -4,6 +4,7 @@
 > defined in `docs/SCORING_CRITERIA.md`. Use it after Tier 1 hardening is complete.
 >
 > **Distinction from Tier 1 (6-phase hardening):**
+>
 > - Tier 1 = holistic, qualitative evolution. Score assigned by feel after improvement work.
 > - Tier 2 = systematic, checkbox-counted verification. Score = verified checkboxes / total × 10.
 >   An unchecked item is an explicit, visible backlog entry — not an unknown gap.
@@ -208,7 +209,7 @@ Run audits in this order — highest public scrutiny first:
 ### Priority 1 — Cited in the benchmark article (must be clean before article is written)
 
 | Component    | Reason                                                              |
-|--------------|---------------------------------------------------------------------|
+| ------------ | ------------------------------------------------------------------- |
 | Dialog       | The "Dialog focus trap that actually works" killer demo moment      |
 | Select       | Combobox — the hardest ARIA pattern — highest scrutiny              |
 | AutoComplete | Same reason as Select                                               |
@@ -233,7 +234,7 @@ The 9.0-scoring components are least likely to drop but still need formal verifi
 ## How This Relates to the 6-Phase Hardening Prompts
 
 | Dimension        | 6-Phase Hardening (Tier 1)                  | Checkpoint Audit (Tier 2)                  |
-|------------------|---------------------------------------------|--------------------------------------------|
+| ---------------- | ------------------------------------------- | ------------------------------------------ |
 | **Goal**         | Improve the component                       | Verify the component                       |
 | **Output**       | Better code + holistic score                | Verified score + explicit backlog          |
 | **Score basis**  | Expert judgment after improvement           | Counted checkboxes against fixed criteria  |
@@ -249,10 +250,9 @@ The loop is: Tier 1 → Tier 2 audit → fix failures with Tier 1 → re-audit T
 ## Related Documents
 
 | Document                                      | Role                                                             |
-|-----------------------------------------------|------------------------------------------------------------------|
+| --------------------------------------------- | ---------------------------------------------------------------- |
 | `docs/SCORING_CRITERIA.md`                    | The authoritative checkpoint list — read in full before auditing |
 | `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md` | The Tier 1 execution engine — use to fix Tier 2 failures         |
 | `docs/COMPETITIVE_BENCHMARKS.md`              | Evidence file for Category 11                                    |
 | `docs/COMPONENT_SCORES.md`                    | The scoreboard — update after every Tier 2 audit                 |
 | `docs/ROADMAP.md`                             | Phase 4 gate requires Tier 2 audit before benchmark article      |
-

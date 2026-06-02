@@ -169,7 +169,7 @@ function buildDemoProducts(rounds: number): DemoProduct[] {
       const adjustedPrice: number = Number((seed.price + roundMultiplier * 1.75).toFixed(2));
       const adjustedRating: number = Math.min(
         5,
-        Number((seed.rating - roundIndex * 0.05).toFixed(1))
+        Number((seed.rating - roundIndex * 0.05).toFixed(1)),
       );
       const adjustedInventory: number = Math.max(0, seed.inventoryCount - roundIndex * 4);
       const inventoryStatus: DemoInventoryStatus =

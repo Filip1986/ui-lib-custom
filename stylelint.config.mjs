@@ -85,25 +85,21 @@ export default {
             'initial',
             'revert',
             '/^var\\(--uilib-/', // must use --uilib-* namespace
-            '/^var\\(--demo-/',  // demo-app-specific tokens are also allowed
-            '/^clamp\\(/',       // fluid sizing is acceptable
-            '/^oklch\\(/',       // oklch() allowed in token definition files
-            '/^color-mix\\(/',   // color-mix() allowed
+            '/^var\\(--demo-/', // demo-app-specific tokens are also allowed
+            '/^clamp\\(/', // fluid sizing is acceptable
+            '/^oklch\\(/', // oklch() allowed in token definition files
+            '/^color-mix\\(/', // color-mix() allowed
           ],
         },
         expandShorthand: false,
         disableFix: true,
         severity: 'error',
-        message:
-          "Use a design token — var(--uilib-*). Raw values are not allowed.",
+        message: 'Use a design token — var(--uilib-*). Raw values are not allowed.',
       },
     ],
 
     // ── Performance: no layout-triggering animations ──────────────────────────
-    'plugin/no-low-performance-animation-properties': [
-      true,
-      { severity: 'warning' },
-    ],
+    'plugin/no-low-performance-animation-properties': [true, { severity: 'warning' }],
 
     // ── Accessibility: reduced-motion completeness ────────────────────────────
     // Every SCSS file that applies a non-none transition or animation must also
@@ -206,4 +202,3 @@ export default {
     '**/*.ts',
   ],
 };
-

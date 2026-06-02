@@ -18,37 +18,37 @@ function getHost(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getContainer(fixture: ComponentFixture<unknown>): HTMLElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-    '.uilib-galleria__container'
+    '.uilib-galleria__container',
   );
 }
 
 function getItemWrapper(fixture: ComponentFixture<unknown>): HTMLElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-    '.uilib-galleria__item-wrapper'
+    '.uilib-galleria__item-wrapper',
   );
 }
 
 function getAllThumbnailItems(fixture: ComponentFixture<unknown>): NodeListOf<HTMLElement> {
   return (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-    '.uilib-galleria__thumbnail-item'
+    '.uilib-galleria__thumbnail-item',
   );
 }
 
 function getAllThumbnailButtons(fixture: ComponentFixture<unknown>): NodeListOf<HTMLButtonElement> {
   return (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>(
-    '.uilib-galleria__thumbnail-item'
+    '.uilib-galleria__thumbnail-item',
   );
 }
 
 function getNavPrev(fixture: ComponentFixture<unknown>): HTMLButtonElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>(
-    '.uilib-galleria__item-nav--prev'
+    '.uilib-galleria__item-nav--prev',
   );
 }
 
 function getNavNext(fixture: ComponentFixture<unknown>): HTMLButtonElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>(
-    '.uilib-galleria__item-nav--next'
+    '.uilib-galleria__item-nav--next',
   );
 }
 
@@ -131,7 +131,7 @@ describe('GalleriaComponent', (): void => {
       variant: GalleriaVariant;
       size: GalleriaSize;
       thumbnailsPosition: GalleriaThumbnailsPosition;
-    }> = {}
+    }> = {},
   ): Promise<void> {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent],
@@ -369,10 +369,10 @@ describe('GalleriaComponent', (): void => {
 
     // Access via component instance via debugElement
     const galleriaEl2: Element = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-galleria'
+      'ui-lib-galleria',
     )!;
     const thumbNextBtn: HTMLButtonElement | null = galleriaEl2.querySelector<HTMLButtonElement>(
-      '.uilib-galleria__thumbnail-nav--next'
+      '.uilib-galleria__thumbnail-nav--next',
     );
     expect(thumbNextBtn).toBeTruthy();
     thumbNextBtn!.click();
@@ -380,11 +380,11 @@ describe('GalleriaComponent', (): void => {
     await fixture.whenStable();
     // thumbnailFirstIndex should advance by numScroll
     const activeThumb: HTMLElement | null = galleriaEl2.querySelector(
-      '.uilib-galleria__thumbnail-item--active'
+      '.uilib-galleria__thumbnail-item--active',
     );
     // After scroll, first thumbnail should be the 2nd item (index 1)
     const thumbnails: NodeListOf<HTMLElement> = galleriaEl2.querySelectorAll<HTMLElement>(
-      '.uilib-galleria__thumbnail-item'
+      '.uilib-galleria__thumbnail-item',
     );
     expect(thumbnails.length).toBe(3);
     // Void usage to avoid unused-var lint

@@ -13,49 +13,49 @@
 
 ### Inputs
 
-| Name                | Type                      | Default                                  | Description |
-| ------------------- | ------------------------- | ---------------------------------------- | ----------- |
-| `appendTo`          | `DatePickerAppendTo`      | `DATE_PICKER_DEFAULTS.AppendTo`          | —           |
-| `ariaLabel`         | `string | null`           | `null`                                   | —           |
-| `ariaLabelledBy`    | `string | null`           | `null`                                   | —           |
-| `dateFormat`        | `string`                  | `DATE_PICKER_DEFAULTS.DateFormat`        | —           |
-| `disabled`          | `boolean`                 | `DATE_PICKER_DEFAULTS.Disabled`          | —           |
-| `disabledDates`     | `Date[]`                  | `[]`                                     | —           |
-| `disabledDays`      | `number[]`                | `[]`                                     | —           |
-| `filled`            | `boolean`                 | `DATE_PICKER_DEFAULTS.Filled`            | —           |
-| `firstDayOfWeek`    | `number`                  | `DATE_PICKER_DEFAULTS.FirstDayOfWeek`    | —           |
-| `fluid`             | `boolean`                 | `false`                                  | —           |
-| `hourFormat`        | `'12' | '24'`             | `'24'`                                   | —           |
-| `iconDisplay`       | `'input' | 'button'`      | `'input'`                                | —           |
-| `inline`            | `boolean`                 | `DATE_PICKER_DEFAULTS.Inline`            | —           |
-| `inputId`           | `string`                  | `DATE_PICKER_DEFAULTS.InputId`           | —           |
-| `invalid`           | `boolean`                 | `false`                                  | —           |
-| `locale`            | `DatePickerLocale`        | `DEFAULT_LOCALE`                         | —           |
-| `maxDate`           | `Date | null`             | `DATE_PICKER_DEFAULTS.MaxDate`           | —           |
-| `minDate`           | `Date | null`             | `DATE_PICKER_DEFAULTS.MinDate`           | —           |
-| `monthNavigator`    | `boolean`                 | `false`                                  | —           |
-| `name`              | `string`                  | `DATE_PICKER_DEFAULTS.Name`              | —           |
-| `numberOfMonths`    | `number`                  | `1`                                      | —           |
-| `placeholder`       | `string`                  | `DATE_PICKER_DEFAULTS.Placeholder`       | —           |
-| `selectionMode`     | `DatePickerSelectionMode` | `DATE_PICKER_DEFAULTS.SelectionMode`     | —           |
-| `selectOtherMonths` | `boolean`                 | `DATE_PICKER_DEFAULTS.SelectOtherMonths` | —           |
-| `showButtonBar`     | `boolean`                 | `DATE_PICKER_DEFAULTS.ShowButtonBar`     | —           |
-| `showClear`         | `boolean`                 | `false`                                  | —           |
-| `showIcon`          | `boolean`                 | `DATE_PICKER_DEFAULTS.ShowIcon`          | —           |
-| `showOtherMonths`   | `boolean`                 | `DATE_PICKER_DEFAULTS.ShowOtherMonths`   | —           |
-| `showSeconds`       | `boolean`                 | `false`                                  | —           |
-| `showTime`          | `boolean`                 | `false`                                  | —           |
-| `showWeek`          | `boolean`                 | `DATE_PICKER_DEFAULTS.ShowWeek`          | —           |
-| `size`              | `DatePickerSize`          | `DATE_PICKER_DEFAULTS.Size`              | —           |
-| `stepHour`          | `number`                  | `1`                                      | —           |
-| `stepMinute`        | `number`                  | `1`                                      | —           |
-| `stepSecond`        | `number`                  | `1`                                      | —           |
-| `tabindex`          | `number`                  | `DATE_PICKER_DEFAULTS.TabIndex`          | —           |
-| `timeOnly`          | `boolean`                 | `false`                                  | —           |
-| `variant`           | `ThemeVariant | null`     | `null`                                   | —           |
-| `view`              | `DatePickerView`          | `DATE_PICKER_DEFAULTS.View`              | —           |
-| `yearNavigator`     | `boolean`                 | `false`                                  | —           |
-| `yearRange`         | `string`                  | `'1970:2030'`                            | —           |
+| Name                | Type                      | Default                                  | Description                    |
+| ------------------- | ------------------------- | ---------------------------------------- | ------------------------------ | --- |
+| `appendTo`          | `DatePickerAppendTo`      | `DATE_PICKER_DEFAULTS.AppendTo`          | —                              |
+| `ariaLabel`         | `string                   | null`                                    | `null`                         | —   |
+| `ariaLabelledBy`    | `string                   | null`                                    | `null`                         | —   |
+| `dateFormat`        | `string`                  | `DATE_PICKER_DEFAULTS.DateFormat`        | —                              |
+| `disabled`          | `boolean`                 | `DATE_PICKER_DEFAULTS.Disabled`          | —                              |
+| `disabledDates`     | `Date[]`                  | `[]`                                     | —                              |
+| `disabledDays`      | `number[]`                | `[]`                                     | —                              |
+| `filled`            | `boolean`                 | `DATE_PICKER_DEFAULTS.Filled`            | —                              |
+| `firstDayOfWeek`    | `number`                  | `DATE_PICKER_DEFAULTS.FirstDayOfWeek`    | —                              |
+| `fluid`             | `boolean`                 | `false`                                  | —                              |
+| `hourFormat`        | `'12'                     | '24'`                                    | `'24'`                         | —   |
+| `iconDisplay`       | `'input'                  | 'button'`                                | `'input'`                      | —   |
+| `inline`            | `boolean`                 | `DATE_PICKER_DEFAULTS.Inline`            | —                              |
+| `inputId`           | `string`                  | `DATE_PICKER_DEFAULTS.InputId`           | —                              |
+| `invalid`           | `boolean`                 | `false`                                  | —                              |
+| `locale`            | `DatePickerLocale`        | `DEFAULT_LOCALE`                         | —                              |
+| `maxDate`           | `Date                     | null`                                    | `DATE_PICKER_DEFAULTS.MaxDate` | —   |
+| `minDate`           | `Date                     | null`                                    | `DATE_PICKER_DEFAULTS.MinDate` | —   |
+| `monthNavigator`    | `boolean`                 | `false`                                  | —                              |
+| `name`              | `string`                  | `DATE_PICKER_DEFAULTS.Name`              | —                              |
+| `numberOfMonths`    | `number`                  | `1`                                      | —                              |
+| `placeholder`       | `string`                  | `DATE_PICKER_DEFAULTS.Placeholder`       | —                              |
+| `selectionMode`     | `DatePickerSelectionMode` | `DATE_PICKER_DEFAULTS.SelectionMode`     | —                              |
+| `selectOtherMonths` | `boolean`                 | `DATE_PICKER_DEFAULTS.SelectOtherMonths` | —                              |
+| `showButtonBar`     | `boolean`                 | `DATE_PICKER_DEFAULTS.ShowButtonBar`     | —                              |
+| `showClear`         | `boolean`                 | `false`                                  | —                              |
+| `showIcon`          | `boolean`                 | `DATE_PICKER_DEFAULTS.ShowIcon`          | —                              |
+| `showOtherMonths`   | `boolean`                 | `DATE_PICKER_DEFAULTS.ShowOtherMonths`   | —                              |
+| `showSeconds`       | `boolean`                 | `false`                                  | —                              |
+| `showTime`          | `boolean`                 | `false`                                  | —                              |
+| `showWeek`          | `boolean`                 | `DATE_PICKER_DEFAULTS.ShowWeek`          | —                              |
+| `size`              | `DatePickerSize`          | `DATE_PICKER_DEFAULTS.Size`              | —                              |
+| `stepHour`          | `number`                  | `1`                                      | —                              |
+| `stepMinute`        | `number`                  | `1`                                      | —                              |
+| `stepSecond`        | `number`                  | `1`                                      | —                              |
+| `tabindex`          | `number`                  | `DATE_PICKER_DEFAULTS.TabIndex`          | —                              |
+| `timeOnly`          | `boolean`                 | `false`                                  | —                              |
+| `variant`           | `ThemeVariant             | null`                                    | `null`                         | —   |
+| `view`              | `DatePickerView`          | `DATE_PICKER_DEFAULTS.View`              | —                              |
+| `yearNavigator`     | `boolean`                 | `false`                                  | —                              |
+| `yearRange`         | `string`                  | `'1970:2030'`                            | —                              |
 
 ### Outputs
 
@@ -149,4 +149,3 @@ _No component-level CSS variables detected._
 - [Demo page](/components/date-picker)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/date-picker/README.md)
-

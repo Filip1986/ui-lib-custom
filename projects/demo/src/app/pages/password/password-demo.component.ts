@@ -137,7 +137,7 @@ export class PasswordDemoComponent {
 
   public readonly passwordControl: FormControl<string | null> = new FormControl<string | null>(
     null,
-    [Validators.required, Validators.minLength(8)]
+    [Validators.required, Validators.minLength(8)],
   );
 
   public scrollTo(id: string): void {

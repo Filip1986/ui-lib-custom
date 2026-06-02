@@ -13,24 +13,24 @@ RadioButton component with accessible labeling and group selection support via C
 
 ### Inputs
 
-| Name              | Type                        | Default      | Description                                                        |
-| ----------------- | --------------------------- | ------------ | ------------------------------------------------------------------ |
-| `appearance`      | `RadioButtonAppearance`     | `'outlined'` | Visual appearance of the radio box.                                |
-| `ariaDescribedby` | `string | null`             | `null`       | Links to helper/error text element ids.                            |
-| `ariaLabel`       | `string | null`             | `null`       | ARIA label when no visible label is provided.                      |
-| `ariaLabelledby`  | `string | null`             | `null`       | Explicit aria-labelledby override.                                 |
-| `autofocus`       | `boolean`                   | `false`      | Automatically focuses the input after view init.                   |
-| `disabled`        | `boolean`                   | `false`      | Whether the radio button is disabled.                              |
-| `inputId`         | `string | null`             | `null`       | Id forwarded to the native `<input>` element.                      |
-| `invalid`         | `boolean`                   | `false`      | Explicit invalid state for accessibility and styling.              |
-| `label`           | `string | null`             | `null`       | Label text rendered next to the radio button.                      |
-| `name`            | `string | null`             | `null`       | Name attribute shared across the radio group.                      |
-| `readonly`        | `boolean`                   | `false`      | When true the radio button is visible but cannot be changed.       |
-| `required`        | `boolean`                   | `false`      | Whether the native input is required.                              |
-| `size`            | `RadioButtonSize`           | `'md'`       | Size token: sm | md | lg.                                          |
-| `tabindex`        | `number`                    | `0`          | Tab index for keyboard navigation.                                 |
-| `value`           | `unknown`                   | `null`       | The value this radio button represents in the group model.         |
-| `variant`         | `RadioButtonVariant | null` | `null`       | Design-system variant; falls back to ThemeConfigService when null. |
+| Name              | Type                    | Default      | Description                                                  |
+| ----------------- | ----------------------- | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------------ | --- |
+| `appearance`      | `RadioButtonAppearance` | `'outlined'` | Visual appearance of the radio box.                          |
+| `ariaDescribedby` | `string                 | null`        | `null`                                                       | Links to helper/error text element ids.                            |
+| `ariaLabel`       | `string                 | null`        | `null`                                                       | ARIA label when no visible label is provided.                      |
+| `ariaLabelledby`  | `string                 | null`        | `null`                                                       | Explicit aria-labelledby override.                                 |
+| `autofocus`       | `boolean`               | `false`      | Automatically focuses the input after view init.             |
+| `disabled`        | `boolean`               | `false`      | Whether the radio button is disabled.                        |
+| `inputId`         | `string                 | null`        | `null`                                                       | Id forwarded to the native `<input>` element.                      |
+| `invalid`         | `boolean`               | `false`      | Explicit invalid state for accessibility and styling.        |
+| `label`           | `string                 | null`        | `null`                                                       | Label text rendered next to the radio button.                      |
+| `name`            | `string                 | null`        | `null`                                                       | Name attribute shared across the radio group.                      |
+| `readonly`        | `boolean`               | `false`      | When true the radio button is visible but cannot be changed. |
+| `required`        | `boolean`               | `false`      | Whether the native input is required.                        |
+| `size`            | `RadioButtonSize`       | `'md'`       | Size token: sm                                               | md                                                                 | lg. |
+| `tabindex`        | `number`                | `0`          | Tab index for keyboard navigation.                           |
+| `value`           | `unknown`               | `null`       | The value this radio button represents in the group model.   |
+| `variant`         | `RadioButtonVariant     | null`        | `null`                                                       | Design-system variant; falls back to ThemeConfigService when null. |
 
 ### Outputs
 
@@ -131,4 +131,3 @@ RadioButton component with accessible labeling and group selection support via C
 - [Demo page](/components/radio-button)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/radio-button/README.md)
-

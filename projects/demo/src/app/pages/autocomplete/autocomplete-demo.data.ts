@@ -89,5 +89,5 @@ export const AUTOCOMPLETE_LARGE_DATASET: Array<{ label: string; value: string }>
   (_: unknown, index: number): { label: string; value: string } => ({
     label: `Item ${index + 1}`,
     value: `item-${index + 1}`,
-  })
+  }),
 );

@@ -60,6 +60,7 @@ npm run build && npm run verify:tree-shaking
 ```
 
 **Checklist for every new component:**
+
 - [ ] `ViewEncapsulation.None` + `OnPush` + standalone
 - [ ] `input()` / `output()` (not `@Input()` / `@Output()`)
 - [ ] Design tokens only — no hardcoded colours
@@ -278,4 +279,3 @@ npm run knip           # find dead code and unused exports
 npm run check          # full quality gate: lint:ci + typecheck + test
 npm run health         # run health check script (if configured)
 ```
-

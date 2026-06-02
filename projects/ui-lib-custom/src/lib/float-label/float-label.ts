@@ -70,17 +70,17 @@ export class FloatLabelComponent implements AfterViewChecked {
   private syncProjectedAccessibility(
     projectedLabel: HTMLLabelElement,
     projectedControl: HTMLElement,
-    nativeControl: FloatLabelNativeControl | null
+    nativeControl: FloatLabelNativeControl | null,
   ): void {
     const labelId: string = this.ensureElementId(
       projectedLabel,
-      `ui-lib-float-label-label-${nextFloatLabelLabelId++}`
+      `ui-lib-float-label-label-${nextFloatLabelLabelId++}`,
     );
 
     if (nativeControl !== null) {
       const controlId: string = this.ensureElementId(
         nativeControl,
-        `ui-lib-float-label-control-${nextFloatLabelControlId++}`
+        `ui-lib-float-label-control-${nextFloatLabelControlId++}`,
       );
 
       if (projectedLabel.htmlFor !== controlId) {
@@ -97,7 +97,7 @@ export class FloatLabelComponent implements AfterViewChecked {
   private needsSynchronization(
     projectedLabel: HTMLLabelElement,
     projectedControl: HTMLElement,
-    nativeControl: FloatLabelNativeControl | null
+    nativeControl: FloatLabelNativeControl | null,
   ): boolean {
     const labelId: string = projectedLabel.id.trim();
 
@@ -140,7 +140,7 @@ export class FloatLabelComponent implements AfterViewChecked {
   private resolveProjectedLabel(): HTMLLabelElement | null {
     return (
       (Array.from(this.hostElementRef.nativeElement.children).find(
-        (element: Element): boolean => element instanceof HTMLLabelElement
+        (element: Element): boolean => element instanceof HTMLLabelElement,
       ) as HTMLLabelElement | undefined) ?? null
     );
   }
@@ -148,7 +148,7 @@ export class FloatLabelComponent implements AfterViewChecked {
   private resolveProjectedControl(): HTMLElement | null {
     return (
       (Array.from(this.hostElementRef.nativeElement.children).find(
-        (element: Element): boolean => element.tagName.toLowerCase() !== 'label'
+        (element: Element): boolean => element.tagName.toLowerCase() !== 'label',
       ) as HTMLElement | undefined) ?? null
     );
   }
@@ -197,7 +197,7 @@ export class FloatLabelComponent implements AfterViewChecked {
   private appendIdReference(
     element: HTMLElement,
     attributeName: 'aria-labelledby',
-    id: string
+    id: string,
   ): void {
     const existingTokens: string[] = (element.getAttribute(attributeName) ?? '')
       .split(/\s+/)

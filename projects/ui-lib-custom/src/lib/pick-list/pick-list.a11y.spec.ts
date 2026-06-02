@@ -89,7 +89,7 @@ class PickListA11yHostComponent {
   public readonly targetAriaLabel: WritableSignal<string | null> = signal<string | null>(null);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly variant: WritableSignal<PickListVariant | null> = signal<PickListVariant | null>(
-    null
+    null,
   );
 }
 
@@ -131,7 +131,7 @@ const ICON_PROVIDERS: Array<Provider | EnvironmentProviders> = [
 
 function queryEl<T extends Element>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
@@ -225,7 +225,7 @@ describe('PickList Accessibility', (): void => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const sourceList: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       expect(sourceList.getAttribute('role')).toBe('listbox');
     });
@@ -234,7 +234,7 @@ describe('PickList Accessibility', (): void => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const targetList: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--target .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--target .ui-lib-pick-list__list',
       );
       expect(targetList.getAttribute('role')).toBe('listbox');
     });
@@ -252,7 +252,7 @@ describe('PickList Accessibility', (): void => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const sourceList: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       expect(sourceList.getAttribute('aria-label')).toBe('Source list');
     });
@@ -261,7 +261,7 @@ describe('PickList Accessibility', (): void => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const targetList: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--target .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--target .ui-lib-pick-list__list',
       );
       expect(targetList.getAttribute('aria-label')).toBe('Target list');
     });
@@ -272,7 +272,7 @@ describe('PickList Accessibility', (): void => {
       fixture.detectChanges();
       const sourceList: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       expect(sourceList.getAttribute('aria-label')).toBe('Available countries');
     });
@@ -283,7 +283,7 @@ describe('PickList Accessibility', (): void => {
       fixture.detectChanges();
       const targetList: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--target .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--target .ui-lib-pick-list__list',
       );
       expect(targetList.getAttribute('aria-label')).toBe('Selected countries');
     });
@@ -301,7 +301,7 @@ describe('PickList Accessibility', (): void => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const items: HTMLElement[] = queryAll<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__item'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__item',
       );
       items.forEach((item: HTMLElement): void => {
         expect(item.getAttribute('aria-selected')).toBe('false');
@@ -314,7 +314,7 @@ describe('PickList Accessibility', (): void => {
       fixture.detectChanges();
       const items: HTMLElement[] = queryAll<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__item'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__item',
       );
       expect(items[0]?.getAttribute('aria-selected')).toBe('true');
       expect(items[1]?.getAttribute('aria-selected')).toBe('false');
@@ -329,15 +329,15 @@ describe('PickList Accessibility', (): void => {
 
     it('assigns unique listbox IDs across multiple instances', (): void => {
       const fixture: ComponentFixture<MultiPickListA11yHostComponent> = TestBed.createComponent(
-        MultiPickListA11yHostComponent
+        MultiPickListA11yHostComponent,
       );
       document.body.appendChild(fixture.nativeElement);
       fixture.detectChanges();
 
       const lists: HTMLElement[] = Array.from(
         (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-          '.ui-lib-pick-list__list'
-        )
+          '.ui-lib-pick-list__list',
+        ),
       );
       expect(lists.length).toBe(4);
       const ids: string[] = lists.map((list: HTMLElement): string => list.id);
@@ -357,11 +357,11 @@ describe('PickList Accessibility', (): void => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const buttons: HTMLButtonElement[] = queryAll<HTMLButtonElement>(
         fixture,
-        '.ui-lib-pick-list__transfer-btn'
+        '.ui-lib-pick-list__transfer-btn',
       );
       expect(buttons.length).toBe(4);
       const labels: (string | null)[] = buttons.map((btn: HTMLButtonElement): string | null =>
-        btn.getAttribute('aria-label')
+        btn.getAttribute('aria-label'),
       );
       expect(labels).toContain('Move all to target');
       expect(labels).toContain('Move selected to target');
@@ -373,7 +373,7 @@ describe('PickList Accessibility', (): void => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const buttons: HTMLButtonElement[] = queryAll<HTMLButtonElement>(
         fixture,
-        '.ui-lib-pick-list__control-btn'
+        '.ui-lib-pick-list__control-btn',
       );
       expect(buttons.length).toBe(8);
       buttons.forEach((btn: HTMLButtonElement): void => {
@@ -400,7 +400,7 @@ describe('PickList Accessibility', (): void => {
     it('ArrowDown moves focus to the next source item', async (): Promise<void> => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       component.focusItem('source', 0);
@@ -409,7 +409,7 @@ describe('PickList Accessibility', (): void => {
 
       const list: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       list.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
       fixture.detectChanges();
@@ -421,7 +421,7 @@ describe('PickList Accessibility', (): void => {
     it('ArrowUp moves focus to the previous source item', async (): Promise<void> => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       component.focusItem('source', 2);
@@ -430,7 +430,7 @@ describe('PickList Accessibility', (): void => {
 
       const list: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       list.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
       fixture.detectChanges();
@@ -442,7 +442,7 @@ describe('PickList Accessibility', (): void => {
     it('Home key moves focus to the first source item', async (): Promise<void> => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       component.focusItem('source', 3);
@@ -451,7 +451,7 @@ describe('PickList Accessibility', (): void => {
 
       const list: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       list.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
       fixture.detectChanges();
@@ -463,7 +463,7 @@ describe('PickList Accessibility', (): void => {
     it('End key moves focus to the last source item', async (): Promise<void> => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       component.focusItem('source', 0);
@@ -472,7 +472,7 @@ describe('PickList Accessibility', (): void => {
 
       const list: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       list.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
       fixture.detectChanges();
@@ -484,7 +484,7 @@ describe('PickList Accessibility', (): void => {
     it('Space toggles selection of the focused source item', async (): Promise<void> => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       component.focusItem('source', 0);
@@ -493,7 +493,7 @@ describe('PickList Accessibility', (): void => {
 
       const list: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       list.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
       fixture.detectChanges();
@@ -505,7 +505,7 @@ describe('PickList Accessibility', (): void => {
     it('Enter toggles selection of the focused source item', async (): Promise<void> => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       component.focusItem('source', 1);
@@ -514,7 +514,7 @@ describe('PickList Accessibility', (): void => {
 
       const list: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       list.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
       fixture.detectChanges();
@@ -526,12 +526,12 @@ describe('PickList Accessibility', (): void => {
     it('Ctrl+a selects all source items', async (): Promise<void> => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       const list: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       list.dispatchEvent(new KeyboardEvent('keydown', { key: 'a', ctrlKey: true, bubbles: true }));
       fixture.detectChanges();
@@ -545,12 +545,12 @@ describe('PickList Accessibility', (): void => {
       fixture.componentInstance.sourceSelection.set([SOURCE_ITEMS[0]!]);
       fixture.detectChanges();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       const list: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       list.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
       fixture.detectChanges();
@@ -564,16 +564,16 @@ describe('PickList Accessibility', (): void => {
       fixture.componentInstance.sourceSelection.set([SOURCE_ITEMS[0]!]);
       fixture.detectChanges();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
       const initialTargetCount: number = component.target().length;
 
       const list: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--source .ui-lib-pick-list__list',
       );
       list.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'ArrowRight', ctrlKey: true, bubbles: true })
+        new KeyboardEvent('keydown', { key: 'ArrowRight', ctrlKey: true, bubbles: true }),
       );
       fixture.detectChanges();
       await fixture.whenStable();
@@ -586,16 +586,16 @@ describe('PickList Accessibility', (): void => {
       fixture.componentInstance.targetSelection.set([TARGET_ITEMS[0]!]);
       fixture.detectChanges();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
       const initialSourceCount: number = component.source().length;
 
       const list: HTMLElement = queryRequired<HTMLElement>(
         fixture,
-        '.ui-lib-pick-list__panel--target .ui-lib-pick-list__list'
+        '.ui-lib-pick-list__panel--target .ui-lib-pick-list__list',
       );
       list.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'ArrowLeft', ctrlKey: true, bubbles: true })
+        new KeyboardEvent('keydown', { key: 'ArrowLeft', ctrlKey: true, bubbles: true }),
       );
       fixture.detectChanges();
       await fixture.whenStable();
@@ -614,13 +614,13 @@ describe('PickList Accessibility', (): void => {
       fixture.componentInstance.sourceSelection.set([SOURCE_ITEMS[0]!]);
       fixture.detectChanges();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       const announcerSpy: jest.SpyInstance = jest.spyOn(
         (component as unknown as { liveAnnouncer: { announce: (msg: string) => Promise<void> } })
           .liveAnnouncer,
-        'announce'
+        'announce',
       );
 
       component.moveToTarget();
@@ -630,13 +630,13 @@ describe('PickList Accessibility', (): void => {
     it('moveAllToTarget announces all moved items', (): void => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       const announcerSpy: jest.SpyInstance = jest.spyOn(
         (component as unknown as { liveAnnouncer: { announce: (msg: string) => Promise<void> } })
           .liveAnnouncer,
-        'announce'
+        'announce',
       );
 
       component.moveAllToTarget();
@@ -648,13 +648,13 @@ describe('PickList Accessibility', (): void => {
       fixture.componentInstance.targetSelection.set([TARGET_ITEMS[0]!]);
       fixture.detectChanges();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       const announcerSpy: jest.SpyInstance = jest.spyOn(
         (component as unknown as { liveAnnouncer: { announce: (msg: string) => Promise<void> } })
           .liveAnnouncer,
-        'announce'
+        'announce',
       );
 
       component.moveToSource();
@@ -664,13 +664,13 @@ describe('PickList Accessibility', (): void => {
     it('moveAllToSource announces all moved items', (): void => {
       const fixture: ComponentFixture<PickListA11yHostComponent> = createFixture();
       const component: PickListComponent = fixture.debugElement.query(
-        By.directive(PickListComponent)
+        By.directive(PickListComponent),
       ).componentInstance as PickListComponent;
 
       const announcerSpy: jest.SpyInstance = jest.spyOn(
         (component as unknown as { liveAnnouncer: { announce: (msg: string) => Promise<void> } })
           .liveAnnouncer,
-        'announce'
+        'announce',
       );
 
       component.moveAllToSource();

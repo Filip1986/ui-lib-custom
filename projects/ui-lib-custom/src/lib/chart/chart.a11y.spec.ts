@@ -24,13 +24,13 @@ jest.mock('chart.js', (): { Chart: jest.Mock } => ({
       config: { plugins: [] },
       update: jest.fn(),
       destroy: jest.fn(),
-    })
+    }),
   ),
 }));
 
 type ChartComponentCtor = new (...args: never[]) => object;
 const chartComponentModule: { ChartComponent: ChartComponentCtor } = jest.requireActual(
-  './chart.component'
+  './chart.component',
 ) as { ChartComponent: ChartComponentCtor };
 const ChartComponent: ChartComponentCtor = chartComponentModule.ChartComponent;
 
@@ -79,7 +79,7 @@ class DefaultHostComponent {
 }
 
 async function createFixture(
-  host: typeof DefaultHostComponent
+  host: typeof DefaultHostComponent,
 ): Promise<ComponentFixture<DefaultHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [host],

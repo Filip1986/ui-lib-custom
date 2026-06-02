@@ -61,7 +61,7 @@ export class MenubarSubComponent {
 
   /** Items filtered to `visible !== false`. */
   public readonly visibleItems: Signal<MenubarItem[]> = computed<MenubarItem[]>((): MenubarItem[] =>
-    this.items().filter((item: MenubarItem): boolean => item.visible !== false)
+    this.items().filter((item: MenubarItem): boolean => item.visible !== false),
   );
 
   // ── Template helpers ──────────────────────────────────────────────────────
@@ -184,7 +184,7 @@ export class MenubarSubComponent {
       return;
     }
     const links: NodeListOf<HTMLElement> = list.querySelectorAll<HTMLElement>(
-      ':scope > li > a.ui-lib-menubar__sub-link:not([aria-disabled="true"])'
+      ':scope > li > a.ui-lib-menubar__sub-link:not([aria-disabled="true"])',
     );
     const linksArray: HTMLElement[] = Array.from(links);
     const currentIndex: number = linksArray.indexOf(current);

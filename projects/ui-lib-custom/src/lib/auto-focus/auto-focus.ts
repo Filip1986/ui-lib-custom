@@ -61,7 +61,7 @@ export class AutoFocus implements AfterViewInit {
       if (isDevMode() && !this.isProgrammaticallyFocusable(target)) {
         console.warn(
           `[ui-lib-custom/auto-focus] ${this.hostTagName} host or selector target is not programmatically focusable. ` +
-            'Add tabindex="-1" or provide a focusable selector target.'
+            'Add tabindex="-1" or provide a focusable selector target.',
         );
       }
 
@@ -82,7 +82,7 @@ export class AutoFocus implements AfterViewInit {
     } catch {
       if (isDevMode()) {
         console.warn(
-          `[ui-lib-custom/auto-focus] Invalid selector "${selectorValue}" on ${this.hostTagName}. Falling back to host element.`
+          `[ui-lib-custom/auto-focus] Invalid selector "${selectorValue}" on ${this.hostTagName}. Falling back to host element.`,
         );
       }
       return hostElement;
@@ -129,7 +129,7 @@ export class AutoFocus implements AfterViewInit {
     }
 
     return target.matches(
-      'a[href], button, input, select, textarea, summary, iframe, [contenteditable="true"], audio[controls], video[controls]'
+      'a[href], button, input, select, textarea, summary, iframe, [contenteditable="true"], audio[controls], video[controls]',
     );
   }
 }

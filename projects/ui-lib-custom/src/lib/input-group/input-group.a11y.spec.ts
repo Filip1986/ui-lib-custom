@@ -136,17 +136,17 @@ describe('InputGroup accessibility', (): void => {
 
   it('default composition has no axe violations', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupA11yHostComponent> = await setup(
-      InputGroupA11yHostComponent
+      InputGroupA11yHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
   it('decorative text addon is aria-hidden', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupA11yHostComponent> = await setup(
-      InputGroupA11yHostComponent
+      InputGroupA11yHostComponent,
     );
     const decorativeAddon: HTMLElement = getRootElement(fixture).querySelector(
-      '[data-testid="currency-addon"]'
+      '[data-testid="currency-addon"]',
     ) as HTMLElement;
 
     expect(decorativeAddon.getAttribute('aria-hidden')).toBe('true');
@@ -154,10 +154,10 @@ describe('InputGroup accessibility', (): void => {
 
   it('decorative text addon is not focusable', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupA11yHostComponent> = await setup(
-      InputGroupA11yHostComponent
+      InputGroupA11yHostComponent,
     );
     const decorativeAddon: HTMLElement = getRootElement(fixture).querySelector(
-      '[data-testid="currency-addon"]'
+      '[data-testid="currency-addon"]',
     ) as HTMLElement;
 
     expect(decorativeAddon.tagName.toLowerCase()).toBe('span');
@@ -167,13 +167,13 @@ describe('InputGroup accessibility', (): void => {
 
   it('label for attribute targets the input id', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupA11yHostComponent> = await setup(
-      InputGroupA11yHostComponent
+      InputGroupA11yHostComponent,
     );
     const labelElement: HTMLLabelElement = getRootElement(fixture).querySelector(
-      '[data-testid="amount-label"]'
+      '[data-testid="amount-label"]',
     ) as HTMLLabelElement;
     const inputElement: HTMLInputElement = getRootElement(fixture).querySelector(
-      '[data-testid="amount-input"]'
+      '[data-testid="amount-input"]',
     ) as HTMLInputElement;
 
     expect(labelElement.getAttribute('for')).toBe(inputElement.id);
@@ -181,13 +181,13 @@ describe('InputGroup accessibility', (): void => {
 
   it('label for attribute does not target the group container', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupA11yHostComponent> = await setup(
-      InputGroupA11yHostComponent
+      InputGroupA11yHostComponent,
     );
     const labelElement: HTMLLabelElement = getRootElement(fixture).querySelector(
-      '[data-testid="amount-label"]'
+      '[data-testid="amount-label"]',
     ) as HTMLLabelElement;
     const groupElement: HTMLElement = getRootElement(fixture).querySelector(
-      '[data-testid="amount-group"]'
+      '[data-testid="amount-group"]',
     ) as HTMLElement;
 
     expect(labelElement.getAttribute('for')).not.toBe(groupElement.id);
@@ -195,10 +195,10 @@ describe('InputGroup accessibility', (): void => {
 
   it('button addon uses a native button element', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupA11yHostComponent> = await setup(
-      InputGroupA11yHostComponent
+      InputGroupA11yHostComponent,
     );
     const buttonElement: HTMLButtonElement = getRootElement(fixture).querySelector(
-      '[data-testid="copy-button"]'
+      '[data-testid="copy-button"]',
     ) as HTMLButtonElement;
 
     expect(buttonElement.tagName.toLowerCase()).toBe('button');
@@ -207,10 +207,10 @@ describe('InputGroup accessibility', (): void => {
 
   it('icon-only button addon has an aria-label', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupA11yHostComponent> = await setup(
-      InputGroupA11yHostComponent
+      InputGroupA11yHostComponent,
     );
     const buttonElement: HTMLButtonElement = getRootElement(fixture).querySelector(
-      '[data-testid="copy-button"]'
+      '[data-testid="copy-button"]',
     ) as HTMLButtonElement;
 
     expect(buttonElement.getAttribute('aria-label')).toBe('Copy amount');
@@ -218,13 +218,13 @@ describe('InputGroup accessibility', (): void => {
 
   it('supports addonLeft and addonRight slots around the input', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupSlotHostComponent> = await setup(
-      InputGroupSlotHostComponent
+      InputGroupSlotHostComponent,
     );
     const groupElement: HTMLElement = getRootElement(fixture).querySelector(
-      '[data-testid="slot-group"]'
+      '[data-testid="slot-group"]',
     ) as HTMLElement;
     const childTestIds: Array<string | null> = Array.from(groupElement.children).map(
-      (childElement: Element): string | null => childElement.getAttribute('data-testid')
+      (childElement: Element): string | null => childElement.getAttribute('data-testid'),
     );
 
     expect(childTestIds).toEqual(['slot-left', 'slot-input', 'slot-right']);
@@ -232,10 +232,10 @@ describe('InputGroup accessibility', (): void => {
 
   it('composes with ui-lib-input', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupInputComposableHostComponent> = await setup(
-      InputGroupInputComposableHostComponent
+      InputGroupInputComposableHostComponent,
     );
     const decorativeAddon: HTMLElement = fixture.debugElement.query(
-      By.css('ui-lib-input-group-addon span')
+      By.css('ui-lib-input-group-addon span'),
     ).nativeElement as HTMLElement;
 
     expect(fixture.debugElement.query(By.css('ui-lib-input'))).toBeTruthy();
@@ -244,11 +244,11 @@ describe('InputGroup accessibility', (): void => {
 
   it('composes with ui-lib-input-mask', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupInputMaskComposableHostComponent> = await setup(
-      InputGroupInputMaskComposableHostComponent
+      InputGroupInputMaskComposableHostComponent,
     );
     const rootElement: HTMLElement = getRootElement(fixture);
     const decorativeAddon: HTMLElement = fixture.debugElement.query(
-      By.css('[data-testid="phone-addon"]')
+      By.css('[data-testid="phone-addon"]'),
     ).nativeElement as HTMLElement;
     const labelElement: HTMLLabelElement = rootElement.querySelector('label') as HTMLLabelElement;
     const controlElement: HTMLElement = rootElement.querySelector('#phone-input') as HTMLElement;
@@ -261,10 +261,10 @@ describe('InputGroup accessibility', (): void => {
 
   it('composes with ui-lib-input-number', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupInputNumberComposableHostComponent> = await setup(
-      InputGroupInputNumberComposableHostComponent
+      InputGroupInputNumberComposableHostComponent,
     );
     const decorativeAddon: HTMLElement = fixture.debugElement.query(
-      By.css('[data-testid="number-addon"]')
+      By.css('[data-testid="number-addon"]'),
     ).nativeElement as HTMLElement;
 
     expect(fixture.debugElement.query(By.css('ui-lib-input-number'))).toBeTruthy();
@@ -273,10 +273,10 @@ describe('InputGroup accessibility', (): void => {
 
   it('composes with ui-lib-password', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupPasswordComposableHostComponent> = await setup(
-      InputGroupPasswordComposableHostComponent
+      InputGroupPasswordComposableHostComponent,
     );
     const decorativeAddon: HTMLElement = fixture.debugElement.query(
-      By.css('[data-testid="password-addon"]')
+      By.css('[data-testid="password-addon"]'),
     ).nativeElement as HTMLElement;
 
     expect(fixture.debugElement.query(By.css('ui-lib-password'))).toBeTruthy();

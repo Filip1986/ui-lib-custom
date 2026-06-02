@@ -1,4 +1,4 @@
-@use '../../shared/styles/doc-page.scss' as *;
+@use '../../shared/styles/doc-page.scss';
 
 .demo-row {
   display: grid;
@@ -26,4 +26,3 @@
     margin-top: 1rem;
   }
 }
-

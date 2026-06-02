@@ -18,43 +18,43 @@ function getRoot(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getInstance(fixture: ComponentFixture<unknown>): Menubar {
   return fixture.debugElement.query(
-    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Menubar
+    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Menubar,
   ).componentInstance as Menubar;
 }
 
 function getRootLinks(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-menubar__root-link'
-    )
+      '.ui-lib-menubar__root-link',
+    ),
   );
 }
 
 function getRootItems(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      'ul[role="menubar"] > .ui-lib-menubar__root-item'
-    )
+      'ul[role="menubar"] > .ui-lib-menubar__root-item',
+    ),
   );
 }
 
 function getPanel(fixture: ComponentFixture<unknown>): HTMLElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-    '.ui-lib-menubar__panel'
+    '.ui-lib-menubar__panel',
   );
 }
 
 function getSubLinks(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-menubar__sub-link'
-    )
+      '.ui-lib-menubar__sub-link',
+    ),
   );
 }
 
 function getToggleButton(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-    'button.ui-lib-menubar__toggle'
+    'button.ui-lib-menubar__toggle',
   ) as HTMLElement;
 }
 
@@ -153,8 +153,8 @@ describe('Menubar', (): void => {
   it('should render root item labels', (): void => {
     const labels: HTMLElement[] = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-        '.ui-lib-menubar__root-label'
-      )
+        '.ui-lib-menubar__root-label',
+      ),
     );
     const texts: string[] = labels.map((el: HTMLElement): string => (el.textContent || '').trim());
     expect(texts).toContain('File');
@@ -166,8 +166,8 @@ describe('Menubar', (): void => {
   it('should render a caret on items with sub-items', (): void => {
     const carets: HTMLElement[] = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-        '.ui-lib-menubar__root-caret'
-      )
+        '.ui-lib-menubar__root-caret',
+      ),
     );
     // File and Edit have items; View and Help do not
     expect(carets.length).toBe(2);
@@ -267,7 +267,9 @@ describe('Menubar', (): void => {
     editLink.click();
     fixture.detectChanges();
     const panels: HTMLElement[] = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-menubar__panel')
+      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
+        '.ui-lib-menubar__panel',
+      ),
     );
     expect(panels.length).toBe(1);
   });
@@ -493,8 +495,8 @@ describe('Menubar', (): void => {
     fixture.detectChanges();
     const labels: HTMLElement[] = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-        '.ui-lib-menubar__root-label'
-      )
+        '.ui-lib-menubar__root-label',
+      ),
     );
     expect(((labels[0] as HTMLElement).textContent || '').trim()).toBe('New Item');
   });

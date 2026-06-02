@@ -21,7 +21,7 @@ function queryEl<T extends HTMLElement>(fixture: ComponentFixture<unknown>, sele
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -157,7 +157,7 @@ describe('TreeTableComponent', (): void => {
     it('should render cell values from node.data', (): void => {
       const cells: HTMLElement[] = queryAllEl<HTMLElement>(
         fixture,
-        '.uilib-tree-table-row:first-child .uilib-tree-table-td'
+        '.uilib-tree-table-row:first-child .uilib-tree-table-td',
       );
       const text: string = cells
         .map((cell: HTMLElement): string => cell.textContent.trim())
@@ -173,14 +173,14 @@ describe('TreeTableComponent', (): void => {
     it('should render leaf spacers for visible leaf nodes', (): void => {
       const spacers: HTMLElement[] = queryAllEl<HTMLElement>(
         fixture,
-        '.uilib-tree-table-leaf-spacer'
+        '.uilib-tree-table-leaf-spacer',
       );
       expect(spacers.length).toBe(2);
     });
 
     it('should apply host class ui-lib-tree-table', (): void => {
       const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-        'ui-lib-tree-table'
+        'ui-lib-tree-table',
       ) as HTMLElement;
       expect(host.classList.contains('ui-lib-tree-table')).toBe(true);
     });
@@ -389,14 +389,14 @@ describe('TreeTableComponent', (): void => {
 
     it('should render a header checkbox', (): void => {
       expect(
-        queryEl<HTMLElement>(fixture, '.uilib-tree-table-th-selection .uilib-tree-table-checkbox')
+        queryEl<HTMLElement>(fixture, '.uilib-tree-table-th-selection .uilib-tree-table-checkbox'),
       ).toBeTruthy();
     });
 
     it('should render row checkboxes', (): void => {
       const boxes: HTMLElement[] = queryAllEl<HTMLElement>(
         fixture,
-        '.uilib-tree-table-td-selection .uilib-tree-table-checkbox'
+        '.uilib-tree-table-td-selection .uilib-tree-table-checkbox',
       );
       expect(boxes.length).toBeGreaterThan(0);
     });
@@ -404,7 +404,7 @@ describe('TreeTableComponent', (): void => {
     it('should check a row checkbox on click', (): void => {
       const checkbox: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.uilib-tree-table-td-selection .uilib-tree-table-checkbox'
+        '.uilib-tree-table-td-selection .uilib-tree-table-checkbox',
       );
       checkbox.click();
       fixture.detectChanges();
@@ -414,7 +414,7 @@ describe('TreeTableComponent', (): void => {
     it('should cascade selection to children', (): void => {
       const checkboxes: HTMLElement[] = queryAllEl<HTMLElement>(
         fixture,
-        '.uilib-tree-table-td-selection .uilib-tree-table-checkbox'
+        '.uilib-tree-table-td-selection .uilib-tree-table-checkbox',
       );
       (checkboxes[0] as HTMLElement).click();
       fixture.detectChanges();
@@ -428,7 +428,7 @@ describe('TreeTableComponent', (): void => {
     it('should select all via header checkbox', (): void => {
       const headerCheckbox: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.uilib-tree-table-th-selection .uilib-tree-table-checkbox'
+        '.uilib-tree-table-th-selection .uilib-tree-table-checkbox',
       );
       headerCheckbox.click();
       fixture.detectChanges();
@@ -508,7 +508,7 @@ describe('TreeTableComponent', (): void => {
       const before: number = queryAllEl<HTMLElement>(fixture, '.uilib-tree-table-row').length;
       const input: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.uilib-tree-table-filter-input'
+        '.uilib-tree-table-filter-input',
       );
       input.value = 'PDF';
       input.dispatchEvent(new Event('input'));
@@ -519,7 +519,7 @@ describe('TreeTableComponent', (): void => {
     it('should show empty message when no rows match', (): void => {
       const input: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.uilib-tree-table-filter-input'
+        '.uilib-tree-table-filter-input',
       );
       input.value = 'xyzzy_no_match_at_all';
       input.dispatchEvent(new Event('input'));
@@ -583,7 +583,7 @@ describe('TreeTableComponent', (): void => {
 
     it('should have role="treegrid" on the table', (): void => {
       expect(queryEl<HTMLElement>(fixture, '.uilib-tree-table-table').getAttribute('role')).toBe(
-        'treegrid'
+        'treegrid',
       );
     });
 
@@ -606,7 +606,7 @@ describe('TreeTableComponent', (): void => {
     it('should have aria-expanded on branch rows', (): void => {
       const rows: HTMLElement[] = queryAllEl<HTMLElement>(fixture, '.uilib-tree-table-row');
       const branchRows: HTMLElement[] = rows.filter(
-        (row: HTMLElement): boolean => row.getAttribute('aria-expanded') !== null
+        (row: HTMLElement): boolean => row.getAttribute('aria-expanded') !== null,
       );
       expect(branchRows.length).toBeGreaterThan(0);
     });

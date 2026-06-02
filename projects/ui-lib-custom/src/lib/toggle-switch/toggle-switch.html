@@ -22,15 +22,10 @@
   <span class="ui-lib-toggle-switch__thumb"></span>
 </span>
 @if (label()) {
-  <label
-    class="ui-lib-toggle-switch__label"
-    [id]="labelElementId"
-    [for]="nativeInputId()"
-  >
+  <label class="ui-lib-toggle-switch__label" [id]="labelElementId" [for]="nativeInputId()">
     {{ label() }}
   </label>
 }
 @if (!label()) {
   <ng-content />
 }
-

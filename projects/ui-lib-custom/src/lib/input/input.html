@@ -10,7 +10,13 @@
     </label>
   }
 
-  <div class="ui-input-field" (click)="focusInput($event)" (keydown.enter)="focusInput()" tabindex="-1" role="presentation">
+  <div
+    class="ui-input-field"
+    (click)="focusInput($event)"
+    (keydown.enter)="focusInput()"
+    tabindex="-1"
+    role="presentation"
+  >
     <span class="ui-input-prefix">
       <ng-content select="[prefix]" />
     </span>
@@ -49,7 +55,12 @@
       />
 
       @if (showClear() && value() && !isDisabled()) {
-        <button type="button" class="ui-input-clear" (click)="clear()" [attr.aria-label]="i18n.translate('input.clear')">
+        <button
+          type="button"
+          class="ui-input-clear"
+          (click)="clear()"
+          [attr.aria-label]="i18n.translate('input.clear')"
+        >
           ×
         </button>
       }

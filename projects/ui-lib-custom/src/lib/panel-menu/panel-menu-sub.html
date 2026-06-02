@@ -1,15 +1,8 @@
-<ul
-  class="ui-lib-panel-menu__sub-list"
-  [style.--pm-depth]="depth()"
-  role="menu"
->
+<ul class="ui-lib-panel-menu__sub-list" [style.--pm-depth]="depth()" role="menu">
   @for (item of visibleItems(); track item.id ?? item.label ?? $index) {
     @if (item.separator) {
       <!-- Separator -->
-      <li
-        class="ui-lib-panel-menu__sub-separator"
-        role="separator"
-      ></li>
+      <li class="ui-lib-panel-menu__sub-separator" role="separator"></li>
     } @else if (item.items && item.items.length > 0) {
       <!-- Expandable sub-group -->
       <li
@@ -31,16 +24,10 @@
           (keydown)="onItemKeyDown($event, item, $index, true)"
         >
           @if (item.icon) {
-            <span
-              class="ui-lib-panel-menu__sub-icon {{ item.icon }}"
-              aria-hidden="true"
-            ></span>
+            <span class="ui-lib-panel-menu__sub-icon {{ item.icon }}" aria-hidden="true"></span>
           }
           <span class="ui-lib-panel-menu__sub-label">{{ item.label }}</span>
-          <span
-            class="ui-lib-panel-menu__sub-toggle"
-            aria-hidden="true"
-          ></span>
+          <span class="ui-lib-panel-menu__sub-toggle" aria-hidden="true"></span>
         </button>
 
         <!-- Nested sub-list (always in DOM, CSS controls visibility for animation) -->
@@ -69,9 +56,11 @@
         @if (item.url) {
           <a
             class="ui-lib-panel-menu__sub-link"
-            [class]="item.styleClass
-              ? 'ui-lib-panel-menu__sub-link ' + item.styleClass
-              : 'ui-lib-panel-menu__sub-link'"
+            [class]="
+              item.styleClass
+                ? 'ui-lib-panel-menu__sub-link ' + item.styleClass
+                : 'ui-lib-panel-menu__sub-link'
+            "
             role="menuitem"
             [href]="item.url"
             [attr.target]="item.target || null"
@@ -81,10 +70,7 @@
             (keydown)="onItemKeyDown($event, item, $index, false)"
           >
             @if (item.icon) {
-              <span
-                class="ui-lib-panel-menu__sub-icon {{ item.icon }}"
-                aria-hidden="true"
-              ></span>
+              <span class="ui-lib-panel-menu__sub-icon {{ item.icon }}" aria-hidden="true"></span>
             }
             @if (item.label) {
               <span class="ui-lib-panel-menu__sub-label">{{ item.label }}</span>
@@ -93,9 +79,11 @@
         } @else {
           <a
             class="ui-lib-panel-menu__sub-link"
-            [class]="item.styleClass
-              ? 'ui-lib-panel-menu__sub-link ' + item.styleClass
-              : 'ui-lib-panel-menu__sub-link'"
+            [class]="
+              item.styleClass
+                ? 'ui-lib-panel-menu__sub-link ' + item.styleClass
+                : 'ui-lib-panel-menu__sub-link'
+            "
             role="menuitem"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
             [attr.tabindex]="item.disabled ? '-1' : '0'"
@@ -103,10 +91,7 @@
             (keydown)="onItemKeyDown($event, item, $index, false)"
           >
             @if (item.icon) {
-              <span
-                class="ui-lib-panel-menu__sub-icon {{ item.icon }}"
-                aria-hidden="true"
-              ></span>
+              <span class="ui-lib-panel-menu__sub-icon {{ item.icon }}" aria-hidden="true"></span>
             }
             @if (item.label) {
               <span class="ui-lib-panel-menu__sub-label">{{ item.label }}</span>

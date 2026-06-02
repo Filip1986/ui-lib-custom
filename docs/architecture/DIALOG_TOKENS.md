@@ -37,28 +37,28 @@ This is a design specification only (no implementation changes in this phase).
 
 > Table includes requested tokens plus a `Shared?` column to identify cross-overlay candidates.
 
-| Name | Default (Material) | Bootstrap | Minimal | Shared? |
-|---|---|---|---|---|
-| `--uilib-dialog-bg` | `var(--uilib-surface, #ffffff)` | `var(--uilib-surface, #ffffff)` | `var(--uilib-surface, #ffffff)` | No |
-| `--uilib-dialog-border-radius` | `var(--uilib-radius-lg, 8px)` | `var(--uilib-radius-md, 6px)` | `var(--uilib-radius-sm, 2px)` | No |
-| `--uilib-dialog-shadow` | `var(--uilib-shadow-lg, 0 14px 28px rgba(0, 0, 0, 0.25))` | `var(--uilib-shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.12))` | `none` | No |
-| `--uilib-dialog-header-bg` | `var(--uilib-surface-alt, #f1f3f5)` | `var(--uilib-surface-alt, #f1f3f5)` | `var(--uilib-dialog-bg, var(--uilib-surface, #ffffff))` | No |
-| `--uilib-dialog-header-color` | `var(--uilib-page-fg, #1f2933)` | `var(--uilib-page-fg, #1f2933)` | `var(--uilib-page-fg, #1f2933)` | No |
-| `--uilib-dialog-header-font-size` | `var(--uilib-font-size-lg, 1.125rem)` | `var(--uilib-font-size-md, 1rem)` | `var(--uilib-font-size-md, 1rem)` | No |
-| `--uilib-dialog-header-font-weight` | `var(--uilib-font-heading-weight, 600)` | `var(--uilib-font-heading-weight, 600)` | `var(--uilib-font-heading-weight, 600)` | No |
-| `--uilib-dialog-header-padding` | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)` | `var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)` | `var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)` | No |
-| `--uilib-dialog-content-padding` | `var(--uilib-space-5, 1.25rem)` | `var(--uilib-space-4, 1rem)` | `var(--uilib-space-4, 1rem)` | No |
-| `--uilib-dialog-footer-padding` | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)` | `var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)` | `var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)` | No |
-| `--uilib-dialog-footer-border-top` | `1px solid var(--uilib-border, #e0e0e0)` | `1px solid var(--uilib-border, #e0e0e0)` | `1px solid var(--uilib-border, #e0e0e0)` | No |
-| `--uilib-dialog-close-btn-size` | `2rem` | `1.875rem` | `1.75rem` | No |
-| `--uilib-dialog-close-btn-color` | `var(--uilib-muted, #5f6c80)` | `var(--uilib-muted, #5f6c80)` | `var(--uilib-muted, #5f6c80)` | No |
-| `--uilib-dialog-close-btn-hover-bg` | `color-mix(in srgb, var(--uilib-page-fg, #1f2933) 8%, transparent)` | `color-mix(in srgb, var(--uilib-page-fg, #1f2933) 10%, transparent)` | `color-mix(in srgb, var(--uilib-page-fg, #1f2933) 6%, transparent)` | No |
-| `--uilib-dialog-z-index` | `var(--uilib-z-modal, 1050)` | `var(--uilib-z-modal, 1050)` | `var(--uilib-z-modal, 1050)` | No (depends on shared z-scale) |
-| `--uilib-overlay-backdrop-bg` | `var(--uilib-color-neutral-900, #212121)` | `var(--uilib-color-neutral-900, #212121)` | `var(--uilib-color-neutral-900, #212121)` | Yes |
-| `--uilib-overlay-backdrop-opacity` | `0.48` | `0.50` | `0.32` | Yes |
-| `--uilib-dialog-animation-duration` | `var(--uilib-transition-fast-duration, 200ms)` | `var(--uilib-transition-fast-duration, 200ms)` | `var(--uilib-transition-fast-duration, 150ms)` | No (can map to shared overlay motion token later) |
-| `--uilib-dialog-animation-easing` | `var(--uilib-transition-ease-out, ease-out)` | `var(--uilib-transition-ease-out, ease-out)` | `var(--uilib-transition-ease-out, ease-out)` | No |
-| `--uilib-dialog-maximized-margin` | `0` | `0` | `0` | No |
+| Name                                | Default (Material)                                                  | Bootstrap                                                            | Minimal                                                             | Shared?                                           |
+| ----------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------- |
+| `--uilib-dialog-bg`                 | `var(--uilib-surface, #ffffff)`                                     | `var(--uilib-surface, #ffffff)`                                      | `var(--uilib-surface, #ffffff)`                                     | No                                                |
+| `--uilib-dialog-border-radius`      | `var(--uilib-radius-lg, 8px)`                                       | `var(--uilib-radius-md, 6px)`                                        | `var(--uilib-radius-sm, 2px)`                                       | No                                                |
+| `--uilib-dialog-shadow`             | `var(--uilib-shadow-lg, 0 14px 28px rgba(0, 0, 0, 0.25))`           | `var(--uilib-shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.12))`              | `none`                                                              | No                                                |
+| `--uilib-dialog-header-bg`          | `var(--uilib-surface-alt, #f1f3f5)`                                 | `var(--uilib-surface-alt, #f1f3f5)`                                  | `var(--uilib-dialog-bg, var(--uilib-surface, #ffffff))`             | No                                                |
+| `--uilib-dialog-header-color`       | `var(--uilib-page-fg, #1f2933)`                                     | `var(--uilib-page-fg, #1f2933)`                                      | `var(--uilib-page-fg, #1f2933)`                                     | No                                                |
+| `--uilib-dialog-header-font-size`   | `var(--uilib-font-size-lg, 1.125rem)`                               | `var(--uilib-font-size-md, 1rem)`                                    | `var(--uilib-font-size-md, 1rem)`                                   | No                                                |
+| `--uilib-dialog-header-font-weight` | `var(--uilib-font-heading-weight, 600)`                             | `var(--uilib-font-heading-weight, 600)`                              | `var(--uilib-font-heading-weight, 600)`                             | No                                                |
+| `--uilib-dialog-header-padding`     | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)`          | `var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)`           | `var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)`          | No                                                |
+| `--uilib-dialog-content-padding`    | `var(--uilib-space-5, 1.25rem)`                                     | `var(--uilib-space-4, 1rem)`                                         | `var(--uilib-space-4, 1rem)`                                        | No                                                |
+| `--uilib-dialog-footer-padding`     | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)`          | `var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)`           | `var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)`          | No                                                |
+| `--uilib-dialog-footer-border-top`  | `1px solid var(--uilib-border, #e0e0e0)`                            | `1px solid var(--uilib-border, #e0e0e0)`                             | `1px solid var(--uilib-border, #e0e0e0)`                            | No                                                |
+| `--uilib-dialog-close-btn-size`     | `2rem`                                                              | `1.875rem`                                                           | `1.75rem`                                                           | No                                                |
+| `--uilib-dialog-close-btn-color`    | `var(--uilib-muted, #5f6c80)`                                       | `var(--uilib-muted, #5f6c80)`                                        | `var(--uilib-muted, #5f6c80)`                                       | No                                                |
+| `--uilib-dialog-close-btn-hover-bg` | `color-mix(in srgb, var(--uilib-page-fg, #1f2933) 8%, transparent)` | `color-mix(in srgb, var(--uilib-page-fg, #1f2933) 10%, transparent)` | `color-mix(in srgb, var(--uilib-page-fg, #1f2933) 6%, transparent)` | No                                                |
+| `--uilib-dialog-z-index`            | `var(--uilib-z-modal, 1050)`                                        | `var(--uilib-z-modal, 1050)`                                         | `var(--uilib-z-modal, 1050)`                                        | No (depends on shared z-scale)                    |
+| `--uilib-overlay-backdrop-bg`       | `var(--uilib-color-neutral-900, #212121)`                           | `var(--uilib-color-neutral-900, #212121)`                            | `var(--uilib-color-neutral-900, #212121)`                           | Yes                                               |
+| `--uilib-overlay-backdrop-opacity`  | `0.48`                                                              | `0.50`                                                               | `0.32`                                                              | Yes                                               |
+| `--uilib-dialog-animation-duration` | `var(--uilib-transition-fast-duration, 200ms)`                      | `var(--uilib-transition-fast-duration, 200ms)`                       | `var(--uilib-transition-fast-duration, 150ms)`                      | No (can map to shared overlay motion token later) |
+| `--uilib-dialog-animation-easing`   | `var(--uilib-transition-ease-out, ease-out)`                        | `var(--uilib-transition-ease-out, ease-out)`                         | `var(--uilib-transition-ease-out, ease-out)`                        | No                                                |
+| `--uilib-dialog-maximized-margin`   | `0`                                                                 | `0`                                                                  | `0`                                                                 | No                                                |
 
 ## Token Dependency Graph (Fallback Hierarchy)
 
@@ -139,4 +139,3 @@ Rationale:
 - Keep naming strict: `--uilib-{component}-{property}` and `--uilib-overlay-*` for shared overlay primitives.
 - Mirror TS z-index constants into CSS tokens to avoid split-brain layering logic.
 - Normalize transition tokens (`duration` + `easing`) during implementation to avoid `--uilib-transition-fast` vs `--uilib-transition-fast-duration` drift.
-

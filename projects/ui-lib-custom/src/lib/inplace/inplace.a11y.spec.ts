@@ -129,13 +129,13 @@ function getInplace(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getDisplayButton(fixture: ComponentFixture<unknown>): HTMLButtonElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-inplace__display'
+    '.ui-lib-inplace__display',
   ) as HTMLButtonElement;
 }
 
 function getContentWrapper(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-inplace__content'
+    '.ui-lib-inplace__content',
   ) as HTMLElement;
 }
 
@@ -218,7 +218,7 @@ describe('Inplace Accessibility', (): void => {
       const fixture: ComponentFixture<ActiveClosableInplaceHost> =
         await setup(ActiveClosableInplaceHost);
       const iconSpan: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-inplace__close-button span'
+        '.ui-lib-inplace__close-button span',
       );
       expect(iconSpan?.getAttribute('aria-hidden')).toBe('true');
     });
@@ -258,7 +258,7 @@ describe('Inplace Accessibility', (): void => {
       const fixture: ComponentFixture<InteractiveInplaceHost> = await setup(InteractiveInplaceHost);
       const host: InteractiveInplaceHost = fixture.componentInstance;
       getDisplayButton(fixture).dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
+        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }),
       );
       fixture.detectChanges();
       await fixture.whenStable();
@@ -269,7 +269,7 @@ describe('Inplace Accessibility', (): void => {
       const fixture: ComponentFixture<InteractiveInplaceHost> = await setup(InteractiveInplaceHost);
       const host: InteractiveInplaceHost = fixture.componentInstance;
       getDisplayButton(fixture).dispatchEvent(
-        new KeyboardEvent('keydown', { key: ' ', bubbles: true })
+        new KeyboardEvent('keydown', { key: ' ', bubbles: true }),
       );
       fixture.detectChanges();
       await fixture.whenStable();
@@ -283,7 +283,7 @@ describe('Inplace Accessibility', (): void => {
       fixture.detectChanges();
       await fixture.whenStable();
       getContentWrapper(fixture).dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
+        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }),
       );
       fixture.detectChanges();
       await fixture.whenStable();
@@ -308,7 +308,7 @@ describe('Inplace Accessibility', (): void => {
       await fixture.whenStable();
       expect(getDisplayButton(fixture).getAttribute('aria-expanded')).toBe('true');
       getContentWrapper(fixture).dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
+        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }),
       );
       fixture.detectChanges();
       await fixture.whenStable();

@@ -32,7 +32,7 @@ import type { MessageSeverity, MessageVariant } from './message.types';
 class MessageA11yHostComponent {
   public readonly severity: WritableSignal<MessageSeverity> = signal<MessageSeverity>('info');
   public readonly variant: WritableSignal<MessageVariant | null> = signal<MessageVariant | null>(
-    null
+    null,
   );
   public readonly closable: WritableSignal<boolean> = signal<boolean>(false);
   public readonly messageId: WritableSignal<string | null> = signal<string | null>(null);
@@ -46,7 +46,7 @@ async function setup(
     variant: MessageVariant | null;
     closable: boolean;
     messageId: string | null;
-  }> = {}
+  }> = {},
 ): Promise<ComponentFixture<MessageA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [MessageA11yHostComponent],
@@ -166,7 +166,7 @@ describe('Message Accessibility', (): void => {
   it('severity icon is decorative (aria-hidden="true")', async (): Promise<void> => {
     const fixture: ComponentFixture<MessageA11yHostComponent> = await setup();
     const iconEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-message__icon'
+      '.ui-lib-message__icon',
     );
     expect(iconEl?.getAttribute('aria-hidden')).toBe('true');
   });
@@ -174,7 +174,7 @@ describe('Message Accessibility', (): void => {
   it('close icon is decorative when closable', async (): Promise<void> => {
     const fixture: ComponentFixture<MessageA11yHostComponent> = await setup({ closable: true });
     const closeIconEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-message__close ui-lib-icon'
+      '.ui-lib-message__close ui-lib-icon',
     );
     expect(closeIconEl?.getAttribute('aria-hidden')).toBe('true');
   });

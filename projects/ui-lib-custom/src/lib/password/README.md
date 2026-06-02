@@ -8,49 +8,49 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `variant` | `'material' \| 'bootstrap' \| 'minimal'` | `'material'` | Does not fall back to global theme — must be set explicitly |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
-| `appearance` | `'outlined' \| 'filled'` | `'outlined'` | |
-| `disabled` | `boolean` | `false` | |
-| `readonly` | `boolean` | `false` | |
-| `invalid` | `boolean` | `false` | Applies invalid styles; does not render an error message |
-| `fluid` | `boolean` | `false` | Full-width layout |
-| `feedback` | `boolean` | `true` | Shows a strength meter panel on focus |
-| `toggleMask` | `boolean` | `true` | Shows a button to reveal/hide the password |
-| `showClear` | `boolean` | `false` | Shows an inline clear button when the field has a value |
-| `placeholder` | `string \| undefined` | `undefined` | |
-| `autocomplete` | `string \| undefined` | `undefined` | |
-| `name` | `string \| undefined` | `undefined` | |
-| `inputId` | `string \| undefined` | `undefined` | Overrides the auto-generated id on the native `<input>` |
-| `ariaLabel` | `string \| undefined` | `undefined` | |
-| `ariaLabelledBy` | `string \| undefined` | `undefined` | |
-| `errorMessage` | `string \| undefined` | `undefined` | Announces validation message when `invalid` is `true` |
-| `maxLength` | `number \| undefined` | `undefined` | |
-| `tabindex` | `number \| undefined` | `undefined` | |
-| `promptLabel` | `string` | `'Enter a password'` | Strength panel text before typing |
-| `weakLabel` | `string` | `'Weak'` | |
-| `mediumLabel` | `string` | `'Medium'` | |
-| `strongLabel` | `string` | `'Strong'` | |
-| `mediumRegex` | `string` | `'^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})'` | |
-| `strongRegex` | `string` | `'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})'` | |
-| `inputStyleClass` | `string \| undefined` | `undefined` | Extra CSS class on the inner `<input>` element |
+| Name              | Type                                     | Default                                         | Notes                                                       |
+| ----------------- | ---------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------- | ------------------------------------ | --- |
+| `variant`         | `'material' \| 'bootstrap' \| 'minimal'` | `'material'`                                    | Does not fall back to global theme — must be set explicitly |
+| `size`            | `'sm' \| 'md' \| 'lg'`                   | `'md'`                                          |                                                             |
+| `appearance`      | `'outlined' \| 'filled'`                 | `'outlined'`                                    |                                                             |
+| `disabled`        | `boolean`                                | `false`                                         |                                                             |
+| `readonly`        | `boolean`                                | `false`                                         |                                                             |
+| `invalid`         | `boolean`                                | `false`                                         | Applies invalid styles; does not render an error message    |
+| `fluid`           | `boolean`                                | `false`                                         | Full-width layout                                           |
+| `feedback`        | `boolean`                                | `true`                                          | Shows a strength meter panel on focus                       |
+| `toggleMask`      | `boolean`                                | `true`                                          | Shows a button to reveal/hide the password                  |
+| `showClear`       | `boolean`                                | `false`                                         | Shows an inline clear button when the field has a value     |
+| `placeholder`     | `string \| undefined`                    | `undefined`                                     |                                                             |
+| `autocomplete`    | `string \| undefined`                    | `undefined`                                     |                                                             |
+| `name`            | `string \| undefined`                    | `undefined`                                     |                                                             |
+| `inputId`         | `string \| undefined`                    | `undefined`                                     | Overrides the auto-generated id on the native `<input>`     |
+| `ariaLabel`       | `string \| undefined`                    | `undefined`                                     |                                                             |
+| `ariaLabelledBy`  | `string \| undefined`                    | `undefined`                                     |                                                             |
+| `errorMessage`    | `string \| undefined`                    | `undefined`                                     | Announces validation message when `invalid` is `true`       |
+| `maxLength`       | `number \| undefined`                    | `undefined`                                     |                                                             |
+| `tabindex`        | `number \| undefined`                    | `undefined`                                     |                                                             |
+| `promptLabel`     | `string`                                 | `'Enter a password'`                            | Strength panel text before typing                           |
+| `weakLabel`       | `string`                                 | `'Weak'`                                        |                                                             |
+| `mediumLabel`     | `string`                                 | `'Medium'`                                      |                                                             |
+| `strongLabel`     | `string`                                 | `'Strong'`                                      |                                                             |
+| `mediumRegex`     | `string`                                 | `'^(((?=._[a-z])(?=._[A-Z]))                    | ((?=._[a-z])(?=._[0-9]))                                    | ((?=._[A-Z])(?=._[0-9])))(?=.{6,})'` |     |
+| `strongRegex`     | `string`                                 | `'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})'` |                                                             |
+| `inputStyleClass` | `string \| undefined`                    | `undefined`                                     | Extra CSS class on the inner `<input>` element              |
 
 ## Public properties
 
-| Name | Type | Notes |
-|------|------|-------|
+| Name         | Type     | Notes                                                                               |
+| ------------ | -------- | ----------------------------------------------------------------------------------- |
 | `passwordId` | `string` | Auto-generated id for the native input — use with `<label [for]="comp.passwordId">` |
-| `strengthId` | `string` | Id of the strength live region — equals `passwordId + "-strength"` |
+| `strengthId` | `string` | Id of the strength live region — equals `passwordId + "-strength"`                  |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `focused` | `Event` | Fires when the input gains focus |
-| `blurred` | `Event` | Fires when the input loses focus |
-| `cleared` | `void` | Fires when the clear button is clicked |
+| Name      | Payload | Notes                                  |
+| --------- | ------- | -------------------------------------- |
+| `focused` | `Event` | Fires when the input gains focus       |
+| `blurred` | `Event` | Fires when the input loses focus       |
+| `cleared` | `void`  | Fires when the clear button is clicked |
 
 ## Accessibility
 
@@ -60,8 +60,7 @@ The component generates a unique `passwordId` and `strengthId` on each instance.
 external `<label>` using the component reference:
 
 ```html
-<label [for]="passwordRef.passwordId">New password</label>
-<ui-lib-password #passwordRef />
+<label [for]="passwordRef.passwordId">New password</label> <ui-lib-password #passwordRef />
 ```
 
 When `feedback` is enabled (default), the input automatically has `aria-describedby` pointing to
@@ -130,25 +129,25 @@ an error node linked by `aria-describedby`:
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `--ui-lib-password-transition` | `border-color 0.15s ease, box-shadow 0.15s ease` | Input border/shadow transition; set to `none` when `prefers-reduced-motion: reduce` |
-| `--ui-lib-password-border-color` | `#d1d5db` | Input border color |
-| `--ui-lib-password-border-color-hover` | `#9ca3af` | Input border color on hover |
-| `--ui-lib-password-border-color-focus` | `#6366f1` | Input border color on focus |
-| `--ui-lib-password-border-color-invalid` | `#ef4444` | Input border when invalid |
-| `--ui-lib-password-focus-ring` | `rgba(99, 102, 241, 0.2)` | Focus ring color |
-| `--ui-lib-password-bg` | `#ffffff` | Input background |
-| `--ui-lib-password-color` | `#374151` | Input text color |
-| `--ui-lib-password-border-radius` | `6px` | Input corner radius |
-| `--ui-lib-password-icon-color` | `#6b7280` | Toggle/clear icon color |
-| `--ui-lib-password-panel-bg` | `#ffffff` | Strength panel background |
-| `--ui-lib-password-panel-border-radius` | `6px` | Strength panel corner radius |
-| `--ui-lib-password-panel-shadow` | `0 4px 12px rgba(0,0,0,0.08)` | Strength panel shadow |
-| `--ui-lib-password-meter-bg` | `#e5e7eb` | Meter track background |
-| `--ui-lib-password-meter-height` | `6px` | Meter track height |
-| `--ui-lib-password-meter-bg-weak` | `#ef4444` | Meter fill — weak |
-| `--ui-lib-password-meter-bg-medium` | `#f59e0b` | Meter fill — medium |
-| `--ui-lib-password-meter-bg-strong` | `#10b981` | Meter fill — strong |
-| `--ui-lib-password-meter-transition-duration` | `0.4s` | Meter width animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |
-| `--ui-lib-password-meter-color-transition-duration` | `0.25s` | Meter color animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |
+| Variable                                            | Default                                          | Description                                                                         |
+| --------------------------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| `--ui-lib-password-transition`                      | `border-color 0.15s ease, box-shadow 0.15s ease` | Input border/shadow transition; set to `none` when `prefers-reduced-motion: reduce` |
+| `--ui-lib-password-border-color`                    | `#d1d5db`                                        | Input border color                                                                  |
+| `--ui-lib-password-border-color-hover`              | `#9ca3af`                                        | Input border color on hover                                                         |
+| `--ui-lib-password-border-color-focus`              | `#6366f1`                                        | Input border color on focus                                                         |
+| `--ui-lib-password-border-color-invalid`            | `#ef4444`                                        | Input border when invalid                                                           |
+| `--ui-lib-password-focus-ring`                      | `rgba(99, 102, 241, 0.2)`                        | Focus ring color                                                                    |
+| `--ui-lib-password-bg`                              | `#ffffff`                                        | Input background                                                                    |
+| `--ui-lib-password-color`                           | `#374151`                                        | Input text color                                                                    |
+| `--ui-lib-password-border-radius`                   | `6px`                                            | Input corner radius                                                                 |
+| `--ui-lib-password-icon-color`                      | `#6b7280`                                        | Toggle/clear icon color                                                             |
+| `--ui-lib-password-panel-bg`                        | `#ffffff`                                        | Strength panel background                                                           |
+| `--ui-lib-password-panel-border-radius`             | `6px`                                            | Strength panel corner radius                                                        |
+| `--ui-lib-password-panel-shadow`                    | `0 4px 12px rgba(0,0,0,0.08)`                    | Strength panel shadow                                                               |
+| `--ui-lib-password-meter-bg`                        | `#e5e7eb`                                        | Meter track background                                                              |
+| `--ui-lib-password-meter-height`                    | `6px`                                            | Meter track height                                                                  |
+| `--ui-lib-password-meter-bg-weak`                   | `#ef4444`                                        | Meter fill — weak                                                                   |
+| `--ui-lib-password-meter-bg-medium`                 | `#f59e0b`                                        | Meter fill — medium                                                                 |
+| `--ui-lib-password-meter-bg-strong`                 | `#10b981`                                        | Meter fill — strong                                                                 |
+| `--ui-lib-password-meter-transition-duration`       | `0.4s`                                           | Meter width animation duration; set to `0ms` when `prefers-reduced-motion: reduce`  |
+| `--ui-lib-password-meter-color-transition-duration` | `0.25s`                                          | Meter color animation duration; set to `0ms` when `prefers-reduced-motion: reduce`  |

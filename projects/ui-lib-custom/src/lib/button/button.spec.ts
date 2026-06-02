@@ -119,7 +119,7 @@ describe('Button', (): void => {
     fixture.detectChanges();
 
     const loadingIconEl: DebugElement | null = fixture.debugElement.query(
-      By.css('ui-lib-icon.ui-lib-button__icon--loading')
+      By.css('ui-lib-icon.ui-lib-button__icon--loading'),
     );
     expect(loadingIconEl).toBeTruthy();
     const iconComponent: Icon = loadingIconEl.componentInstance as Icon;
@@ -309,7 +309,7 @@ describe('Button', (): void => {
 
     const btn: HTMLButtonElement = getButton();
     const loadingIconEl: DebugElement | null = fixture.debugElement.query(
-      By.css('ui-lib-icon.ui-lib-button__icon--loading')
+      By.css('ui-lib-icon.ui-lib-button__icon--loading'),
     );
 
     expect(loadingIconEl).toBeTruthy();
@@ -323,10 +323,10 @@ describe('Button', (): void => {
     fixture.detectChanges();
 
     const leftIcon: HTMLElement | null = rootEl().querySelector(
-      'ui-lib-icon.ui-lib-button__icon--start'
+      'ui-lib-icon.ui-lib-button__icon--start',
     );
     const leftEndIcon: HTMLElement | null = rootEl().querySelector(
-      'ui-lib-icon.ui-lib-button__icon--end'
+      'ui-lib-icon.ui-lib-button__icon--end',
     );
     expect(leftIcon).toBeTruthy();
     expect(leftEndIcon).toBeNull();
@@ -335,10 +335,10 @@ describe('Button', (): void => {
     fixture.detectChanges();
 
     const rightIcon: HTMLElement | null = rootEl().querySelector(
-      'ui-lib-icon.ui-lib-button__icon--end'
+      'ui-lib-icon.ui-lib-button__icon--end',
     );
     const rightStartIcon: HTMLElement | null = rootEl().querySelector(
-      'ui-lib-icon.ui-lib-button__icon--start'
+      'ui-lib-icon.ui-lib-button__icon--start',
     );
     expect(rightIcon).toBeTruthy();
     expect(rightStartIcon).toBeNull();
@@ -398,7 +398,7 @@ describe('Button', (): void => {
     const badgeContrast: HTMLElement | null = getBadge();
     expect(badgeContrast).toBeTruthy();
     expect(
-      (badgeContrast as HTMLElement).classList.contains('ui-lib-badge--color-neutral')
+      (badgeContrast as HTMLElement).classList.contains('ui-lib-badge--color-neutral'),
     ).toBeTruthy();
   });
 
@@ -431,7 +431,7 @@ describe('Button', (): void => {
       fixture.detectChanges();
 
       expect(
-        getButton().classList.contains(`ui-lib-button--appearance-${appearance}`)
+        getButton().classList.contains(`ui-lib-button--appearance-${appearance}`),
       ).toBeTruthy();
     });
   });
@@ -458,7 +458,7 @@ describe('Button', (): void => {
 
 describe('Button interactions', (): void => {
   async function createFixture(
-    initial?: Partial<ButtonClickHostComponent>
+    initial?: Partial<ButtonClickHostComponent>,
   ): Promise<ComponentFixture<ButtonClickHostComponent>> {
     await TestBed.configureTestingModule({
       imports: [ButtonClickHostComponent],
@@ -475,7 +475,7 @@ describe('Button interactions', (): void => {
   }
 
   const getButton: (fixture: ComponentFixture<ButtonClickHostComponent>) => HTMLButtonElement = (
-    fixture: ComponentFixture<ButtonClickHostComponent>
+    fixture: ComponentFixture<ButtonClickHostComponent>,
   ): HTMLButtonElement =>
     (fixture.nativeElement as HTMLElement).querySelector('button') as HTMLButtonElement;
 
@@ -555,12 +555,12 @@ describe('Button variant', (): void => {
 
     const getVariantButtons: () => HTMLButtonElement[] = (): HTMLButtonElement[] =>
       Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
       ) as HTMLButtonElement[];
 
     const getRequiredVariantButton: (
       buttons: HTMLButtonElement[],
-      index: number
+      index: number,
     ) => HTMLButtonElement = (buttons: HTMLButtonElement[], index: number): HTMLButtonElement => {
       const button: HTMLButtonElement | undefined = buttons[index];
       if (!button) {
@@ -571,10 +571,10 @@ describe('Button variant', (): void => {
 
     let buttons: HTMLButtonElement[] = getVariantButtons();
     expect(
-      getRequiredVariantButton(buttons, 0).classList.contains('ui-lib-button--bootstrap')
+      getRequiredVariantButton(buttons, 0).classList.contains('ui-lib-button--bootstrap'),
     ).toBeTruthy();
     expect(
-      getRequiredVariantButton(buttons, 1).classList.contains('ui-lib-button--bootstrap')
+      getRequiredVariantButton(buttons, 1).classList.contains('ui-lib-button--bootstrap'),
     ).toBeTruthy();
 
     fixture.componentInstance.overrideVariant.set('minimal');
@@ -582,10 +582,10 @@ describe('Button variant', (): void => {
 
     buttons = getVariantButtons();
     expect(
-      getRequiredVariantButton(buttons, 0).classList.contains('ui-lib-button--bootstrap')
+      getRequiredVariantButton(buttons, 0).classList.contains('ui-lib-button--bootstrap'),
     ).toBeTruthy();
     expect(
-      getRequiredVariantButton(buttons, 1).classList.contains('ui-lib-button--minimal')
+      getRequiredVariantButton(buttons, 1).classList.contains('ui-lib-button--minimal'),
     ).toBeTruthy();
   });
 });

@@ -32,7 +32,7 @@ import { InputOtpComponent } from './input-otp.component';
 class InputOtpA11yHostComponent {
   public readonly length: WritableSignal<number> = signal<number>(4);
   public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(
-    'One-time passcode'
+    'One-time passcode',
   );
   public readonly ariaLabelledBy: WritableSignal<string | null> = signal<string | null>(null);
   public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
@@ -72,7 +72,7 @@ describe('InputOtp Accessibility', (): void => {
 
   function cells(): HTMLInputElement[] {
     return Array.from(
-      otpElement().querySelectorAll<HTMLInputElement>('input.ui-lib-input-otp-cell')
+      otpElement().querySelectorAll<HTMLInputElement>('input.ui-lib-input-otp-cell'),
     );
   }
 
@@ -156,7 +156,7 @@ describe('InputOtp Accessibility', (): void => {
     fixture.componentInstance.invalid.set(true);
     fixture.detectChanges();
     const errorElement: HTMLElement = otpElement().querySelector(
-      '.ui-lib-input-otp-error'
+      '.ui-lib-input-otp-error',
     ) as HTMLElement;
     expect(errorElement.getAttribute('role')).toBe('alert');
     expect(otpElement().getAttribute('aria-describedby')).toBe(errorElement.id);

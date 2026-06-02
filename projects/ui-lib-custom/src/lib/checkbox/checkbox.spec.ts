@@ -67,10 +67,10 @@ class HostComponent {
   public readonly indeterminate: WritableSignal<boolean> = signal<boolean>(false);
   public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
   public readonly lastFocusEvent: WritableSignal<FocusEvent | null> = signal<FocusEvent | null>(
-    null
+    null,
   );
   public readonly lastBlurEvent: WritableSignal<FocusEvent | null> = signal<FocusEvent | null>(
-    null
+    null,
   );
   public checked: boolean = false;
   public readonly content: WritableSignal<string> = signal<string>('');
@@ -109,7 +109,7 @@ describe('Checkbox', (): void => {
     const el: HTMLElement = checkboxEl();
     expect(el.querySelector('.ui-lib-checkbox__label')?.textContent).toContain('Accept terms');
     expect(el.querySelector('.ui-lib-checkbox__description')?.textContent).toContain(
-      'Required to continue'
+      'Required to continue',
     );
   });
 
@@ -283,7 +283,7 @@ describe('Checkbox', (): void => {
     fixture.detectChanges();
 
     const iconElement: HTMLElement | null = checkboxEl().querySelector(
-      '.ui-lib-checkbox__icon--check'
+      '.ui-lib-checkbox__icon--check',
     );
     expect(iconElement?.classList.contains('ui-lib-checkbox__icon--custom')).toBeTruthy();
     expect(iconElement?.classList.contains('pi')).toBeTruthy();
@@ -298,7 +298,7 @@ describe('Checkbox', (): void => {
     await Promise.resolve();
 
     const element: HTMLElement = (autoFocusFixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-checkbox__native-input'
+      '.ui-lib-checkbox__native-input',
     ) as HTMLElement;
     expect(document.activeElement).toBe(element);
   });
@@ -516,7 +516,7 @@ describe('Checkbox Template-driven Group Mode', (): void => {
 
   function checkboxElements(): HTMLElement[] {
     return Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-checkbox')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-checkbox'),
     ) as HTMLElement[];
   }
 
@@ -581,7 +581,7 @@ describe('Checkbox Template-driven Dynamic Group Mode', (): void => {
 
   function checkboxElements(): HTMLElement[] {
     return Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-checkbox')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-checkbox'),
     ) as HTMLElement[];
   }
 
@@ -647,7 +647,7 @@ describe('Checkbox Required Validation', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<TemplateDrivenRequiredHostComponent> = TestBed.createComponent(
-      TemplateDrivenRequiredHostComponent
+      TemplateDrivenRequiredHostComponent,
     );
     fixture.detectChanges();
 
@@ -657,7 +657,7 @@ describe('Checkbox Required Validation', (): void => {
     expect(nativeInputElement.checkValidity()).toBeFalsy();
 
     const checkboxElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-checkbox'
+      'ui-lib-checkbox',
     ) as HTMLElement;
     checkboxElement.click();
     fixture.detectChanges();
@@ -672,7 +672,7 @@ describe('Checkbox Required Validation', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<ReactiveRequiredHostComponent> = TestBed.createComponent(
-      ReactiveRequiredHostComponent
+      ReactiveRequiredHostComponent,
     );
     fixture.detectChanges();
     const acceptedControl: FormControl<boolean> = fixture.componentInstance.form.controls.accepted;
@@ -680,7 +680,7 @@ describe('Checkbox Required Validation', (): void => {
     expect(acceptedControl.invalid).toBeTruthy();
 
     const checkboxElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-checkbox'
+      'ui-lib-checkbox',
     ) as HTMLElement;
     checkboxElement.click();
     fixture.detectChanges();

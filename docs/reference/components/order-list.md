@@ -13,28 +13,28 @@ OrderList component — manages and reorders a collection of items.
 
 ### Inputs
 
-| Name                  | Type                        | Default            | Description                                                                                                                            |
-| --------------------- | --------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`           | `string | null`             | `null`             | Accessible label for the listbox element.                                                                                              |
-| `ariaLabelledBy`      | `string | null`             | `null`             | One or more element IDs that label the listbox element.                                                                                |
-| `controlsPosition`    | `OrderListControlsPosition` | `'left'`           | Position of the reorder control buttons relative to the list.                                                                          |
-| `disabled`            | `boolean`                   | `false`            | When `true`, all interaction is disabled.                                                                                              |
-| `dragDrop`            | `boolean`                   | `false`            | When `true`, items can be reordered by dragging and dropping.                                                                          |
-| `filterBy`            | `string | null`             | `null`             | Dot-notation property path to filter items against (e.g. `'name'` or `'address.city'`). When `null`, the filter input is not rendered. |
-| `filterLocale`        | `string | undefined`        | `undefined`        | BCP 47 locale tag used for locale-sensitive string comparisons during filtering.                                                       |
-| `filterMatchMode`     | `OrderListFilterMatchMode`  | `'contains'`       | Strategy used when matching filter query against item fields.                                                                          |
-| `filterPlaceholder`   | `string`                    | `'Filter'`         | Placeholder text shown inside the filter input.                                                                                        |
-| `header`              | `string | null`             | `null`             | Optional caption rendered above the list.                                                                                              |
-| `metaKeySelection`    | `boolean`                   | `false`            | When `true`, Ctrl/Meta must be held to toggle multi-select.                                                                            |
-| `moveBottomAriaLabel` | `string`                    | `'Move to bottom'` | Accessible label for the "Move to bottom" button.                                                                                      |
-| `moveDownAriaLabel`   | `string`                    | `'Move down'`      | Accessible label for the "Move down" button.                                                                                           |
-| `moveTopAriaLabel`    | `string`                    | `'Move to top'`    | Accessible label for the "Move to top" button.                                                                                         |
-| `moveUpAriaLabel`     | `string`                    | `'Move up'`        | Accessible label for the "Move up" button.                                                                                             |
-| `size`                | `OrderListSize`             | `'md'`             | Component size token.                                                                                                                  |
-| `stripedRows`         | `boolean`                   | `false`            | When `true`, alternating rows are rendered with a background tint.                                                                     |
-| `styleClass`          | `string | null`             | `null`             | Additional CSS class applied to the root element.                                                                                      |
-| `trackBy`             | `string | null`             | `null`             | Property key used to identify items for selection equality and `@for` tracking. When `null`, item object identity is used.             |
-| `variant`             | `OrderListVariant | null`   | `null`             | Theme variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                               |
+| Name                  | Type                        | Default            | Description                                                        |
+| --------------------- | --------------------------- | ------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`           | `string                     | null`              | `null`                                                             | Accessible label for the listbox element.                                                                                              |
+| `ariaLabelledBy`      | `string                     | null`              | `null`                                                             | One or more element IDs that label the listbox element.                                                                                |
+| `controlsPosition`    | `OrderListControlsPosition` | `'left'`           | Position of the reorder control buttons relative to the list.      |
+| `disabled`            | `boolean`                   | `false`            | When `true`, all interaction is disabled.                          |
+| `dragDrop`            | `boolean`                   | `false`            | When `true`, items can be reordered by dragging and dropping.      |
+| `filterBy`            | `string                     | null`              | `null`                                                             | Dot-notation property path to filter items against (e.g. `'name'` or `'address.city'`). When `null`, the filter input is not rendered. |
+| `filterLocale`        | `string                     | undefined`         | `undefined`                                                        | BCP 47 locale tag used for locale-sensitive string comparisons during filtering.                                                       |
+| `filterMatchMode`     | `OrderListFilterMatchMode`  | `'contains'`       | Strategy used when matching filter query against item fields.      |
+| `filterPlaceholder`   | `string`                    | `'Filter'`         | Placeholder text shown inside the filter input.                    |
+| `header`              | `string                     | null`              | `null`                                                             | Optional caption rendered above the list.                                                                                              |
+| `metaKeySelection`    | `boolean`                   | `false`            | When `true`, Ctrl/Meta must be held to toggle multi-select.        |
+| `moveBottomAriaLabel` | `string`                    | `'Move to bottom'` | Accessible label for the "Move to bottom" button.                  |
+| `moveDownAriaLabel`   | `string`                    | `'Move down'`      | Accessible label for the "Move down" button.                       |
+| `moveTopAriaLabel`    | `string`                    | `'Move to top'`    | Accessible label for the "Move to top" button.                     |
+| `moveUpAriaLabel`     | `string`                    | `'Move up'`        | Accessible label for the "Move up" button.                         |
+| `size`                | `OrderListSize`             | `'md'`             | Component size token.                                              |
+| `stripedRows`         | `boolean`                   | `false`            | When `true`, alternating rows are rendered with a background tint. |
+| `styleClass`          | `string                     | null`              | `null`                                                             | Additional CSS class applied to the root element.                                                                                      |
+| `trackBy`             | `string                     | null`              | `null`                                                             | Property key used to identify items for selection equality and `@for` tracking. When `null`, item object identity is used.             |
+| `variant`             | `OrderListVariant           | null`              | `null`                                                             | Theme variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                               |
 
 ### Models (two-way bindable)
 
@@ -166,4 +166,3 @@ _none_
 - [Demo page](/components/order-list)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/order-list/README.md)
-

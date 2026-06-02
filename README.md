@@ -10,15 +10,15 @@ Not another Angular component library. **A new standard for what Angular UI deve
 
 ## North Star
 
-> *Lost in the details? Come back here.*
+> _Lost in the details? Come back here._
 
-| Document | What it answers |
-|---|---|
-| [Vision](docs/VISION.md) | Why this exists and what it is trying to become |
-| [Roadmap](docs/ROADMAP.md) | Where we are and what "ready to go public" actually means |
-| [Launch Strategy](docs/LAUNCH_STRATEGY.md) | How the world finds this — and why the quality of the work is the marketing |
-| [Competitive Strategy](docs/COMPETITIVE_STRATEGY.md) | How to position this when the time comes |
-| [Component Scores](docs/COMPONENT_SCORES.md) | The scoreboard — every component, every category, honest numbers |
+| Document                                             | What it answers                                                             |
+| ---------------------------------------------------- | --------------------------------------------------------------------------- |
+| [Vision](docs/VISION.md)                             | Why this exists and what it is trying to become                             |
+| [Roadmap](docs/ROADMAP.md)                           | Where we are and what "ready to go public" actually means                   |
+| [Launch Strategy](docs/LAUNCH_STRATEGY.md)           | How the world finds this — and why the quality of the work is the marketing |
+| [Competitive Strategy](docs/COMPETITIVE_STRATEGY.md) | How to position this when the time comes                                    |
+| [Component Scores](docs/COMPONENT_SCORES.md)         | The scoreboard — every component, every category, honest numbers            |
 
 **Current committed wow factor:** Elite Accessibility — the most accessible Angular component library ever built.
 Every component. Full keyboard navigation. Correct ARIA. Tested. No exceptions.
@@ -41,24 +41,24 @@ import { Button } from 'ui-lib-custom';
 
 ## Available Entry Points
 
-| Entry Point | Contents |
-|-------------|----------|
-| ui-lib-custom | All public exports (primary barrel) |
-| ui-lib-custom/a11y | Live announcer and a11y utilities |
-| ui-lib-custom/accordion | Accordion components and types |
-| ui-lib-custom/badge | Badge component and types |
-| ui-lib-custom/button | Button component and types |
-| ui-lib-custom/card | Card component and types |
-| ui-lib-custom/checkbox | Checkbox component and types |
-| ui-lib-custom/core | Shared tokens and types |
-| ui-lib-custom/icon | Icon component, service, and types |
-| ui-lib-custom/input | Input component and types |
-| ui-lib-custom/layout | Layout primitives and tokens |
-| ui-lib-custom/select | Select component and types |
-| ui-lib-custom/select-button | SelectButton component and types |
-| ui-lib-custom/tabs | Tabs components and types |
-| ui-lib-custom/theme | Theme services and types |
-| ui-lib-custom/tokens | Design tokens |
+| Entry Point                 | Contents                            |
+| --------------------------- | ----------------------------------- |
+| ui-lib-custom               | All public exports (primary barrel) |
+| ui-lib-custom/a11y          | Live announcer and a11y utilities   |
+| ui-lib-custom/accordion     | Accordion components and types      |
+| ui-lib-custom/badge         | Badge component and types           |
+| ui-lib-custom/button        | Button component and types          |
+| ui-lib-custom/card          | Card component and types            |
+| ui-lib-custom/checkbox      | Checkbox component and types        |
+| ui-lib-custom/core          | Shared tokens and types             |
+| ui-lib-custom/icon          | Icon component, service, and types  |
+| ui-lib-custom/input         | Input component and types           |
+| ui-lib-custom/layout        | Layout primitives and tokens        |
+| ui-lib-custom/select        | Select component and types          |
+| ui-lib-custom/select-button | SelectButton component and types    |
+| ui-lib-custom/tabs          | Tabs components and types           |
+| ui-lib-custom/theme         | Theme services and types            |
+| ui-lib-custom/tokens        | Design tokens                       |
 
 ## 📚 Documentation
 
@@ -118,6 +118,7 @@ export class AppComponent {
 ```
 
 For presets, import `ThemePresetService` and capture or apply presets. See:
+
 - `docs/guides/THEMING_GUIDE.md`
 - `docs/guides/THEME_EDITOR_GOOGLE_FONTS.md`
 

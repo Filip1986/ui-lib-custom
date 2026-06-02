@@ -12,14 +12,14 @@ import { StepperPanel } from './stepper-panel';
 
 function queryElement<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryElements<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -180,7 +180,7 @@ describe('Stepper Accessibility', (): void => {
       const activeTab: HTMLButtonElement | undefined = getHorizontalTabs(fixture)[1];
       const panel: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '[role="tabpanel"]:not([hidden])'
+        '[role="tabpanel"]:not([hidden])',
       );
       expect(panel?.id).toBe(activeTab?.getAttribute('aria-controls'));
       expect(panel?.getAttribute('aria-labelledby')).toBe(activeTab?.id);
@@ -287,10 +287,10 @@ describe('Stepper Accessibility', (): void => {
 
       const tabs: HTMLButtonElement[] = getHorizontalTabs(fixture);
       expect(tabs[1]?.getAttribute('aria-label')).toContain(
-        'unavailable until previous steps are complete'
+        'unavailable until previous steps are complete',
       );
       expect(tabs[2]?.getAttribute('aria-label')).toContain(
-        'unavailable until previous steps are complete'
+        'unavailable until previous steps are complete',
       );
     });
   });
@@ -320,7 +320,7 @@ describe('Stepper Accessibility', (): void => {
   describe('multi-instance ids', (): void => {
     it('generates unique ids for each stepper instance and its step ids', async (): Promise<void> => {
       const fixture: ComponentFixture<StepperMultiInstanceHostComponent> = await createFixture(
-        StepperMultiInstanceHostComponent
+        StepperMultiInstanceHostComponent,
       );
 
       const steppers: HTMLElement[] = queryElements<HTMLElement>(fixture, 'ui-lib-stepper');
@@ -338,7 +338,7 @@ describe('Stepper Accessibility', (): void => {
   describe('vertical orientation', (): void => {
     it('exposes a vertical tablist with the provided aria-label', async (): Promise<void> => {
       const fixture: ComponentFixture<VerticalStepperA11yHostComponent> = await createFixture(
-        VerticalStepperA11yHostComponent
+        VerticalStepperA11yHostComponent,
       );
 
       const tablist: HTMLElement | null = queryElement<HTMLElement>(fixture, '[role="tablist"]');
@@ -348,7 +348,7 @@ describe('Stepper Accessibility', (): void => {
 
     it('applies rich aria-labels to vertical step indicators', async (): Promise<void> => {
       const fixture: ComponentFixture<VerticalStepperA11yHostComponent> = await createFixture(
-        VerticalStepperA11yHostComponent
+        VerticalStepperA11yHostComponent,
       );
 
       const tabs: HTMLButtonElement[] = getVerticalTabs(fixture);

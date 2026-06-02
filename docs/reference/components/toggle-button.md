@@ -13,24 +13,24 @@ ToggleButton selects a boolean value via a button with distinct on/off labels an
 
 ### Inputs
 
-| Name             | Type                           | Default  | Description                                                                                                |
-| ---------------- | ------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------- |
-| `allowEmpty`     | `boolean`                      | `true`   | When false, an already-checked button cannot be unchecked by clicking.                                     |
-| `ariaLabel`      | `string | null`                | `null`   | Accessible label applied to the inner button element.                                                      |
-| `ariaLabelledBy` | `string | null`                | `null`   | ID of an external element that labels this button.                                                         |
-| `autofocus`      | `boolean`                      | `false`  | When true, the button receives focus on load.                                                              |
-| `checked`        | `boolean | null`               | `null`   | Backward-compatible checked input alias. Prefer `pressed`.                                                 |
-| `disabled`       | `boolean`                      | `false`  | When true, interaction is disabled.                                                                        |
-| `iconPos`        | `ToggleButtonIconPos`          | `'left'` | Position of the icon relative to the label.                                                                |
-| `inputId`        | `string | null`                | `null`   | ID attribute applied to the inner button element.                                                          |
-| `offIcon`        | `SemanticIcon | string | null` | `null`   | Icon name or CSS class displayed in the off (unchecked) state.                                             |
-| `offLabel`       | `string`                       | `''`     | Label displayed when the button is in the off (unchecked) state. Falls back to locale 'toggle-button.off'. |
-| `onIcon`         | `SemanticIcon | string | null` | `null`   | Icon name or CSS class displayed in the on (checked) state.                                                |
-| `onLabel`        | `string`                       | `''`     | Label displayed when the button is in the on (checked) state. Falls back to locale 'toggle-button.on'.     |
-| `size`           | `ToggleButtonSize`             | `'md'`   | Component size token.                                                                                      |
-| `styleClass`     | `string | null`                | `null`   | Additional CSS class(es) applied to the host element.                                                      |
-| `tabindex`       | `number`                       | `0`      | Tab index of the inner button.                                                                             |
-| `variant`        | `ToggleButtonVariant | null`   | `null`   | Design variant; inherits from ThemeConfigService when null.                                                |
+| Name             | Type                  | Default  | Description                                                                                                |
+| ---------------- | --------------------- | -------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------------------- |
+| `allowEmpty`     | `boolean`             | `true`   | When false, an already-checked button cannot be unchecked by clicking.                                     |
+| `ariaLabel`      | `string               | null`    | `null`                                                                                                     | Accessible label applied to the inner button element.       |
+| `ariaLabelledBy` | `string               | null`    | `null`                                                                                                     | ID of an external element that labels this button.          |
+| `autofocus`      | `boolean`             | `false`  | When true, the button receives focus on load.                                                              |
+| `checked`        | `boolean              | null`    | `null`                                                                                                     | Backward-compatible checked input alias. Prefer `pressed`.  |
+| `disabled`       | `boolean`             | `false`  | When true, interaction is disabled.                                                                        |
+| `iconPos`        | `ToggleButtonIconPos` | `'left'` | Position of the icon relative to the label.                                                                |
+| `inputId`        | `string               | null`    | `null`                                                                                                     | ID attribute applied to the inner button element.           |
+| `offIcon`        | `SemanticIcon         | string   | null`                                                                                                      | `null`                                                      | Icon name or CSS class displayed in the off (unchecked) state. |
+| `offLabel`       | `string`              | `''`     | Label displayed when the button is in the off (unchecked) state. Falls back to locale 'toggle-button.off'. |
+| `onIcon`         | `SemanticIcon         | string   | null`                                                                                                      | `null`                                                      | Icon name or CSS class displayed in the on (checked) state.    |
+| `onLabel`        | `string`              | `''`     | Label displayed when the button is in the on (checked) state. Falls back to locale 'toggle-button.on'.     |
+| `size`           | `ToggleButtonSize`    | `'md'`   | Component size token.                                                                                      |
+| `styleClass`     | `string               | null`    | `null`                                                                                                     | Additional CSS class(es) applied to the host element.       |
+| `tabindex`       | `number`              | `0`      | Tab index of the inner button.                                                                             |
+| `variant`        | `ToggleButtonVariant  | null`    | `null`                                                                                                     | Design variant; inherits from ThemeConfigService when null. |
 
 ### Models (two-way bindable)
 
@@ -155,4 +155,3 @@ _none_
 - [Demo page](/components/toggle-button)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/toggle-button/README.md)
-

@@ -23,18 +23,18 @@ import type { ClassNameValue } from 'ui-lib-custom/class-names';
 
 A standalone function that combines its arguments into a single space-separated class string.
 
-| Argument | Type | Description |
-|---|---|---|
+| Argument    | Type               | Description                                           |
+| ----------- | ------------------ | ----------------------------------------------------- |
 | `...values` | `ClassNameValue[]` | Strings, conditional objects, arrays, or falsy values |
 
 ### `ClassNamesPipe`
 
 Pipe name: **`classNames`**
 
-| Argument | Type | Description |
-|---|---|---|
-| `value` (primary) | `ClassNameValue` | Primary value passed before the pipe symbol |
-| `...additional` | `ClassNameValue[]` | Optional extra values passed as pipe arguments after `:` |
+| Argument          | Type               | Description                                              |
+| ----------------- | ------------------ | -------------------------------------------------------- |
+| `value` (primary) | `ClassNameValue`   | Primary value passed before the pipe symbol              |
+| `...additional`   | `ClassNameValue[]` | Optional extra values passed as pipe arguments after `:` |
 
 ### `ClassNameValue` type
 
@@ -104,17 +104,17 @@ import { ClassNamesPipe } from 'ui-lib-custom/class-names';
 
 ## Comparison with `[ngClass]`
 
-| Feature | `[ngClass]` | `classNames` |
-|---|---|---|
-| Object syntax | ✅ | ✅ |
-| Array syntax | ✅ | ✅ |
-| String | ✅ | ✅ |
-| Nested arrays | ❌ | ✅ |
-| Composable in TypeScript | ❌ (template-only) | ✅ (pure function) |
-| Works in `computed()` signals | ❌ | ✅ |
-| Works in `HostBinding` / `host` | limited | ✅ |
-| Pure (no re-run on every CD cycle) | ❌ | ✅ (pipe is `pure: true`) |
-| No directive needed | N/A | ✅ (pipe or function only) |
+| Feature                            | `[ngClass]`        | `classNames`               |
+| ---------------------------------- | ------------------ | -------------------------- |
+| Object syntax                      | ✅                 | ✅                         |
+| Array syntax                       | ✅                 | ✅                         |
+| String                             | ✅                 | ✅                         |
+| Nested arrays                      | ❌                 | ✅                         |
+| Composable in TypeScript           | ❌ (template-only) | ✅ (pure function)         |
+| Works in `computed()` signals      | ❌                 | ✅                         |
+| Works in `HostBinding` / `host`    | limited            | ✅                         |
+| Pure (no re-run on every CD cycle) | ❌                 | ✅ (pipe is `pure: true`)  |
+| No directive needed                | N/A                | ✅ (pipe or function only) |
 
 Prefer `classNames` over `[ngClass]` when you need to compose classes in TypeScript (e.g. `computed()` signals, `host` metadata) or when you want guaranteed pure-pipe semantics in templates.
 

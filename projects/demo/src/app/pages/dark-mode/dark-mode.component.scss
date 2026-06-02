@@ -1,4 +1,4 @@
-@use '../../shared/styles/doc-page.scss' as *;
+@use '../../shared/styles/doc-page.scss';
 
 .mode-selector {
   display: flex;
@@ -46,4 +46,3 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
 }
-

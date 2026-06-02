@@ -73,15 +73,15 @@ Project integration references reviewed:
 
 ## Existing ui-lib Host Class Audit (Interop Targets)
 
-| Component | Selector / Host Class | Border Radius Default | Notes for InputGroup CSS targeting |
-|---|---|---|---|
-| Input | Selector `ui-lib-input`; host conditional class `uilib-filled`; inner classes `ui-input`, `ui-input-field` | `ui-input-field` uses `border-radius: var(--uilib-input-radius, ...)` | Group should target `ui-lib-input` children and remove/restore radius on `.ui-input-field`.
-| Select | Selector `ui-lib-select`; host gets open/value/focus classes; inner root class `ui-lib-select` | `.ui-lib-select__control` uses `border-radius: var(--uilib-select-radius, ...)` | Group should target `ui-lib-select` and strip/restore radius on `.ui-lib-select__control`.
-| AutoComplete | Selector and host class `ui-lib-autocomplete` | `.ui-autocomplete-container` uses `border-radius: var(--uilib-autocomplete-border-radius, ...)` | Group should target `.ui-autocomplete-container` as the visual control surface.
-| CascadeSelect | Selector `ui-lib-cascade-select`; root class from constants `ui-lib-cascade-select` | `.ui-lib-cascade-select__trigger` uses `border-radius: var(--uilib-cascade-select-radius, ...)` | Group should target trigger element for radius stitching.
-| FloatLabel | Selector `uilib-float-label`; host class `uilib-float-label` with `--over|--in|--on` modifiers | Does not define control border directly; wraps child controls | Group needs deep selectors for wrapped controls and focus label z-index.
-| IconField | Selector `uilib-icon-field`; host class `ui-lib-icon-field` with `--left|--right` modifiers | No direct border; wrapped input control owns border | Group needs selectors for icon-field wrapped controls and nested wrappers.
-| Button | Selector `ui-lib-button`; no host class binding; host styled with `display: inline-flex`; inner `<button>` class `ui-lib-button` | Inner button has radius via `--uilib-button-radius` | Button in addon should get zero radius; direct group edge button handling should be considered for projected `ui-lib-button`.
+| Component     | Selector / Host Class                                                                                                            | Border Radius Default                                                                           | Notes for InputGroup CSS targeting                                                                                            |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Input         | Selector `ui-lib-input`; host conditional class `uilib-filled`; inner classes `ui-input`, `ui-input-field`                       | `ui-input-field` uses `border-radius: var(--uilib-input-radius, ...)`                           | Group should target `ui-lib-input` children and remove/restore radius on `.ui-input-field`.                                   |
+| Select        | Selector `ui-lib-select`; host gets open/value/focus classes; inner root class `ui-lib-select`                                   | `.ui-lib-select__control` uses `border-radius: var(--uilib-select-radius, ...)`                 | Group should target `ui-lib-select` and strip/restore radius on `.ui-lib-select__control`.                                    |
+| AutoComplete  | Selector and host class `ui-lib-autocomplete`                                                                                    | `.ui-autocomplete-container` uses `border-radius: var(--uilib-autocomplete-border-radius, ...)` | Group should target `.ui-autocomplete-container` as the visual control surface.                                               |
+| CascadeSelect | Selector `ui-lib-cascade-select`; root class from constants `ui-lib-cascade-select`                                              | `.ui-lib-cascade-select__trigger` uses `border-radius: var(--uilib-cascade-select-radius, ...)` | Group should target trigger element for radius stitching.                                                                     |
+| FloatLabel    | Selector `uilib-float-label`; host class `uilib-float-label` with `--over                                                        | --in                                                                                            | --on` modifiers                                                                                                               | Does not define control border directly; wraps child controls              | Group needs deep selectors for wrapped controls and focus label z-index. |
+| IconField     | Selector `uilib-icon-field`; host class `ui-lib-icon-field` with `--left                                                         | --right` modifiers                                                                              | No direct border; wrapped input control owns border                                                                           | Group needs selectors for icon-field wrapped controls and nested wrappers. |
+| Button        | Selector `ui-lib-button`; no host class binding; host styled with `display: inline-flex`; inner `<button>` class `ui-lib-button` | Inner button has radius via `--uilib-button-radius`                                             | Button in addon should get zero radius; direct group edge button handling should be considered for projected `ui-lib-button`. |
 
 ## Public API Contract
 
@@ -92,15 +92,15 @@ Project integration references reviewed:
 
 ### InputGroup Inputs
 
-| Input | Type | Default | Notes |
-|---|---|---|---|
-| (none) | - | - | Pure layout wrapper; consumers use native Angular `class` and `style` bindings on host if needed. |
+| Input  | Type | Default | Notes                                                                                             |
+| ------ | ---- | ------- | ------------------------------------------------------------------------------------------------- |
+| (none) | -    | -       | Pure layout wrapper; consumers use native Angular `class` and `style` bindings on host if needed. |
 
 ### InputGroupAddon Inputs
 
-| Input | Type | Default | Notes |
-|---|---|---|---|
-| (none) | - | - | Pure layout wrapper; no `styleClass`/`style` inputs (Prime parity intentionally skipped). |
+| Input  | Type | Default | Notes                                                                                     |
+| ------ | ---- | ------- | ----------------------------------------------------------------------------------------- |
+| (none) | -    | -       | Pure layout wrapper; no `styleClass`/`style` inputs (Prime parity intentionally skipped). |
 
 Neither component has outputs.
 
@@ -177,14 +177,14 @@ Token flow should follow project conventions:
 
 ## PrimeNG Divergences
 
-| Area | PrimeNG | ui-lib-input-group |
-|---|---|---|
-| Selectors | `p-inputgroup` / `p-inputgroup-addon` | `uilib-input-group` / `uilib-input-group-addon` |
-| `styleClass` input | Present on both (`InputGroup` deprecated) | Not implemented |
-| `style` input on addon | Present | Not implemented |
-| Fluid toggle | `p-inputgroup-fluid` class from internal `fluid` path | CSS-driven width behavior; rely on fluid utility/presence selectors |
-| IftaLabel integration | Separate `p-iftalabel` component | `uilib-float-label` with `variant="in"` |
-| Prime directives | Uses Prime pass-through/Bind host directives | No pass-through directives; plain Angular wrapper components |
+| Area                   | PrimeNG                                               | ui-lib-input-group                                                  |
+| ---------------------- | ----------------------------------------------------- | ------------------------------------------------------------------- |
+| Selectors              | `p-inputgroup` / `p-inputgroup-addon`                 | `uilib-input-group` / `uilib-input-group-addon`                     |
+| `styleClass` input     | Present on both (`InputGroup` deprecated)             | Not implemented                                                     |
+| `style` input on addon | Present                                               | Not implemented                                                     |
+| Fluid toggle           | `p-inputgroup-fluid` class from internal `fluid` path | CSS-driven width behavior; rely on fluid utility/presence selectors |
+| IftaLabel integration  | Separate `p-iftalabel` component                      | `uilib-float-label` with `variant="in"`                             |
+| Prime directives       | Uses Prime pass-through/Bind host directives          | No pass-through directives; plain Angular wrapper components        |
 
 ## Notes for Implementation Phase
 
@@ -193,4 +193,3 @@ Token flow should follow project conventions:
 - Use explicit typing if helper functions/constants are introduced.
 - Do not use relative imports across entry points.
 - Add `ui-lib-custom/input-group` secondary entry point and update export-map tests when implementation starts.
-

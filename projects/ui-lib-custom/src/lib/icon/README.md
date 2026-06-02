@@ -8,16 +8,16 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `name` | `string \| SemanticIcon` | — | **Required.** Semantic icon name or raw library icon name |
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` | Size token resolved to an `em`-based value by `IconService` so icons scale with surrounding text |
-| `color` | `string \| null` | `null` | Any CSS color value; applied as `--uilib-icon-color` on the host |
-| `ariaLabel` | `string \| null` | `null` | Makes the icon informative by removing `aria-hidden`, setting `aria-label`, and setting `role="img"` |
-| `library` | `IconLibrary \| null` | `null` | Override the active icon library for this instance |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Helps `IconService` choose variant-appropriate icons when resolving semantic names |
-| `semantic` | `boolean` | `false` | Force semantic resolution even if the name does not match a known `SemanticIcon` |
-| `clickable` | `boolean` | `false` | Styling hint: applies hover/cursor styling so the icon looks interactive. **Does not make the icon interactive** — the parent element (button or link) must provide all interaction semantics. See accessibility note below. |
+| Name        | Type                                             | Default | Notes                                                                                                                                                                                                                        |
+| ----------- | ------------------------------------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`      | `string \| SemanticIcon`                         | —       | **Required.** Semantic icon name or raw library icon name                                                                                                                                                                    |
+| `size`      | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'`  | `'md'`  | Size token resolved to an `em`-based value by `IconService` so icons scale with surrounding text                                                                                                                             |
+| `color`     | `string \| null`                                 | `null`  | Any CSS color value; applied as `--uilib-icon-color` on the host                                                                                                                                                             |
+| `ariaLabel` | `string \| null`                                 | `null`  | Makes the icon informative by removing `aria-hidden`, setting `aria-label`, and setting `role="img"`                                                                                                                         |
+| `library`   | `IconLibrary \| null`                            | `null`  | Override the active icon library for this instance                                                                                                                                                                           |
+| `variant`   | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`  | Helps `IconService` choose variant-appropriate icons when resolving semantic names                                                                                                                                           |
+| `semantic`  | `boolean`                                        | `false` | Force semantic resolution even if the name does not match a known `SemanticIcon`                                                                                                                                             |
+| `clickable` | `boolean`                                        | `false` | Styling hint: applies hover/cursor styling so the icon looks interactive. **Does not make the icon interactive** — the parent element (button or link) must provide all interaction semantics. See accessibility note below. |
 
 ## Outputs
 
@@ -46,20 +46,20 @@ _none_
 ## Size tokens
 
 | Token | Rendered size |
-|-------|---------------|
-| `xs` | `0.75em` |
-| `sm` | `0.875em` |
-| `md` | `1em` |
-| `lg` | `1.25em` |
-| `xl` | `1.5em` |
-| `2xl` | `2em` |
+| ----- | ------------- |
+| `xs`  | `0.75em`      |
+| `sm`  | `0.875em`     |
+| `md`  | `1em`         |
+| `lg`  | `1.25em`      |
+| `xl`  | `1.5em`       |
+| `2xl` | `2em`         |
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `--uilib-icon-color` | `currentColor` | Icon fill/stroke color; override per instance via the `color` input or CSS |
-| `--uilib-icon-transition` | `150ms ease` | Color transition; set to `none` when `prefers-reduced-motion: reduce` |
+| Variable                  | Default        | Description                                                                |
+| ------------------------- | -------------- | -------------------------------------------------------------------------- |
+| `--uilib-icon-color`      | `currentColor` | Icon fill/stroke color; override per instance via the `color` input or CSS |
+| `--uilib-icon-transition` | `150ms ease`   | Color transition; set to `none` when `prefers-reduced-motion: reduce`      |
 
 ## Performance
 

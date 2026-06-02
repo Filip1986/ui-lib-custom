@@ -90,7 +90,7 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
       {
         rootMargin: `-${this.topOffset}px 0px -60% 0px`,
         threshold: [0, 0.25, 0.5, 1],
-      }
+      },
     );
 
     ids.forEach((id: string): void => {
@@ -106,7 +106,7 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
       .filter((entry: IntersectionObserverEntry): boolean => entry.isIntersecting)
       .sort(
         (a: IntersectionObserverEntry, b: IntersectionObserverEntry): number =>
-          a.boundingClientRect.top - b.boundingClientRect.top
+          a.boundingClientRect.top - b.boundingClientRect.top,
       );
 
     const first: IntersectionObserverEntry | undefined = visible[0];
@@ -129,7 +129,7 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
         return el ? { id, top: el.getBoundingClientRect().top + scrollY } : null;
       })
       .filter((entry: { id: string; top: number } | null): entry is { id: string; top: number } =>
-        Boolean(entry)
+        Boolean(entry),
       );
 
     let candidate: { id: string; top: number } | null = null;

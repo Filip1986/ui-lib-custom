@@ -64,33 +64,33 @@ Legend:
   - `P1` = nice-to-have for v1
   - `P2` = defer
 
-| Capability | PrimeNG Evidence | ui-lib-custom Today | Priority | Gap / Notes |
-|---|---|---|---|---|
-| Single-date selection | `selectionMode='single'` | Missing | P0 | Core DatePicker behavior; no existing date component. |
-| Popup panel + inline mode | `inline`, overlay lifecycle | Partial | P0 | Reuse popup/inline split from `color-picker`; add DatePicker-specific overlay state. |
-| CVA + forms integration | DatePicker extends `BaseInput`, write/control methods | Partial | P0 | Reuse CVA patterns from `select`, `autocomplete`, `color-picker`, `input`. |
-| Month navigation (prev/next) | `navBackward`, `navForward` | Missing | P0 | New calendar navigation state/utilities needed. |
-| Calendar month grid generation | `createMonth`, `createMonths` | Missing | P0 | New date-grid utility module required. |
-| Min/max date constraints | `minDate`, `maxDate`, `isSelectable` | Missing | P0 | Add robust comparators at day-level (local time-safe). |
-| Disabled dates / disabled weekdays | `disabledDates`, `disabledDays` | Missing | P0 | Add utility-driven checks in grid metadata generation. |
-| Keyboard day-grid navigation | `onDateCellKeydown` (arrows, PgUp/PgDn, Home/End, Enter, Esc) | Partial | P0 | Existing keyboard constants cover arrows/Home/End/Escape; add PageUp/PageDown and date-grid focus logic. |
-| ARIA combobox + dialog/grid semantics | Template uses combobox + dialog relations | Partial | P0 | Reuse host ARIA patterns from `select`/`autocomplete`; add full grid roles/states. |
-| Live date announcement | Hidden live artifacts + interaction model | Partial | P0 | Reuse `LiveAnnouncerService` for focused-date narration. |
-| Click-outside close | `bindDocumentClickListener`, `isOutsideClicked` | Exists | P0 | Reuse HostListener/doc-click pattern from `select`, `autocomplete`, `color-picker`. |
-| Escape-close + focus return | keyboard handlers and `hideOverlay` | Exists | P0 | Reuse from `dialog` and `color-picker`. |
-| Theme variants + size + filled | PrimeNG has variant/size analogs | Partial | P0 | Must follow library conventions: `variant` union + sizes `sm/md/lg` + `filled: boolean`. |
-| Month/year quick view switching | `view: date|month|year`, view switch methods | Missing | P1 | Useful for parity; can ship after stable day view. |
-| Range selection | `selectionMode='range'` | Missing | P1 | Requires range hover/preview/endpoint logic and ARIA updates. |
-| Multiple date selection | `selectionMode='multiple'` | Missing | P1 | Requires tokenized display and max count constraints. |
-| Multi-month display | `numberOfMonths` + responsive options | Missing | P1 | Defer responsive slicing until base grid is stable. |
-| Show week numbers | `showWeek`, `getWeekNumber` | Missing | P1 | Add optional week-number column and locale rules. |
-| Manual text parse + custom date format | `parseDate`, `formatDate`, `dateFormat` | Missing | P1 | Build internal parser/formatter; avoid huge v1 locale surface. |
-| Today/Clear button bar | `showButtonBar`, today/clear handlers | Missing | P1 | Straightforward after base model exists. |
-| `appendTo` overlay portal | `appendTo` input | Partial | P1 | Existing components define `appendTo`; DatePicker may start with in-place overlay then extend. |
-| Time picker (`showTime`, `timeOnly`, seconds, 12/24h) | Dedicated time methods (`constrainTime`, increment/decrement) | Missing | P2 | Significant complexity; separate internal module recommended. |
-| TouchUI modal mask + body scroll lock | `touchUI`, mask lifecycle | Partial | P2 | Reuse `dialog` scroll lock + focus trap concepts if added later. |
-| Full template slot parity | Many icon/date/header/footer templates | Partial | P2 | Start with minimal slots (day cell, footer actions), expand later. |
-| PrimeNG pass-through (`pt`) API | `DatePickerPassThrough*` types | Missing | P2 | Not required for current library API strategy. |
+| Capability                                            | PrimeNG Evidence                                              | ui-lib-custom Today | Priority                   | Gap / Notes                                                                                              |
+| ----------------------------------------------------- | ------------------------------------------------------------- | ------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------- | --- | -------------------------------------------------- |
+| Single-date selection                                 | `selectionMode='single'`                                      | Missing             | P0                         | Core DatePicker behavior; no existing date component.                                                    |
+| Popup panel + inline mode                             | `inline`, overlay lifecycle                                   | Partial             | P0                         | Reuse popup/inline split from `color-picker`; add DatePicker-specific overlay state.                     |
+| CVA + forms integration                               | DatePicker extends `BaseInput`, write/control methods         | Partial             | P0                         | Reuse CVA patterns from `select`, `autocomplete`, `color-picker`, `input`.                               |
+| Month navigation (prev/next)                          | `navBackward`, `navForward`                                   | Missing             | P0                         | New calendar navigation state/utilities needed.                                                          |
+| Calendar month grid generation                        | `createMonth`, `createMonths`                                 | Missing             | P0                         | New date-grid utility module required.                                                                   |
+| Min/max date constraints                              | `minDate`, `maxDate`, `isSelectable`                          | Missing             | P0                         | Add robust comparators at day-level (local time-safe).                                                   |
+| Disabled dates / disabled weekdays                    | `disabledDates`, `disabledDays`                               | Missing             | P0                         | Add utility-driven checks in grid metadata generation.                                                   |
+| Keyboard day-grid navigation                          | `onDateCellKeydown` (arrows, PgUp/PgDn, Home/End, Enter, Esc) | Partial             | P0                         | Existing keyboard constants cover arrows/Home/End/Escape; add PageUp/PageDown and date-grid focus logic. |
+| ARIA combobox + dialog/grid semantics                 | Template uses combobox + dialog relations                     | Partial             | P0                         | Reuse host ARIA patterns from `select`/`autocomplete`; add full grid roles/states.                       |
+| Live date announcement                                | Hidden live artifacts + interaction model                     | Partial             | P0                         | Reuse `LiveAnnouncerService` for focused-date narration.                                                 |
+| Click-outside close                                   | `bindDocumentClickListener`, `isOutsideClicked`               | Exists              | P0                         | Reuse HostListener/doc-click pattern from `select`, `autocomplete`, `color-picker`.                      |
+| Escape-close + focus return                           | keyboard handlers and `hideOverlay`                           | Exists              | P0                         | Reuse from `dialog` and `color-picker`.                                                                  |
+| Theme variants + size + filled                        | PrimeNG has variant/size analogs                              | Partial             | P0                         | Must follow library conventions: `variant` union + sizes `sm/md/lg` + `filled: boolean`.                 |
+| Month/year quick view switching                       | `view: date                                                   | month               | year`, view switch methods | Missing                                                                                                  | P1  | Useful for parity; can ship after stable day view. |
+| Range selection                                       | `selectionMode='range'`                                       | Missing             | P1                         | Requires range hover/preview/endpoint logic and ARIA updates.                                            |
+| Multiple date selection                               | `selectionMode='multiple'`                                    | Missing             | P1                         | Requires tokenized display and max count constraints.                                                    |
+| Multi-month display                                   | `numberOfMonths` + responsive options                         | Missing             | P1                         | Defer responsive slicing until base grid is stable.                                                      |
+| Show week numbers                                     | `showWeek`, `getWeekNumber`                                   | Missing             | P1                         | Add optional week-number column and locale rules.                                                        |
+| Manual text parse + custom date format                | `parseDate`, `formatDate`, `dateFormat`                       | Missing             | P1                         | Build internal parser/formatter; avoid huge v1 locale surface.                                           |
+| Today/Clear button bar                                | `showButtonBar`, today/clear handlers                         | Missing             | P1                         | Straightforward after base model exists.                                                                 |
+| `appendTo` overlay portal                             | `appendTo` input                                              | Partial             | P1                         | Existing components define `appendTo`; DatePicker may start with in-place overlay then extend.           |
+| Time picker (`showTime`, `timeOnly`, seconds, 12/24h) | Dedicated time methods (`constrainTime`, increment/decrement) | Missing             | P2                         | Significant complexity; separate internal module recommended.                                            |
+| TouchUI modal mask + body scroll lock                 | `touchUI`, mask lifecycle                                     | Partial             | P2                         | Reuse `dialog` scroll lock + focus trap concepts if added later.                                         |
+| Full template slot parity                             | Many icon/date/header/footer templates                        | Partial             | P2                         | Start with minimal slots (day cell, footer actions), expand later.                                       |
+| PrimeNG pass-through (`pt`) API                       | `DatePickerPassThrough*` types                                | Missing             | P2                         | Not required for current library API strategy.                                                           |
 
 ## Reusable Infrastructure Assessment
 
@@ -164,6 +164,7 @@ Recommendation:
 Recommended new internal utility files under DatePicker component folder first (promote to `core` only if reused by 3+ components):
 
 1. `date-picker-date-utils.ts`
+
 - `startOfDayLocal(date: Date): Date`
 - `isSameDay(a: Date, b: Date): boolean`
 - `compareDay(a: Date, b: Date): -1 | 0 | 1`
@@ -172,17 +173,20 @@ Recommended new internal utility files under DatePicker component folder first (
 - `daysInMonth(year: number, monthIndex: number): number`
 
 2. `date-picker-grid-utils.ts`
+
 - calendar cell metadata generation (including out-of-month cells)
 - first-day-of-week offset logic
 - optional week number computation hook
 
 3. `date-picker-format-utils.ts`
+
 - initial formatter/parser scope for v1:
   - default format (ISO-like or locale-short)
   - strict parse for single mode
 - define extension seam for future tokenized custom formats
 
 4. `date-picker-locale.ts`
+
 - lightweight locale structure (day names, month names, firstDayOfWeek, labels)
 - default from browser locale + input overrides
 
@@ -390,4 +394,3 @@ Ship DatePicker v1 as a high-confidence single-date picker with strong accessibi
   - richer parse/format options
 - P2 deferred:
   - time/touchUI/full template parity
-

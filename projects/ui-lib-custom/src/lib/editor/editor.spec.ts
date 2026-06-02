@@ -197,7 +197,7 @@ describe('EditorComponent', (): void => {
 
   function toolbarSelectEl(): HTMLSelectElement {
     const element: HTMLSelectElement | null = hostEl().querySelector(
-      '.ui-lib-editor-toolbar-select'
+      '.ui-lib-editor-toolbar-select',
     );
     if (!element) {
       throw new Error('Expected toolbar select element.');
@@ -207,7 +207,7 @@ describe('EditorComponent', (): void => {
 
   function buttonByAriaLabel(label: string): HTMLButtonElement {
     const button: HTMLButtonElement | null = hostEl().querySelector(
-      `.ui-lib-editor-toolbar-button[aria-label="${label}"]`
+      `.ui-lib-editor-toolbar-button[aria-label="${label}"]`,
     );
     if (!button) {
       throw new Error(`Expected toolbar button with aria-label: ${label}`);
@@ -300,10 +300,10 @@ describe('EditorComponent', (): void => {
 
     it('updates toolbarState from queryCommandState and queryCommandValue', (): void => {
       queryCommandStateMock.mockImplementation(
-        (command: string): boolean => command === 'bold' || command === 'insertOrderedList'
+        (command: string): boolean => command === 'bold' || command === 'insertOrderedList',
       );
       queryCommandValueMock.mockImplementation((command: string): string =>
-        command === 'formatBlock' ? 'h2' : ''
+        command === 'formatBlock' ? 'h2' : '',
       );
 
       component.executeCommand('bold');
@@ -350,7 +350,7 @@ describe('EditorComponent', (): void => {
 
       expect(editorContentEl().getAttribute('contenteditable')).toBe('false');
       expect(toolbarButtons().every((button: HTMLButtonElement): boolean => button.disabled)).toBe(
-        true
+        true,
       );
       expect(toolbarSelectEl().disabled).toBeTruthy();
     });
@@ -364,7 +364,7 @@ describe('EditorComponent', (): void => {
       expect(editorContentEl().getAttribute('contenteditable')).toBe('false');
       expect(hostEl().classList.contains('ui-lib-editor--disabled')).toBeTruthy();
       expect(toolbarButtons().every((button: HTMLButtonElement): boolean => button.disabled)).toBe(
-        true
+        true,
       );
       expect(toolbarSelectEl().disabled).toBeTruthy();
     });
@@ -386,7 +386,7 @@ describe('EditorComponent', (): void => {
   describe('Custom Toolbar', (): void => {
     it('renders projected toolbar and hides default toolbar controls', async (): Promise<void> => {
       const customFixture: ComponentFixture<CustomToolbarHostComponent> = TestBed.createComponent(
-        CustomToolbarHostComponent
+        CustomToolbarHostComponent,
       );
       customFixture.detectChanges();
       await detectAndFlush(customFixture);
@@ -394,7 +394,7 @@ describe('EditorComponent', (): void => {
       const root: HTMLElement = customFixture.nativeElement as HTMLElement;
       const projected: HTMLElement | null = root.querySelector('.custom-toolbar');
       const defaultBoldButton: Element | null = root.querySelector(
-        '.ui-lib-editor-toolbar-button[aria-label="Bold"]'
+        '.ui-lib-editor-toolbar-button[aria-label="Bold"]',
       );
       if (!projected) {
         throw new Error('Expected projected toolbar content.');
@@ -528,7 +528,7 @@ describe('EditorComponent', (): void => {
       contentElement.dispatchEvent(new Event('input', { bubbles: true }));
       reactiveFixture.detectChanges();
       expect(reactiveFixture.componentInstance.form.controls.content.value).toBe(
-        '<p>from view</p>'
+        '<p>from view</p>',
       );
 
       reactiveFixture.destroy();
@@ -541,14 +541,14 @@ describe('EditorComponent', (): void => {
         this: EventTarget,
         type: string,
         callback: EventListenerOrEventListenerObject,
-        options?: boolean | EventListenerOptions
+        options?: boolean | EventListenerOptions,
       ) => void = EventTarget.prototype.removeEventListener;
 
       const removeListenerMock: jest.Mock = jest.fn(function removeListenerProxy(
         this: EventTarget,
         type: string,
         callback: EventListenerOrEventListenerObject,
-        options?: boolean | EventListenerOptions
+        options?: boolean | EventListenerOptions,
       ): void {
         originalRemoveEventListener.call(this, type, callback, options);
       });

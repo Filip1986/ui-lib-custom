@@ -14,13 +14,13 @@ SpeedDial scaffold component with public API signals and projection slots.
 ### Inputs
 
 | Name                 | Type                       | Default    | Description |
-| -------------------- | -------------------------- | ---------- | ----------- |
-| `ariaLabel`          | `string | null`            | `null`     | —           |
-| `ariaLabelledBy`     | `string | null`            | `null`     | —           |
-| `buttonAriaLabel`    | `string | null`            | `null`     | —           |
+| -------------------- | -------------------------- | ---------- | ----------- | --- |
+| `ariaLabel`          | `string                    | null`      | `null`      | —   |
+| `ariaLabelledBy`     | `string                    | null`      | `null`      | —   |
+| `buttonAriaLabel`    | `string                    | null`      | `null`      | —   |
 | `direction`          | `SpeedDialDirection`       | `'up'`     | —           |
 | `disabled`           | `boolean`                  | `false`    | —           |
-| `hideIcon`           | `string | null`            | `null`     | —           |
+| `hideIcon`           | `string                    | null`      | `null`      | —   |
 | `hideOnClickOutside` | `boolean`                  | `true`     | —           |
 | `mask`               | `boolean`                  | `false`    | —           |
 | `model`              | `readonly SpeedDialItem[]` | `[]`       | —           |
@@ -28,11 +28,11 @@ SpeedDial scaffold component with public API signals and projection slots.
 | `rotateAnimation`    | `boolean`                  | `true`     | —           |
 | `showIcon`           | `string`                   | `'plus'`   | —           |
 | `size`               | `SpeedDialSize`            | `'md'`     | —           |
-| `styleClass`         | `string | null`            | `null`     | —           |
+| `styleClass`         | `string                    | null`      | `null`      | —   |
 | `tabindex`           | `number`                   | `0`        | —           |
 | `transitionDelay`    | `number`                   | `30`       | —           |
 | `type`               | `SpeedDialType`            | `'linear'` | —           |
-| `variant`            | `SpeedDialVariant | null`  | `null`     | —           |
+| `variant`            | `SpeedDialVariant          | null`      | `null`      | —   |
 
 ### Models (two-way bindable)
 
@@ -143,4 +143,3 @@ _none_
 - [Demo page](/components/speed-dial)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/speed-dial/README.md)
-

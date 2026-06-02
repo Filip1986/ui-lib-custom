@@ -13,12 +13,12 @@ Fieldset — a labelled content container that optionally collapses its body. Su
 
 ### Inputs
 
-| Name         | Type                     | Default | Description                                                                           |
-| ------------ | ------------------------ | ------- | ------------------------------------------------------------------------------------- |
-| `legend`     | `string`                 | `''`    | Text to render in the legend area. Use `[fieldsetLegend]` projection for custom HTML. |
-| `styleClass` | `string | null`          | `null`  | Additional CSS classes to attach to the host element.                                 |
-| `toggleable` | `boolean`                | `false` | Whether the fieldset body can be collapsed/expanded by the user.                      |
-| `variant`    | `FieldsetVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.                       |
+| Name         | Type             | Default | Description                                                                           |
+| ------------ | ---------------- | ------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `legend`     | `string`         | `''`    | Text to render in the legend area. Use `[fieldsetLegend]` projection for custom HTML. |
+| `styleClass` | `string          | null`   | `null`                                                                                | Additional CSS classes to attach to the host element.           |
+| `toggleable` | `boolean`        | `false` | Whether the fieldset body can be collapsed/expanded by the user.                      |
+| `variant`    | `FieldsetVariant | null`   | `null`                                                                                | Visual variant — inherits from ThemeConfigService when not set. |
 
 ### Models (two-way bindable)
 
@@ -112,4 +112,3 @@ Fieldset — a labelled content container that optionally collapses its body. Su
 - [Demo page](/components/fieldset)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/fieldset/README.md)
-

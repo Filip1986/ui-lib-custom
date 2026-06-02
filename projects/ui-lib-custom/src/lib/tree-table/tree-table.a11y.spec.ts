@@ -259,7 +259,7 @@ describe('TreeTableComponent accessibility', (): void => {
     it('treegrid falls back to default label when neither ariaLabel nor caption is set', async (): Promise<void> => {
       const fixture: ComponentFixture<NoLabelHost> = await setup(NoLabelHost);
       const table: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        'table[role="treegrid"]'
+        'table[role="treegrid"]',
       );
       expect(table?.getAttribute('aria-label')).toBe('Tree table');
     });
@@ -280,7 +280,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const rows: HTMLElement[] = bodyRows(fixture);
       // Documents, Pictures, Downloads are at level 1
       const levelOneRows: HTMLElement[] = rows.filter(
-        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '1'
+        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '1',
       );
       expect(levelOneRows.length).toBe(3);
     });
@@ -289,7 +289,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const levelTwoRows: HTMLElement[] = rows.filter(
-        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '2'
+        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '2',
       );
       // Invoice.pdf and Reports are level 2 children of Documents
       expect(levelTwoRows.length).toBe(2);
@@ -299,7 +299,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const levelThreeRows: HTMLElement[] = rows.filter(
-        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '3'
+        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '3',
       );
       // Q1.pdf is the only level 3 row
       expect(levelThreeRows.length).toBe(1);
@@ -313,7 +313,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const docsRow: HTMLElement = rows.find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs',
       ) as HTMLElement;
       expect(docsRow.getAttribute('aria-expanded')).toBe('true');
     });
@@ -322,7 +322,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const picsRow: HTMLElement = rows.find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'pics'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'pics',
       ) as HTMLElement;
       expect(picsRow.getAttribute('aria-expanded')).toBe('false');
     });
@@ -331,7 +331,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const leafRow: HTMLElement = rows.find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'invoice'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'invoice',
       ) as HTMLElement;
       expect(leafRow.getAttribute('aria-expanded')).toBeNull();
     });
@@ -339,7 +339,7 @@ describe('TreeTableComponent accessibility', (): void => {
     it('expanding a node changes aria-expanded to "true"', async (): Promise<void> => {
       const fixture: ComponentFixture<CollapsedRootHost> = await setup(CollapsedRootHost);
       const toggle: HTMLElement = root(fixture).querySelector(
-        '.uilib-tree-table-toggle'
+        '.uilib-tree-table-toggle',
       ) as HTMLElement;
       toggle.click();
       fixture.detectChanges();
@@ -353,7 +353,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const docsRow: HTMLElement = rows.find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs',
       ) as HTMLElement;
       // Documents is expanded — find its toggle
       const toggle: HTMLElement = docsRow.querySelector('.uilib-tree-table-toggle') as HTMLElement;
@@ -362,7 +362,7 @@ describe('TreeTableComponent accessibility', (): void => {
       await fixture.whenStable();
 
       const updatedDocsRow: HTMLElement = bodyRows(fixture).find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs',
       ) as HTMLElement;
       expect(updatedDocsRow.getAttribute('aria-expanded')).toBe('false');
     });
@@ -375,7 +375,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const rootRows: HTMLElement[] = rows.filter(
-        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '1'
+        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '1',
       );
       rootRows.forEach((row: HTMLElement): void => {
         expect(row.getAttribute('aria-setsize')).toBe('3');
@@ -386,10 +386,10 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const rootRows: HTMLElement[] = rows.filter(
-        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '1'
+        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '1',
       );
       const positions: number[] = rootRows.map((row: HTMLElement): number =>
-        parseInt(row.getAttribute('aria-posinset') ?? '0', 10)
+        parseInt(row.getAttribute('aria-posinset') ?? '0', 10),
       );
       expect(positions).toEqual([1, 2, 3]);
     });
@@ -398,7 +398,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const levelTwoRows: HTMLElement[] = rows.filter(
-        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '2'
+        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '2',
       );
       levelTwoRows.forEach((row: HTMLElement): void => {
         expect(row.getAttribute('aria-setsize')).toBe('2');
@@ -409,10 +409,10 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const levelTwoRows: HTMLElement[] = rows.filter(
-        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '2'
+        (row: HTMLElement): boolean => row.getAttribute('aria-level') === '2',
       );
       const positions: number[] = levelTwoRows.map((row: HTMLElement): number =>
-        parseInt(row.getAttribute('aria-posinset') ?? '0', 10)
+        parseInt(row.getAttribute('aria-posinset') ?? '0', 10),
       );
       expect(positions).toEqual([1, 2]);
     });
@@ -421,7 +421,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const q1Row: HTMLElement = rows.find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'q1'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'q1',
       ) as HTMLElement;
       expect(q1Row.getAttribute('aria-setsize')).toBe('1');
       expect(q1Row.getAttribute('aria-posinset')).toBe('1');
@@ -464,7 +464,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const rows: HTMLElement[] = bodyRows(fixture);
       rows.forEach((row: HTMLElement): void => {
         const checkboxCell: HTMLElement = row.querySelector(
-          '.uilib-tree-table-td-selection'
+          '.uilib-tree-table-td-selection',
         ) as HTMLElement;
         expect(checkboxCell.getAttribute('role')).toBe('gridcell');
       });
@@ -566,7 +566,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const leafRow: HTMLElement = rows.find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'invoice'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'invoice',
       ) as HTMLElement;
       leafRow.focus();
 
@@ -581,7 +581,7 @@ describe('TreeTableComponent accessibility', (): void => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const rows: HTMLElement[] = bodyRows(fixture);
       const docsRow: HTMLElement = rows.find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs',
       ) as HTMLElement;
       docsRow.focus();
       expect(docsRow.getAttribute('aria-expanded')).toBe('true');
@@ -591,7 +591,7 @@ describe('TreeTableComponent accessibility', (): void => {
       await fixture.whenStable();
 
       const updatedDocsRow: HTMLElement = bodyRows(fixture).find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs',
       ) as HTMLElement;
       expect(updatedDocsRow.getAttribute('aria-expanded')).toBe('false');
     });
@@ -601,10 +601,10 @@ describe('TreeTableComponent accessibility', (): void => {
       const rows: HTMLElement[] = bodyRows(fixture);
       // Invoice.pdf (level 2) is at index 1; its parent Documents is at index 0
       const invoiceRow: HTMLElement = rows.find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'invoice'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'invoice',
       ) as HTMLElement;
       const docsRow: HTMLElement = rows.find(
-        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs'
+        (row: HTMLElement): boolean => row.getAttribute('data-key') === 'docs',
       ) as HTMLElement;
       invoiceRow.focus();
 
@@ -658,7 +658,7 @@ describe('TreeTableComponent accessibility', (): void => {
         .queryAll(By.directive(TreeTableComponent))
         .map(
           (debugEl: { componentInstance: unknown }): TreeTableComponent =>
-            debugEl.componentInstance as TreeTableComponent
+            debugEl.componentInstance as TreeTableComponent,
         );
       expect(components.length).toBe(2);
       expect(components[0]!.instanceId).not.toBe(components[1]!.instanceId);
@@ -667,7 +667,7 @@ describe('TreeTableComponent accessibility', (): void => {
     it('instanceId matches expected format', async (): Promise<void> => {
       const fixture: ComponentFixture<FullTreeHost> = await setup(FullTreeHost);
       const component: TreeTableComponent = fixture.debugElement.query(
-        By.directive(TreeTableComponent)
+        By.directive(TreeTableComponent),
       ).componentInstance as TreeTableComponent;
       expect(component.instanceId).toMatch(/^ui-lib-tree-table-\d+$/);
     });

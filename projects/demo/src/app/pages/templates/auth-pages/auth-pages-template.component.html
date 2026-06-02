@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Auth Pages Template"
@@ -20,8 +19,8 @@
   <section id="overview" data-doc-anchor>
     <h2>Overview</h2>
     <p>
-      Three complete authentication screens — Login, Register, and Forgot Password — all styled
-      with CSS variables so they automatically inherit your brand theme. Keyboard-accessible and
+      Three complete authentication screens — Login, Register, and Forgot Password — all styled with
+      CSS variables so they automatically inherit your brand theme. Keyboard-accessible and
       screen-reader ready.
     </p>
     <div class="auth-feature-grid">
@@ -60,23 +59,28 @@
         [attr.aria-selected]="activeTab() === 'login'"
         [class.active]="activeTab() === 'login'"
         (click)="setTab('login')"
-      >Login</button>
+      >
+        Login
+      </button>
       <button
         role="tab"
         [attr.aria-selected]="activeTab() === 'register'"
         [class.active]="activeTab() === 'register'"
         (click)="setTab('register')"
-      >Register</button>
+      >
+        Register
+      </button>
       <button
         role="tab"
         [attr.aria-selected]="activeTab() === 'forgot'"
         [class.active]="activeTab() === 'forgot'"
         (click)="setTab('forgot')"
-      >Forgot Password</button>
+      >
+        Forgot Password
+      </button>
     </div>
 
     <div class="auth-preview-area">
-
       <!-- Login ─── -->
       @if (activeTab() === 'login') {
         <ui-lib-panel class="auth-card">
@@ -165,13 +169,25 @@
                 <label for="reg-fname" class="auth-label">First name</label>
                 <div class="auth-input-wrap">
                   <i class="pi pi-user auth-input-icon"></i>
-                  <input id="reg-fname" type="text" class="auth-input" placeholder="Jane" autocomplete="given-name" />
+                  <input
+                    id="reg-fname"
+                    type="text"
+                    class="auth-input"
+                    placeholder="Jane"
+                    autocomplete="given-name"
+                  />
                 </div>
               </div>
               <div class="auth-field">
                 <label for="reg-lname" class="auth-label">Last name</label>
                 <div class="auth-input-wrap">
-                  <input id="reg-lname" type="text" class="auth-input" placeholder="Smith" autocomplete="family-name" />
+                  <input
+                    id="reg-lname"
+                    type="text"
+                    class="auth-input"
+                    placeholder="Smith"
+                    autocomplete="family-name"
+                  />
                 </div>
               </div>
             </div>
@@ -180,7 +196,13 @@
               <label for="reg-email" class="auth-label">Email address</label>
               <div class="auth-input-wrap">
                 <i class="pi pi-envelope auth-input-icon"></i>
-                <input id="reg-email" type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+                <input
+                  id="reg-email"
+                  type="email"
+                  class="auth-input"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                />
               </div>
             </div>
 
@@ -188,7 +210,13 @@
               <label for="reg-password" class="auth-label">Password</label>
               <div class="auth-input-wrap">
                 <i class="pi pi-lock auth-input-icon"></i>
-                <input id="reg-password" type="password" class="auth-input" placeholder="Min 8 characters" autocomplete="new-password" />
+                <input
+                  id="reg-password"
+                  type="password"
+                  class="auth-input"
+                  placeholder="Min 8 characters"
+                  autocomplete="new-password"
+                />
               </div>
               <div class="auth-password-strength">
                 <div class="auth-strength-bar auth-strength-bar--weak"></div>
@@ -227,9 +255,7 @@
             <span class="auth-brand-name">MyApp</span>
           </div>
           <h2 class="auth-heading">Reset your password</h2>
-          <p class="auth-subheading">
-            Enter your email and we'll send you a reset link.
-          </p>
+          <p class="auth-subheading">Enter your email and we'll send you a reset link.</p>
 
           <div class="auth-form">
             <div class="auth-field">
@@ -256,7 +282,6 @@
           </div>
         </ui-lib-panel>
       }
-
     </div>
   </section>
 
@@ -273,5 +298,4 @@
       <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
     </div>
   </section>
-
 </app-doc-page-layout>

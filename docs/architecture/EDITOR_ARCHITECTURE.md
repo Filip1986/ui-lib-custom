@@ -3,6 +3,7 @@
 ## Goal
 
 Define a `ui-lib-editor` architecture that follows library conventions while delivering a native rich text editing baseline:
+
 - standalone + `OnPush` + `ViewEncapsulation.None`
 - signal-based inputs/outputs
 - CVA compatibility for template-driven and reactive forms
@@ -13,23 +14,23 @@ Define a `ui-lib-editor` architecture that follows library conventions while del
 
 ## Inputs (signal-based)
 
-| Input | Type | Default | Notes |
-| --- | --- | --- | --- |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Uses `ThemeConfigService.variant()` fallback when `null`. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Host class drives size styles. |
-| `placeholder` | `string` | `''` | Applied to `data-placeholder` on editable element. |
-| `readonly` | `boolean` | `false` | Sets `contenteditable="false"` and disables toolbar actions. |
-| `disabled` | `boolean` | `false` | Merged with CVA `setDisabledState`. |
-| `filled` | `boolean` | `false` | Adds filled appearance host class. |
-| `ariaLabel` | `string \| null` | `null` | Passed through to editable area. |
-| `ariaLabelledBy` | `string \| null` | `null` | Passed through to editable area. |
+| Input            | Type                                             | Default | Notes                                                        |
+| ---------------- | ------------------------------------------------ | ------- | ------------------------------------------------------------ |
+| `variant`        | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`  | Uses `ThemeConfigService.variant()` fallback when `null`.    |
+| `size`           | `'sm' \| 'md' \| 'lg'`                           | `'md'`  | Host class drives size styles.                               |
+| `placeholder`    | `string`                                         | `''`    | Applied to `data-placeholder` on editable element.           |
+| `readonly`       | `boolean`                                        | `false` | Sets `contenteditable="false"` and disables toolbar actions. |
+| `disabled`       | `boolean`                                        | `false` | Merged with CVA `setDisabledState`.                          |
+| `filled`         | `boolean`                                        | `false` | Adds filled appearance host class.                           |
+| `ariaLabel`      | `string \| null`                                 | `null`  | Passed through to editable area.                             |
+| `ariaLabelledBy` | `string \| null`                                 | `null`  | Passed through to editable area.                             |
 
 ## Outputs
 
-| Output | Type | Emitted when |
-| --- | --- | --- |
-| `textChange` | `EditorTextChangeEvent` | Editable content changes from user or programmatic updates. |
-| `selectionChange` | `EditorSelectionChangeEvent` | Browser selection changes inside the editor root. |
+| Output            | Type                         | Emitted when                                                |
+| ----------------- | ---------------------------- | ----------------------------------------------------------- |
+| `textChange`      | `EditorTextChangeEvent`      | Editable content changes from user or programmatic updates. |
+| `selectionChange` | `EditorSelectionChangeEvent` | Browser selection changes inside the editor root.           |
 
 ## Public methods
 
@@ -43,10 +44,12 @@ Define a `ui-lib-editor` architecture that follows library conventions while del
 ## Core Type Contracts
 
 Source files:
+
 - `projects/ui-lib-custom/src/lib/editor/editor.types.ts`
 - `projects/ui-lib-custom/src/lib/editor/editor.constants.ts`
 
 Key contracts:
+
 - `EditorTextChangeEvent`
 - `EditorSelectionChangeEvent`
 - `EditorToolbarState`
@@ -69,11 +72,13 @@ Key contracts:
 ## Toolbar State Tracking
 
 State refresh sources:
+
 - Document `selectionchange` (filtered to selections inside editor root)
 - Editable `input`
 - Command execution completion
 
 State refresh logic:
+
 - `document.queryCommandState()` for toggle commands:
   - `bold`, `italic`, `underline`, `strikeThrough`
   - `insertOrderedList`, `insertUnorderedList`
@@ -83,6 +88,7 @@ State refresh logic:
   - color values (`foreColor`, `backColor`) when needed for UI sync
 
 Template bindings:
+
 - Toolbar buttons bind active class to `toolbarState()` fields.
 - Toggle buttons bind `aria-pressed` to same state fields.
 - Heading select binds `[value]` to `toolbarState().blockFormat`.
@@ -104,6 +110,7 @@ Template bindings:
 ## Paste Handling
 
 Editable area listens to `paste` and performs:
+
 1. `event.preventDefault()`
 2. Read `text/html` from clipboard
 3. If HTML exists:
@@ -125,6 +132,7 @@ Placeholder remains CSS-driven:
 ```
 
 Runtime details:
+
 - Editable element gets `data-placeholder` from `placeholder()` input.
 - Browsers often keep `<br>` for empty `contenteditable`; therefore component computes `isEmpty` using `textContent?.trim() === ''`.
 - Host gets `ui-lib-editor--empty` class when computed empty state is true.
@@ -138,6 +146,7 @@ Runtime details:
 ## Host Binding Strategy
 
 A computed host class string includes:
+
 - root class
 - variant class (`ui-lib-editor--material`, `ui-lib-editor--bootstrap`, `ui-lib-editor--minimal`)
 - size class (`ui-lib-editor--size-sm`, `ui-lib-editor--size-md`, `ui-lib-editor--size-lg`)
@@ -181,6 +190,7 @@ A computed host class string includes:
 ## Variant default guidance
 
 Default values are tokenized first in `design-tokens.ts`, then mapped to CSS vars:
+
 - `material`: elevated/surface-first toolbar and stronger focus ring
 - `bootstrap`: higher border contrast and slightly denser control chrome
 - `minimal`: reduced chrome, lower shadow, neutral separators
@@ -198,8 +208,8 @@ Default values are tokenized first in `design-tokens.ts`, then mapped to CSS var
 ## Utility Module Notes
 
 `projects/ui-lib-custom/src/lib/editor/editor-sanitizer.ts` provides pure helpers:
+
 - `sanitizeHtml(html: string): string`
 - `stripHtmlTags(html: string): string`
 
 Implementation uses `DOMParser`, tag stripping, and attribute filtering. It is intentionally editor-specific so other components are not coupled to rich-text sanitization behavior.
-

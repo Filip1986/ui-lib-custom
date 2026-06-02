@@ -14,14 +14,14 @@ import { CarouselComponent } from './carousel.component';
 
 function queryElement<T extends Element>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryElements<T extends Element>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -104,7 +104,7 @@ describe('Carousel Accessibility', (): void => {
       fixture.detectChanges();
       const pauseBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-autoplay-button'
+        '.uilib-carousel-autoplay-button',
       );
       pauseBtn?.click();
       fixture.detectChanges();
@@ -157,7 +157,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const slides: HTMLElement[] = queryElements<HTMLElement>(
         fixture,
-        '.uilib-carousel-item:not(.uilib-carousel-item-clone)'
+        '.uilib-carousel-item:not(.uilib-carousel-item-clone)',
       );
       expect(slides.length).toBeGreaterThan(0);
       for (const slide of slides) {
@@ -169,7 +169,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const slides: HTMLElement[] = queryElements<HTMLElement>(
         fixture,
-        '.uilib-carousel-item:not(.uilib-carousel-item-clone)'
+        '.uilib-carousel-item:not(.uilib-carousel-item-clone)',
       );
       for (const slide of slides) {
         expect(slide.getAttribute('aria-roledescription')).toBe('slide');
@@ -180,7 +180,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const slides: HTMLElement[] = queryElements<HTMLElement>(
         fixture,
-        '.uilib-carousel-item:not(.uilib-carousel-item-clone)'
+        '.uilib-carousel-item:not(.uilib-carousel-item-clone)',
       );
       expect(slides[0]?.getAttribute('aria-label')).toBe('Slide 1 of 5');
       expect(slides[4]?.getAttribute('aria-label')).toBe('Slide 5 of 5');
@@ -190,7 +190,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const slides: HTMLElement[] = queryElements<HTMLElement>(
         fixture,
-        '.uilib-carousel-item:not(.uilib-carousel-item-clone)'
+        '.uilib-carousel-item:not(.uilib-carousel-item-clone)',
       );
       // Only first slide is active by default (numVisible=1)
       expect(slides[0]?.getAttribute('aria-hidden')).toBe('false');
@@ -205,7 +205,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const prevBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-prev-button'
+        '.uilib-carousel-prev-button',
       );
       expect(prevBtn?.getAttribute('aria-label')).toBe('Previous slide');
     });
@@ -214,7 +214,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       expect(nextBtn?.getAttribute('aria-label')).toBe('Next slide');
     });
@@ -226,11 +226,11 @@ describe('Carousel Accessibility', (): void => {
       fixture.detectChanges();
       const prevBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-prev-button'
+        '.uilib-carousel-prev-button',
       );
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       expect(prevBtn?.getAttribute('aria-label')).toBe('Vorherige Folie');
       expect(nextBtn?.getAttribute('aria-label')).toBe('Nächste Folie');
@@ -244,7 +244,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const dots: HTMLButtonElement[] = queryElements<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-indicator-button'
+        '.uilib-carousel-indicator-button',
       );
       expect(dots.length).toBeGreaterThan(0);
       expect(dots[0]?.getAttribute('aria-label')).toBe('Go to slide 1');
@@ -255,7 +255,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const dots: HTMLButtonElement[] = queryElements<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-indicator-button'
+        '.uilib-carousel-indicator-button',
       );
       expect(dots[0]?.getAttribute('aria-current')).toBe('true');
     });
@@ -264,7 +264,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const dots: HTMLButtonElement[] = queryElements<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-indicator-button'
+        '.uilib-carousel-indicator-button',
       );
       for (let i: number = 1; i < dots.length; i++) {
         expect(dots[i]?.getAttribute('aria-current')).toBeNull();
@@ -275,13 +275,13 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       nextBtn?.click();
       fixture.detectChanges();
       const dots: HTMLButtonElement[] = queryElements<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-indicator-button'
+        '.uilib-carousel-indicator-button',
       );
       expect(dots[0]?.getAttribute('aria-current')).toBeNull();
       expect(dots[1]?.getAttribute('aria-current')).toBe('true');
@@ -295,7 +295,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const pauseBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-autoplay-button'
+        '.uilib-carousel-autoplay-button',
       );
       expect(pauseBtn).toBeNull();
     });
@@ -306,7 +306,7 @@ describe('Carousel Accessibility', (): void => {
       fixture.detectChanges();
       const pauseBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-autoplay-button'
+        '.uilib-carousel-autoplay-button',
       );
       expect(pauseBtn).not.toBeNull();
     });
@@ -319,7 +319,7 @@ describe('Carousel Accessibility', (): void => {
       // directly by clicking the button (which calls toggleAutoplay)
       const pauseBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-autoplay-button'
+        '.uilib-carousel-autoplay-button',
       );
       expect(pauseBtn?.getAttribute('aria-label')).toBe('Resume autoplay');
     });
@@ -331,7 +331,7 @@ describe('Carousel Accessibility', (): void => {
       fixture.detectChanges();
       const pauseBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-autoplay-button'
+        '.uilib-carousel-autoplay-button',
       );
       expect(pauseBtn?.getAttribute('aria-label')).toBe('Wiedergabe fortsetzen');
     });
@@ -345,7 +345,7 @@ describe('Carousel Accessibility', (): void => {
       // then verify the aria-label switches to the custom pauseLabel
       const pauseBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-autoplay-button'
+        '.uilib-carousel-autoplay-button',
       );
       // Initial state: not playing, shows playLabel
       expect(pauseBtn?.getAttribute('aria-label')).toBe('Resume autoplay');
@@ -364,7 +364,7 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const dots: HTMLButtonElement[] = queryElements<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-indicator-button'
+        '.uilib-carousel-indicator-button',
       );
       expect(dots[0]?.getAttribute('tabindex')).toBe('0');
       for (let i: number = 1; i < dots.length; i++) {
@@ -376,15 +376,15 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const indicatorList: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.uilib-carousel-indicator-list'
+        '.uilib-carousel-indicator-list',
       );
       const dots: HTMLButtonElement[] = queryElements<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-indicator-button'
+        '.uilib-carousel-indicator-button',
       );
       dots[0]?.focus();
       indicatorList?.dispatchEvent(
-        new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+        new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }),
       );
       // Focus should attempt to move; in JSDOM we verify the event was processed
       expect(indicatorList).not.toBeNull();
@@ -394,16 +394,16 @@ describe('Carousel Accessibility', (): void => {
       const fixture: ComponentFixture<CarouselA11yHostComponent> = createFixture();
       const indicatorList: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.uilib-carousel-indicator-list'
+        '.uilib-carousel-indicator-list',
       );
       const dots: HTMLButtonElement[] = queryElements<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-indicator-button'
+        '.uilib-carousel-indicator-button',
       );
       dots[0]?.focus();
       expect((): void => {
         indicatorList?.dispatchEvent(
-          new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true })
+          new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }),
         );
       }).not.toThrow();
     });

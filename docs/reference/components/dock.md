@@ -13,16 +13,16 @@ Dock component — a macOS-style icon bar with a hover magnification effect. Ite
 
 ### Inputs
 
-| Name                 | Type                 | Default                            | Description                                                                                                                                                                       |
-| -------------------- | -------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`          | `string`             | `''`                               | Accessible label for the dock's `<nav>` landmark. Displayed to screen-reader users and shown in accessibility trees. Falls back to the active locale's `'dock.label'` when empty. |
-| `items`              | `DockItem[]`         | `[]`                               | Items to display in the dock.                                                                                                                                                     |
-| `magnification`      | `boolean`            | `true`                             | Whether the magnification effect is active on hover. Set to false for a static, non-animating dock.                                                                               |
-| `magnificationLevel` | `number`             | `DOCK_DEFAULT_MAGNIFICATION_LEVEL` | Maximum scale factor applied to the directly hovered item. Values between 1.2 and 2.5 work well visually.                                                                         |
-| `position`           | `DockPosition`       | `'bottom'`                         | Position of the dock relative to its container.                                                                                                                                   |
-| `size`               | `DockSize`           | `'md'`                             | Size token: sm | md | lg.                                                                                                                                                         |
-| `styleClass`         | `string | null`      | `null`                             | Extra CSS class appended to the host element.                                                                                                                                     |
-| `variant`            | `DockVariant | null` | `null`                             | Design-system variant; falls back to ThemeConfigService when null.                                                                                                                |
+| Name                 | Type           | Default                            | Description                                                                                                                                                                       |
+| -------------------- | -------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | --- |
+| `ariaLabel`          | `string`       | `''`                               | Accessible label for the dock's `<nav>` landmark. Displayed to screen-reader users and shown in accessibility trees. Falls back to the active locale's `'dock.label'` when empty. |
+| `items`              | `DockItem[]`   | `[]`                               | Items to display in the dock.                                                                                                                                                     |
+| `magnification`      | `boolean`      | `true`                             | Whether the magnification effect is active on hover. Set to false for a static, non-animating dock.                                                                               |
+| `magnificationLevel` | `number`       | `DOCK_DEFAULT_MAGNIFICATION_LEVEL` | Maximum scale factor applied to the directly hovered item. Values between 1.2 and 2.5 work well visually.                                                                         |
+| `position`           | `DockPosition` | `'bottom'`                         | Position of the dock relative to its container.                                                                                                                                   |
+| `size`               | `DockSize`     | `'md'`                             | Size token: sm                                                                                                                                                                    | md                                                                 | lg. |
+| `styleClass`         | `string        | null`                              | `null`                                                                                                                                                                            | Extra CSS class appended to the host element.                      |
+| `variant`            | `DockVariant   | null`                              | `null`                                                                                                                                                                            | Design-system variant; falls back to ThemeConfigService when null. |
 
 ### Outputs
 
@@ -118,4 +118,3 @@ _none_
 - [Demo page](/components/dock)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/dock/README.md)
-

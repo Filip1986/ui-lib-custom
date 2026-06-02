@@ -9,6 +9,7 @@ A complete, production-ready Angular UI component library with multiple design v
 ## ✅ Components Included
 
 ### 1. Button Component
+
 - **3 Design Variants**: Material, Bootstrap, Minimal
 - **3 Sizes**: Small, Medium, Large
 - **5 Colors**: Primary, Secondary, Success, Danger, Warning
@@ -16,9 +17,10 @@ A complete, production-ready Angular UI component library with multiple design v
 - **Fully typed** with TypeScript interfaces
 
 ### 2. Card Component
+
 - **3 Design Variants**: Material, Bootstrap, Minimal
 - **4 Elevation Levels**: None, Low, Medium, High
-- **Features**: 
+- **Features**:
   - Header slot (`card-header`)
   - Footer slot (`card-footer`)
   - Body content projection
@@ -86,6 +88,7 @@ D:\Work\Personal\Github\ui-lib-custom\
 ## 🎯 Current Status
 
 ### ✅ Completed
+
 - [x] Angular workspace created
 - [x] UI components library generated
 - [x] Button component with 3 variants implemented
@@ -100,7 +103,9 @@ D:\Work\Personal\Github\ui-lib-custom\
 - [x] Integration guides created
 
 ### 🎨 Demo Running
+
 **URL**: http://localhost:4200
+
 - Shows all button variants
 - Shows all card variants
 - Interactive examples
@@ -113,17 +118,20 @@ D:\Work\Personal\Github\ui-lib-custom\
 ### Option 1: npm link (Recommended for Development)
 
 **Setup (one-time):**
+
 ```bash
 cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-lib-custom
 npm link
 ```
 
 **In your Angular project:**
+
 ```bash
 npm link ui-lib-custom
 ```
 
 **Use in your component:**
+
 ```typescript
 import { Button, Card } from 'ui-lib-custom';
 
@@ -132,7 +140,7 @@ import { Button, Card } from 'ui-lib-custom';
   template: `
     <ui-lib-button variant="material" color="primary">Click Me</ui-lib-button>
     <ui-lib-card variant="material">Content here</ui-lib-card>
-  `
+  `,
 })
 export class MyComponent {}
 ```
@@ -140,6 +148,7 @@ export class MyComponent {}
 ### Option 2: Local Path
 
 **In your project's package.json:**
+
 ```json
 {
   "dependencies": {
@@ -156,6 +165,7 @@ npm publish
 ```
 
 Then in any project:
+
 ```bash
 npm install ui-lib-custom
 ```
@@ -165,6 +175,7 @@ npm install ui-lib-custom
 ## 📝 Quick Reference
 
 ### Button Usage
+
 ```html
 <!-- Variants -->
 <ui-lib-button variant="material">Material</ui-lib-button>
@@ -189,6 +200,7 @@ npm install ui-lib-custom
 ```
 
 ### Card Usage
+
 ```html
 <!-- Full Card -->
 <ui-lib-card variant="material" elevation="medium">
@@ -218,22 +230,26 @@ npm install ui-lib-custom
 ## 🛠️ Development Commands
 
 ### Rebuild Library
+
 ```bash
 cd D:\Work\Personal\Github\ui-lib-custom
 ng build ui-lib-custom
 ```
 
 ### Watch Mode (auto-rebuild)
+
 ```bash
 ng build ui-lib-custom --watch
 ```
 
 ### Run Demo
+
 ```bash
 ng serve demo
 ```
 
 ### Production Build
+
 ```bash
 ng build ui-lib-custom --configuration production
 ```
@@ -253,18 +269,21 @@ ng build ui-lib-custom --configuration production
 ## 🎨 Design Variants Explained
 
 ### Material Design
+
 - Modern, flat design
 - Elevation shadows
 - Smooth animations
 - Perfect for: Modern web apps, dashboards
 
 ### Bootstrap
+
 - Traditional Bootstrap styling
 - Subtle borders and gradients
 - Familiar look and feel
 - Perfect for: Business apps, admin panels
 
 ### Minimal
+
 - Clean, minimal design
 - Border-based
 - Content-focused
@@ -303,6 +322,7 @@ ng build ui-lib-custom --configuration production
 ## 🎉 Success!
 
 You now have a **complete, working UI component library** that:
+
 - ✅ Is built and ready to use
 - ✅ Has multiple design variants
 - ✅ Can be used in any Angular project

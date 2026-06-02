@@ -19,46 +19,46 @@ This document is based on:
 
 > Note: PrimeNG prop/template names can vary slightly by version. Names below reflect common/current API naming and should be validated against the exact PrimeNG version used for parity checks.
 
-| Feature | PrimeNG Prop / Template | Priority | Notes for `ui-lib-dialog` |
-|---|---|---|---|
-| Visible binding | `[(visible)]` | P0 | Required controlled/uncontrolled visibility contract for Angular signals + `visibleChange` output parity. |
-| Modal vs non-modal | `modal` | P0 | Required to establish overlay/backdrop behavior baseline for all future overlay components. |
-| Header projection | `header` and header template slot (`#header` / `pTemplate="header"`) | P0 | Support projected header for composition-first API shape. |
-| Footer projection | footer template slot (`#footer` / `pTemplate="footer"`) | P0 | Required action area customization; avoid button API explosion. |
-| Closable | `closable` | P0 | Required close affordance (icon/button) and emitted close reason semantics. |
-| Close on Escape | `closeOnEscape` | P0 | Use `KEYBOARD_KEYS.Escape` from `core`; must respect modal/non-modal behavior. |
-| Responsive breakpoints | `breakpoints` | P0 | Required to adapt width/max-width at runtime for demo + production usage. |
-| ARIA compliance | `role`, `aria-labelledby`, `aria-modal`, `closeAriaLabel` | P0 | Must ship with complete role/labeling strategy and keyboard expectations. |
-| Scroll lock | `blockScroll` | P0 | Required body scroll lock for modal dialogs with safe unlock lifecycle. |
-| Focus trap | `focusTrap` | P0 | Required keyboard containment and focus restoration on close. |
-| Maximizable | `maximizable` | P1 | Nice-to-have for app shell/dense data workflows; depends on robust sizing state model. |
-| Position presets (9) | `position` | P1 | Include all 9 positions to match expected overlay placement coverage. |
-| Draggable | `draggable` | P1 | Useful but adds pointer lifecycle complexity and viewport constraints. |
-| Dismissable mask | `dismissableMask` | P1 | Needs precise outside-click handling and close reason differentiation. |
-| Long content auto-scroll | typically `contentStyle` / `contentStyleClass` patterns | P1 | Provide default content max-height + overflow behavior using design tokens. |
-| Headless mode | headless template (`#headless`) | P1 | Enables fully custom markup while reusing overlay shell and behavior. |
-| Resizable | `resizable` | P2 | Defer; high interaction complexity and testing matrix. |
-| RTL behavior | inherited `rtl`/direction support | P2 | Defer explicit API; rely on document/container direction for v1 unless required by consumers. |
-| Dynamic Dialog service | `DialogService` + dynamic component loading | P2 | Defer; needs service-level overlay registry and lifecycle APIs. |
-| Append target | `appendTo` | P2 | Defer; requires portal/host abstraction and SSR-safe target resolution. |
-| Layering manager | `autoZIndex`, `baseZIndex` | P2 | Defer full public API; implement internal strategy first, expose later if needed. |
-| Keep in viewport | `keepInViewport` | P2 | Defer until draggable/resizable are in scope. |
+| Feature                  | PrimeNG Prop / Template                                              | Priority | Notes for `ui-lib-dialog`                                                                                 |
+| ------------------------ | -------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------- |
+| Visible binding          | `[(visible)]`                                                        | P0       | Required controlled/uncontrolled visibility contract for Angular signals + `visibleChange` output parity. |
+| Modal vs non-modal       | `modal`                                                              | P0       | Required to establish overlay/backdrop behavior baseline for all future overlay components.               |
+| Header projection        | `header` and header template slot (`#header` / `pTemplate="header"`) | P0       | Support projected header for composition-first API shape.                                                 |
+| Footer projection        | footer template slot (`#footer` / `pTemplate="footer"`)              | P0       | Required action area customization; avoid button API explosion.                                           |
+| Closable                 | `closable`                                                           | P0       | Required close affordance (icon/button) and emitted close reason semantics.                               |
+| Close on Escape          | `closeOnEscape`                                                      | P0       | Use `KEYBOARD_KEYS.Escape` from `core`; must respect modal/non-modal behavior.                            |
+| Responsive breakpoints   | `breakpoints`                                                        | P0       | Required to adapt width/max-width at runtime for demo + production usage.                                 |
+| ARIA compliance          | `role`, `aria-labelledby`, `aria-modal`, `closeAriaLabel`            | P0       | Must ship with complete role/labeling strategy and keyboard expectations.                                 |
+| Scroll lock              | `blockScroll`                                                        | P0       | Required body scroll lock for modal dialogs with safe unlock lifecycle.                                   |
+| Focus trap               | `focusTrap`                                                          | P0       | Required keyboard containment and focus restoration on close.                                             |
+| Maximizable              | `maximizable`                                                        | P1       | Nice-to-have for app shell/dense data workflows; depends on robust sizing state model.                    |
+| Position presets (9)     | `position`                                                           | P1       | Include all 9 positions to match expected overlay placement coverage.                                     |
+| Draggable                | `draggable`                                                          | P1       | Useful but adds pointer lifecycle complexity and viewport constraints.                                    |
+| Dismissable mask         | `dismissableMask`                                                    | P1       | Needs precise outside-click handling and close reason differentiation.                                    |
+| Long content auto-scroll | typically `contentStyle` / `contentStyleClass` patterns              | P1       | Provide default content max-height + overflow behavior using design tokens.                               |
+| Headless mode            | headless template (`#headless`)                                      | P1       | Enables fully custom markup while reusing overlay shell and behavior.                                     |
+| Resizable                | `resizable`                                                          | P2       | Defer; high interaction complexity and testing matrix.                                                    |
+| RTL behavior             | inherited `rtl`/direction support                                    | P2       | Defer explicit API; rely on document/container direction for v1 unless required by consumers.             |
+| Dynamic Dialog service   | `DialogService` + dynamic component loading                          | P2       | Defer; needs service-level overlay registry and lifecycle APIs.                                           |
+| Append target            | `appendTo`                                                           | P2       | Defer; requires portal/host abstraction and SSR-safe target resolution.                                   |
+| Layering manager         | `autoZIndex`, `baseZIndex`                                           | P2       | Defer full public API; implement internal strategy first, expose later if needed.                         |
+| Keep in viewport         | `keepInViewport`                                                     | P2       | Defer until draggable/resizable are in scope.                                                             |
 
 ## Infrastructure Inventory (Exists vs Needed)
 
-| Capability | Exists today | Needed for Dialog |
-|---|---|---|
-| Keyboard key constants | `core/shared/constants.ts` exports `KEYBOARD_KEYS` including `Escape`, `Tab` | Reuse as-is; add dialog-specific key handling contract. |
-| Signal-based controlled/uncontrolled pattern | Strong examples in `tabs.ts` and `accordion.ts` | Reuse pattern for `visible/defaultVisible` and `visibleChange`. |
-| ARIA + keyboard navigation patterns | Present in `tabs` and `accordion` | Add dialog-specific role/label/focus trap semantics. |
-| Animation approach | Accordion SCSS uses tokenized transitions and layered wrappers | Create dialog animation tokens + shared overlay motion pattern (enter/leave). |
-| Theme variant resolution | `ThemeConfigService.variant()` already used in components | Reuse for dialog variants; no immediate service API change required for variant selection. |
-| Overlay/backdrop primitives | Not present | Create overlay/backdrop primitives (container, mask, outside-click handling, close reasons). |
-| Scroll lock manager | Not present | Create reference-counted scroll lock utility to handle nested overlays safely. |
-| Focus trap utility | Not present | Create core a11y utility to cycle tab focus and restore trigger focus on close. |
-| Z-index stacking strategy | Not present | Create internal overlay stack manager (`nextLayer`, `releaseLayer`) for nested overlays and future components. |
-| Runtime breakpoint evaluator | Not present | Create media query evaluator utility (using `matchMedia` with SSR guards). |
-| Overlay design tokens | No dedicated overlay/dialog token group in `design-tokens.ts` | Add dialog/overlay token set (surface, shadow, radius, mask, motion, spacing, z-layers). |
+| Capability                                   | Exists today                                                                 | Needed for Dialog                                                                                              |
+| -------------------------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Keyboard key constants                       | `core/shared/constants.ts` exports `KEYBOARD_KEYS` including `Escape`, `Tab` | Reuse as-is; add dialog-specific key handling contract.                                                        |
+| Signal-based controlled/uncontrolled pattern | Strong examples in `tabs.ts` and `accordion.ts`                              | Reuse pattern for `visible/defaultVisible` and `visibleChange`.                                                |
+| ARIA + keyboard navigation patterns          | Present in `tabs` and `accordion`                                            | Add dialog-specific role/label/focus trap semantics.                                                           |
+| Animation approach                           | Accordion SCSS uses tokenized transitions and layered wrappers               | Create dialog animation tokens + shared overlay motion pattern (enter/leave).                                  |
+| Theme variant resolution                     | `ThemeConfigService.variant()` already used in components                    | Reuse for dialog variants; no immediate service API change required for variant selection.                     |
+| Overlay/backdrop primitives                  | Not present                                                                  | Create overlay/backdrop primitives (container, mask, outside-click handling, close reasons).                   |
+| Scroll lock manager                          | Not present                                                                  | Create reference-counted scroll lock utility to handle nested overlays safely.                                 |
+| Focus trap utility                           | Not present                                                                  | Create core a11y utility to cycle tab focus and restore trigger focus on close.                                |
+| Z-index stacking strategy                    | Not present                                                                  | Create internal overlay stack manager (`nextLayer`, `releaseLayer`) for nested overlays and future components. |
+| Runtime breakpoint evaluator                 | Not present                                                                  | Create media query evaluator utility (using `matchMedia` with SSR guards).                                     |
+| Overlay design tokens                        | No dedicated overlay/dialog token group in `design-tokens.ts`                | Add dialog/overlay token set (surface, shadow, radius, mask, motion, spacing, z-layers).                       |
 
 ## Dependency and Conflict Analysis
 
@@ -88,15 +88,15 @@ This document is based on:
 
 ## Risks and Mitigations
 
-| Risk | Impact | Likelihood | Mitigation |
-|---|---|---|---|
-| SSR breakage from direct `window`/`document` access in scroll lock, focus trap, or breakpoints | High | Medium | Inject `DOCUMENT`, derive `defaultView`, and no-op gracefully when unavailable. |
-| Focus trap edge cases (no tabbables, disabled elements, shadow DOM boundaries) | High | Medium | Implement tested tabbable-query utility + fallback to dialog container focus; add a11y unit tests. |
-| Scroll lock leak on nested dialogs | High | Medium | Reference-counted lock manager with deterministic acquire/release in lifecycle hooks. |
-| Incorrect layering for concurrent overlays | High | Medium | Central overlay stack service with monotonic z-index allocation and cleanup on destroy. |
-| Outside click false positives with drag interactions | Medium | Medium | Track pointer down/up targets and close only on true mask click path. |
-| Breakpoint listeners leaking on destroy | Medium | Medium | Encapsulate media query listeners in utility with explicit teardown; test destroy path. |
-| API creep in v1 | Medium | Medium | Keep P0 as hard scope gate; treat P1 as optional by milestone capacity. |
+| Risk                                                                                           | Impact | Likelihood | Mitigation                                                                                         |
+| ---------------------------------------------------------------------------------------------- | ------ | ---------- | -------------------------------------------------------------------------------------------------- |
+| SSR breakage from direct `window`/`document` access in scroll lock, focus trap, or breakpoints | High   | Medium     | Inject `DOCUMENT`, derive `defaultView`, and no-op gracefully when unavailable.                    |
+| Focus trap edge cases (no tabbables, disabled elements, shadow DOM boundaries)                 | High   | Medium     | Implement tested tabbable-query utility + fallback to dialog container focus; add a11y unit tests. |
+| Scroll lock leak on nested dialogs                                                             | High   | Medium     | Reference-counted lock manager with deterministic acquire/release in lifecycle hooks.              |
+| Incorrect layering for concurrent overlays                                                     | High   | Medium     | Central overlay stack service with monotonic z-index allocation and cleanup on destroy.            |
+| Outside click false positives with drag interactions                                           | Medium | Medium     | Track pointer down/up targets and close only on true mask click path.                              |
+| Breakpoint listeners leaking on destroy                                                        | Medium | Medium     | Encapsulate media query listeners in utility with explicit teardown; test destroy path.            |
+| API creep in v1                                                                                | Medium | Medium     | Keep P0 as hard scope gate; treat P1 as optional by milestone capacity.                            |
 
 ## CDK vs Custom Decision
 

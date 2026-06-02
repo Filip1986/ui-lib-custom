@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Dock"
@@ -14,12 +13,7 @@
       Hover over items to see the magnification effect; click to trigger the command.
     </p>
     <div class="demo-section__preview demo-section__preview--centered">
-      <ui-lib-dock
-        [items]="osItems"
-        position="bottom"
-        variant="material"
-        size="md"
-      />
+      <ui-lib-dock [items]="osItems" position="bottom" variant="material" size="md" />
     </div>
     <div class="demo-section__code">
       <ui-lib-code-snippet
@@ -41,12 +35,7 @@
     @for (v of variants; track v) {
       <div class="demo-section__variant-row">
         <span class="demo-section__variant-label">{{ v }}</span>
-        <ui-lib-dock
-          [items]="osItems"
-          position="bottom"
-          [variant]="v"
-          size="md"
-        />
+        <ui-lib-dock [items]="osItems" position="bottom" [variant]="v" size="md" />
       </div>
     }
 
@@ -69,12 +58,7 @@
     @for (s of sizes; track s) {
       <div class="demo-section__variant-row">
         <span class="demo-section__variant-label">{{ s }}</span>
-        <ui-lib-dock
-          [items]="osItems"
-          position="bottom"
-          variant="material"
-          [size]="s"
-        />
+        <ui-lib-dock [items]="osItems" position="bottom" variant="material" [size]="s" />
       </div>
     }
 
@@ -99,12 +83,7 @@
       @for (p of positions; track p) {
         <div class="demo-position-cell">
           <span class="demo-section__variant-label">{{ p }}</span>
-          <ui-lib-dock
-            [items]="osItems.slice(0, 5)"
-            [position]="p"
-            variant="material"
-            size="sm"
-          />
+          <ui-lib-dock [items]="osItems.slice(0, 5)" [position]="p" variant="material" size="sm" />
         </div>
       }
     </div>
@@ -122,16 +101,11 @@
   <!-- ── No magnification ───────────────────────────────────────────────────── -->
   <app-doc-section id="no-magnification" title="No Magnification">
     <p class="demo-section__description">
-      Set <code>[magnification]="false"</code> to render a static dock without the scale
-      animation — useful in compact layouts or for users who prefer reduced motion.
+      Set <code>[magnification]="false"</code> to render a static dock without the scale animation —
+      useful in compact layouts or for users who prefer reduced motion.
     </p>
     <div class="demo-section__preview demo-section__preview--centered">
-      <ui-lib-dock
-        [items]="osItems"
-        position="bottom"
-        variant="material"
-        [magnification]="false"
-      />
+      <ui-lib-dock [items]="osItems" position="bottom" variant="material" [magnification]="false" />
     </div>
     <div class="demo-section__code">
       <ui-lib-code-snippet
@@ -146,16 +120,12 @@
   <!-- ── Disabled items ─────────────────────────────────────────────────────── -->
   <app-doc-section id="disabled-items" title="Disabled Items">
     <p class="demo-section__description">
-      Individual items can be disabled by setting <code>disabled: true</code>. Disabled items
-      are styled with reduced opacity, are not interactive, and are announced to screen readers
-      via <code>aria-disabled</code>.
+      Individual items can be disabled by setting <code>disabled: true</code>. Disabled items are
+      styled with reduced opacity, are not interactive, and are announced to screen readers via
+      <code>aria-disabled</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--centered">
-      <ui-lib-dock
-        [items]="itemsWithDisabled"
-        position="bottom"
-        variant="material"
-      />
+      <ui-lib-dock [items]="itemsWithDisabled" position="bottom" variant="material" />
     </div>
     <div class="demo-section__code">
       <ui-lib-code-snippet
@@ -170,16 +140,12 @@
   <!-- ── Link items ─────────────────────────────────────────────────────────── -->
   <app-doc-section id="link-items" title="Link Items">
     <p class="demo-section__description">
-      Items with a <code>url</code> render as <code>&lt;a href&gt;</code> anchors.
-      Items with <code>routerLink</code> use Angular's router. Items with only a
-      <code>command</code> render as <code>&lt;button&gt;</code> elements.
+      Items with a <code>url</code> render as <code>&lt;a href&gt;</code> anchors. Items with
+      <code>routerLink</code> use Angular's router. Items with only a <code>command</code> render as
+      <code>&lt;button&gt;</code> elements.
     </p>
     <div class="demo-section__preview demo-section__preview--centered">
-      <ui-lib-dock
-        [items]="linkItems"
-        position="bottom"
-        variant="material"
-      />
+      <ui-lib-dock [items]="linkItems" position="bottom" variant="material" />
     </div>
     <div class="demo-section__code">
       <ui-lib-code-snippet
@@ -210,7 +176,8 @@
                 severity="primary"
                 size="sm"
                 (click)="setVariant(v)"
-              >{{ v }}</ui-lib-button>
+                >{{ v }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -225,7 +192,8 @@
                 severity="primary"
                 size="sm"
                 (click)="setSize(s)"
-              >{{ s }}</ui-lib-button>
+                >{{ s }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -240,7 +208,8 @@
                 severity="primary"
                 size="sm"
                 (click)="setPosition(p)"
-              >{{ p }}</ui-lib-button>
+                >{{ p }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -254,14 +223,16 @@
               severity="primary"
               size="sm"
               (click)="magnification.set(true)"
-            >On</ui-lib-button>
+              >On</ui-lib-button
+            >
             <ui-lib-button
               type="button"
               [appearance]="!magnification() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               (click)="magnification.set(false)"
-            >Off</ui-lib-button>
+              >Off</ui-lib-button
+            >
           </div>
         </div>
       </div>
@@ -290,7 +261,6 @@
 
   <!-- ── API ────────────────────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API">
-
     <h3 class="demo-section__subtitle">Dock Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
 
@@ -309,7 +279,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -318,7 +287,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -327,5 +296,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

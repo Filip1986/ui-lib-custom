@@ -18,7 +18,7 @@ function getHost(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getInstance(fixture: ComponentFixture<unknown>): Menu {
   return fixture.debugElement.query(
-    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Menu
+    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Menu,
   ).componentInstance as Menu;
 }
 
@@ -28,7 +28,7 @@ function getPanel(fixture: ComponentFixture<unknown>): HTMLElement | null {
 
 function getMenuLinks(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-menu__link')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-menu__link'),
   );
 }
 
@@ -208,7 +208,7 @@ describe('Menu', (): void => {
         fixture.nativeElement as HTMLElement
       ).querySelectorAll<HTMLElement>('.ui-lib-menu__item-label');
       const labelTexts: string[] = Array.from(labels).map((element: HTMLElement): string =>
-        (element.textContent as string).trim()
+        (element.textContent as string).trim(),
       );
       expect(labelTexts).toContain('Profile');
       expect(labelTexts).toContain('Settings');
@@ -226,7 +226,7 @@ describe('Menu', (): void => {
     it('should apply role="separator" to separator elements', (): void => {
       const fixture: ComponentFixture<HostComponent> = createFixture();
       const separator: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-menu__separator'
+        '.ui-lib-menu__separator',
       );
       expect(separator?.getAttribute('role')).toBe('separator');
     });
@@ -311,7 +311,7 @@ describe('Menu', (): void => {
       ]);
       const allLinks: HTMLElement[] = getMenuLinks(fixture);
       const disabledLink: HTMLElement | undefined = allLinks.find(
-        (link: HTMLElement): boolean => link.getAttribute('aria-disabled') === 'true'
+        (link: HTMLElement): boolean => link.getAttribute('aria-disabled') === 'true',
       );
       expect(disabledLink).toBeDefined();
     });

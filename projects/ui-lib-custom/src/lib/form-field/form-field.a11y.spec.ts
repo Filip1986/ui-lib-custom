@@ -159,7 +159,7 @@ describe('FormField Accessibility', (): void => {
   it('hint element renders with generated id', async (): Promise<void> => {
     const fixture: ComponentFixture<HintHostComponent> = await createFixture(HintHostComponent);
     const hintElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-hint'
+      '.ui-form-field-hint',
     ) as HTMLElement;
     expect(hintElement.id).toMatch(/^form-field-\d+-hint$/);
   });
@@ -167,7 +167,7 @@ describe('FormField Accessibility', (): void => {
   it('hint text is present for screen reader consumption', async (): Promise<void> => {
     const fixture: ComponentFixture<HintHostComponent> = await createFixture(HintHostComponent);
     const hintElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-hint'
+      '.ui-form-field-hint',
     ) as HTMLElement;
     expect((hintElement.textContent as string).trim()).toBe('Use your work email');
   });
@@ -176,7 +176,7 @@ describe('FormField Accessibility', (): void => {
     const fixture: ComponentFixture<HintHostComponent> = await createFixture(HintHostComponent);
     const inputElement: HTMLInputElement = getInputElement(fixture);
     const hintElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-hint'
+      '.ui-form-field-hint',
     ) as HTMLElement;
     expect(inputElement.getAttribute('aria-describedby')).toBe(hintElement.id);
   });
@@ -185,7 +185,7 @@ describe('FormField Accessibility', (): void => {
     const fixture: ComponentFixture<InvalidHostComponent> =
       await createFixture(InvalidHostComponent);
     const errorElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-error'
+      '.ui-form-field-error',
     ) as HTMLElement;
     expect(errorElement).toBeTruthy();
   });
@@ -194,7 +194,7 @@ describe('FormField Accessibility', (): void => {
     const fixture: ComponentFixture<InvalidHostComponent> =
       await createFixture(InvalidHostComponent);
     const errorElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-error'
+      '.ui-form-field-error',
     ) as HTMLElement;
     expect(errorElement.getAttribute('role')).toBe('alert');
   });
@@ -203,7 +203,7 @@ describe('FormField Accessibility', (): void => {
     const fixture: ComponentFixture<InvalidHostComponent> =
       await createFixture(InvalidHostComponent);
     const errorElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-error'
+      '.ui-form-field-error',
     ) as HTMLElement;
     expect(errorElement.id).toMatch(/^form-field-\d+-error$/);
   });
@@ -213,7 +213,7 @@ describe('FormField Accessibility', (): void => {
       await createFixture(InvalidHostComponent);
     const inputElement: HTMLInputElement = getInputElement(fixture);
     const errorElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-error'
+      '.ui-form-field-error',
     ) as HTMLElement;
     expect(inputElement.getAttribute('aria-describedby')?.includes(errorElement.id)).toBe(true);
   });
@@ -223,13 +223,13 @@ describe('FormField Accessibility', (): void => {
       await createFixture(InvalidHostComponent);
     const inputElement: HTMLInputElement = getInputElement(fixture);
     const hintElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-hint'
+      '.ui-form-field-hint',
     ) as HTMLElement;
     const errorElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-error'
+      '.ui-form-field-error',
     ) as HTMLElement;
     expect(inputElement.getAttribute('aria-describedby')).toBe(
-      `${hintElement.id} ${errorElement.id}`
+      `${hintElement.id} ${errorElement.id}`,
     );
   });
 
@@ -251,7 +251,7 @@ describe('FormField Accessibility', (): void => {
     const fixture: ComponentFixture<RequiredHostComponent> =
       await createFixture(RequiredHostComponent);
     const requiredIndicator: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-required-indicator'
+      '.ui-form-field-required-indicator',
     ) as HTMLElement;
     expect(requiredIndicator.getAttribute('aria-hidden')).toBe('true');
   });
@@ -289,10 +289,10 @@ describe('FormField Accessibility', (): void => {
       await createFixture(InvalidHostComponent);
     const labelElement: HTMLLabelElement = getLabelElement(fixture);
     const errorElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-error'
+      '.ui-form-field-error',
     ) as HTMLElement;
     expect(errorElement.id.split('-').slice(0, 3).join('-')).toBe(
-      labelElement.id.split('-').slice(0, 3).join('-')
+      labelElement.id.split('-').slice(0, 3).join('-'),
     );
   });
 

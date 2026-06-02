@@ -23,11 +23,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const LIB_DIR = join(ROOT, 'projects', 'ui-lib-custom', 'src', 'lib');
 
-const ALLOWLISTED_FILENAMES = new Set([
-  'design-tokens.ts',
-  'public-api.ts',
-  'index.ts',
-]);
+const ALLOWLISTED_FILENAMES = new Set(['design-tokens.ts', 'public-api.ts', 'index.ts']);
 
 const ALLOWLISTED_SUFFIXES = ['.spec.ts', '.a11y.spec.ts', '.types.ts', '.d.ts'];
 
@@ -108,7 +104,9 @@ function run() {
   }
 
   if (allViolations.length === 0) {
-    console.log(`✅ No hardcoded English strings found in ARIA/label attributes (${files.length} files checked).`);
+    console.log(
+      `✅ No hardcoded English strings found in ARIA/label attributes (${files.length} files checked).`,
+    );
     process.exit(0);
   }
 
@@ -119,7 +117,9 @@ function run() {
   console.error(
     '\nFix: expose each string as a component input so consumers can provide a translated value.',
   );
-  console.error('See docs/reference/systems/BUNDLE_BUDGET.md and Category 12 in SCORING_CRITERIA.md.');
+  console.error(
+    'See docs/reference/systems/BUNDLE_BUDGET.md and Category 12 in SCORING_CRITERIA.md.',
+  );
   process.exit(1);
 }
 

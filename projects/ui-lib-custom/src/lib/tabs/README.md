@@ -12,36 +12,36 @@
 
 ### Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual variant; inherits from `ThemeConfigService` when null |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token (also accepts `'small'`, `'medium'`, `'large'`) |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Tab list orientation |
-| `activation` | `'auto' \| 'manual'` | `'auto'` | Arrow keys either activate immediately or only move focus until `Enter` / `Space` is pressed |
-| `align` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'start'` | Alignment of tab triggers in the list |
-| `ariaLabel` | `string \| null` | `null` | Accessible label applied to the tablist when no visible heading labels it |
-| `mode` | `'default' \| 'navigation'` | `'default'` | `'navigation'` disables panel rendering for router use |
-| `selectedValue` | `TabsValue \| null` | `null` | Controlled selection by value |
-| `selectedIndex` | `number \| null` | `null` | Controlled selection by index |
-| `defaultValue` | `TabsValue \| null` | `null` | Initial selected value (uncontrolled) |
-| `defaultIndex` | `number \| null` | `null` | Initial selected index (uncontrolled) |
-| `lazy` | `boolean \| 'unmount' \| 'keep-alive'` | `false` | Global panel render strategy; overridable per tab |
-| `scrollBehavior` | `'auto' \| 'arrows'` | `'auto'` | `'arrows'` shows scroll buttons when tab list overflows |
-| `closable` | `boolean` | `false` | Adds a close button to every tab (overridable per tab) |
-| `disabled` | `boolean` | `false` | Disables all tabs |
-| `focusPanelOnSelect` | `boolean` | `false` | Moves focus into the active panel on selection |
-| `iconPosition` | `'left' \| 'top' \| 'right'` | `'left'` | Position of icon within the tab label |
-| `dir` | `'ltr' \| 'rtl' \| 'auto'` | `'auto'` | Explicit text direction; `'auto'` reads from computed styles |
+| Name                 | Type                                             | Default        | Notes                                                                                        |
+| -------------------- | ------------------------------------------------ | -------------- | -------------------------------------------------------------------------------------------- |
+| `variant`            | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`         | Visual variant; inherits from `ThemeConfigService` when null                                 |
+| `size`               | `'sm' \| 'md' \| 'lg'`                           | `'md'`         | Size token (also accepts `'small'`, `'medium'`, `'large'`)                                   |
+| `orientation`        | `'horizontal' \| 'vertical'`                     | `'horizontal'` | Tab list orientation                                                                         |
+| `activation`         | `'auto' \| 'manual'`                             | `'auto'`       | Arrow keys either activate immediately or only move focus until `Enter` / `Space` is pressed |
+| `align`              | `'start' \| 'center' \| 'end' \| 'stretch'`      | `'start'`      | Alignment of tab triggers in the list                                                        |
+| `ariaLabel`          | `string \| null`                                 | `null`         | Accessible label applied to the tablist when no visible heading labels it                    |
+| `mode`               | `'default' \| 'navigation'`                      | `'default'`    | `'navigation'` disables panel rendering for router use                                       |
+| `selectedValue`      | `TabsValue \| null`                              | `null`         | Controlled selection by value                                                                |
+| `selectedIndex`      | `number \| null`                                 | `null`         | Controlled selection by index                                                                |
+| `defaultValue`       | `TabsValue \| null`                              | `null`         | Initial selected value (uncontrolled)                                                        |
+| `defaultIndex`       | `number \| null`                                 | `null`         | Initial selected index (uncontrolled)                                                        |
+| `lazy`               | `boolean \| 'unmount' \| 'keep-alive'`           | `false`        | Global panel render strategy; overridable per tab                                            |
+| `scrollBehavior`     | `'auto' \| 'arrows'`                             | `'auto'`       | `'arrows'` shows scroll buttons when tab list overflows                                      |
+| `closable`           | `boolean`                                        | `false`        | Adds a close button to every tab (overridable per tab)                                       |
+| `disabled`           | `boolean`                                        | `false`        | Disables all tabs                                                                            |
+| `focusPanelOnSelect` | `boolean`                                        | `false`        | Moves focus into the active panel on selection                                               |
+| `iconPosition`       | `'left' \| 'top' \| 'right'`                     | `'left'`       | Position of icon within the tab label                                                        |
+| `dir`                | `'ltr' \| 'rtl' \| 'auto'`                       | `'auto'`       | Explicit text direction; `'auto'` reads from computed styles                                 |
 
 ### Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `selectedChange` | `{ value: TabsValue \| null; index: number }` | Emitted on any selection change |
-| `selectedIndexChange` | `number` | Emitted with the new selected index |
-| `navigate` | `{ value: TabsValue \| null; index: number }` | Emitted in `mode="navigation"` only |
-| `tabClose` | `{ value: TabsValue \| null; index: number }` | Emitted when a closable tab's close button is clicked |
-| `tabFocus` | `{ value: TabsValue \| null; index: number }` | Emitted when a tab trigger receives focus |
+| Name                  | Payload                                       | Notes                                                 |
+| --------------------- | --------------------------------------------- | ----------------------------------------------------- |
+| `selectedChange`      | `{ value: TabsValue \| null; index: number }` | Emitted on any selection change                       |
+| `selectedIndexChange` | `number`                                      | Emitted with the new selected index                   |
+| `navigate`            | `{ value: TabsValue \| null; index: number }` | Emitted in `mode="navigation"` only                   |
+| `tabClose`            | `{ value: TabsValue \| null; index: number }` | Emitted when a closable tab's close button is clicked |
+| `tabFocus`            | `{ value: TabsValue \| null; index: number }` | Emitted when a tab trigger receives focus             |
 
 ---
 
@@ -49,13 +49,13 @@
 
 ### Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `value` | `string \| number \| null` | `null` | Unique identifier; falls back to tab index when null |
-| `label` | `string \| null` | `null` | Tab trigger text; use `[uiLibTabLabel]` template for custom markup |
-| `disabled` | `boolean` | `false` | Disables this tab |
-| `closable` | `boolean` | `false` | Shows a close button on this tab |
-| `lazy` | `boolean \| 'unmount' \| 'keep-alive' \| undefined` | `undefined` | Per-tab override of the parent `lazy` setting |
+| Name       | Type                                                | Default     | Notes                                                              |
+| ---------- | --------------------------------------------------- | ----------- | ------------------------------------------------------------------ |
+| `value`    | `string \| number \| null`                          | `null`      | Unique identifier; falls back to tab index when null               |
+| `label`    | `string \| null`                                    | `null`      | Tab trigger text; use `[uiLibTabLabel]` template for custom markup |
+| `disabled` | `boolean`                                           | `false`     | Disables this tab                                                  |
+| `closable` | `boolean`                                           | `false`     | Shows a close button on this tab                                   |
+| `lazy`     | `boolean \| 'unmount' \| 'keep-alive' \| undefined` | `undefined` | Per-tab override of the parent `lazy` setting                      |
 
 Use `[uiLibTabLabel]` directive on an `<ng-template>` for custom label markup.
 Use `[uiLibTabContent]` directive on an `<ng-template>` for content rendered outside the default `<ng-content>` slot.
@@ -72,7 +72,12 @@ Use `[uiLibTabContent]` directive on an `<ng-template>` for content rendered out
 </ui-lib-tabs>
 
 <!-- Controlled selection with close support -->
-<ui-lib-tabs [selectedValue]="activeTab" [closable]="true" (selectedChange)="activeTab = $event.value" (tabClose)="removeTab($event)">
+<ui-lib-tabs
+  [selectedValue]="activeTab"
+  [closable]="true"
+  (selectedChange)="activeTab = $event.value"
+  (tabClose)="removeTab($event)"
+>
   <ui-lib-tab value="a" label="Tab A">Content A</ui-lib-tab>
   <ui-lib-tab value="b" label="Tab B">Content B</ui-lib-tab>
 </ui-lib-tabs>
@@ -88,13 +93,13 @@ Use `[uiLibTabContent]` directive on an `<ng-template>` for content rendered out
 
 ### Keyboard support
 
-| Key | Behavior |
-|-----|----------|
-| `Tab` | Leaves the tablist and moves focus into the active panel |
+| Key                        | Behavior                                                     |
+| -------------------------- | ------------------------------------------------------------ |
+| `Tab`                      | Leaves the tablist and moves focus into the active panel     |
 | `ArrowLeft` / `ArrowRight` | Move between horizontal tabs (wraps and skips disabled tabs) |
-| `ArrowUp` / `ArrowDown` | Move between vertical tabs (wraps and skips disabled tabs) |
-| `Home` / `End` | Jump to the first / last enabled tab |
-| `Enter` / `Space` | Activate the focused tab in manual mode |
+| `ArrowUp` / `ArrowDown`    | Move between vertical tabs (wraps and skips disabled tabs)   |
+| `Home` / `End`             | Jump to the first / last enabled tab                         |
+| `Enter` / `Space`          | Activate the focused tab in manual mode                      |
 
 ### CSS custom properties
 

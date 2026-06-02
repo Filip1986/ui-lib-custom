@@ -32,7 +32,7 @@ class TestHostComponent {
   public readonly welcomeMessage: WritableSignal<string> = signal<string>('');
   public readonly prompt: WritableSignal<string> = signal<string>('$');
   public readonly variant: WritableSignal<TerminalVariant | null> = signal<TerminalVariant | null>(
-    null
+    null,
   );
 }
 
@@ -140,7 +140,7 @@ describe('Terminal', (): void => {
   it('should not render welcome message when empty', (): void => {
     const { fixture } = setup();
     const welcome: DebugElement | null = fixture.debugElement.query(
-      By.css('.ui-lib-terminal__welcome')
+      By.css('.ui-lib-terminal__welcome'),
     );
     expect(welcome).toBeNull();
   });
@@ -209,7 +209,7 @@ describe('Terminal', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const commandText: HTMLElement = fixture.debugElement.query(
-      By.css('.ui-lib-terminal__command-text')
+      By.css('.ui-lib-terminal__command-text'),
     ).nativeElement as HTMLElement;
     expect(commandText.textContent!.trim()).toBe('whoami');
   });
@@ -231,7 +231,7 @@ describe('Terminal', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const response: DebugElement | null = fixture.debugElement.query(
-      By.css('.ui-lib-terminal__response')
+      By.css('.ui-lib-terminal__response'),
     );
     expect(response).toBeNull();
   });

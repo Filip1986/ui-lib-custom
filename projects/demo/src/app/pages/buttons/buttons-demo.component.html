@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Button"
@@ -75,9 +74,8 @@
     <h2 class="demo-section__title">Glass Shadow</h2>
     <p class="demo-section__description">
       A two-layer effect: a vivid gradient shadow offset behind a glassmorphic foreground button.
-      Hover shifts the shadow outward; active press snaps the button toward it.
-      Customize colors via <code>--uilib-button-glass-shadow-from</code> and
-      <code>--uilib-button-glass-shadow-to</code>.
+      Hover shifts the shadow outward; active press snaps the button toward it. Customize colors via
+      <code>--uilib-button-glass-shadow-from</code> and <code>--uilib-button-glass-shadow-to</code>.
     </p>
     <ui-lib-panel variant="minimal">
       <div class="buttons-demo__glass-shadow-showcase">
@@ -162,8 +160,8 @@
   <app-doc-section id="framed" title="Framed">
     <h2 class="demo-section__title">Framed</h2>
     <p class="demo-section__description">
-      A premium geometric design: solid button body framed by a thick outer border, with an
-      L-shaped offset frame that shifts on hover and snaps on press. Customize colors via
+      A premium geometric design: solid button body framed by a thick outer border, with an L-shaped
+      offset frame that shifts on hover and snaps on press. Customize colors via
       <code>--uilib-button-framed-bg</code>, <code>--uilib-button-framed-border-color</code>, and
       <code>--uilib-button-framed-frame-color</code>.
     </p>
@@ -327,8 +325,8 @@
   <!-- ── Section 6: Pill & Raised modifiers ──────────────────────────────── -->
   <app-doc-section id="pill-raised" title="Pill &amp; Raised">
     <p class="demo-section__description">
-      <code>pill</code> applies a full 999 px border-radius; <code>raised</code> adds a drop
-      shadow. Both are orthogonal modifiers that compose with any appearance or severity.
+      <code>pill</code> applies a full 999 px border-radius; <code>raised</code> adds a drop shadow.
+      Both are orthogonal modifiers that compose with any appearance or severity.
     </p>
     <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row buttons-demo__row--wrap">
@@ -681,9 +679,7 @@
             <strong>Icon-only buttons</strong> must provide <code>ariaLabel</code> — without visible
             text there is no accessible name for screen readers.
           </li>
-          <li>
-            <code>ariaPressed</code> — set on toggle buttons to communicate pressed state.
-          </li>
+          <li><code>ariaPressed</code> — set on toggle buttons to communicate pressed state.</li>
           <li>
             <code>ariaChecked</code> — use with <code>role="checkbox"</code> or
             <code>role="radio"</code>.
@@ -763,9 +759,7 @@
 
   <!-- ── Event log ─────────────────────────────────────────────────────────── -->
   <app-doc-section id="event-log" title="Event Log">
-    <p class="demo-section__description">
-      Interact with the buttons above to see events.
-    </p>
+    <p class="demo-section__description">Interact with the buttons above to see events.</p>
     <ui-lib-panel variant="minimal">
       <div class="buttons-demo__log-panel">
         @if (eventLog().length === 0) {
@@ -784,7 +778,6 @@
     </ui-lib-panel>
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -793,7 +786,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -802,5 +795,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

@@ -80,7 +80,7 @@ const TOOLBAR_ITEM_SELECTOR: string = [
 export class Toolbar {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly elementRef: ElementRef<HTMLElement> = inject(
-    ElementRef
+    ElementRef,
   ) as ElementRef<HTMLElement>;
 
   /** Unique DOM id for this toolbar instance. */
@@ -100,7 +100,7 @@ export class Toolbar {
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<ToolbarVariant> = computed<ToolbarVariant>(
-    (): ToolbarVariant => this.variant() ?? this.themeConfig.variant()
+    (): ToolbarVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Computed CSS classes applied to the host element. */
@@ -197,7 +197,7 @@ export class Toolbar {
   /** Returns all naturally interactive items within the toolbar. */
   private getToolbarItems(): HTMLElement[] {
     return Array.from(
-      this.elementRef.nativeElement.querySelectorAll<HTMLElement>(TOOLBAR_ITEM_SELECTOR)
+      this.elementRef.nativeElement.querySelectorAll<HTMLElement>(TOOLBAR_ITEM_SELECTOR),
     );
   }
 

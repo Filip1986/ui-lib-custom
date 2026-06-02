@@ -65,7 +65,7 @@ describe('Drawer Accessibility', (): void => {
   });
 
   function createHost(
-    initialState: Partial<DrawerA11yHostComponent> = {}
+    initialState: Partial<DrawerA11yHostComponent> = {},
   ): ComponentFixture<DrawerA11yHostComponent> {
     const fixture: ComponentFixture<DrawerA11yHostComponent> =
       TestBed.createComponent(DrawerA11yHostComponent);
@@ -81,7 +81,7 @@ describe('Drawer Accessibility', (): void => {
 
   function getPanel(fixture: ComponentFixture<DrawerA11yHostComponent>): HTMLElement {
     const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-drawer__panel'
+      '.ui-lib-drawer__panel',
     );
     if (!panel) {
       throw new Error('Expected drawer panel to exist.');
@@ -222,7 +222,7 @@ describe('Drawer Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-drawer'
+        'ui-lib-drawer',
       )!;
       expect(host.getAttribute('aria-hidden')).toBe('true');
     });
@@ -233,7 +233,7 @@ describe('Drawer Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-drawer'
+        'ui-lib-drawer',
       )!;
       expect(host.getAttribute('aria-hidden')).toBeNull();
     });
@@ -255,7 +255,7 @@ describe('Drawer Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const closeButton: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-drawer__close'
+        '.ui-lib-drawer__close',
       );
       expect(closeButton?.getAttribute('aria-label')).toBe('Close');
     });
@@ -268,12 +268,12 @@ describe('Drawer Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const svgIcon: SVGElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-drawer__close svg'
+        '.ui-lib-drawer__close svg',
       );
       expect(svgIcon).toBeTruthy();
 
       const piSpan: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-drawer__close .pi'
+        '.ui-lib-drawer__close .pi',
       );
       expect(piSpan).toBeNull();
     });
@@ -296,7 +296,7 @@ describe('Drawer Accessibility', (): void => {
         fixture.nativeElement as HTMLElement
       ).querySelector('.first-focusable');
       const footerAction: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.footer-action'
+        '.footer-action',
       );
 
       if (!firstFocusable || !footerAction) {
@@ -324,7 +324,7 @@ describe('Drawer Accessibility', (): void => {
         fixture.nativeElement as HTMLElement
       ).querySelector('.first-focusable');
       const footerAction: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.footer-action'
+        '.footer-action',
       );
 
       if (!firstFocusable || !footerAction) {
@@ -443,7 +443,7 @@ describe('Drawer Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const backdrop: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-drawer__backdrop'
+        '.ui-lib-drawer__backdrop',
       );
       if (!backdrop) {
         throw new Error('Expected backdrop to exist.');

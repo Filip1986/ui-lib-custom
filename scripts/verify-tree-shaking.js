@@ -122,7 +122,7 @@ const entries = [
     importPath: 'ui-lib-custom/layout',
     imports: ['Stack'],
     template: ['<ui-lib-stack>', '  <div>One</div>', '  <div>Two</div>', '</ui-lib-stack>'].join(
-      '\n'
+      '\n',
     ),
     allowed: ['layout'],
   },
@@ -209,7 +209,7 @@ function runBuild() {
   const result = childProcess.spawnSync(
     'npx',
     ['ng', 'build', 'minimal', '--named-chunks', '--stats-json'],
-    { cwd: rootDir, stdio: 'inherit', shell: true }
+    { cwd: rootDir, stdio: 'inherit', shell: true },
   );
   if (result.status !== 0) {
     throw new Error('Build failed.');

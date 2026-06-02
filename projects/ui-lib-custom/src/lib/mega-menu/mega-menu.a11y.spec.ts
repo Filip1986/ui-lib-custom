@@ -28,14 +28,14 @@ const MEGA_MENU_AXE_RULES: Record<string, { enabled: boolean }> = {
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -112,7 +112,7 @@ async function createFixture(): Promise<{
 
 async function openRootPanel(
   fixture: ComponentFixture<MegaMenuA11yHostComponent>,
-  linkIndex: number
+  linkIndex: number,
 ): Promise<void> {
   const links: HTMLElement[] = queryAllEl<HTMLElement>(fixture, '.ui-lib-mega-menu__root-link');
   dispatchKey(links[linkIndex] as HTMLElement, 'ArrowDown');
@@ -169,7 +169,7 @@ describe('MegaMenu Accessibility', (): void => {
       ({ fixture } = await createFixture());
       const items: HTMLElement[] = queryAllEl(
         fixture,
-        'ul[role="menubar"] > .ui-lib-mega-menu__root-item'
+        'ul[role="menubar"] > .ui-lib-mega-menu__root-item',
       );
       expect(items.length).toBeGreaterThan(0);
       for (const item of items) {
@@ -249,7 +249,7 @@ describe('MegaMenu Accessibility', (): void => {
       // The panel id must be a non-empty string that starts with the instance prefix
       const link: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-mega-menu__root-link[aria-controls]'
+        '.ui-lib-mega-menu__root-link[aria-controls]',
       );
       const panelId: string | null = link?.getAttribute('aria-controls') ?? null;
       expect(panelId).toBeTruthy();
@@ -308,7 +308,7 @@ describe('MegaMenu Accessibility', (): void => {
       await openRootPanel(fixture, 0);
       const disabledLinks: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-mega-menu__sub-link[aria-disabled="true"]'
+        '.ui-lib-mega-menu__sub-link[aria-disabled="true"]',
       );
       expect(disabledLinks.length).toBeGreaterThan(0);
     });
@@ -457,7 +457,7 @@ describe('MegaMenu Accessibility', (): void => {
       // Get all sub-links that are enabled in the first column
       const firstColLinks: HTMLElement[] = queryAllEl(
         fixture,
-        'ul[role="menu"]:first-of-type .ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
+        'ul[role="menu"]:first-of-type .ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
       );
       expect(firstColLinks.length).toBeGreaterThan(1);
       firstColLinks[0]?.focus();
@@ -471,7 +471,7 @@ describe('MegaMenu Accessibility', (): void => {
       await openRootPanel(fixture, 0);
       const firstColLinks: HTMLElement[] = queryAllEl(
         fixture,
-        'ul[role="menu"]:first-of-type .ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
+        'ul[role="menu"]:first-of-type .ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
       );
       expect(firstColLinks.length).toBeGreaterThan(1);
       firstColLinks[1]?.focus();
@@ -489,13 +489,13 @@ describe('MegaMenu Accessibility', (): void => {
       const col1: HTMLElement = allColumnMenus[1] as HTMLElement;
       const firstColLinks: HTMLElement[] = Array.from(
         col0.querySelectorAll<HTMLElement>(
-          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
-        )
+          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
+        ),
       );
       const secondColLinks: HTMLElement[] = Array.from(
         col1.querySelectorAll<HTMLElement>(
-          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
-        )
+          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
+        ),
       );
       firstColLinks[0]?.focus();
       dispatchKey(firstColLinks[0] as HTMLElement, 'ArrowRight');
@@ -512,13 +512,13 @@ describe('MegaMenu Accessibility', (): void => {
       const col1: HTMLElement = allColumnMenus[1] as HTMLElement;
       const firstColLinks: HTMLElement[] = Array.from(
         col0.querySelectorAll<HTMLElement>(
-          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
-        )
+          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
+        ),
       );
       const secondColLinks: HTMLElement[] = Array.from(
         col1.querySelectorAll<HTMLElement>(
-          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
-        )
+          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
+        ),
       );
       secondColLinks[0]?.focus();
       dispatchKey(secondColLinks[0] as HTMLElement, 'ArrowLeft');
@@ -531,7 +531,7 @@ describe('MegaMenu Accessibility', (): void => {
       await openRootPanel(fixture, 0);
       const subLinks: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
+        '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
       );
       expect(subLinks.length).toBeGreaterThan(0);
       dispatchKey(subLinks[0] as HTMLElement, 'Escape');
@@ -546,7 +546,7 @@ describe('MegaMenu Accessibility', (): void => {
       await openRootPanel(fixture, 0);
       const subLinks: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
+        '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
       );
       subLinks[0]?.focus();
       dispatchKey(subLinks[0] as HTMLElement, 'Escape');
@@ -565,7 +565,7 @@ describe('MegaMenu Accessibility', (): void => {
       ({ fixture } = await createFixture());
       const opened: MegaMenuItem[] = [];
       const debugEl: DebugElement = fixture.debugElement.query(
-        (de: DebugElement): boolean => de.componentInstance instanceof MegaMenu
+        (de: DebugElement): boolean => de.componentInstance instanceof MegaMenu,
       );
       const megaMenuInstance: MegaMenu = debugEl.componentInstance as MegaMenu;
       megaMenuInstance.panelOpened.subscribe((item: MegaMenuItem): void => {

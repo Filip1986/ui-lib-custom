@@ -39,4 +39,3 @@ jobs:
             } catch (error) {
               console.log(`Could not delete branch "${branch}": ${error.message}`);
             }
-

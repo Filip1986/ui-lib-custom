@@ -22,8 +22,10 @@
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
 import { join, extname } from 'path';
 
-const LIB_DIR = new URL('../projects/ui-lib-custom/src/lib', import.meta.url).pathname
-  .replace(/^\/([A-Za-z]:)/, '$1'); // fix Windows path /D:/... → D:/...
+const LIB_DIR = new URL('../projects/ui-lib-custom/src/lib', import.meta.url).pathname.replace(
+  /^\/([A-Za-z]:)/,
+  '$1',
+); // fix Windows path /D:/... → D:/...
 
 const REPLACEMENTS = [
   // margin

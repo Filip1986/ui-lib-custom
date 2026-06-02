@@ -146,7 +146,7 @@ class TwoTreesHost {
 const fixtureRefs: ComponentFixture<unknown>[] = [];
 
 async function createTreeA11yFixture(
-  configure?: (host: TreeA11yHost) => void
+  configure?: (host: TreeA11yHost) => void,
 ): Promise<ComponentFixture<TreeA11yHost>> {
   await TestBed.configureTestingModule({
     imports: [TreeA11yHost],
@@ -164,7 +164,7 @@ async function createTreeA11yFixture(
 }
 
 async function createCheckboxFixture(
-  configure?: (host: CheckboxTreeHost) => void
+  configure?: (host: CheckboxTreeHost) => void,
 ): Promise<ComponentFixture<CheckboxTreeHost>> {
   await TestBed.configureTestingModule({
     imports: [CheckboxTreeHost],
@@ -246,7 +246,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const rootItems: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => parseInt(item.getAttribute('aria-level') ?? '0', 10) === 1
+        (item: HTMLElement): boolean => parseInt(item.getAttribute('aria-level') ?? '0', 10) === 1,
       );
       expect(rootItems.length).toBeGreaterThan(0);
     });
@@ -255,7 +255,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const depth1Items: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => parseInt(item.getAttribute('aria-level') ?? '0', 10) === 2
+        (item: HTMLElement): boolean => parseInt(item.getAttribute('aria-level') ?? '0', 10) === 2,
       );
       expect(depth1Items.length).toBeGreaterThan(0);
     });
@@ -264,7 +264,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const depth2Items: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => parseInt(item.getAttribute('aria-level') ?? '0', 10) === 3
+        (item: HTMLElement): boolean => parseInt(item.getAttribute('aria-level') ?? '0', 10) === 3,
       );
       expect(depth2Items.length).toBeGreaterThan(0);
     });
@@ -293,7 +293,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const rootItems: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-level') === '1'
+        (item: HTMLElement): boolean => item.getAttribute('aria-level') === '1',
       );
       for (const item of rootItems) {
         expect(item.getAttribute('aria-setsize')).toBe('3');
@@ -304,10 +304,10 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const rootItems: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-level') === '1'
+        (item: HTMLElement): boolean => item.getAttribute('aria-level') === '1',
       );
       const positions: string[] = rootItems.map(
-        (item: HTMLElement): string => item.getAttribute('aria-posinset') ?? ''
+        (item: HTMLElement): string => item.getAttribute('aria-posinset') ?? '',
       );
       expect(positions).toContain('1');
       expect(positions).toContain('2');
@@ -318,7 +318,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const depth2Items: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-level') === '2'
+        (item: HTMLElement): boolean => item.getAttribute('aria-level') === '2',
       );
       expect(depth2Items[0]?.getAttribute('aria-posinset')).toBe('1');
     });
@@ -331,7 +331,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const expanded: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-expanded') === 'true'
+        (item: HTMLElement): boolean => item.getAttribute('aria-expanded') === 'true',
       );
       expect(expanded.length).toBeGreaterThan(0);
     });
@@ -340,7 +340,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const collapsed: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-expanded') === 'false'
+        (item: HTMLElement): boolean => item.getAttribute('aria-expanded') === 'false',
       );
       expect(collapsed.length).toBeGreaterThan(0);
     });
@@ -349,7 +349,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const leafMovies: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Movies'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Movies',
       );
       expect(leafMovies).toBeTruthy();
       expect(leafMovies?.hasAttribute('aria-expanded')).toBe(false);
@@ -369,7 +369,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture(
         (host: TreeA11yHost): void => {
           host.selectionMode.set('multiple');
-        }
+        },
       );
       const tree: HTMLElement | null = query(fixture.nativeElement as Element, 'ui-lib-tree');
       expect(tree?.getAttribute('aria-multiselectable')).toBe('true');
@@ -385,7 +385,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture(
         (host: TreeA11yHost): void => {
           host.selectionMode.set('single');
-        }
+        },
       );
       const tree: HTMLElement | null = query(fixture.nativeElement as Element, 'ui-lib-tree');
       expect(tree?.hasAttribute('aria-multiselectable')).toBe(false);
@@ -399,11 +399,11 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture(
         (host: TreeA11yHost): void => {
           host.selectionMode.set('single');
-        }
+        },
       );
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const unselected: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-selected') === 'false'
+        (item: HTMLElement): boolean => item.getAttribute('aria-selected') === 'false',
       );
       expect(unselected.length).toBeGreaterThan(0);
     });
@@ -413,11 +413,11 @@ describe('Tree — accessibility', (): void => {
         (host: TreeA11yHost): void => {
           host.selectionMode.set('single');
           host.selection.set(buildNodes()[0] as TreeNode);
-        }
+        },
       );
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const selected: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-selected') === 'true'
+        (item: HTMLElement): boolean => item.getAttribute('aria-selected') === 'true',
       );
       expect(selected.length).toBe(1);
     });
@@ -426,7 +426,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<CheckboxTreeHost> = await createCheckboxFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const withSelected: HTMLElement[] = items.filter((item: HTMLElement): boolean =>
-        item.hasAttribute('aria-selected')
+        item.hasAttribute('aria-selected'),
       );
       expect(withSelected.length).toBe(0);
     });
@@ -439,7 +439,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<CheckboxTreeHost> = await createCheckboxFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const unchecked: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-checked') === 'false'
+        (item: HTMLElement): boolean => item.getAttribute('aria-checked') === 'false',
       );
       expect(unchecked.length).toBeGreaterThan(0);
     });
@@ -450,11 +450,11 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<CheckboxTreeHost> = await createCheckboxFixture(
         (host: CheckboxTreeHost): void => {
           host.selection.set([apple]);
-        }
+        },
       );
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const checked: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-checked') === 'true'
+        (item: HTMLElement): boolean => item.getAttribute('aria-checked') === 'true',
       );
       expect(checked.length).toBeGreaterThan(0);
     });
@@ -464,7 +464,7 @@ describe('Tree — accessibility', (): void => {
       // Click Apple checkbox only → Fruits becomes partially checked
       const checkboxes: HTMLElement[] = queryAll(
         fixture.nativeElement as Element,
-        '.uilib-tree-node-checkbox'
+        '.uilib-tree-node-checkbox',
       );
       // Order: Fruits(0), Apple(1), Banana(2), Vegetables(3)
       checkboxes[1]?.click();
@@ -473,7 +473,7 @@ describe('Tree — accessibility', (): void => {
       fixture.detectChanges();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const partial: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.getAttribute('aria-checked') === 'mixed'
+        (item: HTMLElement): boolean => item.getAttribute('aria-checked') === 'mixed',
       );
       expect(partial).toBeTruthy();
     });
@@ -482,7 +482,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<CheckboxTreeHost> = await createCheckboxFixture();
       const nestedCheckboxes: HTMLElement[] = queryAll(
         fixture.nativeElement as Element,
-        '[role="checkbox"]'
+        '[role="checkbox"]',
       );
       expect(nestedCheckboxes.length).toBe(0);
     });
@@ -500,11 +500,11 @@ describe('Tree — accessibility', (): void => {
         (host: TreeA11yHost): void => {
           host.nodes.set(nodes);
           host.selectionMode.set('single');
-        }
+        },
       );
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const disabledItem: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Disabled'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Disabled',
       );
       expect(disabledItem?.getAttribute('aria-disabled')).toBe('true');
     });
@@ -513,7 +513,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture(
         (host: TreeA11yHost): void => {
           host.selectionMode.set('single');
-        }
+        },
       );
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       expect(items[0]?.hasAttribute('aria-disabled')).toBe(false);
@@ -535,7 +535,7 @@ describe('Tree — accessibility', (): void => {
       await fixture.whenStable();
 
       const trees: HTMLElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-tree')
+        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-tree'),
       );
       expect(trees.length).toBe(2);
       const id1: string | null = trees[0]!.getAttribute('id');
@@ -589,7 +589,7 @@ describe('Tree — accessibility', (): void => {
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       // Pictures is collapsed (aria-expanded="false")
       const pictures: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.getAttribute('aria-expanded') === 'false'
+        (item: HTMLElement): boolean => item.getAttribute('aria-expanded') === 'false',
       );
       expect(pictures).toBeTruthy();
       pictures!.focus();
@@ -615,7 +615,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const movies: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Movies'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Movies',
       );
       expect(movies).toBeTruthy();
       movies!.focus();
@@ -641,10 +641,10 @@ describe('Tree — accessibility', (): void => {
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       // Expenses.xlsx (level 3) → parent is Work (level 2)
       const expenses: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Expenses.xlsx'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Expenses.xlsx',
       );
       const work: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Work'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Work',
       );
       expect(expenses).toBeTruthy();
       expect(work).toBeTruthy();
@@ -658,7 +658,7 @@ describe('Tree — accessibility', (): void => {
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       // Pictures is root-level and collapsed
       const pictures: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.getAttribute('aria-expanded') === 'false'
+        (item: HTMLElement): boolean => item.getAttribute('aria-expanded') === 'false',
       );
       expect(pictures).toBeTruthy();
       pictures!.focus();
@@ -677,7 +677,7 @@ describe('Tree — accessibility', (): void => {
       items[items.length - 1]!.focus();
       dispatchKeydown(items[items.length - 1] as HTMLElement, 'd');
       const documents: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Documents'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Documents',
       );
       expect(document.activeElement).toBe(documents);
     });
@@ -688,7 +688,7 @@ describe('Tree — accessibility', (): void => {
       items[0]!.focus();
       dispatchKeydown(items[0] as HTMLElement, 'p');
       const pictures: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Pictures'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Pictures',
       );
       expect(document.activeElement).toBe(pictures);
     });
@@ -699,7 +699,7 @@ describe('Tree — accessibility', (): void => {
       items[0]!.focus();
       dispatchKeydown(items[0] as HTMLElement, 'm');
       const movies: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Movies'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Movies',
       );
       expect(document.activeElement).toBe(movies);
     });
@@ -708,10 +708,10 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       const movies: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Movies'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Movies',
       );
       const documents: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Documents'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Documents',
       );
       movies?.focus();
       dispatchKeydown(movies!, 'd');
@@ -725,7 +725,7 @@ describe('Tree — accessibility', (): void => {
       // Uppercase 'P' should still find Pictures
       dispatchKeydown(items[0] as HTMLElement, 'P');
       const pictures: HTMLElement | undefined = items.find(
-        (item: HTMLElement): boolean => item.textContent.trim() === 'Pictures'
+        (item: HTMLElement): boolean => item.textContent.trim() === 'Pictures',
       );
       expect(document.activeElement).toBe(pictures);
     });
@@ -746,10 +746,10 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const toggles: HTMLElement[] = queryAll(
         fixture.nativeElement as Element,
-        '.uilib-tree-node-toggle'
+        '.uilib-tree-node-toggle',
       );
       const expandToggle: HTMLElement | undefined = toggles.find(
-        (btn: HTMLElement): boolean => btn.getAttribute('aria-label') === 'Expand'
+        (btn: HTMLElement): boolean => btn.getAttribute('aria-label') === 'Expand',
       );
       expect(expandToggle).toBeTruthy();
     });
@@ -758,10 +758,10 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const toggles: HTMLElement[] = queryAll(
         fixture.nativeElement as Element,
-        '.uilib-tree-node-toggle'
+        '.uilib-tree-node-toggle',
       );
       const collapseToggle: HTMLElement | undefined = toggles.find(
-        (btn: HTMLElement): boolean => btn.getAttribute('aria-label') === 'Collapse'
+        (btn: HTMLElement): boolean => btn.getAttribute('aria-label') === 'Collapse',
       );
       expect(collapseToggle).toBeTruthy();
     });
@@ -770,7 +770,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const toggles: HTMLElement[] = queryAll(
         fixture.nativeElement as Element,
-        '.uilib-tree-node-toggle'
+        '.uilib-tree-node-toggle',
       );
       for (const toggle of toggles) {
         expect(toggle.getAttribute('tabindex')).toBe('-1');
@@ -794,7 +794,7 @@ describe('Tree — accessibility', (): void => {
 
       const input: HTMLElement | null = query(
         fixture.nativeElement as Element,
-        '.uilib-tree-filter-input'
+        '.uilib-tree-filter-input',
       );
       expect(input?.getAttribute('aria-label')).toBeTruthy();
 
@@ -815,7 +815,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture(
         (host: TreeA11yHost): void => {
           host.selectionMode.set('single');
-        }
+        },
       );
       await checkA11y(fixture, { rules: SKIP_TREE_STRUCTURE_RULES });
     });
@@ -824,7 +824,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture(
         (host: TreeA11yHost): void => {
           host.selectionMode.set('multiple');
-        }
+        },
       );
       await checkA11y(fixture, { rules: SKIP_TREE_STRUCTURE_RULES });
     });
@@ -838,7 +838,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<CheckboxTreeHost> = await createCheckboxFixture();
       const checkboxes: HTMLElement[] = queryAll(
         fixture.nativeElement as Element,
-        '.uilib-tree-node-checkbox'
+        '.uilib-tree-node-checkbox',
       );
       checkboxes[1]?.click(); // Check Apple only → Fruits becomes partial
       fixture.detectChanges();

@@ -10,17 +10,17 @@
 
 ### `ui-lib-icon-field`
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
+| Name           | Type                | Default  | Notes                          |
+| -------------- | ------------------- | -------- | ------------------------------ |
 | `iconPosition` | `'left' \| 'right'` | `'left'` | Which side the icon appears on |
 
 ### `ui-lib-input-icon`
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `styleClass` | `string \| null` | `null` | Renders a class-based icon span when provided |
-| `decorative` | `boolean` | `true` | Decorative icons stay `aria-hidden="true"` by default |
-| `ariaLabel` | `string \| null` | `null` | Rare escape hatch for a truly informative standalone icon |
+| Name         | Type             | Default | Notes                                                     |
+| ------------ | ---------------- | ------- | --------------------------------------------------------- |
+| `styleClass` | `string \| null` | `null`  | Renders a class-based icon span when provided             |
+| `decorative` | `boolean`        | `true`  | Decorative icons stay `aria-hidden="true"` by default     |
+| `ariaLabel`  | `string \| null` | `null`  | Rare escape hatch for a truly informative standalone icon |
 
 ## Outputs
 
@@ -57,12 +57,12 @@ _none_
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `--ui-lib-icon-field-icon-color` | `var(--uilib-muted, currentColor)` | Icon color |
-| `--ui-lib-icon-field-icon-margin` | `0.75rem` | Distance from the icon to the field edge |
-| `--ui-lib-icon-field-icon-size` | inherited | Icon size (overridden by `sm`/`lg` size context) |
-| `--ui-lib-icon-field-input-padding-with-icon` | `2.5rem` | Input side padding when an icon is present |
-| `--ui-lib-icon-field-input-padding-with-icon-sm` | `2rem` | Input side padding for `sm` fields |
-| `--ui-lib-icon-field-input-padding-with-icon-lg` | `3rem` | Input side padding for `lg` fields |
-| `--ui-lib-icon-field-icon-margin-minimal` | inherits `--ui-lib-icon-field-icon-margin` | Icon margin override for the minimal variant |
+| Variable                                         | Default                                    | Description                                      |
+| ------------------------------------------------ | ------------------------------------------ | ------------------------------------------------ |
+| `--ui-lib-icon-field-icon-color`                 | `var(--uilib-muted, currentColor)`         | Icon color                                       |
+| `--ui-lib-icon-field-icon-margin`                | `0.75rem`                                  | Distance from the icon to the field edge         |
+| `--ui-lib-icon-field-icon-size`                  | inherited                                  | Icon size (overridden by `sm`/`lg` size context) |
+| `--ui-lib-icon-field-input-padding-with-icon`    | `2.5rem`                                   | Input side padding when an icon is present       |
+| `--ui-lib-icon-field-input-padding-with-icon-sm` | `2rem`                                     | Input side padding for `sm` fields               |
+| `--ui-lib-icon-field-input-padding-with-icon-lg` | `3rem`                                     | Input side padding for `lg` fields               |
+| `--ui-lib-icon-field-icon-margin-minimal`        | inherits `--ui-lib-icon-field-icon-margin` | Icon margin override for the minimal variant     |

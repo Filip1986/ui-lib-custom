@@ -91,7 +91,7 @@ const figma = themeService.exportAsFigmaTokens();
 
 ```typescript
 customTheme: ThemeScopeConfig = {
-  colors: { primary: '#ff5722' }
+  colors: { primary: '#ff5722' },
 };
 ```
 

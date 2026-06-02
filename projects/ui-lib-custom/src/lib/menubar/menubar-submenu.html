@@ -1,15 +1,7 @@
-<ul
-  class="ui-lib-menubar__sub-list"
-  role="menu"
-  aria-orientation="vertical"
->
+<ul class="ui-lib-menubar__sub-list" role="menu" aria-orientation="vertical">
   @for (item of visibleItems(); track $index) {
     @if (item.separator) {
-      <li
-        class="ui-lib-menubar__sub-separator"
-        role="separator"
-        aria-hidden="true"
-      ></li>
+      <li class="ui-lib-menubar__sub-separator" role="separator" aria-hidden="true"></li>
     } @else {
       <li
         [class]="getSubItemClasses(item, $index)"
@@ -24,7 +16,9 @@
             role="menuitem"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
             [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
-            [attr.aria-expanded]="item.items?.length ? (activeIndex() === $index ? 'true' : 'false') : null"
+            [attr.aria-expanded]="
+              item.items?.length ? (activeIndex() === $index ? 'true' : 'false') : null
+            "
             [attr.tabindex]="item.disabled ? '-1' : '0'"
             (click)="onItemClick($event, item, $index)"
             (keydown)="onItemKeyDown($event, item, $index)"
@@ -42,7 +36,9 @@
             role="menuitem"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
             [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
-            [attr.aria-expanded]="item.items?.length ? (activeIndex() === $index ? 'true' : 'false') : null"
+            [attr.aria-expanded]="
+              item.items?.length ? (activeIndex() === $index ? 'true' : 'false') : null
+            "
             [attr.tabindex]="item.disabled ? '-1' : '0'"
             (click)="onItemClick($event, item, $index)"
             (keydown)="onItemKeyDown($event, item, $index)"

@@ -192,7 +192,7 @@ describe('Button Accessibility', (): void => {
 
   it('icon-only button: has aria-label when ariaLabel is provided', async (): Promise<void> => {
     const fixture: ComponentFixture<IconOnlyWithLabelHostComponent> = await createFixture(
-      IconOnlyWithLabelHostComponent
+      IconOnlyWithLabelHostComponent,
     );
     const btn: HTMLButtonElement = getButton(fixture);
     expect(btn.getAttribute('aria-label')).toBe('Delete item');
@@ -200,7 +200,7 @@ describe('Button Accessibility', (): void => {
 
   it('icon-only button: has fallback "Button" aria-label when ariaLabel is absent', async (): Promise<void> => {
     const fixture: ComponentFixture<IconOnlyNoLabelHostComponent> = await createFixture(
-      IconOnlyNoLabelHostComponent
+      IconOnlyNoLabelHostComponent,
     );
     const btn: HTMLButtonElement = getButton(fixture);
     expect(btn.getAttribute('aria-label')).toBe('Button');
@@ -282,14 +282,14 @@ describe('Button Accessibility', (): void => {
 
   it('loading button: uses loadingLabel as aria-label when provided', async (): Promise<void> => {
     const fixture: ComponentFixture<LoadingWithLoadingLabelHostComponent> = await createFixture(
-      LoadingWithLoadingLabelHostComponent
+      LoadingWithLoadingLabelHostComponent,
     );
     expect(getButton(fixture).getAttribute('aria-label')).toBe('Saving…');
   });
 
   it('loading button: falls back to ariaLabel when loadingLabel is absent', async (): Promise<void> => {
     const fixture: ComponentFixture<LoadingWithAriaLabelHostComponent> = await createFixture(
-      LoadingWithAriaLabelHostComponent
+      LoadingWithAriaLabelHostComponent,
     );
     expect(getButton(fixture).getAttribute('aria-label')).toBe('Submitting form');
   });
@@ -339,7 +339,7 @@ describe('Button Accessibility', (): void => {
 
   it('axe: icon-only button with aria-label passes', async (): Promise<void> => {
     const fixture: ComponentFixture<IconOnlyWithLabelHostComponent> = await createFixture(
-      IconOnlyWithLabelHostComponent
+      IconOnlyWithLabelHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });

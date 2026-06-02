@@ -246,7 +246,7 @@ describe('Card Accessibility', (): void => {
     const labelledBy: string | null = cardEl.getAttribute('aria-labelledby');
     expect(labelledBy).toBeTruthy();
     const titleEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__title'
+      '.ui-lib-card__title',
     );
     expect(titleEl).toBeTruthy();
     expect(titleEl?.id).toBe(labelledBy);
@@ -255,7 +255,7 @@ describe('Card Accessibility', (): void => {
   it('non-hoverable card with header: title div has a stable non-empty id', async (): Promise<void> => {
     const fixture: ComponentFixture<TestHostComponent> = await setup(TestHostComponent);
     const titleEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__title'
+      '.ui-lib-card__title',
     );
     expect(titleEl?.id).toMatch(/^ui-lib-card-title-\d+$/);
   });
@@ -263,7 +263,7 @@ describe('Card Accessibility', (): void => {
   it('multiple card instances: title IDs are unique', async (): Promise<void> => {
     const fixture: ComponentFixture<TwoCardHost> = await setup(TwoCardHost);
     const titles: HTMLElement[] = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-card__title')
+      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-card__title'),
     );
     expect(titles.length).toBe(2);
     expect(titles[0]?.id).toBeTruthy();
@@ -308,7 +308,7 @@ describe('Card Accessibility', (): void => {
   it('closable card: close button has an accessible label', async (): Promise<void> => {
     const fixture: ComponentFixture<ClosableCardHost> = await setup(ClosableCardHost);
     const closeIconHost: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-card__close-icon'
+      '.ui-lib-card__close-icon',
     );
     expect(closeIconHost).toBeTruthy();
     // The clickable icon renders a button child with aria-label

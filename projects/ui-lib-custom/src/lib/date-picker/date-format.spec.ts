@@ -52,7 +52,7 @@ describe('date-format', (): void => {
     it('formats timestamp tokens @ and !', (): void => {
       expect(formatDate(baseDate, '@', DEFAULT_LOCALE)).toBe(`${baseDate.getTime()}`);
       expect(formatDate(baseDate, '!', DEFAULT_LOCALE)).toBe(
-        `${baseDate.getTime() * 10000 + DATE_PICKER_FORMAT_TOKENS.DotNetTicksTo1970}`
+        `${baseDate.getTime() * 10000 + DATE_PICKER_FORMAT_TOKENS.DotNetTicksTo1970}`,
       );
     });
   });
@@ -70,7 +70,7 @@ describe('date-format', (): void => {
 
     it('supports escaped single quotes in output', (): void => {
       expect(formatDate(baseDate, "mm/dd/yy ''at'' HH:mm", DEFAULT_LOCALE)).toBe(
-        "03/14/2024 'at' HH:03"
+        "03/14/2024 'at' HH:03",
       );
     });
   });
@@ -91,10 +91,10 @@ describe('date-format', (): void => {
       const ticksFormatted: string = formatDate(baseDate, '!', DEFAULT_LOCALE);
 
       expect(toDaySignature(parseDate(unixFormatted, '@', DEFAULT_LOCALE))).toBe(
-        toDaySignature(baseDate)
+        toDaySignature(baseDate),
       );
       expect(toDaySignature(parseDate(ticksFormatted, '!', DEFAULT_LOCALE))).toBe(
-        toDaySignature(baseDate)
+        toDaySignature(baseDate),
       );
     });
 
@@ -144,10 +144,10 @@ describe('date-format', (): void => {
       expect(shortNamed).toBe('ThX Mx 14, 2024');
 
       expect(toDaySignature(parseDate(longNamed, 'DD, MM d, yy', customLocale))).toBe(
-        toDaySignature(baseDate)
+        toDaySignature(baseDate),
       );
       expect(toDaySignature(parseDate(shortNamed, 'D M d, yy', customLocale))).toBe(
-        toDaySignature(baseDate)
+        toDaySignature(baseDate),
       );
     });
   });

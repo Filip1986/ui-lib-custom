@@ -6,170 +6,152 @@
     description="A hierarchical tree chart for visualising organisational structures. Supports collapsible subtrees, single and multiple node selection, custom node templates, and three design variants."
   />
 
-    <!-- 1. Basic -->
-    <app-doc-section id="basic" title="Basic">
-      <p class="demo-section__description">
-        Pass an array of <code>OrganizationChartNode</code> objects to <code>[value]</code>. Set
-        <code>expanded: true</code> on any node to show its children by default.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-organization-chart [value]="basicNodes()" />
-      </ui-lib-panel>
-      <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-    </app-doc-section>
+  <!-- 1. Basic -->
+  <app-doc-section id="basic" title="Basic">
+    <p class="demo-section__description">
+      Pass an array of <code>OrganizationChartNode</code> objects to <code>[value]</code>. Set
+      <code>expanded: true</code> on any node to show its children by default.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-organization-chart [value]="basicNodes()" />
+    </ui-lib-panel>
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+  </app-doc-section>
 
-    <!-- 2. Collapsible -->
-    <app-doc-section id="collapsible" title="Collapsible">
-      <p class="demo-section__description">
-        Add <code>[collapsible]="true"</code> to display a toggle button on every node that has
-        children. Clicking it fires <code>(nodeExpand)</code> or <code>(nodeCollapse)</code>.
+  <!-- 2. Collapsible -->
+  <app-doc-section id="collapsible" title="Collapsible">
+    <p class="demo-section__description">
+      Add <code>[collapsible]="true"</code> to display a toggle button on every node that has
+      children. Clicking it fires <code>(nodeExpand)</code> or <code>(nodeCollapse)</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-organization-chart
+        [value]="collapsibleNodes()"
+        [collapsible]="true"
+        (nodeExpand)="onNodeExpand($event)"
+        (nodeCollapse)="onNodeCollapse($event)"
+      />
+      @if (eventLog().length > 0) {
+        <div class="demo-event-log">
+          @for (entry of eventLog(); track $index) {
+            <div class="demo-event-log__entry">{{ entry }}</div>
+          }
+        </div>
+      }
+    </ui-lib-panel>
+    <app-doc-code-example [html]="collapsibleHtml" [typescript]="collapsibleTs" />
+  </app-doc-section>
+
+  <!-- 3. Single Selection -->
+  <app-doc-section id="single-selection" title="Single Selection">
+    <p class="demo-section__description">
+      Set <code>selectionMode="single"</code> and bind <code>[(selection)]</code> to track the
+      selected node. Clicking a selected node deselects it.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-organization-chart
+        [value]="singleNodes()"
+        selectionMode="single"
+        [selection]="singleSelection()"
+        (selectionChange)="singleSelection.set($any($event))"
+        (nodeSelect)="onNodeSelect($event)"
+        (nodeUnselect)="onNodeUnselect($event)"
+      />
+      <p class="demo-selection-status">
+        Selected: <strong>{{ formatSelection(singleSelection()) }}</strong>
       </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-organization-chart
-          [value]="collapsibleNodes()"
-          [collapsible]="true"
-          (nodeExpand)="onNodeExpand($event)"
-          (nodeCollapse)="onNodeCollapse($event)"
-        />
-        @if (eventLog().length > 0) {
-          <div class="demo-event-log">
-            @for (entry of eventLog(); track $index) {
-              <div class="demo-event-log__entry">{{ entry }}</div>
-            }
+    </ui-lib-panel>
+    <app-doc-code-example [html]="singleSelectionHtml" [typescript]="singleSelectionTs" />
+  </app-doc-section>
+
+  <!-- 4. Multiple Selection -->
+  <app-doc-section id="multiple-selection" title="Multiple Selection">
+    <p class="demo-section__description">
+      Set <code>selectionMode="multiple"</code> to allow selecting several nodes simultaneously. The
+      <code>selection</code> binding holds an array.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-organization-chart
+        [value]="multipleNodes()"
+        selectionMode="multiple"
+        [selection]="multipleSelection()"
+        (selectionChange)="multipleSelection.set($any($event))"
+        (nodeSelect)="onNodeSelect($event)"
+        (nodeUnselect)="onNodeUnselect($event)"
+      />
+      <p class="demo-selection-status">
+        Selected: <strong>{{ formatSelection(multipleSelection()) }}</strong>
+      </p>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="multipleSelectionHtml" [typescript]="multipleSelectionTs" />
+  </app-doc-section>
+
+  <!-- 5. Custom Template -->
+  <app-doc-section id="custom-template" title="Custom Template">
+    <p class="demo-section__description">
+      Project an <code>&lt;ng-template uiOrgChartNode let-node&gt;</code> to replace the default
+      label rendering. The context variable exposes the full
+      <code>OrganizationChartNode</code> including any <code>data</code>
+      you attach.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-organization-chart [value]="customTemplateNodes()">
+        <ng-template uiOrgChartNode let-node>
+          <div class="demo-person-node">
+            <span class="demo-person-node__avatar">{{ initials(node.label) }}</span>
+            <strong class="demo-person-node__name">{{ node.label }}</strong>
+            <span class="demo-person-node__role">{{ node.data?.role }}</span>
           </div>
-        }
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="collapsibleHtml"
-        [typescript]="collapsibleTs"
+        </ng-template>
+      </ui-lib-organization-chart>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="customTemplateHtml" [typescript]="customTemplateTs" />
+  </app-doc-section>
+
+  <!-- 6. Bootstrap Variant -->
+  <app-doc-section id="bootstrap" title="Bootstrap Variant">
+    <p class="demo-section__description">
+      Set <code>variant="bootstrap"</code> for a flat, border-based style consistent with
+      Bootstrap-themed applications.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-organization-chart
+        [value]="bootstrapNodes()"
+        variant="bootstrap"
+        [collapsible]="true"
       />
-    </app-doc-section>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="bootstrapHtml" [typescript]="bootstrapTs" />
+  </app-doc-section>
 
-    <!-- 3. Single Selection -->
-    <app-doc-section id="single-selection" title="Single Selection">
-      <p class="demo-section__description">
-        Set <code>selectionMode="single"</code> and bind <code>[(selection)]</code> to track the
-        selected node. Clicking a selected node deselects it.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-organization-chart
-          [value]="singleNodes()"
-          selectionMode="single"
-          [selection]="singleSelection()"
-          (selectionChange)="singleSelection.set($any($event))"
-          (nodeSelect)="onNodeSelect($event)"
-          (nodeUnselect)="onNodeUnselect($event)"
-        />
-        <p class="demo-selection-status">
-          Selected: <strong>{{ formatSelection(singleSelection()) }}</strong>
-        </p>
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="singleSelectionHtml"
-        [typescript]="singleSelectionTs"
-      />
-    </app-doc-section>
+  <!-- 7. Minimal Variant -->
+  <app-doc-section id="minimal" title="Minimal Variant">
+    <p class="demo-section__description">
+      <code>variant="minimal"</code> removes all card chrome, using only dashed connector lines for
+      a lightweight look.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-organization-chart [value]="minimalNodes()" variant="minimal" [collapsible]="true" />
+    </ui-lib-panel>
+    <app-doc-code-example [html]="minimalHtml" [typescript]="minimalTs" />
+  </app-doc-section>
 
-    <!-- 4. Multiple Selection -->
-    <app-doc-section id="multiple-selection" title="Multiple Selection">
-      <p class="demo-section__description">
-        Set <code>selectionMode="multiple"</code> to allow selecting several nodes simultaneously.
-        The <code>selection</code> binding holds an array.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-organization-chart
-          [value]="multipleNodes()"
-          selectionMode="multiple"
-          [selection]="multipleSelection()"
-          (selectionChange)="multipleSelection.set($any($event))"
-          (nodeSelect)="onNodeSelect($event)"
-          (nodeUnselect)="onNodeUnselect($event)"
-        />
-        <p class="demo-selection-status">
-          Selected: <strong>{{ formatSelection(multipleSelection()) }}</strong>
-        </p>
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="multipleSelectionHtml"
-        [typescript]="multipleSelectionTs"
-      />
-    </app-doc-section>
+  <!-- 8. Accessibility -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+  </app-doc-section>
 
-    <!-- 5. Custom Template -->
-    <app-doc-section id="custom-template" title="Custom Template">
-      <p class="demo-section__description">
-        Project an <code>&lt;ng-template uiOrgChartNode let-node&gt;</code> to replace the default
-        label rendering. The context variable exposes the full
-        <code>OrganizationChartNode</code> including any <code>data</code>
-        you attach.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-organization-chart [value]="customTemplateNodes()">
-          <ng-template uiOrgChartNode let-node>
-            <div class="demo-person-node">
-              <span class="demo-person-node__avatar">{{ initials(node.label) }}</span>
-              <strong class="demo-person-node__name">{{ node.label }}</strong>
-              <span class="demo-person-node__role">{{ node.data?.role }}</span>
-            </div>
-          </ng-template>
-        </ui-lib-organization-chart>
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="customTemplateHtml"
-        [typescript]="customTemplateTs"
-      />
-    </app-doc-section>
+  <!-- 9. API Reference -->
+  <app-doc-section id="api" title="API Reference">
+    <h3 class="demo-section__subtitle">Inputs</h3>
+    <app-doc-api-reference [rows]="apiInputRows" />
+    <h3 class="demo-section__subtitle">Outputs</h3>
+    <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
+    <h3 class="demo-section__subtitle">Template Slots</h3>
+    <app-doc-api-reference [rows]="apiSlotRows" kind="name" [showDefault]="false" />
+  </app-doc-section>
 
-    <!-- 6. Bootstrap Variant -->
-    <app-doc-section id="bootstrap" title="Bootstrap Variant">
-      <p class="demo-section__description">
-        Set <code>variant="bootstrap"</code> for a flat, border-based style consistent with
-        Bootstrap-themed applications.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-organization-chart
-          [value]="bootstrapNodes()"
-          variant="bootstrap"
-          [collapsible]="true"
-        />
-      </ui-lib-panel>
-      <app-doc-code-example [html]="bootstrapHtml" [typescript]="bootstrapTs" />
-    </app-doc-section>
-
-    <!-- 7. Minimal Variant -->
-    <app-doc-section id="minimal" title="Minimal Variant">
-      <p class="demo-section__description">
-        <code>variant="minimal"</code> removes all card chrome, using only dashed connector lines
-        for a lightweight look.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-organization-chart
-          [value]="minimalNodes()"
-          variant="minimal"
-          [collapsible]="true"
-        />
-      </ui-lib-panel>
-      <app-doc-code-example [html]="minimalHtml" [typescript]="minimalTs" />
-    </app-doc-section>
-
-    <!-- 8. Accessibility -->
-    <app-doc-section id="accessibility" title="Accessibility">
-      <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
-      <app-doc-aria-table [rows]="ariaRows" />
-    </app-doc-section>
-
-    <!-- 9. API Reference -->
-    <app-doc-section id="api" title="API Reference">
-      <h3 class="demo-section__subtitle">Inputs</h3>
-      <app-doc-api-reference [rows]="apiInputRows" />
-      <h3 class="demo-section__subtitle">Outputs</h3>
-      <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
-      <h3 class="demo-section__subtitle">Template Slots</h3>
-      <app-doc-api-reference [rows]="apiSlotRows" kind="name" [showDefault]="false" />
-    </app-doc-section>
-
-
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -178,7 +160,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

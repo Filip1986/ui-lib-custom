@@ -38,7 +38,7 @@ class TestHostComponent {
   public readonly type: WritableSignal<DividerType> = signal<DividerType>('solid');
   public readonly align: WritableSignal<DividerAlign | null> = signal<DividerAlign | null>(null);
   public readonly variant: WritableSignal<DividerVariant | null> = signal<DividerVariant | null>(
-    null
+    null,
   );
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
   public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
@@ -191,7 +191,7 @@ describe('Divider', (): void => {
 
   it('should render the content div', (): void => {
     const contentDiv: Element | null = getDividerElement().querySelector(
-      '.ui-lib-divider__content'
+      '.ui-lib-divider__content',
     );
     expect(contentDiv).toBeTruthy();
   });
@@ -200,7 +200,7 @@ describe('Divider', (): void => {
     host.content.set('OR');
     fixture.detectChanges();
     const contentDiv: Element | null = getDividerElement().querySelector(
-      '.ui-lib-divider__content'
+      '.ui-lib-divider__content',
     );
     expect(contentDiv?.textContent!.trim()).toBe('OR');
   });

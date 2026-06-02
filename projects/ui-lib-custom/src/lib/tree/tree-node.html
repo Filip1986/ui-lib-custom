@@ -1,7 +1,11 @@
 <div
   class="uilib-tree-node-row"
   [class.uilib-tree-node-row--selected]="treeContext.isNodeSelected(node())"
-  [class.uilib-tree-node-row--selectable]="node().selectable !== false && treeContext.selectionMode() !== null && treeContext.selectionMode() !== 'checkbox'"
+  [class.uilib-tree-node-row--selectable]="
+    node().selectable !== false &&
+    treeContext.selectionMode() !== null &&
+    treeContext.selectionMode() !== 'checkbox'
+  "
   [class]="node().styleClass ?? ''"
   [style.padding-inline-start.px]="depth() * 20"
   [attr.id]="treeContext.getTreeItemId(node())"
@@ -11,8 +15,16 @@
   [attr.aria-setsize]="setsize()"
   [attr.aria-posinset]="posinset()"
   [attr.aria-expanded]="hasChildren() ? treeContext.isNodeExpanded(node()) : null"
-  [attr.aria-selected]="treeContext.selectionMode() !== 'checkbox' ? treeContext.isNodeSelected(node()) : null"
-  [attr.aria-checked]="treeContext.selectionMode() === 'checkbox' ? (treeContext.isNodePartiallySelected(node()) ? 'mixed' : treeContext.isNodeSelected(node())) : null"
+  [attr.aria-selected]="
+    treeContext.selectionMode() !== 'checkbox' ? treeContext.isNodeSelected(node()) : null
+  "
+  [attr.aria-checked]="
+    treeContext.selectionMode() === 'checkbox'
+      ? treeContext.isNodePartiallySelected(node())
+        ? 'mixed'
+        : treeContext.isNodeSelected(node())
+      : null
+  "
   [attr.aria-disabled]="node().selectable === false ? true : null"
   [attr.tabindex]="treeContext.getNodeTabIndex(node())"
   (click)="treeContext.handleNodeClick($event, node())"

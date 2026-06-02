@@ -58,10 +58,10 @@ describe('BottomSheet Accessibility', (): void => {
   });
 
   function createHost(
-    initialState: Partial<BottomSheetA11yHostComponent> = {}
+    initialState: Partial<BottomSheetA11yHostComponent> = {},
   ): ComponentFixture<BottomSheetA11yHostComponent> {
     const fixture: ComponentFixture<BottomSheetA11yHostComponent> = TestBed.createComponent(
-      BottomSheetA11yHostComponent
+      BottomSheetA11yHostComponent,
     );
     Object.assign(fixture.componentInstance, initialState);
     fixture.detectChanges();
@@ -75,7 +75,7 @@ describe('BottomSheet Accessibility', (): void => {
 
   function getPanel(fixture: ComponentFixture<BottomSheetA11yHostComponent>): HTMLElement {
     const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-bottom-sheet__panel'
+      '.ui-lib-bottom-sheet__panel',
     );
     if (!panel) {
       throw new Error('Expected sheet panel to exist.');
@@ -197,7 +197,7 @@ describe('BottomSheet Accessibility', (): void => {
       const panel: HTMLElement = getPanel(fixture);
       const labelledById: string | null = panel.getAttribute('aria-labelledby');
       const titleEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-bottom-sheet__title'
+        '.ui-lib-bottom-sheet__title',
       );
       expect(titleEl?.getAttribute('id')).toBe(labelledById);
     });
@@ -207,7 +207,7 @@ describe('BottomSheet Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-bottom-sheet'
+        'ui-lib-bottom-sheet',
       )!;
       expect(host.getAttribute('aria-hidden')).toBe('true');
     });
@@ -218,7 +218,7 @@ describe('BottomSheet Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-bottom-sheet'
+        'ui-lib-bottom-sheet',
       )!;
       expect(host.getAttribute('aria-hidden')).not.toBe('true');
     });
@@ -229,7 +229,7 @@ describe('BottomSheet Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const backdrop: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-bottom-sheet__backdrop'
+        '.ui-lib-bottom-sheet__backdrop',
       );
       expect(backdrop?.getAttribute('aria-hidden')).toBe('true');
     });
@@ -242,7 +242,7 @@ describe('BottomSheet Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const closeBtn: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-bottom-sheet__close'
+        '.ui-lib-bottom-sheet__close',
       );
       expect(closeBtn?.getAttribute('aria-label')).toBe('Close');
     });
@@ -255,7 +255,7 @@ describe('BottomSheet Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const icon: SVGElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-bottom-sheet__close svg'
+        '.ui-lib-bottom-sheet__close svg',
       );
       expect(icon?.getAttribute('aria-hidden')).toBe('true');
     });
@@ -286,7 +286,7 @@ describe('BottomSheet Accessibility', (): void => {
         fixture.nativeElement as HTMLElement
       ).querySelector('.first-focusable');
       const footerAction: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.footer-action'
+        '.footer-action',
       );
       if (!firstFocusable || !footerAction) {
         throw new Error('Expected focusable elements to exist.');
@@ -312,7 +312,7 @@ describe('BottomSheet Accessibility', (): void => {
         fixture.nativeElement as HTMLElement
       ).querySelector('.first-focusable');
       const footerAction: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.footer-action'
+        '.footer-action',
       );
       if (!firstFocusable || !footerAction) {
         throw new Error('Expected focusable elements to exist.');
@@ -345,7 +345,7 @@ describe('BottomSheet Accessibility', (): void => {
       document.body.appendChild(fixture.nativeElement);
 
       const trigger: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        '.sheet-trigger'
+        '.sheet-trigger',
       )!;
       trigger.focus();
 
@@ -411,7 +411,7 @@ describe('BottomSheet Accessibility', (): void => {
       const sheet2: BottomSheet = getSheetComponent(fixture2);
 
       expect((sheet1 as unknown as { titleId: string }).titleId).not.toBe(
-        (sheet2 as unknown as { titleId: string }).titleId
+        (sheet2 as unknown as { titleId: string }).titleId,
       );
     });
 

@@ -3,7 +3,9 @@
     <li
       class="ui-lib-breadcrumb__item"
       [class.ui-lib-breadcrumb__item--active]="isLastItem($index)"
-      [class]="item.styleClass ? 'ui-lib-breadcrumb__item ' + item.styleClass : 'ui-lib-breadcrumb__item'"
+      [class]="
+        item.styleClass ? 'ui-lib-breadcrumb__item ' + item.styleClass : 'ui-lib-breadcrumb__item'
+      "
     >
       <!-- Anchor with routerLink -->
       @if (item.routerLink && isClickable(item) && !isLastItem($index)) {

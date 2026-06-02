@@ -236,7 +236,7 @@ describe('Tooltip Accessibility', (): void => {
       const inBody: HTMLElement | null = document.body.querySelector(`#${directive.tooltipId}`);
       const fixtureRoot: HTMLElement = fixture.nativeElement as HTMLElement;
       const inFixture: HTMLElement | null = fixtureRoot.querySelector<HTMLElement>(
-        `#${directive.tooltipId}`
+        `#${directive.tooltipId}`,
       );
       expect(inBody).not.toBeNull();
       expect(inFixture).toBeNull();

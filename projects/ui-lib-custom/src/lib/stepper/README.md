@@ -56,19 +56,19 @@ import type {
 
 ## Stepper inputs
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `activeStep` | `number` | `0` | Active step index (0-based). Two-way bindable with `[(activeStep)]`. |
-| `linear` | `boolean` | `false` | When true, users must progress sequentially; skipping is blocked. |
-| `ariaLabel` | `string` | `'Progress'` | Accessible label announced for the step navigation container. |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout orientation. |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual variant. Falls back to ThemeConfigService when null. |
-| `styleClass` | `string \| null` | `null` | Additional CSS classes for the host element. |
+| Input         | Type                                             | Default        | Description                                                          |
+| ------------- | ------------------------------------------------ | -------------- | -------------------------------------------------------------------- |
+| `activeStep`  | `number`                                         | `0`            | Active step index (0-based). Two-way bindable with `[(activeStep)]`. |
+| `linear`      | `boolean`                                        | `false`        | When true, users must progress sequentially; skipping is blocked.    |
+| `ariaLabel`   | `string`                                         | `'Progress'`   | Accessible label announced for the step navigation container.        |
+| `orientation` | `'horizontal' \| 'vertical'`                     | `'horizontal'` | Layout orientation.                                                  |
+| `variant`     | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`         | Visual variant. Falls back to ThemeConfigService when null.          |
+| `styleClass`  | `string \| null`                                 | `null`         | Additional CSS classes for the host element.                         |
 
 ## Stepper outputs
 
-| Output | Payload | Description |
-|---|---|---|
+| Output       | Payload           | Description                                                                                    |
+| ------------ | ----------------- | ---------------------------------------------------------------------------------------------- |
 | `stepChange` | `StepChangeEvent` | Emitted when the active step changes. Payload: `{ activeStep: number, previousStep: number }`. |
 
 `[(activeStep)]` also provides the standard Angular model output `(activeStepChange)`.
@@ -77,22 +77,22 @@ import type {
 
 Call via template reference (`#stepper`):
 
-| Method | Description |
-|---|---|
-| `nextStep()` | Advances to the next step if one exists. |
-| `prevStep()` | Returns to the previous step. |
-| `goToStep(index)` | Navigates directly to the given step index. |
-| `isFirstStep()` | Returns true when on the first step. |
-| `isLastStep()` | Returns true when on the last step. |
-| `stepId(index)` | Returns the stable DOM id for a step header/tab. |
+| Method            | Description                                      |
+| ----------------- | ------------------------------------------------ |
+| `nextStep()`      | Advances to the next step if one exists.         |
+| `prevStep()`      | Returns to the previous step.                    |
+| `goToStep(index)` | Navigates directly to the given step index.      |
+| `isFirstStep()`   | Returns true when on the first step.             |
+| `isLastStep()`    | Returns true when on the last step.              |
+| `stepId(index)`   | Returns the stable DOM id for a step header/tab. |
 
 ## StepperPanel inputs
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `header` | `string` | `''` | Text label for the step header. |
-| `disabled` | `boolean` | `false` | Prevents navigation to this step. |
-| `error` | `boolean` | `false` | Marks the step as invalid and announces an error state to assistive technology. |
+| Input      | Type      | Default | Description                                                                     |
+| ---------- | --------- | ------- | ------------------------------------------------------------------------------- |
+| `header`   | `string`  | `''`    | Text label for the step header.                                                 |
+| `disabled` | `boolean` | `false` | Prevents navigation to this step.                                               |
+| `error`    | `boolean` | `false` | Marks the step as invalid and announces an error state to assistive technology. |
 
 ## Step metadata
 
@@ -111,11 +111,11 @@ interface StepperItem {
 
 Content is projected via `ng-template` with named template reference variables:
 
-| Template variable | Description |
-|---|---|
-| `#stepperContent` | Main body content rendered in the active step's panel area. |
-| `#stepperFooter` | Footer area — typically Back/Next navigation buttons. |
-| `#stepperHeader` | Custom HTML label for the step header (overrides `header` input). |
+| Template variable | Description                                                       |
+| ----------------- | ----------------------------------------------------------------- |
+| `#stepperContent` | Main body content rendered in the active step's panel area.       |
+| `#stepperFooter`  | Footer area — typically Back/Next navigation buttons.             |
+| `#stepperHeader`  | Custom HTML label for the step header (overrides `header` input). |
 
 ## Variants
 
@@ -128,17 +128,13 @@ Content is projected via `ng-template` with named template reference variables:
 ## Vertical orientation
 
 ```html
-<ui-lib-stepper orientation="vertical">
-  ...
-</ui-lib-stepper>
+<ui-lib-stepper orientation="vertical"> ... </ui-lib-stepper>
 ```
 
 ## Linear mode
 
 ```html
-<ui-lib-stepper [linear]="true" [(activeStep)]="step">
-  ...
-</ui-lib-stepper>
+<ui-lib-stepper [linear]="true" [(activeStep)]="step"> ... </ui-lib-stepper>
 ```
 
 In linear mode, future steps are announced with `aria-disabled="true"`, removed from pointer interaction,
@@ -162,24 +158,24 @@ between steps. In linear mode, future tabs remain visibly present but are disabl
 
 ## Keyboard support
 
-| Key | Behavior |
-|---|---|
-| `Tab` / `Shift+Tab` | Moves focus into or out of the active step tab. |
+| Key                        | Behavior                                                        |
+| -------------------------- | --------------------------------------------------------------- |
+| `Tab` / `Shift+Tab`        | Moves focus into or out of the active step tab.                 |
 | `ArrowRight` / `ArrowLeft` | In horizontal mode, moves to the next/previous accessible step. |
-| `ArrowDown` / `ArrowUp` | In vertical mode, moves to the next/previous accessible step. |
-| `Home` | Jumps to the first accessible step. |
-| `End` | Jumps to the last accessible step. |
+| `ArrowDown` / `ArrowUp`    | In vertical mode, moves to the next/previous accessible step.   |
+| `Home`                     | Jumps to the first accessible step.                             |
+| `End`                      | Jumps to the last accessible step.                              |
 
 ## CSS custom properties
 
-| Property | Description |
-|---|---|
-| `--uilib-stepper-indicator-size` | Size of the step number circle (default: `2rem`). |
-| `--uilib-stepper-indicator-bg-active` | Background of the active step indicator. |
-| `--uilib-stepper-indicator-bg-completed` | Background of completed step indicators. |
-| `--uilib-stepper-indicator-bg-error` | Background of error step indicators. |
-| `--uilib-stepper-label-color-active` | Label colour for the active step. |
-| `--uilib-stepper-label-color-error` | Label colour for errored steps. |
-| `--uilib-stepper-separator-color` | Colour of the connector line between steps. |
-| `--uilib-stepper-separator-thickness` | Thickness of the connector line (default: `2px`). |
-| `--uilib-stepper-content-padding` | Padding around step content area. |
+| Property                                 | Description                                       |
+| ---------------------------------------- | ------------------------------------------------- |
+| `--uilib-stepper-indicator-size`         | Size of the step number circle (default: `2rem`). |
+| `--uilib-stepper-indicator-bg-active`    | Background of the active step indicator.          |
+| `--uilib-stepper-indicator-bg-completed` | Background of completed step indicators.          |
+| `--uilib-stepper-indicator-bg-error`     | Background of error step indicators.              |
+| `--uilib-stepper-label-color-active`     | Label colour for the active step.                 |
+| `--uilib-stepper-label-color-error`      | Label colour for errored steps.                   |
+| `--uilib-stepper-separator-color`        | Colour of the connector line between steps.       |
+| `--uilib-stepper-separator-thickness`    | Thickness of the connector line (default: `2px`). |
+| `--uilib-stepper-content-padding`        | Padding around step content area.                 |

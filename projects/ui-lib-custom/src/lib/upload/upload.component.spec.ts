@@ -16,14 +16,14 @@ import type {
 
 function queryElement<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllElements<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -172,15 +172,15 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
       const chooseBtn: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__btn--choose'
+        '.ui-lib-upload__btn--choose',
       );
       const uploadBtn: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__btn--upload'
+        '.ui-lib-upload__btn--upload',
       );
       const cancelBtn: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__btn--cancel'
+        '.ui-lib-upload__btn--cancel',
       );
       expect(chooseBtn).toBeTruthy();
       expect(uploadBtn).toBeTruthy();
@@ -193,7 +193,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
       const emptyEl: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__empty'
+        '.ui-lib-upload__empty',
       );
       expect(emptyEl).toBeTruthy();
     });
@@ -262,7 +262,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
       const chooseBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.ui-lib-upload__btn--choose'
+        '.ui-lib-upload__btn--choose',
       );
       expect(chooseBtn?.disabled).toBe(true);
     });
@@ -278,7 +278,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
       const uploadBtn: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__btn--upload'
+        '.ui-lib-upload__btn--upload',
       );
       expect(uploadBtn).toBeNull();
     });
@@ -290,7 +290,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
       const cancelBtn: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__btn--cancel'
+        '.ui-lib-upload__btn--cancel',
       );
       expect(cancelBtn).toBeNull();
     });
@@ -306,7 +306,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
       const chooseBtn: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__btn--choose'
+        '.ui-lib-upload__btn--choose',
       );
       expect((chooseBtn?.textContent ?? '').trim()).toContain('Browse');
     });
@@ -318,7 +318,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
       const emptyMsg: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__empty-message'
+        '.ui-lib-upload__empty-message',
       );
       expect((emptyMsg?.textContent ?? '').trim()).toBe('Drop your files here');
     });
@@ -333,7 +333,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       const fakeFile: File = createFakeFile('test.pdf', 1024, 'application/pdf');
@@ -347,7 +347,7 @@ describe('UploadComponent', (): void => {
 
       const fileItems: HTMLElement[] = queryAllElements<HTMLElement>(
         fixture,
-        '.ui-lib-upload__file-item'
+        '.ui-lib-upload__file-item',
       );
       expect(fileItems.length).toBe(1);
     });
@@ -358,7 +358,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       const fakeFile: File = createFakeFile('my-document.pdf', 2048, 'application/pdf');
@@ -371,7 +371,7 @@ describe('UploadComponent', (): void => {
 
       const nameEl: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__file-name'
+        '.ui-lib-upload__file-name',
       );
       expect((nameEl?.textContent ?? '').trim()).toBe('my-document.pdf');
     });
@@ -382,13 +382,13 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       const fakeFile: File = createFakeFile(
         'report.xlsx',
         500,
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       );
       const fakeEvent: Event = new Event('change');
 
@@ -413,7 +413,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       const oversizedFile: File = createFakeFile('large.pdf', 5000, 'application/pdf');
@@ -426,7 +426,7 @@ describe('UploadComponent', (): void => {
 
       const messagesEl: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__messages'
+        '.ui-lib-upload__messages',
       );
       expect(messagesEl).toBeTruthy();
     });
@@ -438,7 +438,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       const pdfFile: File = createFakeFile('doc.pdf', 512, 'application/pdf');
@@ -451,7 +451,7 @@ describe('UploadComponent', (): void => {
 
       const messagesEl: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__messages'
+        '.ui-lib-upload__messages',
       );
       expect(messagesEl).toBeTruthy();
     });
@@ -463,7 +463,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       const oversizedFile: File = createFakeFile('big.zip', 5000, 'application/zip');
@@ -479,7 +479,7 @@ describe('UploadComponent', (): void => {
 
       const messagesEl: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__messages'
+        '.ui-lib-upload__messages',
       );
       expect(messagesEl).toBeNull();
     });
@@ -494,7 +494,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       const fakeFile: File = createFakeFile('remove-me.txt', 100, 'text/plain');
@@ -525,7 +525,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       const fakeFile: File = createFakeFile('clear-me.txt', 100, 'text/plain');
@@ -554,7 +554,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       const fakeFile: File = createFakeFile('upload.csv', 200, 'text/csv');
@@ -580,7 +580,7 @@ describe('UploadComponent', (): void => {
         TestBed.createComponent(DefaultHostComponent);
       fixture.detectChanges();
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
       expect(componentInstance.formatSize(0)).toBe('0 B');
     });
@@ -590,7 +590,7 @@ describe('UploadComponent', (): void => {
         TestBed.createComponent(DefaultHostComponent);
       fixture.detectChanges();
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
       expect(componentInstance.formatSize(1024)).toBe('1.0 KB');
     });
@@ -600,7 +600,7 @@ describe('UploadComponent', (): void => {
         TestBed.createComponent(DefaultHostComponent);
       fixture.detectChanges();
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
       expect(componentInstance.formatSize(1048576)).toBe('1.0 MB');
     });
@@ -624,7 +624,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
       const defaultHeader: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__header'
+        '.ui-lib-upload__header',
       );
       expect(defaultHeader).toBeNull();
     });
@@ -646,7 +646,7 @@ describe('UploadComponent', (): void => {
         TestBed.createComponent(DefaultHostComponent);
       fixture.detectChanges();
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
       const imageFile: File = createFakeFile('photo.jpg', 512, 'image/jpeg');
       expect(componentInstance.isImage(imageFile)).toBe(true);
@@ -657,7 +657,7 @@ describe('UploadComponent', (): void => {
         TestBed.createComponent(DefaultHostComponent);
       fixture.detectChanges();
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
       const pdfFile: File = createFakeFile('doc.pdf', 512, 'application/pdf');
       expect(componentInstance.isImage(pdfFile)).toBe(false);
@@ -673,7 +673,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
       const toolbar: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__toolbar'
+        '.ui-lib-upload__toolbar',
       );
       expect(toolbar?.getAttribute('role')).toBe('toolbar');
     });
@@ -684,7 +684,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
       const content: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__content'
+        '.ui-lib-upload__content',
       );
       expect(content?.getAttribute('role')).toBe('region');
     });
@@ -695,7 +695,7 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       const fakeFile: File = createFakeFile('a11y-test.txt', 100, 'text/plain');
@@ -708,7 +708,7 @@ describe('UploadComponent', (): void => {
 
       const fileList: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-upload__file-list'
+        '.ui-lib-upload__file-list',
       );
       expect(fileList?.getAttribute('role')).toBe('list');
     });
@@ -719,17 +719,17 @@ describe('UploadComponent', (): void => {
       fixture.detectChanges();
 
       const componentInstance: UploadComponent = fixture.debugElement.query(
-        By.directive(UploadComponent)
+        By.directive(UploadComponent),
       ).componentInstance as UploadComponent;
 
       componentInstance.addFiles([new File([''], 'test.txt', { type: 'text/plain' })]);
       fixture.detectChanges();
 
       const removeButtons: HTMLElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('[aria-label]')
+        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('[aria-label]'),
       ).filter(
         (el: HTMLElement): boolean =>
-          el.tagName === 'BUTTON' && (el.getAttribute('aria-label') ?? '').length > 0
+          el.tagName === 'BUTTON' && (el.getAttribute('aria-label') ?? '').length > 0,
       );
       expect(removeButtons.length).toBeGreaterThan(0);
     });

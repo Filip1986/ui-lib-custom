@@ -225,7 +225,7 @@ function cleanupFixture(fixture: ComponentFixture<unknown>): void {
 
 function getListboxEl(fixture: ComponentFixture<unknown>): HTMLElement {
   const el: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '[role="listbox"]'
+    '[role="listbox"]',
   );
   if (!el) throw new Error('Expected listbox element');
   return el;
@@ -237,17 +237,17 @@ function getItemEls(fixture: ComponentFixture<unknown>): NodeListOf<HTMLElement>
 
 function getControlBtns(fixture: ComponentFixture<unknown>): NodeListOf<HTMLButtonElement> {
   return (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>(
-    '.ui-lib-order-list__control-btn'
+    '.ui-lib-order-list__control-btn',
   );
 }
 
 function dispatchKeyOnListbox(
   fixture: ComponentFixture<unknown>,
   key: string,
-  options: KeyboardEventInit = {}
+  options: KeyboardEventInit = {},
 ): void {
   getListboxEl(fixture).dispatchEvent(
-    new KeyboardEvent('keydown', { key, bubbles: true, ...options })
+    new KeyboardEvent('keydown', { key, bubbles: true, ...options }),
   );
   fixture.detectChanges();
 }
@@ -685,7 +685,7 @@ describe('OrderList — Empty state ARIA structure', (): void => {
 
   it('empty state should be rendered outside the listbox as a <p> element', (): void => {
     const emptyEl: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-order-list__empty'
+      '.ui-lib-order-list__empty',
     );
     expect(emptyEl).toBeTruthy();
     expect(emptyEl!.tagName.toLowerCase()).toBe('p');
@@ -693,7 +693,7 @@ describe('OrderList — Empty state ARIA structure', (): void => {
 
   it('empty state should have aria-live="polite"', (): void => {
     const emptyEl: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-order-list__empty'
+      '.ui-lib-order-list__empty',
     );
     expect(emptyEl!.getAttribute('aria-live')).toBe('polite');
   });

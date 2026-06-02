@@ -55,7 +55,7 @@ function makeItems(count: number): DemoItem[] {
       label: `Item ${(index + 1).toString()}`,
       description: `Description for item ${(index + 1).toString()} — index ${index.toString()}`,
       color: COLORS[index % COLORS.length] as string,
-    })
+    }),
   );
 }
 
@@ -65,7 +65,7 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
     (_: unknown, index: number): LazyDemoItem => ({
       id: first + index,
       label: `Lazy Item ${(first + index + 1).toString()}`,
-    })
+    }),
   );
 }
 
@@ -218,7 +218,7 @@ export class ScrollerDemoComponent {
   <ng-template uiScrollerItem let-item>
     <div class="item">{{ item.label }}</div>
   </ng-template>
-</ui-lib-virtual-scroller>`
+</ui-lib-virtual-scroller>`,
   );
 
   protected readonly demoCodeTs: Signal<string> = computed(
@@ -241,7 +241,7 @@ export class MyComponent {
     id: index,
     label: \`Item \${index + 1}\`,
   }));
-}`
+}`,
   );
 
   public readonly apiRows: readonly ApiPropRow[] = [

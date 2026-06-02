@@ -170,9 +170,9 @@ The emotional reaction matters. People should:
 
 The library should create whispers in developer communities:
 
-> *"This is different."*
-> *"This feels amazing."*
-> *"This changes Angular UI development."*
+> _"This is different."_
+> _"This feels amazing."_
+> _"This changes Angular UI development."_
 
 ---
 
@@ -251,7 +251,7 @@ The foundation is comprehensive. The focus is now on depth, not breadth — evol
 **✅ Shipped (70+ components across all categories)**
 
 | Category                   | Components                                                                                                                                                           |
-|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Core inputs**            | Button, Input, Textarea, Select, Checkbox, RadioButton, ToggleButton, ToggleSwitch, SelectButton, InputNumber, InputMask, InputOtp, Rating, Knob, KeyFilter          |
 | **Layout**                 | Layout primitives (Stack / Inline / Grid / Container), Divider, Toolbar, Fluid, Fieldset, Panel, ScrollPanel                                                         |
 | **Overlay & modal**        | Dialog, DynamicDialog, Drawer, BottomSheet, Popover, Tooltip, ConfirmDialog, ConfirmPopup                                                                            |
@@ -262,20 +262,20 @@ The foundation is comprehensive. The focus is now on depth, not breadth — evol
 
 **🔧 Active backlog**
 
-| Item                                                                   | Type             |
-|------------------------------------------------------------------------|------------------|
-| Component v2 evolution — quality scorecard pass on existing components | Hardening        |
-| Documentation completeness — Input, Select, Card, Layout gaps          | Documentation    |
-| Pending secondary entry points — `icon-button`, `alert`                | Infrastructure   |
-| Overlay `appendTo` / z-index manager                                   | Infrastructure   |
-| `knip` dead-code baseline + constants extraction pass                  | Cleanup          |
-| Storybook integration                                                  | DX               |
-| Broader axe-core audit                                                 | Accessibility    |
+| Item                                                                   | Type           |
+| ---------------------------------------------------------------------- | -------------- |
+| Component v2 evolution — quality scorecard pass on existing components | Hardening      |
+| Documentation completeness — Input, Select, Card, Layout gaps          | Documentation  |
+| Pending secondary entry points — `icon-button`, `alert`                | Infrastructure |
+| Overlay `appendTo` / z-index manager                                   | Infrastructure |
+| `knip` dead-code baseline + constants extraction pass                  | Cleanup        |
+| Storybook integration                                                  | DX             |
+| Broader axe-core audit                                                 | Accessibility  |
 
 **🔭 Horizon**
 
 | Item                       | Type      |
-|----------------------------|-----------|
+| -------------------------- | --------- |
 | Runtime variant switcher   | Theming   |
 | Theme preset management    | Theming   |
 | Command Palette            | Component |
@@ -309,7 +309,7 @@ Most libraries stop at layer 1 or 2.
 For every component, follow this operating system:
 
 | Step | Action                                                             |
-|------|--------------------------------------------------------------------|
+| ---- | ------------------------------------------------------------------ |
 | 1    | **Analyze** — understand requirements, API surface, and edge cases |
 | 2    | **Refactor** — clean up structure, naming, and internal design     |
 | 3    | **Harden** — tests, types, error states, boundary conditions       |
@@ -317,7 +317,7 @@ For every component, follow this operating system:
 | 5    | **Document** — README, reference doc, inline examples              |
 | 6    | **Benchmark** — bundle size, render cost, re-render frequency      |
 | 7    | **Integrate** — demo page, Storybook story, entry-point spec       |
-| 8    | **Delight** — the final layer; does it feel *exceptional*?         |
+| 8    | **Delight** — the final layer; does it feel _exceptional_?         |
 
 This is the operating system for every component built in this library.
 
@@ -325,19 +325,19 @@ This is the operating system for every component built in this library.
 
 Before a component ships, it must be scored on each dimension. **A component ships only when every category scores ≥ 8.**
 
-| Category                              | Required Score |
-|---------------------------------------|----------------|
-| API clarity                           | ≥ 8            |
-| Accessibility                         | ≥ 8            |
-| Performance                           | ≥ 8            |
-| Composability                         | ≥ 8            |
-| Theming                               | ≥ 8            |
-| Developer experience                  | ≥ 8            |
-| Documentation                         | ≥ 8            |
-| Visual & interaction polish           | ≥ 8            |
-| Angular integration                   | ≥ 8            |
-| Emotional quality                     | ≥ 8            |
-| Competitive parity & differentiation  | ≥ 8            |
+| Category                             | Required Score |
+| ------------------------------------ | -------------- |
+| API clarity                          | ≥ 8            |
+| Accessibility                        | ≥ 8            |
+| Performance                          | ≥ 8            |
+| Composability                        | ≥ 8            |
+| Theming                              | ≥ 8            |
+| Developer experience                 | ≥ 8            |
+| Documentation                        | ≥ 8            |
+| Visual & interaction polish          | ≥ 8            |
+| Angular integration                  | ≥ 8            |
+| Emotional quality                    | ≥ 8            |
+| Competitive parity & differentiation | ≥ 8            |
 
 This scorecard is what separates a component library from a legendary UI ecosystem.
 
@@ -354,7 +354,7 @@ Legendary libraries are not great at everything at once. They commit to one unde
 
 > **"The most accessible Angular component library ever built."**
 
-This is the current committed wow factor. Every component will be held to a standard that makes accessibility engineers stop and say: *"Nothing else in Angular comes close."*
+This is the current committed wow factor. Every component will be held to a standard that makes accessibility engineers stop and say: _"Nothing else in Angular comes close."_
 
 What elite accessibility means here — not a checklist, a culture:
 
@@ -380,13 +380,13 @@ This is not a feature. It is the foundation everything else is built on.
 
 Once elite accessibility is achieved and maintained, the next committed strengths will be pursued in order:
 
-| # | Wow Factor                           | What "nothing else comes close" means                                                                        |
-|---|--------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| 2 | **Astonishingly good theming**       | Runtime switching, design token system, brand customization that takes minutes not days                      |
-| 3 | **Unmatched forms experience**       | The best typed, reactive, signal-native forms DX in Angular — ever                                           |
-| 4 | **Exceptional DX**                   | APIs so predictable and autocomplete so accurate that developers never reach for docs for basic usage        |
-| 5 | **Unbelievably polished animations** | Motion that makes developers say "how did they do that"                                                      |
-| 6 | **The best Angular table/grid**      | Performance, composability, and API quality that makes every other Angular data grid feel like a spreadsheet |
+| #   | Wow Factor                           | What "nothing else comes close" means                                                                        |
+| --- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| 2   | **Astonishingly good theming**       | Runtime switching, design token system, brand customization that takes minutes not days                      |
+| 3   | **Unmatched forms experience**       | The best typed, reactive, signal-native forms DX in Angular — ever                                           |
+| 4   | **Exceptional DX**                   | APIs so predictable and autocomplete so accurate that developers never reach for docs for basic usage        |
+| 5   | **Unbelievably polished animations** | Motion that makes developers say "how did they do that"                                                      |
+| 6   | **The best Angular table/grid**      | Performance, composability, and API quality that makes every other Angular data grid feel like a spreadsheet |
 
 Each wow factor gets its moment. Each gets committed to fully before the next is declared. No spreading thin.
 
@@ -464,9 +464,10 @@ The model that works — proven by PrimeTek (PrimeNG), AG Grid, and others — i
 
 ### Revenue Streams (in order of when they become viable)
 
-**1. Premium Templates & Blocks** *(viable after Public Beta)*
+**1. Premium Templates & Blocks** _(viable after Public Beta)_
 
 Pre-built, production-ready page compositions using library components:
+
 - Dashboard layouts (analytics, admin, SaaS)
 - Authentication flows (login, register, forgot password, MFA)
 - Data-heavy pages (reports, data explorer, settings)
@@ -476,9 +477,10 @@ This is the PrimeTek model. Developers love the free components; teams buy the "
 dashboard in a day" template. One-time purchase per template pack or a small yearly subscription.
 No component is ever locked inside a template — templates are purely accelerators.
 
-**2. Premium Themes** *(viable after Public Beta)*
+**2. Premium Themes** _(viable after Public Beta)_
 
 Professionally designed, polished CSS token sets beyond the three built-in variants:
+
 - Branded presets (Stripe-style, Linear-style, shadcn-style, enterprise dark)
 - Industry packs (healthcare, fintech, e-commerce)
 - High-contrast / accessibility-optimised themes
@@ -486,9 +488,10 @@ Professionally designed, polished CSS token sets beyond the three built-in varia
 Themes are CSS variable overrides — no special component code, no lock-in. Developers can
 inspect and learn from every theme they buy.
 
-**3. Enterprise Data Grid** *(viable after Wow Factor #6 — The Best Angular Table)*
+**3. Enterprise Data Grid** _(viable after Wow Factor #6 — The Best Angular Table)_
 
 The AG Grid model applied to Angular:
+
 - Free tier: all standard table features (sort, filter, pagination, selection, column resize)
 - Enterprise tier: server-side row model, row grouping, pivoting, Excel / CSV export, master-detail,
   clipboard operations, range selection, status bar
@@ -496,7 +499,7 @@ The AG Grid model applied to Angular:
 This is the highest-value single component in any UI ecosystem. Enterprise Angular teams spend
 serious money on data grids. Owning this space is worth more than 50 average components.
 
-**4. Support Contracts** *(viable after v1.0 GA)*
+**4. Support Contracts** _(viable after v1.0 GA)_
 
 - Priority issue response SLA
 - Private Slack / Discord channel with core team access
@@ -506,9 +509,10 @@ serious money on data grids. Owning this space is worth more than 50 average com
 Enterprise teams that standardise on the library need a human to call. This pays for
 sustainable development without compromising the open-source model.
 
-**5. Accessibility Audit Service** *(Horizon — long-term)*
+**5. Accessibility Audit Service** _(Horizon — long-term)_
 
 Given the library's Elite Accessibility commitment, there is a natural adjacent service:
+
 - Automated axe-core audit of a customer's app (not just this library's components)
 - Manual WCAG 2.1 AA audit report
 - Remediation guidance
@@ -572,19 +576,18 @@ The ultimate emotional outcome:
 
 ## Related Documents
 
-| Document                                                   | Relevance                                    |
-|------------------------------------------------------------|----------------------------------------------|
-| [Architecture](architecture/ARCHITECTURE.md)               | How the vision is implemented structurally   |
-| [Design Tokens](reference/systems/DESIGN_TOKENS.md)        | Token system backing the theming vision      |
-| [Theming Guide](guides/THEMING_GUIDE.md)                   | Runtime theming — a signature feature        |
-| [Accessibility Guide](reference/systems/ACCESSIBILITY.md)  | A11y as architecture — not afterthought      |
-| [Performance Guide](reference/systems/PERFORMANCE.md)      | Performance targets and budgets              |
-| [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) | Standards for building to vision quality     |
-| [Library Conventions](../LIBRARY_CONVENTIONS.md)           | Engineering rules that enforce the vision    |
-| [Project Summary](reference/project/PROJECT_SUMMARY.md)    | Current state vs. vision                     |
-| [Scoring Criteria](SCORING_CRITERIA.md)                    | The 149-checkpoint quality gate — what ≥ 8 actually means per category |
+| Document                                                   | Relevance                                                                  |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------- |
+| [Architecture](architecture/ARCHITECTURE.md)               | How the vision is implemented structurally                                 |
+| [Design Tokens](reference/systems/DESIGN_TOKENS.md)        | Token system backing the theming vision                                    |
+| [Theming Guide](guides/THEMING_GUIDE.md)                   | Runtime theming — a signature feature                                      |
+| [Accessibility Guide](reference/systems/ACCESSIBILITY.md)  | A11y as architecture — not afterthought                                    |
+| [Performance Guide](reference/systems/PERFORMANCE.md)      | Performance targets and budgets                                            |
+| [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) | Standards for building to vision quality                                   |
+| [Library Conventions](../LIBRARY_CONVENTIONS.md)           | Engineering rules that enforce the vision                                  |
+| [Project Summary](reference/project/PROJECT_SUMMARY.md)    | Current state vs. vision                                                   |
+| [Scoring Criteria](SCORING_CRITERIA.md)                    | The 149-checkpoint quality gate — what ≥ 8 actually means per category     |
 | [Competitive Benchmarks](COMPETITIVE_BENCHMARKS.md)        | Per-component parity tables vs Angular Material, PrimeNG, Radix UI, Ark UI |
-| [Competitive Strategy](COMPETITIVE_STRATEGY.md)            | When and how to publish benchmark claims publicly |
-| [Roadmap](ROADMAP.md)                                      | Phase-by-phase path from hardening to v1.0 GA |
-| [Launch Strategy](LAUNCH_STRATEGY.md)                      | The sequenced path to a launch that resonates |
-
+| [Competitive Strategy](COMPETITIVE_STRATEGY.md)            | When and how to publish benchmark claims publicly                          |
+| [Roadmap](ROADMAP.md)                                      | Phase-by-phase path from hardening to v1.0 GA                              |
+| [Launch Strategy](LAUNCH_STRATEGY.md)                      | The sequenced path to a launch that resonates                              |

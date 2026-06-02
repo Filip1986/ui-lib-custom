@@ -76,14 +76,14 @@ export class Stack {
 
   /** Final rendered tag name (defaults to div). */
   protected readonly _renderTag: Signal<StackTag> = computed<StackTag>(
-    (): StackTag => this.as() ?? this.tag() ?? 'div'
+    (): StackTag => this.as() ?? this.tag() ?? 'div',
   );
 
   /** Computed aria-label for semantic elements that need a label. */
   protected readonly _resolvedAriaLabel: Signal<string | null> = computed<string | null>(
     (): string | null => {
       return this._renderTag() === 'nav' ? this.ariaLabel() : null;
-    }
+    },
   );
 
   /** Resolved role; list role is unnecessary when rendering native lists. */
@@ -94,12 +94,12 @@ export class Stack {
         return null;
       }
       return this.role();
-    }
+    },
   );
 
   /** Computed flex-direction value */
   protected readonly _flexDirection: Signal<string> = computed<string>((): string =>
-    this.direction() === 'vertical' ? 'column' : 'row'
+    this.direction() === 'vertical' ? 'column' : 'row',
   );
 
   /** Computed justify-content value */

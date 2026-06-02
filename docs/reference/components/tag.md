@@ -13,17 +13,17 @@ Tag — compact label for status, category, or classification. Supports a text l
 
 ### Inputs
 
-| Name          | Type                | Default         | Description                                                                                      |
-| ------------- | ------------------- | --------------- | ------------------------------------------------------------------------------------------------ |
-| `dismissible` | `boolean`           | `false`         | When true, a remove button is rendered at the end of the tag.                                    |
-| `icon`        | `string | null`     | `null`          | CSS class string for a leading PrimeIcons icon (e.g. "pi pi-check").                             |
-| `removeIcon`  | `string`            | `'pi pi-times'` | CSS class for the remove icon (defaults to "pi pi-times").                                       |
-| `rounded`     | `boolean`           | `false`         | When true, the tag uses fully rounded (pill) corners regardless of variant. Defaults to `false`. |
-| `severity`    | `TagSeverity`       | `'primary'`     | Severity colour — maps to a predefined palette. Defaults to `'primary'`.                         |
-| `size`        | `TagSize`           | `'md'`          | Size of the tag. Defaults to `'md'`.                                                             |
-| `styleClass`  | `string | null`     | `null`          | Additional CSS classes to attach to the host element.                                            |
-| `value`       | `string | null`     | `null`          | Text displayed inside the tag.                                                                   |
-| `variant`     | `TagVariant | null` | `null`          | Visual variant — inherits from ThemeConfigService when not set.                                  |
+| Name          | Type          | Default         | Description                                                                                      |
+| ------------- | ------------- | --------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `dismissible` | `boolean`     | `false`         | When true, a remove button is rendered at the end of the tag.                                    |
+| `icon`        | `string       | null`           | `null`                                                                                           | CSS class string for a leading PrimeIcons icon (e.g. "pi pi-check"). |
+| `removeIcon`  | `string`      | `'pi pi-times'` | CSS class for the remove icon (defaults to "pi pi-times").                                       |
+| `rounded`     | `boolean`     | `false`         | When true, the tag uses fully rounded (pill) corners regardless of variant. Defaults to `false`. |
+| `severity`    | `TagSeverity` | `'primary'`     | Severity colour — maps to a predefined palette. Defaults to `'primary'`.                         |
+| `size`        | `TagSize`     | `'md'`          | Size of the tag. Defaults to `'md'`.                                                             |
+| `styleClass`  | `string       | null`           | `null`                                                                                           | Additional CSS classes to attach to the host element.                |
+| `value`       | `string       | null`           | `null`                                                                                           | Text displayed inside the tag.                                       |
+| `variant`     | `TagVariant   | null`           | `null`                                                                                           | Visual variant — inherits from ThemeConfigService when not set.      |
 
 ### Outputs
 
@@ -117,11 +117,7 @@ Tag — compact label for status, category, or classification. Supports a text l
 <ui-lib-tag value="Angular" icon="pi pi-bolt" severity="info" />
 
 <!-- Dismissible -->
-<ui-lib-tag
-  value="Python"
-  [dismissible]="true"
-  (removed)="removeTag()"
-/>
+<ui-lib-tag value="Python" [dismissible]="true" (removed)="removeTag()" />
 ```
 
 ## Related
@@ -130,4 +126,3 @@ Tag — compact label for status, category, or classification. Supports a text l
 - [Demo page](/components/tag)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/tag/README.md)
-

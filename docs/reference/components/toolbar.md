@@ -13,12 +13,12 @@ Toolbar — a horizontal container with start, center, and end content projectio
 
 ### Inputs
 
-| Name         | Type                    | Default | Description                                                                            |
-| ------------ | ----------------------- | ------- | -------------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string | null`         | `null`  | Accessible label for the toolbar (recommended when multiple toolbars are on one page). |
-| `size`       | `ToolbarSize`           | `'md'`  | Size modifier for the toolbar. Defaults to `'md'`.                                     |
-| `styleClass` | `string | null`         | `null`  | Additional CSS classes to attach to the host element.                                  |
-| `variant`    | `ToolbarVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.                        |
+| Name         | Type            | Default | Description                                        |
+| ------------ | --------------- | ------- | -------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ariaLabel`  | `string         | null`   | `null`                                             | Accessible label for the toolbar (recommended when multiple toolbars are on one page). |
+| `size`       | `ToolbarSize`   | `'md'`  | Size modifier for the toolbar. Defaults to `'md'`. |
+| `styleClass` | `string         | null`   | `null`                                             | Additional CSS classes to attach to the host element.                                  |
+| `variant`    | `ToolbarVariant | null`   | `null`                                             | Visual variant — inherits from ThemeConfigService when not set.                        |
 
 ### Outputs
 
@@ -112,4 +112,3 @@ _none_
 - [Demo page](/components/toolbar)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/toolbar/README.md)
-

@@ -47,26 +47,28 @@ If a "Scoring Session" detail block exists for this component, update it.
 If it does not exist, add one using the template from SCORING_CRITERIA.md:
 
 ```
+
 ### [COMPONENT_PASCAL] — Tier 2 Audit [YYYY-MM-DD]
 
-| Category                             | Score | Notes |
-|--------------------------------------|-------|-------|
-| API Clarity                          |  /10  |       |
-| Accessibility                        |  /10  |       |
-| Performance                          |  /10  |       |
-| Composability                        |  /10  |       |
-| Theming                              |  /10  |       |
-| Developer Experience                 |  /10  |       |
-| Documentation                        |  /10  |       |
-| Visual & Interaction Polish          |  /10  |       |
-| Angular Integration                  |  /10  |       |
-| Emotional Quality                    |  /10  |       |
-| Competitive Parity & Differentiation | PASS/FAIL |   |
-| **Production gate**                  | **PASS / FAIL** |  |
+| Category                             | Score           | Notes |
+| ------------------------------------ | --------------- | ----- |
+| API Clarity                          | /10             |       |
+| Accessibility                        | /10             |       |
+| Performance                          | /10             |       |
+| Composability                        | /10             |       |
+| Theming                              | /10             |       |
+| Developer Experience                 | /10             |       |
+| Documentation                        | /10             |       |
+| Visual & Interaction Polish          | /10             |       |
+| Angular Integration                  | /10             |       |
+| Emotional Quality                    | /10             |       |
+| Competitive Parity & Differentiation | PASS/FAIL       |       |
+| **Production gate**                  | **PASS / FAIL** |       |
 
 Unchecked items (explicit backlog):
 [list every ❌ from Phase 1 that was NOT fixed in Phase 2]
-```
+
+````
 
 ---
 
@@ -87,7 +89,7 @@ If the file does not exist, create it from this structure:
 
 ```typescript
 import { [COMPONENT_PASCAL]Component } from 'ui-lib-custom/[COMPONENT]';
-```
+````
 
 ## Selector
 
@@ -96,28 +98,31 @@ import { [COMPONENT_PASCAL]Component } from 'ui-lib-custom/[COMPONENT]';
 ## Inputs
 
 | Name | Type | Default | Description |
-|------|------|---------|-------------|
+| ---- | ---- | ------- | ----------- |
+
 [one row per input()]
 
 ## Outputs
 
 | Name | Payload | When it fires |
-|------|---------|---------------|
+| ---- | ------- | ------------- |
+
 [one row per output()]
 
 ## Content Slots
 
 | Slot | Expected content | Required |
-|------|-----------------|----------|
+| ---- | ---------------- | -------- |
+
 [one row per ng-content select]
 
 ## Variants
 
-| Variant | Description |
-|---------|-------------|
-| `material` | Material Design 3 aesthetic |
-| `bootstrap` | Bootstrap 5 aesthetic |
-| `minimal` | Clean, neutral, unopinionated |
+| Variant     | Description                   |
+| ----------- | ----------------------------- |
+| `material`  | Material Design 3 aesthetic   |
+| `bootstrap` | Bootstrap 5 aesthetic         |
+| `minimal`   | Clean, neutral, unopinionated |
 
 ## Sizes
 
@@ -140,8 +145,9 @@ import { [COMPONENT_PASCAL]Component } from 'ui-lib-custom/[COMPONENT]';
 ## Theming
 
 | CSS Variable | Default | Description |
-|-------------|---------|-------------|
-[one row per --uilib-[COMPONENT]-* variable]
+| ------------ | ------- | ----------- |
+
+[one row per --uilib-[COMPONENT]-\* variable]
 
 ## Accessibility
 
@@ -150,19 +156,22 @@ import { [COMPONENT_PASCAL]Component } from 'ui-lib-custom/[COMPONENT]';
 ### Keyboard interaction
 
 | Key | Action |
-|-----|--------|
+| --- | ------ |
+
 [one row per key]
 
 ### ARIA roles and states
 
 | Role / Attribute | Element | Purpose |
-|-----------------|---------|---------|
+| ---------------- | ------- | ------- |
+
 [one row per role/aria-*]
 
 ### Screen reader notes
 
 [what NVDA + VoiceOver announce, any caveats]
-```
+
+````
 
 If the file exists, verify and update:
 - Inputs table must match current .ts source exactly (add missing, remove stale)
@@ -202,7 +211,7 @@ If a [COMPONENT_PASCAL] entry does not exist, add one in the correct alphabetica
 - [Runtime variant switching (material/bootstrap/minimal) without page reload]
 - [SSR-safe with no configuration]
 - [add any component-specific differentiators]
-```
+````
 
 ---
 
@@ -277,6 +286,7 @@ just before the TOC rail div. If missing, add it:
 ```
 
 If the `qualityAudit` property already exists (added at Tier 1), update:
+
 - `tier` → `2`
 - `date` → today's date
 - `scores` → the verified Tier 2 scores
@@ -290,8 +300,8 @@ If the `qualityAudit` property already exists (added at Tier 1), update:
 
 Run these commands to confirm the documentation updates did not break anything:
 
-1. npx jest --testPathPatterns="entry-points" --no-coverage  (verifies entry point spec still passes)
-2. ng build ui-lib-custom  (clean build)
+1. npx jest --testPathPatterns="entry-points" --no-coverage (verifies entry point spec still passes)
+2. ng build ui-lib-custom (clean build)
 
 Report PASS or FAIL.
 
@@ -300,6 +310,7 @@ Report PASS or FAIL.
 ## Output
 
 Confirm:
+
 - [ ] docs/COMPONENT_SCORES.md updated with verified Tier 2 scores and unchecked backlog
 - [ ] docs/reference/components/[COMPONENT].md exists and is current
 - [ ] docs/COMPETITIVE_BENCHMARKS.md has an entry for [COMPONENT_PASCAL]
@@ -310,4 +321,7 @@ Confirm:
 - [ ] jest entry-points → PASS
 
 **[COMPONENT_PASCAL] Tier 2 audit is now complete.**
+
+```
+
 ```

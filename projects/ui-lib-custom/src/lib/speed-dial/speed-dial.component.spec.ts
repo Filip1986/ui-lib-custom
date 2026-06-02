@@ -121,7 +121,7 @@ describe('SpeedDialComponent', (): void => {
   });
 
   function createHost(
-    initial?: Partial<SpeedDialHostComponent>
+    initial?: Partial<SpeedDialHostComponent>,
   ): ComponentFixture<SpeedDialHostComponent> {
     const fixture: ComponentFixture<SpeedDialHostComponent> =
       TestBed.createComponent(SpeedDialHostComponent);
@@ -139,20 +139,20 @@ describe('SpeedDialComponent', (): void => {
   }
 
   function getSpeedDialDebugElement(
-    fixture: ComponentFixture<SpeedDialHostComponent>
+    fixture: ComponentFixture<SpeedDialHostComponent>,
   ): DebugElement {
     return fixture.debugElement.query(By.directive(SpeedDialComponent));
   }
 
   function getSpeedDialInstance(
-    fixture: ComponentFixture<SpeedDialHostComponent>
+    fixture: ComponentFixture<SpeedDialHostComponent>,
   ): SpeedDialComponent {
     return getSpeedDialDebugElement(fixture).componentInstance as SpeedDialComponent;
   }
 
   function getHostElement(fixture: ComponentFixture<SpeedDialHostComponent>): HTMLElement {
     const hostElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-speed-dial'
+      'ui-lib-speed-dial',
     );
     if (!hostElement) {
       throw new Error('Expected SpeedDial host element to exist.');
@@ -162,7 +162,7 @@ describe('SpeedDialComponent', (): void => {
 
   function getTriggerButton(fixture: ComponentFixture<SpeedDialHostComponent>): HTMLButtonElement {
     const trigger: HTMLButtonElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-speed-dial__button'
+      '.ui-lib-speed-dial__button',
     );
     if (!trigger) {
       throw new Error('Expected trigger button to exist.');
@@ -172,7 +172,7 @@ describe('SpeedDialComponent', (): void => {
 
   function getListElement(fixture: ComponentFixture<SpeedDialHostComponent>): HTMLUListElement {
     const list: HTMLUListElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-speed-dial__list'
+      '.ui-lib-speed-dial__list',
     );
     if (!list) {
       throw new Error('Expected list element to exist.');
@@ -181,16 +181,16 @@ describe('SpeedDialComponent', (): void => {
   }
 
   function getActionButtons(
-    fixture: ComponentFixture<SpeedDialHostComponent>
+    fixture: ComponentFixture<SpeedDialHostComponent>,
   ): HTMLButtonElement[] {
     return Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('.ui-lib-speed-dial__action')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('.ui-lib-speed-dial__action'),
     ) as HTMLButtonElement[];
   }
 
   function getActionButton(
     fixture: ComponentFixture<SpeedDialHostComponent>,
-    index: number
+    index: number,
   ): HTMLButtonElement {
     const action: HTMLButtonElement | undefined = getActionButtons(fixture)[index];
     if (!action) {
@@ -534,7 +534,7 @@ describe('SpeedDialComponent', (): void => {
     await detectAndFlush(fixture);
     const blockedEvent: KeyboardEvent = dispatchKeydown(
       getTriggerButton(fixture),
-      KEYBOARD_KEYS.ArrowDown
+      KEYBOARD_KEYS.ArrowDown,
     );
     await detectAndFlush(fixture);
     expect(blockedEvent.defaultPrevented).toBe(false);
@@ -760,7 +760,7 @@ describe('SpeedDialComponent', (): void => {
     instance.onItemClick(
       { preventDefault: preventDefaultSpy } as unknown as MouseEvent,
       { label: 'Disabled item', disabled: true },
-      0
+      0,
     );
     expect(preventDefaultSpy).toHaveBeenCalledTimes(1);
 
@@ -873,7 +873,7 @@ describe('SpeedDialComponent', (): void => {
     fixture.componentInstance.direction.set('right');
     await detectAndFlush(fixture);
     instance.onButtonKeydown(
-      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true })
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true }),
     );
     await detectAndFlush(fixture);
     expect(fixture.componentInstance.visible).toBe(true);
@@ -891,7 +891,7 @@ describe('SpeedDialComponent', (): void => {
     expect(fixture.componentInstance.visible).toBe(false);
 
     instance.onButtonKeydown(
-      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowRight, cancelable: true })
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowRight, cancelable: true }),
     );
     await detectAndFlush(fixture);
     expect(fixture.componentInstance.visible).toBe(true);
@@ -905,7 +905,7 @@ describe('SpeedDialComponent', (): void => {
     fixture.componentInstance.model.set([]);
     await detectAndFlush(fixture);
     instance.onButtonKeydown(
-      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true })
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true }),
     );
     await detectAndFlush(fixture);
     expect(instance.focusedItemIndex()).toBe(-1);
@@ -918,20 +918,20 @@ describe('SpeedDialComponent', (): void => {
 
     instance.focusedItemIndex.set(-1);
     instance.onButtonKeydown(
-      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true })
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true }),
     );
     await detectAndFlush(fixture);
     expect(instance.focusedItemIndex()).toBe(-1);
 
     instance.focusedItemIndex.set(0);
     instance.onButtonKeydown(
-      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true })
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true }),
     );
     await detectAndFlush(fixture);
     expect(instance.focusedItemIndex()).toBe(0);
 
     instance.onButtonKeydown(
-      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowRight, cancelable: true })
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowRight, cancelable: true }),
     );
     await detectAndFlush(fixture);
     expect(instance.focusedItemIndex()).toBe(0);
@@ -940,12 +940,12 @@ describe('SpeedDialComponent', (): void => {
     instance.onItemKeydown(
       new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.Home, cancelable: true }),
       firstDisabledItem,
-      0
+      0,
     );
     instance.onItemKeydown(
       new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.End, cancelable: true }),
       firstDisabledItem,
-      0
+      0,
     );
     await detectAndFlush(fixture);
     expect(instance.focusedItemIndex()).toBe(0);

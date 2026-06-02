@@ -13,29 +13,29 @@ Slider - a linear track-based control for selecting a numeric value or range. Su
 
 ### Inputs
 
-| Name             | Type                        | Default                       | Description                                                                 |
-| ---------------- | --------------------------- | ----------------------------- | --------------------------------------------------------------------------- |
-| `animate`        | `boolean`                   | `SLIDER_DEFAULTS.animate`     | When true, fill bar and handle animate on value changes.                    |
-| `ariaLabel`      | `string | null`             | `null`                        | Accessible label forwarded to the handle element(s).                        |
-| `ariaLabelledBy` | `string | null`             | `null`                        | aria-labelledby attribute forwarded to the handle element(s).               |
-| `disabled`       | `boolean`                   | `SLIDER_DEFAULTS.disabled`    | Whether the slider is disabled.                                             |
-| `max`            | `number`                    | `SLIDER_DEFAULTS.max`         | Maximum allowed value.                                                      |
-| `min`            | `number`                    | `SLIDER_DEFAULTS.min`         | Minimum allowed value.                                                      |
-| `orientation`    | `SliderOrientation`         | `SLIDER_DEFAULTS.orientation` | Track orientation - 'horizontal' or 'vertical'.                             |
-| `range`          | `boolean`                   | `SLIDER_DEFAULTS.range`       | When true, value is a [start, end] tuple and two handles are rendered.      |
-| `readonly`       | `boolean`                   | `SLIDER_DEFAULTS.readonly`    | Whether the slider is read-only - focusable but value does not change.      |
-| `size`           | `SliderSize`                | `SLIDER_DEFAULTS.size`        | Size token - 'sm' | 'md' | 'lg'.                                            |
-| `step`           | `number`                    | `SLIDER_DEFAULTS.step`        | Increment/decrement step for keyboard navigation and drag snapping.         |
-| `styleClass`     | `string | null`             | `null`                        | Additional CSS class(es) appended to the host element.                      |
-| `tabindex`       | `number`                    | `SLIDER_DEFAULTS.tabindex`    | Tab index forwarded to each handle element.                                 |
-| `valueTextFn`    | `(value: number) => string` | `value: number`               | Formats the spoken `aria-valuetext` for each handle.                        |
-| `variant`        | `SliderVariant | null`      | `null`                        | Design variant override. When null the active global theme variant is used. |
+| Name             | Type                        | Default                       | Description                                                            |
+| ---------------- | --------------------------- | ----------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----- |
+| `animate`        | `boolean`                   | `SLIDER_DEFAULTS.animate`     | When true, fill bar and handle animate on value changes.               |
+| `ariaLabel`      | `string                     | null`                         | `null`                                                                 | Accessible label forwarded to the handle element(s).                        |
+| `ariaLabelledBy` | `string                     | null`                         | `null`                                                                 | aria-labelledby attribute forwarded to the handle element(s).               |
+| `disabled`       | `boolean`                   | `SLIDER_DEFAULTS.disabled`    | Whether the slider is disabled.                                        |
+| `max`            | `number`                    | `SLIDER_DEFAULTS.max`         | Maximum allowed value.                                                 |
+| `min`            | `number`                    | `SLIDER_DEFAULTS.min`         | Minimum allowed value.                                                 |
+| `orientation`    | `SliderOrientation`         | `SLIDER_DEFAULTS.orientation` | Track orientation - 'horizontal' or 'vertical'.                        |
+| `range`          | `boolean`                   | `SLIDER_DEFAULTS.range`       | When true, value is a [start, end] tuple and two handles are rendered. |
+| `readonly`       | `boolean`                   | `SLIDER_DEFAULTS.readonly`    | Whether the slider is read-only - focusable but value does not change. |
+| `size`           | `SliderSize`                | `SLIDER_DEFAULTS.size`        | Size token - 'sm'                                                      | 'md'                                                                        | 'lg'. |
+| `step`           | `number`                    | `SLIDER_DEFAULTS.step`        | Increment/decrement step for keyboard navigation and drag snapping.    |
+| `styleClass`     | `string                     | null`                         | `null`                                                                 | Additional CSS class(es) appended to the host element.                      |
+| `tabindex`       | `number`                    | `SLIDER_DEFAULTS.tabindex`    | Tab index forwarded to each handle element.                            |
+| `valueTextFn`    | `(value: number) => string` | `value: number`               | Formats the spoken `aria-valuetext` for each handle.                   |
+| `variant`        | `SliderVariant              | null`                         | `null`                                                                 | Design variant override. When null the active global theme variant is used. |
 
 ### Models (two-way bindable)
 
-| Name    | Type                        | Default | Description                                                             |
-| ------- | --------------------------- | ------- | ----------------------------------------------------------------------- |
-| `value` | `number | [number, number]` | `0`     | Current value. Single mode: a number. Range mode: a [start, end] tuple. |
+| Name    | Type    | Default           | Description |
+| ------- | ------- | ----------------- | ----------- | ----------------------------------------------------------------------- |
+| `value` | `number | [number, number]` | `0`         | Current value. Single mode: a number. Range mode: a [start, end] tuple. |
 
 ### Outputs
 
@@ -148,11 +148,7 @@ _none_
 <ui-lib-slider ariaLabel="Volume" [(value)]="volume" />
 
 <!-- custom spoken value text -->
-<ui-lib-slider
-  ariaLabel="Volume"
-  [valueTextFn]="formatVolumeValue"
-  [(value)]="volume"
-/>
+<ui-lib-slider ariaLabel="Volume" [valueTextFn]="formatVolumeValue" [(value)]="volume" />
 ```
 
 ```ts
@@ -165,4 +161,3 @@ public readonly formatVolumeValue = (value: number): string => `${value}%`;
 - [Demo page](/components/slider)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/slider/README.md)
-

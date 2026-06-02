@@ -17,14 +17,14 @@ import type { BreadcrumbItem } from './breadcrumb.types';
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -137,7 +137,7 @@ describe('Breadcrumb Accessibility', (): void => {
   describe('landmark semantics', (): void => {
     it('has role="navigation" and default aria-label on host', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       const host: HTMLElement | null = queryEl<HTMLElement>(fixture, 'ui-lib-breadcrumb');
@@ -147,7 +147,7 @@ describe('Breadcrumb Accessibility', (): void => {
 
     it('uses custom ariaLabel input value on host landmark', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       fixture.componentInstance.ariaLabel.set('Account trail');
@@ -159,7 +159,7 @@ describe('Breadcrumb Accessibility', (): void => {
 
     it('generates unique host ids for multiple breadcrumb instances', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbMultiInstanceHostComponent> = await createFixture(
-        BreadcrumbMultiInstanceHostComponent
+        BreadcrumbMultiInstanceHostComponent,
       );
 
       const hosts: HTMLElement[] = queryAllEl<HTMLElement>(fixture, 'ui-lib-breadcrumb');
@@ -173,7 +173,7 @@ describe('Breadcrumb Accessibility', (): void => {
   describe('ordered list and current page semantics', (): void => {
     it('renders breadcrumbs inside an ordered list and does not render an unordered list', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       expect(queryEl<HTMLOListElement>(fixture, '.ui-lib-breadcrumb__list')).toBeTruthy();
@@ -182,12 +182,12 @@ describe('Breadcrumb Accessibility', (): void => {
 
     it('renders non-last items as links with visible text', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       const links: HTMLAnchorElement[] = queryAllEl<HTMLAnchorElement>(
         fixture,
-        '.ui-lib-breadcrumb__item:not(.ui-lib-breadcrumb__item--active) a.ui-lib-breadcrumb__link'
+        '.ui-lib-breadcrumb__item:not(.ui-lib-breadcrumb__item--active) a.ui-lib-breadcrumb__link',
       );
       expect(links.length).toBe(1);
       expect((links[0]?.textContent ?? '').trim()).toBe('Section');
@@ -195,12 +195,12 @@ describe('Breadcrumb Accessibility', (): void => {
 
     it('renders the last item as non-interactive span with aria-current="page"', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       const current: HTMLElement | null = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-breadcrumb__item--active .ui-lib-breadcrumb__current'
+        '.ui-lib-breadcrumb__item--active .ui-lib-breadcrumb__current',
       );
       expect(current?.tagName).toBe('SPAN');
       expect(current?.getAttribute('aria-current')).toBe('page');
@@ -208,27 +208,27 @@ describe('Breadcrumb Accessibility', (): void => {
 
     it('does not render anchor or button in the last breadcrumb item', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       expect(
         queryEl<HTMLElement>(
           fixture,
-          '.ui-lib-breadcrumb__item--active a, .ui-lib-breadcrumb__item--active button'
-        )
+          '.ui-lib-breadcrumb__item--active a, .ui-lib-breadcrumb__item--active button',
+        ),
       ).toBeNull();
     });
 
     it('does not apply aria-current to non-last items', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       expect(
         queryEl<HTMLElement>(
           fixture,
-          '.ui-lib-breadcrumb__item:not(.ui-lib-breadcrumb__item--active) [aria-current="page"]'
-        )
+          '.ui-lib-breadcrumb__item:not(.ui-lib-breadcrumb__item--active) [aria-current="page"]',
+        ),
       ).toBeNull();
     });
   });
@@ -236,24 +236,24 @@ describe('Breadcrumb Accessibility', (): void => {
   describe('separator and icon semantics', (): void => {
     it('renders separators only between items', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       const separators: HTMLElement[] = queryAllEl<HTMLElement>(
         fixture,
-        '.ui-lib-breadcrumb__separator'
+        '.ui-lib-breadcrumb__separator',
       );
       expect(separators.length).toBe(1);
     });
 
     it('marks separators as aria-hidden', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       const separators: HTMLElement[] = queryAllEl<HTMLElement>(
         fixture,
-        '.ui-lib-breadcrumb__separator'
+        '.ui-lib-breadcrumb__separator',
       );
       expect(separators.length).toBeGreaterThan(0);
       for (const separator of separators) {
@@ -263,12 +263,12 @@ describe('Breadcrumb Accessibility', (): void => {
 
     it('marks icon spans as aria-hidden', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbHomeIconHostComponent> = await createFixture(
-        BreadcrumbHomeIconHostComponent
+        BreadcrumbHomeIconHostComponent,
       );
 
       const icon: HTMLElement | null = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-breadcrumb__item-icon'
+        '.ui-lib-breadcrumb__item-icon',
       );
       expect(icon?.getAttribute('aria-hidden')).toBe('true');
     });
@@ -277,12 +277,12 @@ describe('Breadcrumb Accessibility', (): void => {
   describe('home icon naming', (): void => {
     it('applies aria-label="Home" to icon-only home link by default', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbHomeIconHostComponent> = await createFixture(
-        BreadcrumbHomeIconHostComponent
+        BreadcrumbHomeIconHostComponent,
       );
 
       const firstLink: HTMLAnchorElement | null = queryEl<HTMLAnchorElement>(
         fixture,
-        '.ui-lib-breadcrumb__item:first-child a.ui-lib-breadcrumb__link'
+        '.ui-lib-breadcrumb__item:first-child a.ui-lib-breadcrumb__link',
       );
       expect(firstLink?.getAttribute('aria-label')).toBe(BREADCRUMB_DEFAULT_HOME_ARIA_LABEL);
     });
@@ -293,7 +293,7 @@ describe('Breadcrumb Accessibility', (): void => {
 
       const firstLink: HTMLAnchorElement | null = queryEl<HTMLAnchorElement>(
         fixture,
-        '.ui-lib-breadcrumb__item:first-child a.ui-lib-breadcrumb__link'
+        '.ui-lib-breadcrumb__item:first-child a.ui-lib-breadcrumb__link',
       );
       expect(firstLink?.getAttribute('aria-label')).toBe('Dashboard');
     });
@@ -313,7 +313,7 @@ describe('Breadcrumb Accessibility', (): void => {
   describe('axe-core', (): void => {
     it('passes axe for a 2-item breadcrumb', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
@@ -321,7 +321,7 @@ describe('Breadcrumb Accessibility', (): void => {
 
     it('passes axe for a 3-item breadcrumb', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbA11yHostComponent> = await createFixture(
-        BreadcrumbA11yHostComponent
+        BreadcrumbA11yHostComponent,
       );
 
       fixture.componentInstance.items.set([
@@ -336,7 +336,7 @@ describe('Breadcrumb Accessibility', (): void => {
 
     it('passes axe for home-icon-first breadcrumb', async (): Promise<void> => {
       const fixture: ComponentFixture<BreadcrumbHomeIconHostComponent> = await createFixture(
-        BreadcrumbHomeIconHostComponent
+        BreadcrumbHomeIconHostComponent,
       );
 
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });

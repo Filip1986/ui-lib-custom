@@ -140,7 +140,7 @@ export class ThemeEditorService {
       (state: Record<string, string>): Record<string, string> => ({
         ...state,
         [semanticKey]: normalized,
-      })
+      }),
     );
   }
 

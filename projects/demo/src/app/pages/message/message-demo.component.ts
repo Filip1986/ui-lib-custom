@@ -150,7 +150,7 @@ export class MessageDemoComponent {
     signal<MessageVariant>('bootstrap');
   public readonly playgroundSize: WritableSignal<MessageSize> = signal<MessageSize>('md');
   public readonly playgroundText: WritableSignal<string> = signal<string>(
-    'This is a sample message. Adjust the controls above to explore.'
+    'This is a sample message. Adjust the controls above to explore.',
   );
   public readonly playgroundClosable: WritableSignal<boolean> = signal<boolean>(false);
   public readonly playgroundClosed: WritableSignal<boolean> = signal<boolean>(false);
@@ -170,7 +170,7 @@ export class MessageDemoComponent {
 
   public dismissSeverity(severity: MessageSeverity): void {
     this.closedSeverities.update(
-      (current: Set<MessageSeverity>): Set<MessageSeverity> => new Set([...current, severity])
+      (current: Set<MessageSeverity>): Set<MessageSeverity> => new Set([...current, severity]),
     );
   }
 

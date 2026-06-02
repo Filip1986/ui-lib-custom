@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Table"
@@ -9,7 +8,6 @@
 
   <!-- Interactive demo -->
   <app-doc-section id="interactive-demo" title="Interactive Demo">
-
     <!-- Controls -->
     <div class="demo-controls">
       <div class="control-group">
@@ -22,7 +20,8 @@
               size="sm"
               type="button"
               (click)="activeVariant.set(v)"
-            >{{ v }}</ui-lib-button>
+              >{{ v }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -36,17 +35,26 @@
               size="sm"
               type="button"
               (click)="selectionMode.set(mode.value)"
-            >{{ mode.label }}</ui-lib-button>
+              >{{ mode.label }}</ui-lib-button
+            >
           }
         </div>
       </div>
       <div class="control-toggles">
         <label class="toggle-label">
-          <input type="checkbox" [checked]="stripedRows()" (change)="stripedRows.set(!stripedRows())" />
+          <input
+            type="checkbox"
+            [checked]="stripedRows()"
+            (change)="stripedRows.set(!stripedRows())"
+          />
           Striped rows
         </label>
         <label class="toggle-label">
-          <input type="checkbox" [checked]="showGridlines()" (change)="showGridlines.set(!showGridlines())" />
+          <input
+            type="checkbox"
+            [checked]="showGridlines()"
+            (change)="showGridlines.set(!showGridlines())"
+          />
           Show gridlines
         </label>
         <label class="toggle-label">
@@ -54,7 +62,11 @@
           Row hover
         </label>
         <label class="toggle-label">
-          <input type="checkbox" [checked]="paginatorEnabled()" (change)="paginatorEnabled.set(!paginatorEnabled())" />
+          <input
+            type="checkbox"
+            [checked]="paginatorEnabled()"
+            (change)="paginatorEnabled.set(!paginatorEnabled())"
+          />
           Paginator
         </label>
       </div>
@@ -70,7 +82,9 @@
         (input)="globalFilterValue.set($any($event.target).value)"
       />
       @if (lastSortEvent() !== '—') {
-        <p class="demo-sort-info">Last sort: <strong>{{ lastSortEvent() }}</strong></p>
+        <p class="demo-sort-info">
+          Last sort: <strong>{{ lastSortEvent() }}</strong>
+        </p>
       }
     </div>
 
@@ -126,7 +140,13 @@
       </ng-template>
 
       <!-- Column: Name -->
-      <ui-lib-table-column field="name" header="Product" [sortable]="true" [filterable]="true" filterPlaceholder="Filter name...">
+      <ui-lib-table-column
+        field="name"
+        header="Product"
+        [sortable]="true"
+        [filterable]="true"
+        filterPlaceholder="Filter name..."
+      >
         <ng-template uiTableColumnBody let-row>
           <div class="product-name-cell">
             <span class="product-name">{{ row.name }}</span>
@@ -178,12 +198,16 @@
       <div class="demo-selection-readout">
         @if (selectionMode() === 'single') {
           @if (selectedProducts()) {
-            <p>Selected: <strong>{{ $any(selectedProducts())?.name }}</strong></p>
+            <p>
+              Selected: <strong>{{ $any(selectedProducts())?.name }}</strong>
+            </p>
           } @else {
             <p>No row selected.</p>
           }
         } @else {
-          <p>Selected <strong>{{ $any(selectedProducts())?.length ?? 0 }}</strong> product(s).</p>
+          <p>
+            Selected <strong>{{ $any(selectedProducts())?.length ?? 0 }}</strong> product(s).
+          </p>
         }
       </div>
     }
@@ -200,9 +224,9 @@
           [variant]="v"
           [stripedRows]="true"
         >
-          <ui-lib-table-column field="name"     header="Name"     [sortable]="true" />
-          <ui-lib-table-column field="price"    header="Price"    [sortable]="true" />
-          <ui-lib-table-column field="status"   header="Status"   />
+          <ui-lib-table-column field="name" header="Name" [sortable]="true" />
+          <ui-lib-table-column field="price" header="Price" [sortable]="true" />
+          <ui-lib-table-column field="status" header="Status" />
         </ui-lib-table>
       </div>
     }
@@ -218,14 +242,13 @@
       [variant]="activeVariant()"
       [stripedRows]="true"
     >
-      <ui-lib-table-column field="id"       header="#"        width="60px" />
-      <ui-lib-table-column field="name"     header="Name"     [sortable]="true" />
+      <ui-lib-table-column field="id" header="#" width="60px" />
+      <ui-lib-table-column field="name" header="Name" [sortable]="true" />
       <ui-lib-table-column field="category" header="Category" [sortable]="true" />
-      <ui-lib-table-column field="price"    header="Price"    [sortable]="true" />
+      <ui-lib-table-column field="price" header="Price" [sortable]="true" />
       <ui-lib-table-column field="quantity" header="Qty" />
     </ui-lib-table>
   </app-doc-section>
-
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
@@ -235,7 +258,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -252,7 +275,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -261,5 +284,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

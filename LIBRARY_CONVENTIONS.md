@@ -50,7 +50,7 @@ Run through this mentally before submitting any output.
 - [ ] **Cross-entry-point imports use package paths** — `import { X } from 'ui-lib-custom/button'`, never `from '../button'`. See [Cross-Entry Import Rule](#cross-entry-import-rule).
 - [ ] Public component inputs use string union types — not constants objects
 - [ ] Self-closing tags used for all components without projected content
-- [ ] **No raw hex/px in CSS rule bodies** — add tokens to `design-tokens.ts` first. Hex values that appear as the *default value* of a CSS custom property definition (`--uilib-foo: #hex`) are acceptable — they ARE the token; document them in `design-tokens.ts`. See [Design Token Rule](#design-token-rule).
+- [ ] **No raw hex/px in CSS rule bodies** — add tokens to `design-tokens.ts` first. Hex values that appear as the _default value_ of a CSS custom property definition (`--uilib-foo: #hex`) are acceptable — they ARE the token; document them in `design-tokens.ts`. See [Design Token Rule](#design-token-rule).
 - [ ] If a new secondary entry point was added: `package.json` exports + `typesVersions` updated
 - [ ] Component inventory in `AI_AGENT_CONTEXT.md` updated if component status changed
 - [ ] **No output uses the `on*` prefix**
@@ -69,29 +69,29 @@ These have caused real regressions. Active anti-patterns are still common traps;
 
 #### Active Anti-Patterns
 
-| Anti-pattern | Why it's wrong | Correct approach |
-|---|---|---|
-| Relative import across entry points | Causes circular package graphs and ng-packagr build errors; breaks published package consumers | Use `ui-lib-custom/<entry>` package paths for cross-entry imports: `import type { ButtonVariant } from 'ui-lib-custom/button'` not `from '../button'` |
-| Missing `ViewEncapsulation.None` | CSS variables and animations do not cascade correctly | Always add it — no exceptions |
-| Type inference on `computed()` arrow functions | ESLint `allowTypedFunctionExpressions: false` will fail the build | Always annotate: `computed<MyType>((): MyType => ...)` |
-| Replacing public string union types with constants | Breaks the public API contract for consumers | Only extract *internal* repeated strings; leave public types as union literals |
-| Padding on the `overflow: hidden` collapse wrapper | Padding "leaks" visibly during `grid-row` animation | Use three layers: clip wrapper -> padding wrapper -> content |
-| Creating `public-api.ts` inside secondary entry folders | Not the established convention; ng-packagr handles it | `ng-package.json` points directly to `../src/lib/<n>/index.ts` |
-| Raw hex/px in CSS rule bodies (`.ui-lib-foo { color: #hex }`) | Bypasses the token system; cannot be themed or overridden | Add to `design-tokens.ts`, derive a `--uilib-*` CSS variable, use `var(--uilib-*)` |
-| Raw hex as a CSS variable value without a token reference (`--uilib-foo: #hex`) when a global token exists | The value is siloed; it won't update when the global token changes | Use `var(--uilib-color-neutral-300, #hex)` — global token first, hex as CSS fallback |
-| Bootstrap variant hex values (`#0d6efd`, `#dee2e6`, `#495057`) treated as equivalent to Material global tokens | Bootstrap's palette is distinct; aliasing silently uses wrong color when the global token is customised | Document in `design-tokens.ts → BOOTSTRAP_APPEARANCE_COLORS`; use `var(--uilib-color-neutral-300, #dee2e6)` pattern — hex fallback stays Bootstrap-correct even when global token is overridden |
-| Adding PrimeNG/Material components to demo pages | Undermines dogfooding; surfaces library gaps incorrectly | Use `ui-lib-*` equivalents; document gap in component inventory if none exists |
-| `on*` prefix on outputs (`onClick`, `onFocus`, `onChange`) | Inconsistent with Angular's own event naming and the library standard | Name outputs without the prefix: `buttonClick`, `checkboxFocus`, `cascadeChange` |
-| Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `select`, `submit`, `keydown`, `scroll`, and ~40 others) | Angular registers both an output subscriber AND a native DOM listener on the host; native events bubbling from child elements trigger the handler twice — tests and real usage receive duplicate events | Prefix with a disambiguating component qualifier: `buttonClick`, `textareaFocus`, `dateSelect`, `checkboxChange`. See [Output Naming Rules](#output-naming-rules) for the full blocked list. |
-| Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal | Angular's `model<T>()` auto-generates an internal `{name}Change` event for `[(binding)]` two-way syntax; a second explicit output with the same name overwrites the binding — it receives the rich event object instead of `T`, corrupting host state and producing feedback loops | Give the explicit output a distinct name: `panelChange` instead of `visibleChange`; `treeChange` instead of `selectionChange` (when `selection` is a model). The `model()` internal event continues to work correctly. |
-| Using `uilib-` as the element selector prefix (`uilib-accordion`) | `uilib-` is reserved for CSS custom properties (`--uilib-*`); element selectors use `ui-lib-` (with hyphen) to match every other component in the library | Element selectors: `ui-lib-accordion`; CSS variables: `--uilib-accordion-*` (two different intentional patterns — never mix them) |
+| Anti-pattern                                                                                                                                 | Why it's wrong                                                                                                                                                                                                                                                                     | Correct approach                                                                                                                                                                                                       |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Relative import across entry points                                                                                                          | Causes circular package graphs and ng-packagr build errors; breaks published package consumers                                                                                                                                                                                     | Use `ui-lib-custom/<entry>` package paths for cross-entry imports: `import type { ButtonVariant } from 'ui-lib-custom/button'` not `from '../button'`                                                                  |
+| Missing `ViewEncapsulation.None`                                                                                                             | CSS variables and animations do not cascade correctly                                                                                                                                                                                                                              | Always add it — no exceptions                                                                                                                                                                                          |
+| Type inference on `computed()` arrow functions                                                                                               | ESLint `allowTypedFunctionExpressions: false` will fail the build                                                                                                                                                                                                                  | Always annotate: `computed<MyType>((): MyType => ...)`                                                                                                                                                                 |
+| Replacing public string union types with constants                                                                                           | Breaks the public API contract for consumers                                                                                                                                                                                                                                       | Only extract _internal_ repeated strings; leave public types as union literals                                                                                                                                         |
+| Padding on the `overflow: hidden` collapse wrapper                                                                                           | Padding "leaks" visibly during `grid-row` animation                                                                                                                                                                                                                                | Use three layers: clip wrapper -> padding wrapper -> content                                                                                                                                                           |
+| Creating `public-api.ts` inside secondary entry folders                                                                                      | Not the established convention; ng-packagr handles it                                                                                                                                                                                                                              | `ng-package.json` points directly to `../src/lib/<n>/index.ts`                                                                                                                                                         |
+| Raw hex/px in CSS rule bodies (`.ui-lib-foo { color: #hex }`)                                                                                | Bypasses the token system; cannot be themed or overridden                                                                                                                                                                                                                          | Add to `design-tokens.ts`, derive a `--uilib-*` CSS variable, use `var(--uilib-*)`                                                                                                                                     |
+| Raw hex as a CSS variable value without a token reference (`--uilib-foo: #hex`) when a global token exists                                   | The value is siloed; it won't update when the global token changes                                                                                                                                                                                                                 | Use `var(--uilib-color-neutral-300, #hex)` — global token first, hex as CSS fallback                                                                                                                                   |
+| Bootstrap variant hex values (`#0d6efd`, `#dee2e6`, `#495057`) treated as equivalent to Material global tokens                               | Bootstrap's palette is distinct; aliasing silently uses wrong color when the global token is customised                                                                                                                                                                            | Document in `design-tokens.ts → BOOTSTRAP_APPEARANCE_COLORS`; use `var(--uilib-color-neutral-300, #dee2e6)` pattern — hex fallback stays Bootstrap-correct even when global token is overridden                        |
+| Adding PrimeNG/Material components to demo pages                                                                                             | Undermines dogfooding; surfaces library gaps incorrectly                                                                                                                                                                                                                           | Use `ui-lib-*` equivalents; document gap in component inventory if none exists                                                                                                                                         |
+| `on*` prefix on outputs (`onClick`, `onFocus`, `onChange`)                                                                                   | Inconsistent with Angular's own event naming and the library standard                                                                                                                                                                                                              | Name outputs without the prefix: `buttonClick`, `checkboxFocus`, `cascadeChange`                                                                                                                                       |
+| Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `select`, `submit`, `keydown`, `scroll`, and ~40 others) | Angular registers both an output subscriber AND a native DOM listener on the host; native events bubbling from child elements trigger the handler twice — tests and real usage receive duplicate events                                                                            | Prefix with a disambiguating component qualifier: `buttonClick`, `textareaFocus`, `dateSelect`, `checkboxChange`. See [Output Naming Rules](#output-naming-rules) for the full blocked list.                           |
+| Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal                                                     | Angular's `model<T>()` auto-generates an internal `{name}Change` event for `[(binding)]` two-way syntax; a second explicit output with the same name overwrites the binding — it receives the rich event object instead of `T`, corrupting host state and producing feedback loops | Give the explicit output a distinct name: `panelChange` instead of `visibleChange`; `treeChange` instead of `selectionChange` (when `selection` is a model). The `model()` internal event continues to work correctly. |
+| Using `uilib-` as the element selector prefix (`uilib-accordion`)                                                                            | `uilib-` is reserved for CSS custom properties (`--uilib-*`); element selectors use `ui-lib-` (with hyphen) to match every other component in the library                                                                                                                          | Element selectors: `ui-lib-accordion`; CSS variables: `--uilib-accordion-*` (two different intentional patterns — never mix them)                                                                                      |
 
 #### [Historical] Resolved Anti-Patterns (Migration Notes)
 
-| Anti-pattern | Why it's wrong | Correct approach |
-|---|---|---|
-| [Historical] `enum` instead of `as const` | Enums add runtime overhead and reduce tree-shaking | Use `export const MY_THING = { ... } as const` |
-| [Historical] Using `*ngIf` / `*ngFor` | Legacy syntax inconsistent with Angular 21 codebase | Use `@if`, `@for (x of y; track z)`, `@switch` |
+| Anti-pattern                              | Why it's wrong                                      | Correct approach                               |
+| ----------------------------------------- | --------------------------------------------------- | ---------------------------------------------- |
+| [Historical] `enum` instead of `as const` | Enums add runtime overhead and reduce tree-shaking  | Use `export const MY_THING = { ... } as const` |
+| [Historical] Using `*ngIf` / `*ngFor`     | Legacy syntax inconsistent with Angular 21 codebase | Use `@if`, `@for (x of y; track z)`, `@switch` |
 
 ### Session Handoff Protocol
 
@@ -115,7 +115,7 @@ This is mandatory. It closes the loop between sessions and eliminates re-explana
 - Barrel exports stay tree-shakable; keep `sideEffects: false` and avoid global side effects.
 - Templates should use Angular 21 block syntax (`@if/@else`, `@for` with `track`, `@switch`) for consistency in all new or touched code. Migration rationale is documented in `Historical Migration Notes`.
 - **HTML Special Characters**: Always escape special characters in templates that could be interpreted by Angular. Use `&#123;` for `{` and `&#125;` for `}` when displaying literal braces (e.g., in code examples or documentation). Alternatively, use `{{ '{' }}` and `{{ '}' }}` for interpolation-safe output.
-- **`ng-content` inside `@if` does not work for conditional slots.** Angular resolves content projection statically — the projected nodes are always instantiated by the parent, regardless of whether the `<ng-content>` tag is inside a conditional block. If you need a projection slot that is only *visible* sometimes (e.g. an overlay mask with optional custom content), always render the container element and toggle its visibility via a CSS class (`opacity: 0; pointer-events: none` ↔ visible). See `BlockUI` (`ui-lib-custom/block-ui`) for the established pattern.
+- **`ng-content` inside `@if` does not work for conditional slots.** Angular resolves content projection statically — the projected nodes are always instantiated by the parent, regardless of whether the `<ng-content>` tag is inside a conditional block. If you need a projection slot that is only _visible_ sometimes (e.g. an overlay mask with optional custom content), always render the container element and toggle its visibility via a CSS class (`opacity: 0; pointer-events: none` ↔ visible). See `BlockUI` (`ui-lib-custom/block-ui`) for the established pattern.
 - **Self-Closing Tags**: Use Angular's self-closing tag syntax whenever possible for cleaner, more concise templates. Prefer `<ui-lib-button />` over `<ui-lib-button></ui-lib-button>`. This applies to all components without projected content.
 - **Explicit Typing**: Always provide explicit type annotations for return types, variables, and function parameters. Never rely on type inference for public APIs, class members, or any non-trivial expressions.
 
@@ -157,12 +157,14 @@ Do not assign a value to a named variable only to immediately `return` or pass i
 Inline it directly instead.
 
 ❌ Avoid:
+
 ```ts
 const context: TabsContextItem = { ... };
 return context;
 ```
 
 ✅ Prefer:
+
 ```ts
 return { ... } satisfies TabsContextItem;
 ```
@@ -171,6 +173,7 @@ Use `satisfies Type` instead of `: Type` annotation when inlining a returned obj
 as type annotations cannot be applied directly to return expressions without a variable.
 
 **Exceptions — keep the variable when:**
+
 - It is referenced more than once
 - Naming it significantly clarifies complex logic
 - A temporary debug breakpoint is intentional (remove before committing)
@@ -181,12 +184,14 @@ Always use full, descriptive names for variables, parameters, functions, and cla
 Do not shorten names to save keystrokes — the reader's comprehension matters more than the writer's convenience.
 
 ❌ Avoid:
+
 ```ts
 function processBtn(e: Event, cfg: ButtonConfig): void { ... }
 const idx = items.findIndex(i => i.val === target);
 ```
 
 ✅ Prefer:
+
 ```ts
 function processButton(event: Event, config: ButtonConfig): void { ... }
 const index = items.findIndex(item => item.value === target);
@@ -194,23 +199,24 @@ const index = items.findIndex(item => item.value === target);
 
 **Common offenders:**
 
-| Shortcut | Meaningful name |
-|---|---|
-| `btn` | `button` |
-| `e`, `evt` | `event` |
-| `val` | `value` |
-| `cfg` | `config` |
-| `idx` | `index` |
-| `el`, `elem` | `element` |
-| `cb` | `callback` |
-| `fn` | describe what it does: `handler`, `predicate`, `formatter` |
-| `arr` | describe the contents: `items`, `options`, `entries` |
-| `obj` | describe the shape: `config`, `preset`, `context` |
-| `res` | `response` |
-| `err` | `error` |
-| `arg` | name what the argument actually represents |
+| Shortcut     | Meaningful name                                            |
+| ------------ | ---------------------------------------------------------- |
+| `btn`        | `button`                                                   |
+| `e`, `evt`   | `event`                                                    |
+| `val`        | `value`                                                    |
+| `cfg`        | `config`                                                   |
+| `idx`        | `index`                                                    |
+| `el`, `elem` | `element`                                                  |
+| `cb`         | `callback`                                                 |
+| `fn`         | describe what it does: `handler`, `predicate`, `formatter` |
+| `arr`        | describe the contents: `items`, `options`, `entries`       |
+| `obj`        | describe the shape: `config`, `preset`, `context`          |
+| `res`        | `response`                                                 |
+| `err`        | `error`                                                    |
+| `arg`        | name what the argument actually represents                 |
 
 **Allowed exceptions:**
+
 - `id` — universally understood
 - `url` — universally understood
 - `i`, `j` — only inside classic `for` loops of 3 lines or fewer
@@ -220,6 +226,7 @@ const index = items.findIndex(item => item.value === target);
 Always use a separate `.html` template file for components. Do not use inline `template` in the component decorator.
 
 ❌ Avoid:
+
 ```ts
 @Component({
   selector: 'ui-lib-button',
@@ -228,6 +235,7 @@ Always use a separate `.html` template file for components. Do not use inline `t
 ```
 
 ✅ Prefer:
+
 ```ts
 @Component({
   selector: 'ui-lib-button',
@@ -243,6 +251,7 @@ Always specify the return type on every method, getter, and function.
 Never rely on TypeScript inference for return types.
 
 ❌ Avoid:
+
 ```ts
 getItems() {
   return this.items();
@@ -250,6 +259,7 @@ getItems() {
 ```
 
 ✅ Prefer:
+
 ```ts
 getItems(): TabItem[] {
   return this.items();
@@ -269,11 +279,11 @@ Applies to: class methods, getters, arrow functions assigned to class members, a
 
 These two prefixes look similar but serve different purposes and must **never** be swapped:
 
-| Context | Pattern | Example |
-|---|---|---|
-| Element selector | `ui-lib-{component}` (with hyphen after `ui`) | `ui-lib-button`, `ui-lib-accordion` |
-| CSS custom property | `--uilib-{component}-{property}` (no hyphen in `uilib`) | `--uilib-button-bg`, `--uilib-accordion-border` |
-| Host CSS class | `ui-lib-{component}--{modifier}` | `ui-lib-button--disabled`, `ui-lib-accordion--open` |
+| Context             | Pattern                                                 | Example                                             |
+| ------------------- | ------------------------------------------------------- | --------------------------------------------------- |
+| Element selector    | `ui-lib-{component}` (with hyphen after `ui`)           | `ui-lib-button`, `ui-lib-accordion`                 |
+| CSS custom property | `--uilib-{component}-{property}` (no hyphen in `uilib`) | `--uilib-button-bg`, `--uilib-accordion-border`     |
+| Host CSS class      | `ui-lib-{component}--{modifier}`                        | `ui-lib-button--disabled`, `ui-lib-accordion--open` |
 
 The `uilib-` CSS prefix intentionally omits the hyphen to keep property names shorter and to match the established PrimeNG-style `p-` token convention. The `ui-lib-` selector prefix matches Angular's multi-word custom-element convention. Both patterns are correct and intentional — do not "normalize" them.
 
@@ -341,7 +351,7 @@ public readonly slideEnd: OutputEmitterRef<SliderEvent> = output<SliderEvent>();
 
 ### Rule 3 — Never collide with a `model()` internal change event
 
-Angular's `model<T>()` signal automatically generates an **internal** output named `{signalName}Change` to support two-way binding syntax (`[(signalName)]`). If a component also declares an explicit `output()` with the same name, the explicit output fires *after* the model's internal event and overwrites the consumer's bound variable with the rich event object instead of the plain `T` value — silently corrupting state.
+Angular's `model<T>()` signal automatically generates an **internal** output named `{signalName}Change` to support two-way binding syntax (`[(signalName)]`). If a component also declares an explicit `output()` with the same name, the explicit output fires _after_ the model's internal event and overwrites the consumer's bound variable with the rich event object instead of the plain `T` value — silently corrupting state.
 
 ```typescript
 // ❌ Wrong — 'visibleChange' already exists as model<boolean>()'s internal binding event
@@ -369,15 +379,15 @@ The rule is simple: **scan every `model()` signal name in the component; no expl
 
 When a component needs to expose focus, blur, change, or key events, use the following patterns. These names were specifically chosen to avoid native DOM event shadowing.
 
-| Semantic intent | Blocked name | Approved pattern | Examples in this library |
-|---|---|---|---|
-| Value changed | `change` | `{component}Change` or a semantic verb | `sliderChange`, `switchChange`, `toggleButtonChange`, `colorChange`, `knobChange`, `radioChange`, `ratingChange`, `checkboxChange` |
-| Focus gained | `focus` | `{component}Focus` | `toggleButtonFocus`, `switchFocus`, `knobFocus`, `radioFocus`, `ratingFocus`, `autocompleteFocus`, `datePickerFocus` |
-| Focus lost | `blur` | `{component}Blur` | `toggleButtonBlur`, `switchBlur`, `knobBlur`, `radioBlur`, `ratingBlur`, `autocompleteBlur`, `datePickerBlur` |
-| Keyboard key released | `keyup` / `keyUp` | `{component}KeyUp` | `autocompleteKeyUp` |
-| Keyboard key pressed | `keydown` / `keyDown` | `{component}KeyDown` | `numberKeyDown` |
-| Scroll position changed | `scroll` | `virtual{Noun}Scroll` or `{component}Scroll` | `virtualScroll` |
-| Model two-way change | _auto-generated by `model()`_ | Do NOT add an explicit output — `model()` emits `{name}Change` already | `activeIndex: model()` → `(activeIndexChange)` works automatically |
+| Semantic intent         | Blocked name                  | Approved pattern                                                       | Examples in this library                                                                                                           |
+| ----------------------- | ----------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Value changed           | `change`                      | `{component}Change` or a semantic verb                                 | `sliderChange`, `switchChange`, `toggleButtonChange`, `colorChange`, `knobChange`, `radioChange`, `ratingChange`, `checkboxChange` |
+| Focus gained            | `focus`                       | `{component}Focus`                                                     | `toggleButtonFocus`, `switchFocus`, `knobFocus`, `radioFocus`, `ratingFocus`, `autocompleteFocus`, `datePickerFocus`               |
+| Focus lost              | `blur`                        | `{component}Blur`                                                      | `toggleButtonBlur`, `switchBlur`, `knobBlur`, `radioBlur`, `ratingBlur`, `autocompleteBlur`, `datePickerBlur`                      |
+| Keyboard key released   | `keyup` / `keyUp`             | `{component}KeyUp`                                                     | `autocompleteKeyUp`                                                                                                                |
+| Keyboard key pressed    | `keydown` / `keyDown`         | `{component}KeyDown`                                                   | `numberKeyDown`                                                                                                                    |
+| Scroll position changed | `scroll`                      | `virtual{Noun}Scroll` or `{component}Scroll`                           | `virtualScroll`                                                                                                                    |
+| Model two-way change    | _auto-generated by `model()`_ | Do NOT add an explicit output — `model()` emits `{name}Change` already | `activeIndex: model()` → `(activeIndexChange)` works automatically                                                                 |
 
 ### Rule 4 — `@HostListener` vs imperative `addEventListener` for focus/blur
 
@@ -414,11 +424,13 @@ import type { ButtonVariant, ButtonSize } from 'ui-lib-custom/button';
 ```
 
 **Exceptions:**
-- Imports within the *same* entry point (e.g., `cascade-select.ts` importing `./cascade-select.types`) — relative paths are fine and required here.
+
+- Imports within the _same_ entry point (e.g., `cascade-select.ts` importing `./cascade-select.types`) — relative paths are fine and required here.
 - Story files (`.stories.ts`) — excluded from the library build; relative imports are acceptable.
 - Spec files (`.spec.ts`) — Jest resolves via the `moduleNameMapper` aliases; both work, but prefer package paths for consistency.
 
 **Audit command** — run this to detect violations before any PR:
+
 ```bash
 grep -rn "from '\.\./[a-z-]*'" projects/ui-lib-custom/src/lib/ --include="*.ts" \
   | grep -v ".spec.\|.stories.\|/[a-z-]*\.(types|constants|service|directive|pipe|spec)"
@@ -430,19 +442,19 @@ grep -rn "from '\.\./[a-z-]*'" projects/ui-lib-custom/src/lib/ --include="*.ts" 
 
 ### The three levels
 
-| Level | Where | Example |
-|---|---|---|
-| **TypeScript constant** | `design-tokens.ts` | `BUTTON_APPEARANCE_COLORS.framedAccent = '#ffc82c'` |
-| **CSS custom property** | SCSS file / ThemeConfigService | `--uilib-button-framed-bg: #ffc82c` |
-| **Usage** | Component SCSS rule body | `background: var(--uilib-button-framed-bg)` |
+| Level                   | Where                          | Example                                             |
+| ----------------------- | ------------------------------ | --------------------------------------------------- |
+| **TypeScript constant** | `design-tokens.ts`             | `BUTTON_APPEARANCE_COLORS.framedAccent = '#ffc82c'` |
+| **CSS custom property** | SCSS file / ThemeConfigService | `--uilib-button-framed-bg: #ffc82c`                 |
+| **Usage**               | Component SCSS rule body       | `background: var(--uilib-button-framed-bg)`         |
 
 ### What is and isn't a violation
 
-| Usage | OK? | Reason |
-|---|---|---|
-| `color: #hex` in a CSS rule body | ❌ **Violation** | Raw hex cannot be themed or overridden |
-| `--uilib-foo: #hex` in a CSS variable *definition* block | ✅ **OK** (with caveat) | The CSS variable itself is the token; the hex is its default value |
-| `--uilib-foo: var(--uilib-color-neutral-300, #hex)` in a definition | ✅ **Best** | References global token first; hex is CSS fallback |
+| Usage                                                               | OK?                     | Reason                                                             |
+| ------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------ |
+| `color: #hex` in a CSS rule body                                    | ❌ **Violation**        | Raw hex cannot be themed or overridden                             |
+| `--uilib-foo: #hex` in a CSS variable _definition_ block            | ✅ **OK** (with caveat) | The CSS variable itself is the token; the hex is its default value |
+| `--uilib-foo: var(--uilib-color-neutral-300, #hex)` in a definition | ✅ **Best**             | References global token first; hex is CSS fallback                 |
 
 ### When a global token exists, always reference it
 
@@ -506,11 +518,11 @@ not optional for any component.
 @layer uilib.base, uilib.tokens, uilib.components;
 ```
 
-| Layer | Priority | Contents | Why |
-|---|---|---|---|
-| `uilib.base` | Lowest | Consumer CSS resets / normalizations | Resets should not override component padding/margin |
-| `uilib.tokens` | Middle | `themes.scss` — all `:root` / `[data-theme]` CSS custom properties | Tokens below component styles; component-level tokens win |
-| `uilib.components` | Highest (layered) | Every component `.scss` file | Component styles; unlayered consumer overrides always win |
+| Layer              | Priority          | Contents                                                           | Why                                                       |
+| ------------------ | ----------------- | ------------------------------------------------------------------ | --------------------------------------------------------- |
+| `uilib.base`       | Lowest            | Consumer CSS resets / normalizations                               | Resets should not override component padding/margin       |
+| `uilib.tokens`     | Middle            | `themes.scss` — all `:root` / `[data-theme]` CSS custom properties | Tokens below component styles; component-level tokens win |
+| `uilib.components` | Highest (layered) | Every component `.scss` file                                       | Component styles; unlayered consumer overrides always win |
 
 The declaration `@layer uilib.tokens, uilib.components;` lives **only** in `themes.scss`.
 Consumers who load `themes.scss` get the declaration automatically; they do not need to declare it themselves.
@@ -533,16 +545,14 @@ specificity. This means:
 ```scss
 // ✅ Correct — new component file
 @layer uilib.components {
+  ui-lib-my-component {
+    --uilib-my-component-bg: var(--uilib-surface, #ffffff);
+    display: block;
+  }
 
-ui-lib-my-component {
-  --uilib-my-component-bg: var(--uilib-surface, #ffffff);
-  display: block;
-}
-
-.ui-lib-my-component-inner {
-  padding: var(--uilib-space-4, 1rem);
-}
-
+  .ui-lib-my-component-inner {
+    padding: var(--uilib-space-4, 1rem);
+  }
 } // end @layer uilib.components
 ```
 
@@ -560,7 +570,7 @@ Any app-level CSS reset (`* { margin: 0; padding: 0 }`) **must** be placed in `@
 
 ```scss
 /* Consumer app styles.scss */
-@use 'ui-lib-custom/themes/themes.scss' as *;  // establishes layer order first
+@use 'ui-lib-custom/themes/themes.scss' as *; // establishes layer order first
 
 @layer uilib.base {
   *,
@@ -573,10 +583,13 @@ Any app-level CSS reset (`* { margin: 0; padding: 0 }`) **must** be placed in `@
 }
 
 /* html/body app-level defaults stay unlayered — intentionally beat all library layers */
-html, body { font-family: var(--uilib-font-ui, sans-serif); }
+html,
+body {
+  font-family: var(--uilib-font-ui, sans-serif);
+}
 ```
 
-**Why this is necessary:** Before `@layer`, a `*` reset had specificity `(0,0,0)` and naturally lost to component class selectors `(0,1,0)`. After `@layer`, any *unlayered* author CSS beats every layered rule regardless of specificity. An unlayered `* { padding: 0 }` would zero out every component's padding. Wrapping in `uilib.base` (lowest priority) restores the pre-`@layer` behaviour.
+**Why this is necessary:** Before `@layer`, a `*` reset had specificity `(0,0,0)` and naturally lost to component class selectors `(0,1,0)`. After `@layer`, any _unlayered_ author CSS beats every layered rule regardless of specificity. An unlayered `* { padding: 0 }` would zero out every component's padding. Wrapping in `uilib.base` (lowest priority) restores the pre-`@layer` behaviour.
 
 ### Exception: high-contrast.scss
 
@@ -607,28 +620,28 @@ Any physical directional property in a component SCSS file will block the commit
 
 ### Physical → logical mapping
 
-| Physical (banned)                              | Logical (use this)                            |
-|------------------------------------------------|-----------------------------------------------|
-| `margin-left`                                  | `margin-inline-start`                         |
-| `margin-right`                                 | `margin-inline-end`                           |
-| `padding-left`                                 | `padding-inline-start`                        |
-| `padding-right`                                | `padding-inline-end`                          |
-| `border-left`                                  | `border-inline-start`                         |
-| `border-right`                                 | `border-inline-end`                           |
-| `border-left-color`                            | `border-inline-start-color`                   |
-| `border-right-color`                           | `border-inline-end-color`                     |
-| `border-left-width`                            | `border-inline-start-width`                   |
-| `border-right-width`                           | `border-inline-end-width`                     |
-| `border-left-style`                            | `border-inline-start-style`                   |
-| `border-right-style`                           | `border-inline-end-style`                     |
-| `border-top-left-radius`                       | `border-start-start-radius`                   |
-| `border-top-right-radius`                      | `border-start-end-radius`                     |
-| `border-bottom-left-radius`                    | `border-end-start-radius`                     |
-| `border-bottom-right-radius`                   | `border-end-end-radius`                       |
-| `text-align: left`                             | `text-align: start`                           |
-| `text-align: right`                            | `text-align: end`                             |
-| `left: <directional value>`                    | `inset-inline-start: <value>`                 |
-| `right: <directional value>`                   | `inset-inline-end: <value>`                   |
+| Physical (banned)            | Logical (use this)            |
+| ---------------------------- | ----------------------------- |
+| `margin-left`                | `margin-inline-start`         |
+| `margin-right`               | `margin-inline-end`           |
+| `padding-left`               | `padding-inline-start`        |
+| `padding-right`              | `padding-inline-end`          |
+| `border-left`                | `border-inline-start`         |
+| `border-right`               | `border-inline-end`           |
+| `border-left-color`          | `border-inline-start-color`   |
+| `border-right-color`         | `border-inline-end-color`     |
+| `border-left-width`          | `border-inline-start-width`   |
+| `border-right-width`         | `border-inline-end-width`     |
+| `border-left-style`          | `border-inline-start-style`   |
+| `border-right-style`         | `border-inline-end-style`     |
+| `border-top-left-radius`     | `border-start-start-radius`   |
+| `border-top-right-radius`    | `border-start-end-radius`     |
+| `border-bottom-left-radius`  | `border-end-start-radius`     |
+| `border-bottom-right-radius` | `border-end-end-radius`       |
+| `text-align: left`           | `text-align: start`           |
+| `text-align: right`          | `text-align: end`             |
+| `left: <directional value>`  | `inset-inline-start: <value>` |
+| `right: <directional value>` | `inset-inline-end: <value>`   |
 
 > **Note on `text-align: left/right`**: enforced separately at error severity via
 > `declaration-property-value-disallowed-list`. Both rules cover it.
@@ -660,13 +673,13 @@ Any physical directional property in a component SCSS file will block the commit
 The `left` and `right` CSS properties are **not banned** in the Stylelint rule because they have
 direction-agnostic uses. Apply judgment:
 
-| Usage pattern | Is it directional? | Correct approach |
-|---|---|---|
-| `left: 50%; transform: translateX(-50%)` | No — centering | Keep `left: 50%` |
-| `left: 0; right: 0` (full-width stretch) | No — same as `inset-inline: 0` | Prefer `inset-inline: 0` |
-| `left: 0` (flush-to-start edge) | **Yes** | Use `inset-inline-start: 0` |
-| `right: 0` (flush-to-end edge) | **Yes** | Use `inset-inline-end: 0` |
-| `right: -1px` (overlap trick on end side) | **Yes** | Use `inset-inline-end: -1px` |
+| Usage pattern                             | Is it directional?             | Correct approach             |
+| ----------------------------------------- | ------------------------------ | ---------------------------- |
+| `left: 50%; transform: translateX(-50%)`  | No — centering                 | Keep `left: 50%`             |
+| `left: 0; right: 0` (full-width stretch)  | No — same as `inset-inline: 0` | Prefer `inset-inline: 0`     |
+| `left: 0` (flush-to-start edge)           | **Yes**                        | Use `inset-inline-start: 0`  |
+| `right: 0` (flush-to-end edge)            | **Yes**                        | Use `inset-inline-end: 0`    |
+| `right: -1px` (overlap trick on end side) | **Yes**                        | Use `inset-inline-end: -1px` |
 
 ### Block-axis properties (`top` / `bottom`)
 
@@ -696,12 +709,12 @@ token values, not layout declarations:
 ```scss
 // ✅ OK — raw value in token definition
 ui-lib-button {
-  --uilib-button-padding: 0.375rem 0.75rem;   // shorthand: block inline
+  --uilib-button-padding: 0.375rem 0.75rem; // shorthand: block inline
 }
 
 // ❌ Wrong — physical direction in a rule body
 .uilib-button__label {
-  padding-left: 0.75rem;    // banned
+  padding-left: 0.75rem; // banned
 }
 
 // ✅ Correct
@@ -739,6 +752,7 @@ ui-lib-button {
   - Monospace (`code`, `pre`, `.monospace`): `var(--uilib-font-mono)`.
   - Theme presets supply these via `ThemePresetTypography`; `fontFamily` remains a backward-compatible alias for body/UI fonts.
 - **View Encapsulation**: All library components **must** use `ViewEncapsulation.None`. This is critical for CSS variable cascading and transitions/animations to work correctly across component boundaries. Angular's default emulated encapsulation breaks theming by scoping selectors with `_ngcontent-*` attributes.
+
 ```typescript
   import { ViewEncapsulation } from '@angular/core';
 
@@ -786,13 +800,13 @@ All CSS custom properties MUST follow this pattern:
 
 ### Reserved Global Prefixes
 
-- `--uilib-color-*`        Color palette tokens
-- `--uilib-spacing-*`      Spacing tokens
-- `--uilib-radius-*`       Border radius tokens
-- `--uilib-shadow-*`       Shadow tokens
-- `--uilib-font-*`         Typography tokens
-- `--uilib-surface`        Surface colors
-- `--uilib-page-*`         Page-level variables
+- `--uilib-color-*` Color palette tokens
+- `--uilib-spacing-*` Spacing tokens
+- `--uilib-radius-*` Border radius tokens
+- `--uilib-shadow-*` Shadow tokens
+- `--uilib-font-*` Typography tokens
+- `--uilib-surface` Surface colors
+- `--uilib-page-*` Page-level variables
 
 ### Adding New Variables
 
@@ -951,11 +965,13 @@ When `whenStable()` runs inside a nested `describe` `beforeEach` (e.g., a "templ
 ## Comments
 
 ### When to comment
+
 - **Always**: non-obvious logic, workarounds, ARIA decisions, CSS variable naming rationale
 - **Never**: obvious code (`// increment counter` above `count++`)
 - **Public API**: all exported classes and inputs must have JSDoc descriptions
 
 ### Format
+
 - Prefer `//` for inline explanations
 - Use `/** */` JSDoc for all exported symbols
 - Reference related specs or issues for workarounds: `// See: https://...`
@@ -976,13 +992,18 @@ All items in this section are labeled with `[Historical]` for quick scanning.
 
 - [Historical] **Never use TypeScript `enum`**. Prefer `as const` objects — they have no runtime overhead,
   tree-shake cleanly, and compose naturally with string union types.
-```typescript
-  // ❌ Avoid
-  enum ButtonSize { Sm = 'sm', Md = 'md', Lg = 'lg' }
 
-  // ✅ Prefer
-  export const BUTTON_SIZES = { Sm: 'sm', Md: 'md', Lg: 'lg' } as const;
-  export type ButtonSize = typeof BUTTON_SIZES[keyof typeof BUTTON_SIZES];
+```typescript
+// ❌ Avoid
+enum ButtonSize {
+  Sm = 'sm',
+  Md = 'md',
+  Lg = 'lg',
+}
+
+// ✅ Prefer
+export const BUTTON_SIZES = { Sm: 'sm', Md: 'md', Lg: 'lg' } as const;
+export type ButtonSize = (typeof BUTTON_SIZES)[keyof typeof BUTTON_SIZES];
 ```
 
 - [Historical] **Public input types stay as string unions** (`type InputVariant = 'material' | 'bootstrap' | 'minimal'`).

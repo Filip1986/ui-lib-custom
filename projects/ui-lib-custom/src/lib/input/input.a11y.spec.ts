@@ -43,7 +43,7 @@ class InputA11yHostComponent {
   public readonly readonly: WritableSignal<boolean> = signal<boolean>(false);
   public readonly inputId: WritableSignal<string | null> = signal<string | null>(null);
   public readonly labelFloat: WritableSignal<'over' | 'in' | 'on'> = signal<'over' | 'in' | 'on'>(
-    'over'
+    'over',
   );
   public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
   public readonly ariaLabelledBy: WritableSignal<string | null> = signal<string | null>(null);
@@ -166,7 +166,7 @@ describe('Input Accessibility', (): void => {
     fixture.detectChanges();
 
     const floatingLabel: HTMLLabelElement = firstInputComponent().querySelector(
-      'label.ui-input-label-floating'
+      'label.ui-input-label-floating',
     ) as HTMLLabelElement;
     expect(floatingLabel.getAttribute('for')).toBe(nativeInput().id);
   });
@@ -176,7 +176,7 @@ describe('Input Accessibility', (): void => {
     fixture.detectChanges();
 
     const floatingLabel: HTMLLabelElement = firstInputComponent().querySelector(
-      'label.ui-input-label-floating'
+      'label.ui-input-label-floating',
     ) as HTMLLabelElement;
     expect(floatingLabel.getAttribute('for')).toBe(nativeInput().id);
   });

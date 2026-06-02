@@ -137,7 +137,7 @@ describe('Stack (a11y)', (): void => {
 
   it('role list: supports explicit role when used as non-list container', async (): Promise<void> => {
     const fixture: ComponentFixture<ListRoleStackHostComponent> = await setup(
-      ListRoleStackHostComponent
+      ListRoleStackHostComponent,
     );
     expect(getStackContentElement(fixture).getAttribute('role')).toBe('list');
   });
@@ -150,17 +150,17 @@ describe('Stack (a11y)', (): void => {
 
   it('applies wrap behavior', async (): Promise<void> => {
     const fixture: ComponentFixture<ListRoleStackHostComponent> = await setup(
-      ListRoleStackHostComponent
+      ListRoleStackHostComponent,
     );
     expect(getStackContentElement(fixture).style.flexWrap).toBe('wrap');
   });
 
   it('projects content in DOM order to preserve reading order with wrap', async (): Promise<void> => {
     const fixture: ComponentFixture<ListRoleStackHostComponent> = await setup(
-      ListRoleStackHostComponent
+      ListRoleStackHostComponent,
     );
     const items: HTMLElement[] = Array.from(
-      getStackContentElement(fixture).querySelectorAll<HTMLElement>('div')
+      getStackContentElement(fixture).querySelectorAll<HTMLElement>('div'),
     );
     expect(items.map((item: HTMLElement): string => item.textContent.trim())).toEqual([
       'First',
@@ -171,10 +171,10 @@ describe('Stack (a11y)', (): void => {
 
   it('does not set per-item CSS order that would desync reading order', async (): Promise<void> => {
     const fixture: ComponentFixture<ListRoleStackHostComponent> = await setup(
-      ListRoleStackHostComponent
+      ListRoleStackHostComponent,
     );
     const items: HTMLElement[] = Array.from(
-      getStackContentElement(fixture).querySelectorAll<HTMLElement>('div')
+      getStackContentElement(fixture).querySelectorAll<HTMLElement>('div'),
     );
     items.forEach((item: HTMLElement): void => {
       expect(item.style.order).toBe('');

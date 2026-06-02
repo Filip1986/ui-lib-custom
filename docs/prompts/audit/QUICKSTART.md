@@ -18,10 +18,12 @@ Claude will read all source files, run lint/jest/build, and produce a gap report
 **After Claude finishes:**
 
 Review the gap report. For each ❌:
+
 - Add `[SKIP]` if you intentionally defer it (and why)
 - Leave it as ❌ if you want it fixed in Phase 2
 
 For each 🔍 (human verification):
+
 - Do these yourself: open the browser, run the keyboard walkthrough, check screen readers
 - Note your results before starting Phase 2
 
@@ -67,15 +69,15 @@ and AI_AGENT_CONTEXT.md.
 
 A component passes Tier 2 when:
 
-| Gate | Verified by |
-|------|-------------|
-| All 10 averaged categories ≥ 8.0 | Phase 1 score table |
-| Category 11 (Competitive Parity) = PASS | Phase 1 Category 11 result |
-| eslint --max-warnings 0 | Phase 2 verification commands |
-| jest passes | Phase 2 verification commands |
-| ng build ui-lib-custom clean | Phase 2 verification commands |
-| Manual keyboard walkthrough done | You, during 🔍 human verification |
-| Explicit backlog recorded in COMPONENT_SCORES.md | Phase 3 |
+| Gate                                             | Verified by                       |
+| ------------------------------------------------ | --------------------------------- |
+| All 10 averaged categories ≥ 8.0                 | Phase 1 score table               |
+| Category 11 (Competitive Parity) = PASS          | Phase 1 Category 11 result        |
+| eslint --max-warnings 0                          | Phase 2 verification commands     |
+| jest passes                                      | Phase 2 verification commands     |
+| ng build ui-lib-custom clean                     | Phase 2 verification commands     |
+| Manual keyboard walkthrough done                 | You, during 🔍 human verification |
+| Explicit backlog recorded in COMPONENT_SCORES.md | Phase 3                           |
 
 **Then and only then is the component DONE.**
 

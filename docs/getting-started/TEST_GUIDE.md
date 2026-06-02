@@ -45,7 +45,7 @@ import { Button, Card } from 'ui-lib-custom';
   template: `
     <div style="padding: 2rem; background: #f5f5f5; min-height: 100vh;">
       <h1>Testing UI Components Library</h1>
-      
+
       <div style="margin: 2rem 0;">
         <h2>Buttons</h2>
         <div style="display: flex; gap: 1rem; margin: 1rem 0;">
@@ -85,25 +85,13 @@ import { Button, Card } from 'ui-lib-custom';
           <p>Click the buttons to change the count</p>
           <div card-footer>
             <div style="display: flex; gap: 0.5rem;">
-              <ui-lib-button 
-                variant="material" 
-                color="primary" 
-                size="small"
-                (click)="increment()">
+              <ui-lib-button variant="material" color="primary" size="small" (click)="increment()">
                 Increment
               </ui-lib-button>
-              <ui-lib-button 
-                variant="bootstrap" 
-                color="danger" 
-                size="small"
-                (click)="decrement()">
+              <ui-lib-button variant="bootstrap" color="danger" size="small" (click)="decrement()">
                 Decrement
               </ui-lib-button>
-              <ui-lib-button 
-                variant="minimal" 
-                color="secondary" 
-                size="small"
-                (click)="reset()">
+              <ui-lib-button variant="minimal" color="secondary" size="small" (click)="reset()">
                 Reset
               </ui-lib-button>
             </div>
@@ -112,16 +100,18 @@ import { Button, Card } from 'ui-lib-custom';
       </div>
     </div>
   `,
-  styles: [`
-    h1 {
-      color: #333;
-      margin-bottom: 2rem;
-    }
-    h2 {
-      color: #666;
-      margin: 1rem 0;
-    }
-  `]
+  styles: [
+    `
+      h1 {
+        color: #333;
+        margin-bottom: 2rem;
+      }
+      h2 {
+        color: #666;
+        margin: 1rem 0;
+      }
+    `,
+  ],
 })
 export class AppComponent {
   count = 0;
@@ -149,6 +139,7 @@ ng serve
 Open **http://localhost:4200** in your browser!
 
 You should see:
+
 - Three buttons with different variants
 - Three cards with different designs
 - An interactive counter that works with your buttons
@@ -172,13 +163,13 @@ If you can see and interact with the components, congratulations! ✨
 Try changing the examples:
 
 ### Change Button Variants:
+
 ```html
-<ui-lib-button variant="bootstrap" color="warning" size="large">
-  Large Warning
-</ui-lib-button>
+<ui-lib-button variant="bootstrap" color="warning" size="large"> Large Warning </ui-lib-button>
 ```
 
 ### Change Card Elevation:
+
 ```html
 <ui-lib-card variant="material" elevation="high" [hoverable]="true">
   High elevation card
@@ -186,10 +177,9 @@ Try changing the examples:
 ```
 
 ### Make Full-Width Buttons:
+
 ```html
-<ui-lib-button variant="material" [fullWidth]="true">
-  Full Width Button
-</ui-lib-button>
+<ui-lib-button variant="material" [fullWidth]="true"> Full Width Button </ui-lib-button>
 ```
 
 ---
@@ -199,6 +189,7 @@ Try changing the examples:
 1. **Edit a component** in `D:\Work\Personal\Github\ui-lib-custom\projects\ui-lib-custom\src\lib\`
 
 2. **Rebuild the library:**
+
    ```bash
    cd D:\Work\Personal\Github\ui-lib-custom
    ng build ui-lib-custom
@@ -207,6 +198,7 @@ Try changing the examples:
 3. **Refresh your test app** - Changes will be automatically available!
 
 For continuous development, use watch mode:
+
 ```bash
 ng build ui-lib-custom --watch
 ```
@@ -247,6 +239,7 @@ Then run: `npm install`
 You now have a working UI component library that you can use across all your Angular projects!
 
 **Key Points:**
+
 - Library is built and ready: `dist/ui-lib-custom/`
 - Use `npm link` for easy development
 - Import components: `import { Button, Card } from 'ui-lib-custom'`
@@ -289,6 +282,7 @@ Add global theme styles in `src/styles.scss`:
 ### Consumer App Code
 
 `src/app/app.ts`
+
 ```typescript
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -326,23 +320,14 @@ export class App {
 ```
 
 `src/app/app.html`
+
 ```html
 <main class="demo">
   <ui-lib-card variant="material" class="demo-card">
     <div card-header>Consumer Test Form</div>
     <form class="demo-form">
-      <ui-lib-input
-        label="Name"
-        placeholder="Ada Lovelace"
-        name="name"
-        [(ngModel)]="name"
-      />
-      <ui-lib-input
-        label="Email"
-        placeholder="ada@example.com"
-        name="email"
-        [(ngModel)]="email"
-      />
+      <ui-lib-input label="Name" placeholder="Ada Lovelace" name="name" [(ngModel)]="name" />
+      <ui-lib-input label="Email" placeholder="ada@example.com" name="email" [(ngModel)]="email" />
     </form>
     <div card-footer class="demo-actions">
       <ui-lib-button (click)="setBootstrapVariant()">Variant: Bootstrap</ui-lib-button>

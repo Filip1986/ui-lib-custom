@@ -45,7 +45,7 @@ class TestHostComponent {
 
 function getSpinnerEl(fixture: ComponentFixture<TestHostComponent>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    'ui-lib-progress-spinner'
+    'ui-lib-progress-spinner',
   ) as HTMLElement;
 }
 

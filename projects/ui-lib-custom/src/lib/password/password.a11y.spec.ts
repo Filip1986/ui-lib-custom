@@ -35,17 +35,17 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 })
 class PasswordA11yHostComponent {
   public readonly ariaLabel: WritableSignal<string | undefined> = signal<string | undefined>(
-    'Password'
+    'Password',
   );
   public readonly feedback: WritableSignal<boolean> = signal<boolean>(true);
   public readonly toggleMask: WritableSignal<boolean> = signal<boolean>(false);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
   public readonly errorMessage: WritableSignal<string | undefined> = signal<string | undefined>(
-    undefined
+    undefined,
   );
   public readonly ariaLabelledBy: WritableSignal<string | undefined> = signal<string | undefined>(
-    undefined
+    undefined,
   );
 }
 

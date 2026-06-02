@@ -1,9 +1,8 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header docHeader title="Toolbar" [importCode]="importCode">
     <p class="doc-description">
-      A horizontal container with start, center, and end content projection slots.
-      Use the <code>uiToolbarStart</code>, <code>uiToolbarCenter</code>, and
+      A horizontal container with start, center, and end content projection slots. Use the
+      <code>uiToolbarStart</code>, <code>uiToolbarCenter</code>, and
       <code>uiToolbarEnd</code> attribute selectors to place content in the corresponding slot.
     </p>
   </app-doc-page-header>
@@ -25,7 +24,8 @@
   <!-- Section 2: Start and End -->
   <app-doc-section id="start-and-end" title="Start and End">
     <p class="demo-section__description">
-      Use both <code>uiToolbarStart</code> and <code>uiToolbarEnd</code> to place content on opposite sides.
+      Use both <code>uiToolbarStart</code> and <code>uiToolbarEnd</code> to place content on
+      opposite sides.
     </p>
     <ui-lib-toolbar>
       <div uiToolbarStart>
@@ -63,12 +63,14 @@
   <!-- Section 4: Sizes -->
   <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
-      Use the <code>size</code> input to control toolbar height and spacing:
-      <code>sm</code>, <code>md</code> (default), or <code>lg</code>.
+      Use the <code>size</code> input to control toolbar height and spacing: <code>sm</code>,
+      <code>md</code> (default), or <code>lg</code>.
     </p>
     @for (size of sizes; track size) {
       <div style="margin-bottom: 1rem">
-        <p class="demo-section__description" style="margin-bottom: 0.25rem"><code>size="{{ size }}"</code></p>
+        <p class="demo-section__description" style="margin-bottom: 0.25rem">
+          <code>size="{{ size }}"</code>
+        </p>
         <ui-lib-toolbar [size]="size">
           <div uiToolbarStart>
             <ui-lib-button type="button">Action</ui-lib-button>
@@ -138,7 +140,8 @@
                 severity="primary"
                 size="sm"
                 (click)="setVariant(variant)"
-              >{{ variant }}</ui-lib-button>
+                >{{ variant }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -154,7 +157,8 @@
                 severity="primary"
                 size="sm"
                 (click)="setSize(size)"
-              >{{ size }}</ui-lib-button>
+                >{{ size }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -164,7 +168,6 @@
 
   <!-- API Table -->
   <app-doc-section id="api" title="API">
-
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="inputRows" />
 
@@ -172,7 +175,6 @@
     <app-doc-api-reference kind="property" [rows]="slotRows" [showDefault]="false" />
   </app-doc-section>
 
-  
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -189,7 +191,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -199,5 +201,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

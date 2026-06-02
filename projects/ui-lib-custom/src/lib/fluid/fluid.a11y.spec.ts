@@ -63,14 +63,14 @@ class FluidNestedA11yHost {}
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 async function createFixture<T>(
-  componentType: Parameters<typeof TestBed.createComponent>[0]
+  componentType: Parameters<typeof TestBed.createComponent>[0],
 ): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
     imports: [componentType],
     providers: [provideZonelessChangeDetection()],
   }).compileComponents();
   const fixture: ComponentFixture<T> = TestBed.createComponent(
-    componentType as Parameters<typeof TestBed.createComponent<T>>[0]
+    componentType as Parameters<typeof TestBed.createComponent<T>>[0],
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();

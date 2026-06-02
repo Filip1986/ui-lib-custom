@@ -42,7 +42,7 @@ const renderCheckbox: (args: Partial<CheckboxStoryArgs>) => {
   props: Partial<CheckboxStoryArgs>;
   template: string;
 } = (
-  args: Partial<CheckboxStoryArgs>
+  args: Partial<CheckboxStoryArgs>,
 ): { props: Partial<CheckboxStoryArgs>; template: string } => ({
   props: args,
   template: `

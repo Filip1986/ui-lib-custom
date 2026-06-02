@@ -36,7 +36,7 @@ class RatingA11yHostComponent {
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly cancel: WritableSignal<boolean> = signal<boolean>(true);
   public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(
-    'Product rating'
+    'Product rating',
   );
   public readonly ariaLabelledby: WritableSignal<string | null> = signal<string | null>(null);
 }
@@ -100,7 +100,7 @@ interface RatingA11yFixtureOptions {
 }
 
 async function createFixture(
-  options: RatingA11yFixtureOptions = {}
+  options: RatingA11yFixtureOptions = {},
 ): Promise<ComponentFixture<RatingA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [RatingA11yHostComponent],
@@ -136,7 +136,7 @@ async function createFixture(
 
 function getRatingHost(fixture: ComponentFixture<RatingA11yHostComponent>): HTMLElement {
   const element: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    'ui-lib-rating'
+    'ui-lib-rating',
   );
   if (!element) {
     throw new Error('Expected ui-lib-rating host element to exist');
@@ -146,14 +146,14 @@ function getRatingHost(fixture: ComponentFixture<RatingA11yHostComponent>): HTML
 
 function getRatingInstance(fixture: ComponentFixture<RatingA11yHostComponent>): Rating {
   const debugElement: DebugElement = fixture.debugElement.query(
-    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Rating
+    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Rating,
   );
   return debugElement.componentInstance as Rating;
 }
 
 function setRatingValue(
   fixture: ComponentFixture<RatingA11yHostComponent>,
-  value: number | null
+  value: number | null,
 ): void {
   getRatingInstance(fixture).writeValue(value);
   fixture.detectChanges();
@@ -162,16 +162,16 @@ function setRatingValue(
 function getInteractiveStars(fixture: ComponentFixture<RatingA11yHostComponent>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-rating__star[role="radio"]'
-    )
+      '.ui-lib-rating__star[role="radio"]',
+    ),
   );
 }
 
 function getDecorativeStars(fixture: ComponentFixture<RatingA11yHostComponent>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-rating__star[aria-hidden="true"]'
-    )
+      '.ui-lib-rating__star[aria-hidden="true"]',
+    ),
   );
 }
 
@@ -415,7 +415,7 @@ describe('Rating Accessibility', (): void => {
       fixture.detectChanges();
 
       const cancelButton: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-rating__cancel'
+        '.ui-lib-rating__cancel',
       );
       expect(cancelButton).toBeNull();
     });
@@ -431,7 +431,7 @@ describe('Rating Accessibility', (): void => {
       });
 
       expect(warnSpy).toHaveBeenCalledWith(
-        '[ui-lib-rating] Missing accessible name. Provide ariaLabel or ariaLabelledby when no visible label is present.'
+        '[ui-lib-rating] Missing accessible name. Provide ariaLabel or ariaLabelledby when no visible label is present.',
       );
     });
 

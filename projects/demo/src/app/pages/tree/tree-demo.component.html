@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Tree"
@@ -54,8 +53,8 @@
   <!-- ── Checkbox Selection ──────────────────────────────────────────────── -->
   <app-doc-section id="checkbox-selection" title="Checkbox Selection">
     <p class="demo-section__description">
-      Checking a parent cascades to all its descendants. A dash indicates a partially
-      selected parent.
+      Checking a parent cascades to all its descendants. A dash indicates a partially selected
+      parent.
     </p>
     <div class="demo-card">
       <ui-lib-tree
@@ -72,8 +71,8 @@
   <!-- ── Filter ──────────────────────────────────────────────────────────── -->
   <app-doc-section id="filter" title="Filter">
     <p class="demo-section__description">
-      Type into the search box to filter the tree. Lenient mode (default) shows
-      matching nodes and all their ancestors.
+      Type into the search box to filter the tree. Lenient mode (default) shows matching nodes and
+      all their ancestors.
     </p>
     <div class="demo-card">
       <ui-lib-tree
@@ -132,8 +131,8 @@
   <!-- ── Variants ────────────────────────────────────────────────────────── -->
   <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
-      The three design variants — <code>material</code>, <code>bootstrap</code>,
-      and <code>minimal</code> — adapt to the active theme.
+      The three design variants — <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code> — adapt to the active theme.
     </p>
     <div class="demo-card demo-variants-grid">
       <div>
@@ -174,16 +173,14 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
-      All inputs accepted by <code>ui-lib-tree</code>. Import from
-      <code>ui-lib-custom/tree</code>.
+      All inputs accepted by <code>ui-lib-tree</code>. Import from <code>ui-lib-custom/tree</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -192,7 +189,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -202,5 +199,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

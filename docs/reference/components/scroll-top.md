@@ -13,16 +13,16 @@ ScrollTop — a floating "back to top" button that appears after the user scroll
 
 ### Inputs
 
-| Name              | Type                      | Default            | Description                                                                                       |
-| ----------------- | ------------------------- | ------------------ | ------------------------------------------------------------------------------------------------- |
-| `behavior`        | `ScrollTopBehavior`       | `'smooth'`         | Native scroll-behavior applied when scrolling back to top.                                        |
-| `buttonAriaLabel` | `string`                  | `''`               | Accessible label for the button. Falls back to the active locale's 'scroll-top.label' when empty. |
-| `icon`            | `string`                  | `'pi pi-arrow-up'` | CSS class(es) for the icon (e.g. "pi pi-arrow-up").                                               |
-| `size`            | `ScrollTopSize`           | `'md'`             | Size of the button.                                                                               |
-| `styleClass`      | `string | null`           | `null`             | Additional CSS classes to attach to the host element.                                             |
-| `target`          | `ScrollTopTarget`         | `'window'`         | Target to listen for scroll events on: the global window or the parent element.                   |
-| `threshold`       | `number`                  | `400`              | Scroll distance in pixels before the button becomes visible.                                      |
-| `variant`         | `ScrollTopVariant | null` | `null`             | Visual variant — inherits from ThemeConfigService when not set.                                   |
+| Name              | Type                | Default            | Description                                                                                       |
+| ----------------- | ------------------- | ------------------ | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `behavior`        | `ScrollTopBehavior` | `'smooth'`         | Native scroll-behavior applied when scrolling back to top.                                        |
+| `buttonAriaLabel` | `string`            | `''`               | Accessible label for the button. Falls back to the active locale's 'scroll-top.label' when empty. |
+| `icon`            | `string`            | `'pi pi-arrow-up'` | CSS class(es) for the icon (e.g. "pi pi-arrow-up").                                               |
+| `size`            | `ScrollTopSize`     | `'md'`             | Size of the button.                                                                               |
+| `styleClass`      | `string             | null`              | `null`                                                                                            | Additional CSS classes to attach to the host element.           |
+| `target`          | `ScrollTopTarget`   | `'window'`         | Target to listen for scroll events on: the global window or the parent element.                   |
+| `threshold`       | `number`            | `400`              | Scroll distance in pixels before the button becomes visible.                                      |
+| `variant`         | `ScrollTopVariant   | null`              | `null`                                                                                            | Visual variant — inherits from ThemeConfigService when not set. |
 
 ### Outputs
 
@@ -97,4 +97,3 @@ _none_
 - [Demo page](/components/scroll-top)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/scroll-top/README.md)
-

@@ -29,7 +29,7 @@
           [attr.role]="isMultiTab() ? 'tab' : null"
           [attr.id]="isMultiTab() ? tabId(index) : null"
           [attr.aria-controls]="isMultiTab() ? panelId(index) : null"
-          [attr.aria-selected]="isMultiTab() ? (activeTabIndex() === index) : null"
+          [attr.aria-selected]="isMultiTab() ? activeTabIndex() === index : null"
           [attr.tabindex]="isMultiTab() ? (activeTabIndex() === index ? 0 : -1) : null"
           (click)="selectTab(index)"
           (keydown)="onTabKeydown($event, index)"

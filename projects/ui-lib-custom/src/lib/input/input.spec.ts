@@ -325,7 +325,7 @@ describe('UiLibInput ngModel integration', (): void => {
     freshFixture.detectChanges(false);
 
     const freshInput: HTMLInputElement = (freshFixture.nativeElement as HTMLElement).querySelector(
-      'input'
+      'input',
     ) as HTMLInputElement;
     expect(freshInput.value).toBe('Grace');
   });
@@ -447,7 +447,7 @@ describe('UiLibInput accessibility', (): void => {
     fixture.detectChanges();
 
     const labelEl: HTMLLabelElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      'label.ui-input-label'
+      'label.ui-input-label',
     );
     const inputId: string | null = inputEl().getAttribute('id');
     expect(labelEl?.getAttribute('for')).toBe(inputId);
@@ -458,7 +458,7 @@ describe('UiLibInput accessibility', (): void => {
     fixture.detectChanges();
 
     const errorEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-input-error-text'
+      '.ui-input-error-text',
     );
     expect(inputEl().getAttribute('aria-describedby')).toBe(errorEl?.id ?? null);
   });

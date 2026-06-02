@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Message"
@@ -82,26 +81,11 @@
       Six severity levels, each with a colour palette and a default icon.
     </p>
     <div class="message-demo__stack">
-      <ui-lib-message
-        severity="success"
-        text="Your changes have been saved successfully."
-      />
-      <ui-lib-message
-        severity="info"
-        text="Your subscription renews in 7 days."
-      />
-      <ui-lib-message
-        severity="warn"
-        text="Unsaved changes will be lost if you navigate away."
-      />
-      <ui-lib-message
-        severity="error"
-        text="Unable to connect to the server. Please try again."
-      />
-      <ui-lib-message
-        severity="secondary"
-        text="This feature is available on the Pro plan."
-      />
+      <ui-lib-message severity="success" text="Your changes have been saved successfully." />
+      <ui-lib-message severity="info" text="Your subscription renews in 7 days." />
+      <ui-lib-message severity="warn" text="Unsaved changes will be lost if you navigate away." />
+      <ui-lib-message severity="error" text="Unable to connect to the server. Please try again." />
+      <ui-lib-message severity="secondary" text="This feature is available on the Pro plan." />
       <ui-lib-message
         severity="contrast"
         text="Maintenance window scheduled for Sunday at 02:00 UTC."
@@ -147,21 +131,13 @@
   <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">Three size tokens: sm, md (default), lg.</p>
     <div class="message-demo__stack">
-      <ui-lib-message
-        severity="info"
-        size="sm"
-        text="Small — compact for tight layouts."
-      />
+      <ui-lib-message severity="info" size="sm" text="Small — compact for tight layouts." />
       <ui-lib-message
         severity="info"
         size="md"
         text="Medium — default, balanced for most contexts."
       />
-      <ui-lib-message
-        severity="info"
-        size="lg"
-        text="Large — prominent for top-of-page notices."
-      />
+      <ui-lib-message severity="info" size="lg" text="Large — prominent for top-of-page notices." />
     </div>
   </app-doc-section>
 
@@ -207,7 +183,6 @@
 
   <!-- ─── API Reference ──────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
-
     <h3 class="message-demo__api-subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
 
@@ -215,7 +190,6 @@
     <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
   </app-doc-section>
 
-  
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -232,7 +206,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -242,5 +216,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

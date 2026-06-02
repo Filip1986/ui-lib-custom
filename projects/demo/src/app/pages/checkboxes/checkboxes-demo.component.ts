@@ -140,7 +140,7 @@ export class CheckboxesDemoComponent {
   public readonly showDescription: WritableSignal<boolean> = signal<boolean>(true);
   public readonly label: WritableSignal<string> = signal<string>('Receive product updates');
   public readonly description: WritableSignal<string> = signal<string>(
-    'Weekly highlights, delivered every Monday.'
+    'Weekly highlights, delivered every Monday.',
   );
 
   public checkedPrimary: boolean = false;
@@ -190,7 +190,7 @@ export class CheckboxesDemoComponent {
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
   public readonly playgroundDescription: Signal<string | null> = computed<string | null>(
-    (): string | null => (this.showDescription() ? this.description() : null)
+    (): string | null => (this.showDescription() ? this.description() : null),
   );
 
   public selectVariant(value: CheckboxVariant): void {
@@ -219,7 +219,7 @@ export class CheckboxesDemoComponent {
 
     const normalizedValue: string = label.toLowerCase().replace(/\s+/g, '-');
     const existingOption: CheckboxOption | undefined = this.dynamicOptions().find(
-      (option: CheckboxOption): boolean => option.value === normalizedValue
+      (option: CheckboxOption): boolean => option.value === normalizedValue,
     );
     if (existingOption) {
       this.dynamicOptionLabel.set('');
@@ -235,13 +235,13 @@ export class CheckboxesDemoComponent {
 
   public removeDynamicOption(value: string): void {
     this.dynamicOptions.update((options: CheckboxOption[]): CheckboxOption[] =>
-      options.filter((option: CheckboxOption): boolean => option.value !== value)
+      options.filter((option: CheckboxOption): boolean => option.value !== value),
     );
     const selectedValues: string[] = Array.isArray(this.dynamicSelection)
       ? this.dynamicSelection
       : [];
     this.dynamicSelection = selectedValues.filter(
-      (selectedValue: string): boolean => selectedValue !== value
+      (selectedValue: string): boolean => selectedValue !== value,
     );
   }
 

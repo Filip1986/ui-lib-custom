@@ -1,2 +1,4 @@
-{ "name": "ui-lib-custom/split-button", "sideEffects": false }
-
+{
+  "name": "ui-lib-custom/split-button",
+  "sideEffects": false
+}

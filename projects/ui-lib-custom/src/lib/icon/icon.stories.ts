@@ -64,7 +64,7 @@ export const DarkMode: Story = {
 export const FullApi: Story = {
   args: { name: 'plus', size: 'lg', color: '#1976d2' },
   render: (
-    args: Record<string, unknown>
+    args: Record<string, unknown>,
   ): { props: Record<string, unknown>; template: string } => ({
     props: { ...args },
     template: `<ui-lib-icon [name]="name" [size]="size" [color]="color" />`,

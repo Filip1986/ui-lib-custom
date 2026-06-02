@@ -1,27 +1,22 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header docHeader title="StyleClass" [importCode]="importCode">
     <p class="doc-description">
-      A directive that manages CSS class enter/leave transitions on a target element.
-      Useful for animated show/hide panels, menus, and overlays — all driven by CSS,
-      zero JavaScript animation libraries required.
+      A directive that manages CSS class enter/leave transitions on a target element. Useful for
+      animated show/hide panels, menus, and overlays — all driven by CSS, zero JavaScript animation
+      libraries required.
     </p>
   </app-doc-page-header>
 
   <!-- Section 1: Toggle Mode -->
   <app-doc-section id="toggle-mode" title="Toggle Mode">
     <p class="demo-section__description">
-      Set <code>toggleClass</code> to add and remove a single CSS class on each click.
-      This is the simplest usage — no transitions, just a class toggle.
+      Set <code>toggleClass</code> to add and remove a single CSS class on each click. This is the
+      simplest usage — no transitions, just a class toggle.
     </p>
 
     <div class="demo-card">
       <div class="demo-card__preview">
-        <ui-lib-button
-          [uiLibStyleClass]="'@next'"
-          toggleClass="sc-panel--open"
-          type="button"
-        >
+        <ui-lib-button [uiLibStyleClass]="'@next'" toggleClass="sc-panel--open" type="button">
           Toggle Panel
         </ui-lib-button>
         <div class="sc-panel">
@@ -44,8 +39,8 @@
   <!-- Section 2: Fade Animation -->
   <app-doc-section id="fade-animation" title="Fade Animation">
     <p class="demo-section__description">
-      Use <code>enterActiveClass</code> / <code>leaveActiveClass</code> with CSS keyframe
-      animations for smooth enter and leave transitions.
+      Use <code>enterActiveClass</code> / <code>leaveActiveClass</code> with CSS keyframe animations
+      for smooth enter and leave transitions.
     </p>
 
     <div class="demo-card">
@@ -81,8 +76,8 @@
   <!-- Section 3: Slide Animation -->
   <app-doc-section id="slide-animation" title="Slide Animation">
     <p class="demo-section__description">
-      Use the full <code>enterDoneClass</code> / <code>leaveDoneClass</code> lifecycle
-      to control the final state independently from the active animation class.
+      Use the full <code>enterDoneClass</code> / <code>leaveDoneClass</code> lifecycle to control
+      the final state independently from the active animation class.
     </p>
 
     <div class="demo-card">
@@ -124,7 +119,6 @@
 
     <div class="demo-card">
       <div class="demo-card__preview sc-selectors-demo">
-
         <!-- @prev -->
         <div class="sc-selector-row">
           <div class="sc-badge sc-badge--prev">@prev target</div>
@@ -150,7 +144,6 @@
             Toggle @parent
           </ui-lib-button>
         </div>
-
       </div>
 
       <div class="demo-card__code">
@@ -197,22 +190,24 @@
 
   <!-- API Table -->
   <app-doc-section id="api" title="API">
-
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
   </app-doc-section>
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
   <app-doc-section id="css-vars" title="CSS Custom Properties">
-    <p class="demo-section__description">This is a behavioral directive with no CSS custom properties. All visual styling is controlled by the wrapped component.</p>
+    <p class="demo-section__description">
+      This is a behavioral directive with no CSS custom properties. All visual styling is controlled
+      by the wrapped component.
+    </p>
   </app-doc-section>
 
   <!-- ── Accessibility ──────────────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <p class="demo-section__description">
-      <code>StyleClass</code> manages CSS class transitions only. Add <code>aria-expanded</code>
-      to the trigger and <code>aria-hidden</code> to the panel so assistive technologies
-      reflect the show/hide state that <code>StyleClass</code> drives visually.
+      <code>StyleClass</code> manages CSS class transitions only. Add <code>aria-expanded</code> to
+      the trigger and <code>aria-hidden</code> to the panel so assistive technologies reflect the
+      show/hide state that <code>StyleClass</code> drives visually.
     </p>
     <app-doc-aria-table [rows]="ariaRows" />
     <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
@@ -229,5 +224,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

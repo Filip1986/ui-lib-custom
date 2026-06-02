@@ -18,13 +18,13 @@ import { FocusTrapDirective } from 'ui-lib-custom/focus-trap';
 
 ## Inputs
 
-| Name                   | Type               | Default | Description                                                                                                                        |
-|------------------------|--------------------|---------|------------------------------------------------------------------------------------------------------------------------------------|
-| `uiLibFocusTrap`       | `boolean`          | `true`  | When `true`, keyboard focus is trapped within the host element. Set `false` to release at runtime.                                |
-| `autoFocus`            | `boolean`          | `true`  | When `true`, the first focusable descendant (or `initialFocusSelector` match) receives focus immediately on activation.           |
-| `initialFocusSelector` | `string \| null`   | `null`  | CSS selector for the element that should receive focus on activation. Falls back to first focusable descendant when no match found.|
-| `restoreFocus`         | `boolean`          | `true`  | When `true`, deactivating the trap returns focus to whichever element was active before activation.                               |
-| `sentinelClass`        | `string \| null`   | `null`  | Extra CSS class name(s) added to each sentinel `<span>`. Useful for visual debugging.                                             |
+| Name                   | Type             | Default | Description                                                                                                                         |
+| ---------------------- | ---------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `uiLibFocusTrap`       | `boolean`        | `true`  | When `true`, keyboard focus is trapped within the host element. Set `false` to release at runtime.                                  |
+| `autoFocus`            | `boolean`        | `true`  | When `true`, the first focusable descendant (or `initialFocusSelector` match) receives focus immediately on activation.             |
+| `initialFocusSelector` | `string \| null` | `null`  | CSS selector for the element that should receive focus on activation. Falls back to first focusable descendant when no match found. |
+| `restoreFocus`         | `boolean`        | `true`  | When `true`, deactivating the trap returns focus to whichever element was active before activation.                                 |
+| `sentinelClass`        | `string \| null` | `null`  | Extra CSS class name(s) added to each sentinel `<span>`. Useful for visual debugging.                                               |
 
 ## Usage
 
@@ -41,10 +41,10 @@ import { FocusTrapDirective } from 'ui-lib-custom/focus-trap';
 
 ```html
 @if (isModalOpen) {
-  <div role="dialog" aria-modal="true" [uiLibFocusTrap]="true">
-    <h2>Dialog title</h2>
-    <button (click)="close()">Close</button>
-  </div>
+<div role="dialog" aria-modal="true" [uiLibFocusTrap]="true">
+  <h2>Dialog title</h2>
+  <button (click)="close()">Close</button>
+</div>
 }
 ```
 
@@ -108,19 +108,19 @@ isTrapActive.set(false);
 
 ## Keyboard behavior
 
-| Key           | Behavior                                                            |
-|---------------|---------------------------------------------------------------------|
-| `Tab`         | Move to next focusable descendant; wraps to first after last.       |
-| `Shift + Tab` | Move to previous focusable descendant; wraps to last before first.  |
+| Key           | Behavior                                                           |
+| ------------- | ------------------------------------------------------------------ |
+| `Tab`         | Move to next focusable descendant; wraps to first after last.      |
+| `Shift + Tab` | Move to previous focusable descendant; wraps to last before first. |
 
 ## ARIA attributes
 
 FocusTrap does not change the host role semantics. It only adds hidden sentinel nodes around the trapped container while active.
 
-| Element                    | Attribute       | Value    | Purpose                                              |
-|----------------------------|-----------------|----------|------------------------------------------------------|
-| Sentinel nodes (start/end) | `tabindex`      | `0`      | Keep both Tab and Shift+Tab cycles inside the trap.  |
-| Sentinel nodes (start/end) | `aria-hidden`   | `true`   | Keep sentinels out of the accessibility tree.        |
+| Element                    | Attribute     | Value  | Purpose                                             |
+| -------------------------- | ------------- | ------ | --------------------------------------------------- |
+| Sentinel nodes (start/end) | `tabindex`    | `0`    | Keep both Tab and Shift+Tab cycles inside the trap. |
+| Sentinel nodes (start/end) | `aria-hidden` | `true` | Keep sentinels out of the accessibility tree.       |
 
 ## CSS
 
@@ -130,8 +130,8 @@ Sentinel nodes receive a predictable structure you can target:
 
 ```css
 /* Target sentinel nodes by data attribute */
-[data-ui-lib-focus-trap-sentinel="start"],
-[data-ui-lib-focus-trap-sentinel="end"] {
+[data-ui-lib-focus-trap-sentinel='start'],
+[data-ui-lib-focus-trap-sentinel='end'] {
   /* custom styles */
 }
 ```

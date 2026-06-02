@@ -37,12 +37,12 @@ import { Stack } from 'ui-lib-custom';
 
 **Inputs:**
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| `direction` | `'vertical' \| 'horizontal'` | `'vertical'` | Stack direction |
-| `align` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'stretch'` | Cross-axis alignment |
-| `justify` | `'start' \| 'center' \| 'end' \| 'space-between' \| 'space-around' \| 'space-evenly'` | `'start'` | Main-axis justification |
-| `gap` | `SpacingToken` | `4` | Gap between items (design token) |
+| Input       | Type                                                                                  | Default      | Description                      |
+| ----------- | ------------------------------------------------------------------------------------- | ------------ | -------------------------------- |
+| `direction` | `'vertical' \| 'horizontal'`                                                          | `'vertical'` | Stack direction                  |
+| `align`     | `'start' \| 'center' \| 'end' \| 'stretch'`                                           | `'stretch'`  | Cross-axis alignment             |
+| `justify`   | `'start' \| 'center' \| 'end' \| 'space-between' \| 'space-around' \| 'space-evenly'` | `'start'`    | Main-axis justification          |
+| `gap`       | `SpacingToken`                                                                        | `4`          | Gap between items (design token) |
 
 **Examples:**
 
@@ -97,11 +97,11 @@ import { Inline } from 'ui-lib-custom';
 
 **Inputs:**
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| `align` | `'start' \| 'center' \| 'end' \| 'baseline' \| 'stretch'` | `'center'` | Cross-axis alignment |
-| `justify` | `'start' \| 'center' \| 'end' \| 'space-between' \| 'space-around'` | `'start'` | Main-axis justification |
-| `gap` | `SpacingToken` | `2` | Gap between items |
+| Input     | Type                                                                | Default    | Description             |
+| --------- | ------------------------------------------------------------------- | ---------- | ----------------------- |
+| `align`   | `'start' \| 'center' \| 'end' \| 'baseline' \| 'stretch'`           | `'center'` | Cross-axis alignment    |
+| `justify` | `'start' \| 'center' \| 'end' \| 'space-between' \| 'space-around'` | `'start'`  | Main-axis justification |
+| `gap`     | `SpacingToken`                                                      | `2`        | Gap between items       |
 
 **Examples:**
 
@@ -162,13 +162,13 @@ import { Grid } from 'ui-lib-custom';
 
 **Inputs:**
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| `columns` | `GridColumns` (1-12) | `12` | Number of columns |
-| `align` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'stretch'` | Block-axis alignment |
-| `justify` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'stretch'` | Inline-axis alignment |
-| `gap` | `SpacingToken` | `4` | Gap between cells |
-| `minColumnWidth` | `string \| undefined` | `undefined` | Min column width for auto-fit |
+| Input            | Type                                        | Default     | Description                   |
+| ---------------- | ------------------------------------------- | ----------- | ----------------------------- |
+| `columns`        | `GridColumns` (1-12)                        | `12`        | Number of columns             |
+| `align`          | `'start' \| 'center' \| 'end' \| 'stretch'` | `'stretch'` | Block-axis alignment          |
+| `justify`        | `'start' \| 'center' \| 'end' \| 'stretch'` | `'stretch'` | Inline-axis alignment         |
+| `gap`            | `SpacingToken`                              | `4`         | Gap between cells             |
+| `minColumnWidth` | `string \| undefined`                       | `undefined` | Min column width for auto-fit |
 
 **Examples:**
 
@@ -227,22 +227,22 @@ import { Container } from 'ui-lib-custom';
 
 **Inputs:**
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| `size` | `ContainerSize` | `'lg'` | Max width (sm/md/lg/xl/2xl/full) |
-| `centered` | `boolean` | `true` | Whether to center the container |
-| `padding` | `SpacingToken` | `4` | Horizontal padding |
+| Input      | Type            | Default | Description                      |
+| ---------- | --------------- | ------- | -------------------------------- |
+| `size`     | `ContainerSize` | `'lg'`  | Max width (sm/md/lg/xl/2xl/full) |
+| `centered` | `boolean`       | `true`  | Whether to center the container  |
+| `padding`  | `SpacingToken`  | `4`     | Horizontal padding               |
 
 **Container Sizes:**
 
-| Size | Max Width |
-|------|-----------|
-| `sm` | 640px |
-| `md` | 768px |
-| `lg` | 1024px |
-| `xl` | 1280px |
-| `2xl` | 1536px |
-| `full` | 100% |
+| Size   | Max Width |
+| ------ | --------- |
+| `sm`   | 640px     |
+| `md`   | 768px     |
+| `lg`   | 1024px    |
+| `xl`   | 1280px    |
+| `2xl`  | 1536px    |
+| `full` | 100%      |
 
 **Examples:**
 
@@ -275,22 +275,23 @@ import { Container } from 'ui-lib-custom';
 
 All spacing uses a consistent token system based on rem units:
 
-| Token | Value | Pixels (16px base) |
-|-------|-------|-------------------|
-| `0` | 0 | 0px |
-| `1` | 0.25rem | 4px |
-| `2` | 0.5rem | 8px |
-| `3` | 0.75rem | 12px |
-| `4` | 1rem | 16px |
-| `5` | 1.25rem | 20px |
-| `6` | 1.5rem | 24px |
-| `8` | 2rem | 32px |
-| `10` | 2.5rem | 40px |
-| `12` | 3rem | 48px |
-| `16` | 4rem | 64px |
-| `20` | 5rem | 80px |
+| Token | Value   | Pixels (16px base) |
+| ----- | ------- | ------------------ |
+| `0`   | 0       | 0px                |
+| `1`   | 0.25rem | 4px                |
+| `2`   | 0.5rem  | 8px                |
+| `3`   | 0.75rem | 12px               |
+| `4`   | 1rem    | 16px               |
+| `5`   | 1.25rem | 20px               |
+| `6`   | 1.5rem  | 24px               |
+| `8`   | 2rem    | 32px               |
+| `10`  | 2.5rem  | 40px               |
+| `12`  | 3rem    | 48px               |
+| `16`  | 4rem    | 64px               |
+| `20`  | 5rem    | 80px               |
 
 **Why design tokens?**
+
 - Consistent spacing across the application
 - Easy to maintain and update
 - Enforces design system constraints
@@ -314,7 +315,7 @@ Layout primitives can be composed together for complex layouts:
             <p>Welcome back!</p>
           </ui-lib-stack>
         </header>
-        
+
         <ui-lib-grid [columns]="3" [gap]="4">
           <div class="card">
             <ui-lib-stack [gap]="3">
@@ -326,14 +327,14 @@ Layout primitives can be composed together for complex layouts:
               </ui-lib-inline>
             </ui-lib-stack>
           </div>
-          
+
           <div class="card">
             <ui-lib-stack [gap]="3">
               <h3>Card 2</h3>
               <p>More content</p>
             </ui-lib-stack>
           </div>
-          
+
           <div class="card">
             <ui-lib-stack [gap]="3">
               <h3>Card 3</h3>
@@ -381,6 +382,7 @@ protected _gapValue = computed(() => SPACING_TOKENS[this.gap()]);
 ### 3. OnPush Change Detection
 
 All components use `ChangeDetectionStrategy.OnPush`, only re-checking when:
+
 - Input signals change
 - Events are emitted
 - Manual detection is triggered
@@ -388,6 +390,7 @@ All components use `ChangeDetectionStrategy.OnPush`, only re-checking when:
 ### 4. Direct Style Application
 
 Styles are applied directly via host bindings, avoiding:
+
 - ngClass overhead
 - Runtime class concatenation
 - CSS selector matching
@@ -525,13 +528,13 @@ import { Stack } from 'ui-lib-custom';
 ### Type Imports
 
 ```typescript
-import { 
-  SpacingToken, 
-  ContainerSize, 
+import {
+  SpacingToken,
+  ContainerSize,
   GridColumns,
   StackDirection,
   StackAlign,
-  StackJustify 
+  StackJustify,
 } from 'ui-lib-custom';
 
 // Use in your component
@@ -544,11 +547,13 @@ containerSize: ContainerSize = 'lg';
 ## Browser Support
 
 Layout primitives use modern CSS features:
+
 - Flexbox (all modern browsers)
 - CSS Grid (all modern browsers)
 - CSS Custom Properties (all modern browsers)
 
 **Supported Browsers:**
+
 - Chrome 90+
 - Firefox 88+
 - Safari 14+

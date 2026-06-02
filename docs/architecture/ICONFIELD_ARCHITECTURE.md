@@ -25,15 +25,15 @@ Project integration references reviewed:
 
 ## PrimeNG Feature Mapping
 
-| Feature | PrimeNG API/Evidence | Priority (P0/P1/P2) | Notes for `ui-lib-icon-field` |
-|---|---|---|---|
-| `iconPosition` input (`'left' | 'right'`) | `IconField.iconPosition: 'right' | 'left'` in `types/primeng-iconfield.d.ts`; root classes include `p-iconfield-left`/`p-iconfield-right` in `fesm2022/primeng-iconfield.mjs` | P0 | Keep the same public union type, but default to `'right'` for `ui-lib` consistency with trailing actions. |
-| `styleClass` on InputIcon | `InputIcon.styleClass` in `types/primeng-inputicon.d.ts`; host class binding merges base class and `styleClass` in `fesm2022/primeng-inputicon.mjs` | P0 | Expose `styleClass: string | null` on `uilib-input-icon`. |
-| Custom content projection in InputIcon | Template is `<ng-content></ng-content>` in `fesm2022/primeng-inputicon.mjs` | P0 | Support icon font classes and custom SVG/markup through projection. |
-| FloatLabel compatibility | Prime component is a pure content wrapper (`<ng-content>`) in `fesm2022/primeng-iconfield.mjs`; no special float-label logic | P1 | Must work inside `uilib-float-label` without breaking label movement (`.uilib-float-label` relies on relative positioning and state selectors). |
-| IftaLabel (`variant="in"`) compatibility | Prime has separate `iftalabel` package (`primeng-iftalabel.*` in packed artifact), while IconField remains generic | P1 | In `ui-lib`, equivalent behavior is FloatLabel `variant='in'`; IconField should not own label logic. |
-| Size compatibility with input `size` / `pSize` | No size input on `IconField` or `InputIcon` in `.d.ts`; behavior is driven by wrapped input styling in Prime | P0 | `uilib-icon-field` has no `size` input; inherit from projected `ui-lib-input` or native input styles. |
-| Multiple icons (left + right simultaneously) | Prime root side is single-valued (`iconPosition`), InputIcon itself is generic projected content | P2 | Allow advanced composition with multiple `uilib-input-icon` nodes; default API remains one side selector. |
+| Feature                                        | PrimeNG API/Evidence                                                                                                                                | Priority (P0/P1/P2)              | Notes for `ui-lib-icon-field`                                                                                                                   |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `iconPosition` input (`'left'                  | 'right'`)                                                                                                                                           | `IconField.iconPosition: 'right' | 'left'`in`types/primeng-iconfield.d.ts`; root classes include `p-iconfield-left`/`p-iconfield-right`in`fesm2022/primeng-iconfield.mjs`          | P0                         | Keep the same public union type, but default to `'right'` for `ui-lib` consistency with trailing actions. |
+| `styleClass` on InputIcon                      | `InputIcon.styleClass` in `types/primeng-inputicon.d.ts`; host class binding merges base class and `styleClass` in `fesm2022/primeng-inputicon.mjs` | P0                               | Expose `styleClass: string                                                                                                                      | null`on`uilib-input-icon`. |
+| Custom content projection in InputIcon         | Template is `<ng-content></ng-content>` in `fesm2022/primeng-inputicon.mjs`                                                                         | P0                               | Support icon font classes and custom SVG/markup through projection.                                                                             |
+| FloatLabel compatibility                       | Prime component is a pure content wrapper (`<ng-content>`) in `fesm2022/primeng-iconfield.mjs`; no special float-label logic                        | P1                               | Must work inside `uilib-float-label` without breaking label movement (`.uilib-float-label` relies on relative positioning and state selectors). |
+| IftaLabel (`variant="in"`) compatibility       | Prime has separate `iftalabel` package (`primeng-iftalabel.*` in packed artifact), while IconField remains generic                                  | P1                               | In `ui-lib`, equivalent behavior is FloatLabel `variant='in'`; IconField should not own label logic.                                            |
+| Size compatibility with input `size` / `pSize` | No size input on `IconField` or `InputIcon` in `.d.ts`; behavior is driven by wrapped input styling in Prime                                        | P0                               | `uilib-icon-field` has no `size` input; inherit from projected `ui-lib-input` or native input styles.                                           |
+| Multiple icons (left + right simultaneously)   | Prime root side is single-valued (`iconPosition`), InputIcon itself is generic projected content                                                    | P2                               | Allow advanced composition with multiple `uilib-input-icon` nodes; default API remains one side selector.                                       |
 
 ## Reusable Code Assessment
 
@@ -80,15 +80,15 @@ Project integration references reviewed:
 
 ### IconField Inputs
 
-| Input | Type | Default | Notes |
-|---|---|---|---|
+| Input          | Type                | Default   | Notes                                                     |
+| -------------- | ------------------- | --------- | --------------------------------------------------------- |
 | `iconPosition` | `'left' \| 'right'` | `'right'` | Controls icon placement and projected-input padding side. |
 
 ### InputIcon Inputs
 
-| Input | Type | Default | Notes |
-|---|---|---|---|
-| `styleClass` | `string \| null` | `null` | CSS class(es) for icon element, for example icon-font classes. |
+| Input        | Type             | Default | Notes                                                          |
+| ------------ | ---------------- | ------- | -------------------------------------------------------------- |
+| `styleClass` | `string \| null` | `null`  | CSS class(es) for icon element, for example icon-font classes. |
 
 Neither component has outputs; both are layout/composition primitives.
 
@@ -107,12 +107,12 @@ Use `--uilib-icon-field-*` names:
 
 ## PrimeNG Divergences
 
-| Area | PrimeNG | ui-lib-icon-field |
-|---|---|---|
-| Selector | `p-iconField` / `p-inputIcon` | `uilib-icon-field` / `uilib-input-icon` |
-| Icon rendering | `styleClass` on host span-like icon container | `styleClass` + `<ng-content>` custom content; optional `<ui-lib-icon />` nesting |
-| Size integration | `pSize`/input styling ecosystem | Inherits from projected input; no own `size` input |
-| Variant | Implicit from Prime theme | Optional future `variant` input (P1) with fallback from `ThemeConfigService`; not required for P0 layout API |
+| Area             | PrimeNG                                       | ui-lib-icon-field                                                                                            |
+| ---------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Selector         | `p-iconField` / `p-inputIcon`                 | `uilib-icon-field` / `uilib-input-icon`                                                                      |
+| Icon rendering   | `styleClass` on host span-like icon container | `styleClass` + `<ng-content>` custom content; optional `<ui-lib-icon />` nesting                             |
+| Size integration | `pSize`/input styling ecosystem               | Inherits from projected input; no own `size` input                                                           |
+| Variant          | Implicit from Prime theme                     | Optional future `variant` input (P1) with fallback from `ThemeConfigService`; not required for P0 layout API |
 
 ## Notes for Implementation Phase
 
@@ -120,4 +120,3 @@ Use `--uilib-icon-field-*` names:
 - Keep wrapper components standalone + `OnPush` + `ViewEncapsulation.None`.
 - Avoid imperative DOM logic; rely on host classes and SCSS selectors.
 - Ensure cross-entry imports use package paths (`ui-lib-custom/core`, `ui-lib-custom/theme`) where needed.
-

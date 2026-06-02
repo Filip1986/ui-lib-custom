@@ -186,7 +186,7 @@ function getPanel(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getHeader(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-panel__header'
+    '.ui-lib-panel__header',
   ) as HTMLElement;
 }
 
@@ -196,7 +196,7 @@ function getToggleButton(fixture: ComponentFixture<unknown>): HTMLElement | null
 
 function getContentWrapper(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-panel__content-wrapper'
+    '.ui-lib-panel__content-wrapper',
   ) as HTMLElement;
 }
 
@@ -259,8 +259,8 @@ describe('Panel Accessibility', (): void => {
       const fixture: ComponentFixture<TwoPanelsHost> = await setup(TwoPanelsHost);
       const headers: HTMLElement[] = Array.from(
         (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-          '.ui-lib-panel__header'
-        )
+          '.ui-lib-panel__header',
+        ),
       );
       expect(headers.length).toBe(2);
       const id1: string | null = headers[0]?.getAttribute('id') ?? null;
@@ -316,7 +316,7 @@ describe('Panel Accessibility', (): void => {
     it('toggle icon has aria-hidden="true" (decorative)', async (): Promise<void> => {
       const fixture: ComponentFixture<ToggleablePanelHost> = await setup(ToggleablePanelHost);
       const icon: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-panel__toggle-icon'
+        '.ui-lib-panel__toggle-icon',
       );
       expect(icon?.getAttribute('aria-hidden')).toBe('true');
     });
@@ -380,7 +380,7 @@ describe('Panel Accessibility', (): void => {
 
       // Now expand via Enter
       (getToggleButton(fixture) as HTMLElement).dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
+        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }),
       );
       fixture.detectChanges();
       await fixture.whenStable();

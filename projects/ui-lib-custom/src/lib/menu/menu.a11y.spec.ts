@@ -48,21 +48,21 @@ const GROUPED_ITEMS: MenuItem[] = [
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
 
 function getMenuInstance(fixture: ComponentFixture<unknown>): Menu {
   return fixture.debugElement.query(
-    (debugElement: DebugElement): boolean => debugElement.componentInstance instanceof Menu
+    (debugElement: DebugElement): boolean => debugElement.componentInstance instanceof Menu,
   ).componentInstance as Menu;
 }
 
@@ -219,7 +219,7 @@ describe('Menu Accessibility', (): void => {
       fixture.detectChanges();
       const items: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-menu__group-list .ui-lib-menu__item'
+        '.ui-lib-menu__group-list .ui-lib-menu__item',
       );
       expect(items.length).toBeGreaterThan(0);
       for (const item of items) {
@@ -233,7 +233,7 @@ describe('Menu Accessibility', (): void => {
       fixture.detectChanges();
       const links: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-menu__group-list .ui-lib-menu__link'
+        '.ui-lib-menu__group-list .ui-lib-menu__link',
       );
       expect(links.length).toBeGreaterThan(0);
       for (const link of links) {
@@ -261,7 +261,7 @@ describe('Menu Accessibility', (): void => {
       fixture.detectChanges();
       const separator: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-menu__group-list .ui-lib-menu__separator'
+        '.ui-lib-menu__group-list .ui-lib-menu__separator',
       );
       expect(separator?.getAttribute('role')).toBe('separator');
     });
@@ -272,7 +272,7 @@ describe('Menu Accessibility', (): void => {
       fixture.detectChanges();
       const separator: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-menu__group-list .ui-lib-menu__separator'
+        '.ui-lib-menu__group-list .ui-lib-menu__separator',
       );
       expect(separator?.hasAttribute('aria-hidden')).toBe(false);
     });
@@ -527,7 +527,7 @@ describe('Menu Accessibility', (): void => {
       fixture.detectChanges();
       const disabledLink: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-menu__link[aria-disabled="true"]'
+        '.ui-lib-menu__link[aria-disabled="true"]',
       );
       expect(disabledLink).toBeTruthy();
     });

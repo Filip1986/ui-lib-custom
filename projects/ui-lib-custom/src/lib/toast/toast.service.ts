@@ -50,7 +50,7 @@ export class ToastService {
    */
   public remove(messageId: string): void {
     this._messages.update((current: ToastMessage[]): ToastMessage[] =>
-      current.filter((message: ToastMessage): boolean => message.id !== messageId)
+      current.filter((message: ToastMessage): boolean => message.id !== messageId),
     );
   }
 
@@ -61,7 +61,7 @@ export class ToastService {
   public clear(key?: string): void {
     if (key !== undefined) {
       this._messages.update((current: ToastMessage[]): ToastMessage[] =>
-        current.filter((message: ToastMessage): boolean => message.key !== key)
+        current.filter((message: ToastMessage): boolean => message.key !== key),
       );
     } else {
       this._messages.set([]);

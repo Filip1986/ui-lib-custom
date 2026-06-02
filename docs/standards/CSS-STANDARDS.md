@@ -11,11 +11,11 @@
 This library uses **`ViewEncapsulation.None`** on every component. All styles are **global** by default.
 BEM naming with the `uilib-` prefix is the only collision guard. There is no Angular encapsulation to fall back on.
 
-| Rule                                   | Reason                                                   |
-|----------------------------------------|----------------------------------------------------------|
-| Every class must start with `uilib-`   | Prevents collision with consumer styles                  |
-| BEM is non-negotiable                  | Provides the structure that encapsulation normally would |
-| `::ng-deep` rule does not apply        | Styles are already global — the concept is irrelevant    |
+| Rule                                 | Reason                                                   |
+| ------------------------------------ | -------------------------------------------------------- |
+| Every class must start with `uilib-` | Prevents collision with consumer styles                  |
+| BEM is non-negotiable                | Provides the structure that encapsulation normally would |
+| `::ng-deep` rule does not apply      | Styles are already global — the concept is irrelevant    |
 
 ---
 
@@ -25,15 +25,15 @@ This project's design tokens use the `--uilib-*` CSS custom property prefix, def
 
 ```scss
 // ✅ Always use tokens
-color:      var(--uilib-color-primary);
+color: var(--uilib-color-primary);
 background: var(--uilib-surface);
-font-size:  var(--uilib-text-md);
-gap:        var(--uilib-space-md);
+font-size: var(--uilib-text-md);
+gap: var(--uilib-space-md);
 
 // ❌ Never raw values
-color:      #2563eb;
+color: #2563eb;
 background: #ffffff;
-font-size:  16px;
+font-size: 16px;
 ```
 
 ### New tokens — use oklch
@@ -43,7 +43,7 @@ font-size:  16px;
 --uilib-color-primary: #2563eb;
 
 // ✅ Modern — lightness is predictable; dark mode is just a different L value
---uilib-color-primary:       oklch(57% 0.24 264);
+--uilib-color-primary: oklch(57% 0.24 264);
 --uilib-color-primary-hover: oklch(48% 0.24 264);
 
 // ✅ Dynamic variants with color-mix
@@ -97,7 +97,7 @@ Library components MUST use container queries, not viewport media queries. Consu
 .uilib-card {
   display: grid;
   grid-row: span 3;
-  grid-template-rows: subgrid;  // headers/bodies/footers align across all cards
+  grid-template-rows: subgrid; // headers/bodies/footers align across all cards
 }
 ```
 
@@ -127,7 +127,7 @@ font-size: clamp(var(--uilib-text-sm), 1.5vw + 0.5rem, var(--uilib-text-lg));
 
 ```bash
 npm run lint:css        # check all SCSS/CSS
-npm run lint:css:fix    # auto-fix what's possible  
+npm run lint:css:fix    # auto-fix what's possible
 npm run lint:css:ci     # CI mode — zero warnings
 
 npm run check           # full quality gate (includes CSS lint)
@@ -137,15 +137,15 @@ Pre-commit: `lint-staged` runs stylelint on every staged `.scss`/`.css` file aut
 
 ### Rule → section
 
-| Rule                                             | Enforces                                  | Severity |
-|--------------------------------------------------|-------------------------------------------|----------|
-| `selector-max-id: 0`                             | No ID selectors                           | error    |
-| `max-nesting-depth: 2`                           | No deep nesting                           | error    |
-| `scale-unlimited/declaration-strict-value`       | Token-only colours/sizes                  | error    |
-| `declaration-property-value-disallowed-list`     | No `transition:all`, no `text-align:left` | error    |
-| `plugin/no-low-performance-animation-properties` | GPU-only animations                       | warning  |
+| Rule                                             | Enforces                                   | Severity  |
+| ------------------------------------------------ | ------------------------------------------ | --------- |
+| `selector-max-id: 0`                             | No ID selectors                            | error     |
+| `max-nesting-depth: 2`                           | No deep nesting                            | error     |
+| `scale-unlimited/declaration-strict-value`       | Token-only colours/sizes                   | error     |
+| `declaration-property-value-disallowed-list`     | No `transition:all`, no `text-align:left`  | error     |
+| `plugin/no-low-performance-animation-properties` | GPU-only animations                        | warning   |
 | `property-disallowed-list`                       | Logical properties (physical props banned) | **error** |
-| `scss/no-global-function-names`                  | No `darken()`/`lighten()`                 | error    |
+| `scss/no-global-function-names`                  | No `darken()`/`lighten()`                  | error     |
 
 ---
 
@@ -163,7 +163,7 @@ Pre-commit: `lint-staged` runs stylelint on every staged `.scss`/`.css` file aut
 - [ ] `prefers-reduced-motion` present for every animation
 - [ ] `npm run lint:css` passes
 
-*Last reviewed: 2026-05-27*
+_Last reviewed: 2026-05-27_
 
 ---
 
@@ -174,19 +174,19 @@ This enables full RTL layout support without any extra override CSS.
 
 ### Banned → logical replacements
 
-| ❌ Physical (banned, severity: error)    | ✅ Logical (use this)                         |
-|------------------------------------------|-----------------------------------------------|
-| `margin-left` / `margin-right`           | `margin-inline-start` / `margin-inline-end`   |
-| `padding-left` / `padding-right`         | `padding-inline-start` / `padding-inline-end` |
-| `border-left` / `border-right`           | `border-inline-start` / `border-inline-end`   |
+| ❌ Physical (banned, severity: error)      | ✅ Logical (use this)                                   |
+| ------------------------------------------ | ------------------------------------------------------- |
+| `margin-left` / `margin-right`             | `margin-inline-start` / `margin-inline-end`             |
+| `padding-left` / `padding-right`           | `padding-inline-start` / `padding-inline-end`           |
+| `border-left` / `border-right`             | `border-inline-start` / `border-inline-end`             |
 | `border-left-color` / `border-right-color` | `border-inline-start-color` / `border-inline-end-color` |
 | `border-left-width` / `border-right-width` | `border-inline-start-width` / `border-inline-end-width` |
 | `border-left-style` / `border-right-style` | `border-inline-start-style` / `border-inline-end-style` |
-| `border-top-left-radius`                 | `border-start-start-radius`                   |
-| `border-top-right-radius`               | `border-start-end-radius`                     |
-| `border-bottom-left-radius`             | `border-end-start-radius`                     |
-| `border-bottom-right-radius`            | `border-end-end-radius`                       |
-| `text-align: left` / `text-align: right` | `text-align: start` / `text-align: end`       |
+| `border-top-left-radius`                   | `border-start-start-radius`                             |
+| `border-top-right-radius`                  | `border-start-end-radius`                               |
+| `border-bottom-left-radius`                | `border-end-start-radius`                               |
+| `border-bottom-right-radius`               | `border-end-end-radius`                                 |
+| `text-align: left` / `text-align: right`   | `text-align: start` / `text-align: end`                 |
 
 ### Positioning (`left` / `right`)
 
@@ -202,7 +202,7 @@ These properties are **not in the banned list** because they have direction-agno
 
 // ❌ Directional positioning — use inset-inline-*
 .uilib-sidebar-toggle {
-  left: 0;   // ← this means "start side"
+  left: 0; // ← this means "start side"
 }
 
 // ✅ Correct
@@ -222,7 +222,10 @@ Use `inset: 0` freely for "fill parent" overlays:
 
 ```scss
 // ✅ Equivalent to top:0; right:0; bottom:0; left:0 and works in all writing modes
-.uilib-overlay { position: absolute; inset: 0; }
+.uilib-overlay {
+  position: absolute;
+  inset: 0;
+}
 ```
 
 ### Testing RTL
@@ -230,7 +233,7 @@ Use `inset: 0` freely for "fill parent" overlays:
 Add `dir="rtl"` to `<html>` in the demo app to smoke-test RTL layout:
 
 ```html
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl"></html>
 ```
 
 All components should mirror correctly without any additional CSS.
@@ -241,8 +244,8 @@ Full conventions and examples: [`LIBRARY_CONVENTIONS.md → Logical CSS / RTL Ru
 
 ## See also
 
-| Document | Why it relates |
-|----------|----------------|
-| [`JS-STANDARDS.md`](JS-STANDARDS.md) | Runtime animation rules + layout thrashing under `ViewEncapsulation.None` |
-| [`HTML-STANDARDS.md`](HTML-STANDARDS.md) | Template rules that interact with global CSS under `ViewEncapsulation.None` |
-| [`platform/docs/standards/CSS-STANDARDS.md`](../../../platform/docs/standards/CSS-STANDARDS.md) | Full reference with complete rationale and examples |
+| Document                                                                                        | Why it relates                                                              |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [`JS-STANDARDS.md`](JS-STANDARDS.md)                                                            | Runtime animation rules + layout thrashing under `ViewEncapsulation.None`   |
+| [`HTML-STANDARDS.md`](HTML-STANDARDS.md)                                                        | Template rules that interact with global CSS under `ViewEncapsulation.None` |
+| [`platform/docs/standards/CSS-STANDARDS.md`](../../../platform/docs/standards/CSS-STANDARDS.md) | Full reference with complete rationale and examples                         |

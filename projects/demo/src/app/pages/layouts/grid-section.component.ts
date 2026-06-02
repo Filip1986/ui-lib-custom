@@ -93,7 +93,7 @@ export class MyComponent {}`;
     number
   >;
   private readonly gridColumnsList: GridColumns[] = Object.keys(this.gridColumnsMap).map(
-    (key: string): GridColumns => Number(key) as GridColumns
+    (key: string): GridColumns => Number(key) as GridColumns,
   );
 
   public readonly columnOptions: Array<{ label: string; value: GridColumns }> =
@@ -124,29 +124,29 @@ export class MyComponent {}`;
     (_: unknown, index: number): { label: string; value: number } => {
       const count: number = index + 1;
       return { label: `${count} cards`, value: count };
-    }
+    },
   );
 
   public readonly spacingLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.spacing(), this.spacingOptions)
+    this.displayLabel(this.spacing(), this.spacingOptions),
   );
   public readonly columnLabel: Signal<string> = computed<string>(
-    (): string => `${this.columns()} cols`
+    (): string => `${this.columns()} cols`,
   );
   public readonly minWidthLabel: Signal<string> = computed<string>((): string =>
-    this.minWidth() ? this.minWidth() : 'Fixed columns'
+    this.minWidth() ? this.minWidth() : 'Fixed columns',
   );
   public readonly alignLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.align(), this.alignOptions)
+    this.displayLabel(this.align(), this.alignOptions),
   );
   public readonly justifyLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.justify(), this.justifyOptions)
+    this.displayLabel(this.justify(), this.justifyOptions),
   );
   public readonly cardLabel: Signal<string> = computed<string>(
-    (): string => `${this.cardCount()} cards`
+    (): string => `${this.cardCount()} cards`,
   );
   public readonly cardRange: Signal<number[]> = computed<number[]>((): number[] =>
-    Array.from({ length: this.cardCount() }, (_: unknown, index: number): number => index + 1)
+    Array.from({ length: this.cardCount() }, (_: unknown, index: number): number => index + 1),
   );
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
@@ -196,16 +196,16 @@ export class MyComponent {}`;
       ([key, value]: [string, string]): { label: string; value: T } => ({
         label: `${key} (${this.toPx(value)})`,
         value: key as T,
-      })
+      }),
     );
   }
 
   private displayLabel<T extends string | number>(
     value: T,
-    options: { label: string; value: T }[]
+    options: { label: string; value: T }[],
   ): string {
     const match: { label: string; value: T } | undefined = options.find(
-      (option: { label: string; value: T }): boolean => option.value === value
+      (option: { label: string; value: T }): boolean => option.value === value,
     );
     return match ? match.label : String(value);
   }

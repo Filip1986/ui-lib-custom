@@ -8,18 +8,18 @@
 
 ## Exports
 
-| Name | Kind | Notes |
-|------|------|-------|
-| `MockThemeConfigService` | service | Lightweight test double for `ThemeConfigService`; exposes `variant` signal and `setVariant()` |
-| `createTestComponent<T>` | function | Configures `TestBed`, creates a fixture, and applies inputs in one call |
-| `TestComponentResult<T>` | type | `{ fixture: ComponentFixture<T>; instance: T }` |
+| Name                     | Kind     | Notes                                                                                         |
+| ------------------------ | -------- | --------------------------------------------------------------------------------------------- |
+| `MockThemeConfigService` | service  | Lightweight test double for `ThemeConfigService`; exposes `variant` signal and `setVariant()` |
+| `createTestComponent<T>` | function | Configures `TestBed`, creates a fixture, and applies inputs in one call                       |
+| `TestComponentResult<T>` | type     | `{ fixture: ComponentFixture<T>; instance: T }`                                               |
 
 ## `MockThemeConfigService` API
 
-| Member | Type | Notes |
-|--------|------|-------|
-| `variant` | `Signal<ThemeVariant>` | Read-only signal; starts as `'material'` |
-| `setVariant(variant)` | `void` | Updates the variant for the current test |
+| Member                | Type                   | Notes                                    |
+| --------------------- | ---------------------- | ---------------------------------------- |
+| `variant`             | `Signal<ThemeVariant>` | Read-only signal; starts as `'material'` |
+| `setVariant(variant)` | `void`                 | Updates the variant for the current test |
 
 ## `createTestComponent` signature
 

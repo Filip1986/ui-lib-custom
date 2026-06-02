@@ -247,14 +247,14 @@ function gridCells<T>(fixture: ComponentFixture<T>): HTMLElement[] {
 
 function cellAt<T>(fixture: ComponentFixture<T>, row: number, column: number): HTMLElement {
   return root(fixture).querySelector(
-    `[data-grid-row="${row}"][data-grid-col="${column}"]`
+    `[data-grid-row="${row}"][data-grid-col="${column}"]`,
   ) as HTMLElement;
 }
 
 function pressKey(
   target: HTMLElement,
   key: string,
-  eventInit: Partial<KeyboardEventInit> = {}
+  eventInit: Partial<KeyboardEventInit> = {},
 ): KeyboardEvent {
   const event: KeyboardEvent = new KeyboardEvent('keydown', {
     key,
@@ -328,7 +328,7 @@ describe('TableComponent accessibility', (): void => {
       const fixture: ComponentFixture<StaticHostComponent> =
         await createFixture(StaticHostComponent);
       const cells: HTMLElement[] = Array.from(
-        root(fixture).querySelectorAll('tbody td[role="cell"]')
+        root(fixture).querySelectorAll('tbody td[role="cell"]'),
       );
 
       expect(cells.length).toBeGreaterThan(0);
@@ -348,7 +348,7 @@ describe('TableComponent accessibility', (): void => {
       const fixture: ComponentFixture<InteractiveHostComponent> =
         await createFixture(InteractiveHostComponent);
       const caption: HTMLElement = root(fixture).querySelector(
-        '.ui-lib-table__caption'
+        '.ui-lib-table__caption',
       ) as HTMLElement;
 
       expect(caption.id).toBeTruthy();
@@ -367,13 +367,13 @@ describe('TableComponent accessibility', (): void => {
 
     it('gives multiple instances unique table and caption ids', async (): Promise<void> => {
       const fixture: ComponentFixture<MultiInstanceHostComponent> = await createFixture(
-        MultiInstanceHostComponent
+        MultiInstanceHostComponent,
       );
       const components: TableComponent[] = fixture.debugElement
         .queryAll(By.directive(TableComponent))
         .map(
           (debugElement: { componentInstance: unknown }): TableComponent =>
-            debugElement.componentInstance as TableComponent
+            debugElement.componentInstance as TableComponent,
         );
       const firstComponent: TableComponent = components[0]!;
       const secondComponent: TableComponent = components[1]!;
@@ -436,7 +436,7 @@ describe('TableComponent accessibility', (): void => {
 
       expect(sortAnnouncementRegion(fixture).getAttribute('aria-live')).toBe('polite');
       expect(sortAnnouncementRegion(fixture).textContent.trim()).toBe(
-        'Table sorted by Category, ascending.'
+        'Table sorted by Category, ascending.',
       );
     });
   });
@@ -444,7 +444,7 @@ describe('TableComponent accessibility', (): void => {
   describe('Row selection', (): void => {
     it('sets aria-selected on selectable rows', async (): Promise<void> => {
       const fixture: ComponentFixture<MultipleSelectionHostComponent> = await createFixture(
-        MultipleSelectionHostComponent
+        MultipleSelectionHostComponent,
       );
       const rows: HTMLElement[] = bodyRows(fixture);
 
@@ -466,7 +466,7 @@ describe('TableComponent accessibility', (): void => {
 
     it('sets aria-multiselectable="true" for multiple selection mode', async (): Promise<void> => {
       const fixture: ComponentFixture<MultipleSelectionHostComponent> = await createFixture(
-        MultipleSelectionHostComponent
+        MultipleSelectionHostComponent,
       );
 
       expect(tableElement(fixture).getAttribute('aria-multiselectable')).toBe('true');
@@ -474,7 +474,7 @@ describe('TableComponent accessibility', (): void => {
 
     it('sets aria-multiselectable="false" for single selection mode', async (): Promise<void> => {
       const fixture: ComponentFixture<SingleSelectionHostComponent> = await createFixture(
-        SingleSelectionHostComponent
+        SingleSelectionHostComponent,
       );
 
       expect(tableElement(fixture).getAttribute('aria-multiselectable')).toBe('false');
@@ -488,7 +488,7 @@ describe('TableComponent accessibility', (): void => {
       const component: TableComponent = fixture.debugElement.query(By.directive(TableComponent))
         .componentInstance as TableComponent;
       const toggleButton: HTMLButtonElement = root(fixture).querySelector(
-        '.ui-lib-table__expander-btn'
+        '.ui-lib-table__expander-btn',
       ) as HTMLButtonElement;
 
       expect(toggleButton.getAttribute('aria-expanded')).toBe('false');
@@ -501,14 +501,14 @@ describe('TableComponent accessibility', (): void => {
       const component: TableComponent = fixture.debugElement.query(By.directive(TableComponent))
         .componentInstance as TableComponent;
       const toggleButton: HTMLButtonElement = root(fixture).querySelector(
-        '.ui-lib-table__expander-btn'
+        '.ui-lib-table__expander-btn',
       ) as HTMLButtonElement;
 
       toggleButton.click();
       fixture.detectChanges();
 
       const expandedRow: HTMLElement = root(fixture).querySelector(
-        '.ui-lib-table__expansion-row'
+        '.ui-lib-table__expansion-row',
       ) as HTMLElement;
       expect(toggleButton.getAttribute('aria-expanded')).toBe('true');
       expect(expandedRow.id).toBe(component.getExpandedRowId(0));
@@ -533,7 +533,7 @@ describe('TableComponent accessibility', (): void => {
       const fixture: ComponentFixture<InteractiveHostComponent> =
         await createFixture(InteractiveHostComponent);
       const tabbableCells: HTMLElement[] = Array.from(
-        root(fixture).querySelectorAll('[data-grid-row][data-grid-col][tabindex="0"]')
+        root(fixture).querySelectorAll('[data-grid-row][data-grid-col][tabindex="0"]'),
       );
       const activeCell: HTMLElement = tabbableCells[0]!;
 
@@ -633,7 +633,7 @@ describe('TableComponent accessibility', (): void => {
 
     it('Enter on a focused body cell selects the row in single-selection mode', async (): Promise<void> => {
       const fixture: ComponentFixture<SingleSelectionHostComponent> = await createFixture(
-        SingleSelectionHostComponent
+        SingleSelectionHostComponent,
       );
       document.body.appendChild(fixture.nativeElement);
       const firstBodyCell: HTMLElement = cellAt(fixture, 1, 0);
@@ -647,13 +647,13 @@ describe('TableComponent accessibility', (): void => {
 
     it('removes embedded checkbox controls from the tab order in grid mode', async (): Promise<void> => {
       const fixture: ComponentFixture<CheckboxSelectionHostComponent> = await createFixture(
-        CheckboxSelectionHostComponent
+        CheckboxSelectionHostComponent,
       );
       const headerCheckbox: HTMLInputElement = root(fixture).querySelector(
-        'thead .ui-lib-table__checkbox'
+        'thead .ui-lib-table__checkbox',
       ) as HTMLInputElement;
       const rowCheckbox: HTMLInputElement = root(fixture).querySelector(
-        'tbody .ui-lib-table__checkbox'
+        'tbody .ui-lib-table__checkbox',
       ) as HTMLInputElement;
 
       expect(headerCheckbox.getAttribute('tabindex')).toBe('-1');
@@ -741,7 +741,7 @@ describe('TableComponent accessibility', (): void => {
 
     it('passes axe for selected rows', async (): Promise<void> => {
       const fixture: ComponentFixture<MultipleSelectionHostComponent> = await createFixture(
-        MultipleSelectionHostComponent
+        MultipleSelectionHostComponent,
       );
 
       bodyRows(fixture)[0]?.click();
@@ -754,7 +754,7 @@ describe('TableComponent accessibility', (): void => {
       const fixture: ComponentFixture<ExpandableHostComponent> =
         await createFixture(ExpandableHostComponent);
       const toggleButton: HTMLButtonElement = root(fixture).querySelector(
-        '.ui-lib-table__expander-btn'
+        '.ui-lib-table__expander-btn',
       ) as HTMLButtonElement;
 
       toggleButton.click();

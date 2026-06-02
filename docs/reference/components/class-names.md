@@ -44,9 +44,7 @@ _No component-level CSS variables detected._
 
 ```html
 <!-- Directive applies CSS classes based on a map -->
-<div [uiLibClassNames]="{ 'is-active': isActive, 'has-error': hasError }">
-  Content
-</div>
+<div [uiLibClassNames]="{ 'is-active': isActive, 'has-error': hasError }">Content</div>
 ```
 
 ## Related
@@ -55,4 +53,3 @@ _No component-level CSS variables detected._
 - [Demo page](/components/class-names)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/class-names/README.md)
-

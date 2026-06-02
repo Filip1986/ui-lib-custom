@@ -1,10 +1,5 @@
 <app-doc-page-layout [sections]="sections">
-
-  <app-doc-page-header
-    docHeader
-    [title]="data.componentName"
-    [description]="data.description"
-  />
+  <app-doc-page-header docHeader [title]="data.componentName" [description]="data.description" />
 
   <!-- ── Overview ─────────────────────────────────────────────────────── -->
   <section class="coming-soon-section" id="overview" data-doc-anchor>
@@ -15,9 +10,9 @@
       <div class="coming-soon-banner__content">
         <p class="coming-soon-banner__heading">Under Development</p>
         <p class="coming-soon-banner__body">
-          <strong>{{ data.componentName }}</strong> is planned for a future release.
-          It appears in the menu so you can discover what's coming and track its progress
-          on the <a routerLink="/roadmap" fragment="build-queue" class="coming-soon-link">Roadmap</a>.
+          <strong>{{ data.componentName }}</strong> is planned for a future release. It appears in
+          the menu so you can discover what's coming and track its progress on the
+          <a routerLink="/roadmap" fragment="build-queue" class="coming-soon-link">Roadmap</a>.
         </p>
       </div>
     </div>
@@ -50,7 +45,9 @@
       </div>
       <div class="coming-soon-details__row">
         <dt class="coming-soon-details__label">Reference Implementations</dt>
-        <dd class="coming-soon-details__value coming-soon-details__value--muted">{{ data.reference }}</dd>
+        <dd class="coming-soon-details__value coming-soon-details__value--muted">
+          {{ data.reference }}
+        </dd>
       </div>
     </dl>
 
@@ -71,5 +68,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

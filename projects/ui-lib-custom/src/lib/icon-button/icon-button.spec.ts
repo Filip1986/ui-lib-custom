@@ -84,7 +84,7 @@ describe('IconButton', (): void => {
     emptyLabelFixture.detectChanges();
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      '[ui-lib-icon-button] ariaLabel must not be empty for accessibility.'
+      '[ui-lib-icon-button] ariaLabel must not be empty for accessibility.',
     );
 
     consoleErrorSpy.mockRestore();

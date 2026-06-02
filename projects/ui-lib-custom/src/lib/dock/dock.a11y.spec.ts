@@ -157,27 +157,27 @@ async function setup<T>(componentType: new () => T): Promise<ComponentFixture<T>
 
 function getNav(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-dock__container'
+    '.ui-lib-dock__container',
   ) as HTMLElement;
 }
 
 function getInteractiveItems(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-dock__item-link:not(.ui-lib-dock__item-link--static)'
-    )
+      '.ui-lib-dock__item-link:not(.ui-lib-dock__item-link--static)',
+    ),
   );
 }
 
 function getIcons(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-icon')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-icon'),
   );
 }
 
 function getTooltips(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-dock__tooltip')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-dock__tooltip'),
   );
 }
 
@@ -316,7 +316,7 @@ describe('Dock Accessibility', (): void => {
       const items: HTMLElement[] = getInteractiveItems(fixture);
       const disabledButton: HTMLElement | undefined = items.find(
         (item: HTMLElement): boolean =>
-          item.tagName.toLowerCase() === 'button' && item.hasAttribute('disabled')
+          item.tagName.toLowerCase() === 'button' && item.hasAttribute('disabled'),
       );
       expect(disabledButton).toBeDefined();
       expect(disabledButton?.getAttribute('aria-disabled')).toBe('true');
@@ -325,7 +325,7 @@ describe('Dock Accessibility', (): void => {
     it('disabled button has the disabled HTML attribute (not tabbable)', async (): Promise<void> => {
       const fixture: ComponentFixture<DisabledItemDockHost> = await setup(DisabledItemDockHost);
       const disabledButtons: HTMLElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('button[disabled]')
+        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('button[disabled]'),
       );
       expect(disabledButtons.length).toBeGreaterThan(0);
     });
@@ -334,8 +334,8 @@ describe('Dock Accessibility', (): void => {
       const fixture: ComponentFixture<DisabledItemDockHost> = await setup(DisabledItemDockHost);
       const disabledItems: HTMLElement[] = Array.from(
         (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-          '.ui-lib-dock__item--disabled'
-        )
+          '.ui-lib-dock__item--disabled',
+        ),
       );
       expect(disabledItems.length).toBeGreaterThan(0);
     });
@@ -348,8 +348,8 @@ describe('Dock Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultDockHost> = await setup(DefaultDockHost);
       const buttons: HTMLElement[] = Array.from(
         (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-          'button:not([disabled])'
-        )
+          'button:not([disabled])',
+        ),
       );
       expect(buttons.length).toBeGreaterThan(0);
       buttons.forEach((btn: HTMLElement): void => {
@@ -361,7 +361,7 @@ describe('Dock Accessibility', (): void => {
     it('disabled buttons are not focusable (have disabled attribute)', async (): Promise<void> => {
       const fixture: ComponentFixture<DisabledItemDockHost> = await setup(DisabledItemDockHost);
       const disabledButtons: HTMLElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('button[disabled]')
+        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('button[disabled]'),
       );
       expect(disabledButtons.length).toBeGreaterThan(0);
     });
@@ -370,8 +370,8 @@ describe('Dock Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultDockHost> = await setup(DefaultDockHost);
       const staticSpans: HTMLElement[] = Array.from(
         (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-          '.ui-lib-dock__item-link--static'
-        )
+          '.ui-lib-dock__item-link--static',
+        ),
       );
       staticSpans.forEach((span: HTMLElement): void => {
         expect(span.getAttribute('role')).toBeNull();

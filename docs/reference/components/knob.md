@@ -13,23 +13,23 @@ Knob — a circular dial form control for selecting a numeric value. Supports dr
 
 ### Inputs
 
-| Name            | Type                 | Default                            | Description                                                                                                               |
-| --------------- | -------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`     | `string | undefined` | `undefined`                        | Accessible label for the dial element.                                                                                    |
-| `disabled`      | `boolean`            | `KNOB_DEFAULTS.disabled`           | Whether the knob is disabled.                                                                                             |
-| `inputId`       | `string`             | ``ui-lib-knob-${++knobIdCounter}`` | Unique HTML id forwarded to the SVG element.                                                                              |
-| `max`           | `number`             | `KNOB_DEFAULTS.max`                | Maximum allowed value.                                                                                                    |
-| `min`           | `number`             | `KNOB_DEFAULTS.min`                | Minimum allowed value.                                                                                                    |
-| `readonly`      | `boolean`            | `KNOB_DEFAULTS.readonly`           | Whether the knob is read-only (interactive but value does not change).                                                    |
-| `showValue`     | `boolean`            | `KNOB_DEFAULTS.showValue`          | Whether to render the numeric value label inside the dial.                                                                |
-| `size`          | `KnobSize`           | `KNOB_DEFAULTS.size`               | Component size token.                                                                                                     |
-| `step`          | `number`             | `KNOB_DEFAULTS.step`               | Increment/decrement step for keyboard interaction and drag snapping.                                                      |
-| `strokeWidth`   | `number`             | `KNOB_DEFAULTS.strokeWidth`        | Width of the SVG arc stroke in SVG user-unit coordinates.                                                                 |
-| `tabindex`      | `number`             | `KNOB_DEFAULTS.tabindex`           | Tab index for keyboard focus.                                                                                             |
-| `textColor`     | `string | null`      | `null`                             | Inline color override for the center value text label. Accepts any CSS color.                                             |
-| `valueColor`    | `string | null`      | `null`                             | Inline color override for the value (range) arc stroke. Accepts any CSS color.                                            |
-| `valueTemplate` | `string | null`      | `null`                             | Optional value format template. Use `{value}` as a placeholder for the number. Example: `'{value}%'` renders `42%`.       |
-| `variant`       | `KnobVariant | null` | `null`                             | Design variant override. When null the active global theme variant is used. Accepts 'material' | 'bootstrap' | 'minimal'. |
+| Name            | Type         | Default                          | Description                                                            |
+| --------------- | ------------ | -------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------- | ---------- |
+| `ariaLabel`     | `string      | undefined`                       | `undefined`                                                            | Accessible label for the dial element.                                                                              |
+| `disabled`      | `boolean`    | `KNOB_DEFAULTS.disabled`         | Whether the knob is disabled.                                          |
+| `inputId`       | `string`     | `ui-lib-knob-${++knobIdCounter}` | Unique HTML id forwarded to the SVG element.                           |
+| `max`           | `number`     | `KNOB_DEFAULTS.max`              | Maximum allowed value.                                                 |
+| `min`           | `number`     | `KNOB_DEFAULTS.min`              | Minimum allowed value.                                                 |
+| `readonly`      | `boolean`    | `KNOB_DEFAULTS.readonly`         | Whether the knob is read-only (interactive but value does not change). |
+| `showValue`     | `boolean`    | `KNOB_DEFAULTS.showValue`        | Whether to render the numeric value label inside the dial.             |
+| `size`          | `KnobSize`   | `KNOB_DEFAULTS.size`             | Component size token.                                                  |
+| `step`          | `number`     | `KNOB_DEFAULTS.step`             | Increment/decrement step for keyboard interaction and drag snapping.   |
+| `strokeWidth`   | `number`     | `KNOB_DEFAULTS.strokeWidth`      | Width of the SVG arc stroke in SVG user-unit coordinates.              |
+| `tabindex`      | `number`     | `KNOB_DEFAULTS.tabindex`         | Tab index for keyboard focus.                                          |
+| `textColor`     | `string      | null`                            | `null`                                                                 | Inline color override for the center value text label. Accepts any CSS color.                                       |
+| `valueColor`    | `string      | null`                            | `null`                                                                 | Inline color override for the value (range) arc stroke. Accepts any CSS color.                                      |
+| `valueTemplate` | `string      | null`                            | `null`                                                                 | Optional value format template. Use `{value}` as a placeholder for the number. Example: `'{value}%'` renders `42%`. |
+| `variant`       | `KnobVariant | null`                            | `null`                                                                 | Design variant override. When null the active global theme variant is used. Accepts 'material'                      | 'bootstrap' | 'minimal'. |
 
 ### Models (two-way bindable)
 
@@ -123,4 +123,3 @@ _none_
 - [Demo page](/components/knob)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/knob/README.md)
-

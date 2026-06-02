@@ -21,109 +21,117 @@
 
 @defer (on immediate) {
   @if (inline() || panelVisible()) {
-  <div
-    #panelElement
-    role="dialog"
-    [attr.aria-label]="i18n.translate('colorpicker.panel')"
-    aria-modal="false"
-    class="ui-lib-colorpicker__panel"
-    [attr.id]="panelId()"
-    [attr.data-placement]="panelPlacement()"
-    [attr.tabindex]="isDisabled() ? -1 : 0"
-    (click)="$event.stopPropagation()"
-    (keydown)="onPanelKeydown($event)"
-  >
-    <div class="ui-lib-colorpicker__controls">
-      <div
-        #colorAreaElement
-        class="ui-lib-colorpicker__color-area"
-        aria-hidden="true"
-        tabindex="-1"
-        [style.background-color]="hueOnlyColor()"
-        (mousedown)="onColorAreaMouseDown($event)"
-        (touchstart)="onColorAreaTouchStart($event)"
-        (keydown)="onColorAreaKeydown($event)"
-      >
-        <div class="ui-lib-colorpicker__color-area-gradient"></div>
+    <div
+      #panelElement
+      role="dialog"
+      [attr.aria-label]="i18n.translate('colorpicker.panel')"
+      aria-modal="false"
+      class="ui-lib-colorpicker__panel"
+      [attr.id]="panelId()"
+      [attr.data-placement]="panelPlacement()"
+      [attr.tabindex]="isDisabled() ? -1 : 0"
+      (click)="$event.stopPropagation()"
+      (keydown)="onPanelKeydown($event)"
+    >
+      <div class="ui-lib-colorpicker__controls">
         <div
-          class="ui-lib-colorpicker__selector"
-          [style.left.%]="selectorLeft()"
-          [style.top.%]="selectorTop()"
-        ></div>
+          #colorAreaElement
+          class="ui-lib-colorpicker__color-area"
+          aria-hidden="true"
+          tabindex="-1"
+          [style.background-color]="hueOnlyColor()"
+          (mousedown)="onColorAreaMouseDown($event)"
+          (touchstart)="onColorAreaTouchStart($event)"
+          (keydown)="onColorAreaKeydown($event)"
+        >
+          <div class="ui-lib-colorpicker__color-area-gradient"></div>
+          <div
+            class="ui-lib-colorpicker__selector"
+            [style.left.%]="selectorLeft()"
+            [style.top.%]="selectorTop()"
+          ></div>
+        </div>
+
+        <div
+          #hueElement
+          class="ui-lib-colorpicker__hue"
+          role="slider"
+          [attr.aria-label]="i18n.translate('colorpicker.hue')"
+          aria-valuemin="0"
+          aria-valuemax="359"
+          [attr.aria-valuenow]="hue()"
+          [attr.aria-valuetext]="hue() + ' degrees'"
+          [attr.tabindex]="isDisabled() ? -1 : 0"
+          (mousedown)="onHueMouseDown($event)"
+          (touchstart)="onHueTouchStart($event)"
+          (keydown)="onHueKeydown($event)"
+        >
+          <div class="ui-lib-colorpicker__hue-handle" [style.top.%]="hueHandleTop()"></div>
+        </div>
       </div>
 
-      <div
-        #hueElement
-        class="ui-lib-colorpicker__hue"
-        role="slider"
-        [attr.aria-label]="i18n.translate('colorpicker.hue')"
-        aria-valuemin="0"
-        aria-valuemax="359"
-        [attr.aria-valuenow]="hue()"
-        [attr.aria-valuetext]="hue() + ' degrees'"
-        [attr.tabindex]="isDisabled() ? -1 : 0"
-        (mousedown)="onHueMouseDown($event)"
-        (touchstart)="onHueTouchStart($event)"
-        (keydown)="onHueKeydown($event)"
-      >
-        <div class="ui-lib-colorpicker__hue-handle" [style.top.%]="hueHandleTop()"></div>
-      </div>
-    </div>
-
-    <div class="ui-lib-colorpicker__inputs">
-      <div class="ui-lib-colorpicker__input-group ui-lib-colorpicker__input-group--hex">
-        <label [attr.for]="hexInputId()" class="ui-lib-colorpicker__input-label">{{ i18n.translate('colorpicker.label.hex') }}</label>
-        <input
-          [attr.id]="hexInputId()"
-          type="text"
-          class="ui-lib-colorpicker__text-input"
-          [value]="hexDisplayValue()"
-          [disabled]="isDisabled()"
-          (change)="onHexInputChange($event)"
-        />
-      </div>
-      <div class="ui-lib-colorpicker__input-row">
-        <div class="ui-lib-colorpicker__input-group">
-          <label [attr.for]="hueInputId()" class="ui-lib-colorpicker__input-label">{{ i18n.translate('colorpicker.label.h') }}</label>
+      <div class="ui-lib-colorpicker__inputs">
+        <div class="ui-lib-colorpicker__input-group ui-lib-colorpicker__input-group--hex">
+          <label [attr.for]="hexInputId()" class="ui-lib-colorpicker__input-label">{{
+            i18n.translate('colorpicker.label.hex')
+          }}</label>
           <input
-            [attr.id]="hueInputId()"
-            type="number"
-            class="ui-lib-colorpicker__number-input"
-            [value]="hue()"
-            min="0"
-            max="359"
+            [attr.id]="hexInputId()"
+            type="text"
+            class="ui-lib-colorpicker__text-input"
+            [value]="hexDisplayValue()"
             [disabled]="isDisabled()"
-            (change)="onHueInputChange($event)"
+            (change)="onHexInputChange($event)"
           />
         </div>
-        <div class="ui-lib-colorpicker__input-group">
-          <label [attr.for]="satInputId()" class="ui-lib-colorpicker__input-label">{{ i18n.translate('colorpicker.label.s') }}</label>
-          <input
-            [attr.id]="satInputId()"
-            type="number"
-            class="ui-lib-colorpicker__number-input"
-            [value]="saturation()"
-            min="0"
-            max="100"
-            [disabled]="isDisabled()"
-            (change)="onSatInputChange($event)"
-          />
-        </div>
-        <div class="ui-lib-colorpicker__input-group">
-          <label [attr.for]="brightInputId()" class="ui-lib-colorpicker__input-label">{{ i18n.translate('colorpicker.label.b') }}</label>
-          <input
-            [attr.id]="brightInputId()"
-            type="number"
-            class="ui-lib-colorpicker__number-input"
-            [value]="brightness()"
-            min="0"
-            max="100"
-            [disabled]="isDisabled()"
-            (change)="onBrightInputChange($event)"
-          />
+        <div class="ui-lib-colorpicker__input-row">
+          <div class="ui-lib-colorpicker__input-group">
+            <label [attr.for]="hueInputId()" class="ui-lib-colorpicker__input-label">{{
+              i18n.translate('colorpicker.label.h')
+            }}</label>
+            <input
+              [attr.id]="hueInputId()"
+              type="number"
+              class="ui-lib-colorpicker__number-input"
+              [value]="hue()"
+              min="0"
+              max="359"
+              [disabled]="isDisabled()"
+              (change)="onHueInputChange($event)"
+            />
+          </div>
+          <div class="ui-lib-colorpicker__input-group">
+            <label [attr.for]="satInputId()" class="ui-lib-colorpicker__input-label">{{
+              i18n.translate('colorpicker.label.s')
+            }}</label>
+            <input
+              [attr.id]="satInputId()"
+              type="number"
+              class="ui-lib-colorpicker__number-input"
+              [value]="saturation()"
+              min="0"
+              max="100"
+              [disabled]="isDisabled()"
+              (change)="onSatInputChange($event)"
+            />
+          </div>
+          <div class="ui-lib-colorpicker__input-group">
+            <label [attr.for]="brightInputId()" class="ui-lib-colorpicker__input-label">{{
+              i18n.translate('colorpicker.label.b')
+            }}</label>
+            <input
+              [attr.id]="brightInputId()"
+              type="number"
+              class="ui-lib-colorpicker__number-input"
+              [value]="brightness()"
+              min="0"
+              max="100"
+              [disabled]="isDisabled()"
+              (change)="onBrightInputChange($event)"
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
   }
 }

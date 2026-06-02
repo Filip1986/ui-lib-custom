@@ -59,8 +59,7 @@ deleteItem(): void {
 Use the `key` input and `ConfirmationConfig.key` to target a specific dialog:
 
 ```html
-<ui-lib-confirm-dialog key="delete" />
-<ui-lib-confirm-dialog key="logout" />
+<ui-lib-confirm-dialog key="delete" /> <ui-lib-confirm-dialog key="logout" />
 ```
 
 ```ts
@@ -70,7 +69,7 @@ this.confirmationService.confirm({ key: 'delete', message: 'Delete this item?' }
 ## Inputs
 
 | Input             | Type                           | Default                               | Description                                       |
-|-------------------|--------------------------------|---------------------------------------|---------------------------------------------------|
+| ----------------- | ------------------------------ | ------------------------------------- | ------------------------------------------------- |
 | `visible`         | `boolean` (model)              | `false`                               | Two-way visibility binding                        |
 | `key`             | `string`                       | `''`                                  | Targets service calls to this specific instance   |
 | `header`          | `string`                       | `'Confirmation'`                      | Dialog title                                      |
@@ -93,9 +92,9 @@ this.confirmationService.confirm({ key: 'delete', message: 'Delete this item?' }
 
 ## Content projection
 
-| Slot              | Selector          | Description                                                                       |
-|-------------------|-------------------|-----------------------------------------------------------------------------------|
-| Rich content      | `[uilib-content]` | Extra content rendered below the message paragraph (images, lists, custom markup). Set `message=""` to suppress the default paragraph. |
+| Slot         | Selector          | Description                                                                                                                            |
+| ------------ | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Rich content | `[uilib-content]` | Extra content rendered below the message paragraph (images, lists, custom markup). Set `message=""` to suppress the default paragraph. |
 
 ### Example — acknowledgment dialog with rich content
 
@@ -131,22 +130,22 @@ this.confirmationService.confirm({
 
 ## Outputs
 
-| Output       | Type     | Description                                              |
-|--------------|----------|----------------------------------------------------------|
-| `accepted`   | `void`   | Emitted when the user clicks Accept                      |
-| `rejected`   | `void`   | Emitted when the user clicks Reject or closes the dialog |
+| Output     | Type   | Description                                              |
+| ---------- | ------ | -------------------------------------------------------- |
+| `accepted` | `void` | Emitted when the user clicks Accept                      |
+| `rejected` | `void` | Emitted when the user clicks Reject or closes the dialog |
 
 ## ConfirmationService API
 
-| Method                                | Description                         |
-|---------------------------------------|-------------------------------------|
-| `confirm(config: ConfirmationConfig)` | Show a confirmation dialog          |
-| `close(key?: string)`                 | Programmatically close the dialog   |
+| Method                                | Description                       |
+| ------------------------------------- | --------------------------------- |
+| `confirm(config: ConfirmationConfig)` | Show a confirmation dialog        |
+| `close(key?: string)`                 | Programmatically close the dialog |
 
 ## ConfirmationConfig
 
 | Property          | Type                          | Description                      |
-|-------------------|-------------------------------|----------------------------------|
+| ----------------- | ----------------------------- | -------------------------------- |
 | `key`             | `string`                      | Targets a specific dialog by key |
 | `header`          | `string`                      | Dialog title                     |
 | `message`         | `string`                      | Confirmation message             |
@@ -170,7 +169,13 @@ this.confirmationService.confirm({
 
 ```ts
 type ConfirmDialogVariant = 'material' | 'bootstrap' | 'minimal';
-type ConfirmDialogButtonSeverity = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';
+type ConfirmDialogButtonSeverity =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'warning'
+  | 'info';
 type ConfirmDialogPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
 type ConfirmDialogDefaultFocus = 'accept' | 'reject' | 'none';
 ```
@@ -179,13 +184,13 @@ type ConfirmDialogDefaultFocus = 'accept' | 'reject' | 'none';
 
 ConfirmDialog falls back to the active locale bundle for default text. Override any key via the corresponding input or `ConfirmationConfig` property.
 
-| i18n key                       | Default (en)                         | Overridden by                        |
-|-------------------------------|--------------------------------------|--------------------------------------|
-| `confirm-dialog.header`       | `Confirmation`                       | `header` input / `ConfirmationConfig.header` |
-| `confirm-dialog.message`      | `Are you sure you want to proceed?`  | `message` input / `ConfirmationConfig.message` |
-| `confirm-dialog.accept`       | `Yes`                                | `acceptLabel` / `ConfirmationConfig.acceptLabel` |
-| `confirm-dialog.reject`       | `No`                                 | `rejectLabel` / `ConfirmationConfig.rejectLabel` |
-| `confirm-dialog.close`        | `Close`                              | (close button `aria-label`, not exposed as input) |
+| i18n key                 | Default (en)                        | Overridden by                                     |
+| ------------------------ | ----------------------------------- | ------------------------------------------------- |
+| `confirm-dialog.header`  | `Confirmation`                      | `header` input / `ConfirmationConfig.header`      |
+| `confirm-dialog.message` | `Are you sure you want to proceed?` | `message` input / `ConfirmationConfig.message`    |
+| `confirm-dialog.accept`  | `Yes`                               | `acceptLabel` / `ConfirmationConfig.acceptLabel`  |
+| `confirm-dialog.reject`  | `No`                                | `rejectLabel` / `ConfirmationConfig.rejectLabel`  |
+| `confirm-dialog.close`   | `Close`                             | (close button `aria-label`, not exposed as input) |
 
 To supply translations outside the built-in bundles, pass your own locale bundle to `UiLibI18nService.registerBundle()` and include the keys above.
 
@@ -194,7 +199,7 @@ To supply translations outside the built-in bundles, pass your own locale bundle
 ConfirmDialog meets WCAG 2.1 AA requirements for modal dialogs. All features below are built-in and require no extra configuration.
 
 | Feature              | Detail                                                                                                                              |
-|----------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | `role="alertdialog"` | Panel has the correct ARIA landmark role for confirmation dialogs                                                                   |
 | `aria-modal="true"`  | Signals to assistive technologies that this is a modal context                                                                      |
 | `aria-labelledby`    | Points to the header `<span>` — screen readers announce the title on open                                                           |
@@ -214,7 +219,7 @@ ConfirmDialog meets WCAG 2.1 AA requirements for modal dialogs. All features bel
 ### Keyboard navigation
 
 | Key               | Action                                      |
-|-------------------|---------------------------------------------|
+| ----------------- | ------------------------------------------- |
 | `Tab`             | Move focus forward through dialog controls  |
 | `Shift+Tab`       | Move focus backward through dialog controls |
 | `Enter` / `Space` | Activate the focused button                 |
@@ -222,25 +227,25 @@ ConfirmDialog meets WCAG 2.1 AA requirements for modal dialogs. All features bel
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `--uilib-confirm-dialog-bg` | `var(--uilib-surface)` | Panel background |
-| `--uilib-confirm-dialog-border-radius` | `var(--uilib-radius-lg, 8px)` | Panel corner radius |
-| `--uilib-confirm-dialog-shadow` | `var(--uilib-shadow-lg)` | Panel box shadow |
-| `--uilib-confirm-dialog-z-index` | `var(--uilib-z-modal, 1050)` | Stack order |
-| `--uilib-confirm-dialog-width` | `min(100%, 30rem)` | Panel maximum width |
-| `--uilib-confirm-dialog-header-bg` | `var(--uilib-surface-alt)` | Header area background |
-| `--uilib-confirm-dialog-header-color` | `var(--uilib-page-fg)` | Header text color |
-| `--uilib-confirm-dialog-header-padding` | `1rem 1.25rem` | Header padding |
-| `--uilib-confirm-dialog-header-font-size` | `var(--uilib-font-size-lg, 1.125rem)` | Header title font size |
-| `--uilib-confirm-dialog-content-padding` | `1.25rem` | Content area padding |
-| `--uilib-confirm-dialog-icon-size` | `2rem` | Message icon size |
-| `--uilib-confirm-dialog-icon-color` | `var(--uilib-color-warning-500, #f59e0b)` | Message icon color |
-| `--uilib-confirm-dialog-footer-padding` | `1rem 1.25rem` | Footer padding |
-| `--uilib-confirm-dialog-footer-gap` | `0.5rem` | Gap between footer buttons |
-| `--uilib-confirm-dialog-close-btn-size` | `2rem` | Close button size |
-| `--uilib-confirm-dialog-close-btn-color` | `var(--uilib-muted)` | Close button icon color |
-| `--uilib-confirm-dialog-btn-radius` | `var(--uilib-radius-md, 6px)` | Accept/reject button radius |
-| `--uilib-confirm-dialog-enter-duration` | `200ms` | Panel entrance animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |
-| `--uilib-confirm-dialog-backdrop-enter-duration` | `150ms` | Backdrop entrance animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |
-| `--uilib-confirm-dialog-interactive-transition-duration` | `120ms` | Button and close-button hover transition duration; set to `0ms` when `prefers-reduced-motion: reduce` |
+| Variable                                                 | Default                                   | Description                                                                                           |
+| -------------------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `--uilib-confirm-dialog-bg`                              | `var(--uilib-surface)`                    | Panel background                                                                                      |
+| `--uilib-confirm-dialog-border-radius`                   | `var(--uilib-radius-lg, 8px)`             | Panel corner radius                                                                                   |
+| `--uilib-confirm-dialog-shadow`                          | `var(--uilib-shadow-lg)`                  | Panel box shadow                                                                                      |
+| `--uilib-confirm-dialog-z-index`                         | `var(--uilib-z-modal, 1050)`              | Stack order                                                                                           |
+| `--uilib-confirm-dialog-width`                           | `min(100%, 30rem)`                        | Panel maximum width                                                                                   |
+| `--uilib-confirm-dialog-header-bg`                       | `var(--uilib-surface-alt)`                | Header area background                                                                                |
+| `--uilib-confirm-dialog-header-color`                    | `var(--uilib-page-fg)`                    | Header text color                                                                                     |
+| `--uilib-confirm-dialog-header-padding`                  | `1rem 1.25rem`                            | Header padding                                                                                        |
+| `--uilib-confirm-dialog-header-font-size`                | `var(--uilib-font-size-lg, 1.125rem)`     | Header title font size                                                                                |
+| `--uilib-confirm-dialog-content-padding`                 | `1.25rem`                                 | Content area padding                                                                                  |
+| `--uilib-confirm-dialog-icon-size`                       | `2rem`                                    | Message icon size                                                                                     |
+| `--uilib-confirm-dialog-icon-color`                      | `var(--uilib-color-warning-500, #f59e0b)` | Message icon color                                                                                    |
+| `--uilib-confirm-dialog-footer-padding`                  | `1rem 1.25rem`                            | Footer padding                                                                                        |
+| `--uilib-confirm-dialog-footer-gap`                      | `0.5rem`                                  | Gap between footer buttons                                                                            |
+| `--uilib-confirm-dialog-close-btn-size`                  | `2rem`                                    | Close button size                                                                                     |
+| `--uilib-confirm-dialog-close-btn-color`                 | `var(--uilib-muted)`                      | Close button icon color                                                                               |
+| `--uilib-confirm-dialog-btn-radius`                      | `var(--uilib-radius-md, 6px)`             | Accept/reject button radius                                                                           |
+| `--uilib-confirm-dialog-enter-duration`                  | `200ms`                                   | Panel entrance animation duration; set to `0ms` when `prefers-reduced-motion: reduce`                 |
+| `--uilib-confirm-dialog-backdrop-enter-duration`         | `150ms`                                   | Backdrop entrance animation duration; set to `0ms` when `prefers-reduced-motion: reduce`              |
+| `--uilib-confirm-dialog-interactive-transition-duration` | `120ms`                                   | Button and close-button hover transition duration; set to `0ms` when `prefers-reduced-motion: reduce` |

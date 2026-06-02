@@ -18,16 +18,9 @@
           <!-- Group header with labelled child items -->
           <li class="ui-lib-menu__item-group" role="presentation">
             @if (item.label) {
-              <div
-                class="ui-lib-menu__group-label"
-                aria-hidden="true"
-              >{{ item.label }}</div>
+              <div class="ui-lib-menu__group-label" aria-hidden="true">{{ item.label }}</div>
             }
-            <ul
-              class="ui-lib-menu__group-list"
-              role="group"
-              [attr.aria-label]="item.label || null"
-            >
+            <ul class="ui-lib-menu__group-list" role="group" [attr.aria-label]="item.label || null">
               @for (groupItem of getVisibleGroupItems(item); track $index) {
                 @if (groupItem.separator) {
                   <li class="ui-lib-menu__separator" role="separator"></li>
@@ -40,9 +33,11 @@
                     @if (groupItem.url) {
                       <a
                         class="ui-lib-menu__link"
-                        [class]="groupItem.styleClass
-                          ? 'ui-lib-menu__link ' + groupItem.styleClass
-                          : 'ui-lib-menu__link'"
+                        [class]="
+                          groupItem.styleClass
+                            ? 'ui-lib-menu__link ' + groupItem.styleClass
+                            : 'ui-lib-menu__link'
+                        "
                         role="menuitem"
                         [href]="groupItem.url"
                         [attr.target]="groupItem.target || null"
@@ -53,7 +48,10 @@
                         (focus)="onItemFocus(groupItem)"
                       >
                         @if (groupItem.icon) {
-                          <span class="ui-lib-menu__item-icon {{ groupItem.icon }}" aria-hidden="true"></span>
+                          <span
+                            class="ui-lib-menu__item-icon {{ groupItem.icon }}"
+                            aria-hidden="true"
+                          ></span>
                         }
                         @if (groupItem.label) {
                           <span class="ui-lib-menu__item-label">{{ groupItem.label }}</span>
@@ -62,9 +60,11 @@
                     } @else {
                       <a
                         class="ui-lib-menu__link"
-                        [class]="groupItem.styleClass
-                          ? 'ui-lib-menu__link ' + groupItem.styleClass
-                          : 'ui-lib-menu__link'"
+                        [class]="
+                          groupItem.styleClass
+                            ? 'ui-lib-menu__link ' + groupItem.styleClass
+                            : 'ui-lib-menu__link'
+                        "
                         role="menuitem"
                         [attr.aria-disabled]="groupItem.disabled ? 'true' : null"
                         [attr.tabindex]="getTabIndex(groupItem, getFlatIndex(groupItem))"
@@ -73,7 +73,10 @@
                         (focus)="onItemFocus(groupItem)"
                       >
                         @if (groupItem.icon) {
-                          <span class="ui-lib-menu__item-icon {{ groupItem.icon }}" aria-hidden="true"></span>
+                          <span
+                            class="ui-lib-menu__item-icon {{ groupItem.icon }}"
+                            aria-hidden="true"
+                          ></span>
                         }
                         @if (groupItem.label) {
                           <span class="ui-lib-menu__item-label">{{ groupItem.label }}</span>
@@ -95,9 +98,9 @@
             @if (item.url) {
               <a
                 class="ui-lib-menu__link"
-                [class]="item.styleClass
-                  ? 'ui-lib-menu__link ' + item.styleClass
-                  : 'ui-lib-menu__link'"
+                [class]="
+                  item.styleClass ? 'ui-lib-menu__link ' + item.styleClass : 'ui-lib-menu__link'
+                "
                 role="menuitem"
                 [href]="item.url"
                 [attr.target]="item.target || null"
@@ -117,9 +120,9 @@
             } @else {
               <a
                 class="ui-lib-menu__link"
-                [class]="item.styleClass
-                  ? 'ui-lib-menu__link ' + item.styleClass
-                  : 'ui-lib-menu__link'"
+                [class]="
+                  item.styleClass ? 'ui-lib-menu__link ' + item.styleClass : 'ui-lib-menu__link'
+                "
                 role="menuitem"
                 [attr.aria-disabled]="item.disabled ? 'true' : null"
                 [attr.tabindex]="getTabIndex(item, getFlatIndex(item))"

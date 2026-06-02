@@ -170,7 +170,7 @@ describe('IconButton Accessibility', (): void => {
     await createFixture(EmptyLabelHostComponent);
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      '[ui-lib-icon-button] ariaLabel must not be empty for accessibility.'
+      '[ui-lib-icon-button] ariaLabel must not be empty for accessibility.',
     );
   });
 

@@ -9,7 +9,7 @@
 ## Inputs
 
 | Name         | Type                                                                                              | Default       | Notes                                                                                           |
-|--------------|---------------------------------------------------------------------------------------------------|---------------|-------------------------------------------------------------------------------------------------|
+| ------------ | ------------------------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------- |
 | `position`   | `'top-right' \| 'top-left' \| 'bottom-right' \| 'bottom-left' \| 'top-center' \| 'bottom-center'` | `'top-right'` | Screen position of the toast container                                                          |
 | `life`       | `number`                                                                                          | `3000`        | Default auto-dismiss duration in ms; individual messages can override via their `life` property |
 | `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null`                                                  | `null`        | Falls back to `ThemeConfigService` global variant when null                                     |
@@ -22,18 +22,18 @@ _none_
 
 ## `ToastMessage` Interface
 
-| Property       | Type                                       | Default          | Description                                                |
-|----------------|--------------------------------------------|------------------|------------------------------------------------------------|
-| `id`           | `string \| undefined`                      | auto-generated   | Unique identifier. Auto-generated if omitted.              |
-| `key`          | `string \| undefined`                      | —                | Routes this message to the matching `Toast` container key. |
-| `severity`     | `'success' \| 'info' \| 'warn' \| 'error'` | `'info'`         | Controls colour palette and default icon.                  |
-| `summary`      | `string \| undefined`                      | —                | Bold headline text shown above detail.                     |
-| `detail`       | `string \| undefined`                      | —                | Body text for the notification.                            |
-| `life`         | `number \| undefined`                      | container `life` | Auto-dismiss duration ms — overrides container default.    |
-| `sticky`       | `boolean \| undefined`                     | `false`          | When true, the toast never auto-dismisses.                 |
-| `closable`     | `boolean \| undefined`                     | `true`           | When false, the dismiss button is hidden.                  |
-| `icon`         | `string \| undefined`                      | severity default | Custom icon name — overrides the severity default.         |
-| `styleClass`   | `string \| undefined`                      | —                | Additional CSS class(es) on the item element.              |
+| Property     | Type                                       | Default          | Description                                                |
+| ------------ | ------------------------------------------ | ---------------- | ---------------------------------------------------------- |
+| `id`         | `string \| undefined`                      | auto-generated   | Unique identifier. Auto-generated if omitted.              |
+| `key`        | `string \| undefined`                      | —                | Routes this message to the matching `Toast` container key. |
+| `severity`   | `'success' \| 'info' \| 'warn' \| 'error'` | `'info'`         | Controls colour palette and default icon.                  |
+| `summary`    | `string \| undefined`                      | —                | Bold headline text shown above detail.                     |
+| `detail`     | `string \| undefined`                      | —                | Body text for the notification.                            |
+| `life`       | `number \| undefined`                      | container `life` | Auto-dismiss duration ms — overrides container default.    |
+| `sticky`     | `boolean \| undefined`                     | `false`          | When true, the toast never auto-dismisses.                 |
+| `closable`   | `boolean \| undefined`                     | `true`           | When false, the dismiss button is hidden.                  |
+| `icon`       | `string \| undefined`                      | severity default | Custom icon name — overrides the severity default.         |
+| `styleClass` | `string \| undefined`                      | —                | Additional CSS class(es) on the item element.              |
 
 ## Usage
 
@@ -77,7 +77,7 @@ toastService.add({ key: 'global', severity: 'success', summary: 'Profile saved' 
 ## CSS Custom Properties
 
 | Property                           | Default                            | Description                                                                                     |
-|------------------------------------|------------------------------------|-------------------------------------------------------------------------------------------------|
+| ---------------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `--uilib-toast-width`              | `22rem`                            | Width of the toast container                                                                    |
 | `--uilib-toast-gap`                | `0.5rem`                           | Gap between stacked toasts                                                                      |
 | `--uilib-toast-z-index`            | `var(--uilib-z-overlay, 1100)`     | Stack order                                                                                     |
@@ -92,7 +92,7 @@ toastService.add({ key: 'global', severity: 'success', summary: 'Profile saved' 
 ### ARIA features
 
 | Feature                      | Detail                                                                                                                                                                                                              |
-|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `role="region"`              | Applied to the `<ui-lib-toast>` host element — identifies the notification area as a page landmark.                                                                                                                 |
 | `aria-label="Notifications"` | Names the region for screen reader landmark navigation.                                                                                                                                                             |
 | `role="alert"`               | Applied to **error** severity items — implies `aria-live="assertive"` and `aria-atomic="true"`. Screen readers interrupt immediately to announce the content.                                                       |
@@ -105,11 +105,11 @@ toastService.add({ key: 'global', severity: 'success', summary: 'Profile saved' 
 
 ### Keyboard navigation
 
-| Key                 | Behaviour                                                                            |
-|---------------------|--------------------------------------------------------------------------------------|
-| Tab                 | Cycles through visible dismiss buttons (one per closable toast)                      |
-| Enter / Space       | Activates the focused dismiss button — starts exit animation, then removes the toast |
-| No Escape handler   | Toasts are non-modal — no global Escape handler needed. Focus is never trapped.      |
+| Key               | Behaviour                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| Tab               | Cycles through visible dismiss buttons (one per closable toast)                      |
+| Enter / Space     | Activates the focused dismiss button — starts exit animation, then removes the toast |
+| No Escape handler | Toasts are non-modal — no global Escape handler needed. Focus is never trapped.      |
 
 ### Severity and urgency
 

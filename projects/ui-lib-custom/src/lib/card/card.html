@@ -3,7 +3,7 @@
   [attr.role]="hoverable() ? 'button' : null"
   [attr.tabindex]="hoverable() ? 0 : null"
   [attr.aria-label]="hoverable() ? ariaLabel() || null : null"
-  [attr.aria-labelledby]="(!hoverable() && headerVisible()) ? titleId : null"
+  [attr.aria-labelledby]="!hoverable() && headerVisible() ? titleId : null"
   (keydown)="onKeydown($event)"
   [style.--uilib-card-shadow]="shadow()"
   [style.--uilib-card-shadow-hover]="shadow()"

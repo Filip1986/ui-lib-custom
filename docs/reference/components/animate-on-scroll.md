@@ -73,4 +73,3 @@ _none_
 - [Demo page](/components/animate-on-scroll)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/animate-on-scroll/README.md)
-

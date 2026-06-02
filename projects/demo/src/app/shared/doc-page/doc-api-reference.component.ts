@@ -61,7 +61,7 @@ export class DocApiReferenceComponent {
    * Defaults to auto-detect: shown if at least one row has a `default` value.
    */
   public readonly showDefault: InputSignal<boolean | undefined> = input<boolean | undefined>(
-    undefined
+    undefined,
   );
 
   /** Resolved first-column label based on `kind`. */
@@ -86,6 +86,6 @@ export class DocApiReferenceComponent {
 
   /** Rows cast to a mutable array as required by ui-lib-table's `value` input. */
   public readonly tableRows: Signal<ApiPropRow[]> = computed<ApiPropRow[]>(
-    (): ApiPropRow[] => this.rows() as ApiPropRow[]
+    (): ApiPropRow[] => this.rows() as ApiPropRow[],
   );
 }

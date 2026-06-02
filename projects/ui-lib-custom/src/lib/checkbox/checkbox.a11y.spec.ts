@@ -111,7 +111,7 @@ describe('Checkbox Accessibility', (): void => {
 
   function getRequiredElement<TElement extends Element>(
     selector: string,
-    rootElement: ParentNode = hostElement()
+    rootElement: ParentNode = hostElement(),
   ): TElement {
     const element: TElement | null = rootElement.querySelector(selector) as TElement | null;
     if (!element) {
@@ -132,14 +132,14 @@ describe('Checkbox Accessibility', (): void => {
   function firstInputElement(): HTMLInputElement {
     return getRequiredElement<HTMLInputElement>(
       '.ui-lib-checkbox__native-input',
-      firstCheckboxElement()
+      firstCheckboxElement(),
     );
   }
 
   function secondInputElement(): HTMLInputElement {
     return getRequiredElement<HTMLInputElement>(
       '.ui-lib-checkbox__native-input',
-      secondCheckboxElement()
+      secondCheckboxElement(),
     );
   }
 
@@ -208,10 +208,10 @@ describe('Checkbox Accessibility', (): void => {
 
   it('keeps checkmark and indeterminate icons aria-hidden', (): void => {
     const checkIconElement: HTMLElement | null = firstCheckboxElement().querySelector(
-      '.ui-lib-checkbox__icon--check'
+      '.ui-lib-checkbox__icon--check',
     );
     const indeterminateIconElement: HTMLElement | null = firstCheckboxElement().querySelector(
-      '.ui-lib-checkbox__icon--indeterminate'
+      '.ui-lib-checkbox__icon--indeterminate',
     );
 
     expect(checkIconElement?.getAttribute('aria-hidden')).toBe('true');
@@ -235,7 +235,7 @@ describe('Checkbox Accessibility', (): void => {
     fixture.detectChanges();
 
     expect(firstInputElement().getAttribute('aria-describedby')).toMatch(
-      /^ui-lib-checkbox-\d+-description$/
+      /^ui-lib-checkbox-\d+-description$/,
     );
   });
 

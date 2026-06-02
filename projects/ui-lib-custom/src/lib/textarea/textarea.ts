@@ -69,7 +69,7 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
 
   /** Design variant override. When null the active global theme variant is used. */
   public readonly variant: InputSignal<TextareaVariant | null> = input<TextareaVariant | null>(
-    TEXTAREA_DEFAULTS.variant
+    TEXTAREA_DEFAULTS.variant,
   );
 
   /** Size token -- controls padding and font size. */
@@ -98,7 +98,7 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
 
   /** Maximum number of text rows before auto-resize enables internal scrolling. */
   public readonly maxRows: InputSignal<number | null> = input<number | null>(
-    TEXTAREA_DEFAULTS.maxRows
+    TEXTAREA_DEFAULTS.maxRows,
   );
 
   /** Number of visible text columns. */
@@ -106,7 +106,7 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
 
   /** CSS resize behaviour. Use 'auto' to enable JS-driven auto-resize. */
   public readonly resize: InputSignal<TextareaResize> = input<TextareaResize>(
-    TEXTAREA_DEFAULTS.resize
+    TEXTAREA_DEFAULTS.resize,
   );
 
   /** When true, the textarea grows in height automatically to fit its content. */
@@ -129,7 +129,7 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
 
   /** Maximum allowed character length -- also sets maxlength on the native element. */
   public readonly maxLength: InputSignal<number | null> = input<number | null>(
-    TEXTAREA_DEFAULTS.maxLength
+    TEXTAREA_DEFAULTS.maxLength,
   );
 
   /** Error message rendered below the textarea and announced to screen readers. */
@@ -200,35 +200,35 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
   protected readonly textareaId: string;
 
   protected readonly effectiveVariant: Signal<TextareaVariant> = computed<TextareaVariant>(
-    (): TextareaVariant => this.variant() ?? this.themeConfig.variant()
+    (): TextareaVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   protected readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   protected readonly controlId: Signal<string> = computed<string>(
-    (): string => this.inputId() ?? this.textareaId
+    (): string => this.inputId() ?? this.textareaId,
   );
 
   protected readonly errorId: Signal<string> = computed<string>(
-    (): string => `${this.controlId()}-error`
+    (): string => `${this.controlId()}-error`,
   );
 
   protected readonly hintId: Signal<string> = computed<string>(
-    (): string => `${this.controlId()}-hint`
+    (): string => `${this.controlId()}-hint`,
   );
 
   protected readonly isInvalid: Signal<boolean> = computed<boolean>(
-    (): boolean => this.invalid() || Boolean(this.error())
+    (): boolean => this.invalid() || Boolean(this.error()),
   );
 
   protected readonly showErrorRegion: Signal<boolean> = computed<boolean>(
-    (): boolean => this.isInvalid() && (Boolean(this.error()) || this.hasProjectedError())
+    (): boolean => this.isInvalid() && (Boolean(this.error()) || this.hasProjectedError()),
   );
 
   protected readonly showHintRegion: Signal<boolean> = computed<boolean>(
-    (): boolean => Boolean(this.hint()) || this.hasProjectedHint()
+    (): boolean => Boolean(this.hint()) || this.hasProjectedHint(),
   );
 
   protected readonly ariaDescribedBy: Signal<string | null> = computed<string | null>(
@@ -241,16 +241,16 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
         ids.push(this.hintId());
       }
       return ids.length > 0 ? ids.join(' ') : null;
-    }
+    },
   );
 
   protected readonly currentLength: Signal<number> = computed<number>(
-    (): number => this.value().length
+    (): number => this.value().length,
   );
 
   /** The resize CSS value applied to the native textarea. Auto-resize mode uses 'none'. */
   protected readonly nativeResize: Signal<string> = computed<string>((): string =>
-    this.autoResize() ? 'none' : this.resize()
+    this.autoResize() ? 'none' : this.resize(),
   );
 
   protected readonly hostClasses: Signal<string> = computed<string>((): string => {

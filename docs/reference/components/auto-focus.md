@@ -13,10 +13,10 @@ Opt-in only: focus runs only when you explicitly add `uiLibAutoFocus` to an elem
 
 ### Inputs
 
-| Name       | Type            | Default | Description                                                              |
-| ---------- | --------------- | ------- | ------------------------------------------------------------------------ |
-| `disabled` | `boolean`       | `false` | When `true`, autofocus is skipped.                                       |
-| `selector` | `string | null` | `null`  | Optional CSS selector used to focus a child element instead of the host. |
+| Name       | Type      | Default | Description                        |
+| ---------- | --------- | ------- | ---------------------------------- | ------------------------------------------------------------------------ |
+| `disabled` | `boolean` | `false` | When `true`, autofocus is skipped. |
+| `selector` | `string   | null`   | `null`                             | Optional CSS selector used to focus a child element instead of the host. |
 
 ### Outputs
 
@@ -64,8 +64,7 @@ _No component-level CSS variables detected._
 ## Usage Examples
 
 ```html
-<input uiLibAutoFocus />
-<input uiLibAutoFocus [disabled]="disableAutoFocus" />
+<input uiLibAutoFocus /> <input uiLibAutoFocus [disabled]="disableAutoFocus" />
 ```
 
 ```html
@@ -88,4 +87,3 @@ _No component-level CSS variables detected._
 - [Demo page](/components/auto-focus)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/auto-focus/README.md)
-

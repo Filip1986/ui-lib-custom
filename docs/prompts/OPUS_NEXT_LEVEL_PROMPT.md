@@ -75,58 +75,58 @@ As of May 2026, the "hardening milestone" is complete:
 This is the current quality model. Every component is evaluated across these categories (1–10 integer scores,
 gate = every category ≥ 8):
 
-| Category    | What ≥ 8 looks like |
-|-------------|---------------------|
-| **API**     | Inputs/outputs feel obvious without reading docs; naming consistent; defaults intelligent |
-| **A11y**    | Full keyboard nav, correct ARIA, screen-reader tested, reduced motion, zero axe violations |
-| **Perf**    | No unnecessary renders, signals correct, no memory leaks, tree-shaking verified |
-| **Comp**    | Content projection slots sufficient; developer can extend without forking |
+| Category    | What ≥ 8 looks like                                                                           |
+| ----------- | --------------------------------------------------------------------------------------------- |
+| **API**     | Inputs/outputs feel obvious without reading docs; naming consistent; defaults intelligent     |
+| **A11y**    | Full keyboard nav, correct ARIA, screen-reader tested, reduced motion, zero axe violations    |
+| **Perf**    | No unnecessary renders, signals correct, no memory leaks, tree-shaking verified               |
+| **Comp**    | Content projection slots sufficient; developer can extend without forking                     |
 | **Theme**   | All visuals exposed as `--uilib-*` CSS vars; dark mode works; runtime variant switching works |
-| **DX**      | TS autocomplete excellent; error states clear; common case ≤ 3 lines of consumer code |
+| **DX**      | TS autocomplete excellent; error states clear; common case ≤ 3 lines of consumer code         |
 | **Docs**    | README has selector, all inputs/outputs, content projection, examples, a11y notes, edge cases |
 | **Polish**  | Animations smooth and intentional; interactions have perceptible feedback; no jarring reflows |
-| **Angular** | Signals-first, OnPush, standalone, SSR-safe, hydration-safe, zoneless-compatible |
-| **Feel**    | Using the component feels satisfying — would make a developer smile, not just work |
+| **Angular** | Signals-first, OnPush, standalone, SSR-safe, hydration-safe, zoneless-compatible              |
+| **Feel**    | Using the component feels satisfying — would make a developer smile, not just work            |
 
 **Current scores snapshot (run date: 2026-05-25):**
 
-| Component         | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg  |
-|-------------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|
-| Button            | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9  |
-| Input             | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.8  |
-| Checkbox          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0  |
-| Toast             | 9   | 10   | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.1  |
-| Popover           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0  |
-| Tooltip           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0  |
-| Tabs              | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0  |
-| Accordion         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0  |
-| Menu              | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0  |
-| Card              | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0  |
-| Dialog            | 9   | 9    | 8    | 9    | 8     | 9   | 8    | 9      | 9       | 8    | 8.6  |
-| Select            | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2  |
-| AutoComplete      | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2  |
-| CascadeSelect     | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2  |
-| DatePicker        | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3  |
-| ColorPicker       | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2  |
-| Knob              | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2  |
-| Slider            | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 8.8  |
-| Table             | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6  |
-| TreeTable         | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5  |
-| Tree              | 9   | 8    | 9    | 9    | 9     | 9   | 8    | 8      | 9       | 8    | 8.6  |
-| VirtualScroller   | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5  |
-| Carousel          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3  |
-| Galleria          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3  |
-| DataView          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3  |
-| Timeline          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3  |
-| OrganizationChart | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3  |
-| MeterGroup        | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3  |
-| Avatar            | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2  |
-| Drawer            | 9   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.5  |
-| ConfirmDialog     | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3  |
-| DynamicDialog     | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3  |
-| BottomSheet       | 8   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.5  |
-| Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5  |
-| Chart             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9  |
+| Component         | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg |
+| ----------------- | --- | ---- | ---- | ---- | ----- | --- | ---- | ------ | ------- | ---- | --- |
+| Button            | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 |
+| Input             | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.8 |
+| Checkbox          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 |
+| Toast             | 9   | 10   | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.1 |
+| Popover           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 |
+| Tooltip           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 |
+| Tabs              | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 |
+| Accordion         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 |
+| Menu              | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 |
+| Card              | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 |
+| Dialog            | 9   | 9    | 8    | 9    | 8     | 9   | 8    | 9      | 9       | 8    | 8.6 |
+| Select            | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 |
+| AutoComplete      | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 |
+| CascadeSelect     | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 |
+| DatePicker        | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 |
+| ColorPicker       | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 |
+| Knob              | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 |
+| Slider            | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 8.8 |
+| Table             | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 |
+| TreeTable         | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 |
+| Tree              | 9   | 8    | 9    | 9    | 9     | 9   | 8    | 8      | 9       | 8    | 8.6 |
+| VirtualScroller   | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 |
+| Carousel          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 |
+| Galleria          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 |
+| DataView          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 |
+| Timeline          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 |
+| OrganizationChart | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 |
+| MeterGroup        | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 |
+| Avatar            | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 |
+| Drawer            | 9   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.5 |
+| ConfirmDialog     | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3 |
+| DynamicDialog     | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3 |
+| BottomSheet       | 8   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.5 |
+| Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 |
+| Chart             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 |
 
 > **Pattern to reason about:** Most components plateau at 8.2–8.3. Almost nothing exceeds 9.1.
 > The gap between 8.x and 10 is the frontier I want to plan for.
@@ -149,6 +149,7 @@ WCAG 2.2 and WAI-ARIA design pattern compliance as the real bar. When any trade-
 go further on accessibility, not less.
 
 **Queued "wow factors" (not yet activated):**
+
 - Signals-first data binding depth (fully zoneless by default, no zone.js required)
 - CSS cascade layer discipline (consumer CSS always wins, zero specificity battles)
 - First-class RTL/i18n support out of the box
@@ -156,6 +157,7 @@ go further on accessibility, not less.
 - Theme preset marketplace
 
 **Next milestone candidates (priority order):**
+
 1. Signals-first data grid — highest commercial value in the Angular ecosystem
 2. Runtime variant switcher + theme preset management
 3. Broader automated axe-core audit pass (Playwright-driven)
@@ -270,6 +272,7 @@ Use tables, numbered lists, and concrete examples wherever possible.
 
 Where you recommend a specific pattern or intervention, show what it looks like in Angular
 (TypeScript/SCSS/HTML) using this library's conventions:
+
 - Signal inputs: `value = input<string>('default')`
 - Computed: `display = computed<string>((): string => ...)`
 - Outputs: `buttonClick = output<MouseEvent>()`
@@ -279,4 +282,3 @@ Where you recommend a specific pattern or intervention, show what it looks like 
 
 Do not give generic Angular advice — everything must be specific to this library's architecture
 and conventions as described above.
-

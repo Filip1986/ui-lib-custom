@@ -37,7 +37,7 @@ function getElement(fixture: ComponentFixture<unknown>, selector: string): HTMLE
 class TestHostComponent {
   public readonly blocked: WritableSignal<boolean> = signal<boolean>(false);
   public readonly variant: WritableSignal<BlockUIVariant | null> = signal<BlockUIVariant | null>(
-    null
+    null,
   );
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
   public readonly baseZIndex: WritableSignal<number> = signal<number>(0);
@@ -72,7 +72,7 @@ describe('BlockUI', (): void => {
       fixture.componentInstance.baseZIndex.set(initial.baseZIndex);
     fixture.detectChanges();
     const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-      'ui-lib-block-ui'
+      'ui-lib-block-ui',
     ) as HTMLElement;
     return { fixture, host };
   }

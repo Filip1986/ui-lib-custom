@@ -42,6 +42,6 @@ export function provideChartDefaults(): void {
     ArcElement,
     Tooltip,
     Legend,
-    Filler
+    Filler,
   );
 }

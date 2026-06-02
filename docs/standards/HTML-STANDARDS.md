@@ -41,13 +41,13 @@ Rule: **use the most semantically appropriate element; document when a consumer 
 
 ### Correct element for each purpose
 
-| Intent | Correct element | Wrong element |
-|---|---|---|
-| Trigger an action | `<button type="button">` | `<div>`, `<span>` |
-| Navigation item | `<a href="...">` | `<button>` |
-| Data table | `<table>`, `<th scope>`, `<td>` | nested `<div>` grids |
-| Ordered steps | `<ol>` + `<li>` | `<div>` with numbers |
-| Unordered options | `<ul>` + `<li>` | `<div>` items |
+| Intent            | Correct element                 | Wrong element        |
+| ----------------- | ------------------------------- | -------------------- |
+| Trigger an action | `<button type="button">`        | `<div>`, `<span>`    |
+| Navigation item   | `<a href="...">`                | `<button>`           |
+| Data table        | `<table>`, `<th scope>`, `<td>` | nested `<div>` grids |
+| Ordered steps     | `<ol>` + `<li>`                 | `<div>` with numbers |
+| Unordered options | `<ul>` + `<li>`                 | `<div>` items        |
 
 ### Heading hierarchy — library components must not include `<h1>`–`<h3>`
 
@@ -56,11 +56,13 @@ Library components should use `<h4>`–`<h6>` for internal component headings (c
 ```html
 <!-- ✅ Configurable heading level via input -->
 <ng-template #titleTemplate>
-  @switch (headingLevel()) {
-    @case (4) { <h4 class="uilib-card__title">{{ title() }}</h4> }
-    @case (5) { <h5 class="uilib-card__title">{{ title() }}</h5> }
-    @default  { <h6 class="uilib-card__title">{{ title() }}</h6> }
-  }
+  @switch (headingLevel()) { @case (4) {
+  <h4 class="uilib-card__title">{{ title() }}</h4>
+  } @case (5) {
+  <h5 class="uilib-card__title">{{ title() }}</h5>
+  } @default {
+  <h6 class="uilib-card__title">{{ title() }}</h6>
+  } }
 </ng-template>
 ```
 
@@ -84,17 +86,15 @@ Or use `aria-labelledby` on the component root and project the heading from the 
 ```html
 <!-- ✅ Correct -->
 @if (disabled()) {
-  <span class="uilib-button__loader" aria-busy="true" />
+<span class="uilib-button__loader" aria-busy="true" />
 } @else {
-  <ng-content />
-}
-
-@for (option of options(); track option.value) {
-  <li class="uilib-select__option" [class.uilib-select__option--selected]="option.value === value()">
-    {{ option.label }}
-  </li>
+<ng-content />
+} @for (option of options(); track option.value) {
+<li class="uilib-select__option" [class.uilib-select__option--selected]="option.value === value()">
+  {{ option.label }}
+</li>
 } @empty {
-  <li class="uilib-select__empty">No options</li>
+<li class="uilib-select__empty">No options</li>
 }
 ```
 
@@ -140,11 +140,9 @@ Interactive widgets must declare their ARIA role and all required properties:
   [attr.aria-activedescendant]="activeId()"
 >
   @for (option of options(); track option.value) {
-    <li
-      role="option"
-      [id]="option.id"
-      [attr.aria-selected]="option.value === value()"
-    >{{ option.label }}</li>
+  <li role="option" [id]="option.id" [attr.aria-selected]="option.value === value()">
+    {{ option.label }}
+  </li>
   }
 </ul>
 ```
@@ -171,14 +169,14 @@ readonly clearLabel = input<string>('Clear');
 
 Implement the WAI-ARIA design pattern for the widget type:
 
-| Component type | Required keyboard behaviour |
-|---|---|
-| Button | `Enter` + `Space` activate |
-| Checkbox | `Space` toggles |
-| Radio group | Arrow keys move selection |
-| Listbox | Arrow keys navigate; `Enter` selects; `Escape` closes |
-| Dialog | `Escape` closes; focus trap active |
-| Tabs | Arrow keys switch; `Home`/`End` jump to first/last |
+| Component type | Required keyboard behaviour                           |
+| -------------- | ----------------------------------------------------- |
+| Button         | `Enter` + `Space` activate                            |
+| Checkbox       | `Space` toggles                                       |
+| Radio group    | Arrow keys move selection                             |
+| Listbox        | Arrow keys navigate; `Enter` selects; `Escape` closes |
+| Dialog         | `Escape` closes; focus trap active                    |
+| Tabs           | Arrow keys switch; `Home`/`End` jump to first/last    |
 
 ### Expose disabled state correctly
 
@@ -196,7 +194,7 @@ host: {
 Library form components must implement `ControlValueAccessor`:
 
 ```typescript
-providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => UiLibInput), multi: true }]
+providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => UiLibInput), multi: true }];
 ```
 
 ### Associate labels
@@ -282,7 +280,7 @@ Projected nodes are always instantiated by the parent regardless of `@if` on the
 ```html
 <!-- ❌ Does NOT prevent content creation -->
 @if (showExtra()) {
-  <ng-content select="[extra]" />
+<ng-content select="[extra]" />
 }
 
 <!-- ✅ Always render slot — hide/show via CSS -->
@@ -320,8 +318,10 @@ Projected nodes are always instantiated by the parent regardless of `@if` on the
 ### `track` must use stable identity
 
 ```html
-@for (item of items(); track item.id) { ... }  <!-- ✅ -->
-@for (item of items(); track $index) { ... }   <!-- ❌ Fragile -->
+@for (item of items(); track item.id) { ... }
+<!-- ✅ -->
+@for (item of items(); track $index) { ... }
+<!-- ❌ Fragile -->
 ```
 
 ---
@@ -408,15 +408,15 @@ readonly type = input<string>('text');
 
 Supported types the library input should handle gracefully:
 
-| Type | Browser provides | Consumers use for |
-|---|---|---|
-| `type="email"` | Email validation, `@` keyboard on mobile | Email fields |
-| `type="url"` | URL validation | URL fields |
-| `type="tel"` | Phone keyboard on mobile | Phone number inputs |
-| `type="number"` | Numeric keyboard, min/max, step | Quantity, age, price |
-| `type="date"` | Date picker, ISO date value | Date fields |
-| `type="search"` | Clear button, search semantics | Search inputs |
-| `type="password"` | Masked input, reveal toggle | Password fields |
+| Type              | Browser provides                         | Consumers use for    |
+| ----------------- | ---------------------------------------- | -------------------- |
+| `type="email"`    | Email validation, `@` keyboard on mobile | Email fields         |
+| `type="url"`      | URL validation                           | URL fields           |
+| `type="tel"`      | Phone keyboard on mobile                 | Phone number inputs  |
+| `type="number"`   | Numeric keyboard, min/max, step          | Quantity, age, price |
+| `type="date"`     | Date picker, ISO date value              | Date fields          |
+| `type="search"`   | Clear button, search semantics           | Search inputs        |
+| `type="password"` | Masked input, reveal toggle              | Password fields      |
 
 ### Forwarding number-specific attributes
 
@@ -429,12 +429,7 @@ readonly step = input<number | null>(null);
 ```
 
 ```html
-<input
-  [type]="type()"
-  [attr.min]="min()"
-  [attr.max]="max()"
-  [attr.step]="step()"
-/>
+<input [type]="type()" [attr.min]="min()" [attr.max]="max()" [attr.step]="step()" />
 ```
 
 ---
@@ -442,7 +437,7 @@ readonly step = input<number | null>(null);
 ## 12. What NOT To Do
 
 | Anti-pattern                                     | Why                                      | Alternative                                        |
-|--------------------------------------------------|------------------------------------------|----------------------------------------------------|
+| ------------------------------------------------ | ---------------------------------------- | -------------------------------------------------- |
 | `<div>`/`<span>` for interactive elements        | No keyboard behaviour, no semantics      | `<button>` or `<a href>`                           |
 | `*ngIf` / `*ngFor`                               | Legacy, banned by ESLint                 | `@if` / `@for`                                     |
 | Hard-coding `<h1>`–`<h3>` in a library component | Breaks the consumer's page outline       | Configurable heading level or `aria-labelledby`    |
@@ -458,16 +453,19 @@ readonly step = input<number | null>(null);
 ## 13. Review Checklist
 
 ### Semantic structure
+
 - [ ] Correct element used: `<button>` for actions, `<a href>` for navigation, `<ul>`/`<li>` for lists
 - [ ] No `<h1>`–`<h3>` hard-coded — use configurable heading level or `aria-labelledby`
 
 ### Angular template syntax
+
 - [ ] `@if` / `@for` / `@switch` — no `*ngIf` / `*ngFor`
 - [ ] Every `@for` has `track` on a stable identity property
 - [ ] Self-closing tags for all void/component elements without projected content
 - [ ] No method calls in templates — `computed()` used instead
 
 ### Accessibility (critical for a library)
+
 - [ ] ARIA role declared and all required properties set
 - [ ] Every interactive element has an accessible label
 - [ ] Keyboard interaction follows WAI-ARIA design pattern for the widget type
@@ -476,10 +474,12 @@ readonly step = input<number | null>(null);
 - [ ] Configurable label text exposed as `input()` where contextual
 
 ### Content projection
+
 - [ ] `ng-content` is NOT inside `@if` — CSS visibility pattern used instead
 - [ ] Slot names are semantic (`uilib-*`), not positional
 
 ### Images
+
 - [ ] `alt` text populated (decorative icons: `aria-hidden="true"`)
 - [ ] `width` and `height` present on `<img>` elements
 - [ ] `srcset` and `sizes` forwarded as inputs; `priority` input controls `loading`/`fetchpriority`
@@ -491,7 +491,7 @@ readonly step = input<number | null>(null);
 Rules enforced automatically via `eslint.config.mjs`:
 
 | Rule                                                    | Enforces                           | Severity |
-|---------------------------------------------------------|------------------------------------|----------|
+| ------------------------------------------------------- | ---------------------------------- | -------- |
 | `@angular-eslint/template/alt-text`                     | Alt text on images                 | error    |
 | `@angular-eslint/template/elements-content`             | Non-empty interactive elements     | error    |
 | `@angular-eslint/template/label-has-associated-control` | Label/input association            | error    |
@@ -544,13 +544,12 @@ Suggest removals where native HTML does the job better.
 
 ---
 
-*Last reviewed: 2026-05-24 — Added §10 Responsive Images, §11 HTML5 Form Input Types, §15 AI-Assisted Review Workflow.*
+_Last reviewed: 2026-05-24 — Added §10 Responsive Images, §11 HTML5 Form Input Types, §15 AI-Assisted Review Workflow._
 
 ## See also
 
-| Document | Why it relates |
-|---|---|
-| [CSS-STANDARDS.md](CSS-STANDARDS.md) | Styling rules for the elements defined here |
-| [LIBRARY_CONVENTIONS.md](../../LIBRARY_CONVENTIONS.md) | Component naming, output naming, BEM conventions |
-| [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md) | AI agent quick-reference for these rules |
-
+| Document                                                                   | Why it relates                                   |
+| -------------------------------------------------------------------------- | ------------------------------------------------ |
+| [CSS-STANDARDS.md](CSS-STANDARDS.md)                                       | Styling rules for the elements defined here      |
+| [LIBRARY_CONVENTIONS.md](../../LIBRARY_CONVENTIONS.md)                     | Component naming, output naming, BEM conventions |
+| [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md) | AI agent quick-reference for these rules         |

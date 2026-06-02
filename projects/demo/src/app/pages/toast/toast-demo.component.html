@@ -3,7 +3,6 @@
 <ui-lib-toast position="bottom-left" key="secondary" />
 
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Toast"
@@ -38,8 +37,8 @@
   <!-- ─── Section: Sticky & Closable ───────────────────────────────────────── -->
   <app-doc-section id="sticky-non-closable" title="Sticky &amp; Non-Closable">
     <p class="demo-section__description">
-      Set <code>sticky: true</code> to prevent auto-dismissal. Set
-      <code>closable: false</code> to hide the close button.
+      Set <code>sticky: true</code> to prevent auto-dismissal. Set <code>closable: false</code> to
+      hide the close button.
     </p>
     <div class="toast-demo__row">
       <ui-lib-button label="Sticky" severity="warn" (click)="showSticky()" />
@@ -50,8 +49,8 @@
   <!-- ─── Section: Life duration ───────────────────────────────────────────── -->
   <app-doc-section id="auto-dismiss-duration" title="Auto-dismiss Duration">
     <p class="demo-section__description">
-      Control how long a toast stays visible with the <code>life</code> property
-      (milliseconds). Per-message <code>life</code> overrides the container default.
+      Control how long a toast stays visible with the <code>life</code> property (milliseconds).
+      Per-message <code>life</code> overrides the container default.
     </p>
     <div class="toast-demo__row">
       <ui-lib-button label="1.5 s (quick)" (click)="showShortLife()" />
@@ -76,7 +75,8 @@
               severity="primary"
               size="sm"
               (click)="selectedPosition.set(pos)"
-            >{{ pos }}</ui-lib-button>
+              >{{ pos }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -91,7 +91,8 @@
               severity="primary"
               size="sm"
               (click)="selectedVariant.set(v)"
-            >{{ v }}</ui-lib-button>
+              >{{ v }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -108,21 +109,16 @@
   <!-- ─── Section: Keyed containers ────────────────────────────────────────── -->
   <app-doc-section id="keyed-containers" title="Keyed Containers">
     <p class="demo-section__description">
-      Use the <code>key</code> input on both the container and the message to route
-      toasts to a specific container. Useful for displaying toasts in different
-      screen regions simultaneously.
+      Use the <code>key</code> input on both the container and the message to route toasts to a
+      specific container. Useful for displaying toasts in different screen regions simultaneously.
     </p>
     <div class="toast-demo__row">
-      <ui-lib-button
-        label="Send to secondary container (bottom-left)"
-        (click)="showKeyed()"
-      />
+      <ui-lib-button label="Send to secondary container (bottom-left)" (click)="showKeyed()" />
     </div>
   </app-doc-section>
 
   <!-- ─── Section: API ─────────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="Toast API">
-
     <h3 class="demo-section__subtitle">Toast container inputs</h3>
     <app-doc-api-reference [rows]="apiContainerInputRows" />
 
@@ -141,7 +137,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -150,7 +145,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -160,5 +155,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

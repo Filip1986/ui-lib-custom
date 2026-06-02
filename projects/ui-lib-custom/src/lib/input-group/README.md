@@ -47,6 +47,6 @@ _none_
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
+| Variable                                   | Default                           | Description                                                           |
+| ------------------------------------------ | --------------------------------- | --------------------------------------------------------------------- |
 | `--ui-lib-input-group-addon-border-radius` | `var(--uilib-border-radius, 6px)` | Corner radius applied to the outermost start/end element in the group |

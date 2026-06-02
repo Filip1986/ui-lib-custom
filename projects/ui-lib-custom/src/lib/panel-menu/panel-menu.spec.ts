@@ -146,7 +146,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const separators: NodeListOf<HTMLElement> = el.querySelectorAll(
-      '.ui-lib-panel-menu__separator'
+      '.ui-lib-panel-menu__separator',
     );
     expect(separators.length).toBe(1);
   });
@@ -159,7 +159,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const expanded: NodeListOf<HTMLElement> = el.querySelectorAll(
-      '.ui-lib-panel-menu__panel--expanded'
+      '.ui-lib-panel-menu__panel--expanded',
     );
     expect(expanded.length).toBe(0);
   });
@@ -170,13 +170,13 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const firstHeader: HTMLButtonElement = el.querySelector(
-      '.ui-lib-panel-menu__header'
+      '.ui-lib-panel-menu__header',
     ) as HTMLButtonElement;
     firstHeader.click();
     fixture.detectChanges();
 
     const expanded: NodeListOf<HTMLElement> = el.querySelectorAll(
-      '.ui-lib-panel-menu__panel--expanded'
+      '.ui-lib-panel-menu__panel--expanded',
     );
     expect(expanded.length).toBe(1);
   });
@@ -187,7 +187,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const firstHeader: HTMLButtonElement = el.querySelector(
-      '.ui-lib-panel-menu__header'
+      '.ui-lib-panel-menu__header',
     ) as HTMLButtonElement;
     firstHeader.click();
     fixture.detectChanges();
@@ -195,7 +195,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const expanded: NodeListOf<HTMLElement> = el.querySelectorAll(
-      '.ui-lib-panel-menu__panel--expanded'
+      '.ui-lib-panel-menu__panel--expanded',
     );
     expect(expanded.length).toBe(0);
   });
@@ -207,7 +207,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const headers: NodeListOf<HTMLButtonElement> = el.querySelectorAll(
-      '.ui-lib-panel-menu__header'
+      '.ui-lib-panel-menu__header',
     );
     (headers[0] as HTMLButtonElement).click();
     fixture.detectChanges();
@@ -215,7 +215,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const expanded: NodeListOf<HTMLElement> = el.querySelectorAll(
-      '.ui-lib-panel-menu__panel--expanded'
+      '.ui-lib-panel-menu__panel--expanded',
     );
     expect(expanded.length).toBe(1);
   });
@@ -229,7 +229,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const headers: NodeListOf<HTMLButtonElement> = el.querySelectorAll(
-      '.ui-lib-panel-menu__header'
+      '.ui-lib-panel-menu__header',
     );
     (headers[0] as HTMLButtonElement).click();
     fixture.detectChanges();
@@ -237,7 +237,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const expanded: NodeListOf<HTMLElement> = el.querySelectorAll(
-      '.ui-lib-panel-menu__panel--expanded'
+      '.ui-lib-panel-menu__panel--expanded',
     );
     expect(expanded.length).toBe(2);
   });
@@ -253,7 +253,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const expanded: NodeListOf<HTMLElement> = el.querySelectorAll(
-      '.ui-lib-panel-menu__panel--expanded'
+      '.ui-lib-panel-menu__panel--expanded',
     );
     expect(expanded.length).toBe(1);
   });
@@ -266,7 +266,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const header: HTMLButtonElement = el.querySelector(
-      '.ui-lib-panel-menu__header'
+      '.ui-lib-panel-menu__header',
     ) as HTMLButtonElement;
     expect(header.disabled).toBe(true);
   });
@@ -279,7 +279,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const firstHeader: HTMLButtonElement = el.querySelector(
-      '.ui-lib-panel-menu__header'
+      '.ui-lib-panel-menu__header',
     ) as HTMLButtonElement;
     firstHeader.click();
     fixture.detectChanges();
@@ -295,7 +295,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const firstHeader: HTMLButtonElement = el.querySelector(
-      '.ui-lib-panel-menu__header'
+      '.ui-lib-panel-menu__header',
     ) as HTMLButtonElement;
     firstHeader.click();
     fixture.detectChanges();
@@ -352,7 +352,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     expect(el.querySelector('ui-lib-panel-menu')?.className).toContain(
-      'ui-lib-panel-menu--variant-material'
+      'ui-lib-panel-menu--variant-material',
     );
   });
 
@@ -363,7 +363,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     expect(el.querySelector('ui-lib-panel-menu')?.className).toContain(
-      'ui-lib-panel-menu--variant-bootstrap'
+      'ui-lib-panel-menu--variant-bootstrap',
     );
   });
 
@@ -374,7 +374,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     expect(el.querySelector('ui-lib-panel-menu')?.className).toContain(
-      'ui-lib-panel-menu--variant-minimal'
+      'ui-lib-panel-menu--variant-minimal',
     );
   });
 
@@ -387,7 +387,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     expect(el.querySelector('ui-lib-panel-menu')?.className).toContain(
-      'ui-lib-panel-menu--size-sm'
+      'ui-lib-panel-menu--size-sm',
     );
   });
 
@@ -398,7 +398,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     expect(el.querySelector('ui-lib-panel-menu')?.className).toContain(
-      'ui-lib-panel-menu--size-lg'
+      'ui-lib-panel-menu--size-lg',
     );
   });
 
@@ -441,7 +441,7 @@ describe('PanelMenu', (): void => {
     fixture.detectChanges();
 
     const toggleIcons: NodeListOf<HTMLElement> = el.querySelectorAll(
-      '.ui-lib-panel-menu__header-toggle'
+      '.ui-lib-panel-menu__header-toggle',
     );
     // Only panel with children should have toggle
     expect(toggleIcons.length).toBe(1);

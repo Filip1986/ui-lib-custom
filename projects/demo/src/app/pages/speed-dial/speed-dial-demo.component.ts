@@ -245,7 +245,7 @@ export class SpeedDialDemoComponent {
       ...item,
       tooltip: `${item.label ?? 'Action'} action`,
       styleClass: `demo-speed-dial-item-${String(index + 1)}`,
-    })
+    }),
   );
 
   public setVariant(variant: SpeedDialVariant): void {

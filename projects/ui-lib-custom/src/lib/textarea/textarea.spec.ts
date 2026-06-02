@@ -17,7 +17,7 @@ import type { TextareaChangeEvent, TextareaSize, TextareaVariant } from './texta
 
 function queryEl<T extends Element = HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T {
   const element: T | null = (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
   if (!element) {
@@ -28,7 +28,7 @@ function queryEl<T extends Element = HTMLElement>(
 
 function queryAll<T extends Element = HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -75,7 +75,7 @@ class TextareaNgModelHostComponent {
   public readonly placeholder: WritableSignal<string> = signal<string>('Enter text...');
   public readonly size: WritableSignal<TextareaSize> = signal<TextareaSize>('md');
   public readonly variant: WritableSignal<TextareaVariant | null> = signal<TextareaVariant | null>(
-    null
+    null,
   );
   public readonly rows: WritableSignal<number> = signal<number>(3);
   public readonly maxRows: WritableSignal<number | null> = signal<number | null>(null);
@@ -153,7 +153,7 @@ describe('UiLibTextarea - rendering', (): void => {
   it('should render a native textarea element', (): void => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.tagName).toBe('TEXTAREA');
   });
@@ -174,14 +174,14 @@ describe('UiLibTextarea - rendering', (): void => {
   it('should render placeholder on the native textarea', (): void => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.placeholder).toBe('Enter text...');
   });
 
   it('should apply md size class by default', (): void => {
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     expect(hostEl.classList.contains('ui-lib-textarea--size-md')).toBe(true);
   });
@@ -191,7 +191,7 @@ describe('UiLibTextarea - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     expect(hostEl.classList.contains('ui-lib-textarea--size-sm')).toBe(true);
   });
@@ -201,7 +201,7 @@ describe('UiLibTextarea - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     expect(hostEl.classList.contains('ui-lib-textarea--size-lg')).toBe(true);
   });
@@ -211,11 +211,11 @@ describe('UiLibTextarea - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(hostEl.classList.contains('ui-lib-textarea--disabled')).toBe(true);
     expect(control.disabled).toBe(true);
@@ -226,11 +226,11 @@ describe('UiLibTextarea - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(hostEl.classList.contains('ui-lib-textarea--readonly')).toBe(true);
     expect(control.readOnly).toBe(true);
@@ -244,7 +244,7 @@ describe('UiLibTextarea - rendering', (): void => {
     expect(indicator).toBeTruthy();
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.getAttribute('aria-required')).toBe('true');
   });
@@ -254,7 +254,7 @@ describe('UiLibTextarea - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     const errorEl: HTMLElement = queryEl(fixture, '.ui-lib-textarea__error');
     expect(hostEl.classList.contains('ui-lib-textarea--error')).toBe(true);
@@ -275,7 +275,7 @@ describe('UiLibTextarea - rendering', (): void => {
     await fixture.whenStable();
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.getAttribute('aria-describedby')).toBeTruthy();
     expect(control.getAttribute('aria-invalid')).toBe('true');
@@ -300,7 +300,7 @@ describe('UiLibTextarea - rendering', (): void => {
     await fixture.whenStable();
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.getAttribute('maxlength')).toBe('200');
   });
@@ -311,7 +311,7 @@ describe('UiLibTextarea - rendering', (): void => {
     await fixture.whenStable();
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.rows).toBe(5);
   });
@@ -342,7 +342,7 @@ describe('UiLibTextarea - variants', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     expect(hostEl.classList.contains('ui-lib-textarea--variant-material')).toBe(true);
   });
@@ -352,7 +352,7 @@ describe('UiLibTextarea - variants', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     expect(hostEl.classList.contains('ui-lib-textarea--variant-bootstrap')).toBe(true);
   });
@@ -362,7 +362,7 @@ describe('UiLibTextarea - variants', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     expect(hostEl.classList.contains('ui-lib-textarea--variant-minimal')).toBe(true);
   });
@@ -396,7 +396,7 @@ describe('UiLibTextarea - ngModel', (): void => {
     await fixture.whenStable();
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.value).toBe('hello world');
   });
@@ -404,7 +404,7 @@ describe('UiLibTextarea - ngModel', (): void => {
   it('should update model and emit valueChange when user types', async (): Promise<void> => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     control.value = 'typed text';
     control.dispatchEvent(new Event('input', { bubbles: true }));
@@ -421,7 +421,7 @@ describe('UiLibTextarea - ngModel', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     expect(hostEl.classList.contains('ui-lib-textarea--filled')).toBe(true);
     expect(hostEl.classList.contains('uilib-filled')).toBe(true);
@@ -431,14 +431,14 @@ describe('UiLibTextarea - ngModel', (): void => {
     // Type text via native event so CVA internal state is driven directly
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     control.value = 'something';
     control.dispatchEvent(new Event('input', { bubbles: true }));
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     expect(hostEl.classList.contains('ui-lib-textarea--filled')).toBe(true);
 
@@ -476,7 +476,7 @@ describe('UiLibTextarea - ngModel', (): void => {
   it('should emit textareaFocus event when textarea gains focus', async (): Promise<void> => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     control.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
     fixture.detectChanges();
@@ -487,7 +487,7 @@ describe('UiLibTextarea - ngModel', (): void => {
   it('should emit textareaBlur event when textarea loses focus', async (): Promise<void> => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     control.dispatchEvent(new FocusEvent('blur', { bubbles: true }));
     fixture.detectChanges();
@@ -498,10 +498,10 @@ describe('UiLibTextarea - ngModel', (): void => {
   it('should apply focused class on focus and remove on blur', async (): Promise<void> => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
 
     control.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
@@ -539,7 +539,7 @@ describe('UiLibTextarea - reactive forms', (): void => {
   it('should initialise with the FormControl value', (): void => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.value).toBe('initial value');
   });
@@ -547,7 +547,7 @@ describe('UiLibTextarea - reactive forms', (): void => {
   it('should propagate user input back to FormControl', async (): Promise<void> => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     control.value = 'updated';
     control.dispatchEvent(new Event('input', { bubbles: true }));
@@ -562,7 +562,7 @@ describe('UiLibTextarea - reactive forms', (): void => {
     await fixture.whenStable();
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.disabled).toBe(true);
   });
@@ -576,7 +576,7 @@ describe('UiLibTextarea - reactive forms', (): void => {
     await fixture.whenStable();
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.disabled).toBe(false);
   });
@@ -587,7 +587,7 @@ describe('UiLibTextarea - reactive forms', (): void => {
     await fixture.whenStable();
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.value).toBe('patched value');
   });
@@ -617,7 +617,7 @@ describe('UiLibTextarea - accessibility', (): void => {
     const label: HTMLLabelElement = queryEl<HTMLLabelElement>(fixture, '.ui-lib-textarea__label');
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(label.htmlFor).toBe(control.id);
     expect(control.id).toBeTruthy();
@@ -629,7 +629,7 @@ describe('UiLibTextarea - accessibility', (): void => {
     await fixture.whenStable();
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
-      '.ui-lib-textarea__control'
+      '.ui-lib-textarea__control',
     );
     expect(control.getAttribute('aria-readonly')).toBe('true');
   });
@@ -639,7 +639,7 @@ describe('UiLibTextarea - accessibility', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const hostEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-textarea'
+      'ui-lib-textarea',
     ) as HTMLElement;
     expect(hostEl.getAttribute('aria-disabled')).toBe('true');
   });

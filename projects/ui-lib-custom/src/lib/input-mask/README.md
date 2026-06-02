@@ -8,50 +8,50 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `mask` | `string` | `''` | Mask pattern string (e.g. `'99/99/9999'`, `'(999) 999-9999'`) |
-| `slotChar` | `string` | `'_'` | Placeholder character for unfilled mask slots |
-| `autoClear` | `boolean` | `true` | Clear the value if input is incomplete on blur |
-| `keepBuffer` | `boolean` | `false` | Keep partial mask characters in the model value |
-| `unmask` | `boolean` | `false` | Emit raw value without mask characters |
-| `showClear` | `boolean` | `false` | Show a clear icon when the field has a value |
-| `type` | `string` | `'text'` | Native input type |
-| `characterPattern` | `string` | `'[A-Za-z]'` | Regex pattern used for the `a` mask slot |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token |
-| `filled` | `boolean` | `false` | Filled background appearance |
-| `disabled` | `boolean` | `false` | Disable the input |
-| `readonly` | `boolean` | `false` | Make the input read-only |
-| `placeholder` | `string \| undefined` | `undefined` | Input placeholder text |
-| `autocomplete` | `string \| undefined` | `undefined` | Native autocomplete attribute |
-| `name` | `string \| undefined` | `undefined` | Native name attribute |
-| `fluid` | `boolean` | `false` | Stretch to fill container width |
-| `invalid` | `boolean` | `false` | Apply error styling |
-| `id` | `string \| null` | `null` | Optional explicit input ID (auto-generated otherwise) |
-| `ariaLabel` | `string \| null` | `null` | Accessible name for unlabeled/icon-only usage |
-| `ariaLabelledBy` | `string \| null` | `null` | ID reference to an external label element |
-| `maskHint` | `string \| null` | `null` | Screen-reader hint announced via `aria-describedby` (`mask` value is used when omitted) |
-| `errorMessage` | `string \| null` | `null` | Error text rendered when invalid/incomplete |
+| Name               | Type                   | Default      | Notes                                                                                   |
+| ------------------ | ---------------------- | ------------ | --------------------------------------------------------------------------------------- |
+| `mask`             | `string`               | `''`         | Mask pattern string (e.g. `'99/99/9999'`, `'(999) 999-9999'`)                           |
+| `slotChar`         | `string`               | `'_'`        | Placeholder character for unfilled mask slots                                           |
+| `autoClear`        | `boolean`              | `true`       | Clear the value if input is incomplete on blur                                          |
+| `keepBuffer`       | `boolean`              | `false`      | Keep partial mask characters in the model value                                         |
+| `unmask`           | `boolean`              | `false`      | Emit raw value without mask characters                                                  |
+| `showClear`        | `boolean`              | `false`      | Show a clear icon when the field has a value                                            |
+| `type`             | `string`               | `'text'`     | Native input type                                                                       |
+| `characterPattern` | `string`               | `'[A-Za-z]'` | Regex pattern used for the `a` mask slot                                                |
+| `size`             | `'sm' \| 'md' \| 'lg'` | `'md'`       | Size token                                                                              |
+| `filled`           | `boolean`              | `false`      | Filled background appearance                                                            |
+| `disabled`         | `boolean`              | `false`      | Disable the input                                                                       |
+| `readonly`         | `boolean`              | `false`      | Make the input read-only                                                                |
+| `placeholder`      | `string \| undefined`  | `undefined`  | Input placeholder text                                                                  |
+| `autocomplete`     | `string \| undefined`  | `undefined`  | Native autocomplete attribute                                                           |
+| `name`             | `string \| undefined`  | `undefined`  | Native name attribute                                                                   |
+| `fluid`            | `boolean`              | `false`      | Stretch to fill container width                                                         |
+| `invalid`          | `boolean`              | `false`      | Apply error styling                                                                     |
+| `id`               | `string \| null`       | `null`       | Optional explicit input ID (auto-generated otherwise)                                   |
+| `ariaLabel`        | `string \| null`       | `null`       | Accessible name for unlabeled/icon-only usage                                           |
+| `ariaLabelledBy`   | `string \| null`       | `null`       | ID reference to an external label element                                               |
+| `maskHint`         | `string \| null`       | `null`       | Screen-reader hint announced via `aria-describedby` (`mask` value is used when omitted) |
+| `errorMessage`     | `string \| null`       | `null`       | Error text rendered when invalid/incomplete                                             |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `completed` | `InputMaskCompleteEvent` | All mask slots are filled |
-| `focused` | `Event` | Input focused |
-| `blurred` | `Event` | Input blurred |
-| `inputChanged` | `Event` | Value changed while typing |
-| `cleared` | `void` | Clear button clicked |
+| Name           | Payload                  | Notes                      |
+| -------------- | ------------------------ | -------------------------- |
+| `completed`    | `InputMaskCompleteEvent` | All mask slots are filled  |
+| `focused`      | `Event`                  | Input focused              |
+| `blurred`      | `Event`                  | Input blurred              |
+| `inputChanged` | `Event`                  | Value changed while typing |
+| `cleared`      | `void`                   | Clear button clicked       |
 
 ## Mask syntax
 
-| Token | Meaning | Default accepted chars |
-|---|---|---|
-| `9` | Required digit | `0-9` |
-| `a` | Required alpha character | `A-Z` / `a-z` (`characterPattern` input controls this) |
-| `*` | Required alphanumeric character | Combined `a` + digit |
-| `?` | Start of optional section | Characters after `?` are optional |
-| Any other char | Literal mask character | e.g. `(`, `)`, `/`, `-`, space |
+| Token          | Meaning                         | Default accepted chars                                 |
+| -------------- | ------------------------------- | ------------------------------------------------------ |
+| `9`            | Required digit                  | `0-9`                                                  |
+| `a`            | Required alpha character        | `A-Z` / `a-z` (`characterPattern` input controls this) |
+| `*`            | Required alphanumeric character | Combined `a` + digit                                   |
+| `?`            | Start of optional section       | Characters after `?` are optional                      |
+| Any other char | Literal mask character          | e.g. `(`, `)`, `/`, `-`, space                         |
 
 ## Accessibility behavior
 
@@ -73,21 +73,21 @@
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `--ui-lib-input-mask-padding-y` | `0.5rem` | Vertical padding of the input |
-| `--ui-lib-input-mask-padding-x` | `0.75rem` | Horizontal padding of the input |
-| `--ui-lib-input-mask-font-size` | `1rem` | Input font size |
-| `--ui-lib-input-mask-border-radius` | `var(--uilib-radius-md, 0.5rem)` | Input corner radius |
-| `--ui-lib-input-mask-border-color` | `var(--uilib-border)` | Default border color |
-| `--ui-lib-input-mask-bg` | `var(--uilib-surface)` | Input background |
-| `--ui-lib-input-mask-text-color` | `var(--uilib-page-fg)` | Input text color |
-| `--ui-lib-input-mask-placeholder-color` | `var(--uilib-muted)` | Placeholder text color |
-| `--ui-lib-input-mask-focus-border-color` | `var(--uilib-color-primary-600)` | Border color on focus |
-| `--ui-lib-input-mask-focus-ring` | `0 0 0 3px color-mix(…focus-border-color… 28%)` | Focus ring box-shadow |
-| `--ui-lib-input-mask-invalid-border-color` | `var(--uilib-color-danger-600)` | Border color when invalid |
-| `--ui-lib-input-mask-error-color` | `var(--uilib-color-danger-600)` | Error message text color |
-| `--ui-lib-input-mask-transition` | `border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease` | Input state transition; set to `none` when `prefers-reduced-motion: reduce` |
+| Variable                                   | Default                                                                       | Description                                                                 |
+| ------------------------------------------ | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `--ui-lib-input-mask-padding-y`            | `0.5rem`                                                                      | Vertical padding of the input                                               |
+| `--ui-lib-input-mask-padding-x`            | `0.75rem`                                                                     | Horizontal padding of the input                                             |
+| `--ui-lib-input-mask-font-size`            | `1rem`                                                                        | Input font size                                                             |
+| `--ui-lib-input-mask-border-radius`        | `var(--uilib-radius-md, 0.5rem)`                                              | Input corner radius                                                         |
+| `--ui-lib-input-mask-border-color`         | `var(--uilib-border)`                                                         | Default border color                                                        |
+| `--ui-lib-input-mask-bg`                   | `var(--uilib-surface)`                                                        | Input background                                                            |
+| `--ui-lib-input-mask-text-color`           | `var(--uilib-page-fg)`                                                        | Input text color                                                            |
+| `--ui-lib-input-mask-placeholder-color`    | `var(--uilib-muted)`                                                          | Placeholder text color                                                      |
+| `--ui-lib-input-mask-focus-border-color`   | `var(--uilib-color-primary-600)`                                              | Border color on focus                                                       |
+| `--ui-lib-input-mask-focus-ring`           | `0 0 0 3px color-mix(…focus-border-color… 28%)`                               | Focus ring box-shadow                                                       |
+| `--ui-lib-input-mask-invalid-border-color` | `var(--uilib-color-danger-600)`                                               | Border color when invalid                                                   |
+| `--ui-lib-input-mask-error-color`          | `var(--uilib-color-danger-600)`                                               | Error message text color                                                    |
+| `--ui-lib-input-mask-transition`           | `border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease` | Input state transition; set to `none` when `prefers-reduced-motion: reduce` |
 
 ## Security note
 

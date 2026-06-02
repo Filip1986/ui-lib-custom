@@ -245,7 +245,7 @@ export class OrderListDemoComponent {
   public onReorder(event: OrderListReorderEvent): void {
     const items: DemoProduct[] = event.items as DemoProduct[];
     this.lastReorderEvent.set(
-      `Moved from position ${event.previousIndex + 1} → ${event.currentIndex + 1} (${items.length} items)`
+      `Moved from position ${event.previousIndex + 1} → ${event.currentIndex + 1} (${items.length} items)`,
     );
   }
 

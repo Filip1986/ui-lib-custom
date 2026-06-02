@@ -78,7 +78,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
     return this.isPortrait() ? this.height() : this.width();
   });
   public readonly displayHeight: Signal<number> = computed<number>((): number =>
-    this.isPortrait() ? this.width() : this.height()
+    this.isPortrait() ? this.width() : this.height(),
   );
 
   private resizeObserver?: ResizeObserver;
@@ -88,7 +88,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
     if (this.frameHost?.nativeElement) {
       this.resizeObserver = new ResizeObserver((): void => this.computeScale());
       this.resizeObserver.observe(
-        this.frameHost.nativeElement.parentElement ?? this.frameHost.nativeElement
+        this.frameHost.nativeElement.parentElement ?? this.frameHost.nativeElement,
       );
       this.computeScale();
     }

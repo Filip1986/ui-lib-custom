@@ -43,7 +43,7 @@ class SpeedDialA11yHostComponent {
     signal<SpeedDialVariant | null>('material');
   public readonly direction: WritableSignal<SpeedDialDirection> = signal<SpeedDialDirection>('up');
   public readonly buttonAriaLabel: WritableSignal<string | null> = signal<string | null>(
-    'Open speed dial'
+    'Open speed dial',
   );
   public open: boolean = false;
 }
@@ -68,14 +68,14 @@ class SpeedDialMultiA11yHostComponent {
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -83,7 +83,7 @@ function queryAllEl<T extends HTMLElement>(
 function triggerButton(fixture: ComponentFixture<unknown>): HTMLButtonElement {
   const el: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
     fixture,
-    '.ui-lib-speed-dial__button'
+    '.ui-lib-speed-dial__button',
   );
   if (!el) {
     throw new Error('Expected trigger button to exist.');
@@ -121,7 +121,7 @@ async function createFixture(): Promise<ComponentFixture<SpeedDialA11yHostCompon
   }).compileComponents();
 
   const fixture: ComponentFixture<SpeedDialA11yHostComponent> = TestBed.createComponent(
-    SpeedDialA11yHostComponent
+    SpeedDialA11yHostComponent,
   );
   document.body.appendChild(fixture.nativeElement);
   await detectAndWait(fixture);
@@ -141,7 +141,7 @@ async function createMultiFixture(): Promise<ComponentFixture<SpeedDialMultiA11y
   }).compileComponents();
 
   const fixture: ComponentFixture<SpeedDialMultiA11yHostComponent> = TestBed.createComponent(
-    SpeedDialMultiA11yHostComponent
+    SpeedDialMultiA11yHostComponent,
   );
   document.body.appendChild(fixture.nativeElement);
   await detectAndWait(fixture);
@@ -190,7 +190,7 @@ describe('SpeedDial Accessibility', (): void => {
       fixture = await createFixture();
       await openByClick(fixture);
       const instance: SpeedDialComponent = fixture.debugElement.query(
-        By.directive(SpeedDialComponent)
+        By.directive(SpeedDialComponent),
       ).componentInstance as SpeedDialComponent;
       expect(triggerButton(fixture).getAttribute('aria-controls')).toBe(instance.listId);
       expect(actionList(fixture)?.getAttribute('id')).toBe(instance.listId);
@@ -260,7 +260,7 @@ describe('SpeedDial Accessibility', (): void => {
         .queryAll(By.directive(SpeedDialComponent))
         .map(
           (debugEl: DebugElement): SpeedDialComponent =>
-            debugEl.componentInstance as SpeedDialComponent
+            debugEl.componentInstance as SpeedDialComponent,
         );
       expect(instances.length).toBe(2);
       expect(instances[0]?.listId).not.toBe(instances[1]?.listId);
@@ -293,7 +293,7 @@ describe('SpeedDial Accessibility', (): void => {
       fixture.componentInstance.direction.set('down');
       await openByClick(fixture);
       const instance: SpeedDialComponent = fixture.debugElement.query(
-        By.directive(SpeedDialComponent)
+        By.directive(SpeedDialComponent),
       ).componentInstance as SpeedDialComponent;
       const buttons: HTMLButtonElement[] = actionButtons(fixture);
       // Use focusItem so both DOM focus and the focusedItemIndex signal are in sync
@@ -308,7 +308,7 @@ describe('SpeedDial Accessibility', (): void => {
       fixture.componentInstance.direction.set('down');
       await openByClick(fixture);
       const instance: SpeedDialComponent = fixture.debugElement.query(
-        By.directive(SpeedDialComponent)
+        By.directive(SpeedDialComponent),
       ).componentInstance as SpeedDialComponent;
       const buttons: HTMLButtonElement[] = actionButtons(fixture);
       // Use focusItem so both DOM focus and the focusedItemIndex signal are in sync

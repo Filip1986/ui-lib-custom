@@ -71,7 +71,7 @@ const TREE_NODES: OrganizationChartNode[] = [
 })
 class TestHostComponent {
   public readonly value: WritableSignal<OrganizationChartNode[]> = signal(
-    JSON.parse(JSON.stringify(TREE_NODES)) as OrganizationChartNode[]
+    JSON.parse(JSON.stringify(TREE_NODES)) as OrganizationChartNode[],
   );
   public readonly selectionMode: WritableSignal<OrganizationChartSelectionMode> = signal(null);
   public readonly collapsible: WritableSignal<boolean> = signal(false);
@@ -115,14 +115,14 @@ async function setup(): Promise<ComponentFixture<TestHostComponent>> {
 function getNodeCells(fixture: ComponentFixture<TestHostComponent>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.uilib-org-chart-node-cell'
-    )
+      '.uilib-org-chart-node-cell',
+    ),
   );
 }
 
 function getNodeCell(
   fixture: ComponentFixture<TestHostComponent>,
-  label: string
+  label: string,
 ): HTMLElement | null {
   const cells: HTMLElement[] = getNodeCells(fixture);
   return cells.find((cell: HTMLElement): boolean => cell.textContent.includes(label)) ?? null;
@@ -167,7 +167,7 @@ describe('OrganizationChart', (): void => {
     it('applies variant host class', async (): Promise<void> => {
       const fixture: ComponentFixture<TestHostComponent> = await setup();
       const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-organization-chart'
+        'ui-lib-organization-chart',
       )!;
       expect(host.classList).toContain('ui-lib-organization-chart--variant-material');
     });
@@ -178,7 +178,7 @@ describe('OrganizationChart', (): void => {
       fixture.detectChanges();
       await fixture.whenStable();
       const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-organization-chart'
+        'ui-lib-organization-chart',
       )!;
       expect(host.classList).toContain('ui-lib-organization-chart--variant-bootstrap');
     });
@@ -198,7 +198,7 @@ describe('OrganizationChart', (): void => {
     it('root list element has role="tree"', async (): Promise<void> => {
       const fixture: ComponentFixture<TestHostComponent> = await setup();
       const rootTree: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        '.uilib-org-chart-root'
+        '.uilib-org-chart-root',
       )!;
       expect(rootTree.getAttribute('role')).toBe('tree');
     });

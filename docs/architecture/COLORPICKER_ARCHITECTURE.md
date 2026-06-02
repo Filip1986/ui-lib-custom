@@ -3,6 +3,7 @@
 ## Goal
 
 Define a `ui-lib-color-picker` architecture that matches library conventions:
+
 - standalone + `OnPush` + `ViewEncapsulation.None`
 - signal inputs/outputs
 - strict explicit typing
@@ -25,24 +26,24 @@ Source file: `projects/ui-lib-custom/src/lib/color-picker/color-picker.types.ts`
 
 ### Inputs (signal-based)
 
-| Input | Type | Default | Notes |
-| --- | --- | --- | --- |
-| `value` | `InputSignal<ColorPickerValue>` | `null` | Current externally bound value; normalized internally to HSB for interaction. |
-| `format` | `InputSignal<ColorFormat>` | `'hex'` | Outbound model format. |
-| `inline` | `InputSignal<boolean>` | `false` | `false` = popup trigger + panel, `true` = always visible panel. |
-| `variant` | `InputSignal<ColorPickerVariant | null>` | `null` | Resolved via `ThemeConfigService.variant()` when not set. |
-| `disabled` | `InputSignal<boolean>` | `false` | Merged with CVA disabled state. |
-| `inputId` | `InputSignal<string>` | `''` | Hidden/native input id for forms and labels. |
-| `tabindex` | `InputSignal<number>` | `0` | Trigger focus order in popup mode. |
-| `appendTo` | `InputSignal<string | HTMLElement | undefined>` | `'body'` | Panel mount target (`'body'`, `'self'`, CSS selector, or `HTMLElement`). |
+| Input      | Type                            | Default     | Notes                                                                         |
+| ---------- | ------------------------------- | ----------- | ----------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `value`    | `InputSignal<ColorPickerValue>` | `null`      | Current externally bound value; normalized internally to HSB for interaction. |
+| `format`   | `InputSignal<ColorFormat>`      | `'hex'`     | Outbound model format.                                                        |
+| `inline`   | `InputSignal<boolean>`          | `false`     | `false` = popup trigger + panel, `true` = always visible panel.               |
+| `variant`  | `InputSignal<ColorPickerVariant | null>`      | `null`                                                                        | Resolved via `ThemeConfigService.variant()` when not set. |
+| `disabled` | `InputSignal<boolean>`          | `false`     | Merged with CVA disabled state.                                               |
+| `inputId`  | `InputSignal<string>`           | `''`        | Hidden/native input id for forms and labels.                                  |
+| `tabindex` | `InputSignal<number>`           | `0`         | Trigger focus order in popup mode.                                            |
+| `appendTo` | `InputSignal<string             | HTMLElement | undefined>`                                                                   | `'body'`                                                  | Panel mount target (`'body'`, `'self'`, CSS selector, or `HTMLElement`). |
 
 ### Outputs
 
-| Output | Type | Emitted when |
-| --- | --- | --- |
+| Output     | Type                                       | Emitted when                                             |
+| ---------- | ------------------------------------------ | -------------------------------------------------------- |
 | `onChange` | `OutputEmitterRef<ColorPickerChangeEvent>` | Color value changes via pointer or keyboard interaction. |
-| `onShow` | `OutputEmitterRef<void>` | Popup panel is opened (popup mode only). |
-| `onHide` | `OutputEmitterRef<void>` | Popup panel is closed (popup mode only). |
+| `onShow`   | `OutputEmitterRef<void>`                   | Popup panel is opened (popup mode only).                 |
+| `onHide`   | `OutputEmitterRef<void>`                   | Popup panel is closed (popup mode only).                 |
 
 ## Host Binding Contract
 
@@ -56,6 +57,7 @@ The component host class/state contract:
 - `class.ui-lib-colorpicker--minimal: variant() === 'minimal'`
 
 Additional expected runtime classes:
+
 - `ui-lib-colorpicker--open` (popup mode, panel visible)
 - Angular form state classes (`ng-touched`, `ng-dirty`, `ng-invalid`) from CVA usage
 
@@ -74,6 +76,7 @@ The component implements full `ControlValueAccessor`:
   - Merge with `disabled` input into effective disabled state.
 
 Model flow:
+
 1. External value -> normalize with `toHsbColor()`.
 2. Interaction updates HSB coordinates.
 3. Emit formatted value via `formatColorValue(hsb, format())`.
@@ -146,4 +149,3 @@ The component styling surface uses these variables:
 
 - Shared overlay utility in `ui-lib-custom/core` to consolidate duplicated mount/position logic.
 - Advanced transition option parity (`showTransitionOptions` / `hideTransitionOptions`) as configurable motion inputs.
-

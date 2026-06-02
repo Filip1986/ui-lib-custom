@@ -14,17 +14,17 @@ DataGrid component — high-performance grid with virtual scroll, column pinning
 ### Inputs
 
 | Name                 | Type                      | Default                                         | Description                                                                                                                                                                                         |
-| -------------------- | ------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`          | `string | null`           | `null`                                          | Accessible label for the grid element.                                                                                                                                                              |
-| `caption`            | `string | null`           | `null`                                          | Caption text rendered above the grid.                                                                                                                                                               |
+| -------------------- | ------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`          | `string                   | null`                                           | `null`                                                                                                                                                                                              | Accessible label for the grid element.                                                                            |
+| `caption`            | `string                   | null`                                           | `null`                                                                                                                                                                                              | Caption text rendered above the grid.                                                                             |
 | `columnResizeMode`   | `DataGridResizeMode`      | `DATA_GRID_DEFAULTS.RESIZE_MODE`                | Resize mode applied when `resizableColumns` is `true`.                                                                                                                                              |
-| `dataKey`            | `string | null`           | `null`                                          | Dot-notation property key that uniquely identifies each row. Required for selection equality and `@for` tracking.                                                                                   |
+| `dataKey`            | `string                   | null`                                           | `null`                                                                                                                                                                                              | Dot-notation property key that uniquely identifies each row. Required for selection equality and `@for` tracking. |
 | `editMode`           | `DataGridEditMode`        | `DATA_GRID_DEFAULTS.EDIT_MODE`                  | Cell edit mode. When `null`, editing is disabled.                                                                                                                                                   |
 | `emptyMessage`       | `string`                  | `DATA_GRID_DEFAULTS.EMPTY_MESSAGE`              | Message shown in the empty state when no `[uiDataGridEmpty]` template is provided.                                                                                                                  |
-| `filterLocale`       | `string | undefined`      | `undefined`                                     | BCP 47 locale for locale-sensitive string comparisons.                                                                                                                                              |
+| `filterLocale`       | `string                   | undefined`                                      | `undefined`                                                                                                                                                                                         | BCP 47 locale for locale-sensitive string comparisons.                                                            |
 | `filterMatchMode`    | `DataGridFilterMatchMode` | `DATA_GRID_DEFAULTS.FILTER_MATCH_MODE`          | Match strategy for text filters.                                                                                                                                                                    |
-| `globalFilterFields` | `string[] | null`         | `null`                                          | Specific column fields to include in the global filter. When `null`, all fields are searched.                                                                                                       |
-| `id`                 | `string | null`           | `null`                                          | Optional explicit id override for the grid container.                                                                                                                                               |
+| `globalFilterFields` | `string[]                 | null`                                           | `null`                                                                                                                                                                                              | Specific column fields to include in the global filter. When `null`, all fields are searched.                     |
+| `id`                 | `string                   | null`                                           | `null`                                                                                                                                                                                              | Optional explicit id override for the grid container.                                                             |
 | `lazy`               | `boolean`                 | `false`                                         | When `true`, the grid operates in server-side mode. The `lazyLoad` output fires whenever sort, filter, or pagination changes — the consumer must update `[value]` and `[totalRecords]` accordingly. |
 | `metaKeySelection`   | `boolean`                 | `false`                                         | When `true`, Ctrl/Meta must be held to toggle multi-row selection.                                                                                                                                  |
 | `multiSortMode`      | `boolean`                 | `false`                                         | When `true`, Ctrl+click adds a column to the multi-sort stack.                                                                                                                                      |
@@ -34,28 +34,28 @@ DataGrid component — high-performance grid with virtual scroll, column pinning
 | `rowHeight`          | `number`                  | `DATA_GRID_DEFAULTS.ROW_HEIGHT`                 | Fixed row height in pixels used for virtual scroll calculations. All data rows must have this exact height when `virtualScroll` is `true`.                                                          |
 | `rowHover`           | `boolean`                 | `false`                                         | When `true`, the pointer cursor and hover highlight are shown on rows.                                                                                                                              |
 | `rowsPerPageOptions` | `number[]`                | `[ ...DATA_GRID_DEFAULTS.ROWS_PER_PAGE_OPTIONS` | Options for the rows-per-page selector.                                                                                                                                                             |
-| `scrollHeight`       | `string | null`           | `null`                                          | Explicit CSS height for the scrollable body viewport, e.g. `'400px'`.                                                                                                                               |
+| `scrollHeight`       | `string                   | null`                                           | `null`                                                                                                                                                                                              | Explicit CSS height for the scrollable body viewport, e.g. `'400px'`.                                             |
 | `selectionMode`      | `DataGridSelectionMode`   | `DATA_GRID_DEFAULTS.SELECTION_MODE`             | Row selection mode.                                                                                                                                                                                 |
 | `showGridlines`      | `boolean`                 | `false`                                         | When `true`, grid lines are drawn between all cells.                                                                                                                                                |
 | `size`               | `DataGridSize`            | `DATA_GRID_DEFAULTS.SIZE`                       | Component size token.                                                                                                                                                                               |
 | `stickyHeader`       | `boolean`                 | `true`                                          | When `true`, the header row is always visible during vertical scroll.                                                                                                                               |
 | `stripedRows`        | `boolean`                 | `false`                                         | When `true`, alternating rows receive a background tint.                                                                                                                                            |
-| `styleClass`         | `string | null`           | `null`                                          | Additional CSS class(es) applied to the host element.                                                                                                                                               |
+| `styleClass`         | `string                   | null`                                           | `null`                                                                                                                                                                                              | Additional CSS class(es) applied to the host element.                                                             |
 | `totalRecords`       | `number`                  | `0`                                             | Total number of records for server-side pagination. Only required when `lazy` is `true`.                                                                                                            |
 | `value`              | `unknown[]`               | `[]`                                            | Array of row objects to display.                                                                                                                                                                    |
-| `variant`            | `DataGridVariant | null`  | `null`                                          | Design variant override; inherits from `ThemeConfigService` when `null`.                                                                                                                            |
+| `variant`            | `DataGridVariant          | null`                                           | `null`                                                                                                                                                                                              | Design variant override; inherits from `ThemeConfigService` when `null`.                                          |
 | `virtualScroll`      | `boolean`                 | `false`                                         | When `true`, only visible rows are rendered (requires a fixed `scrollHeight`).                                                                                                                      |
 
 ### Models (two-way bindable)
 
 | Name            | Type                 | Default                            | Description                                                                                  |
-| --------------- | -------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------- |
+| --------------- | -------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | `first`         | `number`             | `0`                                | Zero-based offset of the first visible row. Use `[(first)]` for two-way binding.             |
 | `globalFilter`  | `string`             | `''`                               | Global filter string applied across all columns. Use `[(globalFilter)]` for two-way binding. |
 | `multiSortMeta` | `DataGridSortMeta[]` | `[]`                               | Current multi-sort stack. Use `[(multiSortMeta)]` for two-way binding.                       |
 | `rows`          | `number`             | `DATA_GRID_DEFAULTS.ROWS_PER_PAGE` | Number of rows displayed per page. Use `[(rows)]` for two-way binding.                       |
 | `selection`     | `unknown`            | `null`                             | Currently selected row(s). Use `[(selection)]` for two-way binding.                          |
-| `sortField`     | `string | null`      | `null`                             | Field currently used for sorting. Use `[(sortField)]` for two-way binding.                   |
+| `sortField`     | `string              | null`                              | `null`                                                                                       | Field currently used for sorting. Use `[(sortField)]` for two-way binding. |
 | `sortOrder`     | `DataGridSortOrder`  | `DATA_GRID_DEFAULTS.SORT_ORDER`    | Current sort order. Use `[(sortOrder)]` for two-way binding.                                 |
 
 ### Outputs
@@ -79,22 +79,22 @@ DataGrid component — high-performance grid with virtual scroll, column pinning
 
 Column definitions are render-less components placed as direct children of `<ui-lib-data-grid>`.
 
-| Name                | Type              | Default  | Description                                                                              |
-| ------------------- | ----------------- | -------- | ---------------------------------------------------------------------------------------- |
-| `field`             | `string`          | `''`     | Dot-notation path used to read the cell value from a row object.                         |
-| `header`            | `string`          | `''`     | Column header text when no `[uiDataGridColumnHeader]` template is provided.              |
-| `footer`            | `string`          | `''`     | Column footer text when no `[uiDataGridColumnFooter]` template is provided.              |
-| `sortable`          | `boolean`         | `false`  | When `true`, clicking the header cycles through sort orders.                             |
-| `sortField`         | `string \| null`  | `null`   | Override field used for sorting. Falls back to `field`.                                  |
-| `filterable`        | `boolean`         | `false`  | When `true`, renders a per-column filter input below the header.                         |
-| `filterField`       | `string \| null`  | `null`   | Override field used for filtering. Falls back to `field`.                                |
-| `filterPlaceholder` | `string`          | `''`     | Placeholder for the column filter input.                                                 |
-| `width`             | `string \| null`  | `null`   | Explicit column width, e.g. `'200px'` or `'15%'`.                                       |
-| `minWidth`          | `string \| null`  | `null`   | Minimum width during resize. Falls back to `DATA_GRID_DEFAULTS.MIN_COLUMN_WIDTH`.        |
-| `frozen`            | `DataGridFrozen`  | `false`  | Pin the column to `'start'` or `'end'`, or leave it scrollable with `false`.            |
-| `resizable`         | `boolean \| null` | `null`   | Per-column resize override. Inherits from the grid-level `resizableColumns` when `null`. |
-| `editable`          | `boolean`         | `false`  | When `true`, cells are editable (requires `editMode` on the parent grid).                |
-| `styleClass`        | `string \| null`  | `null`   | Additional CSS class(es) applied to every `<td>` and `<th>` in this column.             |
+| Name                | Type              | Default | Description                                                                              |
+| ------------------- | ----------------- | ------- | ---------------------------------------------------------------------------------------- |
+| `field`             | `string`          | `''`    | Dot-notation path used to read the cell value from a row object.                         |
+| `header`            | `string`          | `''`    | Column header text when no `[uiDataGridColumnHeader]` template is provided.              |
+| `footer`            | `string`          | `''`    | Column footer text when no `[uiDataGridColumnFooter]` template is provided.              |
+| `sortable`          | `boolean`         | `false` | When `true`, clicking the header cycles through sort orders.                             |
+| `sortField`         | `string \| null`  | `null`  | Override field used for sorting. Falls back to `field`.                                  |
+| `filterable`        | `boolean`         | `false` | When `true`, renders a per-column filter input below the header.                         |
+| `filterField`       | `string \| null`  | `null`  | Override field used for filtering. Falls back to `field`.                                |
+| `filterPlaceholder` | `string`          | `''`    | Placeholder for the column filter input.                                                 |
+| `width`             | `string \| null`  | `null`  | Explicit column width, e.g. `'200px'` or `'15%'`.                                        |
+| `minWidth`          | `string \| null`  | `null`  | Minimum width during resize. Falls back to `DATA_GRID_DEFAULTS.MIN_COLUMN_WIDTH`.        |
+| `frozen`            | `DataGridFrozen`  | `false` | Pin the column to `'start'` or `'end'`, or leave it scrollable with `false`.             |
+| `resizable`         | `boolean \| null` | `null`  | Per-column resize override. Inherits from the grid-level `resizableColumns` when `null`. |
+| `editable`          | `boolean`         | `false` | When `true`, cells are editable (requires `editMode` on the parent grid).                |
+| `styleClass`        | `string \| null`  | `null`  | Additional CSS class(es) applied to every `<td>` and `<th>` in this column.              |
 
 ### Column Template Slots
 
@@ -164,38 +164,38 @@ _none_ (columns are provided via `<ui-lib-data-grid-column>` child elements)
 
 ### Keyboard Interactions
 
-| Key | Action |
-| --- | ------ |
+| Key                 | Action                                                                    |
+| ------------------- | ------------------------------------------------------------------------- |
 | `Tab` / `Shift+Tab` | Move between focusable elements (header cells, filter inputs, data cells) |
-| `Enter` / `Space` | Toggle sort on focused sortable column header |
-| `Enter` | Select focused row (when `selectionMode` is set) |
-| `F2` / `Enter` | Enter cell edit mode on an editable cell |
-| `Escape` | Cancel cell edit |
-| `Tab` | Commit cell edit and advance to the next editable cell |
-| `Enter` | Commit cell edit |
+| `Enter` / `Space`   | Toggle sort on focused sortable column header                             |
+| `Enter`             | Select focused row (when `selectionMode` is set)                          |
+| `F2` / `Enter`      | Enter cell edit mode on an editable cell                                  |
+| `Escape`            | Cancel cell edit                                                          |
+| `Tab`               | Commit cell edit and advance to the next editable cell                    |
+| `Enter`             | Commit cell edit                                                          |
 
 ### ARIA Attributes
 
-| Attribute | Element | Description |
-| --------- | ------- | ----------- |
-| `role="grid"` | Grid wrapper | Identifies the grid widget |
-| `role="row"` | Header row, data rows | Row role on every row |
-| `role="columnheader"` | `<th>` cells | Header cells |
-| `role="gridcell"` | `<td>` cells | Data cells |
-| `aria-label` | Grid wrapper | Set via the `ariaLabel` input |
-| `aria-rowcount` | Grid wrapper | Total record count (updates live on filter/page) |
-| `aria-rowindex` | Data rows | 1-based row index (offset-aware for virtual scroll) |
-| `aria-colindex` | Cells | 1-based column index |
-| `aria-sort` | Sortable column headers | `"ascending"`, `"descending"`, or `"none"` |
-| `aria-label` | Filter inputs | `"Filter by <header>"` |
+| Attribute             | Element                 | Description                                         |
+| --------------------- | ----------------------- | --------------------------------------------------- |
+| `role="grid"`         | Grid wrapper            | Identifies the grid widget                          |
+| `role="row"`          | Header row, data rows   | Row role on every row                               |
+| `role="columnheader"` | `<th>` cells            | Header cells                                        |
+| `role="gridcell"`     | `<td>` cells            | Data cells                                          |
+| `aria-label`          | Grid wrapper            | Set via the `ariaLabel` input                       |
+| `aria-rowcount`       | Grid wrapper            | Total record count (updates live on filter/page)    |
+| `aria-rowindex`       | Data rows               | 1-based row index (offset-aware for virtual scroll) |
+| `aria-colindex`       | Cells                   | 1-based column index                                |
+| `aria-sort`           | Sortable column headers | `"ascending"`, `"descending"`, or `"none"`          |
+| `aria-label`          | Filter inputs           | `"Filter by <header>"`                              |
 
 ## Usage Examples
 
 ```html
 <!-- Minimal sortable grid -->
 <ui-lib-data-grid [value]="rows" ariaLabel="Products">
-  <ui-lib-data-grid-column field="id"    header="ID"    [sortable]="true" width="80px" />
-  <ui-lib-data-grid-column field="name"  header="Name"  [sortable]="true" />
+  <ui-lib-data-grid-column field="id" header="ID" [sortable]="true" width="80px" />
+  <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" />
   <ui-lib-data-grid-column field="price" header="Price" [sortable]="true" width="120px" />
 </ui-lib-data-grid>
 
@@ -210,10 +210,10 @@ _none_ (columns are provided via `<ui-lib-data-grid-column>` child elements)
   dataKey="id"
   ariaLabel="Users"
 >
-  <ui-lib-data-grid-column field="id"       header="ID"       frozen="start" width="80px" />
+  <ui-lib-data-grid-column field="id" header="ID" frozen="start" width="80px" />
   <ui-lib-data-grid-column field="username" header="Username" [sortable]="true" />
-  <ui-lib-data-grid-column field="email"    header="Email"    [filterable]="true" />
-  <ui-lib-data-grid-column field="role"     header="Role"     frozen="end"   width="120px" />
+  <ui-lib-data-grid-column field="email" header="Email" [filterable]="true" />
+  <ui-lib-data-grid-column field="role" header="Role" frozen="end" width="120px" />
 </ui-lib-data-grid>
 ```
 
@@ -235,9 +235,9 @@ _none_ (columns are provided via `<ui-lib-data-grid-column>` child elements)
       ariaLabel="Users"
       (lazyLoad)="load($event)"
     >
-      <ui-lib-data-grid-column field="name"  header="Name"  [sortable]="true" />
+      <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" />
       <ui-lib-data-grid-column field="email" header="Email" [sortable]="true" [filterable]="true" />
-      <ui-lib-data-grid-column field="role"  header="Role"  width="120px" />
+      <ui-lib-data-grid-column field="role" header="Role" width="120px" />
     </ui-lib-data-grid>
   `,
 })
@@ -298,9 +298,9 @@ export class UserTableComponent {
   <ui-lib-data-grid-column field="name" header="Name" />
   <ng-template uiDataGridEmpty let-ctx>
     @if (ctx.filtered) {
-      <p>No products match your search.</p>
+    <p>No products match your search.</p>
     } @else {
-      <p>No products yet.</p>
+    <p>No products yet.</p>
     }
   </ng-template>
 </ui-lib-data-grid>
@@ -318,8 +318,8 @@ export class UserTableComponent {
   dataKey="id"
   ariaLabel="Large dataset"
 >
-  <ui-lib-data-grid-column field="index" header="#"    width="60px" />
-  <ui-lib-data-grid-column field="name"  header="Name" [sortable]="true" />
+  <ui-lib-data-grid-column field="index" header="#" width="60px" />
+  <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" />
 </ui-lib-data-grid>
 ```
 
@@ -334,29 +334,29 @@ export class UserTableComponent {
   [stripedRows]="true"
 >
   <ui-lib-data-grid-column field="category" header="Category" />
-  <ui-lib-data-grid-column field="revenue"  header="Revenue" />
+  <ui-lib-data-grid-column field="revenue" header="Revenue" />
 </ui-lib-data-grid>
 ```
 
 ## Migration from PrimeNG Table
 
-| PrimeNG `p-table` | `ui-lib-data-grid` |
-| ----------------- | ------------------ |
-| `[value]` | `[value]` (same) |
-| `[lazy]="true"` + `(onLazyLoad)` | `[lazy]="true"` + `(lazyLoad)` |
-| `[paginator]="true"` + `[rows]` | `[paginator]="true"` + `[(rows)]` |
-| `[(selection)]` + `selectionMode` | `[(selection)]` + `selectionMode` (same) |
-| `editMode="cell"` | `editMode="cell"` (same) |
-| `[virtualScroll]` + `[virtualScrollItemSize]` | `[virtualScroll]` + `[rowHeight]` |
-| `<p-column field="x" header="Y">` | `<ui-lib-data-grid-column field="x" header="Y" />` |
-| `<ng-template pTemplate="body" let-row>` | `<ng-template uiDataGridColumnBody let-row>` |
-| `<ng-template pTemplate="editor" let-row>` | `<ng-template uiDataGridColumnEditor let-row let-field="field">` |
-| `<ng-template pTemplate="emptymessage">` | `<ng-template uiDataGridEmpty let-ctx>` |
-| `(onRowSelect)` / `(onRowUnselect)` | `(rowSelected)` / `(rowUnselected)` |
-| `(onSort)` | `(sorted)` |
-| `(onFilter)` | `(filtered)` |
-| `(onPage)` | `(paged)` |
-| `(onColResize)` | `(columnResize)` |
+| PrimeNG `p-table`                             | `ui-lib-data-grid`                                               |
+| --------------------------------------------- | ---------------------------------------------------------------- |
+| `[value]`                                     | `[value]` (same)                                                 |
+| `[lazy]="true"` + `(onLazyLoad)`              | `[lazy]="true"` + `(lazyLoad)`                                   |
+| `[paginator]="true"` + `[rows]`               | `[paginator]="true"` + `[(rows)]`                                |
+| `[(selection)]` + `selectionMode`             | `[(selection)]` + `selectionMode` (same)                         |
+| `editMode="cell"`                             | `editMode="cell"` (same)                                         |
+| `[virtualScroll]` + `[virtualScrollItemSize]` | `[virtualScroll]` + `[rowHeight]`                                |
+| `<p-column field="x" header="Y">`             | `<ui-lib-data-grid-column field="x" header="Y" />`               |
+| `<ng-template pTemplate="body" let-row>`      | `<ng-template uiDataGridColumnBody let-row>`                     |
+| `<ng-template pTemplate="editor" let-row>`    | `<ng-template uiDataGridColumnEditor let-row let-field="field">` |
+| `<ng-template pTemplate="emptymessage">`      | `<ng-template uiDataGridEmpty let-ctx>`                          |
+| `(onRowSelect)` / `(onRowUnselect)`           | `(rowSelected)` / `(rowUnselected)`                              |
+| `(onSort)`                                    | `(sorted)`                                                       |
+| `(onFilter)`                                  | `(filtered)`                                                     |
+| `(onPage)`                                    | `(paged)`                                                        |
+| `(onColResize)`                               | `(columnResize)`                                                 |
 
 **Key differences:**
 
@@ -371,4 +371,3 @@ export class UserTableComponent {
 - [Demo page](/components/data-grid)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/data-grid/README.md)
-

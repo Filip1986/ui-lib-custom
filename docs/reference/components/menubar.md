@@ -7,19 +7,19 @@
 
 ## Overview
 
-Menubar component — a PrimeNG-inspired horizontal navigation bar where top-level items can open single-column dropdown submenus. Submenus support arbitrary nesting depth (nested panels open to the right). **Basic usage:** ```html <ui-lib-menubar [model]="items" /> ``` **With start/end slots:** ```html <ui-lib-menubar [model]="items"> <img menubarStart src="logo.png" alt="Logo" /> <button menubarEnd>Sign in</button> </ui-lib-menubar> ```
+Menubar component — a PrimeNG-inspired horizontal navigation bar where top-level items can open single-column dropdown submenus. Submenus support arbitrary nesting depth (nested panels open to the right). **Basic usage:** `html <ui-lib-menubar [model]="items" /> ` **With start/end slots:** `html <ui-lib-menubar [model]="items"> <img menubarStart src="logo.png" alt="Logo" /> <button menubarEnd>Sign in</button> </ui-lib-menubar> `
 
 ## API
 
 ### Inputs
 
-| Name         | Type                    | Default                      | Description                                                                 |
-| ------------ | ----------------------- | ---------------------------- | --------------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                | `MENUBAR_DEFAULT_ARIA_LABEL` | Accessible label for the navigation landmark (`aria-label` on the `<nav>`). |
-| `model`      | `MenubarItem[]`         | `[]`                         | Array of top-level navigation items.                                        |
-| `size`       | `MenubarSize`           | `'md'`                       | Size token: sm | md | lg.                                                   |
-| `styleClass` | `string | null`         | `null`                       | Extra CSS class appended to the host element.                               |
-| `variant`    | `MenubarVariant | null` | `null`                       | Design-system variant; falls back to `ThemeConfigService` when `null`.      |
+| Name         | Type            | Default                      | Description                                                                 |
+| ------------ | --------------- | ---------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- | --- |
+| `ariaLabel`  | `string`        | `MENUBAR_DEFAULT_ARIA_LABEL` | Accessible label for the navigation landmark (`aria-label` on the `<nav>`). |
+| `model`      | `MenubarItem[]` | `[]`                         | Array of top-level navigation items.                                        |
+| `size`       | `MenubarSize`   | `'md'`                       | Size token: sm                                                              | md                                                                     | lg. |
+| `styleClass` | `string         | null`                        | `null`                                                                      | Extra CSS class appended to the host element.                          |
+| `variant`    | `MenubarVariant | null`                        | `null`                                                                      | Design-system variant; falls back to `ThemeConfigService` when `null`. |
 
 ### Outputs
 
@@ -160,4 +160,3 @@ Menubar component — a PrimeNG-inspired horizontal navigation bar where top-lev
 - [Demo page](/components/menubar)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/menubar/README.md)
-

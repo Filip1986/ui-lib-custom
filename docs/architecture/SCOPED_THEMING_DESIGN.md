@@ -29,9 +29,7 @@ Design architecture for component-level theme overrides, supporting component in
 </div>
 
 <!-- Or data attribute -->
-<ui-lib-card data-theme="dark">
-  Content uses dark theme
-</ui-lib-card>
+<ui-lib-card data-theme="dark"> Content uses dark theme </ui-lib-card>
 ```
 
 ### Decision Summary
@@ -43,18 +41,22 @@ Design architecture for component-level theme overrides, supporting component in
 ## Implementation Options (Evaluation)
 
 ### Option A: CSS Custom Property Scoping
+
 - **Pros**: Fast, pure CSS cascade, works with any DOM nesting.
 - **Cons**: Requires careful variable naming and complete variable coverage.
 
 ### Option B: Angular Context/DI
+
 - **Pros**: Type-safe and Angular-native.
 - **Cons**: Does not automatically apply CSS vars; requires extra bridging.
 
 ### Option C: Directive with CSS Variable Application
+
 - **Pros**: Works with any element, easy to adopt, aligns with existing CSS var model.
 - **Cons**: Must manage variable merging and updates.
 
 ### Recommendation
+
 - **Option C + Option A**: A directive applies CSS variables to its host element, leveraging CSS cascade for inheritance. `data-theme` remains a static override option.
 
 ## Theme Scope Interface
@@ -160,9 +162,7 @@ export class Card {
 ### Partial overrides
 
 ```html
-<ui-lib-card
-  [theme]="{ colorScheme: 'dark', colors: { primary: '#90caf9' } }"
->
+<ui-lib-card [theme]="{ colorScheme: 'dark', colors: { primary: '#90caf9' } }">
   <ui-lib-button>Primary adapted</ui-lib-button>
 </ui-lib-card>
 ```
@@ -180,4 +180,3 @@ export class Card {
 - Use `ViewEncapsulation.None` to keep CSS vars cascading correctly across component boundaries.
 - Avoid inline hardcoded colors in components; keep everything driven by CSS vars.
 - Ensure any new CSS variable follows `LIBRARY_CONVENTIONS.md` naming guidelines.
-

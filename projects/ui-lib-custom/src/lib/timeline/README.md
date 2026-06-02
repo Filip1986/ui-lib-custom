@@ -8,15 +8,15 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `value` | `T[]` | required | Array of data items to render as timeline events. Required. |
-| `layout` | `'vertical' \| 'horizontal'` | `'vertical'` | Orientation of the timeline axis. |
-| `align` | `'left' \| 'right' \| 'alternate' \| 'top' \| 'bottom'` | `'left'` | Event alignment. Vertical supports `left`, `right`, `alternate`; horizontal supports `top`, `bottom`. |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme when null. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Component density. |
-| `styleClass` | `string \| null` | `null` | Extra CSS class on the host element. |
-| `ariaLabel` | `string` | `'Timeline'` | Accessible label for the list element. |
+| Name         | Type                                                    | Default      | Notes                                                                                                 |
+| ------------ | ------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------- |
+| `value`      | `T[]`                                                   | required     | Array of data items to render as timeline events. Required.                                           |
+| `layout`     | `'vertical' \| 'horizontal'`                            | `'vertical'` | Orientation of the timeline axis.                                                                     |
+| `align`      | `'left' \| 'right' \| 'alternate' \| 'top' \| 'bottom'` | `'left'`     | Event alignment. Vertical supports `left`, `right`, `alternate`; horizontal supports `top`, `bottom`. |
+| `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null`        | `null`       | Falls back to global theme when null.                                                                 |
+| `size`       | `'sm' \| 'md' \| 'lg'`                                  | `'md'`       | Component density.                                                                                    |
+| `styleClass` | `string \| null`                                        | `null`       | Extra CSS class on the host element.                                                                  |
+| `ariaLabel`  | `string`                                                | `'Timeline'` | Accessible label for the list element.                                                                |
 
 ## Outputs
 
@@ -24,14 +24,14 @@ _none_
 
 ## ARIA attributes
 
-| Element | Attribute | Value | Purpose |
-|---|---|---|---|
-| Host (`ui-lib-timeline`) | `role` | `list` | Exposes the timeline as a semantic list of events |
-| Host | `id` | `ui-lib-timeline-{n}` | Auto-generated unique instance id for per-item labelling |
-| Host | `aria-label` | `ariaLabel` input | Provides the list's accessible name |
-| Event row | `role` | `listitem` | Identifies each event as a list item |
-| Event row | `aria-labelledby` | `content` id + optional `opposite` id | Builds the item name from visible event text |
-| Connector / marker dot | `aria-hidden` | `true` | Keeps decorative separator graphics out of the accessibility tree |
+| Element                  | Attribute         | Value                                 | Purpose                                                           |
+| ------------------------ | ----------------- | ------------------------------------- | ----------------------------------------------------------------- |
+| Host (`ui-lib-timeline`) | `role`            | `list`                                | Exposes the timeline as a semantic list of events                 |
+| Host                     | `id`              | `ui-lib-timeline-{n}`                 | Auto-generated unique instance id for per-item labelling          |
+| Host                     | `aria-label`      | `ariaLabel` input                     | Provides the list's accessible name                               |
+| Event row                | `role`            | `listitem`                            | Identifies each event as a list item                              |
+| Event row                | `aria-labelledby` | `content` id + optional `opposite` id | Builds the item name from visible event text                      |
+| Connector / marker dot   | `aria-hidden`     | `true`                                | Keeps decorative separator graphics out of the accessibility tree |
 
 ## Keyboard interaction
 
@@ -51,21 +51,21 @@ behaviour. When projected content receives focus, the event row shows a visible 
 
 ## CSS custom properties
 
-| Variable | Default | Description |
-|---|---|---|
-| `--uilib-timeline-connector-color` | `var(--uilib-border-color, #dee2e6)` | Decorative connector colour |
-| `--uilib-timeline-connector-width` | `2px` | Connector thickness |
-| `--uilib-timeline-marker-size` | `1.25rem` | Marker width and height |
-| `--uilib-timeline-marker-bg` | `var(--uilib-primary-color, #3b82f6)` | Marker fill colour |
-| `--uilib-timeline-marker-border-color` | `var(--uilib-primary-color, #3b82f6)` | Marker border colour |
-| `--uilib-timeline-marker-border-width` | `2px` | Marker border width |
-| `--uilib-timeline-event-gap` | `0` | Gap between event grid tracks |
-| `--uilib-timeline-content-gap` | `1rem` | Space between separator and content |
-| `--uilib-timeline-opposite-gap` | `1rem` | Space between separator and opposite content |
-| `--uilib-timeline-opposite-min-width` | `6rem` | Minimum opposite column width in vertical mode |
-| `--uilib-timeline-font-size` | `1rem` | Base font size |
-| `--uilib-timeline-color` | `var(--uilib-text-color, #1f2937)` | Text colour |
-| `--uilib-timeline-focus-ring-color` | `var(--uilib-primary-color, #3b82f6)` | Focus-within ring colour for projected interactive content |
+| Variable                               | Default                               | Description                                                |
+| -------------------------------------- | ------------------------------------- | ---------------------------------------------------------- |
+| `--uilib-timeline-connector-color`     | `var(--uilib-border-color, #dee2e6)`  | Decorative connector colour                                |
+| `--uilib-timeline-connector-width`     | `2px`                                 | Connector thickness                                        |
+| `--uilib-timeline-marker-size`         | `1.25rem`                             | Marker width and height                                    |
+| `--uilib-timeline-marker-bg`           | `var(--uilib-primary-color, #3b82f6)` | Marker fill colour                                         |
+| `--uilib-timeline-marker-border-color` | `var(--uilib-primary-color, #3b82f6)` | Marker border colour                                       |
+| `--uilib-timeline-marker-border-width` | `2px`                                 | Marker border width                                        |
+| `--uilib-timeline-event-gap`           | `0`                                   | Gap between event grid tracks                              |
+| `--uilib-timeline-content-gap`         | `1rem`                                | Space between separator and content                        |
+| `--uilib-timeline-opposite-gap`        | `1rem`                                | Space between separator and opposite content               |
+| `--uilib-timeline-opposite-min-width`  | `6rem`                                | Minimum opposite column width in vertical mode             |
+| `--uilib-timeline-font-size`           | `1rem`                                | Base font size                                             |
+| `--uilib-timeline-color`               | `var(--uilib-text-color, #1f2937)`    | Text colour                                                |
+| `--uilib-timeline-focus-ring-color`    | `var(--uilib-primary-color, #3b82f6)` | Focus-within ring colour for projected interactive content |
 
 ## Usage
 

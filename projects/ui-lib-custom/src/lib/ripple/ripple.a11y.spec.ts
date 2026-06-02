@@ -48,14 +48,14 @@ class MultiRippleHost {}
 // ---------------------------------------------------------------------------
 
 async function createFixture<T>(
-  componentType: Parameters<typeof TestBed.createComponent>[0]
+  componentType: Parameters<typeof TestBed.createComponent>[0],
 ): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
     imports: [componentType],
     providers: [provideZonelessChangeDetection()],
   }).compileComponents();
   const fixture: ComponentFixture<T> = TestBed.createComponent(
-    componentType as Parameters<typeof TestBed.createComponent<T>>[0]
+    componentType as Parameters<typeof TestBed.createComponent<T>>[0],
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
@@ -65,7 +65,7 @@ async function createFixture<T>(
 
 function click(element: HTMLElement, x: number = 0, y: number = 0): void {
   element.dispatchEvent(
-    new MouseEvent('click', { bubbles: true, cancelable: true, clientX: x, clientY: y })
+    new MouseEvent('click', { bubbles: true, cancelable: true, clientX: x, clientY: y }),
   );
 }
 
@@ -82,7 +82,7 @@ function mockReducedMotion(prefer: boolean): () => void {
         addListener: jest.fn(),
         removeListener: jest.fn(),
         dispatchEvent: jest.fn().mockReturnValue(false),
-      }) as MediaQueryList
+      }) as MediaQueryList,
   );
   return (): void => {
     window.matchMedia = original;

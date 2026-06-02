@@ -7,10 +7,7 @@
   tabindex="0"
 >
   <!-- Value / placeholder display -->
-  <span
-    class="ui-lib-tree-select__value"
-    [class.ui-lib-tree-select__placeholder]="!hasValue()"
-  >
+  <span class="ui-lib-tree-select__value" [class.ui-lib-tree-select__placeholder]="!hasValue()">
     @if (hasValue()) {
       {{ displayLabel() }}
     } @else {
@@ -40,7 +37,8 @@
       class="ui-lib-tree-select__chevron"
       [class.ui-lib-tree-select__chevron--open]="panelVisible()"
       aria-hidden="true"
-    >▾</span>
+      >▾</span
+    >
   </span>
 </div>
 
@@ -72,11 +70,6 @@
   </div>
 }
 
-<span
-  class="ui-lib-tree-select__sr-live"
-  [id]="liveRegionId"
-  aria-live="polite"
-  aria-atomic="true"
->
+<span class="ui-lib-tree-select__sr-live" [id]="liveRegionId" aria-live="polite" aria-atomic="true">
   {{ selectionAnnouncement() }}
 </span>

@@ -7,20 +7,20 @@
 
 ## Overview
 
-PanelMenu — a vertical, accordion-style navigation menu driven by a `model` array. Root items with an `items` array act as collapsible panels; leaf items (no `items`) are directly activatable. ```html <ui-lib-panel-menu [model]="items" /> ```
+PanelMenu — a vertical, accordion-style navigation menu driven by a `model` array. Root items with an `items` array act as collapsible panels; leaf items (no `items`) are directly activatable. `html <ui-lib-panel-menu [model]="items" /> `
 
 ## API
 
 ### Inputs
 
-| Name         | Type                      | Default                         | Description                                                                                                                        |
-| ------------ | ------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                  | `PANEL_MENU_DEFAULT_ARIA_LABEL` | Accessible label applied to the root container (aria-label).                                                                       |
-| `model`      | `PanelMenuItem[]`         | `[]`                            | Array of root-level items.                                                                                                         |
-| `multiple`   | `boolean`                 | `false`                         | When `true`, multiple root panels can be expanded simultaneously. When `false` (default) expanding one panel collapses all others. |
-| `size`       | `PanelMenuSize`           | `'md'`                          | Size token: sm | md | lg.                                                                                                          |
-| `styleClass` | `string | null`           | `null`                          | Extra CSS class appended to the host element.                                                                                      |
-| `variant`    | `PanelMenuVariant | null` | `null`                          | Design-system variant; falls back to ThemeConfigService when null.                                                                 |
+| Name         | Type              | Default                         | Description                                                                                                                        |
+| ------------ | ----------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | --- |
+| `ariaLabel`  | `string`          | `PANEL_MENU_DEFAULT_ARIA_LABEL` | Accessible label applied to the root container (aria-label).                                                                       |
+| `model`      | `PanelMenuItem[]` | `[]`                            | Array of root-level items.                                                                                                         |
+| `multiple`   | `boolean`         | `false`                         | When `true`, multiple root panels can be expanded simultaneously. When `false` (default) expanding one panel collapses all others. |
+| `size`       | `PanelMenuSize`   | `'md'`                          | Size token: sm                                                                                                                     | md                                                                 | lg. |
+| `styleClass` | `string           | null`                           | `null`                                                                                                                             | Extra CSS class appended to the host element.                      |
+| `variant`    | `PanelMenuVariant | null`                           | `null`                                                                                                                             | Design-system variant; falls back to ThemeConfigService when null. |
 
 ### Outputs
 
@@ -128,4 +128,3 @@ _none_
 - [Demo page](/components/panel-menu)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/panel-menu/README.md)
-

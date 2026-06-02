@@ -13,16 +13,16 @@ Message component — inline severity-based status message with optional close a
 
 ### Inputs
 
-| Name         | Type                    | Default  | Description                                                                                                                                                                                                               |
-| ------------ | ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `closable`   | `boolean`               | `false`  | When true, a close button is rendered.                                                                                                                                                                                    |
-| `icon`       | `string | null`         | `null`   | Custom icon name to override the default severity icon. Accepts any semantic icon name from the icon library.                                                                                                             |
-| `messageId`  | `string | null`         | `null`   | Optional explicit `id` for the host element. When omitted an auto-generated `ui-lib-message-{n}` id is used. Consumers should bind this to the same value they pass to `aria-describedby` on the associated form control. |
-| `severity`   | `MessageSeverity`       | `'info'` | Severity level — controls the colour palette and default icon.                                                                                                                                                            |
-| `size`       | `MessageSize`           | `'md'`   | Size of the message.                                                                                                                                                                                                      |
-| `styleClass` | `string | null`         | `null`   | Additional CSS class(es) to attach to the host element.                                                                                                                                                                   |
-| `text`       | `string | null`         | `null`   | Optional text content. Can be combined with content projection or used standalone.                                                                                                                                        |
-| `variant`    | `MessageVariant | null` | `null`   | Design variant. When omitted, falls back to the global ThemeConfigService variant.                                                                                                                                        |
+| Name         | Type              | Default  | Description                                                    |
+| ------------ | ----------------- | -------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `closable`   | `boolean`         | `false`  | When true, a close button is rendered.                         |
+| `icon`       | `string           | null`    | `null`                                                         | Custom icon name to override the default severity icon. Accepts any semantic icon name from the icon library.                                                                                                             |
+| `messageId`  | `string           | null`    | `null`                                                         | Optional explicit `id` for the host element. When omitted an auto-generated `ui-lib-message-{n}` id is used. Consumers should bind this to the same value they pass to `aria-describedby` on the associated form control. |
+| `severity`   | `MessageSeverity` | `'info'` | Severity level — controls the colour palette and default icon. |
+| `size`       | `MessageSize`     | `'md'`   | Size of the message.                                           |
+| `styleClass` | `string           | null`    | `null`                                                         | Additional CSS class(es) to attach to the host element.                                                                                                                                                                   |
+| `text`       | `string           | null`    | `null`                                                         | Optional text content. Can be combined with content projection or used standalone.                                                                                                                                        |
+| `variant`    | `MessageVariant   | null`    | `null`                                                         | Design variant. When omitted, falls back to the global ThemeConfigService variant.                                                                                                                                        |
 
 ### Outputs
 
@@ -98,4 +98,3 @@ Message component — inline severity-based status message with optional close a
 - [Demo page](/components/message)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/message/README.md)
-

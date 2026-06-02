@@ -14,18 +14,18 @@ import { Skeleton } from 'ui-lib-custom/skeleton';
 
 ## Inputs
 
-| Input          | Type                                                      | Default             | Description                                                                 |
-|----------------|-----------------------------------------------------------|---------------------|-----------------------------------------------------------------------------|
-| `loading`      | `boolean`                                                 | `true`              | When `true`, shows the skeleton placeholder and loading semantics.          |
-| `ariaLabel`    | `string`                                                  | `'Loading content'` | Accessible label announced while the skeleton is active.                   |
-| `shape`        | `'rectangle' \| 'circle'`                                 | `'rectangle'`       | Shape of the placeholder.                                                  |
-| `width`        | `string`                                                  | `'100%'`            | CSS width (e.g. `'12rem'`, `'100%'`). Overridden by `size`.               |
-| `height`       | `string`                                                  | `'1rem'`            | CSS height (e.g. `'2rem'`). Overridden by `size`.                         |
-| `size`         | `string \| null`                                          | `null`              | Sets both width and height to the same value. Useful for circles.         |
-| `borderRadius` | `string \| null`                                          | `null`              | Custom border-radius, overrides the shape/variant default.                |
-| `animation`    | `'wave' \| 'none'`                                        | `'wave'`            | Shimmer animation type. Use `'none'` to disable.                          |
-| `variant`      | `'material' \| 'bootstrap' \| 'minimal' \| null`          | `null`              | Design variant. Falls back to `ThemeConfigService` when `null`.           |
-| `styleClass`   | `string \| null`                                          | `null`              | Additional CSS classes applied to the host element.                       |
+| Input          | Type                                             | Default             | Description                                                        |
+| -------------- | ------------------------------------------------ | ------------------- | ------------------------------------------------------------------ |
+| `loading`      | `boolean`                                        | `true`              | When `true`, shows the skeleton placeholder and loading semantics. |
+| `ariaLabel`    | `string`                                         | `'Loading content'` | Accessible label announced while the skeleton is active.           |
+| `shape`        | `'rectangle' \| 'circle'`                        | `'rectangle'`       | Shape of the placeholder.                                          |
+| `width`        | `string`                                         | `'100%'`            | CSS width (e.g. `'12rem'`, `'100%'`). Overridden by `size`.        |
+| `height`       | `string`                                         | `'1rem'`            | CSS height (e.g. `'2rem'`). Overridden by `size`.                  |
+| `size`         | `string \| null`                                 | `null`              | Sets both width and height to the same value. Useful for circles.  |
+| `borderRadius` | `string \| null`                                 | `null`              | Custom border-radius, overrides the shape/variant default.         |
+| `animation`    | `'wave' \| 'none'`                               | `'wave'`            | Shimmer animation type. Use `'none'` to disable.                   |
+| `variant`      | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`              | Design variant. Falls back to `ThemeConfigService` when `null`.    |
+| `styleClass`   | `string \| null`                                 | `null`              | Additional CSS classes applied to the host element.                |
 
 ## Usage examples
 
@@ -75,30 +75,30 @@ import { Skeleton } from 'ui-lib-custom/skeleton';
 
 ## CSS Variables
 
-| Variable                              | Default                                                  | Description                         |
-|---------------------------------------|----------------------------------------------------------|-------------------------------------|
-| `--uilib-skeleton-bg`                 | `var(--uilib-surface-200, #e5e7eb)`                      | Background colour                   |
-| `--uilib-skeleton-shimmer-color`      | `var(--uilib-surface-50, #f9fafb)`                       | Shimmer highlight colour            |
-| `--uilib-skeleton-border-radius`      | `var(--uilib-radius-md, 0.375rem)`                       | Corner radius                       |
-| `--uilib-skeleton-circle-border-radius` | `var(--uilib-radius-full, 9999px)`                     | Border radius used by `shape="circle"` and variant circle overrides |
-| `--uilib-skeleton-animation-duration` | `1.5s`                                                   | Wave sweep duration; override to slow down or speed up the shimmer |
-| `--uilib-skeleton-animation`          | `uilib-skeleton-wave var(--uilib-skeleton-animation-duration) infinite ease-in-out` | Full wave animation shorthand; set to `none` by `prefers-reduced-motion` |
+| Variable                                | Default                                                                             | Description                                                              |
+| --------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `--uilib-skeleton-bg`                   | `var(--uilib-surface-200, #e5e7eb)`                                                 | Background colour                                                        |
+| `--uilib-skeleton-shimmer-color`        | `var(--uilib-surface-50, #f9fafb)`                                                  | Shimmer highlight colour                                                 |
+| `--uilib-skeleton-border-radius`        | `var(--uilib-radius-md, 0.375rem)`                                                  | Corner radius                                                            |
+| `--uilib-skeleton-circle-border-radius` | `var(--uilib-radius-full, 9999px)`                                                  | Border radius used by `shape="circle"` and variant circle overrides      |
+| `--uilib-skeleton-animation-duration`   | `1.5s`                                                                              | Wave sweep duration; override to slow down or speed up the shimmer       |
+| `--uilib-skeleton-animation`            | `uilib-skeleton-wave var(--uilib-skeleton-animation-duration) infinite ease-in-out` | Full wave animation shorthand; set to `none` by `prefers-reduced-motion` |
 
 ## ARIA attributes
 
-| Element | Attributes | Purpose |
-|---------|------------|---------|
-| `ui-lib-skeleton` host while `loading=true` | `id`, `role="status"`, `aria-live="polite"`, `aria-atomic="true"`, `aria-busy="true"`, `aria-label` | Announces an active loading region with a descriptive label. |
-| `ui-lib-skeleton` host while `loading=false` | `id`, `aria-busy="false"` | Keeps a stable container id while removing temporary loading semantics. |
-| `.ui-lib-skeleton__placeholder` | `aria-hidden="true"` | Hides the decorative placeholder block from assistive technology. |
-| `.ui-lib-skeleton__shimmer` | `aria-hidden="true"` | Hides the decorative shimmer animation from assistive technology. |
-| `.ui-lib-skeleton__content` while `loading=true` | `aria-hidden="true"`, `inert` | Prevents projected content from being announced or focused before it is ready. |
+| Element                                          | Attributes                                                                                          | Purpose                                                                        |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `ui-lib-skeleton` host while `loading=true`      | `id`, `role="status"`, `aria-live="polite"`, `aria-atomic="true"`, `aria-busy="true"`, `aria-label` | Announces an active loading region with a descriptive label.                   |
+| `ui-lib-skeleton` host while `loading=false`     | `id`, `aria-busy="false"`                                                                           | Keeps a stable container id while removing temporary loading semantics.        |
+| `.ui-lib-skeleton__placeholder`                  | `aria-hidden="true"`                                                                                | Hides the decorative placeholder block from assistive technology.              |
+| `.ui-lib-skeleton__shimmer`                      | `aria-hidden="true"`                                                                                | Hides the decorative shimmer animation from assistive technology.              |
+| `.ui-lib-skeleton__content` while `loading=true` | `aria-hidden="true"`, `inert`                                                                       | Prevents projected content from being announced or focused before it is ready. |
 
 ## Keyboard interaction
 
-| Key | Behaviour |
-|-----|-----------|
-| `Tab` while loading | Skeleton host is not focusable and hidden projected content is inert. |
+| Key                 | Behaviour                                                                                 |
+| ------------------- | ----------------------------------------------------------------------------------------- |
+| `Tab` while loading | Skeleton host is not focusable and hidden projected content is inert.                     |
 | `Tab` after loading | Focus moves to the first interactive element inside the projected content, if one exists. |
 
 ## Accessibility

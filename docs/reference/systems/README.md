@@ -7,11 +7,13 @@ System-level documentation for design systems, architectural patterns, and cross
 ## 🎨 Available Systems
 
 ### CSS Architecture & Theming
+
 **File:** [CSS_ARCHITECTURE.md](CSS_ARCHITECTURE.md)
 
 **Status:** ✅ Refactored 2026-05-23
 
 **Includes:**
+
 - Token hierarchy (universal → light/dark → component → variant)
 - Globally registered scale tokens (radius, spacing, font-size, shadows)
 - Density system (`data-density` attribute)
@@ -26,11 +28,13 @@ System-level documentation for design systems, architectural patterns, and cross
 ---
 
 ### Design Token System
+
 **File:** [DESIGN_TOKENS.md](DESIGN_TOKENS.md)
 
 **Status:** ✅ Complete
 
 **Includes:**
+
 - 177+ design tokens across 8 categories
 - Color palettes (primary, secondary, success, danger, warning, info, neutral)
 - Spacing tokens (0-20 scale)
@@ -45,13 +49,16 @@ System-level documentation for design systems, architectural patterns, and cross
 ---
 
 ### Layout System
+
 **Files:**
+
 - [LAYOUT_SYSTEM.md](LAYOUT_SYSTEM.md) - Complete API reference
 - [LAYOUT_IMPLEMENTATION.md](LAYOUT_IMPLEMENTATION.md) - Implementation details
 
 **Status:** ✅ Complete
 
 **Includes:**
+
 - Stack component (vertical/horizontal layouts)
 - Inline component (wrapping inline layouts)
 - Grid component (CSS Grid with columns)
@@ -62,11 +69,13 @@ System-level documentation for design systems, architectural patterns, and cross
 ---
 
 ### Theming System
+
 **File:** [THEMING.md](THEMING.md)
 
 **Status:** ✅ Complete
 
 **Includes:**
+
 - Light/dark presets via CSS variables
 - `data-theme` switching guidance
 - Brand override example with `--uilib-*` vars
@@ -77,11 +86,13 @@ System-level documentation for design systems, architectural patterns, and cross
 ---
 
 ### Accessibility System
+
 **File:** [ACCESSIBILITY.md](ACCESSIBILITY.md)
 
 **Status:** ✅ Complete
 
 **Includes:**
+
 - WCAG 2.1 AA principles
 - Per-component accessibility expectations
 - Keyboard and screen reader guidance
@@ -92,11 +103,13 @@ System-level documentation for design systems, architectural patterns, and cross
 ---
 
 ### Performance System
+
 **File:** [PERFORMANCE.md](PERFORMANCE.md)
 
 **Status:** ✅ Complete
 
 **Includes:**
+
 - Bundle size guidance and tracking
 - Runtime performance characteristics
 - Consumer best practices
@@ -110,6 +123,7 @@ System-level documentation for design systems, architectural patterns, and cross
 The **systems** folder contains documentation for:
 
 ### ✅ DO Include:
+
 - Design systems (tokens, themes)
 - Architectural patterns (layout systems)
 - Shared utilities and helpers
@@ -117,6 +131,7 @@ The **systems** folder contains documentation for:
 - System-wide configurations
 
 ### ❌ DON'T Include:
+
 - Individual component docs (use `components/` folder)
 - Project-level docs (use `project/` folder)
 - Getting started guides (use `getting-started/` folder)
@@ -129,9 +144,11 @@ The **systems** folder contains documentation for:
 Each system should have:
 
 ### 1. Main Documentation (`SYSTEM_NAME.md`)
+
 **Purpose:** Complete reference for the system
 
 **Should include:**
+
 - System overview and purpose
 - Complete API/token reference
 - Usage examples
@@ -140,9 +157,11 @@ Each system should have:
 - Migration guides
 
 ### 2. Implementation Details (optional: `SYSTEM_NAME_IMPLEMENTATION.md`)
+
 **Purpose:** Technical implementation notes
 
 **Should include:**
+
 - Architecture decisions
 - Performance characteristics
 - Integration notes
@@ -161,12 +180,12 @@ Each system should have:
 
 ## 📊 Systems Overview
 
-| System | Description | Tokens/Components | Status |
-|--------|-------------|-------------------|--------|
-| Design Tokens | Consistent styling values | 177+ tokens | ✅ Complete |
-| Layout | Layout primitives | 4 components | ✅ Complete |
-| Accessibility | WCAG/ARIA guidance | Components + testing | ✅ Complete |
-| Performance | Size/runtime guidance | Components + builds | ✅ Complete |
+| System        | Description               | Tokens/Components    | Status      |
+| ------------- | ------------------------- | -------------------- | ----------- |
+| Design Tokens | Consistent styling values | 177+ tokens          | ✅ Complete |
+| Layout        | Layout primitives         | 4 components         | ✅ Complete |
+| Accessibility | WCAG/ARIA guidance        | Components + testing | ✅ Complete |
+| Performance   | Size/runtime guidance     | Components + builds  | ✅ Complete |
 
 ---
 

@@ -6,6 +6,7 @@
 > recommended weekly rhythm in §3.4 of the response document.
 >
 > **Conventions every prompt assumes the agent already knows:**
+>
 > - Read `CLAUDE.md`, `AGENTS.md`, `LIBRARY_CONVENTIONS.md`, and the target component's
 >   co-located `README.md` before writing code.
 > - Library rules: `ViewEncapsulation.None`, `OnPush`, standalone, signal IO, block syntax,
@@ -18,22 +19,22 @@
 
 ## Table of Prompts
 
-| # | Prompt                                                              | Track                  | Section in response |
-|---|---------------------------------------------------------------------|------------------------|---------------------|
-| 1 | Sprint A — Competitive benchmark backfill (per component)            | Cross-cutting research  | §1.3 Sprint A · §2.5 |
-| 2 | Sprint B — Reference doc generator (one-off build)                  | Cross-cutting tooling   | §1.3 Sprint B        |
-| 3 | Sprint B — Reference doc finish (per component)                     | Cross-cutting + per-component | §1.3 Sprint B  |
-| 4 | Sprint C — NVDA + VoiceOver session recording (per component)        | Cross-cutting a11y      | §1.3 Sprint C        |
-| 5 | Sprint D — Reduced-motion completeness audit (library-wide)         | Cross-cutting lint      | §1.3 Sprint D        |
-| 6 | Sprint E — Per-entry-point gzip budget (one-off build)              | Cross-cutting tooling   | §1.3 Sprint E        |
-| 7 | Per-component 8.x → 9.5+ upgrade (12-step template)                  | Per-component           | §2.3 · §3.1          |
-| 8 | 8.2-cluster batch upgrade (15 components, one PR each)               | Per-component batch     | §3.2                 |
-| 9 | Category 10 — Emotional Quality verification                         | Per-component validation | §2.4                |
-| 10| Category 12 — Add "Internationalisation" to the scoring system       | Scoring system change   | §1.5                 |
-| 11| Premium build — Signals-first Data Grid (greenfield 10/10)           | Greenfield premium      | §1.4 · §3.5          |
-| 12| Premium build — Query Builder scaffolding                            | Greenfield premium      | §3.5                 |
-| 13| Weekly cadence — Monday planning prompt                              | Process                 | §3.4                 |
-| 14| Weekly cadence — Friday wrap prompt                                  | Process                 | §3.4                 |
+| #   | Prompt                                                         | Track                         | Section in response  |
+| --- | -------------------------------------------------------------- | ----------------------------- | -------------------- |
+| 1   | Sprint A — Competitive benchmark backfill (per component)      | Cross-cutting research        | §1.3 Sprint A · §2.5 |
+| 2   | Sprint B — Reference doc generator (one-off build)             | Cross-cutting tooling         | §1.3 Sprint B        |
+| 3   | Sprint B — Reference doc finish (per component)                | Cross-cutting + per-component | §1.3 Sprint B        |
+| 4   | Sprint C — NVDA + VoiceOver session recording (per component)  | Cross-cutting a11y            | §1.3 Sprint C        |
+| 5   | Sprint D — Reduced-motion completeness audit (library-wide)    | Cross-cutting lint            | §1.3 Sprint D        |
+| 6   | Sprint E — Per-entry-point gzip budget (one-off build)         | Cross-cutting tooling         | §1.3 Sprint E        |
+| 7   | Per-component 8.x → 9.5+ upgrade (12-step template)            | Per-component                 | §2.3 · §3.1          |
+| 8   | 8.2-cluster batch upgrade (15 components, one PR each)         | Per-component batch           | §3.2                 |
+| 9   | Category 10 — Emotional Quality verification                   | Per-component validation      | §2.4                 |
+| 10  | Category 12 — Add "Internationalisation" to the scoring system | Scoring system change         | §1.5                 |
+| 11  | Premium build — Signals-first Data Grid (greenfield 10/10)     | Greenfield premium            | §1.4 · §3.5          |
+| 12  | Premium build — Query Builder scaffolding                      | Greenfield premium            | §3.5                 |
+| 13  | Weekly cadence — Monday planning prompt                        | Process                       | §3.4                 |
+| 14  | Weekly cadence — Friday wrap prompt                            | Process                       | §3.4                 |
 
 ---
 
@@ -212,28 +213,35 @@ PROTOCOL (run twice — once per SR):
 OUTPUT to docs/reference/a11y-sessions/<component>.md using this template:
 
 ```
+
 # <Component> — Screen Reader Session
 
 Date: YYYY-MM-DD
-NVDA version: …  · Chrome version: …
+NVDA version: … · Chrome version: …
 VoiceOver: macOS … · Safari: …
 
 ## NVDA + Chrome
-| Step | Action | Announced | Pass? |
-|------|--------|-----------|-------|
+
+| Step | Action           | Announced    | Pass? |
+| ---- | ---------------- | ------------ | ----- |
 | 1    | Tab to component | "<verbatim>" | ✅/❌ |
 | 2    | Press Down arrow | "<verbatim>" | ✅/❌ |
+
 …
 
 ## VoiceOver + Safari
+
 (same table)
 
 ## Issues found
+
 - [ ] <Issue 1 — file a bug as fix(a11y): <component> <one-line>>
 - [ ] <Issue 2>
 
 ## Verdict
+
 A11y score: <integer> → <new integer>
+
 ```
 
 IF issues found:
@@ -709,21 +717,23 @@ DO:
 2. Compute the inventory average from docs/COMPONENT_SCORES.md.
 3. Append a "Recent Handoff" block to AI_AGENT_CONTEXT.md:
 
-   ```
-   Date: YYYY-MM-DD (week of …)
-   Changed: <list of components or sprints>
-   Sprints progressed: <A/B/C/D/E with % complete>
-   Inventory average: previous=<n.n> → current=<n.n>
-   State: <what is complete / in progress>
-   Verification: <commands that passed>
-   Next step: <single most logical next action — usually next Monday's planning>
-   ```
+```
+
+Date: YYYY-MM-DD (week of …)
+Changed: <list of components or sprints>
+Sprints progressed: <A/B/C/D/E with % complete>
+Inventory average: previous=<n.n> → current=<n.n>
+State: <what is complete / in progress>
+Verification: <commands that passed>
+Next step: <single most logical next action — usually next Monday's planning>
+
+```
 
 4. Trim AI_AGENT_CONTEXT.md to the newest 3 handoffs; move older to
-   docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md (per CLAUDE.md protocol).
+docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md (per CLAUDE.md protocol).
 
 5. If inventory average just crossed a major threshold (8.5, 9.0, 9.5), note it
-   in CHANGELOG.md under "Unreleased → Quality milestones".
+in CHANGELOG.md under "Unreleased → Quality milestones".
 
 6. Push: `chore(week): wrap week of YYYY-MM-DD — avg <n.n>`
 ```
@@ -760,4 +770,3 @@ Weeks 5+
 Each prompt is independent and resumable. If a session is interrupted, the
 prompt's per-step commit format makes mid-flight recovery trivial — read the
 last commit, find the step number, continue from the next.
-

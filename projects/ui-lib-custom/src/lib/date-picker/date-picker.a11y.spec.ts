@@ -195,7 +195,7 @@ async function createInlineWithConstraintsFixture(): Promise<
   }).compileComponents();
 
   const fixture: ComponentFixture<InlineWithConstraintsHostComponent> = TestBed.createComponent(
-    InlineWithConstraintsHostComponent
+    InlineWithConstraintsHostComponent,
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
@@ -301,7 +301,7 @@ const FULL_DAY_NAMES: readonly string[] = [
 describe('DatePicker Accessibility', (): void => {
   afterEach((): void => {
     const appended: NodeListOf<Element> = document.body.querySelectorAll(
-      'ui-lib-date-picker, [data-testid]'
+      'ui-lib-date-picker, [data-testid]',
     );
     appended.forEach((node: Element): void => {
       if (node.parentElement === document.body) {
@@ -310,7 +310,7 @@ describe('DatePicker Accessibility', (): void => {
     });
     // Also clean up host component elements
     const hostEls: NodeListOf<Element> = document.body.querySelectorAll(
-      'ng-component, div[ng-version]'
+      'ng-component, div[ng-version]',
     );
     hostEls.forEach((node: Element): void => {
       if (node.parentElement === document.body) {
@@ -442,7 +442,7 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const prevBtn: HTMLButtonElement | null = root.querySelector(
-        '.ui-lib-datepicker__prev-button'
+        '.ui-lib-datepicker__prev-button',
       );
       expect(prevBtn).toBeTruthy();
       const label: string | null = prevBtn!.getAttribute('aria-label');
@@ -454,11 +454,11 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const prevBtn: HTMLButtonElement | null = root.querySelector(
-        '.ui-lib-datepicker__prev-button'
+        '.ui-lib-datepicker__prev-button',
       );
       const label: string = prevBtn!.getAttribute('aria-label') ?? '';
       const hasMonthName: boolean = MONTH_NAMES.some((name: string): boolean =>
-        label.includes(name)
+        label.includes(name),
       );
       expect(hasMonthName).toBe(true);
     });
@@ -467,7 +467,7 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const nextBtn: HTMLButtonElement | null = root.querySelector(
-        '.ui-lib-datepicker__next-button'
+        '.ui-lib-datepicker__next-button',
       );
       expect(nextBtn).toBeTruthy();
       const label: string | null = nextBtn!.getAttribute('aria-label');
@@ -479,11 +479,11 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const nextBtn: HTMLButtonElement | null = root.querySelector(
-        '.ui-lib-datepicker__next-button'
+        '.ui-lib-datepicker__next-button',
       );
       const label: string = nextBtn!.getAttribute('aria-label') ?? '';
       const hasMonthName: boolean = MONTH_NAMES.some((name: string): boolean =>
-        label.includes(name)
+        label.includes(name),
       );
       expect(hasMonthName).toBe(true);
     });
@@ -492,10 +492,10 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const prevBtn: HTMLButtonElement | null = root.querySelector(
-        '.ui-lib-datepicker__prev-button'
+        '.ui-lib-datepicker__prev-button',
       );
       const nextBtn: HTMLButtonElement | null = root.querySelector(
-        '.ui-lib-datepicker__next-button'
+        '.ui-lib-datepicker__next-button',
       );
       const prevLabelBefore: string = prevBtn!.getAttribute('aria-label') ?? '';
       const nextLabelBefore: string = nextBtn!.getAttribute('aria-label') ?? '';
@@ -588,7 +588,7 @@ describe('DatePicker Accessibility', (): void => {
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const cells: HTMLElement[] = getGridCells(root);
       const selectedCells: HTMLElement[] = cells.filter(
-        (c: HTMLElement): boolean => c.getAttribute('aria-selected') === 'true'
+        (c: HTMLElement): boolean => c.getAttribute('aria-selected') === 'true',
       );
       expect(selectedCells.length).toBeGreaterThan(0);
     });
@@ -601,7 +601,7 @@ describe('DatePicker Accessibility', (): void => {
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const cells: HTMLElement[] = getGridCells(root);
       const disabledCells: HTMLElement[] = cells.filter(
-        (c: HTMLElement): boolean => c.getAttribute('aria-disabled') === 'true'
+        (c: HTMLElement): boolean => c.getAttribute('aria-disabled') === 'true',
       );
       // With a min/max date constraint at least some cells should be disabled
       expect(disabledCells.length).toBeGreaterThan(0);
@@ -611,7 +611,7 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const dayButtons: NodeListOf<HTMLButtonElement> = root.querySelectorAll(
-        '[role="gridcell"] button'
+        '[role="gridcell"] button',
       );
       for (const btn of Array.from(dayButtons)) {
         expect(btn.hasAttribute('aria-label')).toBe(true);
@@ -622,10 +622,10 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const dayButtons: HTMLButtonElement[] = Array.from(
-        root.querySelectorAll<HTMLButtonElement>('[role="gridcell"] button:not([disabled])')
+        root.querySelectorAll<HTMLButtonElement>('[role="gridcell"] button:not([disabled])'),
       );
       const focusedButtons: HTMLButtonElement[] = dayButtons.filter(
-        (b: HTMLButtonElement): boolean => b.getAttribute('tabindex') === '0'
+        (b: HTMLButtonElement): boolean => b.getAttribute('tabindex') === '0',
       );
       expect(focusedButtons.length).toBe(1);
     });
@@ -638,7 +638,7 @@ describe('DatePicker Accessibility', (): void => {
       const picker: HTMLElement | null = root.querySelector('ui-lib-date-picker');
       expect(picker).toBeTruthy();
       const todayBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        getDateButtonSelector(today)
+        getDateButtonSelector(today),
       );
       if (todayBtn) {
         const label: string | null = todayBtn.getAttribute('aria-label');
@@ -655,7 +655,7 @@ describe('DatePicker Accessibility', (): void => {
       fixture.detectChanges();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const selectedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        getDateButtonSelector(selectedDate)
+        getDateButtonSelector(selectedDate),
       );
       expect(selectedBtn).toBeTruthy();
       const label: string | null = selectedBtn!.getAttribute('aria-label');
@@ -674,7 +674,7 @@ describe('DatePicker Accessibility', (): void => {
       const pickers: NodeListOf<HTMLElement> = root.querySelectorAll('ui-lib-date-picker');
       expect(pickers.length).toBe(2);
       const inputs: NodeListOf<HTMLInputElement> = root.querySelectorAll(
-        '.ui-lib-datepicker__input'
+        '.ui-lib-datepicker__input',
       );
       expect(inputs.length).toBe(2);
       // IDs of the inputs should be distinct
@@ -694,7 +694,7 @@ describe('DatePicker Accessibility', (): void => {
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const input: HTMLInputElement = getInput(root);
       input.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true })
+        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true }),
       );
       fixture.detectChanges();
       expect(root.querySelector('.ui-lib-datepicker__panel')).toBeTruthy();
@@ -706,7 +706,7 @@ describe('DatePicker Accessibility', (): void => {
       openPopup(fixture);
       const panel: HTMLElement = getPanel(root);
       panel.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })
+        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }),
       );
       fixture.detectChanges();
       expect(root.querySelector('.ui-lib-datepicker__panel')).toBeNull();
@@ -716,18 +716,18 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const focusedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        '[role="gridcell"] button[tabindex="0"]'
+        '[role="gridcell"] button[tabindex="0"]',
       );
       expect(focusedBtn).toBeTruthy();
       const dateKey: string | null = focusedBtn!.getAttribute('data-date-key');
       expect(dateKey).toBeTruthy();
       focusedBtn!.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true })
+        new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }),
       );
       fixture.detectChanges();
       // A new button should have tabindex=0 now
       const newFocusedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        '[role="gridcell"] button[tabindex="0"]'
+        '[role="gridcell"] button[tabindex="0"]',
       );
       expect(newFocusedBtn).toBeTruthy();
       expect(newFocusedBtn!.getAttribute('data-date-key')).not.toBe(dateKey);
@@ -737,17 +737,17 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const focusedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        '[role="gridcell"] button[tabindex="0"]:not([disabled])'
+        '[role="gridcell"] button[tabindex="0"]:not([disabled])',
       );
       expect(focusedBtn).toBeTruthy();
       focusedBtn!.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true })
+        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }),
       );
       fixture.detectChanges();
       // After selection, a cell should have aria-selected=true
       const cells: HTMLElement[] = getGridCells(root);
       const selectedCell: HTMLElement | undefined = cells.find(
-        (c: HTMLElement): boolean => c.getAttribute('aria-selected') === 'true'
+        (c: HTMLElement): boolean => c.getAttribute('aria-selected') === 'true',
       );
       expect(selectedCell).toBeTruthy();
     });
@@ -756,16 +756,16 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const focusedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        '[role="gridcell"] button[tabindex="0"]:not([disabled])'
+        '[role="gridcell"] button[tabindex="0"]:not([disabled])',
       );
       expect(focusedBtn).toBeTruthy();
       focusedBtn!.dispatchEvent(
-        new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true })
+        new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true }),
       );
       fixture.detectChanges();
       const cells: HTMLElement[] = getGridCells(root);
       const selectedCell: HTMLElement | undefined = cells.find(
-        (c: HTMLElement): boolean => c.getAttribute('aria-selected') === 'true'
+        (c: HTMLElement): boolean => c.getAttribute('aria-selected') === 'true',
       );
       expect(selectedCell).toBeTruthy();
     });
@@ -776,11 +776,11 @@ describe('DatePicker Accessibility', (): void => {
       const grid: HTMLElement = getGrid(root);
       const labelBefore: string | null = grid.getAttribute('aria-label');
       const focusedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        '[role="gridcell"] button[tabindex="0"]:not([disabled])'
+        '[role="gridcell"] button[tabindex="0"]:not([disabled])',
       );
       expect(focusedBtn).toBeTruthy();
       focusedBtn!.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'PageDown', bubbles: true, cancelable: true })
+        new KeyboardEvent('keydown', { key: 'PageDown', bubbles: true, cancelable: true }),
       );
       fixture.detectChanges();
       const labelAfter: string | null = grid.getAttribute('aria-label');
@@ -793,11 +793,11 @@ describe('DatePicker Accessibility', (): void => {
       const grid: HTMLElement = getGrid(root);
       const labelBefore: string | null = grid.getAttribute('aria-label');
       const focusedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        '[role="gridcell"] button[tabindex="0"]:not([disabled])'
+        '[role="gridcell"] button[tabindex="0"]:not([disabled])',
       );
       expect(focusedBtn).toBeTruthy();
       focusedBtn!.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'PageUp', bubbles: true, cancelable: true })
+        new KeyboardEvent('keydown', { key: 'PageUp', bubbles: true, cancelable: true }),
       );
       fixture.detectChanges();
       const labelAfter: string | null = grid.getAttribute('aria-label');
@@ -815,7 +815,7 @@ describe('DatePicker Accessibility', (): void => {
       await fixture.whenStable();
       fixture.detectChanges();
       const focusedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        '[role="gridcell"] button[tabindex="0"]'
+        '[role="gridcell"] button[tabindex="0"]',
       );
       expect(focusedBtn).toBeTruthy();
     });
@@ -831,7 +831,7 @@ describe('DatePicker Accessibility', (): void => {
       fixture.detectChanges();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const focusedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        getDateButtonSelector(selectedDate)
+        getDateButtonSelector(selectedDate),
       );
       expect(focusedBtn).toBeTruthy();
       expect(focusedBtn!.getAttribute('tabindex')).toBe('0');

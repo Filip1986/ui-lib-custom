@@ -35,7 +35,7 @@ const EXAMPLES = {
 </ui-lib-bottom-sheet>
 \`\`\``,
 
-  'chip': `\`\`\`html
+  chip: `\`\`\`html
 <!-- Static label -->
 <ui-lib-chip label="Angular" />
 
@@ -107,7 +107,7 @@ export class MyComponent {
 </ui-lib-data-grid>
 \`\`\``,
 
-  'divider': `\`\`\`html
+  divider: `\`\`\`html
 <!-- Horizontal divider (default) -->
 <ui-lib-divider />
 
@@ -145,7 +145,7 @@ export class MyComponent {
 }
 \`\`\``,
 
-  'fieldset': `\`\`\`html
+  fieldset: `\`\`\`html
 <!-- Static fieldset -->
 <ui-lib-fieldset legend="Address">
   <div>Street: 123 Main St</div>
@@ -157,7 +157,7 @@ export class MyComponent {
 </ui-lib-fieldset>
 \`\`\``,
 
-  'fluid': `\`\`\`html
+  fluid: `\`\`\`html
 <!-- Fluid directive makes all child inputs fill 100% width -->
 <ui-lib-fluid>
   <ui-lib-input placeholder="Full-width input" />
@@ -174,7 +174,7 @@ export class MyComponent {
 </div>
 \`\`\``,
 
-  'inplace': `\`\`\`html
+  inplace: `\`\`\`html
 <!-- Click to reveal / edit inline -->
 <ui-lib-inplace>
   <ng-template uiLibInplaceDisplay>
@@ -187,7 +187,7 @@ export class MyComponent {
 </ui-lib-inplace>
 \`\`\``,
 
-  'panel': `\`\`\`html
+  panel: `\`\`\`html
 <!-- Static panel -->
 <ui-lib-panel header="Summary">
   <p>Content inside the panel.</p>
@@ -199,7 +199,7 @@ export class MyComponent {
 </ui-lib-panel>
 \`\`\``,
 
-  'popover': `\`\`\`html
+  popover: `\`\`\`html
 <ui-lib-button (click)="op.toggle($event)">Show Info</ui-lib-button>
 
 <ui-lib-popover #op>
@@ -245,7 +245,7 @@ export class MyComponent {
 </div>
 \`\`\``,
 
-  'skeleton': `\`\`\`html
+  skeleton: `\`\`\`html
 <!-- Text line placeholder -->
 <ui-lib-skeleton width="80%" height="1rem" />
 
@@ -259,7 +259,7 @@ export class MyComponent {
 </div>
 \`\`\``,
 
-  'stepper': `\`\`\`html
+  stepper: `\`\`\`html
 <ui-lib-stepper [(activeStep)]="step">
   <ui-lib-step-panel header="Account">
     <ui-lib-input placeholder="Email" />
@@ -291,7 +291,7 @@ export class MyComponent {
 <aside #sidebar class="sidebar">…</aside>
 \`\`\``,
 
-  'terminal': `\`\`\`typescript
+  terminal: `\`\`\`typescript
 @Component({
   template: \`
     <ui-lib-terminal
@@ -312,7 +312,7 @@ export class MyComponent {
 }
 \`\`\``,
 
-  'toolbar': `\`\`\`html
+  toolbar: `\`\`\`html
 <ui-lib-toolbar>
   <ng-template uiLibToolbarStart>
     <ui-lib-button icon="menu" [iconOnly]="true" ariaLabel="Menu" />
@@ -326,7 +326,7 @@ export class MyComponent {
 </ui-lib-toolbar>
 \`\`\``,
 
-  'tooltip': `\`\`\`html
+  tooltip: `\`\`\`html
 <!-- Attribute directive — simplest form -->
 <ui-lib-button uiLibTooltip="Save your changes">Save</ui-lib-button>
 
@@ -352,7 +352,7 @@ import { readdirSync } from 'node:fs';
 let updated = 0;
 let skipped = 0;
 
-for (const file of readdirSync(DOCS_DIR).filter(f => f.endsWith('.md'))) {
+for (const file of readdirSync(DOCS_DIR).filter((f) => f.endsWith('.md'))) {
   const name = file.replace(/\.md$/, '').toLowerCase();
   const path = resolve(DOCS_DIR, file);
   const content = readFileSync(path, 'utf8');

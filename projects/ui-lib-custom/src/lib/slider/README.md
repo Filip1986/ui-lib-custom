@@ -8,42 +8,42 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `value` | `number \| [number, number]` | `0` | Current value. Two-way bindable via `[(value)]` or `ngModel`. Use a tuple in range mode. |
-| `min` | `number` | `0` | Minimum allowed value. |
-| `max` | `number` | `100` | Maximum allowed value. |
-| `step` | `number` | `1` | Increment/decrement step for keyboard and drag snapping. |
-| `range` | `boolean` | `false` | When true, renders two handles and `value` is `[start, end]`. |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Track orientation. |
-| `disabled` | `boolean` | `false` | Disables interaction. |
-| `readonly` | `boolean` | `false` | Focusable but value does not change. |
-| `animate` | `boolean` | `false` | Adds CSS transition animation on value changes. |
-| `tabindex` | `number` | `0` | Tab index forwarded to each handle. |
-| `ariaLabel` | `string \| null` | `null` | Accessible label forwarded to handle element(s). |
-| `ariaLabelledBy` | `string \| null` | `null` | `aria-labelledby` forwarded to handle element(s). |
-| `valueTextFn` | `(value: number) => string` | `(value) => String(value)` | Formats `aria-valuetext` for screen readers in single and range modes. |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme when null. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Component density. |
-| `styleClass` | `string \| null` | `null` | Extra CSS class appended to the host element. |
+| Name             | Type                                             | Default                    | Notes                                                                                    |
+| ---------------- | ------------------------------------------------ | -------------------------- | ---------------------------------------------------------------------------------------- |
+| `value`          | `number \| [number, number]`                     | `0`                        | Current value. Two-way bindable via `[(value)]` or `ngModel`. Use a tuple in range mode. |
+| `min`            | `number`                                         | `0`                        | Minimum allowed value.                                                                   |
+| `max`            | `number`                                         | `100`                      | Maximum allowed value.                                                                   |
+| `step`           | `number`                                         | `1`                        | Increment/decrement step for keyboard and drag snapping.                                 |
+| `range`          | `boolean`                                        | `false`                    | When true, renders two handles and `value` is `[start, end]`.                            |
+| `orientation`    | `'horizontal' \| 'vertical'`                     | `'horizontal'`             | Track orientation.                                                                       |
+| `disabled`       | `boolean`                                        | `false`                    | Disables interaction.                                                                    |
+| `readonly`       | `boolean`                                        | `false`                    | Focusable but value does not change.                                                     |
+| `animate`        | `boolean`                                        | `false`                    | Adds CSS transition animation on value changes.                                          |
+| `tabindex`       | `number`                                         | `0`                        | Tab index forwarded to each handle.                                                      |
+| `ariaLabel`      | `string \| null`                                 | `null`                     | Accessible label forwarded to handle element(s).                                         |
+| `ariaLabelledBy` | `string \| null`                                 | `null`                     | `aria-labelledby` forwarded to handle element(s).                                        |
+| `valueTextFn`    | `(value: number) => string`                      | `(value) => String(value)` | Formats `aria-valuetext` for screen readers in single and range modes.                   |
+| `variant`        | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`                     | Falls back to global theme when null.                                                    |
+| `size`           | `'sm' \| 'md' \| 'lg'`                           | `'md'`                     | Component density.                                                                       |
+| `styleClass`     | `string \| null`                                 | `null`                     | Extra CSS class appended to the host element.                                            |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `change` | `SliderChangeEvent` | Emitted on every user-driven value change during drag or keyboard interaction. |
-| `slideEnd` | `SliderSlideEndEvent` | Emitted when the user releases a drag interaction. |
+| Name       | Payload               | Notes                                                                          |
+| ---------- | --------------------- | ------------------------------------------------------------------------------ |
+| `change`   | `SliderChangeEvent`   | Emitted on every user-driven value change during drag or keyboard interaction. |
+| `slideEnd` | `SliderSlideEndEvent` | Emitted when the user releases a drag interaction.                             |
 
 ## Keyboard Navigation
 
-| Key | Action |
-|-----|--------|
-| `ArrowRight` / `ArrowUp` | Increment by `step` |
-| `ArrowLeft` / `ArrowDown` | Decrement by `step` |
-| `PageUp` | Increment by `step × 10` |
-| `PageDown` | Decrement by `step × 10` |
-| `Home` | Jump to minimum value |
-| `End` | Jump to maximum value |
+| Key                       | Action                   |
+| ------------------------- | ------------------------ |
+| `ArrowRight` / `ArrowUp`  | Increment by `step`      |
+| `ArrowLeft` / `ArrowDown` | Decrement by `step`      |
+| `PageUp`                  | Increment by `step × 10` |
+| `PageDown`                | Decrement by `step × 10` |
+| `Home`                    | Jump to minimum value    |
+| `End`                     | Jump to maximum value    |
 
 ## Accessibility
 
@@ -55,13 +55,13 @@
 
 ### ARIA attribute behavior
 
-| Attribute | Source |
-|---|---|
-| `aria-valuenow` | Current numeric value for the active handle |
-| `aria-valuemin` / `aria-valuemax` | Global min/max in single mode; cross-constrained by the opposite thumb in range mode |
-| `aria-valuetext` | `valueTextFn(value)` for human-readable announcements |
-| `aria-orientation` | `horizontal` or `vertical` from the `orientation` input |
-| `aria-label` / `aria-labelledby` | Forwarded from inputs; range mode falls back to `Minimum value` / `Maximum value` when no label is supplied |
+| Attribute                         | Source                                                                                                      |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `aria-valuenow`                   | Current numeric value for the active handle                                                                 |
+| `aria-valuemin` / `aria-valuemax` | Global min/max in single mode; cross-constrained by the opposite thumb in range mode                        |
+| `aria-valuetext`                  | `valueTextFn(value)` for human-readable announcements                                                       |
+| `aria-orientation`                | `horizontal` or `vertical` from the `orientation` input                                                     |
+| `aria-label` / `aria-labelledby`  | Forwarded from inputs; range mode falls back to `Minimum value` / `Maximum value` when no label is supplied |
 
 ## Usage
 
@@ -79,11 +79,7 @@
 <ui-lib-slider ariaLabel="Volume" [(value)]="volume" />
 
 <!-- custom spoken value text -->
-<ui-lib-slider
-  ariaLabel="Volume"
-  [valueTextFn]="formatVolumeValue"
-  [(value)]="volume"
-/>
+<ui-lib-slider ariaLabel="Volume" [valueTextFn]="formatVolumeValue" [(value)]="volume" />
 ```
 
 ```ts
@@ -92,15 +88,15 @@ public readonly formatVolumeValue = (value: number): string => `${value}%`;
 
 ## CSS custom properties
 
-| Variable | Purpose |
-|---|---|
-| `--uilib-slider-track-color` | Track background color |
-| `--uilib-slider-fill-color` | Filled-range color |
-| `--uilib-slider-handle-bg` | Thumb background |
-| `--uilib-slider-handle-border` | Thumb border |
-| `--uilib-slider-focus-ring-color` | `:focus-visible` ring color |
-| `--uilib-slider-fill-transition` | Fill animation timing; set to `none` when `prefers-reduced-motion: reduce` |
-| `--uilib-slider-handle-transition` | Handle hover/shadow transition; set to `none` when `prefers-reduced-motion: reduce` |
+| Variable                                   | Purpose                                                                                             |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `--uilib-slider-track-color`               | Track background color                                                                              |
+| `--uilib-slider-fill-color`                | Filled-range color                                                                                  |
+| `--uilib-slider-handle-bg`                 | Thumb background                                                                                    |
+| `--uilib-slider-handle-border`             | Thumb border                                                                                        |
+| `--uilib-slider-focus-ring-color`          | `:focus-visible` ring color                                                                         |
+| `--uilib-slider-fill-transition`           | Fill animation timing; set to `none` when `prefers-reduced-motion: reduce`                          |
+| `--uilib-slider-handle-transition`         | Handle hover/shadow transition; set to `none` when `prefers-reduced-motion: reduce`                 |
 | `--uilib-slider-animate-handle-transition` | Handle position transition when `animate=true`; set to `none` when `prefers-reduced-motion: reduce` |
-| `--uilib-slider-track-padding` | Hit-box padding on the track container (`12px`) |
-| `--uilib-slider-vertical-height` | Vertical slider height |
+| `--uilib-slider-track-padding`             | Hit-box padding on the track container (`12px`)                                                     |
+| `--uilib-slider-vertical-height`           | Vertical slider height                                                                              |

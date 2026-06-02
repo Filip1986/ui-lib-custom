@@ -62,15 +62,15 @@ These are the recurring design decisions that come up for every component. Resol
 
 ### Naming & terminology mapping
 
-| PrimeNG concept | ui-lib-custom equivalent | Notes |
-|---|---|---|
-| `variant` (filled/outlined) | `appearance` input | Our `variant` means material/bootstrap/minimal |
-| `size="small"` / `size="large"` | `size="sm"` / `size="md"` / `size="lg"` | Always three tokens |
-| `severity` | `severity` | Keep as-is if applicable |
-| `p-` prefix | `uilib-` prefix | Host classes, CSS vars |
-| `styleClass` | `styleClass` | Keep for escape-hatch styling |
-| `@Input()` | `input()` / `model()` | Signal inputs only, never decorators |
-| TypeScript `enum` | `as const` object + string union type | Public API uses the union, internals use the constant |
+| PrimeNG concept                 | ui-lib-custom equivalent                | Notes                                                 |
+| ------------------------------- | --------------------------------------- | ----------------------------------------------------- |
+| `variant` (filled/outlined)     | `appearance` input                      | Our `variant` means material/bootstrap/minimal        |
+| `size="small"` / `size="large"` | `size="sm"` / `size="md"` / `size="lg"` | Always three tokens                                   |
+| `severity`                      | `severity`                              | Keep as-is if applicable                              |
+| `p-` prefix                     | `uilib-` prefix                         | Host classes, CSS vars                                |
+| `styleClass`                    | `styleClass`                            | Keep for escape-hatch styling                         |
+| `@Input()`                      | `input()` / `model()`                   | Signal inputs only, never decorators                  |
+| TypeScript `enum`               | `as const` object + string union type   | Public API uses the union, internals use the constant |
 
 ### Form integration checklist (if applicable)
 
@@ -100,17 +100,17 @@ These rules exist because Angular's output mechanism has two non-obvious traps. 
 
 **Rule 2 — Never shadow a native DOM event name.** When an `output()` shares a name with a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `submit`, `select`, `keydown`, `keyup`, `scroll`, `resize`, `load`, `error`, `mousedown`, `mouseup`, `mousemove`, `pointerdown`, `pointerup`, `touchstart`, `touchend`, `drag`, `drop`, `paste`, `copy`, `cut`, `wheel`...), Angular registers **both** an output subscriber and a native DOM listener on the host. Native events that bubble from child elements trigger the callback twice — once per path. Always disambiguate with a component qualifier:
 
-  ```
-  ❌ click, input, focus, blur, change
-  ✅ buttonClick, valueChange, textareaFocus, textareaBlur, panelChange
-  ```
+```
+❌ click, input, focus, blur, change
+✅ buttonClick, valueChange, textareaFocus, textareaBlur, panelChange
+```
 
 **Rule 3 — Never name an explicit `output()` `{signalName}Change` when `{signalName}` is a `model()` signal.** Angular's `model<T>()` auto-generates a `{name}Change` output for `[(binding)]` two-way syntax. A second explicit output with that name overwrites the binding with the rich event object instead of `T`. List every `model()` signal name in the component and make sure no explicit output matches `{name}Change`.
 
-  ```typescript
-  // model<boolean>() named 'visible' → blocked output name: 'visibleChange'
-  // model<string>()  named 'value'   → blocked output name: 'valueChange' (use 'inputChange' etc.)
-  ```
+```typescript
+// model<boolean>() named 'visible' → blocked output name: 'visibleChange'
+// model<string>()  named 'value'   → blocked output name: 'valueChange' (use 'inputChange' etc.)
+```
 
 **Rule 4 — `@HostListener` + focus/blur outputs.** If the component exposes a focus/blur-related output AND needs to track host `focus`/`blur` internally, use imperative `addEventListener` in the constructor — not `@HostListener`. See `cascade-select.ts` for the reference implementation.
 
@@ -204,7 +204,7 @@ Do not skip this. Research the correct ARIA pattern before implementation; do no
 - Reference existing test files for patterns — do **not** reference `AI_TEST_GUARD.md` (it does not exist); use `jest.config.ts` and existing `.spec.ts` files as the source of truth
 
 **Test host properties must be `WritableSignal`, not plain properties.**
-With zoneless OnPush, setting a plain property on the test host and calling `fixture.detectChanges()` does *not* propagate the change to a child component's `input()` or `model()` signal. Always declare test host properties as `WritableSignal` and update them via `.set()`:
+With zoneless OnPush, setting a plain property on the test host and calling `fixture.detectChanges()` does _not_ propagate the change to a child component's `input()` or `model()` signal. Always declare test host properties as `WritableSignal` and update them via `.set()`:
 
 ```typescript
 // ❌ Does not work with zoneless OnPush — signal input never updates
@@ -234,6 +234,7 @@ Pass initial values via the signal in a typed `BootstrapOptions` interface rathe
 ### Test file reference
 
 Use `jest.config.ts` for configuration patterns. Look at existing component `.spec.ts` files for:
+
 - Test host component setup patterns
 - Signal input testing patterns
 - How to trigger change detection in zoneless mode
@@ -254,15 +255,15 @@ When generating the multi-prompt sequence for the agent, follow this established
 
 ### Standard phase sequence:
 
-| Phase | Purpose | Typical prompts |
-|---|---|---|
-| Research & Gap Analysis | Inspect PrimeNG source via `npm pack`, document API surface, identify convention divergences | 1 |
-| API Design & Types | Define TypeScript types, interfaces, constants, input/output signatures | 1 |
-| Scaffold & Entry Point | Create files, secondary entry point, wire up barrel exports | 1 |
-| Core Implementation | Component class, template, form integration | 1–3 |
-| Styling | SCSS for all three variants, CSS variables, animations | 1–2 |
-| Testing | Unit tests covering rendering, interaction, accessibility, forms | 1–2 |
-| Demo & Documentation | Demo page in the demo app, update `AI_AGENT_CONTEXT.md` | 1 |
+| Phase                   | Purpose                                                                                      | Typical prompts |
+| ----------------------- | -------------------------------------------------------------------------------------------- | --------------- |
+| Research & Gap Analysis | Inspect PrimeNG source via `npm pack`, document API surface, identify convention divergences | 1               |
+| API Design & Types      | Define TypeScript types, interfaces, constants, input/output signatures                      | 1               |
+| Scaffold & Entry Point  | Create files, secondary entry point, wire up barrel exports                                  | 1               |
+| Core Implementation     | Component class, template, form integration                                                  | 1–3             |
+| Styling                 | SCSS for all three variants, CSS variables, animations                                       | 1–2             |
+| Testing                 | Unit tests covering rendering, interaction, accessibility, forms                             | 1–2             |
+| Demo & Documentation    | Demo page in the demo app, update `AI_AGENT_CONTEXT.md`                                      | 1               |
 
 ### Prompt sequence rules:
 

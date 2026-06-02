@@ -13,28 +13,28 @@ Checkbox component with accessible labeling and indeterminate support.
 
 ### Inputs
 
-| Name            | Type                     | Default      | Description |
-| --------------- | ------------------------ | ------------ | ----------- |
-| `appearance`    | `CheckboxAppearance`     | `'outlined'` | —           |
-| `ariaLabel`     | `string | null`          | `null`       | —           |
-| `autofocus`     | `boolean`                | `false`      | —           |
-| `binary`        | `boolean`                | `false`      | —           |
-| `checkboxIcon`  | `string | null`          | `null`       | —           |
-| `description`   | `string | null`          | `null`       | —           |
-| `disabled`      | `boolean`                | `false`      | —           |
-| `falseValue`    | `unknown`                | `false`      | —           |
-| `indeterminate` | `boolean`                | `false`      | —           |
-| `inputClass`    | `string | null`          | `null`       | —           |
-| `inputId`       | `string | null`          | `null`       | —           |
-| `label`         | `string | null`          | `null`       | —           |
-| `name`          | `string | null`          | `null`       | —           |
-| `readonly`      | `boolean`                | `false`      | —           |
-| `required`      | `boolean`                | `false`      | —           |
-| `size`          | `CheckboxSize`           | `'md'`       | —           |
-| `tabindex`      | `number`                 | `0`          | —           |
-| `trueValue`     | `unknown`                | `true`       | —           |
-| `value`         | `unknown | null`         | `null`       | —           |
-| `variant`       | `CheckboxVariant | null` | `null`       | —           |
+| Name            | Type                 | Default      | Description |
+| --------------- | -------------------- | ------------ | ----------- | --- |
+| `appearance`    | `CheckboxAppearance` | `'outlined'` | —           |
+| `ariaLabel`     | `string              | null`        | `null`      | —   |
+| `autofocus`     | `boolean`            | `false`      | —           |
+| `binary`        | `boolean`            | `false`      | —           |
+| `checkboxIcon`  | `string              | null`        | `null`      | —   |
+| `description`   | `string              | null`        | `null`      | —   |
+| `disabled`      | `boolean`            | `false`      | —           |
+| `falseValue`    | `unknown`            | `false`      | —           |
+| `indeterminate` | `boolean`            | `false`      | —           |
+| `inputClass`    | `string              | null`        | `null`      | —   |
+| `inputId`       | `string              | null`        | `null`      | —   |
+| `label`         | `string              | null`        | `null`      | —   |
+| `name`          | `string              | null`        | `null`      | —   |
+| `readonly`      | `boolean`            | `false`      | —           |
+| `required`      | `boolean`            | `false`      | —           |
+| `size`          | `CheckboxSize`       | `'md'`       | —           |
+| `tabindex`      | `number`             | `0`          | —           |
+| `trueValue`     | `unknown`            | `true`       | —           |
+| `value`         | `unknown             | null`        | `null`      | —   |
+| `variant`       | `CheckboxVariant     | null`        | `null`      | —   |
 
 ### Models (two-way bindable)
 
@@ -133,4 +133,3 @@ Checkbox component with accessible labeling and indeterminate support.
 - [Demo page](/components/checkbox)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/checkbox/README.md)
-

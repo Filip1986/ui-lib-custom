@@ -323,7 +323,7 @@ export class TreeTableDemoComponent {
       return this.multipleSelection.length > 0
         ? this.multipleSelection
             .map((node: TreeTableNode): string =>
-              String((node.data as Record<string, unknown>)['name'] ?? '')
+              String((node.data as Record<string, unknown>)['name'] ?? ''),
             )
             .join(', ')
         : 'None';

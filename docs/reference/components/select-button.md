@@ -13,29 +13,29 @@ Segmented select component that supports single or multiple selection modes.
 
 ### Inputs
 
-| Name             | Type                                             | Default                | Description |
-| ---------------- | ------------------------------------------------ | ---------------------- | ----------- |
-| `allowEmpty`     | `boolean`                                        | `false`                | —           |
-| `ariaLabel`      | `string | null`                                  | `null`                 | —           |
-| `ariaLabelledBy` | `string | null`                                  | `null`                 | —           |
-| `disabled`       | `boolean`                                        | `false`                | —           |
-| `fluid`          | `boolean`                                        | `false`                | —           |
-| `invalid`        | `boolean`                                        | `false`                | —           |
-| `multiple`       | `boolean`                                        | `false`                | —           |
-| `optionDisabled` | `string`                                         | `'disabled'`           | —           |
-| `optionLabel`    | `string`                                         | `'label'`              | —           |
-| `options`        | `SelectButtonOption[]`                           | `[]`                   | —           |
-| `optionValue`    | `string`                                         | `'value'`              | —           |
-| `size`           | `SelectButtonSize`                               | `SHARED_DEFAULTS.Size` | —           |
-| `value`          | `SelectButtonValue | SelectButtonValue[] | null` | `null`                 | —           |
-| `variant`        | `SelectButtonVariant | null`                     | `null`                 | —           |
+| Name             | Type                   | Default                | Description |
+| ---------------- | ---------------------- | ---------------------- | ----------- | ------ | --- |
+| `allowEmpty`     | `boolean`              | `false`                | —           |
+| `ariaLabel`      | `string                | null`                  | `null`      | —      |
+| `ariaLabelledBy` | `string                | null`                  | `null`      | —      |
+| `disabled`       | `boolean`              | `false`                | —           |
+| `fluid`          | `boolean`              | `false`                | —           |
+| `invalid`        | `boolean`              | `false`                | —           |
+| `multiple`       | `boolean`              | `false`                | —           |
+| `optionDisabled` | `string`               | `'disabled'`           | —           |
+| `optionLabel`    | `string`               | `'label'`              | —           |
+| `options`        | `SelectButtonOption[]` | `[]`                   | —           |
+| `optionValue`    | `string`               | `'value'`              | —           |
+| `size`           | `SelectButtonSize`     | `SHARED_DEFAULTS.Size` | —           |
+| `value`          | `SelectButtonValue     | SelectButtonValue[]    | null`       | `null` | —   |
+| `variant`        | `SelectButtonVariant   | null`                  | `null`      | —      |
 
 ### Outputs
 
-| Name              | Type                                             | Description |
-| ----------------- | ------------------------------------------------ | ----------- |
-| `selectionChange` | `SelectButtonChangeEvent`                        | —           |
-| `valueChange`     | `SelectButtonValue | SelectButtonValue[] | null` | —           |
+| Name              | Type                      | Description         |
+| ----------------- | ------------------------- | ------------------- | ----- | --- |
+| `selectionChange` | `SelectButtonChangeEvent` | —                   |
+| `valueChange`     | `SelectButtonValue        | SelectButtonValue[] | null` | —   |
 
 ## Content Projection
 
@@ -125,7 +125,12 @@ _none_
 <ui-lib-select-button [options]="sizeOptions" ariaLabel="Size" [(ngModel)]="selectedSize" />
 
 <!-- custom item template, multiple selection -->
-<ui-lib-select-button [options]="tagOptions" [multiple]="true" ariaLabel="Formatting" [(ngModel)]="selectedTags">
+<ui-lib-select-button
+  [options]="tagOptions"
+  [multiple]="true"
+  ariaLabel="Formatting"
+  [(ngModel)]="selectedTags"
+>
   <ng-template #item let-option>{{ option.label }}</ng-template>
 </ui-lib-select-button>
 
@@ -140,4 +145,3 @@ _none_
 - [Demo page](/components/select-button)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/select-button/README.md)
-

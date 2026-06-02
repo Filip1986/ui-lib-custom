@@ -238,21 +238,21 @@ All new components must:
 
 6. **ESLint HTML template rules** (13 rules enforced — full list in [`docs/standards/HTML-STANDARDS.md`](./docs/standards/HTML-STANDARDS.md)):
 
-   | Rule | Severity |
-   | ---- | -------- |
-   | `alt-text` | error |
-   | `elements-content` | error |
-   | `label-has-associated-control` | error |
-   | `no-positive-tabindex` | error |
-   | `valid-aria` | error |
-   | `role-has-required-aria-props` | error |
-   | `prefer-control-flow` | error |
-   | `click-events-have-key-events` | warning |
-   | `mouse-events-have-key-events` | warning |
-   | `interactive-supports-focus` | warning |
-   | `no-autofocus` | warning |
-   | `use-track-by-function` | warning |
-   | `prefer-self-closing-tags` | warning |
+   | Rule                           | Severity |
+   | ------------------------------ | -------- |
+   | `alt-text`                     | error    |
+   | `elements-content`             | error    |
+   | `label-has-associated-control` | error    |
+   | `no-positive-tabindex`         | error    |
+   | `valid-aria`                   | error    |
+   | `role-has-required-aria-props` | error    |
+   | `prefer-control-flow`          | error    |
+   | `click-events-have-key-events` | warning  |
+   | `mouse-events-have-key-events` | warning  |
+   | `interactive-supports-focus`   | warning  |
+   | `no-autofocus`                 | warning  |
+   | `use-track-by-function`        | warning  |
+   | `prefer-self-closing-tags`     | warning  |
 
    Run: `npx eslint projects/ui-lib-custom/src/lib/<component>/ --max-warnings 0`
 

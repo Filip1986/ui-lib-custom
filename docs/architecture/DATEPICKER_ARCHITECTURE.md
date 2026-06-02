@@ -17,59 +17,59 @@ Current status:
 
 ## Inputs
 
-| Input | Type | Default | Notes |
-|---|---|---|---|
-| `selectionMode` | `'single' | 'multiple' | 'range'` | `'single'` | v1 implementation starts with single selection; other modes are staged. |
-| `view` | `'date' | 'month' | 'year'` | `'date'` | v1 focuses on day-grid. |
-| `size` | `'sm' | 'md' | 'lg'` | `'md'` | Library-standard size scale. |
-| `variant` | `'material' | 'bootstrap' | 'minimal'` | `'material'` | Theme variant override. |
-| `filled` | `boolean` | `false` | Matches library convention. |
-| `inline` | `boolean` | `false` | Popup vs inline panel. |
-| `disabled` | `boolean` | `false` | Disables input and interaction. |
-| `readonlyInput` | `boolean` | `false` | Prevents free text typing while still allowing panel selection. |
-| `showIcon` | `boolean` | `false` | Shows trigger icon/button. |
-| `placeholder` | `string` | `''` | Input placeholder text. |
-| `dateFormat` | `string` | `'mm/dd/yy'` | Uses `date-format.ts` grammar. |
-| `firstDayOfWeek` | `number` | `0` | 0=Sunday ... 6=Saturday. |
-| `showOtherMonths` | `boolean` | `true` | Controls rendering of out-of-month dates. |
-| `selectOtherMonths` | `boolean` | `false` | Controls selectability of out-of-month dates. |
-| `showWeek` | `boolean` | `false` | Optional week number column (deferred behavior details). |
-| `showButtonBar` | `boolean` | `false` | Shows Today/Clear actions in footer. |
-| `minDate` | `Date | null` | `null` | Lower bound. |
-| `maxDate` | `Date | null` | `null` | Upper bound. |
-| `disabledDates` | `Date[] | null` | `null` | Explicit disabled day list. |
-| `disabledDays` | `number[] | null` | `null` | Disabled weekday indices. |
-| `yearRange` | `string` | `'1900:2100'` | Parsed by `getYearRange()`. |
-| `keepInvalid` | `boolean` | `false` | Keeps invalid typed text in input for manual correction flows. |
-| `inputId` | `string` | `''` | Optional deterministic id. |
-| `name` | `string` | `''` | Native form field name. |
-| `required` | `boolean` | `false` | Native required semantics. |
-| `tabIndex` | `number` | `0` | Focus order control. |
-| `appendTo` | `'self' | 'body' | HTMLElement` | `'self'` | Overlay portal target (initially optional). |
+| Input               | Type        | Default       | Notes                                                           |
+| ------------------- | ----------- | ------------- | --------------------------------------------------------------- | --------------------------- | ----------------------------------------------------------------------- |
+| `selectionMode`     | `'single'   | 'multiple'    | 'range'`                                                        | `'single'`                  | v1 implementation starts with single selection; other modes are staged. |
+| `view`              | `'date'     | 'month'       | 'year'`                                                         | `'date'`                    | v1 focuses on day-grid.                                                 |
+| `size`              | `'sm'       | 'md'          | 'lg'`                                                           | `'md'`                      | Library-standard size scale.                                            |
+| `variant`           | `'material' | 'bootstrap'   | 'minimal'`                                                      | `'material'`                | Theme variant override.                                                 |
+| `filled`            | `boolean`   | `false`       | Matches library convention.                                     |
+| `inline`            | `boolean`   | `false`       | Popup vs inline panel.                                          |
+| `disabled`          | `boolean`   | `false`       | Disables input and interaction.                                 |
+| `readonlyInput`     | `boolean`   | `false`       | Prevents free text typing while still allowing panel selection. |
+| `showIcon`          | `boolean`   | `false`       | Shows trigger icon/button.                                      |
+| `placeholder`       | `string`    | `''`          | Input placeholder text.                                         |
+| `dateFormat`        | `string`    | `'mm/dd/yy'`  | Uses `date-format.ts` grammar.                                  |
+| `firstDayOfWeek`    | `number`    | `0`           | 0=Sunday ... 6=Saturday.                                        |
+| `showOtherMonths`   | `boolean`   | `true`        | Controls rendering of out-of-month dates.                       |
+| `selectOtherMonths` | `boolean`   | `false`       | Controls selectability of out-of-month dates.                   |
+| `showWeek`          | `boolean`   | `false`       | Optional week number column (deferred behavior details).        |
+| `showButtonBar`     | `boolean`   | `false`       | Shows Today/Clear actions in footer.                            |
+| `minDate`           | `Date       | null`         | `null`                                                          | Lower bound.                |
+| `maxDate`           | `Date       | null`         | `null`                                                          | Upper bound.                |
+| `disabledDates`     | `Date[]     | null`         | `null`                                                          | Explicit disabled day list. |
+| `disabledDays`      | `number[]   | null`         | `null`                                                          | Disabled weekday indices.   |
+| `yearRange`         | `string`    | `'1900:2100'` | Parsed by `getYearRange()`.                                     |
+| `keepInvalid`       | `boolean`   | `false`       | Keeps invalid typed text in input for manual correction flows.  |
+| `inputId`           | `string`    | `''`          | Optional deterministic id.                                      |
+| `name`              | `string`    | `''`          | Native form field name.                                         |
+| `required`          | `boolean`   | `false`       | Native required semantics.                                      |
+| `tabIndex`          | `number`    | `0`           | Focus order control.                                            |
+| `appendTo`          | `'self'     | 'body'        | HTMLElement`                                                    | `'self'`                    | Overlay portal target (initially optional).                             |
 
 ## Outputs
 
-| Output | Payload | Purpose |
-|---|---|---|
-| `onChange` | `DatePickerChangeEvent` | Emits value changes from user interaction. |
-| `onSelect` | `DatePickerChangeEvent` | Emits when a date is explicitly selected. |
-| `onOpen` | `void` | Panel became visible. |
-| `onClose` | `void` | Panel closed. |
-| `onClear` | `void` | Clear action invoked. |
+| Output          | Payload                      | Purpose                                               |
+| --------------- | ---------------------------- | ----------------------------------------------------- |
+| `onChange`      | `DatePickerChangeEvent`      | Emits value changes from user interaction.            |
+| `onSelect`      | `DatePickerChangeEvent`      | Emits when a date is explicitly selected.             |
+| `onOpen`        | `void`                       | Panel became visible.                                 |
+| `onClose`       | `void`                       | Panel closed.                                         |
+| `onClear`       | `void`                       | Clear action invoked.                                 |
 | `onMonthChange` | `DatePickerMonthChangeEvent` | Month navigation changed current calendar month/year. |
-| `onYearChange` | `DatePickerYearChangeEvent` | Year navigation changed current month/year context. |
-| `onFocus` | `FocusEvent` | Input focus event forwarding. |
-| `onBlur` | `FocusEvent` | Input blur event forwarding. |
+| `onYearChange`  | `DatePickerYearChangeEvent`  | Year navigation changed current month/year context.   |
+| `onFocus`       | `FocusEvent`                 | Input focus event forwarding.                         |
+| `onBlur`        | `FocusEvent`                 | Input blur event forwarding.                          |
 
 ## Template Slots (Planned)
 
-| Slot | Context | Purpose | Priority |
-|---|---|---|---|
-| `date` | `{ $implicit: DatePickerDateMeta }` | Custom day cell rendering | P1 |
-| `header` | none | Replace header area | P1 |
-| `footer` | none | Custom footer content | P1 |
-| `inputIcon` | `{ clickCallback: (event: Event) => void }` | Custom trigger icon | P1 |
-| `buttonBar` | `{ todayCallback, clearCallback }` | Custom Today/Clear controls | P1 |
+| Slot        | Context                                     | Purpose                     | Priority |
+| ----------- | ------------------------------------------- | --------------------------- | -------- |
+| `date`      | `{ $implicit: DatePickerDateMeta }`         | Custom day cell rendering   | P1       |
+| `header`    | none                                        | Replace header area         | P1       |
+| `footer`    | none                                        | Custom footer content       | P1       |
+| `inputIcon` | `{ clickCallback: (event: Event) => void }` | Custom trigger icon         | P1       |
+| `buttonBar` | `{ todayCallback, clearCallback }`          | Custom Today/Clear controls | P1       |
 
 ## CVA Integration Flow
 
@@ -172,17 +172,17 @@ Proposed token namespace:
 
 ## Keyboard Interaction Table
 
-| Context | Key | Behavior |
-|---|---|---|
-| Input | `Enter` / `ArrowDown` | Open panel and focus active date |
-| Input | `Escape` | Close panel if open |
-| Grid | `ArrowLeft` / `ArrowRight` | Move focus by day |
-| Grid | `ArrowUp` / `ArrowDown` | Move focus by week |
-| Grid | `Home` / `End` | Jump to month boundary target |
-| Grid | `PageUp` / `PageDown` | Move to previous/next month, preserve day when possible |
-| Grid | `Enter` / `Space` | Select focused date |
-| Grid | `Escape` | Close panel and restore input focus |
-| Popup | `Tab` / `Shift+Tab` | Follow normal tab order (no hard trap in standard popup mode) |
+| Context | Key                        | Behavior                                                      |
+| ------- | -------------------------- | ------------------------------------------------------------- |
+| Input   | `Enter` / `ArrowDown`      | Open panel and focus active date                              |
+| Input   | `Escape`                   | Close panel if open                                           |
+| Grid    | `ArrowLeft` / `ArrowRight` | Move focus by day                                             |
+| Grid    | `ArrowUp` / `ArrowDown`    | Move focus by week                                            |
+| Grid    | `Home` / `End`             | Jump to month boundary target                                 |
+| Grid    | `PageUp` / `PageDown`      | Move to previous/next month, preserve day when possible       |
+| Grid    | `Enter` / `Space`          | Select focused date                                           |
+| Grid    | `Escape`                   | Close panel and restore input focus                           |
+| Popup   | `Tab` / `Shift+Tab`        | Follow normal tab order (no hard trap in standard popup mode) |
 
 ## Accessibility Model
 
@@ -199,13 +199,13 @@ Proposed token namespace:
 
 ## Deferred Features and Rationale
 
-| Feature | Priority | Rationale |
-|---|---|---|
-| Time picker (`showTime`, `timeOnly`, seconds, 12/24h) | P2 | High complexity and increased interaction matrix; isolate after stable date grid. |
-| Touch UI modal mode | P2 | Requires mask layering, scroll-lock/focus-trap integration and mobile UX tuning. |
-| Full PrimeNG template parity | P2 | Keep initial API smaller and easier to stabilize. |
-| Responsive multi-month panel | P2 | Adds layout + keyboard complexity; defer until core navigation hardening. |
-| Advanced format tolerance modes | P2 | Strict parse/format parity is enough for initial ship; user-friendly heuristics can come later. |
+| Feature                                               | Priority | Rationale                                                                                       |
+| ----------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| Time picker (`showTime`, `timeOnly`, seconds, 12/24h) | P2       | High complexity and increased interaction matrix; isolate after stable date grid.               |
+| Touch UI modal mode                                   | P2       | Requires mask layering, scroll-lock/focus-trap integration and mobile UX tuning.                |
+| Full PrimeNG template parity                          | P2       | Keep initial API smaller and easier to stabilize.                                               |
+| Responsive multi-month panel                          | P2       | Adds layout + keyboard complexity; defer until core navigation hardening.                       |
+| Advanced format tolerance modes                       | P2       | Strict parse/format parity is enough for initial ship; user-friendly heuristics can come later. |
 
 ## Implementation Notes for Next Phase
 
@@ -216,4 +216,3 @@ Proposed token namespace:
   - signal-based inputs/models
 - Reuse existing overlay close patterns from `color-picker`, `select`, and `autocomplete`.
 - Keep pure date operations inside utilities; component should orchestrate state and UI only.
-

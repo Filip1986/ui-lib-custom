@@ -43,5 +43,5 @@ export interface TreeContext {
 
 /** DI token for TreeContext. Provided by the Tree component. */
 export const TREE_CONTEXT: InjectionToken<TreeContext> = new InjectionToken<TreeContext>(
-  'TreeContext'
+  'TreeContext',
 );

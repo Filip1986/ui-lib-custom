@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 export type AvatarGroupMax = number;
 export const AVATAR_GROUP_CONTEXT: InjectionToken<boolean> = new InjectionToken<boolean>(
-  'AVATAR_GROUP_CONTEXT'
+  'AVATAR_GROUP_CONTEXT',
 );
 let nextAvatarGroupId: number = 0;
 /**
@@ -46,7 +46,7 @@ export class AvatarGroup {
   /** Accessible override text for the overflow counter */
   public readonly overflowAriaLabel: InputSignal<string | null> = input<string | null>(null);
   public readonly resolvedAriaLabel: Signal<string> = computed<string>(
-    (): string => this.ariaLabel() || 'Avatar group'
+    (): string => this.ariaLabel() || 'Avatar group',
   );
   public readonly resolvedOverflowCount: Signal<number> = computed<number>((): number => {
     const overflowCount: number = this.overflowCount();
@@ -54,6 +54,6 @@ export class AvatarGroup {
   });
   public readonly overflowAnnouncement: Signal<string> = computed<string>(
     (): string =>
-      this.overflowAriaLabel() || `${this.resolvedOverflowCount()} more avatar(s) not shown`
+      this.overflowAriaLabel() || `${this.resolvedOverflowCount()} more avatar(s) not shown`,
   );
 }

@@ -13,9 +13,9 @@ Internal shell component rendered by DialogService.open(). This component is NOT
 
 ### Inputs
 
-| Name            | Type                   | Default | Description                                                   |
-| --------------- | ---------------------- | ------- | ------------------------------------------------------------- |
-| `componentType` | `Type<unknown> | null` | `null`  | @internal — set by DialogService via ComponentRef.setInput(). |
+| Name            | Type           | Default | Description |
+| --------------- | -------------- | ------- | ----------- | ------------------------------------------------------------- |
+| `componentType` | `Type<unknown> | null`   | `null`      | @internal — set by DialogService via ComponentRef.setInput(). |
 
 ### Outputs
 
@@ -100,4 +100,3 @@ export class MyComponent {
 - [Demo page](/components/dynamic-dialog)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/dynamic-dialog/README.md)
-

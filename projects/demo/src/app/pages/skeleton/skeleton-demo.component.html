@@ -1,12 +1,17 @@
 <app-doc-page-layout [sections]="sections">
-
-  <app-doc-page-header docHeader title="Skeleton" [importCode]="importCode"
-    description="Content placeholder displayed while real content is loading. Combine shapes to mock realistic page layouts.">
+  <app-doc-page-header
+    docHeader
+    title="Skeleton"
+    [importCode]="importCode"
+    description="Content placeholder displayed while real content is loading. Combine shapes to mock realistic page layouts."
+  >
   </app-doc-page-header>
 
   <!-- Basic shapes -->
   <app-doc-section id="shapes" title="Shapes">
-    <p class="demo-section__description">Use <code>shape="rectangle"</code> (default) or <code>shape="circle"</code>.</p>
+    <p class="demo-section__description">
+      Use <code>shape="rectangle"</code> (default) or <code>shape="circle"</code>.
+    </p>
     <div class="demo-card">
       <div class="shapes-row">
         <ui-lib-skeleton width="100%" height="2rem" />
@@ -23,7 +28,9 @@
 
   <!-- Card placeholder layout -->
   <app-doc-section id="card-placeholder" title="Card Placeholder">
-    <p class="demo-section__description">Combine rectangle and circle skeletons to simulate a card layout.</p>
+    <p class="demo-section__description">
+      Combine rectangle and circle skeletons to simulate a card layout.
+    </p>
     <div class="demo-card">
       <div class="card-placeholder">
         <ui-lib-skeleton width="100%" height="10rem" styleClass="card-placeholder__image" />
@@ -63,7 +70,9 @@
 
   <!-- All three variants -->
   <app-doc-section id="variants" title="Variants">
-    <p class="demo-section__description">Three design variants: <code>material</code>, <code>bootstrap</code>, <code>minimal</code>.</p>
+    <p class="demo-section__description">
+      Three design variants: <code>material</code>, <code>bootstrap</code>, <code>minimal</code>.
+    </p>
     <div class="variants-grid">
       @for (variant of variants; track variant) {
         <div class="demo-card">
@@ -83,7 +92,10 @@
 
   <!-- Animation control -->
   <app-doc-section id="animation" title="Animation">
-    <p class="demo-section__description">Use <code>animation="wave"</code> (default) or <code>animation="none"</code> to disable the shimmer.</p>
+    <p class="demo-section__description">
+      Use <code>animation="wave"</code> (default) or <code>animation="none"</code> to disable the
+      shimmer.
+    </p>
     <div class="demo-card demo-card--row">
       <div class="animation-col">
         <p class="demo-label">wave (default)</p>
@@ -100,7 +112,10 @@
 
   <!-- Custom sizes -->
   <app-doc-section id="custom-sizes" title="Custom Sizes">
-    <p class="demo-section__description">Width, height, and size accept any CSS dimension. The <code>size</code> shorthand sets both dimensions at once.</p>
+    <p class="demo-section__description">
+      Width, height, and size accept any CSS dimension. The <code>size</code> shorthand sets both
+      dimensions at once.
+    </p>
     <div class="demo-card">
       <div class="sizes-row">
         <ui-lib-skeleton width="4rem" height="4rem" />
@@ -115,7 +130,9 @@
 
   <!-- Custom border radius -->
   <app-doc-section id="custom-border-radius" title="Custom Border Radius">
-    <p class="demo-section__description">Override the default radius with the <code>borderRadius</code> input.</p>
+    <p class="demo-section__description">
+      Override the default radius with the <code>borderRadius</code> input.
+    </p>
     <div class="demo-card">
       <div class="shapes-row">
         <ui-lib-skeleton width="100%" height="2rem" borderRadius="0" />
@@ -130,7 +147,6 @@
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
 
-  
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -147,7 +163,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -157,5 +173,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

@@ -8,33 +8,33 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `id` | `string \| null` | `null` | Optional id for the OTP group container |
-| `length` | `number` | `4` | Number of individual OTP cells to render |
-| `ariaLabel` | `string \| null` | `'One-time passcode'` | Accessible name for the OTP group (`role="group"`) |
-| `ariaLabelledBy` | `string \| null` | `null` | External label element id for the OTP group; when set, `ariaLabel` is omitted |
-| `digitAriaLabelPrefix` | `string` | `'Digit'` | Prefix used for per-cell labels (`Digit 1 of 6`) |
-| `digitAriaLabelConnector` | `string` | `'of'` | Connector used for per-cell labels (`Digit 1 of 6`) |
-| `pasteAnnouncement` | `string` | `'Code entered.'` | Polite live-region message announced after successful paste |
-| `mask` | `boolean` | `false` | Render cells as password fields (dots) |
-| `integerOnly` | `boolean` | `false` | Accept only digit characters (0–9) |
-| `filled` | `boolean` | `false` | Filled background on each cell |
-| `disabled` | `boolean` | `false` | Disable all cells |
-| `readonly` | `boolean` | `false` | Make all cells read-only |
-| `invalid` | `boolean` | `false` | Apply error styling to all cells |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token |
-| `tabindex` | `number \| null` | `null` | Tab index forwarded to each cell input |
-| `styleClass` | `string \| undefined` | `undefined` | Extra CSS class applied to each cell input |
+| Name                      | Type                   | Default               | Notes                                                                         |
+| ------------------------- | ---------------------- | --------------------- | ----------------------------------------------------------------------------- |
+| `id`                      | `string \| null`       | `null`                | Optional id for the OTP group container                                       |
+| `length`                  | `number`               | `4`                   | Number of individual OTP cells to render                                      |
+| `ariaLabel`               | `string \| null`       | `'One-time passcode'` | Accessible name for the OTP group (`role="group"`)                            |
+| `ariaLabelledBy`          | `string \| null`       | `null`                | External label element id for the OTP group; when set, `ariaLabel` is omitted |
+| `digitAriaLabelPrefix`    | `string`               | `'Digit'`             | Prefix used for per-cell labels (`Digit 1 of 6`)                              |
+| `digitAriaLabelConnector` | `string`               | `'of'`                | Connector used for per-cell labels (`Digit 1 of 6`)                           |
+| `pasteAnnouncement`       | `string`               | `'Code entered.'`     | Polite live-region message announced after successful paste                   |
+| `mask`                    | `boolean`              | `false`               | Render cells as password fields (dots)                                        |
+| `integerOnly`             | `boolean`              | `false`               | Accept only digit characters (0–9)                                            |
+| `filled`                  | `boolean`              | `false`               | Filled background on each cell                                                |
+| `disabled`                | `boolean`              | `false`               | Disable all cells                                                             |
+| `readonly`                | `boolean`              | `false`               | Make all cells read-only                                                      |
+| `invalid`                 | `boolean`              | `false`               | Apply error styling to all cells                                              |
+| `size`                    | `'sm' \| 'md' \| 'lg'` | `'md'`                | Size token                                                                    |
+| `tabindex`                | `number \| null`       | `null`                | Tab index forwarded to each cell input                                        |
+| `styleClass`              | `string \| undefined`  | `undefined`           | Extra CSS class applied to each cell input                                    |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `changed` | `InputOtpChangeEvent` | Any cell value changed |
-| `focused` | `FocusEvent` | Any cell received focus |
-| `blurred` | `FocusEvent` | Any cell lost focus |
-| `completed` | `string` | All cells filled; payload is the full OTP string |
+| Name        | Payload               | Notes                                            |
+| ----------- | --------------------- | ------------------------------------------------ |
+| `changed`   | `InputOtpChangeEvent` | Any cell value changed                           |
+| `focused`   | `FocusEvent`          | Any cell received focus                          |
+| `blurred`   | `FocusEvent`          | Any cell lost focus                              |
+| `completed` | `string`              | All cells filled; payload is the full OTP string |
 
 ## Usage
 
@@ -67,23 +67,23 @@
 ## `inputMode` Behavior
 
 | `integerOnly` | Cell `inputMode` |
-|---------------|------------------|
+| ------------- | ---------------- |
 | `false`       | `text`           |
 | `true`        | `numeric`        |
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `--ui-lib-input-otp-cell-width` | `2.5rem` | Width of each OTP cell |
-| `--ui-lib-input-otp-cell-height` | `2.5rem` | Height of each OTP cell |
-| `--ui-lib-input-otp-gap` | `0.5rem` | Gap between cells |
-| `--ui-lib-input-otp-font-size` | `1rem` | Cell font size |
-| `--ui-lib-input-otp-border-radius` | `var(--uilib-radius-md, 0.5rem)` | Cell corner radius |
-| `--ui-lib-input-otp-border-color` | `var(--uilib-border)` | Cell border color |
-| `--ui-lib-input-otp-bg` | `var(--uilib-surface)` | Cell background |
-| `--ui-lib-input-otp-text-color` | `var(--uilib-page-fg)` | Cell text color |
-| `--ui-lib-input-otp-focus-border-color` | `var(--uilib-color-primary-600)` | Cell border on focus |
-| `--ui-lib-input-otp-focus-ring` | `0 0 0 3px color-mix(…focus-border-color… 28%)` | Focus ring box-shadow |
-| `--ui-lib-input-otp-invalid-border-color` | `var(--uilib-color-danger-600)` | Cell border when invalid |
-| `--ui-lib-input-otp-transition` | `border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease` | Cell state transition; set to `none` when `prefers-reduced-motion: reduce` |
+| Variable                                  | Default                                                                       | Description                                                                |
+| ----------------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `--ui-lib-input-otp-cell-width`           | `2.5rem`                                                                      | Width of each OTP cell                                                     |
+| `--ui-lib-input-otp-cell-height`          | `2.5rem`                                                                      | Height of each OTP cell                                                    |
+| `--ui-lib-input-otp-gap`                  | `0.5rem`                                                                      | Gap between cells                                                          |
+| `--ui-lib-input-otp-font-size`            | `1rem`                                                                        | Cell font size                                                             |
+| `--ui-lib-input-otp-border-radius`        | `var(--uilib-radius-md, 0.5rem)`                                              | Cell corner radius                                                         |
+| `--ui-lib-input-otp-border-color`         | `var(--uilib-border)`                                                         | Cell border color                                                          |
+| `--ui-lib-input-otp-bg`                   | `var(--uilib-surface)`                                                        | Cell background                                                            |
+| `--ui-lib-input-otp-text-color`           | `var(--uilib-page-fg)`                                                        | Cell text color                                                            |
+| `--ui-lib-input-otp-focus-border-color`   | `var(--uilib-color-primary-600)`                                              | Cell border on focus                                                       |
+| `--ui-lib-input-otp-focus-ring`           | `0 0 0 3px color-mix(…focus-border-color… 28%)`                               | Focus ring box-shadow                                                      |
+| `--ui-lib-input-otp-invalid-border-color` | `var(--uilib-color-danger-600)`                                               | Cell border when invalid                                                   |
+| `--ui-lib-input-otp-transition`           | `border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease` | Cell state transition; set to `none` when `prefers-reduced-motion: reduce` |

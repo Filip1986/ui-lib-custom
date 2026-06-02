@@ -92,10 +92,7 @@
           <ui-lib-input-number [(ngModel)]="temperature" suffix=" °C" />
         </div>
       </ui-lib-panel>
-      <app-doc-code-example
-        [html]="prefixSuffixHtml"
-        [typescript]="prefixSuffixTsTs"
-      />
+      <app-doc-code-example [html]="prefixSuffixHtml" [typescript]="prefixSuffixTsTs" />
     </app-doc-section>
 
     <app-doc-section id="buttons-stacked" title="Buttons Stacked">
@@ -108,10 +105,7 @@
           [showButtons]="true"
         />
       </ui-lib-panel>
-      <app-doc-code-example
-        [html]="buttonsStackedHtml"
-        [typescript]="buttonsStackedTsTs"
-      />
+      <app-doc-code-example [html]="buttonsStackedHtml" [typescript]="buttonsStackedTsTs" />
     </app-doc-section>
 
     <app-doc-section id="buttons-horizontal" title="Buttons Horizontal">
@@ -126,10 +120,7 @@
           buttonLayout="horizontal"
         />
       </ui-lib-panel>
-      <app-doc-code-example
-        [html]="buttonsHorizontalHtml"
-        [typescript]="buttonsHorizontalTsTs"
-      />
+      <app-doc-code-example [html]="buttonsHorizontalHtml" [typescript]="buttonsHorizontalTsTs" />
     </app-doc-section>
 
     <app-doc-section id="buttons-vertical" title="Buttons Vertical">
@@ -141,10 +132,7 @@
           buttonLayout="vertical"
         />
       </ui-lib-panel>
-      <app-doc-code-example
-        [html]="buttonsVerticalHtml"
-        [typescript]="buttonsVerticalTsTs"
-      />
+      <app-doc-code-example [html]="buttonsVerticalHtml" [typescript]="buttonsVerticalTsTs" />
     </app-doc-section>
 
     <app-doc-section id="step" title="Step">
@@ -158,7 +146,12 @@
     <app-doc-section id="min-max" title="Min &amp; Max">
       <h3>10. Min &amp; Max</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-input-number [(ngModel)]="boundedValue" [min]="0" [max]="100" [showButtons]="true" />
+        <ui-lib-input-number
+          [(ngModel)]="boundedValue"
+          [min]="0"
+          [max]="100"
+          [showButtons]="true"
+        />
       </ui-lib-panel>
       <app-doc-code-example [html]="minMaxHtml" [typescript]="minMaxTsTs" />
     </app-doc-section>
@@ -212,10 +205,7 @@
           <ui-lib-input-number [(ngModel)]="invalidValue" [invalid]="true" />
         </div>
       </ui-lib-panel>
-      <app-doc-code-example
-        [html]="disabledInvalidHtml"
-        [typescript]="disabledInvalidTsTs"
-      />
+      <app-doc-code-example [html]="disabledInvalidHtml" [typescript]="disabledInvalidTsTs" />
     </app-doc-section>
 
     <app-doc-section id="filled" title="Filled">
@@ -264,7 +254,6 @@
     </app-doc-section>
   </div>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -273,7 +262,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -290,7 +279,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

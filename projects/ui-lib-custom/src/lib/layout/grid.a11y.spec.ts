@@ -137,14 +137,14 @@ describe('Grid (a11y)', (): void => {
 
   it('applies explicit row/column gap overrides when provided', (): void => {
     const fixture: ComponentFixture<GridCustomVarsHostComponent> = createFixture(
-      GridCustomVarsHostComponent
+      GridCustomVarsHostComponent,
     );
     const gridElement: HTMLElement = getGridElement(fixture);
     expect(gridElement.style.getPropertyValue('--uilib-grid-row-gap')).toContain(
-      'var(--uilib-stack-sm'
+      'var(--uilib-stack-sm',
     );
     expect(gridElement.style.getPropertyValue('--uilib-grid-column-gap')).toContain(
-      'var(--uilib-stack-lg'
+      'var(--uilib-stack-lg',
     );
   });
 
@@ -159,27 +159,27 @@ describe('Grid (a11y)', (): void => {
 
   it('supports responsive auto-fit columns while keeping DOM order', (): void => {
     const fixture: ComponentFixture<GridResponsiveHostComponent> = createFixture(
-      GridResponsiveHostComponent
+      GridResponsiveHostComponent,
     );
     const gridElement: HTMLElement = getGridElement(fixture);
     const contentOrder: string[] = Array.from(
-      gridElement.querySelectorAll<HTMLDivElement>('div')
+      gridElement.querySelectorAll<HTMLDivElement>('div'),
     ).map((element: HTMLDivElement): string => {
       return element.textContent.trim();
     });
     expect(gridElement.style.getPropertyValue('--uilib-grid-columns')).toBe(
-      'repeat(auto-fit, minmax(320px, 1fr))'
+      'repeat(auto-fit, minmax(320px, 1fr))',
     );
     expect(contentOrder).toEqual(['Reading 1', 'Reading 2', 'Reading 3']);
   });
 
   it('supports custom grid template string input', (): void => {
     const fixture: ComponentFixture<GridCustomVarsHostComponent> = createFixture(
-      GridCustomVarsHostComponent
+      GridCustomVarsHostComponent,
     );
     const gridElement: HTMLElement = getGridElement(fixture);
     expect(gridElement.style.getPropertyValue('--uilib-grid-columns')).toBe(
-      '2fr minmax(200px, 1fr)'
+      '2fr minmax(200px, 1fr)',
     );
   });
 
@@ -213,24 +213,24 @@ describe('Grid (a11y)', (): void => {
 
   it('spacing input produces a stack token CSS var for grid gap', (): void => {
     const fixture: ComponentFixture<GridCustomVarsHostComponent> = createFixture(
-      GridCustomVarsHostComponent
+      GridCustomVarsHostComponent,
     );
     const gridElement: HTMLElement = getGridElement(fixture);
     expect(gridElement.style.getPropertyValue('--uilib-grid-gap')).toContain(
-      'var(--uilib-stack-md'
+      'var(--uilib-stack-md',
     );
   });
 
   it('passes axe with 2-column layout', async (): Promise<void> => {
     const fixture: ComponentFixture<GridTwoColumnHostComponent> = createFixture(
-      GridTwoColumnHostComponent
+      GridTwoColumnHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
   it('passes axe with responsive auto-fit layout', async (): Promise<void> => {
     const fixture: ComponentFixture<GridResponsiveHostComponent> = createFixture(
-      GridResponsiveHostComponent
+      GridResponsiveHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });

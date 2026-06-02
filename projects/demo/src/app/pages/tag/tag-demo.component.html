@@ -1,10 +1,9 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header docHeader title="Tag" [importCode]="importCode">
     <p class="doc-description">
-      A compact label that communicates status, category, or classification at a glance.
-      Supports seven severity colours, three sizes, three design variants, optional icons,
-      and an accessible dismiss button.
+      A compact label that communicates status, category, or classification at a glance. Supports
+      seven severity colours, three sizes, three design variants, optional icons, and an accessible
+      dismiss button.
     </p>
   </app-doc-page-header>
 
@@ -13,10 +12,9 @@
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="severity" title="Severity">
     <p class="demo-section__description">
-      Use the <code>severity</code> input to communicate meaning through colour.
-      Seven values are available: <code>primary</code>, <code>secondary</code>,
-      <code>success</code>, <code>info</code>, <code>warn</code>, <code>danger</code>,
-      and <code>contrast</code>.
+      Use the <code>severity</code> input to communicate meaning through colour. Seven values are
+      available: <code>primary</code>, <code>secondary</code>, <code>success</code>,
+      <code>info</code>, <code>warn</code>, <code>danger</code>, and <code>contrast</code>.
     </p>
     <div class="demo-section__preview">
       @for (severity of severities; track severity) {
@@ -25,9 +23,10 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Severity" [code]="snippets.severity"
+      filename="Severity"
+      [code]="snippets.severity"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -38,15 +37,16 @@
       Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--center">
-      <ui-lib-tag value="Small"  size="sm" severity="primary" />
+      <ui-lib-tag value="Small" size="sm" severity="primary" />
       <ui-lib-tag value="Medium" size="md" severity="primary" />
-      <ui-lib-tag value="Large"  size="lg" severity="primary" />
+      <ui-lib-tag value="Large" size="lg" severity="primary" />
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Sizes" [code]="snippets.sizes"
+      filename="Sizes"
+      [code]="snippets.sizes"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -63,9 +63,10 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Rounded" [code]="snippets.rounded"
+      filename="Rounded"
+      [code]="snippets.rounded"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -73,21 +74,22 @@
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="icons" title="With Icons">
     <p class="demo-section__description">
-      Provide a PrimeIcons class via the <code>icon</code> input to render a leading icon.
-      Icons are always marked <code>aria-hidden="true"</code> — they are decorative.
+      Provide a PrimeIcons class via the <code>icon</code> input to render a leading icon. Icons are
+      always marked <code>aria-hidden="true"</code> — they are decorative.
     </p>
     <div class="demo-section__preview">
-      <ui-lib-tag value="Primary" icon="pi pi-tag"                  severity="primary" />
-      <ui-lib-tag value="Success" icon="pi pi-check-circle"         severity="success" />
+      <ui-lib-tag value="Primary" icon="pi pi-tag" severity="primary" />
+      <ui-lib-tag value="Success" icon="pi pi-check-circle" severity="success" />
       <ui-lib-tag value="Warning" icon="pi pi-exclamation-triangle" severity="warn" />
-      <ui-lib-tag value="Danger"  icon="pi pi-times-circle"         severity="danger" />
-      <ui-lib-tag value="Info"    icon="pi pi-info-circle"          severity="info" />
+      <ui-lib-tag value="Danger" icon="pi pi-times-circle" severity="danger" />
+      <ui-lib-tag value="Info" icon="pi pi-info-circle" severity="info" />
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Icons" [code]="snippets.icons"
+      filename="Icons"
+      [code]="snippets.icons"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -95,21 +97,21 @@
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="dismissible" title="Dismissible">
     <p class="demo-section__description">
-      Set <code>[dismissible]="true"</code> to render a remove button.
-      The button receives an auto-generated <code>aria-label</code> such as
-      <code>Remove Python tag</code>. The tag does not auto-hide — control
-      visibility from the parent via the <code>(removed)</code> output.
+      Set <code>[dismissible]="true"</code> to render a remove button. The button receives an
+      auto-generated <code>aria-label</code> such as <code>Remove Python tag</code>. The tag does
+      not auto-hide — control visibility from the parent via the <code>(removed)</code> output.
     </p>
     <div class="demo-section__preview">
-      <ui-lib-tag value="Python" severity="info"    [dismissible]="true" />
-      <ui-lib-tag value="Urgent" severity="danger"  [dismissible]="true" icon="pi pi-flag" />
+      <ui-lib-tag value="Python" severity="info" [dismissible]="true" />
+      <ui-lib-tag value="Urgent" severity="danger" [dismissible]="true" icon="pi pi-flag" />
       <ui-lib-tag value="Stable" severity="success" [dismissible]="true" [rounded]="true" />
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Dismissible" [code]="snippets.dismissible"
+      filename="Dismissible"
+      [code]="snippets.dismissible"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -118,8 +120,8 @@
   <app-doc-section id="variants" title="Design Variants">
     <p class="demo-section__description">
       Three design variants: <code>material</code>, <code>bootstrap</code>, and
-      <code>minimal</code>. When <code>variant</code> is <code>null</code> (the default),
-      the active theme from <code>ThemeConfigService</code> is used.
+      <code>minimal</code>. When <code>variant</code> is <code>null</code> (the default), the active
+      theme from <code>ThemeConfigService</code> is used.
     </p>
     @for (variant of variants; track variant) {
       <div class="demo-variant-group">
@@ -137,9 +139,10 @@
     }
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants"
+      filename="Variants"
+      [code]="snippets.variants"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -173,7 +176,8 @@
                 severity="primary"
                 size="sm"
                 (click)="setSeverity(severity)"
-              >{{ severityLabels[severity] }}</ui-lib-button>
+                >{{ severityLabels[severity] }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -189,7 +193,8 @@
                 severity="primary"
                 size="sm"
                 (click)="setSize(size)"
-              >{{ size }}</ui-lib-button>
+                >{{ size }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -205,7 +210,8 @@
                 severity="primary"
                 size="sm"
                 (click)="setVariant(variant)"
-              >{{ variant }}</ui-lib-button>
+                >{{ variant }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -220,21 +226,24 @@
               severity="primary"
               size="sm"
               (click)="toggleRounded()"
-            >Rounded</ui-lib-button>
+              >Rounded</ui-lib-button
+            >
             <ui-lib-button
               type="button"
               [appearance]="playgroundIcon() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               (click)="toggleIcon()"
-            >Icon</ui-lib-button>
+              >Icon</ui-lib-button
+            >
             <ui-lib-button
               type="button"
               [appearance]="playgroundDismissible() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               (click)="toggleDismissible()"
-            >Dismissible</ui-lib-button>
+              >Dismissible</ui-lib-button
+            >
           </div>
         </div>
       </div>
@@ -245,7 +254,6 @@
        API
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="api" title="API">
-
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
@@ -262,8 +270,8 @@
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="css-vars" title="CSS Custom Properties">
     <p class="demo-section__description">
-      Override any of these on the host element or an ancestor to theme the tag without
-      touching component internals.
+      Override any of these on the host element or an ancestor to theme the tag without touching
+      component internals.
     </p>
     <app-doc-css-vars-table [rows]="cssVarRows" />
   </app-doc-section>
@@ -272,7 +280,6 @@
        ACCESSIBILITY
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="accessibility" title="Accessibility">
-
     <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
     <app-doc-aria-table [rows]="ariaRows" />
 
@@ -293,8 +300,7 @@
         <code>@media (prefers-reduced-motion: reduce)</code>.
       </li>
       <li>
-        Do not rely on colour alone to convey severity — pair it with a visible text label
-        or icon.
+        Do not rely on colour alone to convey severity — pair it with a visible text label or icon.
       </li>
     </ul>
   </app-doc-section>
@@ -312,5 +318,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

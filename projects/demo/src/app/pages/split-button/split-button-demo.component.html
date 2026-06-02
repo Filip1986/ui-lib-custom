@@ -7,200 +7,196 @@
     <p class="action-log" aria-live="polite">{{ lastAction() }}</p>
   </app-doc-page-header>
 
-    <app-doc-section id="basic" title="Basic">
-      <p>Default SplitButton with label and action menu model.</p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-split-button label="Save" [model]="items" (buttonClick)="onPrimaryAction()" />
-      </ui-lib-panel>
-      <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-    </app-doc-section>
+  <app-doc-section id="basic" title="Basic">
+    <p>Default SplitButton with label and action menu model.</p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-split-button label="Save" [model]="items" (buttonClick)="onPrimaryAction()" />
+    </ui-lib-panel>
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+  </app-doc-section>
 
-    <app-doc-section id="icons" title="Icons">
-      <p>Leading icon on the primary action with icon-capable menu actions.</p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-split-button
-          label="Add"
-          icon="plus"
-          [model]="iconItems"
-          (buttonClick)="onPrimaryAction()"
-        />
-      </ui-lib-panel>
-      <app-doc-code-example [html]="iconsHtml" [typescript]="iconsTs" />
-    </app-doc-section>
+  <app-doc-section id="icons" title="Icons">
+    <p>Leading icon on the primary action with icon-capable menu actions.</p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-split-button
+        label="Add"
+        icon="plus"
+        [model]="iconItems"
+        (buttonClick)="onPrimaryAction()"
+      />
+    </ui-lib-panel>
+    <app-doc-code-example [html]="iconsHtml" [typescript]="iconsTs" />
+  </app-doc-section>
 
-    <app-doc-section id="severity" title="Severity">
-      <p>All severity tokens in one row.</p>
-      <ui-lib-panel variant="minimal">
-        <div class="split-grid split-grid--severity">
-          @for (severity of severities; track severity) {
-            <ui-lib-split-button
-              [label]="severity"
-              [severity]="severity"
-              [model]="items"
-              (buttonClick)="onPrimaryAction()"
-            />
-          }
-        </div>
-      </ui-lib-panel>
-      <app-doc-code-example [html]="severityHtml" [typescript]="severityTs" />
-    </app-doc-section>
-
-    <app-doc-section id="disabled" title="Disabled">
-      <p>Disable all controls, only the main action, or only the menu trigger.</p>
-      <ui-lib-panel variant="minimal">
-        <div class="split-grid split-grid--three">
-          <ui-lib-split-button label="Disabled" [model]="items" [disabled]="true" />
-          <ui-lib-split-button label="Main Disabled" [model]="items" [buttonDisabled]="true" />
+  <app-doc-section id="severity" title="Severity">
+    <p>All severity tokens in one row.</p>
+    <ui-lib-panel variant="minimal">
+      <div class="split-grid split-grid--severity">
+        @for (severity of severities; track severity) {
           <ui-lib-split-button
-            label="Menu Disabled"
+            [label]="severity"
+            [severity]="severity"
             [model]="items"
-            [menuButtonDisabled]="true"
             (buttonClick)="onPrimaryAction()"
           />
-        </div>
-      </ui-lib-panel>
-      <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
-    </app-doc-section>
+        }
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="severityHtml" [typescript]="severityTs" />
+  </app-doc-section>
 
-    <app-doc-section id="raised" title="Raised">
-      <p>Raised style across all severities.</p>
-      <ui-lib-panel variant="minimal">
-        <div class="split-grid split-grid--severity">
-          @for (severity of severities; track severity) {
-            <ui-lib-split-button
-              [label]="severity"
-              [severity]="severity"
-              [raised]="true"
-              [model]="items"
-            />
-          }
-        </div>
-      </ui-lib-panel>
-      <app-doc-code-example [html]="raisedHtml" [typescript]="raisedTs" />
-    </app-doc-section>
+  <app-doc-section id="disabled" title="Disabled">
+    <p>Disable all controls, only the main action, or only the menu trigger.</p>
+    <ui-lib-panel variant="minimal">
+      <div class="split-grid split-grid--three">
+        <ui-lib-split-button label="Disabled" [model]="items" [disabled]="true" />
+        <ui-lib-split-button label="Main Disabled" [model]="items" [buttonDisabled]="true" />
+        <ui-lib-split-button
+          label="Menu Disabled"
+          [model]="items"
+          [menuButtonDisabled]="true"
+          (buttonClick)="onPrimaryAction()"
+        />
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
+  </app-doc-section>
 
-    <app-doc-section id="rounded" title="Rounded">
-      <p>Rounded style across all severities.</p>
-      <ui-lib-panel variant="minimal">
-        <div class="split-grid split-grid--severity">
-          @for (severity of severities; track severity) {
-            <ui-lib-split-button
-              [label]="severity"
-              [severity]="severity"
-              [rounded]="true"
-              [model]="items"
-            />
-          }
-        </div>
-      </ui-lib-panel>
-      <app-doc-code-example [html]="roundedHtml" [typescript]="roundedTs" />
-    </app-doc-section>
+  <app-doc-section id="raised" title="Raised">
+    <p>Raised style across all severities.</p>
+    <ui-lib-panel variant="minimal">
+      <div class="split-grid split-grid--severity">
+        @for (severity of severities; track severity) {
+          <ui-lib-split-button
+            [label]="severity"
+            [severity]="severity"
+            [raised]="true"
+            [model]="items"
+          />
+        }
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="raisedHtml" [typescript]="raisedTs" />
+  </app-doc-section>
 
-    <app-doc-section id="text" title="Text">
-      <p>Text style across all severities.</p>
-      <ui-lib-panel variant="minimal">
-        <div class="split-grid split-grid--severity">
-          @for (severity of severities; track severity) {
-            <ui-lib-split-button
-              [label]="severity"
-              [severity]="severity"
-              [text]="true"
-              [model]="items"
-            />
-          }
-        </div>
-      </ui-lib-panel>
-      <app-doc-code-example [html]="textHtml" [typescript]="textTs" />
-    </app-doc-section>
+  <app-doc-section id="rounded" title="Rounded">
+    <p>Rounded style across all severities.</p>
+    <ui-lib-panel variant="minimal">
+      <div class="split-grid split-grid--severity">
+        @for (severity of severities; track severity) {
+          <ui-lib-split-button
+            [label]="severity"
+            [severity]="severity"
+            [rounded]="true"
+            [model]="items"
+          />
+        }
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="roundedHtml" [typescript]="roundedTs" />
+  </app-doc-section>
 
-    <app-doc-section id="raised-text" title="Raised Text">
-      <p>Raised + text modifiers combined.</p>
-      <ui-lib-panel variant="minimal">
-        <div class="split-grid split-grid--severity">
-          @for (severity of severities; track severity) {
-            <ui-lib-split-button
-              [label]="severity"
-              [severity]="severity"
-              [raised]="true"
-              [text]="true"
-              [model]="items"
-            />
-          }
-        </div>
-      </ui-lib-panel>
-      <app-doc-code-example [html]="raisedTextHtml" [typescript]="raisedTextTs" />
-    </app-doc-section>
+  <app-doc-section id="text" title="Text">
+    <p>Text style across all severities.</p>
+    <ui-lib-panel variant="minimal">
+      <div class="split-grid split-grid--severity">
+        @for (severity of severities; track severity) {
+          <ui-lib-split-button
+            [label]="severity"
+            [severity]="severity"
+            [text]="true"
+            [model]="items"
+          />
+        }
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="textHtml" [typescript]="textTs" />
+  </app-doc-section>
 
-    <app-doc-section id="outlined" title="Outlined">
-      <p>Outlined style across all severities.</p>
-      <ui-lib-panel variant="minimal">
-        <div class="split-grid split-grid--severity">
-          @for (severity of severities; track severity) {
-            <ui-lib-split-button
-              [label]="severity"
-              [severity]="severity"
-              [outlined]="true"
-              [model]="items"
-            />
-          }
-        </div>
-      </ui-lib-panel>
-      <app-doc-code-example [html]="outlinedHtml" [typescript]="outlinedTs" />
-    </app-doc-section>
+  <app-doc-section id="raised-text" title="Raised Text">
+    <p>Raised + text modifiers combined.</p>
+    <ui-lib-panel variant="minimal">
+      <div class="split-grid split-grid--severity">
+        @for (severity of severities; track severity) {
+          <ui-lib-split-button
+            [label]="severity"
+            [severity]="severity"
+            [raised]="true"
+            [text]="true"
+            [model]="items"
+          />
+        }
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="raisedTextHtml" [typescript]="raisedTextTs" />
+  </app-doc-section>
 
-    <app-doc-section id="sizes" title="Sizes">
-      <p>Small, medium, and large size tokens.</p>
-      <ui-lib-panel variant="minimal">
-        <div class="split-grid split-grid--three">
-          <ui-lib-split-button label="Small" size="sm" [model]="items" />
-          <ui-lib-split-button label="Medium" size="md" [model]="items" />
-          <ui-lib-split-button label="Large" size="lg" [model]="items" />
-        </div>
-      </ui-lib-panel>
-      <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-    </app-doc-section>
+  <app-doc-section id="outlined" title="Outlined">
+    <p>Outlined style across all severities.</p>
+    <ui-lib-panel variant="minimal">
+      <div class="split-grid split-grid--severity">
+        @for (severity of severities; track severity) {
+          <ui-lib-split-button
+            [label]="severity"
+            [severity]="severity"
+            [outlined]="true"
+            [model]="items"
+          />
+        }
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="outlinedHtml" [typescript]="outlinedTs" />
+  </app-doc-section>
 
-    <app-doc-section id="template" title="Template">
-      <p>Custom primary-content projection via <code>[splitButtonContent]</code>.</p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-split-button [model]="items" menuButtonAriaLabel="Template actions">
-          <ng-template splitButtonContent>
-            <span class="template-content">
-              <ui-lib-icon name="save" />
-              <span>Save Template</span>
-            </span>
-          </ng-template>
-        </ui-lib-split-button>
-      </ui-lib-panel>
-      <app-doc-code-example [html]="templateHtml" [typescript]="templateTs" />
-    </app-doc-section>
+  <app-doc-section id="sizes" title="Sizes">
+    <p>Small, medium, and large size tokens.</p>
+    <ui-lib-panel variant="minimal">
+      <div class="split-grid split-grid--three">
+        <ui-lib-split-button label="Small" size="sm" [model]="items" />
+        <ui-lib-split-button label="Medium" size="md" [model]="items" />
+        <ui-lib-split-button label="Large" size="lg" [model]="items" />
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
+  </app-doc-section>
 
-    <app-doc-section id="accessibility" title="Accessibility">
-      <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
-      <app-doc-aria-table [rows]="ariaRows" />
-      <p>
-        SplitButton follows a menu-button pattern. The main action remains a standard button, while
-        the trigger exposes menu semantics and the panel uses <code>role="menu"</code>.
-      </p>
-      <ul class="doc-list">
-        <li>Main and menu buttons support Enter/Space; Escape closes the open menu.</li>
-        <li>
-          Menu items use arrow-key navigation with Home/End and expose
-          <code>aria-disabled</code> when needed.
-        </li>
-        <li>
-          Focus returns to the menu button when the menu closes from Escape or item activation.
-        </li>
-        <li>This demo reports command results in a polite live region at the top of the page.</li>
-      </ul>
-    </app-doc-section>
+  <app-doc-section id="template" title="Template">
+    <p>Custom primary-content projection via <code>[splitButtonContent]</code>.</p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-split-button [model]="items" menuButtonAriaLabel="Template actions">
+        <ng-template splitButtonContent>
+          <span class="template-content">
+            <ui-lib-icon name="save" />
+            <span>Save Template</span>
+          </span>
+        </ng-template>
+      </ui-lib-split-button>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="templateHtml" [typescript]="templateTs" />
+  </app-doc-section>
 
-    <app-doc-section id="api" title="API Reference">
-      <app-doc-api-reference [rows]="apiInputRows" />
-    </app-doc-section>
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <p>
+      SplitButton follows a menu-button pattern. The main action remains a standard button, while
+      the trigger exposes menu semantics and the panel uses <code>role="menu"</code>.
+    </p>
+    <ul class="doc-list">
+      <li>Main and menu buttons support Enter/Space; Escape closes the open menu.</li>
+      <li>
+        Menu items use arrow-key navigation with Home/End and expose
+        <code>aria-disabled</code> when needed.
+      </li>
+      <li>Focus returns to the menu button when the menu closes from Escape or item activation.</li>
+      <li>This demo reports command results in a polite live region at the top of the page.</li>
+    </ul>
+  </app-doc-section>
 
+  <app-doc-section id="api" title="API Reference">
+    <app-doc-api-reference [rows]="apiInputRows" />
+  </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -209,7 +205,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

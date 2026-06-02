@@ -13,10 +13,10 @@ Fluid — layout wrapper that stretches all descendant form controls to full wid
 
 ### Inputs
 
-| Name         | Type                        | Default | Description                                                                                                                                                                                                                   |
-| ------------ | --------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `styleClass` | `string | null`             | `null`  | Additional CSS classes to attach to the host element.                                                                                                                                                                         |
-| `uiLibFluid` | `boolean, boolean | string` | `true`  | When `true` (default), the `ui-lib-fluid` class is added to the host element, making its descendant form controls take full width. Supports attribute-only usage — `<div uiLibFluid>` is equivalent to `[uiLibFluid]="true"`. |
+| Name         | Type              | Default | Description |
+| ------------ | ----------------- | ------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `styleClass` | `string           | null`   | `null`      | Additional CSS classes to attach to the host element.                                                                                                                                                                         |
+| `uiLibFluid` | `boolean, boolean | string` | `true`      | When `true` (default), the `ui-lib-fluid` class is added to the host element, making its descendant form controls take full width. Supports attribute-only usage — `<div uiLibFluid>` is equivalent to `[uiLibFluid]="true"`. |
 
 ### Outputs
 
@@ -63,4 +63,3 @@ _No component-level CSS variables detected._
 - [Demo page](/components/fluid)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/fluid/README.md)
-

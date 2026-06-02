@@ -46,7 +46,7 @@ describe('SidebarComponent ordering', (): void => {
       .map((item: NavItem): string => item.label);
 
     const expectedGroupLabels: string[] = [...actualGroupLabels].sort(
-      (left: string, right: string): number => compareLabels(left, right)
+      (left: string, right: string): number => compareLabels(left, right),
     );
 
     expect(actualGroupLabels).toEqual(expectedGroupLabels);
@@ -77,7 +77,7 @@ describe('SidebarComponent ordering', (): void => {
 
     itemsByGroup.forEach((labels: string[], group: string): void => {
       const expected: string[] = [...labels].sort((left: string, right: string): number =>
-        compareLabels(left, right)
+        compareLabels(left, right),
       );
       expect(labels).toEqual(expected);
       expect(labels.length).toBeGreaterThan(0);
@@ -88,28 +88,28 @@ describe('SidebarComponent ordering', (): void => {
   it('keeps trailing ungrouped items alphabetically ordered when present', (): void => {
     const items: NavItem[] = getComponentsItems();
     const firstUngroupedIndex: number = items.findIndex(
-      (item: NavItem): boolean => item.isGroupLabel !== true && !item.group
+      (item: NavItem): boolean => item.isGroupLabel !== true && !item.group,
     );
 
     if (firstUngroupedIndex < 0) {
       expect(
-        items.every((item: NavItem): boolean => item.isGroupLabel === true || Boolean(item.group))
+        items.every((item: NavItem): boolean => item.isGroupLabel === true || Boolean(item.group)),
       ).toBe(true);
       return;
     }
 
     const trailingUngroupedItems: NavItem[] = items.slice(firstUngroupedIndex);
     const trailingUngroupedLabels: string[] = trailingUngroupedItems.map(
-      (item: NavItem): string => item.label
+      (item: NavItem): string => item.label,
     );
     const expectedTrailingLabels: string[] = [...trailingUngroupedLabels].sort(
-      (left: string, right: string): number => compareLabels(left, right)
+      (left: string, right: string): number => compareLabels(left, right),
     );
 
     expect(
       trailingUngroupedItems.every(
-        (item: NavItem): boolean => item.isGroupLabel !== true && !item.group
-      )
+        (item: NavItem): boolean => item.isGroupLabel !== true && !item.group,
+      ),
     ).toBe(true);
     expect(trailingUngroupedLabels).toEqual(expectedTrailingLabels);
   });
@@ -117,7 +117,7 @@ describe('SidebarComponent ordering', (): void => {
   it('contains the expected Menu group placeholders', (): void => {
     const items: NavItem[] = getComponentsItems();
     const menuGroupStart: number = items.findIndex(
-      (item: NavItem): boolean => item.isGroupLabel === true && item.label === 'Menu'
+      (item: NavItem): boolean => item.isGroupLabel === true && item.label === 'Menu',
     );
 
     expect(menuGroupStart).toBeGreaterThan(-1);
@@ -168,10 +168,10 @@ describe('SidebarComponent ordering', (): void => {
 
     // Free group: 5 templates, none with SOON badge
     const freeStart: number = items.findIndex(
-      (item: NavItem): boolean => item.isGroupLabel === true && item.label === 'Free'
+      (item: NavItem): boolean => item.isGroupLabel === true && item.label === 'Free',
     );
     const proStart: number = items.findIndex(
-      (item: NavItem): boolean => item.isGroupLabel === true && item.label === 'Pro'
+      (item: NavItem): boolean => item.isGroupLabel === true && item.label === 'Pro',
     );
     const freeItems: NavItem[] = items.slice(freeStart + 1, proStart);
     expect(freeItems.length).toBe(5);
@@ -184,7 +184,7 @@ describe('SidebarComponent ordering', (): void => {
 
     // Free item routes
     const freeRoutes: (string | undefined)[] = freeItems.map(
-      (item: NavItem): string | undefined => item.route
+      (item: NavItem): string | undefined => item.route,
     );
     expect(freeRoutes).toEqual([
       '/templates/app-shell',

@@ -172,13 +172,13 @@ async function setup<T>(componentType: new () => T): Promise<ComponentFixture<T>
 
 function getHost(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    'ui-lib-select-button'
+    'ui-lib-select-button',
   ) as HTMLElement;
 }
 
 function getButtons(fixture: ComponentFixture<unknown>): HTMLButtonElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-select-button button')
+    (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-select-button button'),
   );
 }
 

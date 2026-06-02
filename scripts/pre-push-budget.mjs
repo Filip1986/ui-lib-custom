@@ -28,9 +28,7 @@ const ROOT = join(__dirname, '..');
 const DIST_MARKER = join(ROOT, 'dist', 'ui-lib-custom', 'package.json');
 
 // Tracked source directories that affect the library bundle.
-const WATCHED_DIRS = [
-  join(ROOT, 'projects', 'ui-lib-custom', 'src'),
-];
+const WATCHED_DIRS = [join(ROOT, 'projects', 'ui-lib-custom', 'src')];
 
 function run(cmd, label) {
   console.log(`\n▶ ${label}`);
@@ -52,10 +50,10 @@ function distIsStale() {
   // Use git to list all tracked source files and check their mtime.
   // This is the fastest cross-platform way — no recursive fs walk needed.
   try {
-    const files = execSync(
-      'git ls-files -- ' + WATCHED_DIRS.map((d) => `"${d}"`).join(' '),
-      { encoding: 'utf-8', cwd: ROOT },
-    )
+    const files = execSync('git ls-files -- ' + WATCHED_DIRS.map((d) => `"${d}"`).join(' '), {
+      encoding: 'utf-8',
+      cwd: ROOT,
+    })
       .split('\n')
       .filter(Boolean);
 

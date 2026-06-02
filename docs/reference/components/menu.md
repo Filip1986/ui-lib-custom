@@ -7,20 +7,20 @@
 
 ## Overview
 
-Menu component — a panel of navigable items. Supports both static (inline) and popup modes. Items can be grouped under labelled headers, separated by dividers, or rendered as direct entries with icons and command callbacks. **Static usage:** ```html <ui-lib-menu [model]="items" /> ``` **Popup usage (attach to a button):** ```html <ui-lib-button label="Options" (click)="menu.toggle($event)" /> <ui-lib-menu #menu [model]="items" [popup]="true" /> ```
+Menu component — a panel of navigable items. Supports both static (inline) and popup modes. Items can be grouped under labelled headers, separated by dividers, or rendered as direct entries with icons and command callbacks. **Static usage:** `html <ui-lib-menu [model]="items" /> ` **Popup usage (attach to a button):** `html <ui-lib-button label="Options" (click)="menu.toggle($event)" /> <ui-lib-menu #menu [model]="items" [popup]="true" /> `
 
 ## API
 
 ### Inputs
 
-| Name         | Type                 | Default                   | Description                                                                                                                                                                                               |
-| ------------ | -------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string`             | `MENU_DEFAULT_ARIA_LABEL` | Accessible label for the menu panel (aria-label).                                                                                                                                                         |
-| `model`      | `MenuItem[]`         | `[]`                      | Array of menu items or group-header items to display.                                                                                                                                                     |
-| `popup`      | `boolean`            | `false`                   | When true, the menu renders as a floating popup anchored to the trigger element. Use `toggle(event)`, `show(event)`, or `hide()` to control it. When false (default), the panel is always visible inline. |
-| `size`       | `MenuSize`           | `'md'`                    | Size token: sm | md | lg.                                                                                                                                                                                 |
-| `styleClass` | `string | null`      | `null`                    | Extra CSS class appended to the host element.                                                                                                                                                             |
-| `variant`    | `MenuVariant | null` | `null`                    | Design-system variant; falls back to ThemeConfigService when null.                                                                                                                                        |
+| Name         | Type         | Default                   | Description                                                                                                                                                                                               |
+| ------------ | ------------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | --- |
+| `ariaLabel`  | `string`     | `MENU_DEFAULT_ARIA_LABEL` | Accessible label for the menu panel (aria-label).                                                                                                                                                         |
+| `model`      | `MenuItem[]` | `[]`                      | Array of menu items or group-header items to display.                                                                                                                                                     |
+| `popup`      | `boolean`    | `false`                   | When true, the menu renders as a floating popup anchored to the trigger element. Use `toggle(event)`, `show(event)`, or `hide()` to control it. When false (default), the panel is always visible inline. |
+| `size`       | `MenuSize`   | `'md'`                    | Size token: sm                                                                                                                                                                                            | md                                                                 | lg. |
+| `styleClass` | `string      | null`                     | `null`                                                                                                                                                                                                    | Extra CSS class appended to the host element.                      |
+| `variant`    | `MenuVariant | null`                     | `null`                                                                                                                                                                                                    | Design-system variant; falls back to ThemeConfigService when null. |
 
 ### Outputs
 
@@ -153,4 +153,3 @@ _none_
 - [Demo page](/components/menu)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/menu/README.md)
-

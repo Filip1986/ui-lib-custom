@@ -17,26 +17,26 @@ import { Chip } from 'ui-lib-custom/chip';
 
 ## Inputs
 
-| Input          | Type                                             | Default         | Description |
-|----------------|--------------------------------------------------|-----------------|-------------|
-| `label`        | `string \| null`                                 | `null`          | Text displayed inside the chip. |
-| `icon`         | `string \| null`                                 | `null`          | CSS class for a leading icon (e.g. `"pi pi-user"`). Ignored when `image` is also set. |
-| `image`        | `string \| null`                                 | `null`          | URL of a circular thumbnail image rendered at the start of the chip. |
-| `imageAlt`     | `string`                                         | `"Chip"`        | Alt text for the chip image. |
-| `removable`    | `boolean`                                        | `false`         | When true, a close button is rendered. |
-| `removeIcon`   | `string`                                         | `"pi pi-times"` | CSS class for the remove button icon. |
-| `selectable`   | `boolean`                                        | `false`         | When true, the chip is keyboard-focusable and can be toggled. |
-| `selected`     | `boolean`                                        | `false`         | Selected state for selectable chips. Pair with `(selectedChange)`. |
-| `size`         | `"sm" \| "md" \| "lg"`                           | `"md"`          | Size of the chip. |
-| `variant`      | `"material" \| "bootstrap" \| "minimal" \| null` | `null`          | Design variant. Inherits from `ThemeConfigService` when `null`. |
-| `styleClass`   | `string \| null`                                 | `null`          | Additional CSS classes applied to the host element. |
+| Input        | Type                                             | Default         | Description                                                                           |
+| ------------ | ------------------------------------------------ | --------------- | ------------------------------------------------------------------------------------- |
+| `label`      | `string \| null`                                 | `null`          | Text displayed inside the chip.                                                       |
+| `icon`       | `string \| null`                                 | `null`          | CSS class for a leading icon (e.g. `"pi pi-user"`). Ignored when `image` is also set. |
+| `image`      | `string \| null`                                 | `null`          | URL of a circular thumbnail image rendered at the start of the chip.                  |
+| `imageAlt`   | `string`                                         | `"Chip"`        | Alt text for the chip image.                                                          |
+| `removable`  | `boolean`                                        | `false`         | When true, a close button is rendered.                                                |
+| `removeIcon` | `string`                                         | `"pi pi-times"` | CSS class for the remove button icon.                                                 |
+| `selectable` | `boolean`                                        | `false`         | When true, the chip is keyboard-focusable and can be toggled.                         |
+| `selected`   | `boolean`                                        | `false`         | Selected state for selectable chips. Pair with `(selectedChange)`.                    |
+| `size`       | `"sm" \| "md" \| "lg"`                           | `"md"`          | Size of the chip.                                                                     |
+| `variant`    | `"material" \| "bootstrap" \| "minimal" \| null` | `null`          | Design variant. Inherits from `ThemeConfigService` when `null`.                       |
+| `styleClass` | `string \| null`                                 | `null`          | Additional CSS classes applied to the host element.                                   |
 
 ## Outputs
 
-| Output          | Type                          | Description |
-|-----------------|-------------------------------|-------------|
-| `removed`       | `OutputEmitterRef<MouseEvent>` | Emitted when the remove button is clicked. The chip does not auto-hide — manage visibility in the parent. |
-| `selectedChange`| `OutputEmitterRef<boolean>`   | Emitted when a selectable chip is toggled; provides the new selected value. |
+| Output           | Type                           | Description                                                                                               |
+| ---------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| `removed`        | `OutputEmitterRef<MouseEvent>` | Emitted when the remove button is clicked. The chip does not auto-hide — manage visibility in the parent. |
+| `selectedChange` | `OutputEmitterRef<boolean>`    | Emitted when a selectable chip is toggled; provides the new selected value.                               |
 
 ## Content projection
 
@@ -65,11 +65,7 @@ Default `<ng-content>` slot is available for fully custom chip content when neit
 ### Removable chip
 
 ```html
-<ui-lib-chip
-  label="Angular"
-  [removable]="true"
-  (removed)="remove()"
-/>
+<ui-lib-chip label="Angular" [removable]="true" (removed)="remove()" />
 ```
 
 ### Selectable chip (toggle)
@@ -92,51 +88,51 @@ Default `<ng-content>` slot is available for fully custom chip content when neit
 
 ## CSS variables
 
-| Variable | Default | Description |
-|---|---|---|
-| `--uilib-chip-bg` | `var(--uilib-color-primary, #6366f1)` | Chip background colour |
-| `--uilib-chip-color` | `#ffffff` | Chip text colour |
-| `--uilib-chip-border` | `none` | Chip border shorthand |
-| `--uilib-chip-border-radius` | `var(--uilib-radius-full, 9999px)` | Chip corner radius |
-| `--uilib-chip-shadow` | `none` | Chip box shadow (material variant adds elevation) |
-| `--uilib-chip-padding-y` | `0.25rem` | Vertical padding |
-| `--uilib-chip-padding-x` | `0.75rem` | Horizontal padding |
-| `--uilib-chip-gap` | `0.375rem` | Gap between icon / image / label / button |
-| `--uilib-chip-font-size` | `0.875rem` | Font size |
-| `--uilib-chip-font-weight` | `500` | Font weight |
-| `--uilib-chip-image-size` | `1.5rem` | Avatar image diameter |
-| `--uilib-chip-image-border-radius` | `var(--uilib-radius-full, 9999px)` | Avatar image corner radius |
-| `--uilib-chip-remove-bg` | `transparent` | Remove button default background |
-| `--uilib-chip-remove-bg-hover` | `rgba(255,255,255,0.2)` | Remove button hover background |
-| `--uilib-chip-remove-bg-active` | `rgba(255,255,255,0.32)` | Remove button pressed background |
-| `--uilib-chip-remove-border-radius` | `var(--uilib-radius-full, 9999px)` | Remove button corner radius |
-| `--uilib-chip-transition` | `var(--uilib-transition-fast, 150ms ease)` | Chip hover/opacity transition; zeroed by `prefers-reduced-motion` |
-| `--uilib-chip-remove-transition` | `var(--uilib-transition-fast, 150ms ease)` | Remove button transition; zeroed by `prefers-reduced-motion` |
+| Variable                            | Default                                    | Description                                                       |
+| ----------------------------------- | ------------------------------------------ | ----------------------------------------------------------------- |
+| `--uilib-chip-bg`                   | `var(--uilib-color-primary, #6366f1)`      | Chip background colour                                            |
+| `--uilib-chip-color`                | `#ffffff`                                  | Chip text colour                                                  |
+| `--uilib-chip-border`               | `none`                                     | Chip border shorthand                                             |
+| `--uilib-chip-border-radius`        | `var(--uilib-radius-full, 9999px)`         | Chip corner radius                                                |
+| `--uilib-chip-shadow`               | `none`                                     | Chip box shadow (material variant adds elevation)                 |
+| `--uilib-chip-padding-y`            | `0.25rem`                                  | Vertical padding                                                  |
+| `--uilib-chip-padding-x`            | `0.75rem`                                  | Horizontal padding                                                |
+| `--uilib-chip-gap`                  | `0.375rem`                                 | Gap between icon / image / label / button                         |
+| `--uilib-chip-font-size`            | `0.875rem`                                 | Font size                                                         |
+| `--uilib-chip-font-weight`          | `500`                                      | Font weight                                                       |
+| `--uilib-chip-image-size`           | `1.5rem`                                   | Avatar image diameter                                             |
+| `--uilib-chip-image-border-radius`  | `var(--uilib-radius-full, 9999px)`         | Avatar image corner radius                                        |
+| `--uilib-chip-remove-bg`            | `transparent`                              | Remove button default background                                  |
+| `--uilib-chip-remove-bg-hover`      | `rgba(255,255,255,0.2)`                    | Remove button hover background                                    |
+| `--uilib-chip-remove-bg-active`     | `rgba(255,255,255,0.32)`                   | Remove button pressed background                                  |
+| `--uilib-chip-remove-border-radius` | `var(--uilib-radius-full, 9999px)`         | Remove button corner radius                                       |
+| `--uilib-chip-transition`           | `var(--uilib-transition-fast, 150ms ease)` | Chip hover/opacity transition; zeroed by `prefers-reduced-motion` |
+| `--uilib-chip-remove-transition`    | `var(--uilib-transition-fast, 150ms ease)` | Remove button transition; zeroed by `prefers-reduced-motion`      |
 
 ## Accessibility
 
 ### ARIA attributes
 
-| Attribute       | Element       | Value                                     | Notes |
-|-----------------|---------------|-------------------------------------------|-------|
-| `role`          | Host          | `option` or `group`                       | `option` for non-removable chips (listbox option). `group` for removable chips (to allow a nested button). |
-| `aria-label`    | Host          | Value of `label` input                    | Omitted when `label` is `null`. |
-| `aria-selected` | Host          | `"true"` / `"false"`                      | Only present when `[selectable]="true"`. |
-| `tabindex`      | Host          | `"0"`                                     | Only present when `[selectable]="true"`. |
-| `id`            | Host          | Auto-generated (`ui-lib-chip-{n}`)        | Unique per instance; stable for the lifetime of the component. |
-| `aria-label`    | Remove button | `"Remove {label}"` or `"Remove"`          | Auto-generated from the `label` input. |
-| `aria-hidden`   | Leading icon  | `"true"`                                  | Decorative icon hidden from screen readers. |
-| `aria-hidden`   | Remove button icon | `"true"`                             | Decorative icon hidden from screen readers. |
-| `alt`           | Image         | Value of `imageAlt` input                 | Defaults to `"Chip"`. Provide a meaningful description. |
+| Attribute       | Element            | Value                              | Notes                                                                                                      |
+| --------------- | ------------------ | ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `role`          | Host               | `option` or `group`                | `option` for non-removable chips (listbox option). `group` for removable chips (to allow a nested button). |
+| `aria-label`    | Host               | Value of `label` input             | Omitted when `label` is `null`.                                                                            |
+| `aria-selected` | Host               | `"true"` / `"false"`               | Only present when `[selectable]="true"`.                                                                   |
+| `tabindex`      | Host               | `"0"`                              | Only present when `[selectable]="true"`.                                                                   |
+| `id`            | Host               | Auto-generated (`ui-lib-chip-{n}`) | Unique per instance; stable for the lifetime of the component.                                             |
+| `aria-label`    | Remove button      | `"Remove {label}"` or `"Remove"`   | Auto-generated from the `label` input.                                                                     |
+| `aria-hidden`   | Leading icon       | `"true"`                           | Decorative icon hidden from screen readers.                                                                |
+| `aria-hidden`   | Remove button icon | `"true"`                           | Decorative icon hidden from screen readers.                                                                |
+| `alt`           | Image              | Value of `imageAlt` input          | Defaults to `"Chip"`. Provide a meaningful description.                                                    |
 
 ### Keyboard interaction
 
-| Key       | Target         | Action |
-|-----------|----------------|--------|
-| `Space`   | Selectable chip | Toggles the selected state (emits `selectedChange`). |
-| `Enter`   | Selectable chip | Toggles the selected state (emits `selectedChange`). |
-| `Tab`     | Selectable chip | Moves focus to/from the chip (standard tab order). |
-| `Space` / `Enter` | Remove button | Activates the remove button (browser default). |
+| Key               | Target          | Action                                               |
+| ----------------- | --------------- | ---------------------------------------------------- |
+| `Space`           | Selectable chip | Toggles the selected state (emits `selectedChange`). |
+| `Enter`           | Selectable chip | Toggles the selected state (emits `selectedChange`). |
+| `Tab`             | Selectable chip | Moves focus to/from the chip (standard tab order).   |
+| `Space` / `Enter` | Remove button   | Activates the remove button (browser default).       |
 
 ### Screen reader notes
 
@@ -144,4 +140,3 @@ Default `<ng-content>` slot is available for fully custom chip content when neit
 - The `label` input provides the accessible name via `aria-label` on the host; when using the default content projection slot, also set `aria-label` manually on the parent or the chip itself via `styleClass`.
 - `imageAlt` should be a meaningful description of the avatar or thumbnail; avoid using `"Chip"` (the default) for real user images.
 - All transitions respect `prefers-reduced-motion: reduce`.
-

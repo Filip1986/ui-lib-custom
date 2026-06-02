@@ -21,7 +21,7 @@ see the Tier 2 queue below for checkpoint-verified audits.
 ### Original 76-component queue
 
 | Component       | Queue      | Tier 1 Avg |
-|-----------------|------------|------------|
+| --------------- | ---------- | ---------- |
 | Dialog          | Tier 1 #1  | 8.6        |
 | Select          | Tier 1 #2  | 8.2        |
 | AutoComplete    | Tier 1 #3  | 8.2        |
@@ -102,7 +102,7 @@ see the Tier 2 queue below for checkpoint-verified audits.
 ### New components (post-queue)
 
 | Component         | Tier 1 Avg |
-|-------------------|------------|
+| ----------------- | ---------- |
 | Textarea          | 8.7        |
 | ToggleButton      | 8.7        |
 | ToggleSwitch      | 8.8        |
@@ -140,37 +140,37 @@ Run in this order — highest public scrutiny and lowest Tier 1 scores first.
 ### Priority 1 — Benchmark article (audit before publishing)
 
 | Component    | Tier 1 Avg | Tier 2 Status  |
-|--------------|------------|----------------|
-| Button       | 8.9        | ⬜ Not audited  |
-| Dialog       | 8.6        | ⬜ Not audited  |
-| Select       | 8.2        | ⬜ Not audited  |
-| AutoComplete | 8.2        | ⬜ Not audited  |
-| Toast        | 9.1        | ⬜ Not audited  |
-| Menubar      | 9.0        | ⬜ Not audited  |
-| Table        | 8.6        | ⬜ Not audited  |
+| ------------ | ---------- | -------------- |
+| Button       | 8.9        | ⬜ Not audited |
+| Dialog       | 8.6        | ⬜ Not audited |
+| Select       | 8.2        | ⬜ Not audited |
+| AutoComplete | 8.2        | ⬜ Not audited |
+| Toast        | 9.1        | ⬜ Not audited |
+| Menubar      | 9.0        | ⬜ Not audited |
+| Table        | 8.6        | ⬜ Not audited |
 
 ### Priority 2 — Most at risk (Tier 1 avg 8.2–8.4)
 
 | Component         | Tier 1 Avg | Tier 2 Status  |
-|-------------------|------------|----------------|
-| Select            | 8.2        | ⬜ Not audited  |
-| AutoComplete      | 8.2        | ⬜ Not audited  |
-| CascadeSelect     | 8.2        | ⬜ Not audited  |
-| Knob              | 8.2        | ⬜ Not audited  |
-| ColorPicker       | 8.2        | ⬜ Not audited  |
-| Avatar            | 8.2        | ⬜ Not audited  |
-| DatePicker        | 8.3        | ⬜ Not audited  |
-| DynamicDialog     | 8.3        | ⬜ Not audited  |
-| ConfirmDialog     | 8.3        | ⬜ Not audited  |
-| DataView          | 8.3        | ⬜ Not audited  |
-| Timeline          | 8.3        | ⬜ Not audited  |
-| OrganizationChart | 8.3        | ⬜ Not audited  |
-| Carousel          | 8.3        | ⬜ Not audited  |
-| Galleria          | 8.3        | ⬜ Not audited  |
-| MeterGroup        | 8.3        | ⬜ Not audited  |
-| Badge             | 8.4        | ⬜ Not audited  |
-| ScrollTop         | 8.4        | ⬜ Not audited  |
-| FocusTrap         | 8.4        | ⬜ Not audited  |
+| ----------------- | ---------- | -------------- |
+| Select            | 8.2        | ⬜ Not audited |
+| AutoComplete      | 8.2        | ⬜ Not audited |
+| CascadeSelect     | 8.2        | ⬜ Not audited |
+| Knob              | 8.2        | ⬜ Not audited |
+| ColorPicker       | 8.2        | ⬜ Not audited |
+| Avatar            | 8.2        | ⬜ Not audited |
+| DatePicker        | 8.3        | ⬜ Not audited |
+| DynamicDialog     | 8.3        | ⬜ Not audited |
+| ConfirmDialog     | 8.3        | ⬜ Not audited |
+| DataView          | 8.3        | ⬜ Not audited |
+| Timeline          | 8.3        | ⬜ Not audited |
+| OrganizationChart | 8.3        | ⬜ Not audited |
+| Carousel          | 8.3        | ⬜ Not audited |
+| Galleria          | 8.3        | ⬜ Not audited |
+| MeterGroup        | 8.3        | ⬜ Not audited |
+| Badge             | 8.4        | ⬜ Not audited |
+| ScrollTop         | 8.4        | ⬜ Not audited |
+| FocusTrap         | 8.4        | ⬜ Not audited |
 
 ### Priority 3 — Remaining components
 

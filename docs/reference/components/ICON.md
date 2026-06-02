@@ -13,15 +13,15 @@ Icon component that resolves semantic names to the active icon library.
 
 ### Inputs
 
-| Name        | Type                      | Default | Description |
-| ----------- | ------------------------- | ------- | ----------- |
-| `ariaLabel` | `string | null`           | `null`  | —           |
-| `clickable` | `boolean`                 | `false` | —           |
-| `color`     | `string | null`           | `null`  | —           |
-| `library`   | `IconLibrary | null`      | `null`  | —           |
-| `semantic`  | `boolean`                 | `false` | —           |
-| `size`      | `IconSize`                | `'md'`  | —           |
-| `variant`   | `ComponentVariant | null` | `null`  | —           |
+| Name        | Type              | Default | Description |
+| ----------- | ----------------- | ------- | ----------- | --- |
+| `ariaLabel` | `string           | null`   | `null`      | —   |
+| `clickable` | `boolean`         | `false` | —           |
+| `color`     | `string           | null`   | `null`      | —   |
+| `library`   | `IconLibrary      | null`   | `null`      | —   |
+| `semantic`  | `boolean`         | `false` | —           |
+| `size`      | `IconSize`        | `'md'`  | —           |
+| `variant`   | `ComponentVariant | null`   | `null`      | —   |
 
 ### Outputs
 
@@ -83,4 +83,3 @@ _none_
 - [Demo page](/components/icon)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/icon/README.md)
-

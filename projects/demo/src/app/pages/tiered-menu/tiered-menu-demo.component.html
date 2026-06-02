@@ -6,11 +6,7 @@
       ARIA roles, and keyboard navigation.
     </p>
     <div class="demo-page-header__preview">
-      <ui-lib-code-snippet
-        [code]="importTs"
-        language="typescript"
-        [showLineNumbers]="true"
-      />
+      <ui-lib-code-snippet [code]="importTs" language="typescript" [showLineNumbers]="true" />
     </div>
   </app-doc-page-header>
 
@@ -185,11 +181,7 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet
-      [code]="itemStatesTs"
-      language="typescript"
-      [showLineNumbers]="true"
-    />
+    <ui-lib-code-snippet [code]="itemStatesTs" language="typescript" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
@@ -201,23 +193,33 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-tiered-menu [model]="urlItems" />
     </div>
-    <ui-lib-code-snippet
-      [code]="urlItemsTs"
-      language="typescript"
-      [showLineNumbers]="true"
-    />
+    <ui-lib-code-snippet [code]="urlItemsTs" language="typescript" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── API ───────────────────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API">
-
     <app-doc-api-reference title="Inputs" kind="input" [rows]="apiInputRows" />
 
-    <app-doc-api-reference title="Outputs" kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+    <app-doc-api-reference
+      title="Outputs"
+      kind="output"
+      [rows]="apiOutputRows"
+      [showDefault]="false"
+    />
 
-    <app-doc-api-reference title="Methods" kind="name" [rows]="apiMethodRows" [showDefault]="false" />
+    <app-doc-api-reference
+      title="Methods"
+      kind="name"
+      [rows]="apiMethodRows"
+      [showDefault]="false"
+    />
 
-    <app-doc-api-reference title="TieredMenuItem" kind="property" [rows]="apiItemRows" [showDefault]="false" />
+    <app-doc-api-reference
+      title="TieredMenuItem"
+      kind="property"
+      [rows]="apiItemRows"
+      [showDefault]="false"
+    />
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
     <app-doc-css-vars-table [rows]="cssVarRows" />
@@ -225,7 +227,6 @@
 
   <!-- ── Accessibility ─────────────────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
-
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
     <app-doc-aria-table [rows]="ariaRows" />
 
@@ -250,7 +251,6 @@
     </ul>
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -259,7 +259,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

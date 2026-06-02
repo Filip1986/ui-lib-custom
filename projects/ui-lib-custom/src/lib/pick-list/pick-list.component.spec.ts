@@ -59,19 +59,19 @@ function getCountry(countries: Country[], index: number): Country {
 
 function getSourceItems(fixture: ComponentFixture<PickListHostComponent>): NodeListOf<HTMLElement> {
   return rootEl(fixture).querySelectorAll<HTMLElement>(
-    '.ui-lib-pick-list__panel--source .ui-lib-pick-list__item'
+    '.ui-lib-pick-list__panel--source .ui-lib-pick-list__item',
   );
 }
 
 function getTargetItems(fixture: ComponentFixture<PickListHostComponent>): NodeListOf<HTMLElement> {
   return rootEl(fixture).querySelectorAll<HTMLElement>(
-    '.ui-lib-pick-list__panel--target .ui-lib-pick-list__item'
+    '.ui-lib-pick-list__panel--target .ui-lib-pick-list__item',
   );
 }
 
 function getTransferButtons(fixture: ComponentFixture<PickListHostComponent>): HTMLElement[] {
   return Array.from(
-    rootEl(fixture).querySelectorAll<HTMLElement>('.ui-lib-pick-list__transfer-btn')
+    rootEl(fixture).querySelectorAll<HTMLElement>('.ui-lib-pick-list__transfer-btn'),
   );
 }
 
@@ -134,7 +134,7 @@ class PickListHostComponent {
   public readonly stripedRows: WritableSignal<boolean> = signal<boolean>(false);
   public readonly dragDrop: WritableSignal<boolean> = signal<boolean>(false);
   public readonly variant: WritableSignal<PickListVariant | null> = signal<PickListVariant | null>(
-    null
+    null,
   );
   public readonly size: WritableSignal<PickListSize> = signal<PickListSize>('md');
   public readonly trackBy: WritableSignal<string | null> = signal<string | null>(null);
@@ -164,7 +164,7 @@ function setup(
     disabled: boolean;
     variant: PickListVariant;
     size: PickListSize;
-  }> = {}
+  }> = {},
 ): {
   fixture: ComponentFixture<PickListHostComponent>;
   host: PickListHostComponent;
@@ -245,10 +245,10 @@ describe('PickListComponent', (): void => {
     it('should render empty state when source is empty', (): void => {
       const { fixture } = setup({ source: [] });
       const sourcePanel: HTMLElement | null = rootEl(fixture).querySelector(
-        '.ui-lib-pick-list__panel--source'
+        '.ui-lib-pick-list__panel--source',
       );
       const empty: HTMLElement | null | undefined = sourcePanel?.querySelector(
-        '.ui-lib-pick-list__empty'
+        '.ui-lib-pick-list__empty',
       );
       expect(empty).not.toBeNull();
     });
@@ -259,7 +259,7 @@ describe('PickListComponent', (): void => {
         targetHeader: 'Selected',
       });
       const headers: NodeListOf<HTMLElement> = rootEl(fixture).querySelectorAll<HTMLElement>(
-        '.ui-lib-pick-list__header'
+        '.ui-lib-pick-list__header',
       );
       expect(headers.length).toBe(2);
       expect(headers[0]!.textContent!.trim()).toBe('Available');
@@ -269,7 +269,7 @@ describe('PickListComponent', (): void => {
     it('should render filter inputs when filterBy is set', (): void => {
       const { fixture } = setup({ filterBy: 'name' });
       const filters: NodeListOf<HTMLElement> = rootEl(fixture).querySelectorAll<HTMLElement>(
-        '.ui-lib-pick-list__filter-input'
+        '.ui-lib-pick-list__filter-input',
       );
       expect(filters.length).toBe(2);
     });
@@ -277,7 +277,7 @@ describe('PickListComponent', (): void => {
     it('should not render filter inputs when filterBy is null', (): void => {
       const { fixture } = setup({ filterBy: null });
       const filters: NodeListOf<HTMLElement> = rootEl(fixture).querySelectorAll<HTMLElement>(
-        '.ui-lib-pick-list__filter-input'
+        '.ui-lib-pick-list__filter-input',
       );
       expect(filters.length).toBe(0);
     });
@@ -290,10 +290,10 @@ describe('PickListComponent', (): void => {
     it('should hide source reorder controls when showSourceControls is false', (): void => {
       const { fixture } = setup({ showSourceControls: false });
       const sourcePanel: HTMLElement | null = rootEl(fixture).querySelector(
-        '.ui-lib-pick-list__panel--source'
+        '.ui-lib-pick-list__panel--source',
       );
       const controls: HTMLElement | null | undefined = sourcePanel?.querySelector(
-        '.ui-lib-pick-list__controls'
+        '.ui-lib-pick-list__controls',
       );
       expect(controls).toBeNull();
     });
@@ -330,7 +330,7 @@ describe('PickListComponent', (): void => {
           const { component } = setup({ variant });
           expect(component.hostClasses()).toContain(`ui-lib-pick-list--${variant}`);
         });
-      }
+      },
     );
 
     (['sm', 'md', 'lg'] as PickListSize[]).forEach((size: PickListSize): void => {

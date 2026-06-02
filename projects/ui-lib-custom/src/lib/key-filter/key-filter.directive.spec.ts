@@ -41,7 +41,7 @@ class KeyFilterHostComponent {
   public readonly bypass: WritableSignal<boolean> = signal<boolean>(false);
   public readonly hintText: WritableSignal<string | null> = signal<string | null>(null);
   public readonly pattern: WritableSignal<KeyFilterPreset | null> = signal<KeyFilterPreset | null>(
-    null
+    null,
   );
   public readonly regex: WritableSignal<RegExp | null> = signal<RegExp | null>(null);
 }
@@ -58,7 +58,7 @@ function setup(): {
     announce: jest.Mock<Promise<void>, [string, AriaLivePoliteness?]>;
   } = {
     announce: jest.fn<Promise<void>, [string, AriaLivePoliteness?]>(
-      (): Promise<void> => Promise.resolve()
+      (): Promise<void> => Promise.resolve(),
     ),
   };
 
@@ -375,7 +375,7 @@ describe('KeyFilterDirective', (): void => {
       expect(inputEl.value).toBe('HelloWorld');
       expect(liveAnnouncer.announce).toHaveBeenCalledWith(
         'Characters not matching the allowed pattern were removed.',
-        'polite'
+        'polite',
       );
     });
 
@@ -461,7 +461,7 @@ describe('KeyFilterDirective', (): void => {
       TestBed.flushEffects();
 
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[uilibKeyFilter] Both pattern and regex are set. The regex input takes precedence.'
+        '[uilibKeyFilter] Both pattern and regex are set. The regex input takes precedence.',
       );
 
       consoleWarnSpy.mockRestore();

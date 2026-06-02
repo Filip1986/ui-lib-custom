@@ -54,160 +54,160 @@ These are reserved for system-wide tokens and should not include component names
 
 All non-compliant variables and their standardized names.
 
-| Component | Current Name | New Name | Breaking Change? |
-|-----------|--------------|----------|------------------|
-| Alert | `--alert-bg` | `--uilib-alert-bg` | Yes |
-| Alert | `--alert-fg` | `--uilib-alert-fg` | Yes |
-| Badge | `--badge-bg` | `--uilib-badge-bg` | Yes |
-| Badge | `--badge-bg-subtle` | `--uilib-badge-bg-subtle` | Yes |
-| Badge | `--badge-bg-outline` | `--uilib-badge-bg-outline` | Yes |
-| Badge | `--badge-fg` | `--uilib-badge-fg` | Yes |
-| Badge | `--badge-border-color` | `--uilib-badge-border-color` | Yes |
-| Badge | `--badge-border-width` | `--uilib-badge-border-width` | Yes |
-| Badge | `--badge-radius` | `--uilib-badge-radius` | Yes |
-| Badge | `--badge-padding-y` | `--uilib-badge-padding-y` | Yes |
-| Badge | `--badge-padding-x` | `--uilib-badge-padding-x` | Yes |
-| Badge | `--badge-gap` | `--uilib-badge-gap` | Yes |
-| Badge | `--badge-font-size` | `--uilib-badge-font-size` | Yes |
-| Badge | `--badge-dot-size` | `--uilib-badge-dot-size` | Yes |
-| Button | `--btn-bg` | `--uilib-button-bg` | Yes |
-| Button | `--btn-bg-hover` | `--uilib-button-bg-hover` | Yes |
-| Button | `--btn-bg-active` | `--uilib-button-bg-active` | Yes |
-| Button | `--btn-border` | `--uilib-button-border` | Yes |
-| Button | `--btn-fg` | `--uilib-button-fg` | Yes |
-| Button | `--btn-fg-hover` | `--uilib-button-fg-hover` | Yes |
-| Button | `--btn-icon-gap` | `--uilib-button-icon-gap` | Yes |
-| Icon | `--icon-color` | `--uilib-icon-color` | Yes |
-| Input | `--ui-input-bg` | `--uilib-input-bg` | Yes |
-| Input | `--ui-input-border` | `--uilib-input-border` | Yes |
-| Input | `--ui-input-border-focus` | `--uilib-input-border-focus` | Yes |
-| Input | `--ui-input-text` | `--uilib-input-text` | Yes |
-| Input | `--ui-input-placeholder` | `--uilib-input-placeholder` | Yes |
-| Input | `--ui-input-radius` | `--uilib-input-radius` | Yes |
-| Input | `--ui-input-error` | `--uilib-input-error` | Yes |
-| Input | `--ui-input-label-color` | `--uilib-input-label-color` | Yes |
-| Input | `--ui-input-label-bg` | `--uilib-input-label-bg` | Yes |
-| Input | `--ui-input-label-floating-scale` | `--uilib-input-label-floating-scale` | Yes |
-| Input | `--ui-input-label-offset-x` | `--uilib-input-label-offset-x` | Yes |
-| Input | `--ui-input-label-padding-x` | `--uilib-input-label-padding-x` | Yes |
-| Input | `--ui-input-label-padding-y` | `--uilib-input-label-padding-y` | Yes |
-| Input | `--ui-input-label-on-offset` | `--uilib-input-label-on-offset` | Yes |
-| Input | `--ui-input-float-in-extra-pad` | `--uilib-input-float-in-extra-pad` | Yes |
-| Login | `--background-color` | `--uilib-login-background-color` | Yes |
-| Login | `--text-color` | `--uilib-login-text-color` | Yes |
-| Login | `--surface-color` | `--uilib-login-surface-color` | Yes |
-| Login | `--card-shadow` | `--uilib-login-card-shadow` | Yes |
-| Login | `--border-color` | `--uilib-login-border-color` | Yes |
-| Login | `--primary-color` | `--uilib-login-primary-color` | Yes |
-| Login | `--primary-color-rgb` | `--uilib-login-primary-color-rgb` | Yes |
-| Login | `--text-color-secondary` | `--uilib-login-text-color-secondary` | Yes |
-| Login | `--surface-hover` | `--uilib-login-surface-hover` | Yes |
-| Login | `--red-500` | `--uilib-login-danger-color` | Yes |
-| Login Form | `--login-card-bg` | `--uilib-login-form-card-bg` | Yes |
-| Login Form | `--login-card-text` | `--uilib-login-form-card-text` | Yes |
-| Login Form | `--login-card-border` | `--uilib-login-form-card-border` | Yes |
-| Login Form | `--login-surface` | `--uilib-login-form-surface` | Yes |
-| Login Form | `--login-muted` | `--uilib-login-form-muted` | Yes |
-| Login 1 | `--card-radius` | `--uilib-login-1-card-radius` | Yes |
-| Select | `--ui-select-bg` | `--uilib-select-bg` | Yes |
-| Select | `--ui-select-border` | `--uilib-select-border` | Yes |
-| Select | `--ui-select-radius` | `--uilib-select-radius` | Yes |
-| Select | `--ui-select-dropdown-bg` | `--uilib-select-dropdown-bg` | Yes |
-| Select | `--ui-select-option-hover` | `--uilib-select-option-hover` | Yes |
-| Select Button | `--uilib-selectbutton-gap` | `--uilib-select-button-gap` | Yes |
-| Select Button | `--uilib-selectbutton-border-radius` | `--uilib-select-button-border-radius` | Yes |
-| Select Button | `--uilib-selectbutton-bg` | `--uilib-select-button-bg` | Yes |
-| Select Button | `--uilib-selectbutton-border` | `--uilib-select-button-border` | Yes |
-| Select Button | `--uilib-selectbutton-selected-bg` | `--uilib-select-button-selected-bg` | Yes |
-| Select Button | `--uilib-selectbutton-selected-fg` | `--uilib-select-button-selected-fg` | Yes |
-| Select Button | `--uilib-selectbutton-hover-bg` | `--uilib-select-button-hover-bg` | Yes |
-| Select Button | `--uilib-selectbutton-shadow` | `--uilib-select-button-shadow` | Yes |
-| Select Button | `--uilib-selectbutton-disabled-opacity` | `--uilib-select-button-disabled-opacity` | Yes |
-| Select Button | `--uilib-selectbutton-invalid-border` | `--uilib-select-button-invalid-border` | Yes |
-| Select Button | `--uilib-selectbutton-small-padding` | `--uilib-select-button-small-padding` | Yes |
-| Select Button | `--uilib-selectbutton-small-font-size` | `--uilib-select-button-small-font-size` | Yes |
-| Select Button | `--uilib-selectbutton-small-min-height` | `--uilib-select-button-small-min-height` | Yes |
-| Select Button | `--uilib-selectbutton-medium-padding` | `--uilib-select-button-medium-padding` | Yes |
-| Select Button | `--uilib-selectbutton-medium-font-size` | `--uilib-select-button-medium-font-size` | Yes |
-| Select Button | `--uilib-selectbutton-medium-min-height` | `--uilib-select-button-medium-min-height` | Yes |
-| Select Button | `--uilib-selectbutton-large-padding` | `--uilib-select-button-large-padding` | Yes |
-| Select Button | `--uilib-selectbutton-large-font-size` | `--uilib-select-button-large-font-size` | Yes |
-| Select Button | `--uilib-selectbutton-large-min-height` | `--uilib-select-button-large-min-height` | Yes |
-| Select Button | `--uilib-selectbutton-material-border-radius` | `--uilib-select-button-material-border-radius` | Yes |
-| Select Button | `--uilib-selectbutton-material-bg` | `--uilib-select-button-material-bg` | Yes |
-| Select Button | `--uilib-selectbutton-material-selected-bg` | `--uilib-select-button-material-selected-bg` | Yes |
-| Select Button | `--uilib-selectbutton-material-selected-fg` | `--uilib-select-button-material-selected-fg` | Yes |
-| Select Button | `--uilib-selectbutton-material-hover-bg` | `--uilib-select-button-material-hover-bg` | Yes |
-| Select Button | `--uilib-selectbutton-material-border` | `--uilib-select-button-material-border` | Yes |
-| Select Button | `--uilib-selectbutton-material-shadow` | `--uilib-select-button-material-shadow` | Yes |
-| Select Button | `--uilib-selectbutton-bootstrap-border-radius` | `--uilib-select-button-bootstrap-border-radius` | Yes |
-| Select Button | `--uilib-selectbutton-bootstrap-bg` | `--uilib-select-button-bootstrap-bg` | Yes |
-| Select Button | `--uilib-selectbutton-bootstrap-selected-bg` | `--uilib-select-button-bootstrap-selected-bg` | Yes |
-| Select Button | `--uilib-selectbutton-bootstrap-selected-fg` | `--uilib-select-button-bootstrap-selected-fg` | Yes |
-| Select Button | `--uilib-selectbutton-bootstrap-hover-bg` | `--uilib-select-button-bootstrap-hover-bg` | Yes |
-| Select Button | `--uilib-selectbutton-bootstrap-border` | `--uilib-select-button-bootstrap-border` | Yes |
-| Select Button | `--uilib-selectbutton-minimal-border-radius` | `--uilib-select-button-minimal-border-radius` | Yes |
-| Select Button | `--uilib-selectbutton-minimal-bg` | `--uilib-select-button-minimal-bg` | Yes |
-| Select Button | `--uilib-selectbutton-minimal-selected-bg` | `--uilib-select-button-minimal-selected-bg` | Yes |
-| Select Button | `--uilib-selectbutton-minimal-selected-fg` | `--uilib-select-button-minimal-selected-fg` | Yes |
-| Select Button | `--uilib-selectbutton-minimal-hover-bg` | `--uilib-select-button-minimal-hover-bg` | Yes |
-| Select Button | `--uilib-selectbutton-minimal-border` | `--uilib-select-button-minimal-border` | Yes |
-| Select Button | `--_sb-gap` | `--uilib-select-button-gap` | Yes |
-| Select Button | `--_sb-radius` | `--uilib-select-button-border-radius` | Yes |
-| Select Button | `--_sb-bg` | `--uilib-select-button-bg` | Yes |
-| Select Button | `--_sb-border` | `--uilib-select-button-border` | Yes |
-| Select Button | `--_sb-selected-bg` | `--uilib-select-button-selected-bg` | Yes |
-| Select Button | `--_sb-selected-fg` | `--uilib-select-button-selected-fg` | Yes |
-| Select Button | `--_sb-hover-bg` | `--uilib-select-button-hover-bg` | Yes |
-| Select Button | `--_sb-shadow` | `--uilib-select-button-shadow` | Yes |
-| Select Button | `--_sb-disabled-opacity` | `--uilib-select-button-disabled-opacity` | Yes |
-| Select Button | `--_sb-invalid-border` | `--uilib-select-button-invalid-border` | Yes |
-| Select Button | `--_sb-padding` | `--uilib-select-button-padding` | Yes |
-| Select Button | `--_sb-font-size` | `--uilib-select-button-font-size` | Yes |
-| Select Button | `--_sb-min-height` | `--uilib-select-button-min-height` | Yes |
-| Sidebar Menu | `--ui-sidebar-bg` | `--uilib-sidebar-bg` | Yes |
-| Sidebar Menu | `--ui-sidebar-width` | `--uilib-sidebar-width` | Yes |
-| Sidebar Menu | `--ui-sidebar-collapsed-width` | `--uilib-sidebar-collapsed-width` | Yes |
-| Sidebar Menu | `--ui-sidebar-item-hover` | `--uilib-sidebar-item-hover` | Yes |
-| Sidebar Menu | `--ui-sidebar-item-active` | `--uilib-sidebar-item-active` | Yes |
-| Sidebar Menu | `--ui-sidebar-text` | `--uilib-sidebar-text` | Yes |
-| Sidebar Menu | `--ui-sidebar-icon` | `--uilib-sidebar-icon` | Yes |
-| Tabs | `--_tabs-bg` | `--uilib-tabs-bg` | Yes |
-| Tabs | `--_tabs-border` | `--uilib-tabs-border` | Yes |
-| Tabs | `--_tabs-border-width` | `--uilib-tabs-border-width` | Yes |
-| Tabs | `--_tabs-border-style` | `--uilib-tabs-border-style` | Yes |
-| Tabs | `--_tabs-radius` | `--uilib-tabs-radius` | Yes |
-| Tabs | `--_tabs-gap` | `--uilib-tabs-gap` | Yes |
-| Tabs | `--_tabs-padding` | `--uilib-tabs-padding` | Yes |
-| Tabs | `--_tab-padding-x` | `--uilib-tab-padding-x` | Yes |
-| Tabs | `--_tab-padding-y` | `--uilib-tab-padding-y` | Yes |
-| Tabs | `--_tab-gap` | `--uilib-tab-gap` | Yes |
-| Tabs | `--_tab-font-size` | `--uilib-tab-font-size` | Yes |
-| Tabs | `--_tab-font-weight` | `--uilib-tab-font-weight` | Yes |
-| Tabs | `--_tab-color` | `--uilib-tabs-color` | Yes |
-| Tabs | `--_tab-color-active` | `--uilib-tabs-color-active` | Yes |
-| Tabs | `--_tab-color-disabled` | `--uilib-tabs-color-disabled` | Yes |
-| Tabs | `--_tab-bg` | `--uilib-tab-bg` | Yes |
-| Tabs | `--_tab-bg-hover` | `--uilib-tab-bg-hover` | Yes |
-| Tabs | `--_tab-bg-active` | `--uilib-tab-bg-active` | Yes |
-| Tabs | `--_tab-border` | `--uilib-tab-border` | Yes |
-| Tabs | `--_tab-border-active` | `--uilib-tab-border-active` | Yes |
-| Tabs | `--_tab-radius` | `--uilib-tab-radius` | Yes |
-| Tabs | `--_indicator-color` | `--uilib-tabs-indicator-color` | Yes |
-| Tabs | `--_indicator-height` | `--uilib-tabs-indicator-height` | Yes |
-| Tabs | `--_indicator-radius` | `--uilib-tabs-indicator-radius` | Yes |
-| Tabs | `--_indicator-offset` | `--uilib-tabs-indicator-offset` | Yes |
-| Tabs | `--_transition` | `--uilib-tabs-transition` | Yes |
-| Tabs | `--_scroll-btn-size` | `--uilib-tabs-nav-button-size` | Yes |
-| Tabs | `--_scroll-btn-bg` | `--uilib-tabs-nav-button-bg` | Yes |
-| Tabs | `--_scroll-btn-color` | `--uilib-tabs-nav-button-color` | Yes |
-| Tabs | `--_scroll-btn-border` | `--uilib-tabs-nav-button-border` | Yes |
-| Tabs | `--_scroll-btn-radius` | `--uilib-tabs-nav-button-radius` | Yes |
-| Tabs | `--_scroll-btn-shadow` | `--uilib-tabs-nav-button-shadow` | Yes |
-| Tabs | `--_scroll-btn-hover-bg` | `--uilib-tabs-nav-button-hover-bg` | Yes |
-| Tabs | `--_scroll-btn-active-bg` | `--uilib-tabs-nav-button-active-bg` | Yes |
-| Tabs | `--_scroll-btn-disabled-opacity` | `--uilib-tabs-nav-button-disabled-opacity` | Yes |
-| Tabs | `--_scroll-btn-gap` | `--uilib-tabs-nav-button-gap` | Yes |
+| Component     | Current Name                                   | New Name                                        | Breaking Change? |
+| ------------- | ---------------------------------------------- | ----------------------------------------------- | ---------------- |
+| Alert         | `--alert-bg`                                   | `--uilib-alert-bg`                              | Yes              |
+| Alert         | `--alert-fg`                                   | `--uilib-alert-fg`                              | Yes              |
+| Badge         | `--badge-bg`                                   | `--uilib-badge-bg`                              | Yes              |
+| Badge         | `--badge-bg-subtle`                            | `--uilib-badge-bg-subtle`                       | Yes              |
+| Badge         | `--badge-bg-outline`                           | `--uilib-badge-bg-outline`                      | Yes              |
+| Badge         | `--badge-fg`                                   | `--uilib-badge-fg`                              | Yes              |
+| Badge         | `--badge-border-color`                         | `--uilib-badge-border-color`                    | Yes              |
+| Badge         | `--badge-border-width`                         | `--uilib-badge-border-width`                    | Yes              |
+| Badge         | `--badge-radius`                               | `--uilib-badge-radius`                          | Yes              |
+| Badge         | `--badge-padding-y`                            | `--uilib-badge-padding-y`                       | Yes              |
+| Badge         | `--badge-padding-x`                            | `--uilib-badge-padding-x`                       | Yes              |
+| Badge         | `--badge-gap`                                  | `--uilib-badge-gap`                             | Yes              |
+| Badge         | `--badge-font-size`                            | `--uilib-badge-font-size`                       | Yes              |
+| Badge         | `--badge-dot-size`                             | `--uilib-badge-dot-size`                        | Yes              |
+| Button        | `--btn-bg`                                     | `--uilib-button-bg`                             | Yes              |
+| Button        | `--btn-bg-hover`                               | `--uilib-button-bg-hover`                       | Yes              |
+| Button        | `--btn-bg-active`                              | `--uilib-button-bg-active`                      | Yes              |
+| Button        | `--btn-border`                                 | `--uilib-button-border`                         | Yes              |
+| Button        | `--btn-fg`                                     | `--uilib-button-fg`                             | Yes              |
+| Button        | `--btn-fg-hover`                               | `--uilib-button-fg-hover`                       | Yes              |
+| Button        | `--btn-icon-gap`                               | `--uilib-button-icon-gap`                       | Yes              |
+| Icon          | `--icon-color`                                 | `--uilib-icon-color`                            | Yes              |
+| Input         | `--ui-input-bg`                                | `--uilib-input-bg`                              | Yes              |
+| Input         | `--ui-input-border`                            | `--uilib-input-border`                          | Yes              |
+| Input         | `--ui-input-border-focus`                      | `--uilib-input-border-focus`                    | Yes              |
+| Input         | `--ui-input-text`                              | `--uilib-input-text`                            | Yes              |
+| Input         | `--ui-input-placeholder`                       | `--uilib-input-placeholder`                     | Yes              |
+| Input         | `--ui-input-radius`                            | `--uilib-input-radius`                          | Yes              |
+| Input         | `--ui-input-error`                             | `--uilib-input-error`                           | Yes              |
+| Input         | `--ui-input-label-color`                       | `--uilib-input-label-color`                     | Yes              |
+| Input         | `--ui-input-label-bg`                          | `--uilib-input-label-bg`                        | Yes              |
+| Input         | `--ui-input-label-floating-scale`              | `--uilib-input-label-floating-scale`            | Yes              |
+| Input         | `--ui-input-label-offset-x`                    | `--uilib-input-label-offset-x`                  | Yes              |
+| Input         | `--ui-input-label-padding-x`                   | `--uilib-input-label-padding-x`                 | Yes              |
+| Input         | `--ui-input-label-padding-y`                   | `--uilib-input-label-padding-y`                 | Yes              |
+| Input         | `--ui-input-label-on-offset`                   | `--uilib-input-label-on-offset`                 | Yes              |
+| Input         | `--ui-input-float-in-extra-pad`                | `--uilib-input-float-in-extra-pad`              | Yes              |
+| Login         | `--background-color`                           | `--uilib-login-background-color`                | Yes              |
+| Login         | `--text-color`                                 | `--uilib-login-text-color`                      | Yes              |
+| Login         | `--surface-color`                              | `--uilib-login-surface-color`                   | Yes              |
+| Login         | `--card-shadow`                                | `--uilib-login-card-shadow`                     | Yes              |
+| Login         | `--border-color`                               | `--uilib-login-border-color`                    | Yes              |
+| Login         | `--primary-color`                              | `--uilib-login-primary-color`                   | Yes              |
+| Login         | `--primary-color-rgb`                          | `--uilib-login-primary-color-rgb`               | Yes              |
+| Login         | `--text-color-secondary`                       | `--uilib-login-text-color-secondary`            | Yes              |
+| Login         | `--surface-hover`                              | `--uilib-login-surface-hover`                   | Yes              |
+| Login         | `--red-500`                                    | `--uilib-login-danger-color`                    | Yes              |
+| Login Form    | `--login-card-bg`                              | `--uilib-login-form-card-bg`                    | Yes              |
+| Login Form    | `--login-card-text`                            | `--uilib-login-form-card-text`                  | Yes              |
+| Login Form    | `--login-card-border`                          | `--uilib-login-form-card-border`                | Yes              |
+| Login Form    | `--login-surface`                              | `--uilib-login-form-surface`                    | Yes              |
+| Login Form    | `--login-muted`                                | `--uilib-login-form-muted`                      | Yes              |
+| Login 1       | `--card-radius`                                | `--uilib-login-1-card-radius`                   | Yes              |
+| Select        | `--ui-select-bg`                               | `--uilib-select-bg`                             | Yes              |
+| Select        | `--ui-select-border`                           | `--uilib-select-border`                         | Yes              |
+| Select        | `--ui-select-radius`                           | `--uilib-select-radius`                         | Yes              |
+| Select        | `--ui-select-dropdown-bg`                      | `--uilib-select-dropdown-bg`                    | Yes              |
+| Select        | `--ui-select-option-hover`                     | `--uilib-select-option-hover`                   | Yes              |
+| Select Button | `--uilib-selectbutton-gap`                     | `--uilib-select-button-gap`                     | Yes              |
+| Select Button | `--uilib-selectbutton-border-radius`           | `--uilib-select-button-border-radius`           | Yes              |
+| Select Button | `--uilib-selectbutton-bg`                      | `--uilib-select-button-bg`                      | Yes              |
+| Select Button | `--uilib-selectbutton-border`                  | `--uilib-select-button-border`                  | Yes              |
+| Select Button | `--uilib-selectbutton-selected-bg`             | `--uilib-select-button-selected-bg`             | Yes              |
+| Select Button | `--uilib-selectbutton-selected-fg`             | `--uilib-select-button-selected-fg`             | Yes              |
+| Select Button | `--uilib-selectbutton-hover-bg`                | `--uilib-select-button-hover-bg`                | Yes              |
+| Select Button | `--uilib-selectbutton-shadow`                  | `--uilib-select-button-shadow`                  | Yes              |
+| Select Button | `--uilib-selectbutton-disabled-opacity`        | `--uilib-select-button-disabled-opacity`        | Yes              |
+| Select Button | `--uilib-selectbutton-invalid-border`          | `--uilib-select-button-invalid-border`          | Yes              |
+| Select Button | `--uilib-selectbutton-small-padding`           | `--uilib-select-button-small-padding`           | Yes              |
+| Select Button | `--uilib-selectbutton-small-font-size`         | `--uilib-select-button-small-font-size`         | Yes              |
+| Select Button | `--uilib-selectbutton-small-min-height`        | `--uilib-select-button-small-min-height`        | Yes              |
+| Select Button | `--uilib-selectbutton-medium-padding`          | `--uilib-select-button-medium-padding`          | Yes              |
+| Select Button | `--uilib-selectbutton-medium-font-size`        | `--uilib-select-button-medium-font-size`        | Yes              |
+| Select Button | `--uilib-selectbutton-medium-min-height`       | `--uilib-select-button-medium-min-height`       | Yes              |
+| Select Button | `--uilib-selectbutton-large-padding`           | `--uilib-select-button-large-padding`           | Yes              |
+| Select Button | `--uilib-selectbutton-large-font-size`         | `--uilib-select-button-large-font-size`         | Yes              |
+| Select Button | `--uilib-selectbutton-large-min-height`        | `--uilib-select-button-large-min-height`        | Yes              |
+| Select Button | `--uilib-selectbutton-material-border-radius`  | `--uilib-select-button-material-border-radius`  | Yes              |
+| Select Button | `--uilib-selectbutton-material-bg`             | `--uilib-select-button-material-bg`             | Yes              |
+| Select Button | `--uilib-selectbutton-material-selected-bg`    | `--uilib-select-button-material-selected-bg`    | Yes              |
+| Select Button | `--uilib-selectbutton-material-selected-fg`    | `--uilib-select-button-material-selected-fg`    | Yes              |
+| Select Button | `--uilib-selectbutton-material-hover-bg`       | `--uilib-select-button-material-hover-bg`       | Yes              |
+| Select Button | `--uilib-selectbutton-material-border`         | `--uilib-select-button-material-border`         | Yes              |
+| Select Button | `--uilib-selectbutton-material-shadow`         | `--uilib-select-button-material-shadow`         | Yes              |
+| Select Button | `--uilib-selectbutton-bootstrap-border-radius` | `--uilib-select-button-bootstrap-border-radius` | Yes              |
+| Select Button | `--uilib-selectbutton-bootstrap-bg`            | `--uilib-select-button-bootstrap-bg`            | Yes              |
+| Select Button | `--uilib-selectbutton-bootstrap-selected-bg`   | `--uilib-select-button-bootstrap-selected-bg`   | Yes              |
+| Select Button | `--uilib-selectbutton-bootstrap-selected-fg`   | `--uilib-select-button-bootstrap-selected-fg`   | Yes              |
+| Select Button | `--uilib-selectbutton-bootstrap-hover-bg`      | `--uilib-select-button-bootstrap-hover-bg`      | Yes              |
+| Select Button | `--uilib-selectbutton-bootstrap-border`        | `--uilib-select-button-bootstrap-border`        | Yes              |
+| Select Button | `--uilib-selectbutton-minimal-border-radius`   | `--uilib-select-button-minimal-border-radius`   | Yes              |
+| Select Button | `--uilib-selectbutton-minimal-bg`              | `--uilib-select-button-minimal-bg`              | Yes              |
+| Select Button | `--uilib-selectbutton-minimal-selected-bg`     | `--uilib-select-button-minimal-selected-bg`     | Yes              |
+| Select Button | `--uilib-selectbutton-minimal-selected-fg`     | `--uilib-select-button-minimal-selected-fg`     | Yes              |
+| Select Button | `--uilib-selectbutton-minimal-hover-bg`        | `--uilib-select-button-minimal-hover-bg`        | Yes              |
+| Select Button | `--uilib-selectbutton-minimal-border`          | `--uilib-select-button-minimal-border`          | Yes              |
+| Select Button | `--_sb-gap`                                    | `--uilib-select-button-gap`                     | Yes              |
+| Select Button | `--_sb-radius`                                 | `--uilib-select-button-border-radius`           | Yes              |
+| Select Button | `--_sb-bg`                                     | `--uilib-select-button-bg`                      | Yes              |
+| Select Button | `--_sb-border`                                 | `--uilib-select-button-border`                  | Yes              |
+| Select Button | `--_sb-selected-bg`                            | `--uilib-select-button-selected-bg`             | Yes              |
+| Select Button | `--_sb-selected-fg`                            | `--uilib-select-button-selected-fg`             | Yes              |
+| Select Button | `--_sb-hover-bg`                               | `--uilib-select-button-hover-bg`                | Yes              |
+| Select Button | `--_sb-shadow`                                 | `--uilib-select-button-shadow`                  | Yes              |
+| Select Button | `--_sb-disabled-opacity`                       | `--uilib-select-button-disabled-opacity`        | Yes              |
+| Select Button | `--_sb-invalid-border`                         | `--uilib-select-button-invalid-border`          | Yes              |
+| Select Button | `--_sb-padding`                                | `--uilib-select-button-padding`                 | Yes              |
+| Select Button | `--_sb-font-size`                              | `--uilib-select-button-font-size`               | Yes              |
+| Select Button | `--_sb-min-height`                             | `--uilib-select-button-min-height`              | Yes              |
+| Sidebar Menu  | `--ui-sidebar-bg`                              | `--uilib-sidebar-bg`                            | Yes              |
+| Sidebar Menu  | `--ui-sidebar-width`                           | `--uilib-sidebar-width`                         | Yes              |
+| Sidebar Menu  | `--ui-sidebar-collapsed-width`                 | `--uilib-sidebar-collapsed-width`               | Yes              |
+| Sidebar Menu  | `--ui-sidebar-item-hover`                      | `--uilib-sidebar-item-hover`                    | Yes              |
+| Sidebar Menu  | `--ui-sidebar-item-active`                     | `--uilib-sidebar-item-active`                   | Yes              |
+| Sidebar Menu  | `--ui-sidebar-text`                            | `--uilib-sidebar-text`                          | Yes              |
+| Sidebar Menu  | `--ui-sidebar-icon`                            | `--uilib-sidebar-icon`                          | Yes              |
+| Tabs          | `--_tabs-bg`                                   | `--uilib-tabs-bg`                               | Yes              |
+| Tabs          | `--_tabs-border`                               | `--uilib-tabs-border`                           | Yes              |
+| Tabs          | `--_tabs-border-width`                         | `--uilib-tabs-border-width`                     | Yes              |
+| Tabs          | `--_tabs-border-style`                         | `--uilib-tabs-border-style`                     | Yes              |
+| Tabs          | `--_tabs-radius`                               | `--uilib-tabs-radius`                           | Yes              |
+| Tabs          | `--_tabs-gap`                                  | `--uilib-tabs-gap`                              | Yes              |
+| Tabs          | `--_tabs-padding`                              | `--uilib-tabs-padding`                          | Yes              |
+| Tabs          | `--_tab-padding-x`                             | `--uilib-tab-padding-x`                         | Yes              |
+| Tabs          | `--_tab-padding-y`                             | `--uilib-tab-padding-y`                         | Yes              |
+| Tabs          | `--_tab-gap`                                   | `--uilib-tab-gap`                               | Yes              |
+| Tabs          | `--_tab-font-size`                             | `--uilib-tab-font-size`                         | Yes              |
+| Tabs          | `--_tab-font-weight`                           | `--uilib-tab-font-weight`                       | Yes              |
+| Tabs          | `--_tab-color`                                 | `--uilib-tabs-color`                            | Yes              |
+| Tabs          | `--_tab-color-active`                          | `--uilib-tabs-color-active`                     | Yes              |
+| Tabs          | `--_tab-color-disabled`                        | `--uilib-tabs-color-disabled`                   | Yes              |
+| Tabs          | `--_tab-bg`                                    | `--uilib-tab-bg`                                | Yes              |
+| Tabs          | `--_tab-bg-hover`                              | `--uilib-tab-bg-hover`                          | Yes              |
+| Tabs          | `--_tab-bg-active`                             | `--uilib-tab-bg-active`                         | Yes              |
+| Tabs          | `--_tab-border`                                | `--uilib-tab-border`                            | Yes              |
+| Tabs          | `--_tab-border-active`                         | `--uilib-tab-border-active`                     | Yes              |
+| Tabs          | `--_tab-radius`                                | `--uilib-tab-radius`                            | Yes              |
+| Tabs          | `--_indicator-color`                           | `--uilib-tabs-indicator-color`                  | Yes              |
+| Tabs          | `--_indicator-height`                          | `--uilib-tabs-indicator-height`                 | Yes              |
+| Tabs          | `--_indicator-radius`                          | `--uilib-tabs-indicator-radius`                 | Yes              |
+| Tabs          | `--_indicator-offset`                          | `--uilib-tabs-indicator-offset`                 | Yes              |
+| Tabs          | `--_transition`                                | `--uilib-tabs-transition`                       | Yes              |
+| Tabs          | `--_scroll-btn-size`                           | `--uilib-tabs-nav-button-size`                  | Yes              |
+| Tabs          | `--_scroll-btn-bg`                             | `--uilib-tabs-nav-button-bg`                    | Yes              |
+| Tabs          | `--_scroll-btn-color`                          | `--uilib-tabs-nav-button-color`                 | Yes              |
+| Tabs          | `--_scroll-btn-border`                         | `--uilib-tabs-nav-button-border`                | Yes              |
+| Tabs          | `--_scroll-btn-radius`                         | `--uilib-tabs-nav-button-radius`                | Yes              |
+| Tabs          | `--_scroll-btn-shadow`                         | `--uilib-tabs-nav-button-shadow`                | Yes              |
+| Tabs          | `--_scroll-btn-hover-bg`                       | `--uilib-tabs-nav-button-hover-bg`              | Yes              |
+| Tabs          | `--_scroll-btn-active-bg`                      | `--uilib-tabs-nav-button-active-bg`             | Yes              |
+| Tabs          | `--_scroll-btn-disabled-opacity`               | `--uilib-tabs-nav-button-disabled-opacity`      | Yes              |
+| Tabs          | `--_scroll-btn-gap`                            | `--uilib-tabs-nav-button-gap`                   | Yes              |
 
 ## Migration Strategy
 

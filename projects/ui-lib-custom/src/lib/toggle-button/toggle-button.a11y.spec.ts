@@ -142,7 +142,7 @@ describe('ToggleButton Accessibility', (): void => {
 
   it('icon-only mode uses aria-label when provided', async (): Promise<void> => {
     const fixture: ComponentFixture<IconOnlyWithLabelHostComponent> = await createFixture(
-      IconOnlyWithLabelHostComponent
+      IconOnlyWithLabelHostComponent,
     );
     const button: HTMLButtonElement = getButton(fixture);
     expect(button.getAttribute('aria-label')).toBe('Favorite');
@@ -154,11 +154,11 @@ describe('ToggleButton Accessibility', (): void => {
       .spyOn(console, 'error')
       .mockImplementation((): void => {});
     const fixture: ComponentFixture<IconOnlyWithoutLabelHostComponent> = await createFixture(
-      IconOnlyWithoutLabelHostComponent
+      IconOnlyWithoutLabelHostComponent,
     );
     expect(fixture).toBeTruthy();
     expect(errorSpy).toHaveBeenCalledWith(
-      '[ui-lib-toggle-button] ariaLabel is required when the toggle button renders icon-only content.'
+      '[ui-lib-toggle-button] ariaLabel is required when the toggle button renders icon-only content.',
     );
     errorSpy.mockRestore();
   });
@@ -168,7 +168,7 @@ describe('ToggleButton Accessibility', (): void => {
       .spyOn(console, 'error')
       .mockImplementation((): void => {});
     const fixture: ComponentFixture<IconOnlyWithoutLabelHostComponent> = await createFixture(
-      IconOnlyWithoutLabelHostComponent
+      IconOnlyWithoutLabelHostComponent,
     );
     expect(getButton(fixture).getAttribute('aria-label')).toBeNull();
     errorSpy.mockRestore();
@@ -200,14 +200,14 @@ describe('ToggleButton Accessibility', (): void => {
 
   it('applies aria-labelledby when provided', async (): Promise<void> => {
     const fixture: ComponentFixture<AriaLabelledByHostComponent> = await createFixture(
-      AriaLabelledByHostComponent
+      AriaLabelledByHostComponent,
     );
     expect(getButton(fixture).getAttribute('aria-labelledby')).toBe('external-label');
   });
 
   it('treats whitespace-only ariaLabel as unset', async (): Promise<void> => {
     const fixture: ComponentFixture<EmptyAriaLabelHostComponent> = await createFixture(
-      EmptyAriaLabelHostComponent
+      EmptyAriaLabelHostComponent,
     );
     expect(getButton(fixture).getAttribute('aria-label')).toBeNull();
   });
@@ -216,7 +216,7 @@ describe('ToggleButton Accessibility', (): void => {
     const fixture: ComponentFixture<GroupUsageHostComponent> =
       await createFixture(GroupUsageHostComponent);
     const group: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '[role="group"]'
+      '[role="group"]',
     );
     expect(group).not.toBeNull();
     expect(group?.getAttribute('aria-label')).toBe('Formatting toggles');
@@ -247,7 +247,7 @@ describe('ToggleButton Accessibility', (): void => {
 
   it('axe: icon-only with aria-label passes', async (): Promise<void> => {
     const fixture: ComponentFixture<IconOnlyWithLabelHostComponent> = await createFixture(
-      IconOnlyWithLabelHostComponent
+      IconOnlyWithLabelHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });

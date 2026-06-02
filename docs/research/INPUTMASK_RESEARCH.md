@@ -393,4 +393,3 @@ Minimum unit coverage should include:
 4. Wire key/focus/blur/input/paste handlers and Android path.
 5. Add clear icon projection option and token-backed styling.
 6. Build comprehensive tests (including Android and optional segment edge cases).
-

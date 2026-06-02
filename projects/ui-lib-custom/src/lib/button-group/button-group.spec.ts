@@ -45,16 +45,16 @@ describe('ButtonGroup', (): void => {
     (fixture.nativeElement as HTMLElement).querySelector('ui-lib-button-group') as HTMLElement;
   const getGroup: () => HTMLElement = (): HTMLElement =>
     (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-button-group .ui-lib-button-group__group'
+      'ui-lib-button-group .ui-lib-button-group__group',
     ) as HTMLElement;
   const getButtons: () => HTMLButtonElement[] = (): HTMLButtonElement[] =>
     Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('button')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
     ) as HTMLButtonElement[];
 
   const getRequiredButton: (buttons: HTMLButtonElement[], index: number) => HTMLButtonElement = (
     buttons: HTMLButtonElement[],
-    index: number
+    index: number,
   ): HTMLButtonElement => {
     const button: HTMLButtonElement | undefined = buttons[index];
     if (!button) {

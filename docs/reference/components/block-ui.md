@@ -13,11 +13,11 @@ BlockUI - Blocks user interaction on a section of the page by overlaying a mask.
 
 ### Inputs
 
-| Name         | Type                    | Default | Description                                                            |
-| ------------ | ----------------------- | ------- | ---------------------------------------------------------------------- |
-| `baseZIndex` | `number`                | `0`     | Base z-index for the mask layer. When 0 uses the CSS variable default. |
-| `styleClass` | `string | null`         | `null`  | Additional CSS classes to apply to the host element.                   |
-| `variant`    | `BlockUIVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.        |
+| Name         | Type            | Default | Description                                                            |
+| ------------ | --------------- | ------- | ---------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `baseZIndex` | `number`        | `0`     | Base z-index for the mask layer. When 0 uses the CSS variable default. |
+| `styleClass` | `string         | null`   | `null`                                                                 | Additional CSS classes to apply to the host element.            |
+| `variant`    | `BlockUIVariant | null`   | `null`                                                                 | Visual variant — inherits from ThemeConfigService when not set. |
 
 ### Models (two-way bindable)
 
@@ -86,9 +86,7 @@ _none_
 <!-- custom mask content with a spinner -->
 <ui-lib-block-ui [(blocked)]="isSaving">
   <form>...</form>
-  <span blockTemplate>
-    <ui-lib-spinner /> Saving…
-  </span>
+  <span blockTemplate> <ui-lib-spinner /> Saving… </span>
 </ui-lib-block-ui>
 ```
 
@@ -98,4 +96,3 @@ _none_
 - [Demo page](/components/block-ui)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/block-ui/README.md)
-

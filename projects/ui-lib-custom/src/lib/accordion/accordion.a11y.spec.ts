@@ -68,16 +68,16 @@ function buildMockTheme(): {
 function getButtons(fixture: ComponentFixture<unknown>): HTMLButtonElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>(
-      '.ui-lib-accordion-panel__header'
-    )
+      '.ui-lib-accordion-panel__header',
+    ),
   );
 }
 
 function getPanelRegions(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-accordion-panel__content'
-    )
+      '.ui-lib-accordion-panel__content',
+    ),
   );
 }
 
@@ -107,7 +107,7 @@ function dispatchKey(element: HTMLElement, key: string): void {
 })
 class BasicHostComponent {
   public readonly expandMode: WritableSignal<'single' | 'multiple'> = signal<'single' | 'multiple'>(
-    'single'
+    'single',
   );
   public readonly disableSecond: WritableSignal<boolean> = signal<boolean>(false);
 }
@@ -157,7 +157,7 @@ async function createTwoAccordionsFixture(): Promise<ComponentFixture<TwoAccordi
   }).compileComponents();
 
   const fixture: ComponentFixture<TwoAccordionsHostComponent> = TestBed.createComponent(
-    TwoAccordionsHostComponent
+    TwoAccordionsHostComponent,
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
@@ -175,7 +175,7 @@ describe('Accordion Accessibility', (): void => {
     }
     // Clean up any appended nativeElements
     const appended: NodeListOf<Element> = document.body.querySelectorAll(
-      'ui-lib-accordion, .ui-lib-accordion-panel'
+      'ui-lib-accordion, .ui-lib-accordion-panel',
     );
     appended.forEach((node: Element): void => {
       if (node.parentElement === document.body) {

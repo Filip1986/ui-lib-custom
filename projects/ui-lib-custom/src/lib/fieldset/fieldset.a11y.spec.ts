@@ -186,13 +186,13 @@ function getFieldset(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getLegend(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-fieldset__legend'
+    '.ui-lib-fieldset__legend',
   ) as HTMLElement;
 }
 
 function getContentWrapper(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-fieldset__content-wrapper'
+    '.ui-lib-fieldset__content-wrapper',
   ) as HTMLElement;
 }
 
@@ -255,8 +255,8 @@ describe('Fieldset Accessibility', (): void => {
       const fixture: ComponentFixture<TwoFieldsetsHost> = await setup(TwoFieldsetsHost);
       const legends: HTMLElement[] = Array.from(
         (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-          '.ui-lib-fieldset__legend'
-        )
+          '.ui-lib-fieldset__legend',
+        ),
       );
       expect(legends.length).toBe(2);
       const id1: string | null = legends[0]?.getAttribute('id') ?? null;
@@ -275,7 +275,7 @@ describe('Fieldset Accessibility', (): void => {
     it('toggle icon has aria-hidden="true" (decorative)', async (): Promise<void> => {
       const fixture: ComponentFixture<ToggleableFieldsetHost> = await setup(ToggleableFieldsetHost);
       const icon: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-fieldset__toggle-icon'
+        '.ui-lib-fieldset__toggle-icon',
       );
       expect(icon?.getAttribute('aria-hidden')).toBe('true');
     });

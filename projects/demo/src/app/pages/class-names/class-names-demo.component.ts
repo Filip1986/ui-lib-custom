@@ -126,14 +126,14 @@ classNames('btn', null, undefined, false, 'icon')
       'demo-box--active': this.isActive(),
       'demo-box--disabled': this.isDisabled(),
       'demo-box--highlighted': this.isHighlighted(),
-    })
+    }),
   );
 
   /** Result preview for the function call section. */
   public readonly functionResult: Signal<string> = computed<string>((): string =>
     classNames('btn', this.isActive() && 'btn--active', {
       'btn--disabled': this.isDisabled(),
-    })
+    }),
   );
 
   public scrollTo(id: string): void {

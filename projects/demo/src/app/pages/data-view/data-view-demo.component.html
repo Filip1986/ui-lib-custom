@@ -92,10 +92,7 @@
           </ui-lib-data-view>
         </ui-lib-stack>
       </ui-lib-panel>
-      <app-doc-code-example
-        [html]="layoutSwitchingHtml"
-        [typescript]="layoutSwitchingTs"
-      />
+      <app-doc-code-example [html]="layoutSwitchingHtml" [typescript]="layoutSwitchingTs" />
     </app-doc-section>
 
     <app-doc-section id="pagination-client" title="Pagination (Client-Side)">
@@ -110,10 +107,7 @@
           </ng-template>
         </ui-lib-data-view>
       </ui-lib-panel>
-      <app-doc-code-example
-        [html]="paginationClientHtml"
-        [typescript]="paginationClientTs"
-      />
+      <app-doc-code-example [html]="paginationClientHtml" [typescript]="paginationClientTs" />
     </app-doc-section>
 
     <app-doc-section id="rows-per-page" title="Rows Per Page">
@@ -133,10 +127,7 @@
           </ng-template>
         </ui-lib-data-view>
       </ui-lib-panel>
-      <app-doc-code-example
-        [html]="rowsPerPageHtml"
-        [typescript]="rowsPerPageTs"
-      />
+      <app-doc-code-example [html]="rowsPerPageHtml" [typescript]="rowsPerPageTs" />
     </app-doc-section>
 
     <app-doc-section id="pagination-position" title="Pagination Position">
@@ -184,10 +175,7 @@
           </ui-lib-data-view>
         </ui-lib-panel>
       </ui-lib-grid>
-      <app-doc-code-example
-        [html]="paginationPositionHtml"
-        [typescript]="paginationPositionTs"
-      />
+      <app-doc-code-example [html]="paginationPositionHtml" [typescript]="paginationPositionTs" />
     </app-doc-section>
 
     <app-doc-section id="custom-page-report" title="Custom Page Report">
@@ -208,10 +196,7 @@
           </ng-template>
         </ui-lib-data-view>
       </ui-lib-panel>
-      <app-doc-code-example
-        [html]="customPageReportHtml"
-        [typescript]="customPageReportTs"
-      />
+      <app-doc-code-example [html]="customPageReportHtml" [typescript]="customPageReportTs" />
     </app-doc-section>
 
     <app-doc-section id="server-side-pagination" title="Server-Side Pagination">
@@ -346,10 +331,7 @@
           </ng-template>
         </ui-lib-data-view>
       </ui-lib-panel>
-      <app-doc-code-example
-        [html]="customTemplatesHtml"
-        [typescript]="customTemplatesTs"
-      />
+      <app-doc-code-example [html]="customTemplatesHtml" [typescript]="customTemplatesTs" />
     </app-doc-section>
 
     <app-doc-section id="empty-state" title="Empty State">
@@ -392,10 +374,7 @@
           </ui-lib-data-view>
         </ui-lib-panel>
       </ui-lib-grid>
-      <app-doc-code-example
-        [html]="loadingStateHtml"
-        [typescript]="loadingStateTs"
-      />
+      <app-doc-code-example [html]="loadingStateHtml" [typescript]="loadingStateTs" />
     </app-doc-section>
 
     <app-doc-section id="sizes" title="Sizes">
@@ -479,10 +458,7 @@
           </ui-lib-data-view>
         </ui-lib-panel>
       </ui-lib-grid>
-      <app-doc-code-example
-        [html]="gridColumnsHtml"
-        [typescript]="gridColumnsTs"
-      />
+      <app-doc-code-example [html]="gridColumnsHtml" [typescript]="gridColumnsTs" />
     </app-doc-section>
 
     <app-doc-section id="custom-paginator-slots" title="Custom Paginator Slots">
@@ -546,13 +522,9 @@
           </ui-lib-data-view>
         </ui-lib-panel>
       </ui-lib-grid>
-      <app-doc-code-example
-        [html]="themeIntegrationHtml"
-        [typescript]="themeIntegrationTs"
-      />
+      <app-doc-code-example [html]="themeIntegrationHtml" [typescript]="themeIntegrationTs" />
     </app-doc-section>
   </div>
-
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
@@ -562,7 +534,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -579,7 +551,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

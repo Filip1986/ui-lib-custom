@@ -66,7 +66,7 @@ function setupDirective(): {
     providers: [provideZonelessChangeDetection()],
   });
   const fixture: ComponentFixture<FluidDirectiveHostComponent> = TestBed.createComponent(
-    FluidDirectiveHostComponent
+    FluidDirectiveHostComponent,
   );
   fixture.detectChanges();
   return { fixture, host: fixture.componentInstance };
@@ -78,7 +78,7 @@ function setupDirectiveAttr(): ComponentFixture<FluidDirectiveAttrHostComponent>
     providers: [provideZonelessChangeDetection()],
   });
   const fixture: ComponentFixture<FluidDirectiveAttrHostComponent> = TestBed.createComponent(
-    FluidDirectiveAttrHostComponent
+    FluidDirectiveAttrHostComponent,
   );
   fixture.detectChanges();
   return fixture;

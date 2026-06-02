@@ -397,7 +397,7 @@ describe('Bind', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<BindExternalOverrideHostComponent> = TestBed.createComponent(
-        BindExternalOverrideHostComponent
+        BindExternalOverrideHostComponent,
       );
 
       fixture.componentInstance.bindings.set({ title: 'bind-title' });
@@ -458,7 +458,7 @@ describe('Bind', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<BindStructuralHostComponent> = TestBed.createComponent(
-        BindStructuralHostComponent
+        BindStructuralHostComponent,
       );
 
       fixture.detectChanges();
@@ -466,10 +466,10 @@ describe('Bind', (): void => {
       const hostElement: HTMLElement = fixture.nativeElement as HTMLElement;
       const ifTarget: HTMLElement | null = hostElement.querySelector('[data-testid="if-target"]');
       const switchTarget: HTMLElement | null = hostElement.querySelector(
-        '[data-testid="switch-target"]'
+        '[data-testid="switch-target"]',
       );
       const forTargets: NodeListOf<HTMLElement> = hostElement.querySelectorAll(
-        '[data-testid="for-target"]'
+        '[data-testid="for-target"]',
       );
 
       expect(ifTarget?.title).toBe('if-title');
@@ -488,7 +488,7 @@ describe('Bind', (): void => {
       fixture.detectChanges();
 
       const directiveWithInternals: BindGetPropertyValueInternal = requireDirective(
-        fixture
+        fixture,
       ) as unknown as BindGetPropertyValueInternal;
 
       expect(directiveWithInternals.getPropertyValue('doesNotExist')).toBeUndefined();
@@ -499,14 +499,14 @@ describe('Bind', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<BindStyleClassHostComponent> = TestBed.createComponent(
-        BindStyleClassHostComponent
+        BindStyleClassHostComponent,
       );
       fixture.detectChanges();
 
       const hostElement: HTMLElement = fixture.nativeElement as HTMLElement;
       const button: HTMLButtonElement = hostElement.querySelector('button') as HTMLButtonElement;
       const target: HTMLElement = hostElement.querySelector(
-        '#bind-style-class-target'
+        '#bind-style-class-target',
       ) as HTMLElement;
 
       expect(button.title).toBe('Toggle the next panel');

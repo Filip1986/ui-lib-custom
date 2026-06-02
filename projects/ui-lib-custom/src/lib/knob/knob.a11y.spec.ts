@@ -41,7 +41,7 @@ class KnobA11yHostComponent {
 }
 
 async function createFixture(
-  initialValue: number = 50
+  initialValue: number = 50,
 ): Promise<ComponentFixture<KnobA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [KnobA11yHostComponent],
@@ -58,7 +58,7 @@ async function createFixture(
 
 function getHostElement(fixture: ComponentFixture<KnobA11yHostComponent>): HTMLElement {
   const hostElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    'ui-lib-knob'
+    'ui-lib-knob',
   );
   if (!hostElement) {
     throw new Error('Expected knob host element');
@@ -68,7 +68,7 @@ function getHostElement(fixture: ComponentFixture<KnobA11yHostComponent>): HTMLE
 
 function getSvgElement(fixture: ComponentFixture<KnobA11yHostComponent>): SVGElement {
   const svgElement: SVGElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-knob-svg'
+    '.ui-lib-knob-svg',
   );
   if (!svgElement) {
     throw new Error('Expected knob svg element');

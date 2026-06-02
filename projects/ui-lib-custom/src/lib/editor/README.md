@@ -8,23 +8,23 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global `ThemeConfigService` variant when null. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Controls padding and font size. |
-| `placeholder` | `string` | `''` | Placeholder shown when the editor is empty. |
-| `readonly` | `boolean` | `false` | When true, sets `contenteditable="false"`. |
-| `disabled` | `boolean` | `false` | Disables editing; also respected via CVA `setDisabledState`. |
-| `filled` | `boolean` | `false` | Applies a filled background style. |
-| `ariaLabel` | `string \| null` | `null` | `aria-label` on the editor content area. |
-| `ariaLabelledBy` | `string \| null` | `null` | `aria-labelledby` on the editor content area. |
+| Name             | Type                                             | Default | Notes                                                        |
+| ---------------- | ------------------------------------------------ | ------- | ------------------------------------------------------------ |
+| `variant`        | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`  | Falls back to global `ThemeConfigService` variant when null. |
+| `size`           | `'sm' \| 'md' \| 'lg'`                           | `'md'`  | Controls padding and font size.                              |
+| `placeholder`    | `string`                                         | `''`    | Placeholder shown when the editor is empty.                  |
+| `readonly`       | `boolean`                                        | `false` | When true, sets `contenteditable="false"`.                   |
+| `disabled`       | `boolean`                                        | `false` | Disables editing; also respected via CVA `setDisabledState`. |
+| `filled`         | `boolean`                                        | `false` | Applies a filled background style.                           |
+| `ariaLabel`      | `string \| null`                                 | `null`  | `aria-label` on the editor content area.                     |
+| `ariaLabelledBy` | `string \| null`                                 | `null`  | `aria-labelledby` on the editor content area.                |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `textChange` | `EditorTextChangeEvent` | Emitted on every input; carries `htmlValue`, `textValue`, and `originalEvent`. |
-| `selectionChange` | `EditorSelectionChangeEvent` | Emitted when the document selection changes inside the editor. |
+| Name              | Payload                      | Notes                                                                          |
+| ----------------- | ---------------------------- | ------------------------------------------------------------------------------ |
+| `textChange`      | `EditorTextChangeEvent`      | Emitted on every input; carries `htmlValue`, `textValue`, and `originalEvent`. |
+| `selectionChange` | `EditorSelectionChangeEvent` | Emitted when the document selection changes inside the editor.                 |
 
 ## Usage
 

@@ -38,7 +38,7 @@ const renderTabs: (args: TabsStoryArgs) => {
   template: string;
   moduleMetadata: { imports: unknown[] };
 } = (
-  args: TabsStoryArgs
+  args: TabsStoryArgs,
 ): { props: TabsStoryArgs; template: string; moduleMetadata: { imports: unknown[] } } => ({
   props: args,
   moduleMetadata: { imports: [Tabs, Tab] },

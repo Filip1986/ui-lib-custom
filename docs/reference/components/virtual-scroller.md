@@ -63,39 +63,39 @@ The item template receives the item as the implicit variable and an `options` ob
 
 ### Inputs
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| `id` | `string` | auto-generated | HTML `id` applied to the viewport element |
-| `styleClass` | `string` | `''` | Extra CSS class on the host element |
-| `items` | `unknown[] \| null \| undefined` | `[]` | Full list of items to virtualize |
-| `itemSize` | `number \| [number, number]` | `0` | Height (vertical), width (horizontal), or `[height, width]` (both) of each item in pixels |
-| `scrollHeight` | `string \| undefined` | `undefined` | CSS height of the viewport (e.g. `'400px'`, `'60vh'`) |
-| `scrollWidth` | `string \| undefined` | `undefined` | CSS width of the viewport — relevant for horizontal/both orientations |
-| `orientation` | `VirtualScrollerOrientation` | `'vertical'` | Scroll axis: `'vertical'`, `'horizontal'`, or `'both'` |
-| `step` | `number` | `0` | Number of items to scroll per step (0 = continuous) |
-| `delay` | `number` | `0` | Debounce delay in ms applied to scroll calculations |
-| `resizeDelay` | `number` | `10` | Debounce delay in ms applied to resize calculations |
-| `appendOnly` | `boolean` | `false` | When `true`, previously rendered items are never removed (append-only mode) |
-| `inline` | `boolean` | `false` | When `true`, the host grows to fit its container rather than taking fixed dimensions |
-| `lazy` | `boolean` | `false` | Enable lazy (server-side) loading. The `lazyLoad` event fires when the window needs new data |
-| `disabled` | `boolean` | `false` | Bypass virtualization entirely — all items are rendered and `<ng-content>` is passed through |
-| `loaderDisabled` | `boolean` | `false` | When `true`, suppresses the loader overlay even if `showLoader` and `loading` are both `true` |
-| `columns` | `unknown[] \| null \| undefined` | `undefined` | Column data for `'both'` orientation |
-| `showSpacer` | `boolean` | `true` | When `false`, the spacer element is omitted (use when a fixed container already provides height) |
-| `showLoader` | `boolean` | `false` | Show the built-in loader overlay or custom `uiScrollerLoader` template while `loading` is `true` |
-| `numToleratedItems` | `number \| undefined` | `undefined` | Number of extra items to render beyond the visible window. Defaults to auto-calculated from viewport size |
-| `loading` | `boolean \| undefined` | `undefined` | External loading flag. Connects to the loader overlay when `showLoader` is also `true` |
-| `trackByFn` | `((index: number, item: unknown) => unknown) \| undefined` | `undefined` | Custom track-by function passed to the internal `@for` loop |
-| `tabIndex` | `number` | `0` | `tabindex` attribute on the viewport element |
-| `totalRecords` | `number \| undefined` | `undefined` | Total number of records available server-side, used in lazy mode to size the spacer |
+| Input               | Type                                                       | Default        | Description                                                                                               |
+| ------------------- | ---------------------------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------- |
+| `id`                | `string`                                                   | auto-generated | HTML `id` applied to the viewport element                                                                 |
+| `styleClass`        | `string`                                                   | `''`           | Extra CSS class on the host element                                                                       |
+| `items`             | `unknown[] \| null \| undefined`                           | `[]`           | Full list of items to virtualize                                                                          |
+| `itemSize`          | `number \| [number, number]`                               | `0`            | Height (vertical), width (horizontal), or `[height, width]` (both) of each item in pixels                 |
+| `scrollHeight`      | `string \| undefined`                                      | `undefined`    | CSS height of the viewport (e.g. `'400px'`, `'60vh'`)                                                     |
+| `scrollWidth`       | `string \| undefined`                                      | `undefined`    | CSS width of the viewport — relevant for horizontal/both orientations                                     |
+| `orientation`       | `VirtualScrollerOrientation`                               | `'vertical'`   | Scroll axis: `'vertical'`, `'horizontal'`, or `'both'`                                                    |
+| `step`              | `number`                                                   | `0`            | Number of items to scroll per step (0 = continuous)                                                       |
+| `delay`             | `number`                                                   | `0`            | Debounce delay in ms applied to scroll calculations                                                       |
+| `resizeDelay`       | `number`                                                   | `10`           | Debounce delay in ms applied to resize calculations                                                       |
+| `appendOnly`        | `boolean`                                                  | `false`        | When `true`, previously rendered items are never removed (append-only mode)                               |
+| `inline`            | `boolean`                                                  | `false`        | When `true`, the host grows to fit its container rather than taking fixed dimensions                      |
+| `lazy`              | `boolean`                                                  | `false`        | Enable lazy (server-side) loading. The `lazyLoad` event fires when the window needs new data              |
+| `disabled`          | `boolean`                                                  | `false`        | Bypass virtualization entirely — all items are rendered and `<ng-content>` is passed through              |
+| `loaderDisabled`    | `boolean`                                                  | `false`        | When `true`, suppresses the loader overlay even if `showLoader` and `loading` are both `true`             |
+| `columns`           | `unknown[] \| null \| undefined`                           | `undefined`    | Column data for `'both'` orientation                                                                      |
+| `showSpacer`        | `boolean`                                                  | `true`         | When `false`, the spacer element is omitted (use when a fixed container already provides height)          |
+| `showLoader`        | `boolean`                                                  | `false`        | Show the built-in loader overlay or custom `uiScrollerLoader` template while `loading` is `true`          |
+| `numToleratedItems` | `number \| undefined`                                      | `undefined`    | Number of extra items to render beyond the visible window. Defaults to auto-calculated from viewport size |
+| `loading`           | `boolean \| undefined`                                     | `undefined`    | External loading flag. Connects to the loader overlay when `showLoader` is also `true`                    |
+| `trackByFn`         | `((index: number, item: unknown) => unknown) \| undefined` | `undefined`    | Custom track-by function passed to the internal `@for` loop                                               |
+| `tabIndex`          | `number`                                                   | `0`            | `tabindex` attribute on the viewport element                                                              |
+| `totalRecords`      | `number \| undefined`                                      | `undefined`    | Total number of records available server-side, used in lazy mode to size the spacer                       |
 
 ### Outputs
 
-| Output | Type | Description |
-|--------|------|-------------|
-| `lazyLoad` | `VirtualScrollerLazyLoadEvent` | Fires (debounced) when the visible window changes in `lazy` mode — provides the `first`/`last` index range to fetch |
-| `scroll` | `VirtualScrollerScrollEvent` | Fires on every scroll event |
-| `scrollIndexChange` | `VirtualScrollerScrollIndexChangeEvent` | Fires when the first or last rendered index changes |
+| Output              | Type                                    | Description                                                                                                         |
+| ------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `lazyLoad`          | `VirtualScrollerLazyLoadEvent`          | Fires (debounced) when the visible window changes in `lazy` mode — provides the `first`/`last` index range to fetch |
+| `scroll`            | `VirtualScrollerScrollEvent`            | Fires on every scroll event                                                                                         |
+| `scrollIndexChange` | `VirtualScrollerScrollIndexChangeEvent` | Fires when the first or last rendered index changes                                                                 |
 
 ---
 
@@ -122,7 +122,9 @@ Replaces the default item rendering. The template context is:
 Replaces the default spinner with custom loader content (e.g. skeleton rows). The template context is:
 
 ```typescript
-{ options: VirtualScrollerLoaderOptions }
+{
+  options: VirtualScrollerLoaderOptions;
+}
 ```
 
 One instance of this template is rendered per item slot visible in the viewport while loading.
@@ -146,7 +148,11 @@ Overrides the entire content area including the item loop. Use only when you nee
 Replaces only the spinner icon inside the default loader overlay. The template context is:
 
 ```typescript
-{ options: { styleClass: string } }
+{
+  options: {
+    styleClass: string;
+  }
+}
 ```
 
 ---
@@ -184,9 +190,9 @@ protected onLazyLoad(event: VirtualScrollerLazyLoadEvent): void {
 >
   <ng-template uiScrollerItem let-item>
     @if (item) {
-      <div class="item">{{ item.label }}</div>
+    <div class="item">{{ item.label }}</div>
     } @else {
-      <div class="item item--placeholder">Loading…</div>
+    <div class="item item--placeholder">Loading…</div>
     }
   </ng-template>
 </ui-lib-virtual-scroller>
@@ -242,12 +248,7 @@ protected onLazyLoad(event: VirtualScrollerLazyLoadEvent): void {
 Disabling virtualization renders all items without a virtual container — useful for small lists or print/export paths where having only a subset of items in the DOM would break layout.
 
 ```html
-<ui-lib-virtual-scroller
-  [items]="items"
-  [itemSize]="48"
-  scrollHeight="300px"
-  [disabled]="true"
->
+<ui-lib-virtual-scroller [items]="items" [itemSize]="48" scrollHeight="300px" [disabled]="true">
   <ng-template uiScrollerItem let-item>
     <div class="item">{{ item.label }}</div>
   </ng-template>
@@ -262,13 +263,13 @@ In disabled mode the scroller renders `<ng-content>` and the `uiScrollerContent`
 
 ```typescript
 interface VirtualScrollerLazyLoadEvent {
-  first: number;  // First index to load (inclusive)
-  last: number;   // Last index to load (exclusive)
+  first: number; // First index to load (inclusive)
+  last: number; // Last index to load (exclusive)
 }
 
 interface VirtualScrollerScrollIndexChangeEvent {
   first: number | { rows: number; cols: number };
-  last:  number | { rows: number; cols: number };
+  last: number | { rows: number; cols: number };
 }
 
 interface VirtualScrollerScrollEvent {
@@ -332,21 +333,21 @@ projects/ui-lib-custom/virtual-scroller/
 
 ## Public API (index.ts exports)
 
-| Export | Kind |
-|--------|------|
-| `VirtualScrollerComponent` | Component |
-| `ScrollerItemDirective` | Directive (`uiScrollerItem`) |
-| `ScrollerContentDirective` | Directive (`uiScrollerContent`) |
-| `ScrollerLoaderDirective` | Directive (`uiScrollerLoader`) |
-| `ScrollerLoaderIconDirective` | Directive (`uiScrollerLoaderIcon`) |
-| `VirtualScrollerOrientation` | Type alias |
-| `VirtualScrollerToType` | Type alias |
-| `VirtualScrollerItemOptions` | Interface |
-| `VirtualScrollerLoaderOptions` | Interface |
-| `VirtualScrollerContentOptions` | Interface |
-| `VirtualScrollerLazyLoadEvent` | Interface |
-| `VirtualScrollerScrollIndexChangeEvent` | Interface |
-| `VirtualScrollerScrollEvent` | Interface |
+| Export                                  | Kind                               |
+| --------------------------------------- | ---------------------------------- |
+| `VirtualScrollerComponent`              | Component                          |
+| `ScrollerItemDirective`                 | Directive (`uiScrollerItem`)       |
+| `ScrollerContentDirective`              | Directive (`uiScrollerContent`)    |
+| `ScrollerLoaderDirective`               | Directive (`uiScrollerLoader`)     |
+| `ScrollerLoaderIconDirective`           | Directive (`uiScrollerLoaderIcon`) |
+| `VirtualScrollerOrientation`            | Type alias                         |
+| `VirtualScrollerToType`                 | Type alias                         |
+| `VirtualScrollerItemOptions`            | Interface                          |
+| `VirtualScrollerLoaderOptions`          | Interface                          |
+| `VirtualScrollerContentOptions`         | Interface                          |
+| `VirtualScrollerLazyLoadEvent`          | Interface                          |
+| `VirtualScrollerScrollIndexChangeEvent` | Interface                          |
+| `VirtualScrollerScrollEvent`            | Interface                          |
 
 ---
 

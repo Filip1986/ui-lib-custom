@@ -14,17 +14,17 @@ SplitButton scaffold component with primary action and dropdown trigger controls
 ### Inputs
 
 | Name                  | Type                         | Default          | Description |
-| --------------------- | ---------------------------- | ---------------- | ----------- |
-| `buttonAriaLabel`     | `string | null`              | `null`           | —           |
+| --------------------- | ---------------------------- | ---------------- | ----------- | --- |
+| `buttonAriaLabel`     | `string                      | null`            | `null`      | —   |
 | `buttonDisabled`      | `boolean`                    | `false`          | —           |
 | `disabled`            | `boolean`                    | `false`          | —           |
 | `dropdownIcon`        | `string`                     | `'chevron-down'` | —           |
-| `icon`                | `string | null`              | `null`           | —           |
-| `iconPosition`        | `'left' | 'right'`           | `'left'`         | —           |
+| `icon`                | `string                      | null`            | `null`      | —   |
+| `iconPosition`        | `'left'                      | 'right'`         | `'left'`    | —   |
 | `label`               | `string`                     | `''`             | —           |
 | `loading`             | `boolean`                    | `false`          | —           |
 | `loadingIcon`         | `string`                     | `'spinner'`      | —           |
-| `menuButtonAriaLabel` | `string | null`              | `null`           | —           |
+| `menuButtonAriaLabel` | `string                      | null`            | `null`      | —   |
 | `menuButtonDisabled`  | `boolean`                    | `false`          | —           |
 | `model`               | `readonly SplitButtonItem[]` | `[]`             | —           |
 | `outlined`            | `boolean`                    | `false`          | —           |
@@ -32,10 +32,10 @@ SplitButton scaffold component with primary action and dropdown trigger controls
 | `rounded`             | `boolean`                    | `false`          | —           |
 | `severity`            | `SplitButtonSeverity`        | `'primary'`      | —           |
 | `size`                | `SplitButtonSize`            | `'md'`           | —           |
-| `styleClass`          | `string | null`              | `null`           | —           |
+| `styleClass`          | `string                      | null`            | `null`      | —   |
 | `tabindex`            | `number`                     | `0`              | —           |
 | `text`                | `boolean`                    | `false`          | —           |
-| `variant`             | `SplitButtonVariant | null`  | `null`           | —           |
+| `variant`             | `SplitButtonVariant          | null`            | `null`      | —   |
 
 ### Outputs
 
@@ -155,4 +155,3 @@ public readonly items: SplitButtonItem[] = [
 - [Demo page](/components/split-button)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/split-button/README.md)
-

@@ -13,13 +13,13 @@ Toast component — fixed-position notification overlay driven by ToastService. 
 
 ### Inputs
 
-| Name         | Type                  | Default       | Description                                                                                                                                                  |
-| ------------ | --------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `key`        | `string | null`       | `null`        | Container key — when set, only messages with a matching `key` are displayed. Use multiple Toast containers with different keys for different screen regions. |
-| `life`       | `number`              | `3000`        | Default auto-dismiss duration in milliseconds. Individual messages can override this via their own `life` property.                                          |
-| `position`   | `ToastPosition`       | `'top-right'` | Screen position of the toast container.                                                                                                                      |
-| `styleClass` | `string | null`       | `null`        | Additional CSS class(es) to attach to the host element.                                                                                                      |
-| `variant`    | `ToastVariant | null` | `null`        | Design variant. When null, falls back to the global ThemeConfigService variant.                                                                              |
+| Name         | Type            | Default       | Description                                                                                                         |
+| ------------ | --------------- | ------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `key`        | `string         | null`         | `null`                                                                                                              | Container key — when set, only messages with a matching `key` are displayed. Use multiple Toast containers with different keys for different screen regions. |
+| `life`       | `number`        | `3000`        | Default auto-dismiss duration in milliseconds. Individual messages can override this via their own `life` property. |
+| `position`   | `ToastPosition` | `'top-right'` | Screen position of the toast container.                                                                             |
+| `styleClass` | `string         | null`         | `null`                                                                                                              | Additional CSS class(es) to attach to the host element.                                                                                                      |
+| `variant`    | `ToastVariant   | null`         | `null`                                                                                                              | Design variant. When null, falls back to the global ThemeConfigService variant.                                                                              |
 
 ### Outputs
 
@@ -105,4 +105,3 @@ this.toastService.add({ severity: 'error', summary: 'Failed', sticky: true });
 - [Demo page](/components/toast)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/toast/README.md)
-

@@ -24,11 +24,7 @@
   [class.uilib-tree-table-scroll-wrapper--active]="scrollable()"
   [style.max-height]="scrollable() ? scrollHeight() : null"
 >
-  <table
-    class="uilib-tree-table-table"
-    role="treegrid"
-    [attr.aria-label]="resolvedAriaLabel()"
-  >
+  <table class="uilib-tree-table-table" role="treegrid" [attr.aria-label]="resolvedAriaLabel()">
     <!-- Column width hints -->
     <colgroup>
       @if (selectionMode() === 'checkbox') {
@@ -43,10 +39,7 @@
     <thead class="uilib-tree-table-thead">
       <tr>
         @if (selectionMode() === 'checkbox') {
-          <th
-            scope="col"
-            class="uilib-tree-table-th uilib-tree-table-th-selection"
-          >
+          <th scope="col" class="uilib-tree-table-th uilib-tree-table-th-selection">
             <span class="uilib-tree-table-sr-only">Select all rows</span>
             <span
               class="uilib-tree-table-checkbox"
@@ -72,9 +65,11 @@
             [class]="column.styleClass() ?? ''"
             [attr.aria-sort]="
               column.sortable()
-                ? (sortField() === column.field()
-                    ? (sortOrder() === 1 ? 'ascending' : 'descending')
-                    : 'none')
+                ? sortField() === column.field()
+                  ? sortOrder() === 1
+                    ? 'ascending'
+                    : 'descending'
+                  : 'none'
                 : null
             "
             (click)="column.sortable() ? handleSort(column.field()) : null"
@@ -111,13 +106,9 @@
           "
           [class]="flatNode.node.styleClass ?? ''"
           [attr.aria-selected]="
-            selectionMode() && selectionMode() !== 'checkbox'
-              ? isSelected(flatNode.node)
-              : null
+            selectionMode() && selectionMode() !== 'checkbox' ? isSelected(flatNode.node) : null
           "
-          [attr.aria-expanded]="
-            hasChildren(flatNode.node) ? isExpanded(flatNode.node) : null
-          "
+          [attr.aria-expanded]="hasChildren(flatNode.node) ? isExpanded(flatNode.node) : null"
           [attr.aria-level]="flatNode.depth + 1"
           [attr.aria-setsize]="flatNode.setsize"
           [attr.aria-posinset]="flatNode.posinset"
@@ -143,14 +134,14 @@
                 role="checkbox"
                 [attr.aria-label]="i18n.translate('tree-table.select-row')"
                 [attr.aria-checked]="
-                  isPartiallySelected(flatNode.node)
-                    ? 'mixed'
-                    : isSelected(flatNode.node)
+                  isPartiallySelected(flatNode.node) ? 'mixed' : isSelected(flatNode.node)
                 "
                 tabindex="-1"
                 (click)="handleCheckboxToggle($event, flatNode.node)"
                 (keydown.enter)="handleCheckboxToggle($event, flatNode.node)"
-                (keydown.space)="$event.preventDefault(); handleCheckboxToggle($event, flatNode.node)"
+                (keydown.space)="
+                  $event.preventDefault(); handleCheckboxToggle($event, flatNode.node)
+                "
               ></span>
             </td>
           }
@@ -193,7 +184,7 @@
                   [ngTemplateOutlet]="bodyTpl"
                   [ngTemplateOutletContext]="{
                     $implicit: flatNode.node,
-                    rowData: flatNode.node.data
+                    rowData: flatNode.node.data,
                   }"
                 />
               } @else {
@@ -206,9 +197,7 @@
         <tr class="uilib-tree-table-row-empty">
           <td
             class="uilib-tree-table-empty-message"
-            [attr.colspan]="
-              columns().length + (selectionMode() === 'checkbox' ? 1 : 0)
-            "
+            [attr.colspan]="columns().length + (selectionMode() === 'checkbox' ? 1 : 0)"
           >
             No records found
           </td>

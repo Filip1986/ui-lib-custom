@@ -52,7 +52,7 @@ describe('Badge', (): void => {
     Object.assign(fixture.componentInstance, initial);
     fixture.detectChanges();
     const badgeElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-badge'
+      'ui-lib-badge',
     ) as HTMLElement;
     const styles: CSSStyleDeclaration = getComputedStyle(badgeElement);
     return { fixture, badgeElement, styles };

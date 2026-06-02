@@ -73,7 +73,7 @@
             <ng-container
               [ngTemplateOutlet]="loaderTpl()!"
               [ngTemplateOutletContext]="{
-                options: getLoaderOptions($index, isBoth() ? { numCols: $index } : undefined)
+                options: getLoaderOptions($index, isBoth() ? { numCols: $index } : undefined),
               }"
             />
           }
@@ -96,7 +96,7 @@
       [ngTemplateOutlet]="contentTpl()!"
       [ngTemplateOutletContext]="{
         $implicit: items(),
-        options: { rows: items(), columns: loadedColumns() }
+        options: { rows: items(), columns: loadedColumns() },
       }"
     />
   }

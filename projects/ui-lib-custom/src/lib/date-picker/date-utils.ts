@@ -94,7 +94,7 @@ export function isDateDisabled(
   minDate: Date | null,
   maxDate: Date | null,
   disabledDates: Date[] | null,
-  disabledDays: number[] | null
+  disabledDays: number[] | null,
 ): boolean {
   if (minDate !== null && isDateBefore(date, minDate)) {
     return true;
@@ -106,7 +106,7 @@ export function isDateDisabled(
 
   if (disabledDates !== null) {
     const hasDateMatch: boolean = disabledDates.some((disabledDate: Date): boolean =>
-      isDateEqual(disabledDate, date)
+      isDateEqual(disabledDate, date),
     );
     if (hasDateMatch) {
       return true;
@@ -115,7 +115,7 @@ export function isDateDisabled(
 
   if (disabledDays !== null) {
     const normalizedDisabledDays: number[] = disabledDays.map((disabledDay: number): number =>
-      normalizeFirstDayOfWeek(disabledDay)
+      normalizeFirstDayOfWeek(disabledDay),
     );
     if (normalizedDisabledDays.includes(date.getDay())) {
       return true;
@@ -169,7 +169,7 @@ export function getMonthDates(
   minDate: Date | null = null,
   maxDate: Date | null = null,
   disabledDates: Date[] | null = null,
-  disabledDays: number[] | null = null
+  disabledDays: number[] | null = null,
 ): DatePickerDateMeta[] {
   const normalizedMonth: number = normalizeMonth(month);
   const normalizedYear: number = Math.trunc(year);
@@ -186,14 +186,14 @@ export function getMonthDates(
     const currentDate: Date = createDate(
       gridStartDate.getFullYear(),
       gridStartDate.getMonth(),
-      gridStartDate.getDate() + dayIndex
+      gridStartDate.getDate() + dayIndex,
     );
     const disabled: boolean = isDateDisabled(
       currentDate,
       minDate,
       maxDate,
       disabledDates,
-      disabledDays
+      disabledDays,
     );
 
     gridDates.push({

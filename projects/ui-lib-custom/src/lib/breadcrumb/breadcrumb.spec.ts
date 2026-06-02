@@ -24,21 +24,23 @@ function getHost(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getItems(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-breadcrumb__item')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
+      '.ui-lib-breadcrumb__item',
+    ),
   );
 }
 
 function getSeparators(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-breadcrumb__separator'
-    )
+      '.ui-lib-breadcrumb__separator',
+    ),
   );
 }
 
 function getInstance(fixture: ComponentFixture<unknown>): Breadcrumb {
   return fixture.debugElement.query(
-    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Breadcrumb
+    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Breadcrumb,
   ).componentInstance as Breadcrumb;
 }
 
@@ -171,7 +173,7 @@ describe('Breadcrumb', (): void => {
       fixture.detectChanges();
 
       const firstLink: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-breadcrumb__item:first-child .ui-lib-breadcrumb__link'
+        '.ui-lib-breadcrumb__item:first-child .ui-lib-breadcrumb__link',
       );
       expect((firstLink?.textContent ?? '').trim()).toBe('Home');
     });
@@ -196,7 +198,7 @@ describe('Breadcrumb', (): void => {
 
     it('should render <a> for clickable items with url', (): void => {
       const link: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-breadcrumb__item:first-child a'
+        '.ui-lib-breadcrumb__item:first-child a',
       );
       expect(link).toBeTruthy();
     });
@@ -207,7 +209,7 @@ describe('Breadcrumb', (): void => {
       fixture.detectChanges();
 
       const button: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-breadcrumb__item:first-child button'
+        '.ui-lib-breadcrumb__item:first-child button',
       );
       expect(button).toBeTruthy();
     });
@@ -239,7 +241,7 @@ describe('Breadcrumb', (): void => {
       const lastItem: HTMLElement = getItems(fixture)[getItems(fixture).length - 1] as HTMLElement;
       const anchor: HTMLAnchorElement | null = lastItem.querySelector<HTMLAnchorElement>('a');
       const current: HTMLElement | null = lastItem.querySelector<HTMLElement>(
-        '.ui-lib-breadcrumb__current'
+        '.ui-lib-breadcrumb__current',
       );
 
       expect(anchor).toBeNull();
@@ -249,7 +251,7 @@ describe('Breadcrumb', (): void => {
     it('should add aria-current="page" to the last item', (): void => {
       const lastItem: HTMLElement = getItems(fixture)[getItems(fixture).length - 1] as HTMLElement;
       const current: HTMLElement | null = lastItem.querySelector<HTMLElement>(
-        '.ui-lib-breadcrumb__current'
+        '.ui-lib-breadcrumb__current',
       );
 
       expect(current?.getAttribute('aria-current')).toBe('page');
@@ -257,7 +259,7 @@ describe('Breadcrumb', (): void => {
 
     it('should NOT add aria-current to non-last items', (): void => {
       const firstLink: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-breadcrumb__item:first-child .ui-lib-breadcrumb__current'
+        '.ui-lib-breadcrumb__item:first-child .ui-lib-breadcrumb__current',
       );
       // First item is rendered as a link (<a>), not a current span, so querySelector returns null
       expect(firstLink).toBeNull();
@@ -284,7 +286,7 @@ describe('Breadcrumb', (): void => {
 
     it('should render disabled item as <span> with aria-disabled', (): void => {
       const disabledSpan: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '[aria-disabled="true"]'
+        '[aria-disabled="true"]',
       );
       expect(disabledSpan).toBeTruthy();
     });
@@ -293,7 +295,7 @@ describe('Breadcrumb', (): void => {
       const instance: Breadcrumb = getInstance(fixture);
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const disabledItem: BreadcrumbItem = { label: 'Disabled', disabled: true };
       const fakeEvent: MouseEvent = new MouseEvent('click');
@@ -331,7 +333,7 @@ describe('Breadcrumb', (): void => {
       const items: HTMLElement[] = getItems(fixture);
       const lastItem: HTMLElement = items[items.length - 1] as HTMLElement;
       const sep: HTMLElement | null = lastItem.querySelector<HTMLElement>(
-        '.ui-lib-breadcrumb__separator'
+        '.ui-lib-breadcrumb__separator',
       );
 
       expect(sep).toBeNull();
@@ -348,14 +350,14 @@ describe('Breadcrumb', (): void => {
       }).compileComponents();
 
       const fixture: ComponentFixture<HostWithSeparatorComponent> = TestBed.createComponent(
-        HostWithSeparatorComponent
+        HostWithSeparatorComponent,
       );
       fixture.detectChanges();
 
       const separators: HTMLElement[] = Array.from(
         (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-          '.ui-lib-breadcrumb__separator'
-        )
+          '.ui-lib-breadcrumb__separator',
+        ),
       );
       const firstSeparator: HTMLElement = separators[0] as HTMLElement;
       expect(separators.length).toBeGreaterThan(0);
@@ -456,7 +458,7 @@ describe('Breadcrumb', (): void => {
       const instance: Breadcrumb = getInstance(fixture);
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const item: BreadcrumbItem = { label: 'Section', url: '/section' };
       const fakeEvent: MouseEvent = new MouseEvent('click');
@@ -482,7 +484,7 @@ describe('Breadcrumb', (): void => {
       const instance: Breadcrumb = getInstance(fixture);
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const item: BreadcrumbItem = { label: 'Disabled', url: '/x', disabled: true };
       const fakeEvent: MouseEvent = new MouseEvent('click');
@@ -511,7 +513,7 @@ describe('Breadcrumb', (): void => {
       const instance: Breadcrumb = getInstance(fixture);
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const commandSpy: jest.Mock = jest.fn();
       const item: BreadcrumbItem = { label: 'Action', command: commandSpy };
@@ -525,7 +527,7 @@ describe('Breadcrumb', (): void => {
       const instance: Breadcrumb = getInstance(fixture);
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const commandSpy: jest.Mock = jest.fn();
       const item: BreadcrumbItem = { label: 'Action', command: commandSpy };
@@ -539,7 +541,7 @@ describe('Breadcrumb', (): void => {
       const instance: Breadcrumb = getInstance(fixture);
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const commandSpy: jest.Mock = jest.fn();
       const item: BreadcrumbItem = { label: 'Action', command: commandSpy };

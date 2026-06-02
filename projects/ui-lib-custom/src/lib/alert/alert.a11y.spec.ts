@@ -41,7 +41,7 @@ async function setup(
     variant: AlertVariant | null;
     dismissible: boolean;
     dismissLabel: string | null;
-  }> = {}
+  }> = {},
 ): Promise<ComponentFixture<AlertA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [AlertA11yHostComponent],
@@ -119,7 +119,7 @@ describe('Alert Accessibility', (): void => {
   it('severity icon is decorative', async (): Promise<void> => {
     const fixture: ComponentFixture<AlertA11yHostComponent> = await setup();
     const iconElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-alert__icon'
+      '.ui-lib-alert__icon',
     );
     expect(iconElement?.getAttribute('aria-hidden')).toBe('true');
   });

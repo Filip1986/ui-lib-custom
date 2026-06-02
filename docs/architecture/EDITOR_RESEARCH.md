@@ -5,6 +5,7 @@
 This document defines a v1 plan for `ui-lib-editor` (rich text editor) using native browser editing APIs (`contenteditable`, `document.execCommand`, `document.queryCommandState`, `document.queryCommandValue`) with no third-party editor runtime.
 
 Inputs used:
+
 - `AI_AGENT_CONTEXT.md`
 - `LIBRARY_CONVENTIONS.md`
 - `projects/ui-lib-custom/src/lib/select/select.ts` (CVA + host state baseline)
@@ -18,30 +19,31 @@ Inputs used:
 
 ## PrimeNG Feature Mapping
 
-| Feature | PrimeNG API / Evidence | Priority | Notes for `ui-lib-editor` (native implementation) |
-| --- | --- | --- | --- |
-| Value binding (`ngModel`, `formControlName`) | `ControlValueAccessor` in `editor.d.ts`, `writeValue/registerOnChange/registerOnTouched` | P0 | Implement CVA over editable `div` `innerHTML`; model value remains HTML string. |
-| Readonly mode | `readonly` input in `editor.d.ts` and Quill `disable/enable` calls in `primeng-editor.mjs` | P0 | Use `contenteditable="false"` when readonly and disable toolbar actions. |
-| Placeholder | `placeholder` input in `editor.d.ts`; Quill placeholder config in `primeng-editor.mjs` | P0 | Use `data-placeholder` on editable element + `::before` when empty. |
-| Default toolbar | Inline default toolbar markup in `primeng-editor.mjs` (header, bold, italic, underline, color, background, list, align, link, image, code block, clean) | P0 | Ship native `<button>/<select>` toolbar wired to `execCommand`. |
-| Custom toolbar template | `p-header` projection / `headerTemplate` in `editor.d.ts` and template in `primeng-editor.mjs` | P0 | Provide content projection via `ng-content select="[editorToolbar]"`; expose `executeCommand()` public method for custom controls. |
-| Text change event | `onTextChange` in `editor.d.ts`; Quill `text-change` handler in `primeng-editor.mjs` | P0 | Emit `textChange` from editable `input`/`beforeinput` pipeline with `{ htmlValue, textValue, source, originalEvent }`. |
-| Selection change event | `onSelectionChange` in `editor.d.ts`; Quill `selection-change` handler in `primeng-editor.mjs` | P0 | Subscribe to `document` `selectionchange`; emit normalized range state when selection is inside editor root. |
-| Init event | `onInit` output in `editor.d.ts`; emitted after editor setup in `primeng-editor.mjs` | P0 | Emit `init` from `afterNextRender` once editable element and toolbar wiring are ready. |
-| Formats whitelist | `formats` input in `editor.d.ts` | P2 | Not directly equivalent without Quill format registry; can be approximated by sanitizing/normalizing output HTML and restricting toolbar commands. |
-| Modules config | `modules` input in `editor.d.ts` | P2 | Not applicable to native editor (no module ecosystem). |
-| Bounds | `bounds` input in `editor.d.ts` | P2 | Quill-specific tooltip bounds; no native counterpart for v1. |
-| Scrolling container | `scrollingContainer` input in `editor.d.ts` | P2 | Quill-specific scrolling behavior; no direct native API need in v1. |
-| Debug level | `debug` input in `editor.d.ts` | P2 | Quill-specific debug switch; omit in native editor. |
-| Quill instance access (`getQuill`) | `getQuill()` in `editor.d.ts` | P2 | No third-party instance to expose; replace with explicit public methods (`focus`, `executeCommand`, `getHtml`, `setHtml`). |
-| Value model includes Delta concepts | `EditorTextChangeEvent.delta` and Quill event signatures in `editor.interface.d.ts` / `primeng-editor.mjs` | P2 | Native model has no Delta; output HTML + plain text only. |
-| Container style/styleClass passthrough | `style` and `styleClass` inputs in `editor.d.ts` | Divergence | Per library convention, avoid `style`/`styleClass` inputs; use host classes + CSS variable contract instead. |
+| Feature                                      | PrimeNG API / Evidence                                                                                                                                  | Priority   | Notes for `ui-lib-editor` (native implementation)                                                                                                  |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Value binding (`ngModel`, `formControlName`) | `ControlValueAccessor` in `editor.d.ts`, `writeValue/registerOnChange/registerOnTouched`                                                                | P0         | Implement CVA over editable `div` `innerHTML`; model value remains HTML string.                                                                    |
+| Readonly mode                                | `readonly` input in `editor.d.ts` and Quill `disable/enable` calls in `primeng-editor.mjs`                                                              | P0         | Use `contenteditable="false"` when readonly and disable toolbar actions.                                                                           |
+| Placeholder                                  | `placeholder` input in `editor.d.ts`; Quill placeholder config in `primeng-editor.mjs`                                                                  | P0         | Use `data-placeholder` on editable element + `::before` when empty.                                                                                |
+| Default toolbar                              | Inline default toolbar markup in `primeng-editor.mjs` (header, bold, italic, underline, color, background, list, align, link, image, code block, clean) | P0         | Ship native `<button>/<select>` toolbar wired to `execCommand`.                                                                                    |
+| Custom toolbar template                      | `p-header` projection / `headerTemplate` in `editor.d.ts` and template in `primeng-editor.mjs`                                                          | P0         | Provide content projection via `ng-content select="[editorToolbar]"`; expose `executeCommand()` public method for custom controls.                 |
+| Text change event                            | `onTextChange` in `editor.d.ts`; Quill `text-change` handler in `primeng-editor.mjs`                                                                    | P0         | Emit `textChange` from editable `input`/`beforeinput` pipeline with `{ htmlValue, textValue, source, originalEvent }`.                             |
+| Selection change event                       | `onSelectionChange` in `editor.d.ts`; Quill `selection-change` handler in `primeng-editor.mjs`                                                          | P0         | Subscribe to `document` `selectionchange`; emit normalized range state when selection is inside editor root.                                       |
+| Init event                                   | `onInit` output in `editor.d.ts`; emitted after editor setup in `primeng-editor.mjs`                                                                    | P0         | Emit `init` from `afterNextRender` once editable element and toolbar wiring are ready.                                                             |
+| Formats whitelist                            | `formats` input in `editor.d.ts`                                                                                                                        | P2         | Not directly equivalent without Quill format registry; can be approximated by sanitizing/normalizing output HTML and restricting toolbar commands. |
+| Modules config                               | `modules` input in `editor.d.ts`                                                                                                                        | P2         | Not applicable to native editor (no module ecosystem).                                                                                             |
+| Bounds                                       | `bounds` input in `editor.d.ts`                                                                                                                         | P2         | Quill-specific tooltip bounds; no native counterpart for v1.                                                                                       |
+| Scrolling container                          | `scrollingContainer` input in `editor.d.ts`                                                                                                             | P2         | Quill-specific scrolling behavior; no direct native API need in v1.                                                                                |
+| Debug level                                  | `debug` input in `editor.d.ts`                                                                                                                          | P2         | Quill-specific debug switch; omit in native editor.                                                                                                |
+| Quill instance access (`getQuill`)           | `getQuill()` in `editor.d.ts`                                                                                                                           | P2         | No third-party instance to expose; replace with explicit public methods (`focus`, `executeCommand`, `getHtml`, `setHtml`).                         |
+| Value model includes Delta concepts          | `EditorTextChangeEvent.delta` and Quill event signatures in `editor.interface.d.ts` / `primeng-editor.mjs`                                              | P2         | Native model has no Delta; output HTML + plain text only.                                                                                          |
+| Container style/styleClass passthrough       | `style` and `styleClass` inputs in `editor.d.ts`                                                                                                        | Divergence | Per library convention, avoid `style`/`styleClass` inputs; use host classes + CSS variable contract instead.                                       |
 
 ## Native API Capabilities and Limitations Assessment
 
 ## `document.execCommand()` coverage needed for v1 default toolbar
 
 Required commands:
+
 - `bold`
 - `italic`
 - `underline`
@@ -64,6 +66,7 @@ Required commands:
 ## `document.queryCommandState()` usage
 
 Use for active/toggle state on:
+
 - `bold`
 - `italic`
 - `underline`
@@ -78,6 +81,7 @@ Use for active/toggle state on:
 ## `document.queryCommandValue()` usage
 
 Use for value-based state on:
+
 - `formatBlock` (expected values similar to `p`, `h1`, `h2`, `h3`)
 - `foreColor`
 - `backColor`
@@ -93,28 +97,29 @@ Use for value-based state on:
   - Selection/range can reset when toolbar buttons steal focus; command execution should preserve or restore range.
 
 Mitigation plan:
+
 - Normalize HTML on read/write (tag canonicalization + attribute cleanup).
 - Keep a small sanitizer pipeline on paste and before emitting model changes.
 - Maintain internal selection snapshot while interacting with toolbar controls.
 
 ## Reusable Infrastructure Assessment
 
-| Area | Reusable from | Reuse plan for `ui-lib-editor` |
-| --- | --- | --- |
-| CVA contract | `select.ts`, `autocomplete.ts`, `checkbox.ts`, `date-picker.ts` patterns | Reuse explicit `writeValue`, `registerOnChange`, `registerOnTouched`, `setDisabledState` flow for HTML string value. |
-| Variant resolution | `ThemeConfigService` + component fallback pattern (`variant() ?? themeConfig.variant()`) | Reuse for `material`/`bootstrap`/`minimal` host class resolution. |
-| Shared sizes/defaults | `ui-lib-custom/core` `SHARED_SIZES`, `SHARED_DEFAULTS` | Reuse `sm`/`md`/`lg` input semantics and host modifiers. |
-| Host class composition | `select.ts` and other signal-based components | Reuse computed host class approach for variant, size, disabled, readonly, filled, focused states. |
-| Disabled/readonly behavior | Existing form components (`select`, `autocomplete`, `input`) | Reuse guards that prevent user interaction while preserving value rendering. |
-| Keyboard constants | `KEYBOARD_KEYS` in `core/shared/constants.ts` | Reuse for Escape/Tab and navigation behavior around toolbar and editable surface. |
+| Area                       | Reusable from                                                                            | Reuse plan for `ui-lib-editor`                                                                                       |
+| -------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| CVA contract               | `select.ts`, `autocomplete.ts`, `checkbox.ts`, `date-picker.ts` patterns                 | Reuse explicit `writeValue`, `registerOnChange`, `registerOnTouched`, `setDisabledState` flow for HTML string value. |
+| Variant resolution         | `ThemeConfigService` + component fallback pattern (`variant() ?? themeConfig.variant()`) | Reuse for `material`/`bootstrap`/`minimal` host class resolution.                                                    |
+| Shared sizes/defaults      | `ui-lib-custom/core` `SHARED_SIZES`, `SHARED_DEFAULTS`                                   | Reuse `sm`/`md`/`lg` input semantics and host modifiers.                                                             |
+| Host class composition     | `select.ts` and other signal-based components                                            | Reuse computed host class approach for variant, size, disabled, readonly, filled, focused states.                    |
+| Disabled/readonly behavior | Existing form components (`select`, `autocomplete`, `input`)                             | Reuse guards that prevent user interaction while preserving value rendering.                                         |
+| Keyboard constants         | `KEYBOARD_KEYS` in `core/shared/constants.ts`                                            | Reuse for Escape/Tab and navigation behavior around toolbar and editable surface.                                    |
 
 ## New Infrastructure Required
 
-| Item | Why needed | Placement |
-| --- | --- | --- |
-| HTML sanitizer utility | Strip dangerous tags and attributes on paste/model update (`<script>`, `<iframe>`, inline event handlers, javascript: URLs) | `projects/ui-lib-custom/src/lib/editor/` (editor-specific, not `core`) |
-| Toolbar state tracker | Derive active command/value state via `queryCommandState` + `queryCommandValue` on `selectionchange` and editor input | `projects/ui-lib-custom/src/lib/editor/` |
-| Public `executeCommand()` method | Enable custom projected toolbar to trigger native commands consistently | `UiLibEditor` public API |
+| Item                             | Why needed                                                                                                                  | Placement                                                              |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| HTML sanitizer utility           | Strip dangerous tags and attributes on paste/model update (`<script>`, `<iframe>`, inline event handlers, javascript: URLs) | `projects/ui-lib-custom/src/lib/editor/` (editor-specific, not `core`) |
+| Toolbar state tracker            | Derive active command/value state via `queryCommandState` + `queryCommandValue` on `selectionchange` and editor input       | `projects/ui-lib-custom/src/lib/editor/`                               |
+| Public `executeCommand()` method | Enable custom projected toolbar to trigger native commands consistently                                                     | `UiLibEditor` public API                                               |
 
 ## Proposed Feature Scope
 
@@ -224,4 +229,3 @@ Mitigation plan:
 ## Summary
 
 `ui-lib-editor` is feasible as a native-first component in this architecture with strong reuse of CVA, host-state, and theming patterns already in the library. The main new work is editor-specific sanitization and robust toolbar-state synchronization around browser command APIs.
-

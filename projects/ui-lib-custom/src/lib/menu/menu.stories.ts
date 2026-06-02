@@ -60,7 +60,7 @@ const renderMenu: (args: Partial<MenuStoryArgs>) => {
   moduleMetadata: { imports: unknown[] };
   template: string;
 } = (
-  args: Partial<MenuStoryArgs>
+  args: Partial<MenuStoryArgs>,
 ): {
   props: Partial<MenuStoryArgs> & { model: MenuItem[] };
   moduleMetadata: { imports: unknown[] };

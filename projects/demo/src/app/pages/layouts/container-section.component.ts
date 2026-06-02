@@ -109,7 +109,7 @@ export class MyComponent {}`;
       } => ({
         label: `${key} (${value})`,
         value: key as Exclude<InsetToken, 'xs'>,
-      })
+      }),
     );
   public readonly centeredOptions: Array<{ label: string; value: boolean }> = [
     { label: 'Centered', value: true },
@@ -117,13 +117,13 @@ export class MyComponent {}`;
   ];
 
   public readonly sizeLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.size(), this.sizeOptions)
+    this.displayLabel(this.size(), this.sizeOptions),
   );
   public readonly insetLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.inset(), this.insetOptions)
+    this.displayLabel(this.inset(), this.insetOptions),
   );
   public readonly centeredLabel: Signal<string> = computed<string>((): string =>
-    this.centered() ? 'Centered' : 'Left-aligned'
+    this.centered() ? 'Centered' : 'Left-aligned',
   );
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
@@ -155,10 +155,10 @@ export class MyComponent {}`;
 
   private displayLabel<T extends string | boolean>(
     value: T,
-    options: { label: string; value: T }[]
+    options: { label: string; value: T }[],
   ): string {
     const match: { label: string; value: T } | undefined = options.find(
-      (option: { label: string; value: T }): boolean => option.value === value
+      (option: { label: string; value: T }): boolean => option.value === value,
     );
     return match ? match.label : String(value);
   }

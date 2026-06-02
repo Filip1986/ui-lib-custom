@@ -178,6 +178,7 @@ Use Cases:              Use Cases:              Use Cases:
 ```
 
 ### Global variant default
+
 `ThemeConfigService` exposes a global `variant` signal (`material | bootstrap | minimal`) that components use as a default when no per-instance `variant` input is provided. This allows live switching across the entire app while keeping per-component overrides intact.
 
 ```ts
@@ -186,6 +187,7 @@ themeService.setVariant('bootstrap');
 ```
 
 Components compute:
+
 ```
 const effectiveVariant = computed(() => this.variant() ?? themeService.variant());
 ```
@@ -293,6 +295,7 @@ app.ts (Your Component)
     │
     ├─ imports: [Button, Card]
 ```
+
     └─ template: `
          <ui-lib-button>    ──────→  button.html
          <ui-lib-card>      ──────→  card.html
@@ -300,22 +303,24 @@ app.ts (Your Component)
                                         │
                                         ├─→ button.css
                                         └─→ card.css
+
 ```
 
 ## Project Timeline
 
 ```
+
 ✅ COMPLETED
 ├─ [√] Angular workspace created
 ├─ [√] Library structure generated
 ├─ [√] Button component implemented
-│   ├─ [√] Material variant
-│   ├─ [√] Bootstrap variant
-│   └─ [√] Minimal variant
+│ ├─ [√] Material variant
+│ ├─ [√] Bootstrap variant
+│ └─ [√] Minimal variant
 ├─ [√] Card component implemented
-│   ├─ [√] Material variant
-│   ├─ [√] Bootstrap variant
-│   └─ [√] Minimal variant
+│ ├─ [√] Material variant
+│ ├─ [√] Bootstrap variant
+│ └─ [√] Minimal variant
 ├─ [√] Library built successfully
 ├─ [√] Demo application created
 ├─ [√] Demo running (localhost:4200)
@@ -336,7 +341,8 @@ app.ts (Your Component)
 ├─ [ ] Add dark mode
 ├─ [ ] Add accessibility features
 └─ [ ] Create documentation website
-```
+
+````
 
 ---
 
@@ -363,7 +369,7 @@ npm link ui-lib-custom
 
 # Import in Code
 import { Button, Card } from 'ui-lib-custom';
-```
+````
 
 ---
 

@@ -26,9 +26,19 @@ const DOCS_DIR = join(ROOT, 'docs', 'reference', 'components');
 
 // Directories that are not standalone components
 const SKIP_DIRS = new Set([
-  'a11y', 'code-snippet', 'core', 'design-tokens.ts', 'i18n', 'layout',
-  'styles', 'syntax-highlighter', 'testing', 'themes', 'theming',
-  'ui-lib-custom.spec.ts', 'ui-lib-custom.ts',
+  'a11y',
+  'code-snippet',
+  'core',
+  'design-tokens.ts',
+  'i18n',
+  'layout',
+  'styles',
+  'syntax-highlighter',
+  'testing',
+  'themes',
+  'theming',
+  'ui-lib-custom.spec.ts',
+  'ui-lib-custom.ts',
 ]);
 
 // ---------------------------------------------------------------------------
@@ -89,12 +99,12 @@ function extractOverview(tsSrc, readmeSrc, displayName) {
       const jsdocMatch = beforeComponent.match(/[\s\S]*\/\*\*([\s\S]*?)\*\/\s*\n?\s*$/);
       if (jsdocMatch) {
         const text = jsdocMatch[1]
-          .replace(/\r\n/g, '\n')           // normalise Windows CRLF → LF
-          .replace(/\r/g, '\n')             // normalise stray CR → LF
-          .replace(/^\s*\* ?/gm, '')        // strip leading "* " from each line
-          .replace(/@\w+[\s\S]*/g, '')      // strip @example, @param, @returns etc.
-          .replace(/\n{2,}/g, '\n')         // collapse consecutive blank lines
-          .replace(/\s*\n\s*/g, ' ')        // fold remaining newlines to spaces
+          .replace(/\r\n/g, '\n') // normalise Windows CRLF → LF
+          .replace(/\r/g, '\n') // normalise stray CR → LF
+          .replace(/^\s*\* ?/gm, '') // strip leading "* " from each line
+          .replace(/@\w+[\s\S]*/g, '') // strip @example, @param, @returns etc.
+          .replace(/\n{2,}/g, '\n') // collapse consecutive blank lines
+          .replace(/\s*\n\s*/g, ' ') // fold remaining newlines to spaces
           .trim();
         if (text) return text;
       }
@@ -115,8 +125,14 @@ function extractOverview(tsSrc, readmeSrc, displayName) {
         if (inPara) break;
         continue;
       }
-      if (/^>/.test(line)) { if (inPara) break; continue; }
-      if (line.trim() === '') { if (inPara) break; continue; }
+      if (/^>/.test(line)) {
+        if (inPara) break;
+        continue;
+      }
+      if (line.trim() === '') {
+        if (inPara) break;
+        continue;
+      }
       inPara = true;
       paraLines.push(line.trim());
     }
@@ -146,7 +162,10 @@ function collectDeclarationLines(lines, startIdx) {
       if (ch === '(') parenDepth++;
       else if (ch === ')') parenDepth--;
     }
-    if (l.includes(';') && parenDepth <= 0) { hasSemi = true; break; }
+    if (l.includes(';') && parenDepth <= 0) {
+      hasSemi = true;
+      break;
+    }
   }
   return { declLines, hasSemi };
 }
@@ -156,16 +175,19 @@ function extractJsdocBefore(lines, idx) {
   while (k >= 0 && lines[k].trim() === '') k--;
   if (k < 0 || !lines[k].trim().endsWith('*/')) return '';
   const jdLines = [];
-  while (k >= 0 && !lines[k].trim().startsWith('/**')) { jdLines.unshift(lines[k]); k--; }
+  while (k >= 0 && !lines[k].trim().startsWith('/**')) {
+    jdLines.unshift(lines[k]);
+    k--;
+  }
   if (k >= 0) jdLines.unshift(lines[k]);
   return jdLines
     .join('\n')
-    .replace(/\r\n/g, '\n')           // normalise Windows CRLF
-    .replace(/\r/g, '\n')             // normalise stray CR
-    .replace(/^\s*\/\*\*\s?/, '')     // strip leading whitespace + /**
-    .replace(/\s*\*\/\s*$/, '')       // strip */ + trailing whitespace
-    .replace(/^\s*\*\s?/gm, '')       // strip leading " * " from each continuation line
-    .replace(/\s+/g, ' ')             // collapse any remaining whitespace
+    .replace(/\r\n/g, '\n') // normalise Windows CRLF
+    .replace(/\r/g, '\n') // normalise stray CR
+    .replace(/^\s*\/\*\*\s?/, '') // strip leading whitespace + /**
+    .replace(/\s*\*\/\s*$/, '') // strip */ + trailing whitespace
+    .replace(/^\s*\*\s?/gm, '') // strip leading " * " from each continuation line
+    .replace(/\s+/g, ' ') // collapse any remaining whitespace
     .trim();
 }
 
@@ -198,7 +220,8 @@ function parseSignals(source) {
 
     // Only consider public readonly signal lines
     if (!/public\s+readonly\s+\w+/.test(line)) continue;
-    if (!/ =\s*(?:input|model|output)[<(]/.test(line + (lines[i + 1] || '') + (lines[i + 2] || ''))) continue;
+    if (!/ =\s*(?:input|model|output)[<(]/.test(line + (lines[i + 1] || '') + (lines[i + 2] || '')))
+      continue;
 
     const { declLines } = collectDeclarationLines(lines, i);
     const fullDecl = declLines.join(' ').replace(/\s+/g, ' ');
@@ -214,7 +237,7 @@ function parseSignals(source) {
 
     const kind = isOutput ? 'output' : isModel ? 'model' : 'input';
     const type = extractSignalType(fullDecl);
-    const defaultVal = kind === 'output' ? '—' : (extractDefaultValue(fullDecl) || '—');
+    const defaultVal = kind === 'output' ? '—' : extractDefaultValue(fullDecl) || '—';
     const jsdoc = extractJsdocBefore(lines, i);
 
     signals.push({ name, kind, type, default: defaultVal, jsdoc });
@@ -274,7 +297,11 @@ function parseA11yTests(source) {
   let m;
   while ((m = re.exec(source)) !== null) {
     const title = m[1];
-    if (/keyboard|arrow|tab|focus|enter|space|escape|aria|role|axe|screen.?reader|announce/i.test(title)) {
+    if (
+      /keyboard|arrow|tab|focus|enter|space|escape|aria|role|axe|screen.?reader|announce/i.test(
+        title,
+      )
+    ) {
       titles.push(title);
     }
   }
@@ -286,11 +313,17 @@ function parseA11yTests(source) {
 // ---------------------------------------------------------------------------
 
 function toTitle(name) {
-  return name.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join('');
+  return name
+    .split('-')
+    .map((w) => w[0].toUpperCase() + w.slice(1))
+    .join('');
 }
 
 function toDisplayName(name) {
-  return name.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+  return name
+    .split('-')
+    .map((w) => w[0].toUpperCase() + w.slice(1))
+    .join(' ');
 }
 
 // ---------------------------------------------------------------------------
@@ -300,7 +333,7 @@ function toDisplayName(name) {
 function mdTable(headers, rows) {
   if (rows.length === 0) return '_none_\n';
   const widths = headers.map((h, i) =>
-    Math.max(h.length, ...rows.map((r) => String(r[i] ?? '').length))
+    Math.max(h.length, ...rows.map((r) => String(r[i] ?? '').length)),
   );
   const pad = (s, w) => String(s ?? '').padEnd(w);
   const sep = widths.map((w) => '-'.repeat(w)).join(' | ');
@@ -319,33 +352,29 @@ function generateDoc(componentName) {
   const className = toTitle(componentName);
 
   // Candidate TS file names (some components use .component.ts)
-  const tsFile =
-    existsSync(join(libPath, `${componentName}.ts`))
-      ? join(libPath, `${componentName}.ts`)
-      : existsSync(join(libPath, `${componentName}.component.ts`))
-        ? join(libPath, `${componentName}.component.ts`)
-        : '';
+  const tsFile = existsSync(join(libPath, `${componentName}.ts`))
+    ? join(libPath, `${componentName}.ts`)
+    : existsSync(join(libPath, `${componentName}.component.ts`))
+      ? join(libPath, `${componentName}.component.ts`)
+      : '';
 
-  const htmlFile =
-    existsSync(join(libPath, `${componentName}.html`))
-      ? join(libPath, `${componentName}.html`)
-      : existsSync(join(libPath, `${componentName}.component.html`))
-        ? join(libPath, `${componentName}.component.html`)
-        : '';
+  const htmlFile = existsSync(join(libPath, `${componentName}.html`))
+    ? join(libPath, `${componentName}.html`)
+    : existsSync(join(libPath, `${componentName}.component.html`))
+      ? join(libPath, `${componentName}.component.html`)
+      : '';
 
-  const scssFile =
-    existsSync(join(libPath, `${componentName}.scss`))
-      ? join(libPath, `${componentName}.scss`)
-      : existsSync(join(libPath, `${componentName}.component.scss`))
-        ? join(libPath, `${componentName}.component.scss`)
-        : '';
+  const scssFile = existsSync(join(libPath, `${componentName}.scss`))
+    ? join(libPath, `${componentName}.scss`)
+    : existsSync(join(libPath, `${componentName}.component.scss`))
+      ? join(libPath, `${componentName}.component.scss`)
+      : '';
 
-  const specFile =
-    existsSync(join(libPath, `${componentName}.spec.ts`))
-      ? join(libPath, `${componentName}.spec.ts`)
-      : existsSync(join(libPath, `${componentName}.component.spec.ts`))
-        ? join(libPath, `${componentName}.component.spec.ts`)
-        : '';
+  const specFile = existsSync(join(libPath, `${componentName}.spec.ts`))
+    ? join(libPath, `${componentName}.spec.ts`)
+    : existsSync(join(libPath, `${componentName}.component.spec.ts`))
+      ? join(libPath, `${componentName}.component.spec.ts`)
+      : '';
 
   const a11ySpecFile = existsSync(join(libPath, `${componentName}.a11y.spec.ts`))
     ? join(libPath, `${componentName}.a11y.spec.ts`)
@@ -373,7 +402,9 @@ function generateDoc(componentName) {
   const a11yTests = [
     ...(specSrc ? parseA11yTests(specSrc) : []),
     ...(a11ySpecSrc ? parseA11yTests(a11ySpecSrc) : []),
-  ].sort().filter((t, i, arr) => arr.indexOf(t) === i);
+  ]
+    .sort()
+    .filter((t, i, arr) => arr.indexOf(t) === i);
 
   // Build the document
   const lines = [];
@@ -398,15 +429,17 @@ function generateDoc(componentName) {
   lines.push('### Inputs');
   lines.push('');
   if (inputs.length > 0) {
-    lines.push(mdTable(
-      ['Name', 'Type', 'Default', 'Description'],
-      inputs.map((s) => [
-        `\`${s.name}\``,
-        s.type ? `\`${s.type}\`` : '—',
-        s.default !== '—' ? `\`${s.default}\`` : '—',
-        s.jsdoc || '—',
-      ]),
-    ));
+    lines.push(
+      mdTable(
+        ['Name', 'Type', 'Default', 'Description'],
+        inputs.map((s) => [
+          `\`${s.name}\``,
+          s.type ? `\`${s.type}\`` : '—',
+          s.default !== '—' ? `\`${s.default}\`` : '—',
+          s.jsdoc || '—',
+        ]),
+      ),
+    );
   } else {
     lines.push('_none_');
     lines.push('');
@@ -416,29 +449,29 @@ function generateDoc(componentName) {
   if (models.length > 0) {
     lines.push('### Models (two-way bindable)');
     lines.push('');
-    lines.push(mdTable(
-      ['Name', 'Type', 'Default', 'Description'],
-      models.map((s) => [
-        `\`${s.name}\``,
-        s.type ? `\`${s.type}\`` : '—',
-        s.default !== '—' ? `\`${s.default}\`` : '—',
-        s.jsdoc || '—',
-      ]),
-    ));
+    lines.push(
+      mdTable(
+        ['Name', 'Type', 'Default', 'Description'],
+        models.map((s) => [
+          `\`${s.name}\``,
+          s.type ? `\`${s.type}\`` : '—',
+          s.default !== '—' ? `\`${s.default}\`` : '—',
+          s.jsdoc || '—',
+        ]),
+      ),
+    );
   }
 
   // API — outputs
   lines.push('### Outputs');
   lines.push('');
   if (outputs.length > 0) {
-    lines.push(mdTable(
-      ['Name', 'Type', 'Description'],
-      outputs.map((s) => [
-        `\`${s.name}\``,
-        s.type ? `\`${s.type}\`` : '—',
-        s.jsdoc || '—',
-      ]),
-    ));
+    lines.push(
+      mdTable(
+        ['Name', 'Type', 'Description'],
+        outputs.map((s) => [`\`${s.name}\``, s.type ? `\`${s.type}\`` : '—', s.jsdoc || '—']),
+      ),
+    );
   } else {
     lines.push('_none_');
     lines.push('');
@@ -448,13 +481,12 @@ function generateDoc(componentName) {
   lines.push('## Content Projection');
   lines.push('');
   if (contentSlots.length > 0) {
-    lines.push(mdTable(
-      ['Selector', 'Notes'],
-      contentSlots.map((slot) => [
-        slot === '(default)' ? '_(default)_' : `\`${slot}\``,
-        '—',
-      ]),
-    ));
+    lines.push(
+      mdTable(
+        ['Selector', 'Notes'],
+        contentSlots.map((slot) => [slot === '(default)' ? '_(default)_' : `\`${slot}\``, '—']),
+      ),
+    );
   } else {
     lines.push('_none_');
     lines.push('');
@@ -464,10 +496,12 @@ function generateDoc(componentName) {
   lines.push('## Theming');
   lines.push('');
   if (cssVars.length > 0) {
-    lines.push(mdTable(
-      ['CSS Variable', 'Default'],
-      cssVars.map(({ name, value }) => [`\`${name}\``, `\`${value}\``]),
-    ));
+    lines.push(
+      mdTable(
+        ['CSS Variable', 'Default'],
+        cssVars.map(({ name, value }) => [`\`${name}\``, `\`${value}\``]),
+      ),
+    );
   } else {
     lines.push('_No component-level CSS variables detected._');
     lines.push('');
@@ -487,10 +521,12 @@ function generateDoc(componentName) {
   lines.push('### Keyboard Interactions');
   lines.push('');
   if (a11yTests.length > 0) {
-    lines.push(mdTable(
-      ['Test description'],
-      a11yTests.map((t) => [t]),
-    ));
+    lines.push(
+      mdTable(
+        ['Test description'],
+        a11yTests.map((t) => [t]),
+      ),
+    );
   } else {
     lines.push('<!-- TODO: list keyboard interactions or link to APG pattern -->');
     lines.push('');
@@ -514,7 +550,9 @@ function generateDoc(componentName) {
   lines.push(`- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#${componentName})`);
   lines.push(`- [Demo page](/components/${componentName})`);
   lines.push(`- [Design tokens](../systems/DESIGN_TOKENS.md)`);
-  lines.push(`- [Co-located README](../../../projects/ui-lib-custom/src/lib/${componentName}/README.md)`);
+  lines.push(
+    `- [Co-located README](../../../projects/ui-lib-custom/src/lib/${componentName}/README.md)`,
+  );
   lines.push('');
   lines.push('');
 
@@ -531,7 +569,10 @@ function extractUsageSection(readmeSrc) {
   let inSection = false;
   const out = [];
   for (const line of lines) {
-    if (/^##+ Usage/i.test(line) || /^##+ Examples?/i.test(line)) { inSection = true; continue; }
+    if (/^##+ Usage/i.test(line) || /^##+ Examples?/i.test(line)) {
+      inSection = true;
+      continue;
+    }
     if (inSection && /^##+ /.test(line)) break;
     if (inSection) out.push(line);
   }

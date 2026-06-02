@@ -161,7 +161,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true, header: 'Delete File' });
       const title: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__title'
+        '.ui-lib-confirm-dialog__title',
       );
       expect(title.textContent!.trim()).toBe('Delete File');
     });
@@ -170,7 +170,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true, message: 'This cannot be undone.' });
       const message: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__message'
+        '.ui-lib-confirm-dialog__message',
       );
       expect(message.textContent!.trim()).toBe('This cannot be undone.');
     });
@@ -185,11 +185,11 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true, acceptLabel: 'Confirm', rejectLabel: 'Cancel' });
       const acceptBtn: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__accept-btn'
+        '.ui-lib-confirm-dialog__accept-btn',
       );
       const rejectBtn: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__reject-btn'
+        '.ui-lib-confirm-dialog__reject-btn',
       );
       expect(acceptBtn.textContent!.trim()).toBe('Confirm');
       expect(rejectBtn.textContent!.trim()).toBe('Cancel');
@@ -223,8 +223,8 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true });
       expect(
         (host.querySelector('ui-lib-confirm-dialog') as HTMLElement | null)?.classList.contains(
-          'ui-lib-confirm-dialog--visible'
-        )
+          'ui-lib-confirm-dialog--visible',
+        ),
       ).toBe(true);
     });
 
@@ -232,7 +232,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true, variant: 'bootstrap' });
       const panel: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__panel'
+        '.ui-lib-confirm-dialog__panel',
       );
       expect(panel.classList.contains('ui-lib-confirm-dialog--variant-bootstrap')).toBe(true);
     });
@@ -241,7 +241,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true, position: 'top' });
       const dialogHost: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        'ui-lib-confirm-dialog'
+        'ui-lib-confirm-dialog',
       );
       expect(dialogHost.classList.contains('ui-lib-confirm-dialog--top')).toBe(true);
     });
@@ -250,7 +250,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true });
       const btn: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__accept-btn'
+        '.ui-lib-confirm-dialog__accept-btn',
       );
       expect(btn.classList.contains('ui-lib-confirm-dialog__btn--primary')).toBe(true);
     });
@@ -259,7 +259,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true });
       const btn: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__reject-btn'
+        '.ui-lib-confirm-dialog__reject-btn',
       );
       expect(btn.classList.contains('ui-lib-confirm-dialog__btn--secondary')).toBe(true);
     });
@@ -268,7 +268,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true, styleClass: 'custom-class' });
       const dialogHost: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        'ui-lib-confirm-dialog'
+        'ui-lib-confirm-dialog',
       );
       expect(dialogHost.classList.contains('custom-class')).toBe(true);
     });
@@ -279,7 +279,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true });
       const panel: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__panel'
+        '.ui-lib-confirm-dialog__panel',
       );
       expect(panel.getAttribute('role')).toBe('alertdialog');
     });
@@ -288,7 +288,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true });
       const panel: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__panel'
+        '.ui-lib-confirm-dialog__panel',
       );
       expect(panel.getAttribute('aria-modal')).toBe('true');
     });
@@ -297,7 +297,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true });
       const panel: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__panel'
+        '.ui-lib-confirm-dialog__panel',
       );
       const labelledById: string | null = panel.getAttribute('aria-labelledby');
       expect(labelledById).toBeTruthy();
@@ -309,7 +309,7 @@ describe('ConfirmDialog', (): void => {
       const { host } = bootstrap({ visible: true });
       const panel: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__panel'
+        '.ui-lib-confirm-dialog__panel',
       );
       const describedById: string | null = panel.getAttribute('aria-describedby');
       expect(describedById).toBeTruthy();
@@ -323,7 +323,7 @@ describe('ConfirmDialog', (): void => {
       const { fixture, host } = bootstrap({ visible: true });
       const btn: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__accept-btn'
+        '.ui-lib-confirm-dialog__accept-btn',
       );
       btn.click();
       fixture.detectChanges();
@@ -338,7 +338,7 @@ describe('ConfirmDialog', (): void => {
       const { fixture, host } = bootstrap({ visible: true });
       const btn: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__reject-btn'
+        '.ui-lib-confirm-dialog__reject-btn',
       );
       btn.click();
       fixture.detectChanges();
@@ -353,7 +353,7 @@ describe('ConfirmDialog', (): void => {
       const { fixture, host } = bootstrap({ visible: true, closable: true });
       const btn: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__close-btn'
+        '.ui-lib-confirm-dialog__close-btn',
       );
       btn.click();
       fixture.detectChanges();
@@ -367,7 +367,7 @@ describe('ConfirmDialog', (): void => {
       const { fixture, host } = bootstrap({ visible: true });
       const panel: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__panel'
+        '.ui-lib-confirm-dialog__panel',
       );
       panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
       fixture.detectChanges();
@@ -381,7 +381,7 @@ describe('ConfirmDialog', (): void => {
       const { fixture, host } = bootstrap({ visible: true, dismissableMask: false });
       const backdrop: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__backdrop'
+        '.ui-lib-confirm-dialog__backdrop',
       );
       backdrop.click();
       fixture.detectChanges();
@@ -395,7 +395,7 @@ describe('ConfirmDialog', (): void => {
       const { fixture, host } = bootstrap({ visible: true, dismissableMask: true });
       const backdrop: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__backdrop'
+        '.ui-lib-confirm-dialog__backdrop',
       );
       backdrop.click();
       fixture.detectChanges();
@@ -426,11 +426,11 @@ describe('ConfirmDialog', (): void => {
 
       const title: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__title'
+        '.ui-lib-confirm-dialog__title',
       );
       const message: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__message'
+        '.ui-lib-confirm-dialog__message',
       );
 
       expect(title.textContent!.trim()).toBe('Service Header');
@@ -451,7 +451,7 @@ describe('ConfirmDialog', (): void => {
 
       const btn: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__accept-btn'
+        '.ui-lib-confirm-dialog__accept-btn',
       );
       btn.click();
       fixture.detectChanges();
@@ -475,7 +475,7 @@ describe('ConfirmDialog', (): void => {
 
       const btn: HTMLElement = getElement(
         { nativeElement: host } as ComponentFixture<unknown>,
-        '.ui-lib-confirm-dialog__reject-btn'
+        '.ui-lib-confirm-dialog__reject-btn',
       );
       btn.click();
       fixture.detectChanges();

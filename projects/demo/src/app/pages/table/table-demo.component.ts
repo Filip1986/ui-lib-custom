@@ -326,7 +326,7 @@ export class TableDemoComponent {
 
   public onSortChange(event: TableSortEvent): void {
     this.lastSortEvent.set(
-      event.order !== 0 ? `${event.field} ${event.order === 1 ? 'ASC' : 'DESC'}` : 'cleared'
+      event.order !== 0 ? `${event.field} ${event.order === 1 ? 'ASC' : 'DESC'}` : 'cleared',
     );
   }
 

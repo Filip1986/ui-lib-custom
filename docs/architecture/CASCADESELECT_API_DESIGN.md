@@ -61,42 +61,42 @@ export interface CascadeSelectGroupChangeEvent {
 
 All inputs use `input()` from `@angular/core` with explicit `InputSignal<T>` annotations.
 
-| Name | Type | Default | Purpose |
-|---|---|---|---|
-| `options` | `InputSignal<unknown[]>` | `[]` | Hierarchical data source. Root-level options are the first column in the panel. |
-| `optionLabel` | `InputSignal<string>` | `'label'` | Leaf display label property key. |
-| `optionValue` | `InputSignal<string \| undefined>` | `undefined` | Leaf model-value key; when undefined, selected leaf object is used as value. |
-| `optionGroupLabel` | `InputSignal<string>` | `'label'` | Group/category display label property key. |
-| `optionGroupChildren` | `InputSignal<string[]>` | `[]` | Ordered child-key names by depth (for example `['states', 'cities']`). |
-| `optionDisabled` | `InputSignal<string \| undefined>` | `undefined` | Optional property key that marks option/group as disabled. |
-| `placeholder` | `InputSignal<string>` | `''` | Trigger placeholder when no leaf is selected. |
-| `variant` | `InputSignal<CascadeSelectVariant \| undefined>` | `undefined` | Optional visual variant; falls back to `ThemeConfigService.variant()`. |
-| `size` | `InputSignal<CascadeSelectSize>` | `'md'` | Component size token (`sm`/`md`/`lg`). |
-| `disabled` | `InputSignal<boolean>` | `false` | Component-level disabled state (merged with CVA disabled). |
-| `invalid` | `InputSignal<boolean>` | `false` | Invalid visual/ARIA state for forms integration. |
-| `loading` | `InputSignal<boolean>` | `false` | Loading state; blocks interaction and allows loading slot rendering. |
-| `showClear` | `InputSignal<boolean>` | `false` | Enables clear control when a value exists. |
-| `fluid` | `InputSignal<boolean>` | `false` | Expands component width to available container width. |
-| `filled` | `InputSignal<boolean>` | `false` | Enables filled style treatment. |
-| `tabindex` | `InputSignal<number>` | `0` | Host focus order index when interactive. |
-| `inputId` | `InputSignal<string>` | `''` | Optional id override for trigger control id generation. |
-| `appendTo` | `InputSignal<string \| HTMLElement \| undefined>` | `'body'` | Panel mount target (`'body'`, `'self'`, CSS selector, or `HTMLElement`). |
-| `ariaLabel` | `InputSignal<string \| null>` | `null` | Explicit aria-label for trigger. |
-| `ariaLabelledBy` | `InputSignal<string \| null>` | `null` | External label id linkage override. |
+| Name                  | Type                                              | Default     | Purpose                                                                         |
+| --------------------- | ------------------------------------------------- | ----------- | ------------------------------------------------------------------------------- |
+| `options`             | `InputSignal<unknown[]>`                          | `[]`        | Hierarchical data source. Root-level options are the first column in the panel. |
+| `optionLabel`         | `InputSignal<string>`                             | `'label'`   | Leaf display label property key.                                                |
+| `optionValue`         | `InputSignal<string \| undefined>`                | `undefined` | Leaf model-value key; when undefined, selected leaf object is used as value.    |
+| `optionGroupLabel`    | `InputSignal<string>`                             | `'label'`   | Group/category display label property key.                                      |
+| `optionGroupChildren` | `InputSignal<string[]>`                           | `[]`        | Ordered child-key names by depth (for example `['states', 'cities']`).          |
+| `optionDisabled`      | `InputSignal<string \| undefined>`                | `undefined` | Optional property key that marks option/group as disabled.                      |
+| `placeholder`         | `InputSignal<string>`                             | `''`        | Trigger placeholder when no leaf is selected.                                   |
+| `variant`             | `InputSignal<CascadeSelectVariant \| undefined>`  | `undefined` | Optional visual variant; falls back to `ThemeConfigService.variant()`.          |
+| `size`                | `InputSignal<CascadeSelectSize>`                  | `'md'`      | Component size token (`sm`/`md`/`lg`).                                          |
+| `disabled`            | `InputSignal<boolean>`                            | `false`     | Component-level disabled state (merged with CVA disabled).                      |
+| `invalid`             | `InputSignal<boolean>`                            | `false`     | Invalid visual/ARIA state for forms integration.                                |
+| `loading`             | `InputSignal<boolean>`                            | `false`     | Loading state; blocks interaction and allows loading slot rendering.            |
+| `showClear`           | `InputSignal<boolean>`                            | `false`     | Enables clear control when a value exists.                                      |
+| `fluid`               | `InputSignal<boolean>`                            | `false`     | Expands component width to available container width.                           |
+| `filled`              | `InputSignal<boolean>`                            | `false`     | Enables filled style treatment.                                                 |
+| `tabindex`            | `InputSignal<number>`                             | `0`         | Host focus order index when interactive.                                        |
+| `inputId`             | `InputSignal<string>`                             | `''`        | Optional id override for trigger control id generation.                         |
+| `appendTo`            | `InputSignal<string \| HTMLElement \| undefined>` | `'body'`    | Panel mount target (`'body'`, `'self'`, CSS selector, or `HTMLElement`).        |
+| `ariaLabel`           | `InputSignal<string \| null>`                     | `null`      | Explicit aria-label for trigger.                                                |
+| `ariaLabelledBy`      | `InputSignal<string \| null>`                     | `null`      | External label id linkage override.                                             |
 
 ### Outputs
 
 All outputs use `output()` from `@angular/core` with explicit `OutputEmitterRef<T>` annotations.
 
-| Name | Type | Emitted when |
-|---|---|---|
-| `onChange` | `OutputEmitterRef<CascadeSelectChangeEvent>` | Selected leaf value changes (user interaction or clear action). |
-| `onGroupChange` | `OutputEmitterRef<CascadeSelectGroupChangeEvent>` | Active expanded group path changes at a specific level. |
-| `onShow` | `OutputEmitterRef<CascadeSelectShowEvent>` | Panel opens. |
-| `onHide` | `OutputEmitterRef<CascadeSelectHideEvent>` | Panel closes. |
-| `onClear` | `OutputEmitterRef<void>` | Clear action is triggered and value resets. |
-| `onFocus` | `OutputEmitterRef<FocusEvent>` | Trigger receives focus. |
-| `onBlur` | `OutputEmitterRef<FocusEvent>` | Trigger loses focus. |
+| Name            | Type                                              | Emitted when                                                    |
+| --------------- | ------------------------------------------------- | --------------------------------------------------------------- |
+| `onChange`      | `OutputEmitterRef<CascadeSelectChangeEvent>`      | Selected leaf value changes (user interaction or clear action). |
+| `onGroupChange` | `OutputEmitterRef<CascadeSelectGroupChangeEvent>` | Active expanded group path changes at a specific level.         |
+| `onShow`        | `OutputEmitterRef<CascadeSelectShowEvent>`        | Panel opens.                                                    |
+| `onHide`        | `OutputEmitterRef<CascadeSelectHideEvent>`        | Panel closes.                                                   |
+| `onClear`       | `OutputEmitterRef<void>`                          | Clear action is triggered and value resets.                     |
+| `onFocus`       | `OutputEmitterRef<FocusEvent>`                    | Trigger receives focus.                                         |
+| `onBlur`        | `OutputEmitterRef<FocusEvent>`                    | Trigger loses focus.                                            |
 
 ### CVA contract
 
@@ -111,15 +111,15 @@ All outputs use `output()` from `@angular/core` with explicit `OutputEmitterRef<
 
 Template customizations follow directive-slot conventions used by AutoComplete.
 
-| Directive selector | Purpose | Template context |
-|---|---|---|
-| `[uiCascadeSelectOption]` | Custom option/leaf row rendering | `$implicit` = option |
-| `[uiCascadeSelectValue]` | Custom trigger selected-value rendering | `$implicit` = selected value |
-| `[uiCascadeSelectDropdownIcon]` | Custom trigger icon content | none |
-| `[uiCascadeSelectOptionGroupIcon]` | Custom group-expand indicator content | `$implicit` = group option |
-| `[uiCascadeSelectHeader]` | Panel header content | none |
-| `[uiCascadeSelectFooter]` | Panel footer content | none |
-| `[uiCascadeSelectLoading]` | Loading state panel content | none |
+| Directive selector                 | Purpose                                 | Template context             |
+| ---------------------------------- | --------------------------------------- | ---------------------------- |
+| `[uiCascadeSelectOption]`          | Custom option/leaf row rendering        | `$implicit` = option         |
+| `[uiCascadeSelectValue]`           | Custom trigger selected-value rendering | `$implicit` = selected value |
+| `[uiCascadeSelectDropdownIcon]`    | Custom trigger icon content             | none                         |
+| `[uiCascadeSelectOptionGroupIcon]` | Custom group-expand indicator content   | `$implicit` = group option   |
+| `[uiCascadeSelectHeader]`          | Panel header content                    | none                         |
+| `[uiCascadeSelectFooter]`          | Panel footer content                    | none                         |
+| `[uiCascadeSelectLoading]`         | Loading state panel content             | none                         |
 
 ## Internal Architecture
 
@@ -199,12 +199,12 @@ Keyboard handling reuses `KEYBOARD_KEYS` constants from `core`.
 
 ## PrimeNG Divergence and Rationale
 
-| API/Behavior | PrimeNG baseline | `ui-lib-cascadeselect` decision | Rationale |
-|---|---|---|---|
-| Filled mode API | Variant-style filled usage | `filled: boolean` input | Aligns with existing `ui-lib-autocomplete` convention. |
-| Size literals | Commonly `small`/`large` | `sm`/`md`/`lg` | Aligns with Select and shared core size literals. |
-| Template customization | `pTemplate` named templates | Directive-slot API (`uiCascadeSelect*`) | Consistent with library projection conventions and strong typing ergonomics. |
-| Panel portal target | `appendTo` available | Implemented with `'body'` default + `'self'`/selector/element targets | Prevents clipping while preserving an extraction path to shared overlay infrastructure. |
+| API/Behavior           | PrimeNG baseline            | `ui-lib-cascadeselect` decision                                       | Rationale                                                                               |
+| ---------------------- | --------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Filled mode API        | Variant-style filled usage  | `filled: boolean` input                                               | Aligns with existing `ui-lib-autocomplete` convention.                                  |
+| Size literals          | Commonly `small`/`large`    | `sm`/`md`/`lg`                                                        | Aligns with Select and shared core size literals.                                       |
+| Template customization | `pTemplate` named templates | Directive-slot API (`uiCascadeSelect*`)                               | Consistent with library projection conventions and strong typing ergonomics.            |
+| Panel portal target    | `appendTo` available        | Implemented with `'body'` default + `'self'`/selector/element targets | Prevents clipping while preserving an extraction path to shared overlay infrastructure. |
 
 ## Final API Signature Snapshot
 
@@ -248,4 +248,3 @@ public readonly onBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 ## Review Gate
 
 This document is the approval checkpoint before implementation. If approved, next step is scaffolding `projects/ui-lib-custom/src/lib/cascadeselect/` with this exact public API and directive-slot contract.
-

@@ -20,11 +20,11 @@ function findMetaByDay(
   monthGrid: ReturnType<typeof getMonthDates>,
   year: number,
   month: number,
-  day: number
+  day: number,
 ): (typeof monthGrid)[number] {
   const cell: (typeof monthGrid)[number] | undefined = monthGrid.find(
     (dateMeta: (typeof monthGrid)[number]): boolean =>
-      dateMeta.year === year && dateMeta.month === month && dateMeta.day === day
+      dateMeta.year === year && dateMeta.month === month && dateMeta.day === day,
   );
 
   if (!cell) {
@@ -153,8 +153,8 @@ describe('date-utils', (): void => {
           createDate(2024, 2, 10),
           createDate(2024, 2, 20),
           null,
-          null
-        )
+          null,
+        ),
       ).toBe(true);
       expect(
         isDateDisabled(
@@ -162,8 +162,8 @@ describe('date-utils', (): void => {
           createDate(2024, 2, 10),
           createDate(2024, 2, 20),
           null,
-          null
-        )
+          null,
+        ),
       ).toBe(true);
       expect(
         isDateDisabled(
@@ -171,8 +171,8 @@ describe('date-utils', (): void => {
           createDate(2024, 2, 10),
           createDate(2024, 2, 20),
           null,
-          null
-        )
+          null,
+        ),
       ).toBe(false);
     });
 
@@ -197,8 +197,8 @@ describe('date-utils', (): void => {
           createDate(2024, 2, 10),
           createDate(2024, 2, 20),
           disabledDates,
-          disabledDays
-        )
+          disabledDays,
+        ),
       ).toBe(true);
       expect(
         isDateDisabled(
@@ -206,8 +206,8 @@ describe('date-utils', (): void => {
           createDate(2024, 2, 10),
           createDate(2024, 2, 20),
           disabledDates,
-          disabledDays
-        )
+          disabledDays,
+        ),
       ).toBe(true);
     });
   });
@@ -287,11 +287,11 @@ describe('date-utils', (): void => {
 
       const marchFirstSundayIndex: number = sundayStartGrid.findIndex(
         (dateMeta: (typeof sundayStartGrid)[number]): boolean =>
-          dateMeta.year === 2024 && dateMeta.month === 2 && dateMeta.day === 1
+          dateMeta.year === 2024 && dateMeta.month === 2 && dateMeta.day === 1,
       );
       const marchFirstMondayIndex: number = mondayStartGrid.findIndex(
         (dateMeta: (typeof mondayStartGrid)[number]): boolean =>
-          dateMeta.year === 2024 && dateMeta.month === 2 && dateMeta.day === 1
+          dateMeta.year === 2024 && dateMeta.month === 2 && dateMeta.day === 1,
       );
 
       expect(marchFirstSundayIndex).toBe(5);
@@ -311,10 +311,10 @@ describe('date-utils', (): void => {
       const grid: ReturnType<typeof getMonthDates> = getMonthDates(
         now.getMonth(),
         now.getFullYear(),
-        0
+        0,
       );
       const todayCount: number = grid.filter(
-        (dateMeta: (typeof grid)[number]): boolean => dateMeta.today
+        (dateMeta: (typeof grid)[number]): boolean => dateMeta.today,
       ).length;
       expect(todayCount).toBe(1);
     });
@@ -327,7 +327,7 @@ describe('date-utils', (): void => {
         createDate(2024, 2, 5),
         createDate(2024, 2, 20),
         [createDate(2024, 2, 10)],
-        [0]
+        [0],
       );
 
       const beforeRange: (typeof grid)[number] = findMetaByDay(grid, 2024, 2, 1);

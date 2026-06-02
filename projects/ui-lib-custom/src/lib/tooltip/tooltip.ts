@@ -46,7 +46,7 @@ export class Tooltip implements OnInit, OnDestroy {
 
   /** Design variant override. Falls back to `ThemeConfigService` when `null`. */
   public readonly tooltipVariant: InputSignal<TooltipVariant | null> = input<TooltipVariant | null>(
-    null
+    null,
   );
 
   private readonly elementRef: ElementRef<HTMLElement> =
@@ -304,14 +304,14 @@ export class Tooltip implements OnInit, OnDestroy {
       tooltipRect,
       viewportWidth,
       viewportHeight,
-      gap
+      gap,
     );
 
     // Update class if position flipped
     if (position !== requestedPosition) {
       el.className = el.className.replace(
         `ui-lib-tooltip--pos-${requestedPosition}`,
-        `ui-lib-tooltip--pos-${position}`
+        `ui-lib-tooltip--pos-${position}`,
       );
       this.lastPosition = position;
     }
@@ -349,7 +349,7 @@ export class Tooltip implements OnInit, OnDestroy {
     tooltipRect: DOMRect,
     viewportWidth: number,
     viewportHeight: number,
-    gap: number
+    gap: number,
   ): TooltipPosition {
     // When tooltip has no measurable dimensions (e.g. jsdom, display:none), keep requested position.
     if (tooltipRect.width === 0 && tooltipRect.height === 0) {

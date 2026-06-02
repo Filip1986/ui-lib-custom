@@ -42,7 +42,7 @@ const renderCard: (args: CardStoryArgs) => {
   template: string;
   moduleMetadata: { imports: unknown[] };
 } = (
-  args: CardStoryArgs
+  args: CardStoryArgs,
 ): { props: CardStoryArgs; template: string; moduleMetadata: { imports: unknown[] } } => ({
   props: args,
   moduleMetadata: { imports: [Card, Button] },

@@ -76,7 +76,7 @@ export default meta;
 
 export const Default: Story = {
   render: (
-    args: DynamicDialogStoryArgs
+    args: DynamicDialogStoryArgs,
   ): {
     props: DynamicDialogStoryArgs & { open: () => void };
     moduleMetadata: { imports: unknown[] };

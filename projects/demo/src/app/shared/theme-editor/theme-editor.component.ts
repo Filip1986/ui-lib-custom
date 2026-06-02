@@ -54,22 +54,22 @@ export class ThemeEditorComponent {
 
   public readonly isOpen: WritableSignal<boolean> = signal<boolean>(false);
   public readonly panelOpen: Signal<boolean> = computed<boolean>(
-    (): boolean => this.embedded() || this.isOpen()
+    (): boolean => this.embedded() || this.isOpen(),
   );
   public readonly pendingColors: WritableSignal<Record<string, string>> =
     this.editorService.pendingColors;
 
   public readonly variant: Signal<ThemeVariant> = computed<ThemeVariant>(
-    (): ThemeVariant => this.themeConfig.variant()
+    (): ThemeVariant => this.themeConfig.variant(),
   );
   public readonly shape: Signal<ThemeShape> = computed<ThemeShape>(
-    (): ThemeShape => this.themeConfig.shape()
+    (): ThemeShape => this.themeConfig.shape(),
   );
   public readonly density: Signal<ThemeDensity> = computed<ThemeDensity>(
-    (): ThemeDensity => this.themeConfig.density()
+    (): ThemeDensity => this.themeConfig.density(),
   );
   public readonly mode: Signal<ThemeMode> = computed<ThemeMode>(
-    (): ThemeMode => this.themeConfig.mode()
+    (): ThemeMode => this.themeConfig.mode(),
   );
 
   public readonly variants: ToggleOption<ThemeVariant>[] = [
@@ -111,14 +111,14 @@ export class ThemeEditorComponent {
   >({});
 
   public readonly headingFont: WritableSignal<string> = signal<string>(
-    this.readCssVar('--uilib-font-heading', "'Inter', sans-serif")
+    this.readCssVar('--uilib-font-heading', "'Inter', sans-serif"),
   );
   public readonly bodyFont: WritableSignal<string> = signal<string>(
-    this.readCssVar('--uilib-font-body', "'Inter', sans-serif")
+    this.readCssVar('--uilib-font-body', "'Inter', sans-serif"),
   );
 
   public readonly savedPresets: Signal<ThemePreset[]> = computed<ThemePreset[]>((): ThemePreset[] =>
-    this.presetService.presets()
+    this.presetService.presets(),
   );
 
   constructor() {
@@ -161,7 +161,7 @@ export class ThemeEditorComponent {
       (state: Record<string, string>): Record<string, string> => ({
         ...state,
         [key]: value,
-      })
+      }),
     );
   }
 
@@ -171,7 +171,7 @@ export class ThemeEditorComponent {
       (state: Record<string, string>): Record<string, string> => ({
         ...state,
         [key]: this.readColor(key),
-      })
+      }),
     );
   }
 
@@ -249,7 +249,7 @@ export class ThemeEditorComponent {
 
   private readColor(key: string): string {
     const def: ColorOption | undefined = this.colors.find(
-      (color: ColorOption): boolean => color.key === key
+      (color: ColorOption): boolean => color.key === key,
     );
     if (!def) {
       return '#000000';
@@ -293,7 +293,7 @@ export class ThemeEditorComponent {
     link.id = id;
     link.rel = 'stylesheet';
     link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(
-      family
+      family,
     )}:wght@400;500;600;700&display=swap`;
     document.head.appendChild(link);
   }

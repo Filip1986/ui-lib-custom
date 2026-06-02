@@ -240,22 +240,26 @@
 
   @if (activeTab() === 'edge-cases') {
     <ui-lib-panel variant="minimal">
-      <p class="doc-list__intro">Three scenarios that stress-test edge cases: empty option list, invalid/error state, and a large dataset with search.</p>
+      <p class="doc-list__intro">
+        Three scenarios that stress-test edge cases: empty option list, invalid/error state, and a
+        large dataset with search.
+      </p>
 
       <div class="demo-edge-cases">
         <div class="demo-edge-case">
           <h3 class="demo-edge-case__title">Empty options</h3>
-          <p class="demo-edge-case__desc">When <code>options</code> is an empty array the panel shows a "No results" message.</p>
-          <ui-lib-select
-            label="Country"
-            [options]="emptyOptions"
-            placeholder="Choose a country"
-          />
+          <p class="demo-edge-case__desc">
+            When <code>options</code> is an empty array the panel shows a "No results" message.
+          </p>
+          <ui-lib-select label="Country" [options]="emptyOptions" placeholder="Choose a country" />
         </div>
 
         <div class="demo-edge-case">
           <h3 class="demo-edge-case__title">Invalid / error state</h3>
-          <p class="demo-edge-case__desc"><code>[invalid]="true"</code> sets <code>aria-invalid</code> on the host and applies the danger border colour.</p>
+          <p class="demo-edge-case__desc">
+            <code>[invalid]="true"</code> sets <code>aria-invalid</code> on the host and applies the
+            danger border colour.
+          </p>
           <ui-lib-select
             label="Required field"
             [options]="options"
@@ -265,12 +269,17 @@
             [ngModel]="invalidValue()"
             (ngModelChange)="invalidValue.set($event)"
           />
-          <p class="demo-edge-case__hint">Host receives <code>aria-invalid="true"</code> and <code>aria-required="true"</code>.</p>
+          <p class="demo-edge-case__hint">
+            Host receives <code>aria-invalid="true"</code> and <code>aria-required="true"</code>.
+          </p>
         </div>
 
         <div class="demo-edge-case">
           <h3 class="demo-edge-case__title">Large dataset — 150 options, 5 groups</h3>
-          <p class="demo-edge-case__desc">Searchable select with 150 grouped options. Type to filter; live region announces result count.</p>
+          <p class="demo-edge-case__desc">
+            Searchable select with 150 grouped options. Type to filter; live region announces result
+            count.
+          </p>
           <ui-lib-select
             label="Large list"
             [options]="largeOptions"
@@ -290,11 +299,7 @@
 
   @if (activeTab() === 'usage') {
     <ui-lib-panel variant="minimal">
-      <app-doc-code-example
-        [html]="usageHtml"
-        [typescript]="usageTs"
-        [showLineNumbers]="true"
-      />
+      <app-doc-code-example [html]="usageHtml" [typescript]="usageTs" [showLineNumbers]="true" />
     </ui-lib-panel>
   }
 
@@ -329,7 +334,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -338,7 +342,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -347,7 +351,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

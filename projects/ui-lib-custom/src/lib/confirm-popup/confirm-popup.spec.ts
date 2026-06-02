@@ -241,7 +241,7 @@ describe('ConfirmPopup', (): void => {
         const { host, fixture, component } = bootstrap({ visible: true, acceptSeverity: severity });
         const buttons: NodeListOf<HTMLElement> = getAllElements(
           host,
-          `.ui-lib-confirm-popup__btn--${severity}`
+          `.ui-lib-confirm-popup__btn--${severity}`,
         );
         expect(buttons.length).toBeGreaterThan(0);
         component.visibleState.set(false);
@@ -281,7 +281,7 @@ describe('ConfirmPopup', (): void => {
     it('should close on Escape keydown', (): void => {
       const { fixture, host, component } = bootstrap({ visible: true });
       getElement(host, '.ui-lib-confirm-popup__panel').dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })
+        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }),
       );
       detectAndFlush(fixture);
       expect(component.visibleState()).toBe(false);
@@ -290,7 +290,7 @@ describe('ConfirmPopup', (): void => {
     it('should not close on non-Escape keydown', (): void => {
       const { fixture, host, component } = bootstrap({ visible: true });
       getElement(host, '.ui-lib-confirm-popup__panel').dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
+        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }),
       );
       detectAndFlush(fixture);
       expect(component.visibleState()).toBe(true);

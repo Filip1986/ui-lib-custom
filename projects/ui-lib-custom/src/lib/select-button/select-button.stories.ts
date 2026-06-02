@@ -90,7 +90,7 @@ export const DarkMode: Story = {
 export const FullApi: Story = {
   args: { variant: 'bootstrap', size: 'lg', multiple: true },
   render: (
-    args: Record<string, unknown>
+    args: Record<string, unknown>,
   ): { props: Record<string, unknown>; template: string } => ({
     props: { ...args, options },
     template: `<ui-lib-select-button [options]="options" [variant]="variant" [size]="size" [multiple]="multiple" />`,

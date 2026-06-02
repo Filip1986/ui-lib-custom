@@ -76,7 +76,7 @@ describe('Editor Accessibility', (): void => {
 
   function boldButtonEl(): HTMLButtonElement {
     const element: HTMLButtonElement | null = hostEl().querySelector(
-      '.ui-lib-editor-toolbar-button[aria-label="Bold"]'
+      '.ui-lib-editor-toolbar-button[aria-label="Bold"]',
     );
     if (!element) {
       throw new Error('Expected bold toolbar button to exist.');

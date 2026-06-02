@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="ContextMenu"
@@ -35,8 +34,8 @@
   <!-- ── Submenu ───────────────────────────────────────────────────────── -->
   <app-doc-section id="nested-submenu" title="Nested Submenu">
     <p class="demo-hint">
-      Provide an <code>items</code> array on any item to create a submenu.
-      Hover or press <kbd>→</kbd> to expand it.
+      Provide an <code>items</code> array on any item to create a submenu. Hover or press
+      <kbd>→</kbd> to expand it.
     </p>
     <div class="demo-target" (contextmenu)="submenuMenu.show($event)">Right-click here</div>
     <ui-lib-context-menu #submenuMenu [model]="submenuItems" />
@@ -62,12 +61,7 @@
       Use the <code>command</code> callback on each item or listen to the <code>itemClick</code>
       output on the component.
     </p>
-    <div
-      class="demo-target"
-      (contextmenu)="eventMenu.show($event)"
-    >
-      Right-click here
-    </div>
+    <div class="demo-target" (contextmenu)="eventMenu.show($event)">Right-click here</div>
     <ui-lib-context-menu #eventMenu [model]="eventItems" (itemClick)="onItemClick($event)" />
     @if (eventLog().length > 0) {
       <div class="demo-event-log" aria-live="polite">
@@ -154,7 +148,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -163,7 +156,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -172,5 +165,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

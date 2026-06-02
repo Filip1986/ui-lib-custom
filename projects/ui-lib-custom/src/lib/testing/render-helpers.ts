@@ -11,7 +11,7 @@ import type { TestComponentResult } from './testing.types';
  */
 export async function createTestComponent<T extends object>(
   component: Type<T>,
-  inputs?: Partial<T>
+  inputs?: Partial<T>,
 ): Promise<TestComponentResult<T>> {
   await TestBed.configureTestingModule({
     imports: [component, NoopAnimationsModule],

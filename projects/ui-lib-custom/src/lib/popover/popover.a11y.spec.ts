@@ -191,7 +191,7 @@ describe('Popover Accessibility', (): void => {
       openPopover(fixture);
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const overlay: HTMLElement | null = host.querySelector<HTMLElement>(
-        '.ui-lib-popover__overlay'
+        '.ui-lib-popover__overlay',
       );
       expect(overlay?.getAttribute('aria-hidden')).toBe('true');
     });
@@ -216,7 +216,7 @@ describe('Popover Accessibility', (): void => {
       openPopover(fixture);
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const closeBtn: HTMLElement | null = host.querySelector<HTMLElement>(
-        '.ui-lib-popover__close-btn'
+        '.ui-lib-popover__close-btn',
       );
       expect(closeBtn?.getAttribute('aria-label')).toBe('Close');
     });
@@ -238,7 +238,7 @@ describe('Popover Accessibility', (): void => {
       openPopover(fixture);
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const closeBtn: HTMLElement | null = host.querySelector<HTMLElement>(
-        '.ui-lib-popover__close-btn'
+        '.ui-lib-popover__close-btn',
       );
       closeBtn?.click();
       detectAndFlush(fixture);
@@ -275,7 +275,7 @@ describe('Popover Accessibility', (): void => {
       detectAndFlush(fixture);
 
       const closeBtn: HTMLElement | null = host.querySelector<HTMLElement>(
-        '.ui-lib-popover__close-btn'
+        '.ui-lib-popover__close-btn',
       );
       closeBtn?.click();
       detectAndFlush(fixture);
@@ -319,7 +319,7 @@ describe('Popover Accessibility', (): void => {
       detectAndFlush(fixture);
 
       const overlay: HTMLElement | null = host.querySelector<HTMLElement>(
-        '.ui-lib-popover__overlay'
+        '.ui-lib-popover__overlay',
       );
       overlay?.click();
       detectAndFlush(fixture);
@@ -378,7 +378,7 @@ describe('Popover Accessibility', (): void => {
       openPopover(fixture);
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const overlay: HTMLElement | null = host.querySelector<HTMLElement>(
-        '.ui-lib-popover__overlay'
+        '.ui-lib-popover__overlay',
       );
       overlay?.click();
       detectAndFlush(fixture);
@@ -392,7 +392,7 @@ describe('Popover Accessibility', (): void => {
       openPopover(fixture);
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const overlay: HTMLElement | null = host.querySelector<HTMLElement>(
-        '.ui-lib-popover__overlay'
+        '.ui-lib-popover__overlay',
       );
       overlay?.click();
       detectAndFlush(fixture);

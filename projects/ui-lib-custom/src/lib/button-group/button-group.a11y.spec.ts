@@ -82,7 +82,7 @@ async function setup<T>(componentType: new () => T): Promise<ComponentFixture<T>
 
 function getGroupElement(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-button-group__group'
+    '.ui-lib-button-group__group',
   ) as HTMLElement;
 }
 
@@ -137,14 +137,14 @@ describe('ButtonGroup Accessibility', (): void => {
     it('default orientation keeps horizontal layout class unset', async (): Promise<void> => {
       const fixture: ComponentFixture<LabeledButtonsHost> = await setup(LabeledButtonsHost);
       expect(
-        getHostElement(fixture).classList.contains('ui-lib-button-group--vertical')
+        getHostElement(fixture).classList.contains('ui-lib-button-group--vertical'),
       ).toBeFalsy();
     });
 
     it('vertical orientation adds vertical host class', async (): Promise<void> => {
       const fixture: ComponentFixture<VerticalHost> = await setup(VerticalHost);
       expect(
-        getHostElement(fixture).classList.contains('ui-lib-button-group--vertical')
+        getHostElement(fixture).classList.contains('ui-lib-button-group--vertical'),
       ).toBeTruthy();
     });
   });
@@ -153,7 +153,7 @@ describe('ButtonGroup Accessibility', (): void => {
     it('text buttons keep their own accessible text labels', async (): Promise<void> => {
       const fixture: ComponentFixture<LabeledButtonsHost> = await setup(LabeledButtonsHost);
       const buttons: HTMLButtonElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
       );
       expect(getRequiredButton(buttons, 0).textContent.trim()).toBe('Bold');
       expect(getRequiredButton(buttons, 1).textContent.trim()).toBe('Italic');
@@ -162,7 +162,7 @@ describe('ButtonGroup Accessibility', (): void => {
     it('icon-only buttons retain individual aria-labels', async (): Promise<void> => {
       const fixture: ComponentFixture<IconOnlyButtonsHost> = await setup(IconOnlyButtonsHost);
       const buttons: HTMLButtonElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
       );
       expect(getRequiredButton(buttons, 0).getAttribute('aria-label')).toBe('Save');
       expect(getRequiredButton(buttons, 1).getAttribute('aria-label')).toBe('Delete');
@@ -174,7 +174,7 @@ describe('ButtonGroup Accessibility', (): void => {
       consoleWarnSpy.mockClear();
       await setup(NoGroupLabelHost);
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[ui-lib-button-group] Missing ariaLabel. Provide ariaLabel when grouping related actions for assistive technologies.'
+        '[ui-lib-button-group] Missing ariaLabel. Provide ariaLabel when grouping related actions for assistive technologies.',
       );
     });
 

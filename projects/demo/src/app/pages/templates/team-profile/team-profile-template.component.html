@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Team &amp; Profile Template"
@@ -20,9 +19,9 @@
   <section id="overview" data-doc-anchor>
     <h2>Overview</h2>
     <p>
-      The Team &amp; Profile template covers two closely related patterns: the personal profile
-      page (suitable for account settings, public profiles, or employee cards) and the team
-      directory grid (used in admin portals, intranets, and HR tools).
+      The Team &amp; Profile template covers two closely related patterns: the personal profile page
+      (suitable for account settings, public profiles, or employee cards) and the team directory
+      grid (used in admin portals, intranets, and HR tools).
     </p>
   </section>
 
@@ -31,11 +30,10 @@
     <h2>User Profile</h2>
 
     <div class="profile-layout">
-
       <!-- Profile card (left) -->
       <ui-lib-panel class="profile-card">
         <div class="profile-avatar-wrap">
-           <ui-lib-avatar label="JD" shape="circle" size="lg" />
+          <ui-lib-avatar label="JD" shape="circle" size="lg" />
           <span class="profile-status-dot profile-status-dot--online" aria-label="Online"></span>
         </div>
         <h3 class="profile-name">Jane Doe</h3>
@@ -141,7 +139,6 @@
           </ul>
         </ui-lib-panel>
       </div>
-
     </div>
   </section>
 
@@ -196,8 +193,8 @@
   <section id="usage" data-doc-anchor>
     <h2>Usage</h2>
     <p>
-      The snippet below shows the key components used in this template. Replace the static data
-      with your team service and bind the profile card to the current user's data.
+      The snippet below shows the key components used in this template. Replace the static data with
+      your team service and bind the profile card to the current user's data.
     </p>
     <ui-lib-code-snippet [code]="codeSnippet" language="typescript" />
     <div class="team-download-cta">
@@ -205,5 +202,4 @@
       <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
     </div>
   </section>
-
 </app-doc-page-layout>

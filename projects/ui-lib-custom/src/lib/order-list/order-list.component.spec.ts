@@ -48,10 +48,10 @@ function getFruit(index: number): Fruit {
 
 function getOrderListItemElement(
   fixture: ComponentFixture<OrderListHostComponent>,
-  index: number
+  index: number,
 ): HTMLElement {
   const itemElement: HTMLElement | undefined = rootEl(fixture).querySelectorAll<HTMLElement>(
-    '.ui-lib-order-list__item'
+    '.ui-lib-order-list__item',
   )[index];
   if (itemElement === undefined) {
     throw new Error(`Expected order-list item element at index ${index}`);
@@ -114,7 +114,7 @@ class OrderListHostComponent {
   public controlsPosition: WritableSignal<OrderListControlsPosition> =
     signal<OrderListControlsPosition>('left');
   public variant: WritableSignal<OrderListVariant | null> = signal<OrderListVariant | null>(
-    'material'
+    'material',
   );
   public size: WritableSignal<OrderListSize> = signal<OrderListSize>('md');
   public trackBy: WritableSignal<string | null> = signal<string | null>(null);
@@ -181,7 +181,7 @@ describe('OrderListComponent', (): void => {
 
     it('should render all items', (): void => {
       const items: NodeListOf<Element> = rootEl(fixture).querySelectorAll(
-        '.ui-lib-order-list__item'
+        '.ui-lib-order-list__item',
       );
       expect(items.length).toBe(FRUITS.length);
     });
@@ -270,7 +270,7 @@ describe('OrderListComponent', (): void => {
 
     it('should render filter input when filterBy is set', (): void => {
       const input: Element | null = rootEl(fixture).querySelector(
-        '.ui-lib-order-list__filter-input'
+        '.ui-lib-order-list__filter-input',
       );
       expect(input).toBeTruthy();
     });
@@ -355,7 +355,7 @@ describe('OrderListComponent', (): void => {
 
     it('should resolve a nested property path', (): void => {
       expect(component.resolveProperty({ address: { city: 'Berlin' } }, 'address.city')).toBe(
-        'berlin'
+        'berlin',
       );
     });
 
@@ -605,7 +605,7 @@ describe('OrderListComponent', (): void => {
   describe('control buttons', (): void => {
     it('move-up button should be disabled when no selection', (): void => {
       const buttons: NodeListOf<HTMLButtonElement> = rootEl(
-        fixture
+        fixture,
       ).querySelectorAll<HTMLButtonElement>('.ui-lib-order-list__control-btn');
       // First two buttons are move-top and move-up — both disabled when no selection
       expect(buttons[1]?.disabled).toBe(true);
@@ -617,7 +617,7 @@ describe('OrderListComponent', (): void => {
       fixture.detectChanges();
       // Buttons: index 0=moveTop, 1=moveUp, 2=moveDown, 3=moveBottom
       const buttons: NodeListOf<HTMLButtonElement> = rootEl(
-        fixture
+        fixture,
       ).querySelectorAll<HTMLButtonElement>('.ui-lib-order-list__control-btn');
       buttons[1]?.click();
       fixture.detectChanges();
@@ -855,7 +855,7 @@ describe('OrderListComponent', (): void => {
         fakeDragEvent('dragleave', {
           currentTarget: container as EventTarget,
           relatedTarget: childNode,
-        })
+        }),
       );
 
       expect(component.dragOverIndex()).toBe(2);
@@ -873,7 +873,7 @@ describe('OrderListComponent', (): void => {
         fakeDragEvent('dragleave', {
           currentTarget: container as EventTarget,
           relatedTarget: outsideNode,
-        })
+        }),
       );
 
       expect(component.dragOverIndex()).toBeNull();

@@ -86,7 +86,7 @@ describe('Accordion', (): void => {
   });
 
   function createTestAccordion(
-    config: Partial<AccordionConfig> = {}
+    config: Partial<AccordionConfig> = {},
   ): ComponentFixture<TestHostComponent> {
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
     const host: TestHostComponent = fixture.componentInstance;
@@ -119,14 +119,14 @@ describe('Accordion', (): void => {
 
   function getPanelHeaders(fixture: ComponentFixture<TestHostComponent>): HTMLElement[] {
     const headers: NodeListOf<Element> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      '.ui-lib-accordion-panel__header'
+      '.ui-lib-accordion-panel__header',
     );
     return Array.from(headers) as HTMLElement[];
   }
 
   function getPanelContents(fixture: ComponentFixture<TestHostComponent>): HTMLElement[] {
     const contents: NodeListOf<Element> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      '.ui-lib-accordion-panel__content'
+      '.ui-lib-accordion-panel__content',
     );
     return Array.from(contents) as HTMLElement[];
   }
@@ -161,7 +161,7 @@ describe('Accordion', (): void => {
     await stabilizeAccordion(fixture);
     const headers: HTMLElement[] = getPanelHeaders(fixture);
     const contentOne: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.panel-content-1'
+      '.panel-content-1',
     );
 
     expect(fixture.componentInstance).toBeTruthy();
@@ -177,7 +177,7 @@ describe('Accordion', (): void => {
   it('applies variant and size classes and updates on change', (): void => {
     const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const accordionEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-accordion'
+      'ui-lib-accordion',
     ) as HTMLElement;
 
     expect(accordionEl.className).toContain('ui-lib-accordion--variant-material');
@@ -367,7 +367,7 @@ describe('Accordion', (): void => {
     const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const contents: HTMLElement[] = getPanelContents(fixture);
     const panelNodes: NodeListOf<Element> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      'ui-lib-accordion-panel'
+      'ui-lib-accordion-panel',
     );
     const panelHosts: HTMLElement[] = Array.from(panelNodes) as HTMLElement[];
     const panelHost0: HTMLElement = getRequiredElement(panelHosts, 0, 'accordion panel');
@@ -387,7 +387,7 @@ describe('Accordion', (): void => {
   it('applies dark theme variables', (): void => {
     const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-accordion'
+      'ui-lib-accordion',
     ) as HTMLElement;
     const root: HTMLElement = document.documentElement;
 

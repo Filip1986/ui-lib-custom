@@ -266,7 +266,7 @@ export class TreeSelectDemoComponent {
 
   // Show clear
   public readonly clearableSelection: WritableSignal<TreeNode | null> = signal<TreeNode | null>(
-    null
+    null,
   );
 
   // Playground

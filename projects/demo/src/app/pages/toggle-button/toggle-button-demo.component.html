@@ -189,10 +189,7 @@
             >
           </div>
         </ui-lib-panel>
-        <app-doc-code-example
-          [html]="allowEmptyHtml"
-          [typescript]="allowEmptyTs"
-        />
+        <app-doc-code-example [html]="allowEmptyHtml" [typescript]="allowEmptyTs" />
       </app-doc-section>
 
       <!-- ── g. Disabled ───────────────────────────────────────────────────── -->
@@ -259,12 +256,16 @@
       <app-doc-section id="events" title="Events">
         <h3>i. Events</h3>
         <p class="section-text">
-          The <code>(toggleButtonChange)</code>, <code>(toggleButtonFocus)</code>, and <code>(toggleButtonBlur)</code> outputs expose
-          interaction events.
+          The <code>(toggleButtonChange)</code>, <code>(toggleButtonFocus)</code>, and
+          <code>(toggleButtonBlur)</code> outputs expose interaction events.
         </p>
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
-            <ui-lib-toggle-button onLabel="On" offLabel="Off" (toggleButtonChange)="onEventChange($event)" />
+            <ui-lib-toggle-button
+              onLabel="On"
+              offLabel="Off"
+              (toggleButtonChange)="onEventChange($event)"
+            />
             <ui-lib-button size="sm" appearance="ghost" (click)="clearEventLog()">
               Clear
             </ui-lib-button>
@@ -289,7 +290,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -298,7 +298,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -307,7 +307,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

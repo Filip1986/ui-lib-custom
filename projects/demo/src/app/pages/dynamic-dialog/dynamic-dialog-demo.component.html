@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="DynamicDialog"
@@ -40,7 +39,9 @@
           Open with Data
         </ui-lib-button>
         @if (lastResult) {
-          <p class="demo-result">Result: <strong>{{ lastResult }}</strong></p>
+          <p class="demo-result">
+            Result: <strong>{{ lastResult }}</strong>
+          </p>
         }
       </div>
       <ui-lib-code-snippet
@@ -55,8 +56,8 @@
   <!-- Scrollable Content -->
   <app-doc-section id="scrollable-content" title="Fixed Height &amp; Scrollable Content">
     <p class="demo-section__desc">
-      Set <code>height</code> on the config to give the dialog a fixed viewport height. The
-      content area scrolls automatically.
+      Set <code>height</code> on the config to give the dialog a fixed viewport height. The content
+      area scrolls automatically.
     </p>
     <div class="demo-card">
       <div class="demo-card__preview">
@@ -102,16 +103,25 @@
   <!-- Positions -->
   <app-doc-section id="viewport-positions" title="Viewport Positions">
     <p class="demo-section__desc">
-      Use <code>position</code> to anchor the dialog to the center or any edge of the
-      viewport.
+      Use <code>position</code> to anchor the dialog to the center or any edge of the viewport.
     </p>
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--grid">
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('top')">Top</ui-lib-button>
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('center')">Center</ui-lib-button>
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('bottom')">Bottom</ui-lib-button>
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('left')">Left</ui-lib-button>
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('right')">Right</ui-lib-button>
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('top')"
+          >Top</ui-lib-button
+        >
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('center')"
+          >Center</ui-lib-button
+        >
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('bottom')"
+          >Bottom</ui-lib-button
+        >
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('left')"
+          >Left</ui-lib-button
+        >
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('right')"
+          >Right</ui-lib-button
+        >
       </div>
       <ui-lib-code-snippet
         language="typescript"
@@ -177,5 +187,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

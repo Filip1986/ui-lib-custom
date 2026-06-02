@@ -119,10 +119,7 @@
             </ui-lib-float-label>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example
-          [html]="floatLabelHtml"
-          [typescript]="floatLabelTs"
-        />
+        <app-doc-code-example [html]="floatLabelHtml" [typescript]="floatLabelTs" />
       </app-doc-section>
 
       <app-doc-section id="sizes" title="Sizes">
@@ -214,7 +211,6 @@
     </div>
   </app-doc-demo-viewport>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -223,7 +219,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"

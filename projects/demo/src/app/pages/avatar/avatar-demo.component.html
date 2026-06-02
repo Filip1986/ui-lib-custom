@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Avatar"
@@ -52,12 +51,7 @@
         size="lg"
       />
     </div>
-    <ui-lib-code-snippet
-      language="html"
-      [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetImage"
-    />
+    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetImage" />
   </app-doc-section>
 
   <!-- Section 2: Label avatars -->
@@ -70,12 +64,7 @@
       <ui-lib-avatar label="AB" size="md" />
       <ui-lib-avatar label="XY" size="lg" />
     </div>
-    <ui-lib-code-snippet
-      language="html"
-      [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetLabel"
-    />
+    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetLabel" />
   </app-doc-section>
 
   <!-- Section 3: Icon avatars -->
@@ -88,12 +77,7 @@
       <ui-lib-avatar icon="pi pi-user" size="md" />
       <ui-lib-avatar icon="pi pi-user" size="lg" />
     </div>
-    <ui-lib-code-snippet
-      language="html"
-      [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetIcon"
-    />
+    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetIcon" />
   </app-doc-section>
 
   <!-- Section 4: Shapes -->
@@ -127,12 +111,7 @@
         <span class="av-shape-label">square</span>
       </div>
     </div>
-    <ui-lib-code-snippet
-      language="html"
-      [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetShape"
-    />
+    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetShape" />
   </app-doc-section>
 
   <!-- Section 5: Variants -->
@@ -160,8 +139,8 @@
   <!-- Section 6: AvatarGroup -->
   <app-doc-section id="avatar-group" title="Avatar Group">
     <p class="demo-section__description">
-      Wrap multiple avatars in <code>ui-lib-avatar-group</code> to stack them with overlap.
-      Set <code>ariaLabel</code> on the group for accessibility.
+      Wrap multiple avatars in <code>ui-lib-avatar-group</code> to stack them with overlap. Set
+      <code>ariaLabel</code> on the group for accessibility.
     </p>
     <div class="av-row">
       <ui-lib-avatar-group ariaLabel="Project team">
@@ -211,7 +190,8 @@
                 size="sm"
                 type="button"
                 (click)="setSize(size)"
-              >{{ size }}</ui-lib-button>
+                >{{ size }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -225,7 +205,8 @@
                 size="sm"
                 type="button"
                 (click)="setShape(shape)"
-              >{{ shape }}</ui-lib-button>
+                >{{ shape }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -239,7 +220,8 @@
                 size="sm"
                 type="button"
                 (click)="setVariant(variant)"
-              >{{ variant }}</ui-lib-button>
+                >{{ variant }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -255,7 +237,6 @@
     <app-doc-api-reference [rows]="avatarGroupInputRows" />
   </app-doc-section>
 
-  
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -272,7 +253,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -282,5 +263,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

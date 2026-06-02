@@ -6,201 +6,192 @@
     description='Displays two images overlaid with a draggable divider, allowing the user to compare a "before" and "after" image by sliding the handle horizontally. Supports keyboard navigation, two-way value binding, three design variants, and three size tokens.'
   />
 
-      <!-- ── a. Basic ────────────────────────────────────────────────────────── -->
-      <app-doc-section id="basic" title="Basic">
-        <p class="demo-section__description">
-          Provide <code>leftImage</code>, <code>leftAlt</code>, <code>rightImage</code>, and
-          <code>rightAlt</code>. Drag the handle to reveal more of either image. Use
-          <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> keys for keyboard navigation.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-compare-wrapper">
-            <ui-lib-image-compare
-              leftImage="https://picsum.photos/seed/before1/800/400"
-              leftAlt="Before"
-              rightImage="https://picsum.photos/seed/after1/800/400"
-              rightAlt="After"
-            />
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-      </app-doc-section>
-
-      <!-- ── b. Two-Way Binding ───────────────────────────────────────────── -->
-      <app-doc-section id="two-way-binding" title="Two-Way Binding">
-        <p class="demo-section__description">
-          Use <code>[(value)]</code> to read and control the slider position (0–100)
-          programmatically.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-compare-wrapper">
-            <ui-lib-image-compare
-              leftImage="https://picsum.photos/seed/before2/800/400"
-              leftAlt="Before"
-              rightImage="https://picsum.photos/seed/after2/800/400"
-              rightAlt="After"
-              [(value)]="position"
-            />
-          </div>
-          <p class="value-text">
-            Position: <strong>{{ position() }}%</strong>
-          </p>
-        </ui-lib-panel>
-        <app-doc-code-example
-          [html]="twoWayBindingHtml"
-          [typescript]="twoWayBindingTs"
+  <!-- ── a. Basic ────────────────────────────────────────────────────────── -->
+  <app-doc-section id="basic" title="Basic">
+    <p class="demo-section__description">
+      Provide <code>leftImage</code>, <code>leftAlt</code>, <code>rightImage</code>, and
+      <code>rightAlt</code>. Drag the handle to reveal more of either image. Use
+      <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> keys for keyboard navigation.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-compare-wrapper">
+        <ui-lib-image-compare
+          leftImage="https://picsum.photos/seed/before1/800/400"
+          leftAlt="Before"
+          rightImage="https://picsum.photos/seed/after1/800/400"
+          rightAlt="After"
         />
-      </app-doc-section>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+  </app-doc-section>
 
-      <!-- ── c. Sizes ─────────────────────────────────────────────────────── -->
-      <app-doc-section id="sizes" title="Sizes">
-        <p class="demo-section__description">
-          Use the <code>size</code> input (<code>sm</code>, <code>md</code>, <code>lg</code>) to
-          scale the handle button.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-col">
-            <div class="size-item">
-              <span class="size-label">sm</span>
-              <div class="demo-compare-wrapper demo-compare-wrapper--sm">
-                <ui-lib-image-compare
-                  leftImage="https://picsum.photos/seed/before3/800/300"
-                  leftAlt="Before"
-                  rightImage="https://picsum.photos/seed/after3/800/300"
-                  rightAlt="After"
-                  size="sm"
-                />
-              </div>
-            </div>
-            <div class="size-item">
-              <span class="size-label">md</span>
-              <div class="demo-compare-wrapper demo-compare-wrapper--sm">
-                <ui-lib-image-compare
-                  leftImage="https://picsum.photos/seed/before4/800/300"
-                  leftAlt="Before"
-                  rightImage="https://picsum.photos/seed/after4/800/300"
-                  rightAlt="After"
-                  size="md"
-                />
-              </div>
-            </div>
-            <div class="size-item">
-              <span class="size-label">lg</span>
-              <div class="demo-compare-wrapper demo-compare-wrapper--sm">
-                <ui-lib-image-compare
-                  leftImage="https://picsum.photos/seed/before5/800/300"
-                  leftAlt="Before"
-                  rightImage="https://picsum.photos/seed/after5/800/300"
-                  rightAlt="After"
-                  size="lg"
-                />
-              </div>
-            </div>
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-      </app-doc-section>
-
-      <!-- ── d. Variants ──────────────────────────────────────────────────── -->
-      <app-doc-section id="variants" title="Variants">
-        <p class="demo-section__description">
-          Three design variants: <code>material</code> (elevated shadow),
-          <code>bootstrap</code> (border, tighter radius), and <code>minimal</code>
-          (no rounding).
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-col">
-            <div class="variant-item">
-              <span class="size-label">material</span>
-              <div class="demo-compare-wrapper demo-compare-wrapper--sm">
-                <ui-lib-image-compare
-                  leftImage="https://picsum.photos/seed/before6/800/300"
-                  leftAlt="Before"
-                  rightImage="https://picsum.photos/seed/after6/800/300"
-                  rightAlt="After"
-                  variant="material"
-                />
-              </div>
-            </div>
-            <div class="variant-item">
-              <span class="size-label">bootstrap</span>
-              <div class="demo-compare-wrapper demo-compare-wrapper--sm">
-                <ui-lib-image-compare
-                  leftImage="https://picsum.photos/seed/before7/800/300"
-                  leftAlt="Before"
-                  rightImage="https://picsum.photos/seed/after7/800/300"
-                  rightAlt="After"
-                  variant="bootstrap"
-                />
-              </div>
-            </div>
-            <div class="variant-item">
-              <span class="size-label">minimal</span>
-              <div class="demo-compare-wrapper demo-compare-wrapper--sm">
-                <ui-lib-image-compare
-                  leftImage="https://picsum.photos/seed/before8/800/300"
-                  leftAlt="Before"
-                  rightImage="https://picsum.photos/seed/after8/800/300"
-                  rightAlt="After"
-                  variant="minimal"
-                />
-              </div>
-            </div>
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-      </app-doc-section>
-
-      <!-- ── e. Disabled ──────────────────────────────────────────────────── -->
-      <app-doc-section id="disabled" title="Disabled">
-        <p class="demo-section__description">
-          Set <code>[disabled]="true"</code> to prevent the user from moving the slider.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-compare-wrapper">
-            <ui-lib-image-compare
-              leftImage="https://picsum.photos/seed/before9/800/400"
-              leftAlt="Before"
-              rightImage="https://picsum.photos/seed/after9/800/400"
-              rightAlt="After"
-              [disabled]="true"
-            />
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
-      </app-doc-section>
-
-      <!-- ── f. Custom Label ──────────────────────────────────────────────── -->
-      <app-doc-section id="custom-label" title="Custom Label">
-        <p class="demo-section__description">
-          Use the <code>ariaLabel</code> input to provide a descriptive accessible label for the
-          slider handle.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-compare-wrapper">
-            <ui-lib-image-compare
-              leftImage="https://picsum.photos/seed/before10/800/400"
-              leftAlt="Original photo"
-              rightImage="https://picsum.photos/seed/after10/800/400"
-              rightAlt="Photo with filter applied"
-              ariaLabel="Compare photo filters"
-            />
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example
-          [html]="customLabelHtml"
-          [typescript]="customLabelTs"
+  <!-- ── b. Two-Way Binding ───────────────────────────────────────────── -->
+  <app-doc-section id="two-way-binding" title="Two-Way Binding">
+    <p class="demo-section__description">
+      Use <code>[(value)]</code> to read and control the slider position (0–100) programmatically.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-compare-wrapper">
+        <ui-lib-image-compare
+          leftImage="https://picsum.photos/seed/before2/800/400"
+          leftAlt="Before"
+          rightImage="https://picsum.photos/seed/after2/800/400"
+          rightAlt="After"
+          [(value)]="position"
         />
-      </app-doc-section>
+      </div>
+      <p class="value-text">
+        Position: <strong>{{ position() }}%</strong>
+      </p>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="twoWayBindingHtml" [typescript]="twoWayBindingTs" />
+  </app-doc-section>
 
-      <!-- ── API Table ─────────────────────────────────────────────────────── -->
-      <app-doc-section id="api" title="API">
-        <app-doc-api-reference [rows]="apiInputRows" />
-        <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
-      </app-doc-section>
+  <!-- ── c. Sizes ─────────────────────────────────────────────────────── -->
+  <app-doc-section id="sizes" title="Sizes">
+    <p class="demo-section__description">
+      Use the <code>size</code> input (<code>sm</code>, <code>md</code>, <code>lg</code>) to scale
+      the handle button.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-col">
+        <div class="size-item">
+          <span class="size-label">sm</span>
+          <div class="demo-compare-wrapper demo-compare-wrapper--sm">
+            <ui-lib-image-compare
+              leftImage="https://picsum.photos/seed/before3/800/300"
+              leftAlt="Before"
+              rightImage="https://picsum.photos/seed/after3/800/300"
+              rightAlt="After"
+              size="sm"
+            />
+          </div>
+        </div>
+        <div class="size-item">
+          <span class="size-label">md</span>
+          <div class="demo-compare-wrapper demo-compare-wrapper--sm">
+            <ui-lib-image-compare
+              leftImage="https://picsum.photos/seed/before4/800/300"
+              leftAlt="Before"
+              rightImage="https://picsum.photos/seed/after4/800/300"
+              rightAlt="After"
+              size="md"
+            />
+          </div>
+        </div>
+        <div class="size-item">
+          <span class="size-label">lg</span>
+          <div class="demo-compare-wrapper demo-compare-wrapper--sm">
+            <ui-lib-image-compare
+              leftImage="https://picsum.photos/seed/before5/800/300"
+              leftAlt="Before"
+              rightImage="https://picsum.photos/seed/after5/800/300"
+              rightAlt="After"
+              size="lg"
+            />
+          </div>
+        </div>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
+  </app-doc-section>
 
-  
-  
+  <!-- ── d. Variants ──────────────────────────────────────────────────── -->
+  <app-doc-section id="variants" title="Variants">
+    <p class="demo-section__description">
+      Three design variants: <code>material</code> (elevated shadow),
+      <code>bootstrap</code> (border, tighter radius), and <code>minimal</code>
+      (no rounding).
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-col">
+        <div class="variant-item">
+          <span class="size-label">material</span>
+          <div class="demo-compare-wrapper demo-compare-wrapper--sm">
+            <ui-lib-image-compare
+              leftImage="https://picsum.photos/seed/before6/800/300"
+              leftAlt="Before"
+              rightImage="https://picsum.photos/seed/after6/800/300"
+              rightAlt="After"
+              variant="material"
+            />
+          </div>
+        </div>
+        <div class="variant-item">
+          <span class="size-label">bootstrap</span>
+          <div class="demo-compare-wrapper demo-compare-wrapper--sm">
+            <ui-lib-image-compare
+              leftImage="https://picsum.photos/seed/before7/800/300"
+              leftAlt="Before"
+              rightImage="https://picsum.photos/seed/after7/800/300"
+              rightAlt="After"
+              variant="bootstrap"
+            />
+          </div>
+        </div>
+        <div class="variant-item">
+          <span class="size-label">minimal</span>
+          <div class="demo-compare-wrapper demo-compare-wrapper--sm">
+            <ui-lib-image-compare
+              leftImage="https://picsum.photos/seed/before8/800/300"
+              leftAlt="Before"
+              rightImage="https://picsum.photos/seed/after8/800/300"
+              rightAlt="After"
+              variant="minimal"
+            />
+          </div>
+        </div>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
+  </app-doc-section>
+
+  <!-- ── e. Disabled ──────────────────────────────────────────────────── -->
+  <app-doc-section id="disabled" title="Disabled">
+    <p class="demo-section__description">
+      Set <code>[disabled]="true"</code> to prevent the user from moving the slider.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-compare-wrapper">
+        <ui-lib-image-compare
+          leftImage="https://picsum.photos/seed/before9/800/400"
+          leftAlt="Before"
+          rightImage="https://picsum.photos/seed/after9/800/400"
+          rightAlt="After"
+          [disabled]="true"
+        />
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
+  </app-doc-section>
+
+  <!-- ── f. Custom Label ──────────────────────────────────────────────── -->
+  <app-doc-section id="custom-label" title="Custom Label">
+    <p class="demo-section__description">
+      Use the <code>ariaLabel</code> input to provide a descriptive accessible label for the slider
+      handle.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-compare-wrapper">
+        <ui-lib-image-compare
+          leftImage="https://picsum.photos/seed/before10/800/400"
+          leftAlt="Original photo"
+          rightImage="https://picsum.photos/seed/after10/800/400"
+          rightAlt="Photo with filter applied"
+          ariaLabel="Compare photo filters"
+        />
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="customLabelHtml" [typescript]="customLabelTs" />
+  </app-doc-section>
+
+  <!-- ── API Table ─────────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API">
+    <app-doc-api-reference [rows]="apiInputRows" />
+    <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
+  </app-doc-section>
+
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -217,7 +208,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

@@ -41,7 +41,7 @@ class TestHostComponent {
   public readonly closable: WritableSignal<boolean> = signal<boolean>(false);
   public readonly closeIcon: WritableSignal<string> = signal<string>('pi pi-times');
   public readonly variant: WritableSignal<InplaceVariant | null> = signal<InplaceVariant | null>(
-    null
+    null,
   );
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
   public activatedCount: number = 0;
@@ -165,7 +165,7 @@ describe('Inplace', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const display: HTMLButtonElement = fixture.debugElement.query(
-      By.css('.ui-lib-inplace__display')
+      By.css('.ui-lib-inplace__display'),
     ).nativeElement as HTMLButtonElement;
     expect(display.disabled).toBe(true);
   });
@@ -173,7 +173,7 @@ describe('Inplace', (): void => {
   it('should have display button in tab order when not disabled', (): void => {
     const { fixture } = setup();
     const display: HTMLButtonElement = fixture.debugElement.query(
-      By.css('.ui-lib-inplace__display')
+      By.css('.ui-lib-inplace__display'),
     ).nativeElement as HTMLButtonElement;
     expect(display.tabIndex).toBe(0);
   });
@@ -184,7 +184,7 @@ describe('Inplace', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const display: HTMLButtonElement = fixture.debugElement.query(
-      By.css('.ui-lib-inplace__display')
+      By.css('.ui-lib-inplace__display'),
     ).nativeElement as HTMLButtonElement;
     expect(display.disabled).toBe(true);
   });
@@ -192,7 +192,7 @@ describe('Inplace', (): void => {
   it('should not render close button when closable is false', (): void => {
     const { fixture } = setup();
     const closeButton: DebugElement | null = fixture.debugElement.query(
-      By.css('.ui-lib-inplace__close-button')
+      By.css('.ui-lib-inplace__close-button'),
     );
     expect(closeButton).toBeNull();
   });
@@ -204,7 +204,7 @@ describe('Inplace', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const closeButton: DebugElement | null = fixture.debugElement.query(
-      By.css('.ui-lib-inplace__close-button')
+      By.css('.ui-lib-inplace__close-button'),
     );
     expect(closeButton).not.toBeNull();
   });
@@ -216,7 +216,7 @@ describe('Inplace', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const closeButton: HTMLButtonElement = fixture.debugElement.query(
-      By.css('.ui-lib-inplace__close-button')
+      By.css('.ui-lib-inplace__close-button'),
     ).nativeElement as HTMLButtonElement;
     closeButton.click();
     fixture.detectChanges();
@@ -231,7 +231,7 @@ describe('Inplace', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const closeButton: HTMLButtonElement = fixture.debugElement.query(
-      By.css('.ui-lib-inplace__close-button')
+      By.css('.ui-lib-inplace__close-button'),
     ).nativeElement as HTMLButtonElement;
     closeButton.click();
     fixture.detectChanges();
@@ -289,7 +289,7 @@ describe('Inplace', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const iconSpan: HTMLElement = fixture.debugElement.query(
-      By.css('.ui-lib-inplace__close-button span')
+      By.css('.ui-lib-inplace__close-button span'),
     ).nativeElement as HTMLElement;
     expect(iconSpan.className).toContain('pi-check');
   });

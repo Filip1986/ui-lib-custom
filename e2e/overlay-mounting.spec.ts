@@ -13,14 +13,14 @@ interface PanelParentCheckArgs {
 async function expectPanelMountedOutsideClippingCard(
   page: Page,
   panelSelector: string,
-  clippingCardSelector: string
+  clippingCardSelector: string,
 ): Promise<void> {
   const mountedToBody: boolean = await page.evaluate(
     (args: PanelParentCheckArgs): boolean => {
       const panel: Element | null = document.querySelector(args.panelSelector);
       return panel?.parentElement === document.body;
     },
-    { panelSelector }
+    { panelSelector },
   );
   expect(mountedToBody).toBe(true);
 
@@ -33,7 +33,7 @@ async function expectPanelMountedOutsideClippingCard(
       }
       return clippingCard.contains(panel);
     },
-    { panelSelector, clippingCardSelector }
+    { panelSelector, clippingCardSelector },
   );
   expect(panelInsideClippingCard).toBe(false);
 }
@@ -48,7 +48,7 @@ test.describe('Overlay Mounting Regressions', (): void => {
 
     const clippingCardSelector: string = 'section#clipping .clipping-card';
     const input: Locator = page.locator(
-      `${clippingCardSelector} ui-lib-autocomplete .ui-autocomplete-input`
+      `${clippingCardSelector} ui-lib-autocomplete .ui-autocomplete-input`,
     );
 
     await input.click();
@@ -69,7 +69,7 @@ test.describe('Overlay Mounting Regressions', (): void => {
 
     const clippingCardSelector: string = 'section#clipping .clipping-card';
     const trigger: Locator = page.locator(
-      `${clippingCardSelector} ui-lib-cascade-select .ui-lib-cascade-select__trigger`
+      `${clippingCardSelector} ui-lib-cascade-select .ui-lib-cascade-select__trigger`,
     );
 
     await trigger.click();
@@ -89,7 +89,7 @@ test.describe('Overlay Mounting Regressions', (): void => {
 
     const clippingCardSelector: string = 'section#clipping .clipping-card';
     const trigger: Locator = page.locator(
-      `${clippingCardSelector} ui-lib-color-picker .ui-lib-colorpicker__trigger`
+      `${clippingCardSelector} ui-lib-color-picker .ui-lib-colorpicker__trigger`,
     );
 
     await trigger.click();

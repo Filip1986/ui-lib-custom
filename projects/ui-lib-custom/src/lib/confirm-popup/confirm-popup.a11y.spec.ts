@@ -73,7 +73,7 @@ describe('ConfirmPopup Accessibility', (): void => {
   describe('closed state', (): void => {
     it('panel is not in DOM when visible=false', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
@@ -82,7 +82,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('no role="alertdialog" element present when closed', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
@@ -91,7 +91,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('axe passes in closed state', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
@@ -103,7 +103,7 @@ describe('ConfirmPopup Accessibility', (): void => {
   describe('open-state ARIA structure', (): void => {
     it('panel has role="alertdialog"', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -113,7 +113,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('panel has aria-modal="true"', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -123,7 +123,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('panel has tabindex="-1"', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -133,7 +133,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('panel aria-describedby resolves to message element', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -147,7 +147,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('panel aria-label equals the resolved message text', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.componentInstance.messageState.set('Delete this item?');
       fixture.detectChanges();
@@ -158,7 +158,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('overlay has aria-hidden="true"', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -170,7 +170,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('arrow has aria-hidden="true"', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -182,7 +182,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('message icon has aria-hidden="true" when icon is provided', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.componentInstance.iconState.set('pi pi-exclamation-triangle');
       fixture.detectChanges();
@@ -199,7 +199,7 @@ describe('ConfirmPopup Accessibility', (): void => {
   describe('focus management', (): void => {
     it('accept button is present and focusable (defaultFocus="accept")', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.componentInstance.defaultFocusState.set('accept');
       fixture.detectChanges();
@@ -212,7 +212,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('reject button is present and focusable (defaultFocus="reject")', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.componentInstance.defaultFocusState.set('reject');
       fixture.detectChanges();
@@ -225,7 +225,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('panel has tabindex="-1" for defaultFocus="none"', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.componentInstance.defaultFocusState.set('none');
       fixture.detectChanges();
@@ -236,12 +236,12 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('focus is restored to trigger element when popup closes via accept button', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
 
       const trigger: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.trigger-btn'
+        '.trigger-btn',
       );
       if (!trigger) throw new Error('Expected trigger button to exist');
       trigger.focus();
@@ -259,12 +259,12 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('focus is restored to trigger element when popup closes via Escape', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
 
       const trigger: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.trigger-btn'
+        '.trigger-btn',
       );
       if (!trigger) throw new Error('Expected trigger button to exist');
       trigger.focus();
@@ -281,12 +281,12 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('focus is restored to service target when popup opened programmatically via service', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
 
       const trigger: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.trigger-btn'
+        '.trigger-btn',
       );
       if (!trigger) throw new Error('Expected trigger button to exist');
       trigger.focus();
@@ -308,7 +308,7 @@ describe('ConfirmPopup Accessibility', (): void => {
   describe('keyboard behaviour', (): void => {
     it('Escape closes the popup', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -323,7 +323,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('accept button click closes the popup', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -338,7 +338,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('reject button click closes the popup', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -357,7 +357,7 @@ describe('ConfirmPopup Accessibility', (): void => {
   describe('overlay dismiss', (): void => {
     it('overlay click closes the popup', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -372,7 +372,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('overlay has aria-hidden="true" (does not present as interactive to AT)', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       openPopup(fixture);
@@ -388,7 +388,7 @@ describe('ConfirmPopup Accessibility', (): void => {
   describe('ConfirmPopupService-driven', (): void => {
     it('service.confirm({ message }) opens popup with correct aria-label', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
 
@@ -404,12 +404,12 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('service.close() closes popup and restores focus to trigger', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
 
       const trigger: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.trigger-btn'
+        '.trigger-btn',
       );
       if (!trigger) throw new Error('Expected trigger button to exist');
       trigger.focus();
@@ -428,7 +428,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('defaultFocus in service config takes precedence over component default', (): void => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       // Component default is 'accept'
       fixture.componentInstance.defaultFocusState.set('accept');
@@ -451,7 +451,7 @@ describe('ConfirmPopup Accessibility', (): void => {
   describe('axe-core automated checks', (): void => {
     it('closed state passes axe', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
@@ -459,7 +459,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('open state passes axe (defaultFocus="accept")', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.componentInstance.defaultFocusState.set('accept');
       fixture.detectChanges();
@@ -469,7 +469,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('open state passes axe (defaultFocus="reject")', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.componentInstance.defaultFocusState.set('reject');
       fixture.detectChanges();
@@ -479,7 +479,7 @@ describe('ConfirmPopup Accessibility', (): void => {
 
     it('service-driven open state passes axe', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfirmPopupA11yHostComponent> = TestBed.createComponent(
-        ConfirmPopupA11yHostComponent
+        ConfirmPopupA11yHostComponent,
       );
       fixture.detectChanges();
 

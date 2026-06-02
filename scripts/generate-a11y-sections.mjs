@@ -70,10 +70,7 @@ function transformTs(src) {
 
   if (hasA11yEntry) {
     // Page already has both entries; just remove the keyboard-navigation one
-    return src.replace(
-      /\n?\s*\{\s*id:\s*'keyboard-navigation'[^}]*\},?/g,
-      '',
-    );
+    return src.replace(/\n?\s*\{\s*id:\s*'keyboard-navigation'[^}]*\},?/g, '');
   }
 
   // Rename the keyboard-navigation entry to accessibility
@@ -99,21 +96,33 @@ for (const folder of pageFolders) {
   const files = readdirSync(dir).filter(
     (f) => f.endsWith('.component.ts') && !f.includes('example') && !f.includes('spec'),
   );
-  if (files.length === 0) { skipped++; continue; }
+  if (files.length === 0) {
+    skipped++;
+    continue;
+  }
 
   const tsFile = files.find((f) => f.includes('demo') || f.includes(folder)) ?? files[0];
   const htmlFile = tsFile.replace('.ts', '.html');
   const tsPath = join(dir, tsFile);
   const htmlPath = join(dir, htmlFile);
 
-  if (!existsSync(htmlPath)) { skipped++; continue; }
+  if (!existsSync(htmlPath)) {
+    skipped++;
+    continue;
+  }
 
   const htmlSrc = readFileSync(htmlPath, 'utf8');
 
   // Skip if already on accessibility section
-  if (htmlSrc.includes('id="accessibility"')) { skipped++; continue; }
+  if (htmlSrc.includes('id="accessibility"')) {
+    skipped++;
+    continue;
+  }
   // Skip if no keyboard-navigation section to upgrade
-  if (!htmlSrc.includes('id="keyboard-navigation"')) { skipped++; continue; }
+  if (!htmlSrc.includes('id="keyboard-navigation"')) {
+    skipped++;
+    continue;
+  }
 
   const tsSrc = readFileSync(tsPath, 'utf8');
 

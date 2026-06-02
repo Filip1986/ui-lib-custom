@@ -74,4 +74,3 @@ _No component-level CSS variables detected._
 - [Demo page](/components/input-group)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/input-group/README.md)
-

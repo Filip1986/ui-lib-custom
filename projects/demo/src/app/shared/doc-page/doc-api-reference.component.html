@@ -8,7 +8,7 @@
   size="sm"
   variant="minimal"
   styleClass="doc-api-reference__table"
-  [ariaLabel]="title() || (nameColumnLabel() + ' reference')"
+  [ariaLabel]="title() || nameColumnLabel() + ' reference'"
 >
   <!-- Name / Input / Output / Property column -->
   <ui-lib-table-column field="name" [header]="nameColumnLabel()" width="18%">
@@ -49,4 +49,3 @@
     </ng-template>
   </ui-lib-table-column>
 </ui-lib-table>
-

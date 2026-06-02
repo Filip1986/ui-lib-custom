@@ -13,13 +13,13 @@ Icon-only button component with size and variant support.
 
 ### Inputs
 
-| Name       | Type                     | Default                   | Description |
-| ---------- | ------------------------ | ------------------------- | ----------- |
-| `color`    | `IconButtonColor | null` | `null`                    | —           |
-| `disabled` | `boolean`                | `false`                   | —           |
-| `loading`  | `boolean`                | `false`                   | —           |
-| `size`     | `IconButtonSize`         | `SHARED_DEFAULTS.Size`    | —           |
-| `variant`  | `IconButtonVariant`      | `SHARED_DEFAULTS.Variant` | —           |
+| Name       | Type                | Default                   | Description |
+| ---------- | ------------------- | ------------------------- | ----------- | --- |
+| `color`    | `IconButtonColor    | null`                     | `null`      | —   |
+| `disabled` | `boolean`           | `false`                   | —           |
+| `loading`  | `boolean`           | `false`                   | —           |
+| `size`     | `IconButtonSize`    | `SHARED_DEFAULTS.Size`    | —           |
+| `variant`  | `IconButtonVariant` | `SHARED_DEFAULTS.Variant` | —           |
 
 ### Outputs
 
@@ -74,4 +74,3 @@ _none_
 - [Demo page](/components/icon-button)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/icon-button/README.md)
-

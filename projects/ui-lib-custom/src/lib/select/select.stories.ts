@@ -54,7 +54,7 @@ const renderSelect: (args: Partial<SelectStoryArgs>) => {
   props: Partial<SelectStoryArgs> & { options: SelectOption[] };
   template: string;
 } = (
-  args: Partial<SelectStoryArgs>
+  args: Partial<SelectStoryArgs>,
 ): { props: Partial<SelectStoryArgs> & { options: SelectOption[] }; template: string } => ({
   props: { ...args, options },
   template: `

@@ -13,9 +13,9 @@ An Angular directive that constrains keyboard focus within a host element. Tab a
 
 ### Inputs
 
-| Name             | Type                        | Default | Description                                                                                                                                                                                                  |
-| ---------------- | --------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `uiLibFocusTrap` | `boolean, boolean | string` | `true`  | When `true` (default), focus is trapped inside the host element. Supports attribute-only usage — `<div uiLibFocusTrap>` is equivalent to `[uiLibFocusTrap]="true"`. Set to `false` to deactivate at runtime. |
+| Name             | Type              | Default | Description |
+| ---------------- | ----------------- | ------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `uiLibFocusTrap` | `boolean, boolean | string` | `true`      | When `true` (default), focus is trapped inside the host element. Supports attribute-only usage — `<div uiLibFocusTrap>` is equivalent to `[uiLibFocusTrap]="true"`. Set to `false` to deactivate at runtime. |
 
 ### Outputs
 
@@ -74,4 +74,3 @@ _No component-level CSS variables detected._
 - [Demo page](/components/focus-trap)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/focus-trap/README.md)
-

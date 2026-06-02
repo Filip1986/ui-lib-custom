@@ -113,7 +113,7 @@ describe('Icon', (): void => {
 
   it('renders namespaced glyph element class', (): void => {
     const glyph: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-icon__glyph'
+      '.ui-lib-icon__glyph',
     );
     expect(glyph).toBeTruthy();
   });

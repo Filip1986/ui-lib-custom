@@ -22,7 +22,6 @@
     class="ui-lib-table__scroll-container"
     [style.max-height]="scrollable() ? scrollHeight() : null"
   >
-
     <table
       [id]="tableId"
       class="ui-lib-table__table"
@@ -33,7 +32,6 @@
       [attr.aria-multiselectable]="gridAriaMultiselectable()"
       [attr.aria-disabled]="disabled() ? 'true' : null"
     >
-
       <!-- THEAD -->
       <thead class="ui-lib-table__thead" role="rowgroup">
         @if (headerTemplate()) {
@@ -41,7 +39,11 @@
           <ng-container [ngTemplateOutlet]="headerTemplate()!" />
         } @else {
           <!-- Auto-generated header row -->
-          <tr class="ui-lib-table__header-row" role="row" [attr.aria-rowindex]="headerAriaRowIndex(0)">
+          <tr
+            class="ui-lib-table__header-row"
+            role="row"
+            [attr.aria-rowindex]="headerAriaRowIndex(0)"
+          >
             <!-- Row-expansion toggle column -->
             @if (expansionTemplate()) {
               <th
@@ -89,15 +91,21 @@
             <!-- Column headers -->
             @for (column of columns(); track column.field(); let columnIndex = $index) {
               <th
-                [class]="'ui-lib-table__th' +
+                [class]="
+                  'ui-lib-table__th' +
                   (column.sortable() ? ' ui-lib-table__th--sortable' : '') +
-                  (sortField() === (column.sortField() ?? column.field()) ? ' ui-lib-table__th--sorted' : '') +
+                  (sortField() === (column.sortField() ?? column.field())
+                    ? ' ui-lib-table__th--sorted'
+                    : '') +
                   (column.frozen() ? ' ui-lib-table__th--frozen' : '') +
-                  (column.styleClass() ? ' ' + column.styleClass() : '')"
+                  (column.styleClass() ? ' ' + column.styleClass() : '')
+                "
                 [style.width]="column.width()"
                 scope="col"
                 role="columnheader"
-                [attr.aria-sort]="column.sortable() ? ariaSortValue(column.sortField() ?? column.field()) : null"
+                [attr.aria-sort]="
+                  column.sortable() ? ariaSortValue(column.sortField() ?? column.field()) : null
+                "
                 [attr.aria-colindex]="ariaColumnIndex(dataColumnIndex(columnIndex))"
                 [attr.aria-label]="column.sortable() ? sortableColumnAriaLabel(column) : null"
                 [attr.aria-disabled]="disabled() ? 'true' : null"
@@ -117,21 +125,48 @@
                 }
                 @if (column.sortable()) {
                   <span class="ui-lib-table__sort-icon" aria-hidden="true">
-                    @if (sortField() === (column.sortField() ?? column.field()) && sortOrder() === 1) {
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ui-lib-table__sort-svg">
-                        <path d="M12 19V5M5 12l7-7 7 7"/>
+                    @if (
+                      sortField() === (column.sortField() ?? column.field()) && sortOrder() === 1
+                    ) {
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        class="ui-lib-table__sort-svg"
+                      >
+                        <path d="M12 19V5M5 12l7-7 7 7" />
                       </svg>
-                    } @else if (sortField() === (column.sortField() ?? column.field()) && sortOrder() === -1) {
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ui-lib-table__sort-svg">
-                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                    } @else if (
+                      sortField() === (column.sortField() ?? column.field()) && sortOrder() === -1
+                    ) {
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        class="ui-lib-table__sort-svg"
+                      >
+                        <path d="M12 5v14M5 12l7 7 7-7" />
                       </svg>
                     } @else {
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ui-lib-table__sort-svg ui-lib-table__sort-svg--inactive">
-                        <path d="M8 9l4-4 4 4M8 15l4 4 4-4"/>
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        class="ui-lib-table__sort-svg ui-lib-table__sort-svg--inactive"
+                      >
+                        <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
                       </svg>
                     }
-                    @if (multiSortMode() && multiSortRank(column.sortField() ?? column.field()) !== null) {
-                      <span class="ui-lib-table__sort-badge">{{ multiSortRank(column.sortField() ?? column.field()) }}</span>
+                    @if (
+                      multiSortMode() &&
+                      multiSortRank(column.sortField() ?? column.field()) !== null
+                    ) {
+                      <span class="ui-lib-table__sort-badge">{{
+                        multiSortRank(column.sortField() ?? column.field())
+                      }}</span>
                     }
                   </span>
                 }
@@ -141,7 +176,11 @@
 
           <!-- Column filter row -->
           @if (hasColumnFilters()) {
-            <tr class="ui-lib-table__filter-row" role="row" [attr.aria-rowindex]="headerAriaRowIndex(1)">
+            <tr
+              class="ui-lib-table__filter-row"
+              role="row"
+              [attr.aria-rowindex]="headerAriaRowIndex(1)"
+            >
               @if (expansionTemplate()) {
                 <th
                   class="ui-lib-table__th ui-lib-table__th--expander"
@@ -198,7 +237,11 @@
               class="ui-lib-table__empty-cell"
               [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
               [attr.aria-colindex]="1"
-              [attr.colspan]="columns().length + (selectionMode() === 'checkbox' ? 1 : 0) + (expansionTemplate() ? 1 : 0)"
+              [attr.colspan]="
+                columns().length +
+                (selectionMode() === 'checkbox' ? 1 : 0) +
+                (expansionTemplate() ? 1 : 0)
+              "
             >
               <div class="ui-lib-table__empty-status" role="status" aria-live="polite">
                 @if (emptyTemplate()) {
@@ -219,7 +262,9 @@
               [class]="resolveRowClass(row, rowIndex)"
               role="row"
               [attr.aria-rowindex]="bodyAriaRowIndex(rowIndex)"
-              [attr.aria-selected]="selectionMode() ? (isRowSelected(row) ? 'true' : 'false') : null"
+              [attr.aria-selected]="
+                selectionMode() ? (isRowSelected(row) ? 'true' : 'false') : null
+              "
               [attr.aria-disabled]="disabled() ? 'true' : null"
               (click)="onRowClick($event, row, rowIndex)"
               (keydown.enter)="onRowClick($any($event), row, rowIndex)"
@@ -248,11 +293,17 @@
                     [attr.aria-label]="expansionToggleAriaLabel(row, rowIndex)"
                     [attr.tabindex]="tableRole() === 'grid' ? '-1' : null"
                   >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ui-lib-table__expander-icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      class="ui-lib-table__expander-icon"
+                    >
                       @if (isRowExpanded(row)) {
-                        <path d="M6 9l6 6 6-6"/>
+                        <path d="M6 9l6 6 6-6" />
                       } @else {
-                        <path d="M9 6l6 6-6 6"/>
+                        <path d="M9 6l6 6-6 6" />
                       }
                     </svg>
                   </button>
@@ -266,11 +317,19 @@
                   [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
                   [attr.aria-colindex]="ariaColumnIndex(expansionTemplate() ? 1 : 0)"
                   [attr.aria-disabled]="disabled() ? 'true' : null"
-                  [attr.tabindex]="gridCellTabIndex(bodyGridRowIndex(rowIndex), expansionTemplate() ? 1 : 0)"
+                  [attr.tabindex]="
+                    gridCellTabIndex(bodyGridRowIndex(rowIndex), expansionTemplate() ? 1 : 0)
+                  "
                   [attr.data-grid-row]="bodyGridRowIndex(rowIndex)"
                   [attr.data-grid-col]="expansionTemplate() ? 1 : 0"
                   (focus)="onGridCellFocus(bodyGridRowIndex(rowIndex), expansionTemplate() ? 1 : 0)"
-                  (keydown)="onGridCellKeydown($event, bodyGridRowIndex(rowIndex), expansionTemplate() ? 1 : 0)"
+                  (keydown)="
+                    onGridCellKeydown(
+                      $event,
+                      bodyGridRowIndex(rowIndex),
+                      expansionTemplate() ? 1 : 0
+                    )
+                  "
                 >
                   <input
                     type="checkbox"
@@ -287,18 +346,30 @@
               <!-- Data cells -->
               @for (column of columns(); track column.field(); let columnIndex = $index) {
                 <td
-                  [class]="'ui-lib-table__td' +
-                  (column.frozen() ? ' ui-lib-table__td--frozen' : '') +
-                  (column.styleClass() ? ' ' + column.styleClass() : '')"
+                  [class]="
+                    'ui-lib-table__td' +
+                    (column.frozen() ? ' ui-lib-table__td--frozen' : '') +
+                    (column.styleClass() ? ' ' + column.styleClass() : '')
+                  "
                   [style.width]="column.width()"
                   [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
                   [attr.aria-colindex]="ariaColumnIndex(dataColumnIndex(columnIndex))"
                   [attr.aria-disabled]="disabled() ? 'true' : null"
-                  [attr.tabindex]="gridCellTabIndex(bodyGridRowIndex(rowIndex), dataColumnIndex(columnIndex))"
+                  [attr.tabindex]="
+                    gridCellTabIndex(bodyGridRowIndex(rowIndex), dataColumnIndex(columnIndex))
+                  "
                   [attr.data-grid-row]="bodyGridRowIndex(rowIndex)"
                   [attr.data-grid-col]="dataColumnIndex(columnIndex)"
-                  (focus)="onGridCellFocus(bodyGridRowIndex(rowIndex), dataColumnIndex(columnIndex))"
-                  (keydown)="onGridCellKeydown($event, bodyGridRowIndex(rowIndex), dataColumnIndex(columnIndex))"
+                  (focus)="
+                    onGridCellFocus(bodyGridRowIndex(rowIndex), dataColumnIndex(columnIndex))
+                  "
+                  (keydown)="
+                    onGridCellKeydown(
+                      $event,
+                      bodyGridRowIndex(rowIndex),
+                      dataColumnIndex(columnIndex)
+                    )
+                  "
                 >
                   @if (column.bodyTemplate()) {
                     <ng-container
@@ -344,10 +415,16 @@
           } @else {
             <tr class="ui-lib-table__footer-row" role="row">
               @if (expansionTemplate()) {
-                <td class="ui-lib-table__td" [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"></td>
+                <td
+                  class="ui-lib-table__td"
+                  [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
+                ></td>
               }
               @if (selectionMode() === 'checkbox') {
-                <td class="ui-lib-table__td" [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"></td>
+                <td
+                  class="ui-lib-table__td"
+                  [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
+                ></td>
               }
               @for (column of columns(); track column.field()) {
                 <td
@@ -365,7 +442,6 @@
           }
         </tfoot>
       }
-
     </table>
   </div>
 
@@ -383,5 +459,4 @@
       (pageChanged)="onPageChange($any($event))"
     />
   }
-
 </div>

@@ -18,26 +18,26 @@ import { Fluid, FluidDirective } from 'ui-lib-custom/fluid';
 
 ## Selector
 
-| Export | Selector | Type |
-|---|---|---|
-| `Fluid` | `ui-lib-fluid` | Component |
+| Export           | Selector       | Type      |
+| ---------------- | -------------- | --------- |
+| `Fluid`          | `ui-lib-fluid` | Component |
 | `FluidDirective` | `[uiLibFluid]` | Directive |
 
 ---
 
 ## Component Inputs — `<ui-lib-fluid>`
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `styleClass` | `string \| null` | `null` | Additional CSS classes appended to the host element. |
+| Input        | Type             | Default | Description                                          |
+| ------------ | ---------------- | ------- | ---------------------------------------------------- |
+| `styleClass` | `string \| null` | `null`  | Additional CSS classes appended to the host element. |
 
 ---
 
 ## Directive Input — `[uiLibFluid]`
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `uiLibFluid` | `boolean` | `true` | When `true` the `ui-lib-fluid` CSS class is applied to the host element. Supports attribute-only usage (`<div uiLibFluid>`). |
+| Input        | Type      | Default | Description                                                                                                                  |
+| ------------ | --------- | ------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `uiLibFluid` | `boolean` | `true`  | When `true` the `ui-lib-fluid` CSS class is applied to the host element. Supports attribute-only usage (`<div uiLibFluid>`). |
 
 ---
 
@@ -105,4 +105,3 @@ The `.ui-lib-fluid` class stretches the following descendant selectors to full w
 ## Accessibility
 
 The Fluid component and directive are purely presentational — they add a CSS class that broadens form control widths. They carry no ARIA roles or attributes of their own. Ensure that any form controls inside are labelled correctly with `<label>` elements or `aria-label` / `aria-labelledby`.
-

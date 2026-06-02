@@ -67,12 +67,12 @@ function mockReducedMotion(preferReducedMotion: boolean): void {
         addListener: jest.fn(),
         removeListener: jest.fn(),
         dispatchEvent: jest.fn().mockReturnValue(false),
-      }) as MediaQueryList
+      }) as MediaQueryList,
   );
 }
 
 async function createFixture<T>(
-  componentType: Parameters<typeof TestBed.createComponent>[0]
+  componentType: Parameters<typeof TestBed.createComponent>[0],
 ): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
     imports: [componentType],
@@ -80,7 +80,7 @@ async function createFixture<T>(
   }).compileComponents();
 
   const fixture: ComponentFixture<T> = TestBed.createComponent(
-    componentType as Parameters<typeof TestBed.createComponent<T>>[0]
+    componentType as Parameters<typeof TestBed.createComponent<T>>[0],
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
@@ -169,7 +169,7 @@ describe('StyleClass (a11y)', (): void => {
   it('sets aria-expanded=false and aria-hidden=true initially in transition mode', async (): Promise<void> => {
     const fixture: ComponentFixture<TransitionStyleClassA11yHostComponent> =
       await createFixture<TransitionStyleClassA11yHostComponent>(
-        TransitionStyleClassA11yHostComponent
+        TransitionStyleClassA11yHostComponent,
       );
     expect(getButton(fixture).getAttribute('aria-expanded')).toBe('false');
     expect(getPanel(fixture, 'transition-panel').getAttribute('aria-hidden')).toBe('true');
@@ -178,7 +178,7 @@ describe('StyleClass (a11y)', (): void => {
   it('updates aria-expanded=true and aria-hidden=false when entering in transition mode', async (): Promise<void> => {
     const fixture: ComponentFixture<TransitionStyleClassA11yHostComponent> =
       await createFixture<TransitionStyleClassA11yHostComponent>(
-        TransitionStyleClassA11yHostComponent
+        TransitionStyleClassA11yHostComponent,
       );
     jest.useFakeTimers();
     getButton(fixture).click();
@@ -190,7 +190,7 @@ describe('StyleClass (a11y)', (): void => {
   it('updates aria-expanded=false and aria-hidden=true when leaving in transition mode', async (): Promise<void> => {
     const fixture: ComponentFixture<TransitionStyleClassA11yHostComponent> =
       await createFixture<TransitionStyleClassA11yHostComponent>(
-        TransitionStyleClassA11yHostComponent
+        TransitionStyleClassA11yHostComponent,
       );
     const button: HTMLButtonElement = getButton(fixture);
     jest.useFakeTimers();
@@ -205,7 +205,7 @@ describe('StyleClass (a11y)', (): void => {
     mockReducedMotion(true);
     const fixture: ComponentFixture<TransitionStyleClassA11yHostComponent> =
       await createFixture<TransitionStyleClassA11yHostComponent>(
-        TransitionStyleClassA11yHostComponent
+        TransitionStyleClassA11yHostComponent,
       );
     const button: HTMLButtonElement = getButton(fixture);
     const panel: HTMLElement = getPanel(fixture, 'transition-panel');
@@ -219,7 +219,7 @@ describe('StyleClass (a11y)', (): void => {
     mockReducedMotion(true);
     const fixture: ComponentFixture<TransitionStyleClassA11yHostComponent> =
       await createFixture<TransitionStyleClassA11yHostComponent>(
-        TransitionStyleClassA11yHostComponent
+        TransitionStyleClassA11yHostComponent,
       );
     const button: HTMLButtonElement = getButton(fixture);
     const panel: HTMLElement = getPanel(fixture, 'transition-panel');
