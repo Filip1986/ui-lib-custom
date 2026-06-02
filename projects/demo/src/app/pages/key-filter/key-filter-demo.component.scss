@@ -17,14 +17,14 @@
 }
 
 .demo-input {
-  width: 100%;
-  padding: var(--uilib-spacing-2) var(--uilib-spacing-3);
+  background: var(--uilib-surface-card);
   border: 1px solid var(--uilib-color-border);
   border-radius: var(--uilib-radius-md);
-  font-size: 1rem;
-  background: var(--uilib-surface-card);
   color: var(--uilib-color-text-primary);
+  font-size: 1rem;
   outline-offset: 2px;
+  padding: var(--uilib-spacing-2) var(--uilib-spacing-3);
+  width: 100%;
 
   &:focus {
     outline: 2px solid var(--uilib-color-primary);
@@ -38,9 +38,9 @@
 }
 
 .inline-checkbox {
-  display: flex;
   align-items: center;
-  gap: var(--uilib-spacing-2);
   cursor: pointer;
+  display: flex;
   font-size: 0.9rem;
+  gap: var(--uilib-spacing-2);
 }

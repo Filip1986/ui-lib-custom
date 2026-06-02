@@ -2,12 +2,12 @@
   <div
     #panelRef
     class="ui-lib-context-menu__panel"
+    role="menu"
+    [attr.aria-label]="effectiveAriaLabel()"
+    [attr.id]="contextMenuId"
     [class.ui-lib-context-menu__panel--positioned]="isPositioned()"
     [style.left.px]="menuX()"
     [style.top.px]="menuY()"
-    [attr.id]="contextMenuId"
-    role="menu"
-    [attr.aria-label]="effectiveAriaLabel()"
   >
     <ul class="ui-lib-context-menu__list" role="presentation">
       @for (item of visibleItems(); track $index) {
@@ -16,41 +16,41 @@
         } @else {
           <li
             class="ui-lib-context-menu__item"
-            [class.ui-lib-context-menu__item--has-submenu]="item.items?.length"
+            role="none"
             [class.ui-lib-context-menu__item--active]="activeSubmenuIndex() === $index"
             [class.ui-lib-context-menu__item--disabled]="item.disabled"
-            role="none"
+            [class.ui-lib-context-menu__item--has-submenu]="item.items?.length"
             (mouseenter)="onItemMouseEnter(item, $index)"
           >
             <a
               class="ui-lib-context-menu__link"
+              role="menuitem"
+              [attr.aria-disabled]="item.disabled ? 'true' : null"
+              [attr.aria-expanded]="
+                item.items?.length ? (activeSubmenuIndex() === $index ? 'true' : 'false') : null
+              "
+              [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
+              [attr.tabindex]="getTabIndex(item, getFlatIndex(item))"
               [class]="
                 item.styleClass
                   ? 'ui-lib-context-menu__link ' + item.styleClass
                   : 'ui-lib-context-menu__link'
               "
-              role="menuitem"
-              [attr.aria-disabled]="item.disabled ? 'true' : null"
-              [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
-              [attr.aria-expanded]="
-                item.items?.length ? (activeSubmenuIndex() === $index ? 'true' : 'false') : null
-              "
-              [attr.tabindex]="getTabIndex(item, getFlatIndex(item))"
               (click)="onItemActivate($event, item, $index)"
-              (keydown)="onItemKeyDown($event, item, $index)"
               (focus)="onItemFocus(item, $index)"
+              (keydown)="onItemKeyDown($event, item, $index)"
             >
               @if (item.icon) {
                 <span
-                  class="ui-lib-context-menu__item-icon {{ item.icon }}"
                   aria-hidden="true"
+                  class="ui-lib-context-menu__item-icon {{ item.icon }}"
                 ></span>
               }
               @if (item.label) {
                 <span class="ui-lib-context-menu__item-label">{{ item.label }}</span>
               }
               @if (item.items?.length) {
-                <span class="ui-lib-context-menu__submenu-icon" aria-hidden="true">›</span>
+                <span aria-hidden="true" class="ui-lib-context-menu__submenu-icon">›</span>
               }
             </a>
 
@@ -62,21 +62,21 @@
                   } @else {
                     <li
                       class="ui-lib-context-menu__item"
-                      [class.ui-lib-context-menu__item--disabled]="subItem.disabled"
                       role="none"
+                      [class.ui-lib-context-menu__item--disabled]="subItem.disabled"
                     >
                       <a
                         class="ui-lib-context-menu__link"
                         role="menuitem"
-                        [attr.aria-disabled]="subItem.disabled ? 'true' : null"
                         tabindex="-1"
+                        [attr.aria-disabled]="subItem.disabled ? 'true' : null"
                         (click)="onSubItemActivate($event, subItem)"
                         (keydown)="onSubItemKeyDown($event, subItem)"
                       >
                         @if (subItem.icon) {
                           <span
-                            class="ui-lib-context-menu__item-icon {{ subItem.icon }}"
                             aria-hidden="true"
+                            class="ui-lib-context-menu__item-icon {{ subItem.icon }}"
                           ></span>
                         }
                         @if (subItem.label) {

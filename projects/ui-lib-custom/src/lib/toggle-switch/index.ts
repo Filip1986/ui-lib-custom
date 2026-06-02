@@ -1,6 +1,6 @@
 export * from './toggle-switch';
 export type {
-  ToggleSwitchVariant,
-  ToggleSwitchSize,
   ToggleSwitchChangeEvent,
+  ToggleSwitchSize,
+  ToggleSwitchVariant,
 } from './toggle-switch.types';

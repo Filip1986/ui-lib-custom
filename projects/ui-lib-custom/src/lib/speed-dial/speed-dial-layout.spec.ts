@@ -1,6 +1,6 @@
-import { computeSpeedDialLayout } from './speed-dial-layout';
-import type { SpeedDialItemPosition } from './speed-dial-layout';
 import type { SpeedDialDirection, SpeedDialType } from './speed-dial.types';
+import type { SpeedDialItemPosition } from './speed-dial-layout';
+import { computeSpeedDialLayout } from './speed-dial-layout';
 
 function getCoordinates(transform: string): { x: number; y: number } {
   const match: RegExpMatchArray | null = transform.match(

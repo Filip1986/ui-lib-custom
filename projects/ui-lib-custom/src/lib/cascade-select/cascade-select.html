@@ -1,8 +1,8 @@
 <div
   #triggerElement
   class="ui-lib-cascade-select__trigger"
-  [attr.id]="controlId()"
   tabindex="-1"
+  [attr.id]="controlId()"
   (click)="togglePanel($event)"
   (keydown.enter)="togglePanel($event)"
 >
@@ -26,8 +26,8 @@
   <div class="ui-lib-cascade-select__actions">
     @if (showClear() && hasValue() && !isDisabled() && !loading()) {
       <button
-        type="button"
         class="ui-lib-cascade-select__clear"
+        type="button"
         [attr.aria-label]="i18n.translate('cascade-select.clear')"
         (click)="$event.stopPropagation(); clearSelection($event)"
       >
@@ -35,7 +35,7 @@
       </button>
     }
 
-    <span class="ui-lib-cascade-select__dropdown-icon" aria-hidden="true">
+    <span aria-hidden="true" class="ui-lib-cascade-select__dropdown-icon">
       @if (dropdownIconTemplate()) {
         <ng-container *ngTemplateOutlet="dropdownIconTemplate()" />
       } @else {
@@ -68,8 +68,8 @@
             <ul
               class="ui-lib-cascade-select__level"
               role="listbox"
-              [attr.id]="getLevelListboxId(level)"
               [attr.aria-label]="getLevelAriaLabel(level)"
+              [attr.id]="getLevelListboxId(level)"
             >
               @for (
                 option of levelOptions;
@@ -78,19 +78,19 @@
               ) {
                 <li
                   class="ui-lib-cascade-select__option"
-                  [attr.id]="getItemId(option, level, optionIndex)"
                   role="option"
                   tabindex="-1"
+                  [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
                   [attr.aria-haspopup]="isOptionGroupAtLevel(option, level) ? 'listbox' : null"
                   [attr.aria-selected]="isOptionSelected(option) ? 'true' : 'false'"
-                  [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
+                  [attr.id]="getItemId(option, level, optionIndex)"
                   [class.ui-lib-cascade-select__option--active]="isOptionActive(level, option)"
-                  [class.ui-lib-cascade-select__option--selected]="isOptionSelected(option)"
                   [class.ui-lib-cascade-select__option--disabled]="isOptionDisabled(option)"
                   [class.ui-lib-cascade-select__option--group]="isOptionGroupAtLevel(option, level)"
-                  (mouseenter)="onOptionHover(level, option)"
+                  [class.ui-lib-cascade-select__option--selected]="isOptionSelected(option)"
                   (click)="onOptionInteraction($event, level, option)"
                   (keydown.enter)="onOptionInteraction($event, level, option)"
+                  (mouseenter)="onOptionHover(level, option)"
                 >
                   <span class="ui-lib-cascade-select__option-label">
                     @if (optionTemplate()) {
@@ -103,7 +103,7 @@
                   </span>
 
                   @if (isOptionGroupAtLevel(option, level)) {
-                    <span class="ui-lib-cascade-select__option-group-icon" aria-hidden="true">
+                    <span aria-hidden="true" class="ui-lib-cascade-select__option-group-icon">
                       @if (optionGroupIconTemplate()) {
                         <ng-container
                           *ngTemplateOutlet="

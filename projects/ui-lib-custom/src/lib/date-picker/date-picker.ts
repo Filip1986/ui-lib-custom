@@ -1,61 +1,52 @@
 import { DOCUMENT } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
+import type {
+  AfterViewChecked,
+  InputSignal,
+  OnDestroy,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
-  ElementRef,
-  HostListener,
-  TemplateRef,
-  ViewChild,
-  ViewEncapsulation,
   computed,
+  ContentChild,
   effect,
+  ElementRef,
   forwardRef,
+  HostListener,
   inject,
   input,
   output,
   signal,
+  TemplateRef,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import type {
-  InputSignal,
-  OutputEmitterRef,
-  Signal,
-  WritableSignal,
-  AfterViewChecked,
-  OnDestroy,
-} from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import {
-  KEYBOARD_KEYS,
   claimOverlayZIndex,
+  KEYBOARD_KEYS,
   releaseOverlayZIndex,
-  type ThemeVariant,
   resolveOverlayAppendTarget,
+  type ThemeVariant,
 } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import { formatDate, parseDate } from './date-format';
 import {
   DATE_PICKER_CSS_CLASSES,
   DATE_PICKER_DEFAULTS,
   DEFAULT_LOCALE,
 } from './date-picker.constants';
-import { formatDate, parseDate } from './date-format';
-import {
-  addMonths,
-  createDate,
-  getDecadeBounds,
-  getDaysInMonth,
-  getMonthDates,
-  getYearRange,
-  isDateBetween,
-  isDateDisabled,
-  isDateEqual,
-} from './date-utils';
 import type {
-  DatePickerChangeEvent,
   DatePickerAppendTo,
+  DatePickerChangeEvent,
   DatePickerDateMeta,
   DatePickerLocale,
   DatePickerMonthChangeEvent,
@@ -66,6 +57,17 @@ import type {
   DatePickerView,
   DatePickerYearChangeEvent,
 } from './date-picker.types';
+import {
+  addMonths,
+  createDate,
+  getDaysInMonth,
+  getDecadeBounds,
+  getMonthDates,
+  getYearRange,
+  isDateBetween,
+  isDateDisabled,
+  isDateEqual,
+} from './date-utils';
 
 const DATE_PICKER_PANEL_MODE_CLASSES: readonly string[] = [
   'ui-lib-datepicker__panel--material',

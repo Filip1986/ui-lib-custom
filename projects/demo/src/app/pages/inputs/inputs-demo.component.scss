@@ -7,18 +7,18 @@
 }
 
 .controls {
-  display: grid;
-  gap: 0.75rem;
-  padding: 1rem;
   background: var(--uilib-surface);
   border: 1px solid var(--uilib-border);
   border-radius: var(--uilib-radius-lg, 12px);
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
 }
 
 .control-group {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 0.5rem;
 
   .label {
@@ -27,11 +27,11 @@
   }
 
   .chip {
-    border: 1px solid var(--uilib-border);
     background: var(--uilib-surface);
+    border: 1px solid var(--uilib-border);
     border-radius: var(--uilib-radius-md, 8px);
-    padding: 0.35rem 0.65rem;
     cursor: pointer;
+    padding: 0.35rem 0.65rem;
     &.active {
       border-color: var(--uilib-button-primary-bg);
       color: var(--uilib-button-primary-bg);
@@ -39,28 +39,28 @@
   }
 
   select {
-    padding: 0.4rem 0.6rem;
-    border-radius: var(--uilib-radius-md, 8px);
-    border: 1px solid var(--uilib-border);
     background: var(--uilib-surface);
+    border: 1px solid var(--uilib-border);
+    border-radius: var(--uilib-radius-md, 8px);
     color: inherit;
+    padding: 0.4rem 0.6rem;
   }
 }
 
 .control-group.toggles {
   gap: 1rem;
   label {
-    display: inline-flex;
     align-items: center;
+    display: inline-flex;
     gap: 0.35rem;
   }
 }
 
 .preview {
-  padding: 1rem;
   background: var(--uilib-surface);
   border: 1px solid var(--uilib-border);
   border-radius: var(--uilib-radius-lg, 12px);
+  padding: 1rem;
 
   form {
     display: flex;

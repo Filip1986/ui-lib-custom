@@ -5,12 +5,14 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { Panel } from './panel';
+import { TestBed } from '@angular/core/testing';
+
+import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import type { ThemeVariant, ThemePreset } from 'ui-lib-custom/theme';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { Panel } from './panel';
 
 // ─── Mock theme ───────────────────────────────────────────────────────────────
 

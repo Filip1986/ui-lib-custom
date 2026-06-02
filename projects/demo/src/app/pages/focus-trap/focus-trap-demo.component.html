@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A directive that constrains keyboard focus within a container element. Tab and Shift+Tab cycle only among the focusable descendants of the host, preventing focus from escaping — essential for accessible modals, dialogs, and side panels."
     docHeader
     title="FocusTrap"
     [importCode]="importCode"
-    description="A directive that constrains keyboard focus within a container element. Tab and Shift+Tab cycle only among the focusable descendants of the host, preventing focus from escaping — essential for accessible modals, dialogs, and side panels."
   />
 
   <div class="demo-page-header__preview">
@@ -25,11 +25,11 @@
       <div class="ft-trap-region" [uiLibFocusTrap]="true">
         <div class="ft-field-row">
           <label class="ft-label" for="basic-name">Name</label>
-          <input id="basic-name" class="ft-input" type="text" placeholder="Enter your name" />
+          <input class="ft-input" id="basic-name" placeholder="Enter your name" type="text" />
         </div>
         <div class="ft-field-row">
           <label class="ft-label" for="basic-email">Email</label>
-          <input id="basic-email" class="ft-input" type="email" placeholder="Enter your email" />
+          <input class="ft-input" id="basic-email" placeholder="Enter your email" type="email" />
         </div>
         <div class="ft-field-row">
           <ui-lib-button severity="primary" type="button">Submit</ui-lib-button>
@@ -39,9 +39,9 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetBasicUsage"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -70,11 +70,11 @@
       <div class="ft-trap-region" [uiLibFocusTrap]="isTrapEnabled()">
         <div class="ft-field-row">
           <label class="ft-label" for="toggle-name">Username</label>
-          <input id="toggle-name" class="ft-input" type="text" placeholder="Username" />
+          <input class="ft-input" id="toggle-name" placeholder="Username" type="text" />
         </div>
         <div class="ft-field-row">
           <label class="ft-label" for="toggle-pass">Password</label>
-          <input id="toggle-pass" class="ft-input" type="password" placeholder="Password" />
+          <input class="ft-input" id="toggle-pass" placeholder="Password" type="password" />
         </div>
         <div class="ft-field-row">
           <ui-lib-button severity="primary" type="button">Log in</ui-lib-button>
@@ -83,9 +83,9 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetToggleTrap"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -102,9 +102,9 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetModalPattern"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -113,17 +113,17 @@
     <h3 class="ft-sub-title">Import</h3>
     <ui-lib-code-snippet
       language="typescript"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetImport"
+      [showLineNumbers]="true"
     />
 
     <h3 class="ft-sub-title">Selector</h3>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetSelector"
+      [showLineNumbers]="true"
     />
 
     <h3 class="ft-sub-title">Inputs</h3>
@@ -162,8 +162,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>
@@ -173,20 +173,20 @@
 @if (isModalOpen()) {
   <div class="ft-modal-backdrop" (click)="closeModal()">
     <div
+      aria-labelledby="modal-title"
+      aria-modal="true"
       class="ft-modal"
       role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
       [uiLibFocusTrap]="true"
       (click)="$event.stopPropagation()"
     >
       <div class="ft-modal__header">
-        <h2 id="modal-title" class="ft-modal__title">Contact Form</h2>
+        <h2 class="ft-modal__title" id="modal-title">Contact Form</h2>
         <ui-lib-button
           appearance="ghost"
+          aria-label="Close dialog"
           size="sm"
           type="button"
-          aria-label="Close dialog"
           (click)="closeModal()"
           >×</ui-lib-button
         >
@@ -198,23 +198,23 @@
         <div class="ft-field-row">
           <label class="ft-label" for="modal-name">Name</label>
           <input
-            id="modal-name"
             class="ft-input"
+            id="modal-name"
+            placeholder="Your name"
             type="text"
             [value]="formName()"
             (input)="onFormNameChange($event)"
-            placeholder="Your name"
           />
         </div>
         <div class="ft-field-row">
           <label class="ft-label" for="modal-email">Email</label>
           <input
-            id="modal-email"
             class="ft-input"
+            id="modal-email"
+            placeholder="Your email"
             type="email"
             [value]="formEmail()"
             (input)="onFormEmailChange($event)"
-            placeholder="Your email"
           />
         </div>
       </div>

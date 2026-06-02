@@ -1,15 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal, type DebugElement, type WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { Component, type DebugElement, signal, type WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
-import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { provideIcons } from '@ng-icons/core';
 import { lucideMinus, lucidePlus } from '@ng-icons/lucide';
+
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
 import { Icon } from 'ui-lib-custom/icon';
-import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from './accordion-panel';
+
 import { ACCORDION_PANEL_STATES } from './accordion.constants';
+import { AccordionHeader, AccordionPanel, AccordionToggleIcon } from './accordion-panel';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

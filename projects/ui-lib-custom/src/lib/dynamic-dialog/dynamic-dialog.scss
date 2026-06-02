@@ -18,13 +18,13 @@
   }
 
   .ui-lib-dynamic-dialog {
-    position: fixed;
-    inset: 0;
-    z-index: var(--uilib-z-overlay, 1100);
-    display: flex;
     align-items: center;
+    display: flex;
+    inset: 0;
     justify-content: center;
     pointer-events: none;
+    position: fixed;
+    z-index: var(--uilib-z-overlay, 1100);
 
     // All direct children receive pointer events so the invisible host doesn't block clicks.
     > * {
@@ -54,30 +54,30 @@
 
     // ---- Backdrop ----
     &__backdrop {
-      position: fixed;
-      inset: 0;
-      background: var(--uilib-dynamic-dialog-backdrop-bg, rgba(0, 0, 0, 0.4));
-      z-index: 0;
       animation: var(--uilib-dynamic-dialog-backdrop-animation);
+      background: var(--uilib-dynamic-dialog-backdrop-bg, rgba(0, 0, 0, 0.4));
+      inset: 0;
+      position: fixed;
+      z-index: 0;
     }
 
     // ---- Panel ----
     &__panel {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
+      animation: var(--uilib-dynamic-dialog-panel-animation);
       background: var(--uilib-dynamic-dialog-bg, var(--uilib-surface, #fff));
       border-radius: var(--uilib-dynamic-dialog-radius, var(--uilib-radius-lg, 12px));
       box-shadow: var(
         --uilib-dynamic-dialog-shadow,
         var(--uilib-shadow-xl, 0 20px 60px rgba(0, 0, 0, 0.25), 0 8px 20px rgba(0, 0, 0, 0.15))
       );
-      min-width: var(--uilib-dynamic-dialog-min-width, 300px);
-      max-width: var(--uilib-dynamic-dialog-max-width, 90vw);
+      display: flex;
+      flex-direction: column;
       max-height: var(--uilib-dynamic-dialog-max-height, 90vh);
-      animation: var(--uilib-dynamic-dialog-panel-animation);
+      max-width: var(--uilib-dynamic-dialog-max-width, 90vw);
+      min-width: var(--uilib-dynamic-dialog-min-width, 300px);
       outline: none;
+      position: relative;
+      z-index: 1;
 
       // ---- Variants ----
       &.ui-lib-dynamic-dialog--variant-material {
@@ -86,54 +86,54 @@
       }
 
       &.ui-lib-dynamic-dialog--variant-bootstrap {
-        border-radius: var(--uilib-dynamic-dialog-radius-bootstrap, 4px);
         border: 1px solid var(--uilib-surface-border, #dee2e6);
+        border-radius: var(--uilib-dynamic-dialog-radius-bootstrap, 4px);
         box-shadow: var(--uilib-dynamic-dialog-shadow-bootstrap);
       }
 
       &.ui-lib-dynamic-dialog--variant-minimal {
-        border-radius: var(--uilib-dynamic-dialog-radius-minimal, 8px);
         border: 1px solid var(--uilib-surface-border, #e9ecef);
+        border-radius: var(--uilib-dynamic-dialog-radius-minimal, 8px);
         box-shadow: var(--uilib-dynamic-dialog-shadow-minimal);
       }
     }
 
     // ---- Header ----
     &__header {
-      display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: var(--uilib-dynamic-dialog-header-gap, 0.5rem);
-      padding: var(--uilib-dynamic-dialog-header-padding, 1.25rem 1.5rem 1rem);
       border-block-end: 1px solid
         var(--uilib-dynamic-dialog-header-border, var(--uilib-surface-border, #e9ecef));
+      display: flex;
       flex-shrink: 0;
+      gap: var(--uilib-dynamic-dialog-header-gap, 0.5rem);
+      justify-content: space-between;
+      padding: var(--uilib-dynamic-dialog-header-padding, 1.25rem 1.5rem 1rem);
     }
 
     &__title {
-      flex: 1;
-      font-weight: 600;
-      font-size: var(--uilib-dynamic-dialog-title-size, 1.125rem);
       color: var(--uilib-dynamic-dialog-title-color, var(--uilib-page-fg, #212121));
+      flex: 1;
+      font-size: var(--uilib-dynamic-dialog-title-size, 1.125rem);
+      font-weight: 600;
       line-height: 1.3;
     }
 
     &__close-btn {
-      display: flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      width: var(--uilib-dynamic-dialog-close-btn-size, 2rem);
-      height: var(--uilib-dynamic-dialog-close-btn-size, 2rem);
-      padding: 0;
-      border: none;
       background: transparent;
-      cursor: pointer;
+      border: none;
       border-radius: var(--uilib-dynamic-dialog-close-btn-radius);
       color: var(--uilib-dynamic-dialog-close-color, var(--uilib-page-fg-muted, #6c757d));
+      cursor: pointer;
+      display: flex;
+      flex-shrink: 0;
+      height: var(--uilib-dynamic-dialog-close-btn-size, 2rem);
+      justify-content: center;
+      padding: 0;
       transition:
         background-color var(--uilib-dynamic-dialog-transition),
         color var(--uilib-dynamic-dialog-transition);
+      width: var(--uilib-dynamic-dialog-close-btn-size, 2rem);
 
       &:hover {
         background: var(--uilib-dynamic-dialog-close-hover-bg, rgba(0, 0, 0, 0.06));

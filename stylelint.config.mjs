@@ -18,6 +18,7 @@ export default {
     'stylelint-scss',
     'stylelint-declaration-strict-value',
     'stylelint-high-performance-animation',
+    'stylelint-order',
     './stylelint-plugin/no-unprefixed-motion.mjs',
   ],
 
@@ -155,6 +156,16 @@ export default {
       },
     ],
 
+    // ── Declaration order (auto-fix) ───────────────────────────────────────────
+    // Alphabetical within each rule block — library + demo. See CODE-ORGANIZATION.md.
+    'order/properties-alphabetical-order': [
+      true,
+      {
+        severity: 'error',
+        ignore: ['custom-properties'],
+      },
+    ],
+
     // ── SCSS quality ──────────────────────────────────────────────────────────
     'scss/no-duplicate-dollar-variables': [
       true,
@@ -187,6 +198,22 @@ export default {
         'scale-unlimited/declaration-strict-value': null,
         'property-disallowed-list': null,
         'declaration-no-important': null,
+      },
+    },
+    {
+      // High-contrast overrides use raw system colors and !important by design
+      files: ['**/high-contrast.scss'],
+      rules: {
+        'scale-unlimited/declaration-strict-value': null,
+        'property-disallowed-list': null,
+        'declaration-no-important': null,
+      },
+    },
+    {
+      // Demo pages: motion rule reports only — auto-fix breaks nested BEM after property reorder
+      files: ['projects/demo/**/*.scss'],
+      rules: {
+        'uilib/no-unprefixed-motion': [true, { severity: 'warning' }],
       },
     },
   ],

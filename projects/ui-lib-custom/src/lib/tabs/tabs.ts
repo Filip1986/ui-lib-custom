@@ -1,18 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewChild,
-  ViewChildren,
-  ViewEncapsulation,
-  computed,
-  contentChildren,
-  effect,
-  inject,
-  input,
-  output,
-  signal,
-} from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import type {
   AfterViewInit,
   InputSignal,
@@ -23,9 +9,33 @@ import type {
   TemplateRef,
   WritableSignal,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
-import { Icon } from 'ui-lib-custom/icon';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  contentChildren,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  output,
+  signal,
+  ViewChild,
+  ViewChildren,
+  ViewEncapsulation,
+} from '@angular/core';
+
+import {
+  KEYBOARD_KEYS,
+  SHARED_DEFAULTS,
+  SHARED_SIZES,
+  SHARED_THEME_VARIANTS,
+} from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { SemanticIcon } from 'ui-lib-custom/icon';
+import { Icon } from 'ui-lib-custom/icon';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { Tab } from './tab';
 import { TabPanel } from './tab-panel';
 import type {
@@ -40,14 +50,6 @@ import type {
   TabsValue,
   TabsVariant,
 } from './tabs.types';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import {
-  SHARED_DEFAULTS,
-  SHARED_SIZES,
-  SHARED_THEME_VARIANTS,
-  KEYBOARD_KEYS,
-} from 'ui-lib-custom/core';
 
 type RtlScrollAxis = 'default' | 'negative' | 'reverse';
 

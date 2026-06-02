@@ -1,20 +1,20 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Tokenized spacing values used across layout primitives."
     docHeader
     title="Design Tokens"
-    description="Tokenized spacing values used across layout primitives."
   />
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="demo" label="Demo" />
-      <ui-lib-tab value="usage" label="Usage" />
-      <ui-lib-tab value="api" label="API Reference" />
+      <ui-lib-tab label="Demo" value="demo" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="API Reference" value="api" />
     </ui-lib-tabs>
   </div>
 
@@ -100,8 +100,8 @@
     <ui-lib-panel variant="minimal">
       <app-doc-code-example
         [html]="usageSnippet"
-        [typescript]="usageSnippetTs"
         [showLineNumbers]="true"
+        [typescript]="usageSnippetTs"
       />
     </ui-lib-panel>
   }

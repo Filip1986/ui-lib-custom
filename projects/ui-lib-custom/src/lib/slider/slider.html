@@ -1,25 +1,25 @@
 <div class="ui-lib-slider__track-container" (pointerdown)="onTrackPointerDown($event)">
-  <div class="ui-lib-slider__track" #trackRef>
-    <div class="ui-lib-slider__fill" aria-hidden="true" [style]="fillStyle()"></div>
+  <div #trackRef class="ui-lib-slider__track">
+    <div aria-hidden="true" class="ui-lib-slider__fill" [style]="fillStyle()"></div>
 
     @if (!range()) {
       <div
         class="ui-lib-slider__handle"
         role="slider"
-        [attr.aria-valuemin]="min()"
-        [attr.aria-valuemax]="max()"
-        [attr.aria-valuenow]="singleValue()"
-        [attr.aria-valuetext]="singleValueText()"
-        [attr.aria-orientation]="orientation()"
+        [attr.aria-disabled]="isDisabled() ? 'true' : null"
         [attr.aria-label]="ariaLabel()"
         [attr.aria-labelledby]="ariaLabelledBy()"
-        [attr.aria-disabled]="isDisabled() ? 'true' : null"
+        [attr.aria-orientation]="orientation()"
+        [attr.aria-valuemax]="max()"
+        [attr.aria-valuemin]="min()"
+        [attr.aria-valuenow]="singleValue()"
+        [attr.aria-valuetext]="singleValueText()"
         [attr.tabindex]="effectiveTabindex()"
         [style]="handleStyle()"
-        (pointerdown)="onHandlePointerDown($event, 'single')"
-        (keydown)="onKeyDown($event, 'single')"
-        (focus)="onFocusEvent($event)"
         (blur)="onBlurEvent($event)"
+        (focus)="onFocusEvent($event)"
+        (keydown)="onKeyDown($event, 'single')"
+        (pointerdown)="onHandlePointerDown($event, 'single')"
       ></div>
     }
 
@@ -27,38 +27,38 @@
       <div
         class="ui-lib-slider__handle ui-lib-slider__handle--start"
         role="slider"
-        [attr.aria-valuemin]="min()"
-        [attr.aria-valuemax]="rangeEndValue()"
-        [attr.aria-valuenow]="rangeStartValue()"
-        [attr.aria-valuetext]="startValueText()"
-        [attr.aria-orientation]="orientation()"
+        [attr.aria-disabled]="isDisabled() ? 'true' : null"
         [attr.aria-label]="ariaLabel() ?? i18n.translate('slider.min')"
         [attr.aria-labelledby]="ariaLabelledBy()"
-        [attr.aria-disabled]="isDisabled() ? 'true' : null"
+        [attr.aria-orientation]="orientation()"
+        [attr.aria-valuemax]="rangeEndValue()"
+        [attr.aria-valuemin]="min()"
+        [attr.aria-valuenow]="rangeStartValue()"
+        [attr.aria-valuetext]="startValueText()"
         [attr.tabindex]="effectiveTabindex()"
         [style]="startHandleStyle()"
-        (pointerdown)="onHandlePointerDown($event, 'start')"
-        (keydown)="onKeyDown($event, 'start')"
-        (focus)="onFocusEvent($event)"
         (blur)="onBlurEvent($event)"
+        (focus)="onFocusEvent($event)"
+        (keydown)="onKeyDown($event, 'start')"
+        (pointerdown)="onHandlePointerDown($event, 'start')"
       ></div>
       <div
         class="ui-lib-slider__handle ui-lib-slider__handle--end"
         role="slider"
-        [attr.aria-valuemin]="rangeStartValue()"
-        [attr.aria-valuemax]="max()"
-        [attr.aria-valuenow]="rangeEndValue()"
-        [attr.aria-valuetext]="endValueText()"
-        [attr.aria-orientation]="orientation()"
+        [attr.aria-disabled]="isDisabled() ? 'true' : null"
         [attr.aria-label]="ariaLabel() ?? i18n.translate('slider.max')"
         [attr.aria-labelledby]="ariaLabelledBy()"
-        [attr.aria-disabled]="isDisabled() ? 'true' : null"
+        [attr.aria-orientation]="orientation()"
+        [attr.aria-valuemax]="max()"
+        [attr.aria-valuemin]="rangeStartValue()"
+        [attr.aria-valuenow]="rangeEndValue()"
+        [attr.aria-valuetext]="endValueText()"
         [attr.tabindex]="effectiveTabindex()"
         [style]="endHandleStyle()"
-        (pointerdown)="onHandlePointerDown($event, 'end')"
-        (keydown)="onKeyDown($event, 'end')"
-        (focus)="onFocusEvent($event)"
         (blur)="onBlurEvent($event)"
+        (focus)="onFocusEvent($event)"
+        (keydown)="onKeyDown($event, 'end')"
+        (pointerdown)="onHandlePointerDown($event, 'end')"
       ></div>
     }
   </div>

@@ -21,11 +21,7 @@ export class MyComponent {
   ]);
 }`;
 
-export const bootstrapHtml = `<ui-lib-organization-chart
-  [value]="nodes"
-  variant="bootstrap"
-  [collapsible]="true"
-/>`;
+export const bootstrapHtml = `<ui-lib-organization-chart variant="bootstrap" [collapsible]="true" [value]="nodes" />`;
 
 export const bootstrapTs = `import { Component, signal } from '@angular/core';
 import { OrganizationChart } from 'ui-lib-custom/organization-chart';
@@ -44,10 +40,7 @@ export class MyComponent {
   ]);
 }`;
 
-export const collapsibleHtml = `<ui-lib-organization-chart
-  [value]="nodes"
-  [collapsible]="true"
-/>`;
+export const collapsibleHtml = `<ui-lib-organization-chart [collapsible]="true" [value]="nodes" />`;
 
 export const collapsibleTs = `import { Component, signal } from '@angular/core';
 import { OrganizationChart } from 'ui-lib-custom/organization-chart';
@@ -78,7 +71,7 @@ export class MyComponent {
 }`;
 
 export const customTemplateHtml = `<ui-lib-organization-chart [value]="nodes">
-  <ng-template uiOrgChartNode let-node>
+  <ng-template let-node uiOrgChartNode>
     <div class="custom-node">
       <span class="custom-node__avatar">{{ initials(node.label) }}</span>
       <strong class="custom-node__name">{{ node.label }}</strong>
@@ -113,11 +106,7 @@ export class MyComponent {
   }
 }`;
 
-export const minimalHtml = `<ui-lib-organization-chart
-  [value]="nodes"
-  variant="minimal"
-  [collapsible]="true"
-/>`;
+export const minimalHtml = `<ui-lib-organization-chart variant="minimal" [collapsible]="true" [value]="nodes" />`;
 
 export const minimalTs = `import { Component, signal } from '@angular/core';
 import { OrganizationChart } from 'ui-lib-custom/organization-chart';
@@ -136,11 +125,7 @@ export class MyComponent {
   ]);
 }`;
 
-export const multipleSelectionHtml = `<ui-lib-organization-chart
-  [value]="nodes"
-  selectionMode="multiple"
-  [(selection)]="selection"
-/>`;
+export const multipleSelectionHtml = `<ui-lib-organization-chart selectionMode="multiple" [value]="nodes" [(selection)]="selection" />`;
 
 export const multipleSelectionTs = `import { Component, signal } from '@angular/core';
 import { OrganizationChart } from 'ui-lib-custom/organization-chart';
@@ -160,11 +145,7 @@ export class MyComponent {
   public readonly selection = signal<OrganizationChartNode[]>([]);
 }`;
 
-export const singleSelectionHtml = `<ui-lib-organization-chart
-  [value]="nodes"
-  selectionMode="single"
-  [(selection)]="selection"
-/>`;
+export const singleSelectionHtml = `<ui-lib-organization-chart selectionMode="single" [value]="nodes" [(selection)]="selection" />`;
 
 export const singleSelectionTs = `import { Component, signal } from '@angular/core';
 import { OrganizationChart } from 'ui-lib-custom/organization-chart';

@@ -1,9 +1,9 @@
 export { Slider } from './slider';
-export { SLIDER_DEFAULTS } from './slider.types';
 export type {
-  SliderVariant,
-  SliderSize,
-  SliderOrientation,
   SliderChangeEvent,
+  SliderOrientation,
+  SliderSize,
   SliderSlideEndEvent,
+  SliderVariant,
 } from './slider.types';
+export { SLIDER_DEFAULTS } from './slider.types';

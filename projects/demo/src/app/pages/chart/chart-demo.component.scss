@@ -11,11 +11,11 @@
 }
 
 .mini-heading {
-  margin: 0;
   color: var(--uilib-muted);
   font-size: 0.875rem;
-  text-transform: uppercase;
   letter-spacing: 0.04em;
+  margin: 0;
+  text-transform: uppercase;
 }
 
 .helper-text {
@@ -28,15 +28,15 @@
 }
 
 .theme-bridge-surface {
-  padding: 0.5rem;
-  border-radius: 0.75rem;
   background: var(--uilib-surface-100, rgba(0, 0, 0, 0.02));
   border: 1px solid var(--uilib-surface-300, rgba(0, 0, 0, 0.08));
+  border-radius: 0.75rem;
+  padding: 0.5rem;
 }
 
 .selection-feedback {
-  margin: 0;
   color: var(--uilib-muted);
+  margin: 0;
 }
 
 @media (max-width: 1024px) {

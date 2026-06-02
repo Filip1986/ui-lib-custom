@@ -5,13 +5,15 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { Button } from './button';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
+import { TestBed } from '@angular/core/testing';
+
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
+import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { Button } from './button';
 
 // ── Shared mock-theme factory ────────────────────────────────────────────────
 

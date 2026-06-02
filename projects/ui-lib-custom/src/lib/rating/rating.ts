@@ -1,33 +1,35 @@
 import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  ViewEncapsulation,
-  afterNextRender,
   computed,
   contentChild,
+  ElementRef,
   forwardRef,
   inject,
-  isDevMode,
   input,
-  model,
-  output,
-  signal,
   type InputSignal,
+  isDevMode,
+  model,
   type ModelSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
   type TemplateRef,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } from './rating.types';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } from './rating.types';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { RatingChangeEvent, RatingRateEvent, RatingSize, RatingVariant } from './rating.types';
+
+export type { RatingChangeEvent, RatingRateEvent, RatingSize, RatingVariant } from './rating.types';
 
 const DEFAULT_RATING_ARIA_LABEL: string = 'Rating';
 

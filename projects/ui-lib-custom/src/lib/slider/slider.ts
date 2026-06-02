@@ -1,17 +1,3 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  ViewEncapsulation,
-  computed,
-  forwardRef,
-  inject,
-  input,
-  model,
-  output,
-  signal,
-  viewChild,
-} from '@angular/core';
 import type {
   ElementRef,
   InputSignal,
@@ -20,11 +6,26 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  forwardRef,
+  inject,
+  input,
+  model,
+  output,
+  signal,
+  viewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { SLIDER_DEFAULTS } from './slider.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   SliderChangeEvent,
   SliderOrientation,
@@ -32,6 +33,7 @@ import type {
   SliderSlideEndEvent,
   SliderVariant,
 } from './slider.types';
+import { SLIDER_DEFAULTS } from './slider.types';
 
 /** Module-level counter — gives every mounted slider a unique DOM ID. */
 let nextSliderId: number = 0;

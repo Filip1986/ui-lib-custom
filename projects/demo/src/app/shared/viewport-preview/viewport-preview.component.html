@@ -7,9 +7,9 @@
       <div class="custom">
         <label>Custom</label>
         <input
-          type="number"
-          min="200"
           max="2000"
+          min="200"
+          type="number"
           [ngModel]="customWidth()"
           (ngModelChange)="customWidth.set($event)"
         />
@@ -27,17 +27,17 @@
 }
 
 <div
-  class="viewport-frame"
   #frameHost
-  [style.width]="autoHeight || isFullWidth() ? '100%' : displayWidth() + 'px'"
+  class="viewport-frame"
   [style.height]="autoHeight || isFullWidth() ? 'auto' : displayHeight() + 'px'"
   [style.transform]="autoHeight ? 'none' : 'scale(' + scale() + ')'"
+  [style.width]="autoHeight || isFullWidth() ? '100%' : displayWidth() + 'px'"
 >
-  <ng-content></ng-content>
+  <ng-content />
 </div>
 
 @if (mode === 'floating' && !activeSignal()) {
-  <div class="viewport-launcher" (click)="toggleActive()" title="Open viewport preview">
+  <div class="viewport-launcher" title="Open viewport preview" (click)="toggleActive()">
     <i class="pi pi-desktop"></i>
   </div>
 }

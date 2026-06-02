@@ -6,7 +6,7 @@
       <strong>accordion + menu</strong> accessibility pattern.
     </p>
     <div class="demo-page-header__preview">
-      <ui-lib-code-snippet [code]="importTs" language="typescript" [showLineNumbers]="true" />
+      <ui-lib-code-snippet language="typescript" [code]="importTs" [showLineNumbers]="true" />
     </div>
   </app-doc-page-header>
 
@@ -29,7 +29,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="expandedModel" />
     </div>
-    <ui-lib-code-snippet [code]="expandedTs" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="expandedTs" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── Multiple Mode ──────────────────────────────────────────────────── -->
@@ -75,7 +75,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="urlModel" />
     </div>
-    <ui-lib-code-snippet [code]="urlItemsTs" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="urlItemsTs" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── Variants ───────────────────────────────────────────────────────── -->
@@ -88,15 +88,15 @@
     <div class="demo-panel-menu-variant-grid">
       <div class="demo-panel-menu-variant-col">
         <p class="demo-panel-menu-variant-label">Material</p>
-        <ui-lib-panel-menu [model]="variantModel" variant="material" />
+        <ui-lib-panel-menu variant="material" [model]="variantModel" />
       </div>
       <div class="demo-panel-menu-variant-col">
         <p class="demo-panel-menu-variant-label">Bootstrap</p>
-        <ui-lib-panel-menu [model]="variantModel" variant="bootstrap" />
+        <ui-lib-panel-menu variant="bootstrap" [model]="variantModel" />
       </div>
       <div class="demo-panel-menu-variant-col">
         <p class="demo-panel-menu-variant-label">Minimal</p>
-        <ui-lib-panel-menu [model]="variantModel" variant="minimal" />
+        <ui-lib-panel-menu variant="minimal" [model]="variantModel" />
       </div>
     </div>
   </app-doc-section>
@@ -109,15 +109,15 @@
     <div class="demo-panel-menu-variant-grid">
       <div class="demo-panel-menu-variant-col">
         <p class="demo-panel-menu-variant-label">sm</p>
-        <ui-lib-panel-menu [model]="sizeModel" size="sm" />
+        <ui-lib-panel-menu size="sm" [model]="sizeModel" />
       </div>
       <div class="demo-panel-menu-variant-col">
         <p class="demo-panel-menu-variant-label">md</p>
-        <ui-lib-panel-menu [model]="sizeModel" size="md" />
+        <ui-lib-panel-menu size="md" [model]="sizeModel" />
       </div>
       <div class="demo-panel-menu-variant-col">
         <p class="demo-panel-menu-variant-label">lg</p>
-        <ui-lib-panel-menu [model]="sizeModel" size="lg" />
+        <ui-lib-panel-menu size="lg" [model]="sizeModel" />
       </div>
     </div>
   </app-doc-section>
@@ -154,18 +154,18 @@
 
   <!-- ── API ────────────────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API">
-    <app-doc-api-reference title="Inputs" kind="input" [rows]="apiInputRows" />
+    <app-doc-api-reference kind="input" title="Inputs" [rows]="apiInputRows" />
 
     <app-doc-api-reference
-      title="Outputs"
       kind="output"
+      title="Outputs"
       [rows]="apiOutputRows"
       [showDefault]="false"
     />
 
     <app-doc-api-reference
-      title="PanelMenuItem"
       kind="property"
+      title="PanelMenuItem"
       [rows]="apiItemRows"
       [showDefault]="false"
     />
@@ -202,9 +202,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -212,8 +212,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

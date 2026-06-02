@@ -1,6 +1,6 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Directive, ElementRef, PLATFORM_ID, inject, input, isDevMode } from '@angular/core';
 import type { AfterViewInit, InputSignal } from '@angular/core';
+import { Directive, ElementRef, inject, input, isDevMode, PLATFORM_ID } from '@angular/core';
 
 /**
  * AutoFocus directive — programmatically focuses the host element (or an

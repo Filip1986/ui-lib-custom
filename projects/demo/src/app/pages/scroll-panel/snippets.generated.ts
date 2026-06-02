@@ -2,7 +2,7 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const basicUsageHtml = `<ui-lib-scroll-panel style="height: 200px;">
+export const basicUsageHtml = `<ui-lib-scroll-panel style="height: 200px">
   <p>Long content...</p>
   <p>More content...</p>
 </ui-lib-scroll-panel>`;
@@ -17,8 +17,8 @@ import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
 })
 export class MyComponent {}`;
 
-export const horizontalHtml = `<ui-lib-scroll-panel style="height: 160px; width: 100%;">
-  <div style="display: flex; gap: 1rem; width: max-content;">
+export const horizontalHtml = `<ui-lib-scroll-panel style="height: 160px; width: 100%">
+  <div style="display: flex; gap: 1rem; width: max-content">
     <!-- wide content -->
   </div>
 </ui-lib-scroll-panel>`;
@@ -33,7 +33,7 @@ import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
 })
 export class MyComponent {}`;
 
-export const interactiveHtml = `<ui-lib-scroll-panel [variant]="activeVariant()" style="height: 200px;">
+export const interactiveHtml = `<ui-lib-scroll-panel style="height: 200px" [variant]="activeVariant()">
   <!-- content -->
 </ui-lib-scroll-panel>`;
 
@@ -52,9 +52,9 @@ export class MyComponent {
     signal<ScrollPanelVariant>('material');
 }`;
 
-export const variantsHtml = `<ui-lib-scroll-panel [variant]="'material'" style="height: 200px;">...</ui-lib-scroll-panel>
-<ui-lib-scroll-panel [variant]="'bootstrap'" style="height: 200px;">...</ui-lib-scroll-panel>
-<ui-lib-scroll-panel [variant]="'minimal'" style="height: 200px;">...</ui-lib-scroll-panel>`;
+export const variantsHtml = `<ui-lib-scroll-panel style="height: 200px" [variant]="'material'">...</ui-lib-scroll-panel>
+<ui-lib-scroll-panel style="height: 200px" [variant]="'bootstrap'">...</ui-lib-scroll-panel>
+<ui-lib-scroll-panel style="height: 200px" [variant]="'minimal'">...</ui-lib-scroll-panel>`;
 
 export const variantsTs = `import { Component } from '@angular/core';
 import { ScrollPanel } from 'ui-lib-custom/scroll-panel';

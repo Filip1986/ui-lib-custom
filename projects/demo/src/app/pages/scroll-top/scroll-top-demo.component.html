@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A floating button that appears once the page is scrolled past a configurable threshold. Clicking it smoothly returns the user to the top of the page or a scrollable container."
     docHeader
     title="ScrollTop"
     [importCode]="importCode"
-    description="A floating button that appears once the page is scrolled past a configurable threshold. Clicking it smoothly returns the user to the top of the page or a scrollable container."
   />
 
   <!-- ------------------------------------------------------------------ -->
@@ -33,8 +33,8 @@
     <div class="demo-section__preview demo-section__preview--code">
       <app-doc-code-example
         [html]="thresholdHtml"
-        [typescript]="thresholdTs"
         [showLineNumbers]="true"
+        [typescript]="thresholdTs"
       />
     </div>
   </app-doc-section>
@@ -50,10 +50,10 @@
     </p>
     <div class="demo-section__preview">
       <div
-        class="demo-scrollable-container"
-        tabindex="0"
-        role="region"
         aria-label="Scrollable demo content"
+        class="demo-scrollable-container"
+        role="region"
+        tabindex="0"
       >
         <ui-lib-scroll-top target="parent" [threshold]="100" />
         @for (item of dummyItems; track item) {
@@ -64,8 +64,8 @@
     <div class="demo-section__code">
       <app-doc-code-example
         [html]="parentTargetHtml"
-        [typescript]="parentTargetTs"
         [showLineNumbers]="true"
+        [typescript]="parentTargetTs"
       />
     </div>
   </app-doc-section>
@@ -83,19 +83,19 @@
       <div class="demo-variant-wrapper">
         <span class="demo-variant-label">material</span>
         <div class="demo-forced-visible">
-          <ui-lib-scroll-top variant="material" styleClass="demo-static" />
+          <ui-lib-scroll-top styleClass="demo-static" variant="material" />
         </div>
       </div>
       <div class="demo-variant-wrapper">
         <span class="demo-variant-label">bootstrap</span>
         <div class="demo-forced-visible">
-          <ui-lib-scroll-top variant="bootstrap" styleClass="demo-static" />
+          <ui-lib-scroll-top styleClass="demo-static" variant="bootstrap" />
         </div>
       </div>
       <div class="demo-variant-wrapper">
         <span class="demo-variant-label">minimal</span>
         <div class="demo-forced-visible">
-          <ui-lib-scroll-top variant="minimal" styleClass="demo-static" />
+          <ui-lib-scroll-top styleClass="demo-static" variant="minimal" />
         </div>
       </div>
     </div>
@@ -162,7 +162,7 @@
   </app-doc-section>
 
   <!-- Filler content so there is something to scroll past -->
-  <div class="demo-scroll-filler" aria-hidden="true">
+  <div aria-hidden="true" class="demo-scroll-filler">
     @for (item of fillerItems; track item) {
       <div class="demo-filler-block">
         <strong>Section {{ item }}</strong>
@@ -184,9 +184,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -195,8 +195,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

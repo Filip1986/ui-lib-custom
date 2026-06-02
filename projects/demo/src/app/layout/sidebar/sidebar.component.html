@@ -17,16 +17,16 @@
                 @if (item.badge) {
                   <span
                     class="nav-item-badge"
-                    [class.nav-item-badge--soon]="item.badge === 'SOON'"
                     [class.nav-item-badge--pro]="item.badge === 'PRO'"
+                    [class.nav-item-badge--soon]="item.badge === 'SOON'"
                     >{{ item.badge }}</span
                   >
                 }
                 <ui-lib-icon
                   class="toggle-icon"
-                  [name]="item.expanded ? 'chevron-down' : 'chevron-right'"
                   size="sm"
-                ></ui-lib-icon>
+                  [name]="item.expanded ? 'chevron-down' : 'chevron-right'"
+                />
               </div>
               <ul class="nav-submenu" [class.expanded]="item.expanded">
                 @for (subItem of item.items; track subItem.label + (subItem.route ?? '')) {
@@ -41,10 +41,10 @@
                       </div>
                     } @else {
                       <a
-                        [routerLink]="subItem.route"
-                        [fragment]="subItem.fragment ?? ''"
-                        routerLinkActive="active"
                         class="nav-link"
+                        routerLinkActive="active"
+                        [fragment]="subItem.fragment ?? ''"
+                        [routerLink]="subItem.route"
                       >
                         @if (subItem.icon) {
                           <i [class]="subItem.icon"></i>
@@ -53,8 +53,8 @@
                         @if (subItem.badge) {
                           <span
                             class="nav-item-badge"
-                            [class.nav-item-badge--soon]="subItem.badge === 'SOON'"
                             [class.nav-item-badge--pro]="subItem.badge === 'PRO'"
+                            [class.nav-item-badge--soon]="subItem.badge === 'SOON'"
                             >{{ subItem.badge }}</span
                           >
                         }
@@ -65,10 +65,10 @@
               </ul>
             } @else {
               <a
-                [routerLink]="item.route"
-                [fragment]="item.fragment ?? ''"
-                routerLinkActive="active"
                 class="nav-link"
+                routerLinkActive="active"
+                [fragment]="item.fragment ?? ''"
+                [routerLink]="item.route"
               >
                 @if (item.icon) {
                   <i [class]="item.icon"></i>
@@ -82,7 +82,7 @@
     </nav>
   </div>
   <div class="sidebar-tip" [class.scrolled]="isContentScrolled()">
-    <ui-lib-icon name="settings" size="sm"></ui-lib-icon>
+    <ui-lib-icon name="settings" size="sm" />
     Toggle theme from the topbar.
   </div>
 </div>

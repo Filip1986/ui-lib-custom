@@ -1,22 +1,22 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A user profile card with skills, stats, and activity feed — paired with a team directory grid. Uses Avatar, AvatarGroup, Badge, and Tag from ui-lib-custom."
     docHeader
     title="Team &amp; Profile Template"
-    description="A user profile card with skills, stats, and activity feed — paired with a team directory grid. Uses Avatar, AvatarGroup, Badge, and Tag from ui-lib-custom."
     [tags]="['Free', 'People', 'Template']"
   />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>
 
   <!-- Overview ─────────────────────────────────────────────────────────────── -->
-  <section id="overview" data-doc-anchor>
+  <section data-doc-anchor id="overview">
     <h2>Overview</h2>
     <p>
       The Team &amp; Profile template covers two closely related patterns: the personal profile page
@@ -26,7 +26,7 @@
   </section>
 
   <!-- User Profile ─────────────────────────────────────────────────────────── -->
-  <section id="profile" data-doc-anchor>
+  <section data-doc-anchor id="profile">
     <h2>User Profile</h2>
 
     <div class="profile-layout">
@@ -34,7 +34,7 @@
       <ui-lib-panel class="profile-card">
         <div class="profile-avatar-wrap">
           <ui-lib-avatar label="JD" shape="circle" size="lg" />
-          <span class="profile-status-dot profile-status-dot--online" aria-label="Online"></span>
+          <span aria-label="Online" class="profile-status-dot profile-status-dot--online"></span>
         </div>
         <h3 class="profile-name">Jane Doe</h3>
         <p class="profile-role">Product Designer</p>
@@ -60,8 +60,8 @@
         <ui-lib-divider />
 
         <div class="profile-actions">
-          <ui-lib-button variant="material" label="Message" leftIcon="pi pi-envelope" />
-          <ui-lib-button variant="minimal" label="Follow" leftIcon="pi pi-user-plus" />
+          <ui-lib-button label="Message" leftIcon="pi pi-envelope" variant="material" />
+          <ui-lib-button label="Follow" leftIcon="pi pi-user-plus" variant="minimal" />
         </div>
 
         <ui-lib-divider />
@@ -120,14 +120,14 @@
                 <strong>Dashboard Redesign</strong>
                 <p>UI/UX overhaul of the main analytics dashboard.</p>
               </div>
-              <ui-lib-badge value="Active" severity="success" />
+              <ui-lib-badge severity="success" value="Active" />
             </li>
             <li class="project-item">
               <div class="project-info">
                 <strong>Design System 2.0</strong>
                 <p>Token migration and component accessibility audit.</p>
               </div>
-              <ui-lib-badge value="Review" severity="warning" />
+              <ui-lib-badge severity="warning" value="Review" />
             </li>
             <li class="project-item">
               <div class="project-info">
@@ -143,7 +143,7 @@
   </section>
 
   <!-- Team Directory ───────────────────────────────────────────────────────── -->
-  <section id="team" data-doc-anchor>
+  <section data-doc-anchor id="team">
     <h2>Team Directory</h2>
 
     <div class="team-toolbar">
@@ -151,27 +151,27 @@
         <i class="pi pi-search"></i>
         <span class="team-search-placeholder">Search team members…</span>
       </div>
-      <ui-lib-button variant="minimal" size="sm" label="Invite member" leftIcon="pi pi-user-plus" />
+      <ui-lib-button label="Invite member" leftIcon="pi pi-user-plus" size="sm" variant="minimal" />
     </div>
 
     <div class="team-grid">
       @for (member of teamMembers; track member.name) {
         <ui-lib-panel class="member-card">
           <div class="member-avatar-wrap">
-            <ui-lib-avatar [label]="member.initials" shape="circle" size="lg" />
+            <ui-lib-avatar shape="circle" size="lg" [label]="member.initials" />
             <span
               class="member-status-dot"
-              [class.member-status-dot--online]="member.status === 'online'"
+              [attr.aria-label]="member.status"
               [class.member-status-dot--away]="member.status === 'away'"
               [class.member-status-dot--offline]="member.status === 'offline'"
-              [attr.aria-label]="member.status"
+              [class.member-status-dot--online]="member.status === 'online'"
             ></span>
           </div>
           <h4 class="member-name">{{ member.name }}</h4>
           <p class="member-role">{{ member.role }}</p>
           <ui-lib-tag [value]="member.department" />
           <div class="member-actions">
-            <ui-lib-button variant="minimal" size="sm" label="Message" leftIcon="pi pi-envelope" />
+            <ui-lib-button label="Message" leftIcon="pi pi-envelope" size="sm" variant="minimal" />
           </div>
         </ui-lib-panel>
       }
@@ -181,7 +181,7 @@
       <div class="team-avatar-group-wrap">
         <ui-lib-avatar-group>
           @for (member of teamMembers; track member.name) {
-            <ui-lib-avatar [label]="member.initials" shape="circle" size="md" />
+            <ui-lib-avatar shape="circle" size="md" [label]="member.initials" />
           }
         </ui-lib-avatar-group>
         <span class="team-count">{{ teamMembers.length }} members</span>
@@ -190,16 +190,16 @@
   </section>
 
   <!-- Usage ────────────────────────────────────────────────────────────────── -->
-  <section id="usage" data-doc-anchor>
+  <section data-doc-anchor id="usage">
     <h2>Usage</h2>
     <p>
       The snippet below shows the key components used in this template. Replace the static data with
       your team service and bind the profile card to the current user's data.
     </p>
-    <ui-lib-code-snippet [code]="codeSnippet" language="typescript" />
+    <ui-lib-code-snippet language="typescript" [code]="codeSnippet" />
     <div class="team-download-cta">
-      <ui-lib-button variant="material" label="Copy Template" leftIcon="pi pi-copy" />
-      <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
+      <ui-lib-button label="Copy Template" leftIcon="pi pi-copy" variant="material" />
+      <ui-lib-button label="View on GitHub" leftIcon="pi pi-github" variant="minimal" />
     </div>
   </section>
 </app-doc-page-layout>

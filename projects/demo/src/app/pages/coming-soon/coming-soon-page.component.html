@@ -1,18 +1,18 @@
 <app-doc-page-layout [sections]="sections">
-  <app-doc-page-header docHeader [title]="data.componentName" [description]="data.description" />
+  <app-doc-page-header docHeader [description]="data.description" [title]="data.componentName" />
 
   <!-- ── Overview ─────────────────────────────────────────────────────── -->
-  <section class="coming-soon-section" id="overview" data-doc-anchor>
-    <div class="coming-soon-banner" role="status" aria-label="Under development">
+  <section class="coming-soon-section" data-doc-anchor id="overview">
+    <div aria-label="Under development" class="coming-soon-banner" role="status">
       <div class="coming-soon-banner__icon">
-        <ui-lib-icon name="clock" size="lg" aria-hidden="true" />
+        <ui-lib-icon aria-hidden="true" name="clock" size="lg" />
       </div>
       <div class="coming-soon-banner__content">
         <p class="coming-soon-banner__heading">Under Development</p>
         <p class="coming-soon-banner__body">
           <strong>{{ data.componentName }}</strong> is planned for a future release. It appears in
           the menu so you can discover what's coming and track its progress on the
-          <a routerLink="/roadmap" fragment="build-queue" class="coming-soon-link">Roadmap</a>.
+          <a class="coming-soon-link" fragment="build-queue" routerLink="/roadmap">Roadmap</a>.
         </p>
       </div>
     </div>
@@ -24,7 +24,7 @@
   </section>
 
   <!-- ── Details ──────────────────────────────────────────────────────── -->
-  <section class="coming-soon-section" id="details" data-doc-anchor>
+  <section class="coming-soon-section" data-doc-anchor id="details">
     <h2 class="coming-soon-section__title">Details</h2>
     <dl class="coming-soon-details">
       <div class="coming-soon-details__row">
@@ -52,8 +52,8 @@
     </dl>
 
     <div class="coming-soon-cta">
-      <a routerLink="/roadmap" fragment="build-queue" class="coming-soon-cta__link">
-        <ui-lib-icon name="map" size="sm" aria-hidden="true" />
+      <a class="coming-soon-cta__link" fragment="build-queue" routerLink="/roadmap">
+        <ui-lib-icon aria-hidden="true" name="map" size="sm" />
         View full Build Queue on the Roadmap
       </a>
     </div>
@@ -63,8 +63,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,69 +8,70 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+
+import { Button } from 'ui-lib-custom/button';
+import type { ThemeVariant } from 'ui-lib-custom/core';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+import { Panel } from 'ui-lib-custom/panel';
+
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { Button } from 'ui-lib-custom/button';
-import { DatePickerComponent } from 'ui-lib-custom/date-picker';
-import type { ThemeVariant } from 'ui-lib-custom/core';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 
-import { Panel } from 'ui-lib-custom/panel';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import {
   basicHtml,
   basicTs,
+  buttonBarHtml,
+  buttonBarTs,
+  disabledHtml,
+  disabledTs,
+  filledHtml,
+  filledTs,
   formatHtml,
   formatTs,
   iconHtml,
   iconTs,
+  inlineHtml,
+  inlineTs,
+  invalidHtml,
+  invalidTs,
   minMaxHtml,
   minMaxTs,
+  monthPickerHtml,
+  monthPickerTs,
   multipleHtml,
+  multipleMonthsHtml,
+  multipleMonthsTs,
   multipleTs,
   rangeHtml,
   rangeTs,
-  buttonBarHtml,
-  buttonBarTs,
+  reactiveHtml,
+  reactiveTs,
+  sizesHtml,
+  sizesTs,
   time24Html,
   time24Ts,
   timeOnlyHtml,
   timeOnlyTs,
-  monthPickerHtml,
-  monthPickerTs,
-  yearPickerHtml,
-  yearPickerTs,
-  multipleMonthsHtml,
-  multipleMonthsTs,
-  inlineHtml,
-  inlineTs,
-  sizesHtml,
-  sizesTs,
   variantsHtml,
   variantsTs,
-  filledHtml,
-  filledTs,
-  disabledHtml,
-  disabledTs,
-  invalidHtml,
-  invalidTs,
-  reactiveHtml,
-  reactiveTs,
+  yearPickerHtml,
+  yearPickerTs,
 } from './snippets.generated';
-
-import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for DatePicker component scenarios and form integrations.
  */

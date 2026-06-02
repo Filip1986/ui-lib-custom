@@ -1,3 +1,5 @@
+import { isPlatformBrowser } from '@angular/common';
+import type { InputSignal, ModelSignal, OnDestroy, OutputEmitterRef, Signal } from '@angular/core';
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -14,11 +16,11 @@ import {
   PLATFORM_ID,
   ViewEncapsulation,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import type { InputSignal, ModelSignal, OnDestroy, OutputEmitterRef, Signal } from '@angular/core';
+
 import { FocusTrap } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { BottomSheetVariant } from './bottom-sheet.types';
 export type { BottomSheetVariant } from './bottom-sheet.types';
 

@@ -1,8 +1,9 @@
+import type { WritableSignal } from '@angular/core';
+import { Component, provideZonelessChangeDetection, signal } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { type ComponentFixture } from '@angular/core/testing';
-import { Component, provideZonelessChangeDetection, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core';
+
 import { ProgressSpinner } from './progress-spinner';
 import type { ProgressSpinnerSize, ProgressSpinnerVariant } from './progress-spinner.types';
 

@@ -1,2 +1,2 @@
 export * from './card';
-export type { CardVariant, CardElevation } from './card.types';
+export type { CardElevation, CardVariant } from './card.types';

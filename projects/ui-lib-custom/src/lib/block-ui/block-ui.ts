@@ -4,13 +4,15 @@ import {
   computed,
   inject,
   input,
-  model,
-  ViewEncapsulation,
   type InputSignal,
+  model,
   type ModelSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
+
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { BlockUIVariant } from './block-ui.types';
 export type { BlockUIVariant } from './block-ui.types';
 

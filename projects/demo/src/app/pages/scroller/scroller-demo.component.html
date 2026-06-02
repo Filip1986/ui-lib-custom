@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Renders only the items currently visible in the viewport plus a configurable tolerance buffer, keeping large lists performant without changing the external API."
     docHeader
     title="Virtual Scroller"
     [importCode]="importCode"
-    description="Renders only the items currently visible in the viewport plus a configurable tolerance buffer, keeping large lists performant without changing the external API."
   />
 
   <!-- Scenario 1 – Vertical list  (10 000 items) -->
@@ -11,8 +11,8 @@
     <p class="demo-section__description">
       Default orientation — list scrolls downward. Each item is 64 px tall.
     </p>
-    <ui-lib-virtual-scroller [items]="verticalItems" [itemSize]="64" scrollHeight="400px">
-      <ng-template uiScrollerItem let-item>
+    <ui-lib-virtual-scroller scrollHeight="400px" [itemSize]="64" [items]="verticalItems">
+      <ng-template let-item uiScrollerItem>
         <div class="scroller-demo__item scroller-demo__item--vertical">
           <span class="scroller-demo__item-dot" [style.background]="item.color"></span>
           <div>
@@ -30,13 +30,13 @@
       Orientation set to <code>horizontal</code>. Each item is 120 px wide.
     </p>
     <ui-lib-virtual-scroller
-      [items]="horizontalItems"
-      [itemSize]="120"
       orientation="horizontal"
-      scrollWidth="100%"
       scrollHeight="120px"
+      scrollWidth="100%"
+      [itemSize]="120"
+      [items]="horizontalItems"
     >
-      <ng-template uiScrollerItem let-item>
+      <ng-template let-item uiScrollerItem>
         <div
           class="scroller-demo__item scroller-demo__item--horizontal"
           [style.border-top-color]="item.color"
@@ -55,16 +55,16 @@
       window.
     </p>
     <ui-lib-virtual-scroller
-      [items]="lazyItems()"
-      [itemSize]="50"
       scrollHeight="400px"
+      [itemSize]="50"
+      [items]="lazyItems()"
       [lazy]="true"
       [loading]="lazyLoading()"
-      [totalRecords]="lazyTotalCount"
       [showLoader]="true"
+      [totalRecords]="lazyTotalCount"
       (lazyLoad)="onLazyLoad($event)"
     >
-      <ng-template uiScrollerItem let-item>
+      <ng-template let-item uiScrollerItem>
         @if (item) {
           <div class="scroller-demo__item scroller-demo__item--lazy">
             <span class="scroller-demo__item-id">#{{ item.id }}</span>
@@ -92,15 +92,15 @@
       >
     </div>
     <ui-lib-virtual-scroller
-      [items]="skeletonItems()"
-      [itemSize]="72"
       scrollHeight="400px"
-      [loading]="skeletonLoading()"
-      [showLoader]="true"
+      [itemSize]="72"
+      [items]="skeletonItems()"
       [loaderDisabled]="false"
+      [loading]="skeletonLoading()"
       [numToleratedItems]="5"
+      [showLoader]="true"
     >
-      <ng-template uiScrollerItem let-item>
+      <ng-template let-item uiScrollerItem>
         <div class="scroller-demo__item scroller-demo__item--card">
           <span class="scroller-demo__item-dot" [style.background]="item.color"></span>
           <div>
@@ -138,12 +138,12 @@
       </label>
     </div>
     <ui-lib-virtual-scroller
-      [items]="disabledItems"
-      [itemSize]="48"
       scrollHeight="300px"
       [disabled]="virtualizationDisabled()"
+      [itemSize]="48"
+      [items]="disabledItems"
     >
-      <ng-template uiScrollerItem let-item>
+      <ng-template let-item uiScrollerItem>
         <div class="scroller-demo__item scroller-demo__item--compact">
           <span class="scroller-demo__item-dot" [style.background]="item.color"></span>
           <span class="scroller-demo__item-label">{{ item.label }}</span>
@@ -157,8 +157,8 @@
     <p class="demo-section__description">
       Each item is 96 px — demonstrates the buffer tolerance with taller rows.
     </p>
-    <ui-lib-virtual-scroller [items]="largeItems" [itemSize]="96" scrollHeight="480px">
-      <ng-template uiScrollerItem let-item>
+    <ui-lib-virtual-scroller scrollHeight="480px" [itemSize]="96" [items]="largeItems">
+      <ng-template let-item uiScrollerItem>
         <div
           class="scroller-demo__item scroller-demo__item--large"
           [style.border-left-color]="item.color"
@@ -175,8 +175,8 @@
   <app-doc-section id="basic-usage" title="Basic Usage">
     <app-doc-code-example
       [html]="demoCode()"
-      [typescript]="demoCodeTs()"
       [showLineNumbers]="true"
+      [typescript]="demoCodeTs()"
     />
   </app-doc-section>
 
@@ -201,9 +201,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -213,8 +213,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

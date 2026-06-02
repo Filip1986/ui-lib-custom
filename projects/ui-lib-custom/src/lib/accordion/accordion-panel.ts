@@ -1,25 +1,27 @@
 import { NgTemplateOutlet } from '@angular/common';
+import type { ElementRef, InputSignal, OnDestroy, Signal, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  Directive,
   computed,
   contentChild,
+  Directive,
   effect,
   inject,
   input,
   signal,
-  ViewEncapsulation,
-  ViewChild,
   TemplateRef,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { ElementRef, InputSignal, OnDestroy, Signal, WritableSignal } from '@angular/core';
+
+import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { Icon } from 'ui-lib-custom/icon';
+
+import { ACCORDION_PANEL_STATES } from './accordion.constants';
+import type { AccordionIconPosition, AccordionToggleIconContext } from './accordion.types';
 import type { AccordionContext } from './accordion-context';
 import { ACCORDION_CONTEXT } from './accordion-context';
-import type { AccordionIconPosition, AccordionToggleIconContext } from './accordion.types';
-import { Icon } from 'ui-lib-custom/icon';
-import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import { ACCORDION_PANEL_STATES } from './accordion.constants';
 
 let accordionPanelId: number = 0;
 

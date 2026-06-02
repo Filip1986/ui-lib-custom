@@ -1,9 +1,10 @@
+import type { WritableSignal } from '@angular/core';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import type { WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideZonelessChangeDetection } from '@angular/core';
+
 import { TreeSelect } from './tree-select.component';
 import type { TreeNode, TreeSelectSelectionMode, TreeSelectVariant } from './tree-select.types';
 

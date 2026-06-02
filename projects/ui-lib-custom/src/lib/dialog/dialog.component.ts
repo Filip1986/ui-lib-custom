@@ -1,36 +1,38 @@
 import { DOCUMENT, isPlatformBrowser, NgStyle } from '@angular/common';
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  Injector,
-  PLATFORM_ID,
-  ViewEncapsulation,
-  afterNextRender,
   computed,
   contentChildren,
   effect,
+  ElementRef,
   inject,
+  Injector,
   input,
-  model,
-  output,
-  signal,
-  viewChild,
   type InputSignal,
+  model,
   type ModelSignal,
   type OnDestroy,
+  output,
   type OutputEmitterRef,
+  PLATFORM_ID,
   type Signal,
+  signal,
+  viewChild,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
+
 import {
   claimOverlayZIndex,
   FocusTrap,
   KEYBOARD_KEYS,
   releaseOverlayZIndex,
 } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { DIALOG_DEFAULTS, DIALOG_POSITION_CLASS_MAP } from './dialog.constants';
 import type { DialogPosition, DialogVariant } from './dialog.types';
 import type { BackdropAnimationParams, DialogAnimationParams } from './dialog-animations';

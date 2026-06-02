@@ -13,14 +13,14 @@
 }
 
 .example-section > p {
-  margin: 0;
   color: var(--uilib-color-text-secondary, #6b7280);
+  margin: 0;
 }
 
 .position-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 }
 
 .position-trigger {
@@ -28,8 +28,8 @@
 }
 
 .custom-header {
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
   gap: 0.5rem;
 }
 
@@ -50,20 +50,20 @@
 }
 
 .headless-shell {
-  width: min(90vw, 32rem);
   background: var(--uilib-surface, #ffffff);
   border: 1px solid var(--uilib-border, #e5e7eb);
   border-radius: var(--uilib-radius-md, 0.5rem);
   box-shadow: var(--uilib-shadow-lg, 0 20px 45px rgba(0, 0, 0, 0.2));
   overflow: hidden;
+  width: min(90vw, 32rem);
 }
 
 .headless-shell__header,
 .headless-shell__footer {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+  display: flex;
   gap: 0.5rem;
+  justify-content: space-between;
   padding: 0.75rem 1rem;
 }
 
@@ -91,11 +91,11 @@
 
 .variant-switcher-controls {
   display: flex;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .variant-selection-label {
-  margin: 0;
   color: var(--uilib-color-text-secondary, #6b7280);
+  margin: 0;
 }

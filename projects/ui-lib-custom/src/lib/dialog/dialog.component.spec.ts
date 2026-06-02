@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import { DialogComponent } from './dialog.component';
 import { DIALOG_DEFAULTS } from './dialog.constants';
 import type { DialogPosition } from './dialog.types';

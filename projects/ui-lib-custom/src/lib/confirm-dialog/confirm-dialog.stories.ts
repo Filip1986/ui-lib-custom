@@ -1,11 +1,14 @@
+import { inject } from '@angular/core';
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig } from '@storybook/angular';
-import { inject } from '@angular/core';
-import { ConfirmDialog } from './confirm-dialog';
-import { ConfirmationService } from './confirm-dialog.service';
-import type { ConfirmDialogVariant, ConfirmDialogPosition } from './confirm-dialog.types';
+
 import { Button } from 'ui-lib-custom/button';
 import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
+import { ConfirmDialog } from './confirm-dialog';
+import { ConfirmationService } from './confirm-dialog.service';
+import type { ConfirmDialogPosition, ConfirmDialogVariant } from './confirm-dialog.types';
 
 type ConfirmDialogStoryArgs = {
   header: string;

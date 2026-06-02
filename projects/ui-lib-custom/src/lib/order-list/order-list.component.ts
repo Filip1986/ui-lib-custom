@@ -1,3 +1,12 @@
+import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
+import type {
+  ElementRef,
+  InputSignal,
+  ModelSignal,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,18 +19,16 @@ import {
   PLATFORM_ID,
   signal,
   TemplateRef,
-  ViewEncapsulation,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
-import type {
-  InputSignal,
-  ModelSignal,
-  OutputEmitterRef,
-  Signal,
-  WritableSignal,
-  ElementRef,
-} from '@angular/core';
+
+import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { Icon } from 'ui-lib-custom/icon';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   OrderListControlsPosition,
   OrderListDragDropEvent,
@@ -39,11 +46,6 @@ import {
   OrderListHeaderDirective,
   OrderListItemDirective,
 } from './order-list-templates.directive';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { Icon } from 'ui-lib-custom/icon';
-import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
-import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
 
 /** Monotonic counter for unique element IDs. */
 let orderListIdCounter: number = 0;

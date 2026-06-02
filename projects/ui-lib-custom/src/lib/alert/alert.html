@@ -1,20 +1,20 @@
 <ui-lib-icon
+  aria-hidden="true"
   class="ui-lib-alert__icon"
+  size="lg"
   [name]="statusIcon()"
   [variant]="effectiveVariant()"
-  size="lg"
-  aria-hidden="true"
 />
 <div class="ui-lib-alert__content">
   <ng-content />
 </div>
 @if (dismissible()) {
   <button
-    type="button"
     class="ui-lib-alert__close"
+    type="button"
     [attr.aria-label]="dismissLabel() ?? i18n.translate('alert.dismiss')"
     (click)="onDismiss()"
   >
-    <ui-lib-icon name="close" [variant]="effectiveVariant()" size="sm" aria-hidden="true" />
+    <ui-lib-icon aria-hidden="true" name="close" size="sm" [variant]="effectiveVariant()" />
   </button>
 }

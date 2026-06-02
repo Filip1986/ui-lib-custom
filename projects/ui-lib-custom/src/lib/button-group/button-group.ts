@@ -2,16 +2,18 @@ import {
   afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  input,
   computed,
-  ViewEncapsulation,
   ElementRef,
   inject,
-  isDevMode,
+  input,
   type InputSignal,
+  isDevMode,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { ButtonVariant, ButtonSize } from 'ui-lib-custom/button';
+
+import type { ButtonSize, ButtonVariant } from 'ui-lib-custom/button';
+
 import { ThemeConfigService } from '../theming/theme-config.service';
 
 /**

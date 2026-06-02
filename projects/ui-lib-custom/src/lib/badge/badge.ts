@@ -1,18 +1,20 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  input,
+  Component,
   computed,
   inject,
-  ViewEncapsulation,
+  input,
   type InputSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import type { BadgeVariant, BadgeColor, BadgeSize } from './badge.types';
 
-export type { BadgeVariant, BadgeColor, BadgeSize } from './badge.types';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { BadgeColor, BadgeSize, BadgeVariant } from './badge.types';
+
+export type { BadgeColor, BadgeSize, BadgeVariant } from './badge.types';
 
 let nextBadgeId: number = 0;
 

@@ -1,14 +1,14 @@
 <ui-lib-container class="doc-page" size="xl" [centered]="true" [padding]="6">
   <div class="doc-layout">
     <div class="doc-main">
-      <ng-content select="[docHeader]"></ng-content>
+      <ng-content select="[docHeader]" />
       <div class="doc-body">
-        <ng-content></ng-content>
+        <ng-content />
       </div>
     </div>
 
     @if (sections.length) {
-      <ng-content select="[docRail]"></ng-content>
+      <ng-content select="[docRail]" />
     }
   </div>
 </ui-lib-container>

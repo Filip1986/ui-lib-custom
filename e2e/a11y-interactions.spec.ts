@@ -42,9 +42,9 @@
  *   13. ColorPicker   — open popup + axe on open panel
  */
 
-import { test, expect } from '@playwright/test';
-import type { Page, Locator } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import type { Locator, Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 

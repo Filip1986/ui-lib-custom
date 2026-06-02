@@ -60,12 +60,12 @@
 
     // Selection shadow (overridden per variant)
     --uilib-tree-node-selection-shadow: none;
+    color: var(--uilib-tree-node-color);
 
     // Base layout
     display: block;
     font-size: var(--uilib-tree-font-size);
     line-height: var(--uilib-tree-line-height);
-    color: var(--uilib-tree-node-color);
 
     // Reset list styles
     ul,
@@ -109,14 +109,14 @@
   }
 
   .uilib-tree-node-row {
-    display: flex;
     align-items: center;
-    gap: 0.375rem;
-    padding: var(--uilib-tree-node-padding-y) var(--uilib-tree-node-padding-x);
-    border-radius: var(--uilib-tree-node-border-radius);
     background: var(--uilib-tree-node-bg);
+    border-radius: var(--uilib-tree-node-border-radius);
     cursor: default;
+    display: flex;
+    gap: 0.375rem;
     outline: none;
+    padding: var(--uilib-tree-node-padding-y) var(--uilib-tree-node-padding-x);
     transition:
       background-color var(--uilib-tree-transition),
       color var(--uilib-tree-transition);
@@ -143,21 +143,21 @@
   // ─── Toggle button ────────────────────────────────────────────────────────────
 
   .uilib-tree-node-toggle {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: var(--uilib-tree-toggle-size);
-    height: var(--uilib-tree-toggle-size);
-    padding: 0;
+    background: transparent;
     border: none;
     border-radius: var(--uilib-tree-toggle-border-radius);
-    background: transparent;
     color: var(--uilib-tree-toggle-color);
     cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    height: var(--uilib-tree-toggle-size);
+    justify-content: center;
+    padding: 0;
     transition:
       background-color var(--uilib-tree-transition),
       transform var(--uilib-tree-transition);
+    width: var(--uilib-tree-toggle-size);
 
     &:hover {
       background: var(--uilib-tree-toggle-bg-hover);
@@ -176,13 +176,13 @@
 
   // Chevron icon drawn with borders
   .uilib-tree-toggle-icon {
-    display: inline-block;
-    width: 0.5rem;
-    height: 0.5rem;
     border-inline-end: 2px solid currentcolor;
     border-bottom: 2px solid currentcolor;
+    display: inline-block;
+    height: 0.5rem;
     transform: rotate(-45deg);
     transition: transform var(--uilib-tree-transition);
+    width: 0.5rem;
   }
 
   .uilib-tree-node-toggle--expanded .uilib-tree-toggle-icon {
@@ -192,26 +192,26 @@
   .uilib-tree-node-leaf-spacer {
     display: inline-block;
     flex-shrink: 0;
-    width: var(--uilib-tree-toggle-size);
     height: var(--uilib-tree-toggle-size);
+    width: var(--uilib-tree-toggle-size);
   }
 
   // ─── Checkbox ─────────────────────────────────────────────────────────────────
 
   .uilib-tree-node-checkbox {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: var(--uilib-tree-checkbox-size);
-    height: var(--uilib-tree-checkbox-size);
+    background: var(--uilib-tree-checkbox-bg);
     border: var(--uilib-tree-checkbox-border);
     border-radius: var(--uilib-tree-checkbox-border-radius);
-    background: var(--uilib-tree-checkbox-bg);
     cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    height: var(--uilib-tree-checkbox-size);
+    justify-content: center;
     transition:
       background-color var(--uilib-tree-transition),
       border-color var(--uilib-tree-transition);
+    width: var(--uilib-tree-checkbox-size);
 
     &:hover {
       border-color: var(--uilib-color-primary, #1976d2);
@@ -222,13 +222,13 @@
       border: var(--uilib-tree-checkbox-border-checked);
 
       &::after {
-        content: '';
-        display: block;
-        width: 0.3em;
-        height: 0.55em;
         border-inline-end: 2px solid var(--uilib-tree-checkbox-color-checked);
         border-bottom: 2px solid var(--uilib-tree-checkbox-color-checked);
+        content: '';
+        display: block;
+        height: 0.55em;
         transform: rotate(45deg) translate(-1px, -1px);
+        width: 0.3em;
       }
     }
 
@@ -237,11 +237,11 @@
       border: var(--uilib-tree-checkbox-border-checked);
 
       &::after {
+        background: var(--uilib-tree-checkbox-color-checked);
         content: '';
         display: block;
-        width: 0.55em;
         height: 2px;
-        background: var(--uilib-tree-checkbox-color-checked);
+        width: 0.55em;
       }
     }
   }
@@ -249,9 +249,9 @@
   // ─── Node icon and label ──────────────────────────────────────────────────────
 
   .uilib-tree-node-icon {
+    color: var(--uilib-tree-toggle-color);
     flex-shrink: 0;
     font-size: var(--uilib-tree-node-icon-font-size);
-    color: var(--uilib-tree-toggle-color);
   }
 
   .uilib-tree-node-label {
@@ -274,31 +274,31 @@
   // ─── Empty state ──────────────────────────────────────────────────────────────
 
   .uilib-tree-empty {
-    padding: 1rem;
-    text-align: center;
     color: var(--uilib-color-text-secondary, #757575);
     font-style: italic;
+    padding: 1rem;
+    text-align: center;
   }
 
   // ─── Filter ───────────────────────────────────────────────────────────────────
 
   .uilib-tree-filter {
-    position: relative;
     margin-bottom: 0.5rem;
+    position: relative;
   }
 
   .uilib-tree-filter-input {
-    display: block;
-    width: 100%;
-    padding: var(--uilib-tree-filter-padding);
+    background: var(--uilib-tree-filter-bg);
     border: var(--uilib-tree-filter-border);
     border-radius: var(--uilib-tree-filter-border-radius);
-    background: var(--uilib-tree-filter-bg);
-    color: var(--uilib-tree-filter-color);
-    font-size: var(--uilib-tree-font-size);
     box-sizing: border-box;
+    color: var(--uilib-tree-filter-color);
+    display: block;
+    font-size: var(--uilib-tree-font-size);
     outline: none;
+    padding: var(--uilib-tree-filter-padding);
     transition: border-color var(--uilib-tree-transition);
+    width: 100%;
 
     &:focus {
       border: var(--uilib-tree-filter-border-focus);
@@ -310,13 +310,13 @@
   }
 
   .uilib-tree-filter-icon {
-    position: absolute;
+    color: var(--uilib-color-text-secondary, #757575);
+    font-size: var(--uilib-tree-filter-icon-font-size);
     inset-inline-end: 0.625rem;
+    pointer-events: none;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--uilib-color-text-secondary, #757575);
-    pointer-events: none;
-    font-size: var(--uilib-tree-filter-icon-font-size);
   }
 
   // ═══════════════════════════════════════════════════════════════════════════════
@@ -335,9 +335,9 @@
     }
 
     .uilib-tree-filter-input {
-      border-radius: 0;
       border: none;
       border-bottom: var(--uilib-tree-filter-border);
+      border-radius: 0;
 
       &:focus {
         border-bottom: var(--uilib-tree-filter-border-focus);
@@ -381,16 +381,16 @@
     --uilib-tree-checkbox-border-checked: 2px solid var(--uilib-color-text-primary, #212121);
 
     .uilib-tree-node-row {
-      border-radius: 0;
       border-bottom: 1px solid transparent;
+      border-radius: 0;
 
       &:hover {
         color: var(--uilib-color-primary, #1976d2);
       }
 
       &.uilib-tree-node-row--selected {
-        font-weight: 500;
         border-bottom-color: currentColor;
+        font-weight: 500;
       }
     }
 

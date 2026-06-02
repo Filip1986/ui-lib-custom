@@ -15,17 +15,17 @@
 }
 
 .timeline-demo__title {
+  color: var(--uilib-text-color, #1f2937);
   font-size: 2rem;
   font-weight: 700;
   margin: 0 0 0.5rem;
-  color: var(--uilib-text-color, #1f2937);
 }
 
 .timeline-demo__subtitle {
   color: var(--uilib-text-color-secondary, #6b7280);
-  margin: 0;
   font-size: 1rem;
   line-height: 1.6;
+  margin: 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -33,9 +33,9 @@
 // ---------------------------------------------------------------------------
 
 .timeline-demo__section {
+  border-bottom: 1px solid var(--uilib-border-color, #e5e7eb);
   margin-bottom: 3rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid var(--uilib-border-color, #e5e7eb);
 
   &:last-child {
     border-bottom: none;
@@ -43,23 +43,23 @@
 }
 
 .timeline-demo__section-title {
+  color: var(--uilib-text-color, #1f2937);
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 0.5rem;
-  color: var(--uilib-text-color, #1f2937);
 }
 
 .timeline-demo__section-desc {
   color: var(--uilib-text-color-secondary, #6b7280);
-  margin: 0 0 1.5rem;
   font-size: 0.9rem;
+  margin: 0 0 1.5rem;
 
   code {
     background: var(--uilib-surface-color-alt, #f3f4f6);
-    padding: 0.1em 0.35em;
     border-radius: 4px;
-    font-size: 0.85em;
     color: var(--uilib-primary-color, #3b82f6);
+    font-size: 0.85em;
+    padding: 0.1em 0.35em;
   }
 }
 
@@ -71,20 +71,20 @@
   background: var(--uilib-surface-color, #ffffff);
   border: 1px solid var(--uilib-border-color, #e5e7eb);
   border-radius: 8px;
-  padding: 0.875rem 1rem;
   margin-bottom: 0.25rem;
+  padding: 0.875rem 1rem;
 }
 
 .timeline-demo__card-title {
+  color: var(--uilib-text-color, #1f2937);
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 0.25rem;
-  color: var(--uilib-text-color, #1f2937);
 }
 
 .timeline-demo__card-body {
-  font-size: 0.875rem;
   color: var(--uilib-text-color-secondary, #6b7280);
+  font-size: 0.875rem;
   margin: 0;
 }
 
@@ -93,8 +93,8 @@
 // ---------------------------------------------------------------------------
 
 .timeline-demo__date {
-  font-size: 0.8125rem;
   color: var(--uilib-text-color-secondary, #6b7280);
+  font-size: 0.8125rem;
   white-space: nowrap;
 }
 
@@ -103,10 +103,10 @@
 // ---------------------------------------------------------------------------
 
 .timeline-demo__badge {
-  display: inline-block;
-  width: 1.25rem;
-  height: 1.25rem;
   border-radius: 50%;
+  display: inline-block;
+  height: 1.25rem;
+  width: 1.25rem;
 
   &--success {
     background: #22c55e;
@@ -126,10 +126,10 @@
 }
 
 .timeline-demo__marker-dot {
-  display: block;
-  width: var(--uilib-timeline-marker-size, 1.25rem);
-  height: var(--uilib-timeline-marker-size, 1.25rem);
   border-radius: 50%;
+  display: block;
+  height: var(--uilib-timeline-marker-size, 1.25rem);
+  width: var(--uilib-timeline-marker-size, 1.25rem);
 }
 
 // ---------------------------------------------------------------------------
@@ -137,10 +137,10 @@
 // ---------------------------------------------------------------------------
 
 .timeline-demo__step-label {
+  color: var(--uilib-text-color, #1f2937);
   display: block;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--uilib-text-color, #1f2937);
   text-align: center;
 }
 
@@ -155,8 +155,8 @@
 .timeline-demo__variant-grid,
 .timeline-demo__size-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -164,15 +164,15 @@
 }
 
 .timeline-demo__variant-label {
+  color: var(--uilib-text-color-secondary, #6b7280);
   font-size: 0.875rem;
   font-weight: 600;
-  text-transform: capitalize;
   margin: 0 0 0.75rem;
-  color: var(--uilib-text-color-secondary, #6b7280);
+  text-transform: capitalize;
 }
 
 .timeline-demo__mini-event {
+  color: var(--uilib-text-color, #1f2937);
   font-size: 0.875rem;
   margin: 0 0 0.5rem;
-  color: var(--uilib-text-color, #1f2937);
 }

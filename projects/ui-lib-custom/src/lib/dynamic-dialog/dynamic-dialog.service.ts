@@ -1,3 +1,4 @@
+import type { ComponentRef, Type } from '@angular/core';
 import {
   ApplicationRef,
   createComponent,
@@ -6,11 +7,11 @@ import {
   Injectable,
   Injector,
 } from '@angular/core';
-import type { ComponentRef, Type } from '@angular/core';
-import { DynamicDialogRef } from './dynamic-dialog-ref';
+
 import { DynamicDialog } from './dynamic-dialog';
-import { DYNAMIC_DIALOG_CONFIG } from './dynamic-dialog.types';
 import type { DynamicDialogConfig } from './dynamic-dialog.types';
+import { DYNAMIC_DIALOG_CONFIG } from './dynamic-dialog.types';
+import { DynamicDialogRef } from './dynamic-dialog-ref';
 
 /**
  * Service for programmatically opening dialog panels that render any Angular component.

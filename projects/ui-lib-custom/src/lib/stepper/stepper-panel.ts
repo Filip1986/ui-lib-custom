@@ -1,11 +1,11 @@
+import type { InputSignal, Signal, TemplateRef } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   contentChild,
   input,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, Signal, TemplateRef } from '@angular/core';
 
 /**
  * StepperPanel — a single step within a Stepper.

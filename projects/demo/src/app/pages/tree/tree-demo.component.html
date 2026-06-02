@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Hierarchical data display with expand/collapse, selection modes, filtering, custom templates, and three design variants."
     docHeader
     title="Tree"
     [importCode]="importCode"
-    description="Hierarchical data display with expand/collapse, selection modes, filtering, custom templates, and three design variants."
   />
 
   <!-- ── Basic Tree ──────────────────────────────────────────────────────── -->
@@ -23,8 +23,8 @@
     </p>
     <div class="demo-card">
       <ui-lib-tree
-        [value]="fileSystemNodes"
         selectionMode="single"
+        [value]="fileSystemNodes"
         [(selection)]="singleSelection"
       />
       <p class="demo-selection-label">
@@ -40,8 +40,8 @@
     </p>
     <div class="demo-card">
       <ui-lib-tree
-        [value]="fileSystemNodes"
         selectionMode="multiple"
+        [value]="fileSystemNodes"
         [(selection)]="multipleSelection"
       />
       <p class="demo-selection-label">
@@ -58,8 +58,8 @@
     </p>
     <div class="demo-card">
       <ui-lib-tree
-        [value]="fileSystemNodes"
         selectionMode="checkbox"
+        [value]="fileSystemNodes"
         [(selection)]="checkboxSelection"
       />
       <p class="demo-selection-label">
@@ -76,9 +76,9 @@
     </p>
     <div class="demo-card">
       <ui-lib-tree
-        [value]="countryNodes"
-        [filter]="true"
         filterPlaceholder="Search countries and cities..."
+        [filter]="true"
+        [value]="countryNodes"
       />
     </div>
   </app-doc-section>
@@ -90,14 +90,14 @@
       to override rendering per node type. Unmatched nodes fall back to the default template.
     </p>
     <div class="demo-card">
-      <ui-lib-tree [value]="customTemplateNodes" selectionMode="single">
-        <ng-template uiTreeNode uiTreeNodeType="department" let-node>
+      <ui-lib-tree selectionMode="single" [value]="customTemplateNodes">
+        <ng-template let-node uiTreeNode uiTreeNodeType="department">
           <span class="demo-dept-node">
             <i class="pi pi-building"></i>
             <strong>{{ node.label }}</strong>
           </span>
         </ng-template>
-        <ng-template uiTreeNode uiTreeNodeType="tech" let-node>
+        <ng-template let-node uiTreeNode uiTreeNodeType="tech">
           <span class="demo-tech-node">
             <i class="pi pi-code"></i>
             {{ node.label }}
@@ -115,15 +115,15 @@
     <div class="demo-card demo-sizes-grid">
       <div>
         <p class="demo-size-label">Small</p>
-        <ui-lib-tree [value]="variantNodes" size="sm" selectionMode="single" />
+        <ui-lib-tree selectionMode="single" size="sm" [value]="variantNodes" />
       </div>
       <div>
         <p class="demo-size-label">Medium (default)</p>
-        <ui-lib-tree [value]="variantNodes" size="md" selectionMode="single" />
+        <ui-lib-tree selectionMode="single" size="md" [value]="variantNodes" />
       </div>
       <div>
         <p class="demo-size-label">Large</p>
-        <ui-lib-tree [value]="variantNodes" size="lg" selectionMode="single" />
+        <ui-lib-tree selectionMode="single" size="lg" [value]="variantNodes" />
       </div>
     </div>
   </app-doc-section>
@@ -138,27 +138,27 @@
       <div>
         <p class="demo-variant-label">Material</p>
         <ui-lib-tree
-          [value]="variantNodes"
-          variant="material"
           selectionMode="single"
+          variant="material"
+          [value]="variantNodes"
           [(selection)]="variantSelection"
         />
       </div>
       <div>
         <p class="demo-variant-label">Bootstrap</p>
         <ui-lib-tree
-          [value]="variantNodes"
-          variant="bootstrap"
           selectionMode="single"
+          variant="bootstrap"
+          [value]="variantNodes"
           [(selection)]="variantSelection"
         />
       </div>
       <div>
         <p class="demo-variant-label">Minimal</p>
         <ui-lib-tree
-          [value]="variantNodes"
-          variant="minimal"
           selectionMode="single"
+          variant="minimal"
+          [value]="variantNodes"
           [(selection)]="variantSelection"
         />
       </div>
@@ -183,9 +183,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -194,8 +194,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

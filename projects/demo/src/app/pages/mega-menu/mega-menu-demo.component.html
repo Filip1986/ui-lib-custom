@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A horizontal (or vertical) navigation bar where top-level items open multi-column mega panels of grouped sub-items. Supports three design variants, three sizes, keyboard navigation, disabled items, separators, URL links, and command callbacks."
     docHeader
     title="MegaMenu"
     [importCode]="importCode"
-    description="A horizontal (or vertical) navigation bar where top-level items open multi-column mega panels of grouped sub-items. Supports three design variants, three sizes, keyboard navigation, disabled items, separators, URL links, and command callbacks."
   />
 
   <!-- ── Basic Horizontal ──────────────────────────────────────────────────── -->
@@ -26,7 +26,7 @@
       Set <code>orientation="vertical"</code> for a stacked list. Mega panels open to the right.
     </p>
     <div class="demo-section__content demo-section__content--vertical">
-      <ui-lib-mega-menu [model]="verticalModel" orientation="vertical" />
+      <ui-lib-mega-menu orientation="vertical" [model]="verticalModel" />
     </div>
     <div class="demo-section__code">
       <app-doc-code-example [html]="verticalHtml" [typescript]="verticalTs" />
@@ -45,9 +45,9 @@
     <div class="demo-section__code">
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetDisabledSeparator"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -67,9 +67,9 @@
     <div class="demo-section__code">
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetCommand"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -140,8 +140,8 @@
         <div class="demo-control-buttons">
           @for (v of variants; track v) {
             <ui-lib-button
-              [variant]="playgroundVariant() === v ? 'material' : 'minimal'"
               size="sm"
+              [variant]="playgroundVariant() === v ? 'material' : 'minimal'"
               (click)="setPlaygroundVariant(v)"
               >{{ v }}</ui-lib-button
             >
@@ -153,8 +153,8 @@
         <div class="demo-control-buttons">
           @for (s of sizes; track s) {
             <ui-lib-button
-              [variant]="playgroundSize() === s ? 'material' : 'minimal'"
               size="sm"
+              [variant]="playgroundSize() === s ? 'material' : 'minimal'"
               (click)="setPlaygroundSize(s)"
               >{{ s }}</ui-lib-button
             >
@@ -166,8 +166,8 @@
         <div class="demo-control-buttons">
           @for (o of orientations; track o) {
             <ui-lib-button
-              [variant]="playgroundOrientation() === o ? 'material' : 'minimal'"
               size="sm"
+              [variant]="playgroundOrientation() === o ? 'material' : 'minimal'"
               (click)="setPlaygroundOrientation(o)"
               >{{ o }}</ui-lib-button
             >
@@ -181,9 +181,9 @@
     >
       <ui-lib-mega-menu
         [model]="basicModel"
-        [variant]="playgroundVariant()"
-        [size]="playgroundSize()"
         [orientation]="playgroundOrientation()"
+        [size]="playgroundSize()"
+        [variant]="playgroundVariant()"
       />
     </div>
   </app-doc-section>
@@ -216,9 +216,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -226,8 +226,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

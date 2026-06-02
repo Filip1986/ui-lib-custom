@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Inline severity-based messages for contextual feedback. Supports six severity levels, three design variants, three sizes, and an optional close action."
     docHeader
     title="Message"
     [importCode]="importCode"
-    description="Inline severity-based messages for contextual feedback. Supports six severity levels, three design variants, three sizes, and an optional close action."
   />
 
   <!-- ─── Playground ─────────────────────────────────────────────── -->
@@ -64,11 +64,11 @@
         </div>
       } @else {
         <ui-lib-message
+          [closable]="playgroundClosable()"
           [severity]="playgroundSeverity()"
-          [variant]="playgroundVariant()"
           [size]="playgroundSize()"
           [text]="playgroundText()"
-          [closable]="playgroundClosable()"
+          [variant]="playgroundVariant()"
           (closed)="onPlaygroundClose()"
         />
       }
@@ -104,23 +104,23 @@
         <div class="message-demo__stack">
           <ui-lib-message
             severity="success"
-            [variant]="variant"
             text="Operation completed successfully."
+            [variant]="variant"
           />
           <ui-lib-message
             severity="info"
-            [variant]="variant"
             text="Here is some useful information."
+            [variant]="variant"
           />
           <ui-lib-message
             severity="warn"
-            [variant]="variant"
             text="Please review before continuing."
+            [variant]="variant"
           />
           <ui-lib-message
             severity="error"
-            [variant]="variant"
             text="Something went wrong. Please try again."
+            [variant]="variant"
           />
         </div>
       </div>
@@ -150,8 +150,8 @@
       @for (severity of severities; track severity) {
         @if (!isSeverityClosed(severity)) {
           <ui-lib-message
-            [severity]="severity"
             [closable]="true"
+            [severity]="severity"
             [text]="'This is a ' + severity + ' message. Click to dismiss.'"
             (closed)="dismissSeverity(severity)"
           />
@@ -173,7 +173,7 @@
     <div class="message-demo__stack">
       <ui-lib-message severity="warn">
         <strong>Action required:</strong> Your payment method expires in 3 days.
-        <a href="#" class="message-demo__link">Update billing</a>
+        <a class="message-demo__link" href="#">Update billing</a>
       </ui-lib-message>
       <ui-lib-message severity="info" [closable]="true">
         <strong>Tip:</strong> Use keyboard shortcut <kbd>Ctrl + S</kbd> to save your work.
@@ -200,9 +200,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -211,8 +211,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

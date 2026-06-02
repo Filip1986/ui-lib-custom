@@ -1,8 +1,8 @@
 <app-doc-page-layout [sections]="sections">
-  <app-doc-page-header docHeader [title]="data.componentName" [description]="data.tagline" />
+  <app-doc-page-header docHeader [description]="data.tagline" [title]="data.componentName" />
 
   <!-- ── Overview ─────────────────────────────────────────────────────── -->
-  <section class="pro-section" id="overview" data-doc-anchor>
+  <section class="pro-section" data-doc-anchor id="overview">
     <div class="pro-tier-banner" role="status" [attr.aria-label]="data.tier + ' tier component'">
       <div class="pro-tier-banner__left">
         <span class="pro-tier-badge">
@@ -12,11 +12,11 @@
         <p class="pro-tier-banner__status">In Design — Coming to the Pro tier</p>
       </div>
       <a
-        [href]="data.githubUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="pro-github-cta"
         aria-label="Star the repository on GitHub to follow progress"
+        class="pro-github-cta"
+        rel="noopener noreferrer"
+        target="_blank"
+        [href]="data.githubUrl"
       >
         <i class="pi pi-github"></i>
         Star on GitHub to follow progress
@@ -29,15 +29,15 @@
     </div>
 
     <div class="pro-roadmap-cta">
-      <a routerLink="/roadmap" fragment="pro-strategy" class="pro-roadmap-link">
-        <ui-lib-icon name="map" size="sm" aria-hidden="true" />
+      <a class="pro-roadmap-link" fragment="pro-strategy" routerLink="/roadmap">
+        <ui-lib-icon aria-hidden="true" name="map" size="sm" />
         View the full Pro &amp; Enterprise Strategy on the Roadmap
       </a>
     </div>
   </section>
 
   <!-- ── Features ─────────────────────────────────────────────────────── -->
-  <section class="pro-section" id="features" data-doc-anchor>
+  <section class="pro-section" data-doc-anchor id="features">
     <h2 class="pro-section__title">What's Included</h2>
     <p class="pro-section__subtitle">
       Planned feature set for the initial Pro release. Scope may evolve based on community input.
@@ -45,7 +45,7 @@
     <ul class="pro-features-list" role="list">
       @for (feature of data.features; track feature) {
         <li class="pro-feature-item" role="listitem">
-          <span class="pro-feature-check" aria-hidden="true">✦</span>
+          <span aria-hidden="true" class="pro-feature-check">✦</span>
           <span>{{ feature }}</span>
         </li>
       }
@@ -53,7 +53,7 @@
   </section>
 
   <!-- ── Use Cases ─────────────────────────────────────────────────────── -->
-  <section class="pro-section" id="use-cases" data-doc-anchor>
+  <section class="pro-section" data-doc-anchor id="use-cases">
     <h2 class="pro-section__title">Built For</h2>
     <p class="pro-section__subtitle">
       The teams and products that benefit most from this component.
@@ -71,8 +71,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

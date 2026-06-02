@@ -1,10 +1,10 @@
 <div class="clipping-card">
   <ui-lib-autocomplete
-    [(ngModel)]="clippingValue"
-    [suggestions]="countrySuggestions"
     optionLabel="name"
     optionValue="code"
     placeholder="Open inside clipped card"
+    [suggestions]="countrySuggestions"
+    [(ngModel)]="clippingValue"
     (completeMethod)="onCountryComplete($event)"
   />
 </div>

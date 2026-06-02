@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import { UiLibSelect } from 'ui-lib-custom/select';
 
 type SelectOptionItem = { label: string; value: string };

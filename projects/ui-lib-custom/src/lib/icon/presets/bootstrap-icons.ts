@@ -1,35 +1,37 @@
-import { provideIcons } from '@ng-icons/core';
-import type { IconMapping } from '../icon.semantics';
+import type { Provider } from '@angular/core';
+
 import {
-  bootstrapX,
-  bootstrapList,
-  bootstrapSearch,
-  bootstrapGear,
-  bootstrapPlus,
-  bootstrapDash,
-  bootstrapPencil,
-  bootstrapTrash,
   bootstrapArrowRepeat,
-  bootstrapDownload,
-  bootstrapUpload,
-  bootstrapShare,
-  bootstrapHouse,
-  bootstrapPerson,
-  bootstrapEnvelope,
+  bootstrapArrowRight,
   bootstrapBell,
-  bootstrapStar,
-  bootstrapHeart,
-  bootstrapInfoCircle,
   bootstrapCheckCircle,
+  bootstrapChevronDown,
+  bootstrapChevronLeft,
+  bootstrapChevronRight,
+  bootstrapChevronUp,
+  bootstrapDash,
+  bootstrapDownload,
+  bootstrapEnvelope,
   bootstrapExclamationOctagon,
   bootstrapExclamationTriangle,
-  bootstrapArrowRight,
-  bootstrapChevronRight,
-  bootstrapChevronLeft,
-  bootstrapChevronUp,
-  bootstrapChevronDown,
+  bootstrapGear,
+  bootstrapHeart,
+  bootstrapHouse,
+  bootstrapInfoCircle,
+  bootstrapList,
+  bootstrapPencil,
+  bootstrapPerson,
+  bootstrapPlus,
+  bootstrapSearch,
+  bootstrapShare,
+  bootstrapStar,
+  bootstrapTrash,
+  bootstrapUpload,
+  bootstrapX,
 } from '@ng-icons/bootstrap-icons';
-import type { Provider } from '@angular/core';
+import { provideIcons } from '@ng-icons/core';
+
+import type { IconMapping } from '../icon.semantics';
 
 export const BOOTSTRAP_ICON_MAPPING: IconMapping = {
   close: 'bootstrapX',

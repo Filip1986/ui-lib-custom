@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A media gallery component with thumbnail navigation, dot indicators, multiple layout positions, fullscreen mode, and autoplay support."
     docHeader
     title="Galleria"
     [importCode]="importCode"
-    description="A media gallery component with thumbnail navigation, dot indicators, multiple layout positions, fullscreen mode, and autoplay support."
   />
 
   <!-- ─── Basic ──────────────────────────────────────────────────────────── -->
@@ -15,16 +15,16 @@
 
     <div class="demo-block demo-block--gallery">
       <ui-lib-galleria
+        variant="material"
+        [numVisible]="5"
         [value]="images"
         [(activeIndex)]="basicActiveIndex"
-        [numVisible]="5"
-        variant="material"
       >
         <ng-template #galleriaItem let-image>
-          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+          <img class="demo-gallery-img" [alt]="image.alt" [src]="image.src" />
         </ng-template>
         <ng-template #galleriaThumbnail let-image>
-          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+          <img class="demo-gallery-thumb" [alt]="image.alt" [src]="image.thumbnailSrc" />
         </ng-template>
       </ui-lib-galleria>
     </div>
@@ -37,12 +37,12 @@
     </p>
 
     <div class="demo-block demo-block--gallery">
-      <ui-lib-galleria [value]="images" [numVisible]="5" variant="material" [showThumbnails]="true">
+      <ui-lib-galleria variant="material" [numVisible]="5" [showThumbnails]="true" [value]="images">
         <ng-template #galleriaItem let-image>
-          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+          <img class="demo-gallery-img" [alt]="image.alt" [src]="image.src" />
         </ng-template>
         <ng-template #galleriaThumbnail let-image>
-          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+          <img class="demo-gallery-thumb" [alt]="image.alt" [src]="image.thumbnailSrc" />
         </ng-template>
         <ng-template #galleriaCaption let-image>
           <div class="demo-caption">
@@ -63,15 +63,15 @@
 
     <div class="demo-block demo-block--gallery">
       <ui-lib-galleria
+        variant="material"
+        [circular]="true"
+        [showIndicators]="true"
+        [showThumbnails]="false"
         [value]="images"
         [(activeIndex)]="indicatorsActiveIndex"
-        [showThumbnails]="false"
-        [showIndicators]="true"
-        [circular]="true"
-        variant="material"
       >
         <ng-template #galleriaItem let-image>
-          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+          <img class="demo-gallery-img" [alt]="image.alt" [src]="image.src" />
         </ng-template>
       </ui-lib-galleria>
     </div>
@@ -87,10 +87,10 @@
     <div class="demo-controls demo-controls--row">
       @for (pos of positionOptions; track pos) {
         <ui-lib-button
-          [appearance]="thumbnailsPosition() === pos ? 'solid' : 'outline'"
           severity="primary"
           size="sm"
           type="button"
+          [appearance]="thumbnailsPosition() === pos ? 'solid' : 'outline'"
           (click)="onPositionChange(pos)"
         >
           {{ pos }}
@@ -105,17 +105,17 @@
       "
     >
       <ui-lib-galleria
-        [value]="images"
-        [(activeIndex)]="positionActiveIndex"
+        variant="material"
         [numVisible]="4"
         [thumbnailsPosition]="thumbnailsPosition()"
-        variant="material"
+        [value]="images"
+        [(activeIndex)]="positionActiveIndex"
       >
         <ng-template #galleriaItem let-image>
-          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+          <img class="demo-gallery-img" [alt]="image.alt" [src]="image.src" />
         </ng-template>
         <ng-template #galleriaThumbnail let-image>
-          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+          <img class="demo-gallery-thumb" [alt]="image.alt" [src]="image.thumbnailSrc" />
         </ng-template>
       </ui-lib-galleria>
     </div>
@@ -130,16 +130,16 @@
 
     <div class="demo-block demo-block--gallery">
       <ui-lib-galleria
-        [value]="images"
-        [(activeIndex)]="noThumbActiveIndex"
-        [showThumbnails]="false"
+        variant="material"
+        [circular]="true"
         [showIndicators]="true"
         [showIndicatorsOnItem]="true"
-        [circular]="true"
-        variant="material"
+        [showThumbnails]="false"
+        [value]="images"
+        [(activeIndex)]="noThumbActiveIndex"
       >
         <ng-template #galleriaItem let-image>
-          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+          <img class="demo-gallery-img" [alt]="image.alt" [src]="image.src" />
         </ng-template>
       </ui-lib-galleria>
     </div>
@@ -154,18 +154,18 @@
 
     <div class="demo-block demo-block--gallery">
       <ui-lib-galleria
+        variant="material"
+        [fullScreen]="true"
+        [numVisible]="5"
         [value]="images"
         [(activeIndex)]="fullscreenActiveIndex"
         [(visible)]="fullscreenVisible"
-        [fullScreen]="true"
-        [numVisible]="5"
-        variant="material"
       >
         <ng-template #galleriaItem let-image>
-          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+          <img class="demo-gallery-img" [alt]="image.alt" [src]="image.src" />
         </ng-template>
         <ng-template #galleriaThumbnail let-image>
-          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+          <img class="demo-gallery-thumb" [alt]="image.alt" [src]="image.thumbnailSrc" />
         </ng-template>
         <ng-template #galleriaCaption let-image>
           <div class="demo-caption">
@@ -185,19 +185,19 @@
 
     <div class="demo-block demo-block--gallery">
       <ui-lib-galleria
+        variant="material"
+        [autoPlay]="true"
+        [circular]="true"
+        [numVisible]="5"
+        [transitionInterval]="3000"
         [value]="images"
         [(activeIndex)]="autoplayActiveIndex"
-        [circular]="true"
-        [autoPlay]="true"
-        [transitionInterval]="3000"
-        [numVisible]="5"
-        variant="material"
       >
         <ng-template #galleriaItem let-image>
-          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+          <img class="demo-gallery-img" [alt]="image.alt" [src]="image.src" />
         </ng-template>
         <ng-template #galleriaThumbnail let-image>
-          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+          <img class="demo-gallery-thumb" [alt]="image.alt" [src]="image.thumbnailSrc" />
         </ng-template>
       </ui-lib-galleria>
     </div>
@@ -213,10 +213,10 @@
     <div class="demo-controls demo-controls--row">
       @for (v of variantOptions; track v) {
         <ui-lib-button
-          [appearance]="selectedVariant() === v ? 'solid' : 'outline'"
           severity="primary"
           size="sm"
           type="button"
+          [appearance]="selectedVariant() === v ? 'solid' : 'outline'"
           (click)="selectedVariant.set(v)"
         >
           {{ v }}
@@ -226,16 +226,16 @@
 
     <div class="demo-block demo-block--gallery">
       <ui-lib-galleria
-        [value]="images"
-        [(activeIndex)]="variantActiveIndex"
         [numVisible]="5"
+        [value]="images"
         [variant]="selectedVariant()"
+        [(activeIndex)]="variantActiveIndex"
       >
         <ng-template #galleriaItem let-image>
-          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+          <img class="demo-gallery-img" [alt]="image.alt" [src]="image.src" />
         </ng-template>
         <ng-template #galleriaThumbnail let-image>
-          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+          <img class="demo-gallery-thumb" [alt]="image.alt" [src]="image.thumbnailSrc" />
         </ng-template>
       </ui-lib-galleria>
     </div>
@@ -251,10 +251,10 @@
     <div class="demo-controls demo-controls--row">
       @for (s of sizeOptions; track s) {
         <ui-lib-button
-          [appearance]="selectedSize() === s ? 'solid' : 'outline'"
           severity="primary"
           size="sm"
           type="button"
+          [appearance]="selectedSize() === s ? 'solid' : 'outline'"
           (click)="selectedSize.set(s)"
         >
           {{ s }}
@@ -264,17 +264,17 @@
 
     <div class="demo-block demo-block--gallery">
       <ui-lib-galleria
-        [value]="images"
-        [(activeIndex)]="sizeActiveIndex"
+        variant="material"
         [numVisible]="5"
         [size]="selectedSize()"
-        variant="material"
+        [value]="images"
+        [(activeIndex)]="sizeActiveIndex"
       >
         <ng-template #galleriaItem let-image>
-          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+          <img class="demo-gallery-img" [alt]="image.alt" [src]="image.src" />
         </ng-template>
         <ng-template #galleriaThumbnail let-image>
-          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+          <img class="demo-gallery-thumb" [alt]="image.alt" [src]="image.thumbnailSrc" />
         </ng-template>
       </ui-lib-galleria>
     </div>
@@ -388,25 +388,25 @@
       "
     >
       <ui-lib-galleria
-        [value]="images"
-        [(activeIndex)]="playgroundActiveIndex"
-        [(visible)]="playgroundVisible"
+        [autoPlay]="playgroundAutoPlay()"
+        [circular]="playgroundCircular()"
+        [fullScreen]="playgroundFullScreen()"
         [numVisible]="5"
-        [variant]="playgroundVariant()"
-        [size]="playgroundSize()"
-        [thumbnailsPosition]="playgroundPosition()"
-        [showThumbnails]="playgroundShowThumbnails()"
         [showIndicators]="playgroundShowIndicators()"
         [showItemNavigators]="playgroundShowNavigators()"
-        [circular]="playgroundCircular()"
-        [autoPlay]="playgroundAutoPlay()"
-        [fullScreen]="playgroundFullScreen()"
+        [showThumbnails]="playgroundShowThumbnails()"
+        [size]="playgroundSize()"
+        [thumbnailsPosition]="playgroundPosition()"
+        [value]="images"
+        [variant]="playgroundVariant()"
+        [(activeIndex)]="playgroundActiveIndex"
+        [(visible)]="playgroundVisible"
       >
         <ng-template #galleriaItem let-image>
-          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+          <img class="demo-gallery-img" [alt]="image.alt" [src]="image.src" />
         </ng-template>
         <ng-template #galleriaThumbnail let-image>
-          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+          <img class="demo-gallery-thumb" [alt]="image.alt" [src]="image.thumbnailSrc" />
         </ng-template>
         <ng-template #galleriaCaption let-image>
           <div class="demo-caption">
@@ -431,9 +431,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -451,8 +451,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

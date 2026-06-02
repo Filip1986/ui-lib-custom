@@ -1,7 +1,8 @@
-import { Directive, ElementRef, HostListener, effect, inject, input } from '@angular/core';
 import type { InputSignal } from '@angular/core';
-import { LiveAnnouncerService } from './live-announcer.service';
+import { Directive, effect, ElementRef, HostListener, inject, input } from '@angular/core';
+
 import type { AriaLivePoliteness } from './live-announcer.service';
+import { LiveAnnouncerService } from './live-announcer.service';
 
 /**
  * Directive to announce content changes

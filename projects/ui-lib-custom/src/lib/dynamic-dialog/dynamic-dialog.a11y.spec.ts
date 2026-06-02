@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { DynamicDialog } from './dynamic-dialog';
-import { DynamicDialogRef } from './dynamic-dialog-ref';
-import { DialogService } from './dynamic-dialog.service';
-import { DYNAMIC_DIALOG_CONFIG } from './dynamic-dialog.types';
-import type { DynamicDialogConfig } from './dynamic-dialog.types';
+import { TestBed } from '@angular/core/testing';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { DynamicDialog } from './dynamic-dialog';
+import { DialogService } from './dynamic-dialog.service';
+import type { DynamicDialogConfig } from './dynamic-dialog.types';
+import { DYNAMIC_DIALOG_CONFIG } from './dynamic-dialog.types';
+import { DynamicDialogRef } from './dynamic-dialog-ref';
 
 // ---- Guest stub component ----
 

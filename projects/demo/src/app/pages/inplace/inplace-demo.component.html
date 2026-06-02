@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Inline editing — switch between a read-only display and an editable content slot on click."
     docHeader
     title="Inplace"
     [importCode]="importCode"
-    description="Inline editing — switch between a read-only display and an editable content slot on click."
   />
 
   <!-- ---- Basic -------------------------------------------------------- -->
@@ -16,14 +16,14 @@
       <div class="demo-field">
         <label class="demo-field__label">Name</label>
         <ui-lib-inplace [(active)]="basicActive">
-          <span inplaceDisplay class="inplace-demo__display-text">{{ basicText() }}</span>
+          <span class="inplace-demo__display-text" inplaceDisplay>{{ basicText() }}</span>
           <input
-            inplaceContent
             class="inplace-demo__input"
+            inplaceContent
             type="text"
             [value]="basicText()"
-            (input)="basicText.set($any($event.target).value)"
             (blur)="basicActive.set(false)"
+            (input)="basicText.set($any($event.target).value)"
           />
         </ui-lib-inplace>
         <p class="demo-field__note">
@@ -42,11 +42,11 @@
     <div class="demo-section__preview">
       <div class="demo-field">
         <label class="demo-field__label">Version</label>
-        <ui-lib-inplace [(active)]="closableActive" [closable]="true">
-          <span inplaceDisplay class="inplace-demo__display-text">{{ closableText }}</span>
+        <ui-lib-inplace [closable]="true" [(active)]="closableActive">
+          <span class="inplace-demo__display-text" inplaceDisplay>{{ closableText }}</span>
           <input
-            inplaceContent
             class="inplace-demo__input"
+            inplaceContent
             type="text"
             [value]="closableText"
             (input)="closableText = $any($event.target).value"
@@ -63,14 +63,14 @@
       <code>inplaceContent</code> slots — icons, badges, images, or entire form groups.
     </p>
     <div class="demo-section__preview">
-      <ui-lib-inplace [(active)]="imageActive" [closable]="true">
-        <span inplaceDisplay class="inplace-demo__rich-display">
-          <span class="pi pi-user inplace-demo__icon" aria-hidden="true"></span>
+      <ui-lib-inplace [closable]="true" [(active)]="imageActive">
+        <span class="inplace-demo__rich-display" inplaceDisplay>
+          <span aria-hidden="true" class="pi pi-user inplace-demo__icon"></span>
           <span>John Doe — click to edit profile</span>
         </span>
-        <div inplaceContent class="inplace-demo__rich-content">
-          <input class="inplace-demo__input" type="text" placeholder="First name" />
-          <input class="inplace-demo__input" type="text" placeholder="Last name" />
+        <div class="inplace-demo__rich-content" inplaceContent>
+          <input class="inplace-demo__input" placeholder="First name" type="text" />
+          <input class="inplace-demo__input" placeholder="Last name" type="text" />
         </div>
       </ui-lib-inplace>
     </div>
@@ -83,10 +83,10 @@
     </p>
     <div class="demo-section__preview">
       <ui-lib-inplace [disabled]="true">
-        <span inplaceDisplay class="inplace-demo__display-text inplace-demo__display-text--muted">
+        <span class="inplace-demo__display-text inplace-demo__display-text--muted" inplaceDisplay>
           {{ disabledText }}
         </span>
-        <input inplaceContent class="inplace-demo__input" type="text" />
+        <input class="inplace-demo__input" inplaceContent type="text" />
       </ui-lib-inplace>
     </div>
   </app-doc-section>
@@ -102,18 +102,18 @@
         <div class="demo-variant-cell">
           <p class="demo-variant-cell__label">{{ variant }}</p>
           <ui-lib-inplace
-            [variant]="variant"
-            [closable]="true"
             [active]="variantActives()[variant]"
+            [closable]="true"
+            [variant]="variant"
             (activated)="setVariantActive(variant, true); onActivated(variant)"
             (deactivated)="setVariantActive(variant, false); onDeactivated(variant)"
           >
-            <span inplaceDisplay class="inplace-demo__display-text">
+            <span class="inplace-demo__display-text" inplaceDisplay>
               Click to edit ({{ variant }})
             </span>
             <input
-              inplaceContent
               class="inplace-demo__input"
+              inplaceContent
               type="text"
               [placeholder]="variant + ' variant'"
             />
@@ -170,9 +170,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -181,8 +181,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

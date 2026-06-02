@@ -1,29 +1,29 @@
 <ng-template #autocompleteInputTemplate>
   <input
-    type="text"
-    role="combobox"
+    autocomplete="off"
     class="ui-autocomplete-input"
-    [id]="inputIdInternal()"
-    [value]="query()"
-    [placeholder]="placeholder()"
-    [disabled]="isDisabled()"
-    [readonly]="readonly()"
-    [attr.maxlength]="maxlength()"
-    [tabindex]="tabindex()"
-    [attr.aria-autocomplete]="'list'"
-    [attr.aria-haspopup]="'listbox'"
-    [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
-    [attr.aria-controls]="panelVisible() ? listboxId : null"
+    role="combobox"
+    type="text"
     [attr.aria-activedescendant]="activeDescendantId()"
+    [attr.aria-autocomplete]="'list'"
+    [attr.aria-controls]="panelVisible() ? listboxId : null"
+    [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
+    [attr.aria-haspopup]="'listbox'"
+    [attr.aria-invalid]="invalid() ? 'true' : null"
     [attr.aria-label]="
       ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('autocomplete.input.label'))
     "
     [attr.aria-labelledby]="ariaLabelledBy()"
-    [attr.aria-invalid]="invalid() ? 'true' : null"
-    autocomplete="off"
-    (input)="onInput($event)"
-    (focus)="onInputFocus($event)"
+    [attr.maxlength]="maxlength()"
+    [disabled]="isDisabled()"
+    [id]="inputIdInternal()"
+    [placeholder]="placeholder()"
+    [readonly]="readonly()"
+    [tabindex]="tabindex()"
+    [value]="query()"
     (blur)="onInputBlur($event)"
+    (focus)="onInputFocus($event)"
+    (input)="onInput($event)"
     (keydown)="onKeydown($event)"
     (keyup)="onInputKeyUp($event)"
   />
@@ -35,16 +35,16 @@
     <div
       class="ui-autocomplete-chip-list"
       role="group"
-      [attr.aria-label]="i18n.translate('autocomplete.chips-label')"
       [attr.aria-disabled]="isDisabled() ? 'true' : null"
+      [attr.aria-label]="i18n.translate('autocomplete.chips-label')"
     >
       @for (chip of selectedChips(); track chipTrackBy($index, chip)) {
         <div
           class="ui-autocomplete-chip"
           [attr.aria-label]="getChipLabel(chip)"
-          [class.ui-autocomplete-chip--focused]="focusedChipIndex() === $index"
           [attr.data-chip-index]="$index"
           [attr.tabindex]="focusedChipIndex() === $index ? 0 : -1"
+          [class.ui-autocomplete-chip--focused]="focusedChipIndex() === $index"
           (keydown)="onChipKeydown($event, $index)"
         >
           @if (selectedItemTemplate()) {
@@ -59,25 +59,25 @@
             <button
               class="ui-autocomplete-chip-remove"
               type="button"
-              (click)="removeChip($index, $event)"
               [attr.aria-label]="
                 i18n.translate('autocomplete.remove-chip', { label: getChipLabel(chip) })
               "
+              (click)="removeChip($index, $event)"
             >
               @if (removeTokenIconTemplate()) {
                 <ng-container *ngTemplateOutlet="removeTokenIconTemplate()" />
               } @else {
                 <svg
-                  class="ui-autocomplete-icon"
                   aria-hidden="true"
+                  class="ui-autocomplete-icon"
+                  fill="none"
                   focusable="false"
+                  height="12"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
                   viewBox="0 0 24 24"
                   width="12"
-                  height="12"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
                 >
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
@@ -99,20 +99,20 @@
     <button
       class="ui-autocomplete-clear"
       type="button"
-      (click)="clear($event)"
       [attr.aria-label]="i18n.translate('autocomplete.clear')"
+      (click)="clear($event)"
     >
       <svg
-        class="ui-autocomplete-icon"
         aria-hidden="true"
+        class="ui-autocomplete-icon"
+        fill="none"
         focusable="false"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-width="2"
         viewBox="0 0 24 24"
         width="16"
-        height="16"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
       >
         <path d="M18 6L6 18M6 6l12 12" />
       </svg>
@@ -123,25 +123,25 @@
     <button
       class="ui-autocomplete-dropdown-btn"
       type="button"
-      [disabled]="isDisabled()"
       [attr.aria-label]="i18n.translate('autocomplete.dropdown')"
+      [disabled]="isDisabled()"
       (click)="onDropdownButtonClick($event)"
     >
       @if (dropdownIconTemplate()) {
         <ng-container *ngTemplateOutlet="dropdownIconTemplate()" />
       } @else {
         <svg
-          class="ui-autocomplete-icon"
           aria-hidden="true"
-          focusable="false"
-          viewBox="0 0 24 24"
-          width="16"
-          height="16"
+          class="ui-autocomplete-icon"
           fill="none"
+          focusable="false"
+          height="16"
           stroke="currentColor"
-          stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="16"
         >
           <path d="M6 9l6 6 6-6" />
         </svg>
@@ -151,7 +151,7 @@
 </div>
 
 <!-- Live region: always in DOM so browser observes changes; announces result count to screen readers -->
-<div class="ui-autocomplete-sr-live" aria-live="polite" aria-atomic="true">
+<div aria-atomic="true" aria-live="polite" class="ui-autocomplete-sr-live">
   {{ resultsAnnouncement() }}
 </div>
 
@@ -160,9 +160,9 @@
     <div
       #panelElement
       class="ui-autocomplete-panel"
-      [id]="listboxId"
-      [attr.role]="listboxRole"
       [attr.aria-label]="listboxLabel()"
+      [attr.role]="listboxRole"
+      [id]="listboxId"
       [style.max-height]="scrollHeight()"
     >
       @if (headerTemplate()) {
@@ -172,7 +172,7 @@
       }
 
       @if (loading()) {
-        <div class="ui-autocomplete-loading" aria-busy="true">
+        <div aria-busy="true" class="ui-autocomplete-loading">
           @if (loadingTemplate()) {
             <ng-container *ngTemplateOutlet="loadingTemplate()" />
           } @else {
@@ -191,7 +191,7 @@
         @for (groupOption of suggestions(); track groupTrackBy($index, groupOption)) {
           @if (groupTemplate()) {
             <!-- Custom group visual header: rendered as aria-hidden sibling outside role="group" -->
-            <div class="ui-autocomplete-option-group-header" aria-hidden="true">
+            <div aria-hidden="true" class="ui-autocomplete-option-group-header">
               <ng-container
                 *ngTemplateOutlet="groupTemplate(); context: { $implicit: groupOption }"
               />
@@ -207,20 +207,20 @@
             @for (option of getGroupChildren(groupOption); track optionTrackBy($index, option)) {
               @let optionIndex = getOptionIndex(option);
               <div
-                [id]="getOptionId(optionIndex)"
-                [attr.role]="optionRole"
-                tabindex="-1"
                 class="ui-autocomplete-option"
-                [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
-                [class.ui-autocomplete-option--selected]="isSelected(option)"
-                [class.ui-autocomplete-option--disabled]="isOptionDisabled(option)"
-                [attr.aria-selected]="isSelected(option) ? 'true' : 'false'"
+                tabindex="-1"
                 [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
-                [attr.aria-setsize]="visibleOptions().length"
                 [attr.aria-posinset]="optionIndex + 1"
-                (mousedown)="$event.preventDefault()"
+                [attr.aria-selected]="isSelected(option) ? 'true' : 'false'"
+                [attr.aria-setsize]="visibleOptions().length"
+                [attr.role]="optionRole"
+                [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
+                [class.ui-autocomplete-option--disabled]="isOptionDisabled(option)"
+                [class.ui-autocomplete-option--selected]="isSelected(option)"
+                [id]="getOptionId(optionIndex)"
                 (click)="selectOption(option, $event)"
                 (keydown.enter)="selectOption(option, $event)"
+                (mousedown)="$event.preventDefault()"
                 (mouseenter)="setActiveIndex(optionIndex)"
               >
                 @if (itemTemplate()) {
@@ -253,20 +253,20 @@
                 ) {
                   @let optionIndex = virtualOptionIndex(localIndex);
                   <div
-                    [id]="getOptionId(optionIndex)"
-                    [attr.role]="optionRole"
-                    tabindex="-1"
                     class="ui-autocomplete-option"
-                    [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
-                    [class.ui-autocomplete-option--selected]="isSelected(option)"
-                    [class.ui-autocomplete-option--disabled]="isOptionDisabled(option)"
-                    [attr.aria-selected]="isSelected(option) ? 'true' : 'false'"
+                    tabindex="-1"
                     [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
-                    [attr.aria-setsize]="visibleOptions().length"
                     [attr.aria-posinset]="optionIndex + 1"
-                    (mousedown)="$event.preventDefault()"
+                    [attr.aria-selected]="isSelected(option) ? 'true' : 'false'"
+                    [attr.aria-setsize]="visibleOptions().length"
+                    [attr.role]="optionRole"
+                    [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
+                    [class.ui-autocomplete-option--disabled]="isOptionDisabled(option)"
+                    [class.ui-autocomplete-option--selected]="isSelected(option)"
+                    [id]="getOptionId(optionIndex)"
                     (click)="selectOption(option, $event)"
                     (keydown.enter)="selectOption(option, $event)"
+                    (mousedown)="$event.preventDefault()"
                     (mouseenter)="setActiveIndex(optionIndex)"
                   >
                     @if (itemTemplate()) {
@@ -288,20 +288,20 @@
             let optionIndex = $index
           ) {
             <div
-              [id]="getOptionId(optionIndex)"
-              [attr.role]="optionRole"
-              tabindex="-1"
               class="ui-autocomplete-option"
-              [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
-              [class.ui-autocomplete-option--selected]="isSelected(option)"
-              [class.ui-autocomplete-option--disabled]="isOptionDisabled(option)"
-              [attr.aria-selected]="isSelected(option) ? 'true' : 'false'"
+              tabindex="-1"
               [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
-              [attr.aria-setsize]="visibleOptions().length"
               [attr.aria-posinset]="optionIndex + 1"
-              (mousedown)="$event.preventDefault()"
+              [attr.aria-selected]="isSelected(option) ? 'true' : 'false'"
+              [attr.aria-setsize]="visibleOptions().length"
+              [attr.role]="optionRole"
+              [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
+              [class.ui-autocomplete-option--disabled]="isOptionDisabled(option)"
+              [class.ui-autocomplete-option--selected]="isSelected(option)"
+              [id]="getOptionId(optionIndex)"
               (click)="selectOption(option, $event)"
               (keydown.enter)="selectOption(option, $event)"
+              (mousedown)="$event.preventDefault()"
               (mouseenter)="setActiveIndex(optionIndex)"
             >
               @if (itemTemplate()) {

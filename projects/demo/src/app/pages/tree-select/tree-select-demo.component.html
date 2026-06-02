@@ -8,11 +8,11 @@
     <app-doc-demo-viewport label="Basic — Single Selection">
       <div demo>
         <ui-lib-tree-select
-          [nodes]="nodes"
-          selectionMode="single"
           placeholder="Select a file..."
-          [(selection)]="singleSelection"
+          selectionMode="single"
           style="max-width: 320px"
+          [nodes]="nodes"
+          [(selection)]="singleSelection"
         />
         @if (singleSelection()) {
           <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--uilib-muted)">
@@ -29,11 +29,11 @@
     <app-doc-demo-viewport label="Multiple Selection">
       <div demo>
         <ui-lib-tree-select
-          [nodes]="nodes"
-          selectionMode="multiple"
           placeholder="Select files..."
-          [(selection)]="multipleSelection"
+          selectionMode="multiple"
           style="max-width: 320px"
+          [nodes]="nodes"
+          [(selection)]="multipleSelection"
         />
         @if (multipleSelection().length > 0) {
           <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--uilib-muted)">
@@ -50,11 +50,11 @@
     <app-doc-demo-viewport label="Checkbox Selection">
       <div demo>
         <ui-lib-tree-select
-          [nodes]="nodes"
-          selectionMode="checkbox"
           placeholder="Select items..."
-          [(selection)]="checkboxSelection"
+          selectionMode="checkbox"
           style="max-width: 320px"
+          [nodes]="nodes"
+          [(selection)]="checkboxSelection"
         />
         @if (checkboxSelection().length > 0) {
           <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--uilib-muted)">
@@ -71,13 +71,13 @@
     <app-doc-demo-viewport label="With Filter">
       <div demo>
         <ui-lib-tree-select
-          [nodes]="nodes"
-          selectionMode="single"
-          [filter]="true"
           filterPlaceholder="Search files..."
           placeholder="Select a file..."
-          [(selection)]="singleSelection"
+          selectionMode="single"
           style="max-width: 320px"
+          [filter]="true"
+          [nodes]="nodes"
+          [(selection)]="singleSelection"
         />
       </div>
       <app-doc-code-example [html]="filterHtml" [typescript]="filterTs" />
@@ -89,21 +89,21 @@
     <app-doc-demo-viewport label="Sizes">
       <div demo style="display: flex; flex-direction: column; gap: 1rem; max-width: 320px">
         <ui-lib-tree-select
-          [nodes]="nodes"
-          size="sm"
           placeholder="Small"
+          size="sm"
+          [nodes]="nodes"
           [(selection)]="sizeSmSelection"
         />
         <ui-lib-tree-select
-          [nodes]="nodes"
-          size="md"
           placeholder="Medium (default)"
+          size="md"
+          [nodes]="nodes"
           [(selection)]="sizeMdSelection"
         />
         <ui-lib-tree-select
-          [nodes]="nodes"
-          size="lg"
           placeholder="Large"
+          size="lg"
+          [nodes]="nodes"
           [(selection)]="sizeLgSelection"
         />
       </div>
@@ -117,23 +117,23 @@
       <div demo style="display: flex; flex-direction: column; gap: 1rem; max-width: 320px">
         <label style="font-size: 0.75rem; color: var(--uilib-muted)">Material</label>
         <ui-lib-tree-select
-          [nodes]="variantNodes"
-          variant="material"
           placeholder="Material variant"
+          variant="material"
+          [nodes]="variantNodes"
           [(selection)]="variantSelections['material']"
         />
         <label style="font-size: 0.75rem; color: var(--uilib-muted)">Bootstrap</label>
         <ui-lib-tree-select
-          [nodes]="variantNodes"
-          variant="bootstrap"
           placeholder="Bootstrap variant"
+          variant="bootstrap"
+          [nodes]="variantNodes"
           [(selection)]="variantSelections['bootstrap']"
         />
         <label style="font-size: 0.75rem; color: var(--uilib-muted)">Minimal</label>
         <ui-lib-tree-select
-          [nodes]="variantNodes"
-          variant="minimal"
           placeholder="Minimal variant"
+          variant="minimal"
+          [nodes]="variantNodes"
           [(selection)]="variantSelections['minimal']"
         />
       </div>
@@ -146,12 +146,12 @@
     <app-doc-demo-viewport label="Show Clear Button">
       <div demo>
         <ui-lib-tree-select
-          [nodes]="nodes"
-          selectionMode="single"
-          [showClear]="true"
           placeholder="Select a file (clearable)..."
-          [(selection)]="clearableSelection"
+          selectionMode="single"
           style="max-width: 320px"
+          [nodes]="nodes"
+          [showClear]="true"
+          [(selection)]="clearableSelection"
         />
       </div>
       <app-doc-code-example [html]="showClearHtml" [typescript]="showClearTs" />
@@ -163,10 +163,10 @@
     <app-doc-demo-viewport label="Disabled">
       <div demo>
         <ui-lib-tree-select
-          [nodes]="nodes"
-          [disabled]="true"
           placeholder="Disabled TreeSelect"
           style="max-width: 320px"
+          [disabled]="true"
+          [nodes]="nodes"
         />
       </div>
       <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
@@ -178,10 +178,10 @@
     <app-doc-demo-viewport label="Loading State">
       <div demo>
         <ui-lib-tree-select
-          [nodes]="nodes"
-          [loading]="true"
           placeholder="Loading..."
           style="max-width: 320px"
+          [loading]="true"
+          [nodes]="nodes"
         />
       </div>
       <app-doc-code-example [html]="loadingHtml" [typescript]="loadingTs" />
@@ -193,12 +193,12 @@
     <app-doc-demo-viewport label="ngModel Binding">
       <div demo>
         <ui-lib-tree-select
-          [nodes]="nodes"
-          selectionMode="single"
           placeholder="Select a file..."
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="ngModelValue"
+          selectionMode="single"
           style="max-width: 320px"
+          [ngModelOptions]="{ standalone: true }"
+          [nodes]="nodes"
+          [(ngModel)]="ngModelValue"
         />
         <pre style="margin-top: 0.5rem; font-size: 0.75rem">{{ ngModelValue | json }}</pre>
       </div>
@@ -210,19 +210,19 @@
   <app-doc-section id="reactive" title="Reactive">
     <app-doc-demo-viewport label="Reactive Forms">
       <div demo>
-        <form [formGroup]="reactiveForm" style="display: flex; flex-direction: column; gap: 1rem">
+        <form style="display: flex; flex-direction: column; gap: 1rem" [formGroup]="reactiveForm">
           <ui-lib-tree-select
-            [nodes]="nodes"
             formControlName="selectedNode"
             placeholder="Select a file..."
             style="max-width: 320px"
+            [nodes]="nodes"
           />
           <ui-lib-tree-select
-            [nodes]="nodes"
-            selectionMode="multiple"
             formControlName="multipleNodes"
             placeholder="Select multiple files..."
+            selectionMode="multiple"
             style="max-width: 320px"
+            [nodes]="nodes"
           />
           <pre style="font-size: 0.75rem">{{ reactiveForm.value | json }}</pre>
         </form>
@@ -250,9 +250,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -261,8 +261,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

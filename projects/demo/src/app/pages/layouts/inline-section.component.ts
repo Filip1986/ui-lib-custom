@@ -1,23 +1,25 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
-import { Button } from 'ui-lib-custom/button';
-import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
-import { INLINE_TOKENS } from 'ui-lib-custom/tokens';
-import type { InlineToken } from 'ui-lib-custom/tokens';
-import type { InlineAlign, InlineJustify } from 'ui-lib-custom/layout';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import type { TabsValue } from 'ui-lib-custom/tabs';
-import { UiLibSelect } from 'ui-lib-custom/select';
 import { CommonModule } from '@angular/common';
+import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
+import { Button } from 'ui-lib-custom/button';
+import type { InlineAlign, InlineJustify } from 'ui-lib-custom/layout';
+import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
+import { Panel } from 'ui-lib-custom/panel';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+import type { InlineToken } from 'ui-lib-custom/tokens';
+import { INLINE_TOKENS } from 'ui-lib-custom/tokens';
+
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for inline layout usage.
  */

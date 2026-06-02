@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+
 import type { ThemeVariant } from 'ui-lib-custom/theme';
 
 /**

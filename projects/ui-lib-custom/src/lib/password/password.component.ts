@@ -1,21 +1,23 @@
+import type { InputSignal, OutputEmitterRef, Signal, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   forwardRef,
   inject,
   input,
   output,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import type { InputSignal, OutputEmitterRef, Signal, WritableSignal } from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
-import { PASSWORD_DEFAULTS } from './password.types';
-import type { PasswordSize, PasswordStrength, PasswordVariant } from './password.types';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { PasswordSize, PasswordStrength, PasswordVariant } from './password.types';
+import { PASSWORD_DEFAULTS } from './password.types';
 
 /** Module-level counter for generating unique IDs across all Password instances. */
 let nextPasswordId: number = 0;

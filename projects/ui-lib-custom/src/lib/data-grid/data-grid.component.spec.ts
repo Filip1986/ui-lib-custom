@@ -1,21 +1,22 @@
+import { DecimalPipe } from '@angular/common';
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+
 import { DataGridComponent } from './data-grid.component';
-import { DataGridColumnComponent } from './data-grid-column.component';
-import { DataGridColumnBodyDirective } from './data-grid-column.component';
 import type {
   DataGridLazyLoadEvent,
   DataGridRowSelectEvent,
   DataGridSortEvent,
 } from './data-grid.types';
-import { DecimalPipe } from '@angular/common';
+import { DataGridColumnComponent } from './data-grid-column.component';
+import { DataGridColumnBodyDirective } from './data-grid-column.component';
 
 // ---------------------------------------------------------------------------
 // Shared test data

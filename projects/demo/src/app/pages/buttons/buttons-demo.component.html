@@ -1,17 +1,17 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Flexible button component with 13 appearances, 9 severities, and orthogonal pill / raised modifiers — all from a single <code>ui-lib-button</code> element."
     docHeader
     title="Button"
     [importCode]="importCode"
-    description="Flexible button component with 13 appearances, 9 severities, and orthogonal pill / raised modifiers — all from a single <code>ui-lib-button</code> element."
   />
 
   <div class="demo-page-header__preview">
-    <div class="buttons-demo__variant-switcher" role="group" aria-label="Select variant">
+    <div aria-label="Select variant" class="buttons-demo__variant-switcher" role="group">
       @for (v of variants; track v) {
         <button
-          type="button"
           class="buttons-demo__variant-btn"
+          type="button"
           [class.buttons-demo__variant-btn--active]="activeVariant() === v"
           (click)="setVariant(v)"
         >
@@ -30,15 +30,15 @@
           Default
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           severity="primary"
+          [variant]="activeVariant()"
           (click)="logEvent('Primary clicked')"
         >
           Primary
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           severity="secondary"
+          [variant]="activeVariant()"
           (click)="logEvent('Secondary clicked')"
         >
           Secondary
@@ -57,9 +57,9 @@
       <div class="buttons-demo__row buttons-demo__row--wrap">
         @for (a of appearances; track a) {
           <ui-lib-button
-            [variant]="activeVariant()"
-            [appearance]="a"
             severity="primary"
+            [appearance]="a"
+            [variant]="activeVariant()"
             (click)="logEvent(a + ' clicked')"
           >
             {{ a }}
@@ -83,9 +83,9 @@
         <div class="buttons-demo__glass-shadow-cell">
           <p class="buttons-demo__glass-shadow-label">Default (warm)</p>
           <ui-lib-button
-            [variant]="activeVariant()"
             appearance="glass-shadow"
             size="lg"
+            [variant]="activeVariant()"
             (click)="logEvent('Glass Shadow clicked')"
           >
             Glass Shadow
@@ -96,13 +96,13 @@
         <div class="buttons-demo__glass-shadow-cell">
           <p class="buttons-demo__glass-shadow-label">Cool gradient</p>
           <ui-lib-button
-            [variant]="activeVariant()"
             appearance="glass-shadow"
             size="lg"
             style="
               --uilib-button-glass-shadow-from: #667eea;
               --uilib-button-glass-shadow-to: #764ba2;
             "
+            [variant]="activeVariant()"
             (click)="logEvent('Glass Shadow cool clicked')"
           >
             Glass Shadow
@@ -113,13 +113,13 @@
         <div class="buttons-demo__glass-shadow-cell">
           <p class="buttons-demo__glass-shadow-label">Mint gradient</p>
           <ui-lib-button
-            [variant]="activeVariant()"
             appearance="glass-shadow"
             size="lg"
             style="
               --uilib-button-glass-shadow-from: #11998e;
               --uilib-button-glass-shadow-to: #38ef7d;
             "
+            [variant]="activeVariant()"
             (click)="logEvent('Glass Shadow mint clicked')"
           >
             Glass Shadow
@@ -130,10 +130,10 @@
         <div class="buttons-demo__glass-shadow-cell">
           <p class="buttons-demo__glass-shadow-label">Pill modifier</p>
           <ui-lib-button
-            [variant]="activeVariant()"
             appearance="glass-shadow"
             size="lg"
             [pill]="true"
+            [variant]="activeVariant()"
             (click)="logEvent('Glass Shadow pill clicked')"
           >
             Glass Shadow
@@ -144,10 +144,10 @@
         <div class="buttons-demo__glass-shadow-cell">
           <p class="buttons-demo__glass-shadow-label">Disabled</p>
           <ui-lib-button
-            [variant]="activeVariant()"
             appearance="glass-shadow"
             size="lg"
             [disabled]="true"
+            [variant]="activeVariant()"
           >
             Glass Shadow
           </ui-lib-button>
@@ -171,9 +171,9 @@
         <div class="buttons-demo__framed-cell">
           <p class="buttons-demo__framed-label">Default</p>
           <ui-lib-button
-            [variant]="activeVariant()"
             appearance="framed"
             size="lg"
+            [variant]="activeVariant()"
             (click)="logEvent('Framed clicked')"
           >
             Button
@@ -184,7 +184,6 @@
         <div class="buttons-demo__framed-cell">
           <p class="buttons-demo__framed-label">Electric</p>
           <ui-lib-button
-            [variant]="activeVariant()"
             appearance="framed"
             size="lg"
             style="
@@ -193,6 +192,7 @@
               --uilib-button-framed-border-color: #ffffff;
               --uilib-button-framed-frame-color: #00d4ff;
             "
+            [variant]="activeVariant()"
             (click)="logEvent('Framed electric clicked')"
           >
             Electric
@@ -203,7 +203,6 @@
         <div class="buttons-demo__framed-cell">
           <p class="buttons-demo__framed-label">Hot Pink</p>
           <ui-lib-button
-            [variant]="activeVariant()"
             appearance="framed"
             size="lg"
             style="
@@ -212,6 +211,7 @@
               --uilib-button-framed-border-color: #ffffff;
               --uilib-button-framed-frame-color: #ff2d78;
             "
+            [variant]="activeVariant()"
             (click)="logEvent('Framed pink clicked')"
           >
             Hot Pink
@@ -222,9 +222,9 @@
         <div class="buttons-demo__framed-cell">
           <p class="buttons-demo__framed-label">Small</p>
           <ui-lib-button
-            [variant]="activeVariant()"
             appearance="framed"
             size="sm"
+            [variant]="activeVariant()"
             (click)="logEvent('Framed small clicked')"
           >
             Small
@@ -235,10 +235,10 @@
         <div class="buttons-demo__framed-cell">
           <p class="buttons-demo__framed-label">Disabled</p>
           <ui-lib-button
-            [variant]="activeVariant()"
             appearance="framed"
             size="lg"
             [disabled]="true"
+            [variant]="activeVariant()"
           >
             Button
           </ui-lib-button>
@@ -260,10 +260,10 @@
             <div class="buttons-demo__row buttons-demo__row--wrap">
               @for (s of severities; track s) {
                 <ui-lib-button
-                  [variant]="activeVariant()"
+                  size="sm"
                   [appearance]="a"
                   [severity]="s"
-                  size="sm"
+                  [variant]="activeVariant()"
                 >
                   {{ s }}
                 </ui-lib-button>
@@ -285,7 +285,7 @@
         @for (s of sizes; track s) {
           <div>
             <p class="buttons-demo__size-label">{{ s }}</p>
-            <ui-lib-button [variant]="activeVariant()" [size]="s" severity="primary">
+            <ui-lib-button severity="primary" [size]="s" [variant]="activeVariant()">
               {{ s }}
             </ui-lib-button>
           </div>
@@ -302,21 +302,21 @@
     </p>
     <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row buttons-demo__row--wrap">
-        <ui-lib-button [variant]="activeVariant()" icon="arrow-left">Back</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" icon="arrow-right" iconPosition="right">
+        <ui-lib-button icon="arrow-left" [variant]="activeVariant()">Back</ui-lib-button>
+        <ui-lib-button icon="arrow-right" iconPosition="right" [variant]="activeVariant()">
           Next
         </ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" icon="user" iconPosition="top">
+        <ui-lib-button icon="user" iconPosition="top" [variant]="activeVariant()">
           Profile
         </ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" icon="user" iconPosition="bottom">
+        <ui-lib-button icon="user" iconPosition="bottom" [variant]="activeVariant()">
           Profile
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
+          ariaLabel="More options"
           icon="more-horizontal"
           [iconOnly]="true"
-          ariaLabel="More options"
+          [variant]="activeVariant()"
         />
       </div>
     </ui-lib-panel>
@@ -330,31 +330,31 @@
     </p>
     <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row buttons-demo__row--wrap">
-        <ui-lib-button [variant]="activeVariant()" [raised]="true" severity="primary">
+        <ui-lib-button severity="primary" [raised]="true" [variant]="activeVariant()">
           Raised
         </ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [pill]="true" severity="primary">
+        <ui-lib-button severity="primary" [pill]="true" [variant]="activeVariant()">
           Pill
         </ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [raised]="true" [pill]="true" severity="primary">
+        <ui-lib-button severity="primary" [pill]="true" [raised]="true" [variant]="activeVariant()">
           Raised + Pill
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
-          [pill]="true"
-          severity="success"
           appearance="outline"
+          severity="success"
+          [pill]="true"
+          [variant]="activeVariant()"
         >
           Outline Pill
         </ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [pill]="true" appearance="ghost">
+        <ui-lib-button appearance="ghost" [pill]="true" [variant]="activeVariant()">
           Ghost Pill
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
-          [pill]="true"
           appearance="soft"
           severity="danger"
+          [pill]="true"
+          [variant]="activeVariant()"
         >
           Soft Pill
         </ui-lib-button>
@@ -370,17 +370,17 @@
     </p>
     <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row">
-        <ui-lib-button [variant]="activeVariant()" [disabled]="true" severity="primary">
+        <ui-lib-button severity="primary" [disabled]="true" [variant]="activeVariant()">
           Disabled
         </ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [loading]="true" severity="primary">
+        <ui-lib-button severity="primary" [loading]="true" [variant]="activeVariant()">
           Loading
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
-          [loading]="true"
-          severity="secondary"
           appearance="outline"
+          severity="secondary"
+          [loading]="true"
+          [variant]="activeVariant()"
         >
           Loading outline
         </ui-lib-button>
@@ -396,23 +396,23 @@
     </p>
     <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row">
-        <ui-lib-button [variant]="activeVariant()" badge="5" severity="primary">
+        <ui-lib-button badge="5" severity="primary" [variant]="activeVariant()">
           Notifications
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           badge="99+"
           badgeSeverity="danger"
           severity="secondary"
+          [variant]="activeVariant()"
         >
           Messages
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
-          badge="1"
-          [iconOnly]="true"
-          icon="mail"
           ariaLabel="Mail"
+          badge="1"
+          icon="mail"
+          [iconOnly]="true"
+          [variant]="activeVariant()"
         />
       </div>
     </ui-lib-panel>
@@ -428,8 +428,8 @@
       <div class="buttons-demo__tactile-grid">
         <ui-lib-button
           appearance="tactile"
-          severity="primary"
           icon="search"
+          severity="primary"
           [variant]="activeVariant()"
           (click)="logEvent('Tactile primary clicked')"
         >
@@ -437,8 +437,8 @@
         </ui-lib-button>
         <ui-lib-button
           appearance="tactile"
-          severity="success"
           icon="check"
+          severity="success"
           [variant]="activeVariant()"
           (click)="logEvent('Tactile success clicked')"
         >
@@ -446,8 +446,8 @@
         </ui-lib-button>
         <ui-lib-button
           appearance="tactile"
-          severity="danger"
           icon="trash"
+          severity="danger"
           [variant]="activeVariant()"
           (click)="logEvent('Tactile danger clicked')"
         >
@@ -455,8 +455,8 @@
         </ui-lib-button>
         <ui-lib-button
           appearance="tactile"
-          severity="warning"
           icon="alert-triangle"
+          severity="warning"
           [variant]="activeVariant()"
           (click)="logEvent('Tactile warning clicked')"
         >
@@ -464,8 +464,8 @@
         </ui-lib-button>
         <ui-lib-button
           appearance="tactile"
-          severity="info"
           icon="info"
+          severity="info"
           [variant]="activeVariant()"
           (click)="logEvent('Tactile info clicked')"
         >
@@ -473,8 +473,8 @@
         </ui-lib-button>
         <ui-lib-button
           appearance="tactile"
-          severity="help"
           icon="help-circle"
+          severity="help"
           [variant]="activeVariant()"
           (click)="logEvent('Tactile help clicked')"
         >
@@ -509,88 +509,88 @@
     <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row buttons-demo__row--wrap">
         <ui-lib-button
-          [variant]="activeVariant()"
           appearance="elevated"
-          severity="primary"
           icon="layers"
+          severity="primary"
+          [variant]="activeVariant()"
           (click)="logEvent('Elevated clicked')"
         >
           Elevated
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           appearance="elevated"
-          severity="success"
           icon="check"
+          severity="success"
+          [variant]="activeVariant()"
           (click)="logEvent('Elevated success clicked')"
         >
           Elevated Success
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           appearance="gradient"
-          severity="primary"
           icon="sparkles"
+          severity="primary"
+          [variant]="activeVariant()"
           (click)="logEvent('Gradient primary clicked')"
         >
           Gradient
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           appearance="gradient"
-          severity="danger"
           icon="flame"
+          severity="danger"
+          [variant]="activeVariant()"
           (click)="logEvent('Gradient danger clicked')"
         >
           Gradient Danger
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           appearance="glass"
-          severity="primary"
           icon="droplets"
+          severity="primary"
+          [variant]="activeVariant()"
           (click)="logEvent('Glass primary clicked')"
         >
           Glass
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           appearance="glass"
           severity="info"
           [pill]="true"
+          [variant]="activeVariant()"
           (click)="logEvent('Glass pill clicked')"
         >
           Glass Pill
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           appearance="neon"
           severity="primary"
+          [variant]="activeVariant()"
           (click)="logEvent('Neon primary clicked')"
         >
           Neon
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           appearance="neon"
           severity="success"
           [pill]="true"
+          [variant]="activeVariant()"
           (click)="logEvent('Neon success clicked')"
         >
           Neon Pill
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           appearance="flat"
           severity="primary"
+          [variant]="activeVariant()"
           (click)="logEvent('Flat primary clicked')"
         >
           Flat
         </ui-lib-button>
         <ui-lib-button
-          [variant]="activeVariant()"
           appearance="flat"
           severity="secondary"
+          [variant]="activeVariant()"
           (click)="logEvent('Flat secondary clicked')"
         >
           Flat Secondary
@@ -610,22 +610,22 @@
           <p class="buttons-demo__size-label">Horizontal</p>
           <ui-lib-button-group>
             <ui-lib-button
-              [variant]="activeVariant()"
               severity="primary"
+              [variant]="activeVariant()"
               (click)="logEvent('Save clicked')"
             >
               Save
             </ui-lib-button>
             <ui-lib-button
-              [variant]="activeVariant()"
               severity="secondary"
+              [variant]="activeVariant()"
               (click)="logEvent('Edit clicked')"
             >
               Edit
             </ui-lib-button>
             <ui-lib-button
-              [variant]="activeVariant()"
               severity="danger"
+              [variant]="activeVariant()"
               (click)="logEvent('Delete clicked')"
             >
               Delete
@@ -651,9 +651,9 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-button
-        [variant]="activeVariant()"
-        [fullWidth]="true"
         severity="primary"
+        [fullWidth]="true"
+        [variant]="activeVariant()"
         (click)="logEvent('Full width clicked')"
       >
         Full Width Button
@@ -721,27 +721,27 @@
       </p>
       <div class="buttons-demo__row">
         <ui-lib-button
-          [variant]="activeVariant()"
-          icon="trash"
-          [iconOnly]="true"
-          severity="danger"
           ariaLabel="Delete item"
+          icon="trash"
+          severity="danger"
+          [iconOnly]="true"
+          [variant]="activeVariant()"
           (click)="logEvent('Delete item (icon-only) clicked')"
         />
         <ui-lib-button
-          [variant]="activeVariant()"
-          icon="edit"
-          [iconOnly]="true"
-          severity="info"
           ariaLabel="Edit item"
+          icon="edit"
+          severity="info"
+          [iconOnly]="true"
+          [variant]="activeVariant()"
           (click)="logEvent('Edit item (icon-only) clicked')"
         />
         <ui-lib-button
-          [variant]="activeVariant()"
-          icon="save"
-          [iconOnly]="true"
-          severity="success"
           ariaLabel="Save item"
+          icon="save"
+          severity="success"
+          [iconOnly]="true"
+          [variant]="activeVariant()"
           (click)="logEvent('Save item (icon-only) clicked')"
         />
       </div>
@@ -780,9 +780,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -790,8 +790,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

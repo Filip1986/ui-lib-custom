@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { FloatLabelComponent } from './float-label';
+import { TestBed } from '@angular/core/testing';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { FloatLabelComponent } from './float-label';
 
 declare const require: (moduleName: string) => unknown;
 

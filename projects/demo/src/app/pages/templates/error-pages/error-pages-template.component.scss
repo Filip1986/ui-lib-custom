@@ -6,41 +6,41 @@
 }
 
 .error-chip {
-  padding: 0.375rem 0.875rem;
+  background: var(--uilib-surface-alt);
   border: 1px solid var(--uilib-border);
   border-radius: 999px;
+  color: var(--uilib-page-fg);
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--uilib-page-fg);
-  background: var(--uilib-surface-alt);
+  padding: 0.375rem 0.875rem;
 }
 
 /* ── Tab bar ────────────────────────────────────────────────────────────────── */
 .error-tab-bar {
+  border-bottom: 1px solid var(--uilib-border);
   display: flex;
   gap: 0.25rem;
   margin-bottom: 0;
-  border-bottom: 1px solid var(--uilib-border);
 
   button {
-    padding: 0.5rem 1rem;
-    border: none;
     background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--uilib-muted);
     cursor: pointer;
     font-size: 0.875rem;
-    color: var(--uilib-muted);
-    border-bottom: 2px solid transparent;
     margin-bottom: -1px;
+    padding: 0.5rem 1rem;
     transition: all 0.15s;
 
     &:hover {
-      color: var(--uilib-page-fg);
       background: var(--uilib-surface-alt);
+      color: var(--uilib-page-fg);
     }
 
     &.active {
-      color: var(--uilib-color-primary-600);
       border-bottom-color: var(--uilib-color-primary-600);
+      color: var(--uilib-color-primary-600);
       font-weight: 600;
     }
   }
@@ -48,54 +48,54 @@
 
 /* ── Preview area ───────────────────────────────────────────────────────────── */
 .error-preview-area {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 3rem 1rem;
   background: var(--uilib-surface-alt);
   border: 1px solid var(--uilib-border);
-  border-top: none;
   border-radius: 0 0 var(--uilib-radius-lg) var(--uilib-radius-lg);
+  border-top: none;
+  display: flex;
+  justify-content: center;
   min-height: 360px;
+  padding: 3rem 1rem;
 }
 
 /* ── Error page ─────────────────────────────────────────────────────────────── */
 .error-page {
-  text-align: center;
   max-width: 480px;
+  text-align: center;
   width: 100%;
 }
 
 /* Illustration */
 .error-illustration {
-  margin: 0 auto 1.5rem;
-  position: relative;
+  align-items: center;
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
+  margin: 0 auto 1.5rem;
+  position: relative;
 }
 
 .error-code {
-  font-size: 5rem;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -2px;
   background: linear-gradient(
     135deg,
     var(--uilib-color-primary-600),
     var(--uilib-color-primary-700)
   );
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  -webkit-text-fill-color: transparent;
 }
 
 .error-illustration--500 .error-code,
 .error-illustration--403 .error-code {
   background: linear-gradient(135deg, #dc2626, #b91c1c);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .error-dots {
@@ -104,10 +104,10 @@
   margin-top: 0.25rem;
 
   span {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
     background: var(--uilib-border);
+    border-radius: 999px;
+    height: 8px;
+    width: 8px;
 
     &:nth-child(2) {
       background: color-mix(in srgb, var(--uilib-color-primary-600) 50%, transparent);
@@ -123,54 +123,59 @@
   margin-top: 0.5rem;
 
   i {
-    font-size: 1.75rem;
     color: #dc2626;
+    font-size: 1.75rem;
     opacity: 0.85;
   }
 }
 
 /* Text */
 .error-title {
-  margin: 0 0 0.75rem;
+  color: var(--uilib-page-fg);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--uilib-page-fg);
+  margin: 0 0 0.75rem;
 }
 
 .error-message {
-  margin: 0 0 1.5rem;
-  font-size: 0.875rem;
   color: var(--uilib-muted);
+  font-size: 0.875rem;
   line-height: 1.6;
+  margin: 0 0 1.5rem;
 }
 
 .error-incident {
-  margin-top: 1.25rem;
-  font-size: 0.78rem;
   color: var(--uilib-muted);
+  font-size: 0.78rem;
+  margin-top: 1.25rem;
 
   code {
-    font-family: monospace;
     background: var(--uilib-surface);
     border: 1px solid var(--uilib-border);
-    padding: 0.1rem 0.4rem;
     border-radius: var(--uilib-radius-sm);
+    font-family: monospace;
     font-size: 0.78rem;
+    padding: 0.1rem 0.4rem;
   }
 }
 
 /* Actions */
 .error-actions {
   display: flex;
-  justify-content: center;
-  gap: 0.75rem;
   flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
 }
 
 /* ── Download CTA ───────────────────────────────────────────────────────────── */
 .error-download-cta {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 1.25rem;
-  flex-wrap: wrap;
+}
+@media (prefers-reduced-motion: reduce) {
+  button {
+    /* TODO: set transition / animation to none */
+  }
 }

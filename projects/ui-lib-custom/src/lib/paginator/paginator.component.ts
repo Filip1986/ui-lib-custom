@@ -1,17 +1,19 @@
+import type { InputSignal, ModelSignal, OutputEmitterRef, Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   inject,
   input,
   model,
   output,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, ModelSignal, OutputEmitterRef, Signal } from '@angular/core';
-import type { PaginatorPageEvent, PaginatorSize, PaginatorVariant } from './paginator.types';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { PaginatorPageEvent, PaginatorSize, PaginatorVariant } from './paginator.types';
 
 let nextPaginatorId: number = 0;
 

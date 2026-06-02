@@ -1,32 +1,32 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Dropdown component with search, multi-select, and templates. Use the controls to see live changes."
     docHeader
     title="Select"
     [importCode]="importCode"
-    description="Dropdown component with search, multi-select, and templates. Use the controls to see live changes."
   />
 
   <app-select-basic-example />
   <app-doc-code-example
     [html]="selectExampleHtml"
-    [typescript]="selectExampleTs"
     [showLineNumbers]="true"
+    [typescript]="selectExampleTs"
   />
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="playground" label="Playground" />
-      <ui-lib-tab value="variants" label="Variants" />
-      <ui-lib-tab value="edge-cases" label="Edge Cases" />
-      <ui-lib-tab value="api-reference" label="API Reference" />
-      <ui-lib-tab value="usage" label="Usage" />
-      <ui-lib-tab value="performance" label="Performance" />
-      <ui-lib-tab value="accessibility" label="Accessibility" />
+      <ui-lib-tab label="Playground" value="playground" />
+      <ui-lib-tab label="Variants" value="variants" />
+      <ui-lib-tab label="Edge Cases" value="edge-cases" />
+      <ui-lib-tab label="API Reference" value="api-reference" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="Performance" value="performance" />
+      <ui-lib-tab label="Accessibility" value="accessibility" />
     </ui-lib-tabs>
   </div>
 
@@ -41,10 +41,10 @@
             @for (v of variants; track v) {
               <ui-lib-button
                 class="control-chip"
-                size="sm"
-                [variant]="'minimal'"
-                [appearance]="variant() === v ? 'solid' : 'ghost'"
                 color="primary"
+                size="sm"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                [variant]="'minimal'"
                 (click)="setVariant(v)"
                 >{{ v }}</ui-lib-button
               >
@@ -106,8 +106,8 @@
         <div class="control">
           <span class="control-label">Placeholder</span>
           <input
-            type="text"
             aria-label="Placeholder text"
+            type="text"
             [value]="placeholder()"
             (input)="placeholder.set($any($event.target).value)"
           />
@@ -120,28 +120,28 @@
         <div class="viewport-controls">
           <div class="preset-buttons">
             @for (preset of viewportPresets; track preset.key) {
-              <ui-lib-button size="sm" appearance="ghost" (click)="setViewportPreset(preset)">{{
+              <ui-lib-button appearance="ghost" size="sm" (click)="setViewportPreset(preset)">{{
                 preset.label
               }}</ui-lib-button>
             }
             <div class="custom">
               <span class="control-label">Custom</span>
               <input
-                type="number"
-                min="200"
-                max="2000"
                 aria-label="Custom viewport width in pixels"
+                max="2000"
+                min="200"
+                type="number"
                 [ngModel]="viewportCustomWidth()"
                 (ngModelChange)="setViewportCustomWidth($event)"
               />
-              <ui-lib-button size="sm" appearance="ghost" (click)="applyViewportCustom()"
+              <ui-lib-button appearance="ghost" size="sm" (click)="applyViewportCustom()"
                 >Apply</ui-lib-button
               >
             </div>
           </div>
           <div class="controls">
             <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-            <ui-lib-button size="sm" appearance="ghost" (click)="rotateViewport()"
+            <ui-lib-button appearance="ghost" size="sm" (click)="rotateViewport()"
               >Rotate</ui-lib-button
             >
           </div>
@@ -151,24 +151,24 @@
       <ui-lib-panel variant="minimal">
         <div class="density-controls">
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('default')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'default'"
+            (click)="setViewportDensity('default')"
             >Default</ui-lib-button
           >
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('comfortable')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'comfortable'"
+            (click)="setViewportDensity('comfortable')"
             >Comfortable</ui-lib-button
           >
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('compact')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'compact'"
+            (click)="setViewportDensity('compact')"
             >Compact</ui-lib-button
           >
         </div>
@@ -180,14 +180,14 @@
         <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
           <ui-lib-select
             label="Options"
-            [options]="options"
-            [variant]="variant()"
-            [searchable]="searchable()"
-            [multiple]="multiple()"
             [disabled]="disabled()"
             [loading]="loading()"
-            [placeholder]="placeholder()"
+            [multiple]="multiple()"
             [ngModel]="value()"
+            [options]="options"
+            [placeholder]="placeholder()"
+            [searchable]="searchable()"
+            [variant]="variant()"
             (ngModelChange)="value.set($event)"
           />
 
@@ -205,33 +205,33 @@
         <div material>
           <ui-lib-select
             label="Options"
-            [options]="options"
             variant="material"
-            [searchable]="searchable()"
             [multiple]="multiple()"
+            [options]="options"
             [placeholder]="placeholder()"
+            [searchable]="searchable()"
           />
         </div>
 
         <div bootstrap>
           <ui-lib-select
             label="Options"
-            [options]="options"
             variant="bootstrap"
-            [searchable]="searchable()"
             [multiple]="multiple()"
+            [options]="options"
             [placeholder]="placeholder()"
+            [searchable]="searchable()"
           />
         </div>
 
         <div minimal>
           <ui-lib-select
             label="Options"
-            [options]="options"
             variant="minimal"
-            [searchable]="searchable()"
             [multiple]="multiple()"
+            [options]="options"
             [placeholder]="placeholder()"
+            [searchable]="searchable()"
           />
         </div>
       </app-variant-comparison>
@@ -251,7 +251,7 @@
           <p class="demo-edge-case__desc">
             When <code>options</code> is an empty array the panel shows a "No results" message.
           </p>
-          <ui-lib-select label="Country" [options]="emptyOptions" placeholder="Choose a country" />
+          <ui-lib-select label="Country" placeholder="Choose a country" [options]="emptyOptions" />
         </div>
 
         <div class="demo-edge-case">
@@ -262,11 +262,11 @@
           </p>
           <ui-lib-select
             label="Required field"
-            [options]="options"
-            [invalid]="true"
-            [required]="true"
             placeholder="Must be selected"
+            [invalid]="true"
             [ngModel]="invalidValue()"
+            [options]="options"
+            [required]="true"
             (ngModelChange)="invalidValue.set($event)"
           />
           <p class="demo-edge-case__hint">
@@ -282,9 +282,9 @@
           </p>
           <ui-lib-select
             label="Large list"
+            placeholder="Search 150 options…"
             [options]="largeOptions"
             [searchable]="true"
-            placeholder="Search 150 options…"
           />
         </div>
       </div>
@@ -299,7 +299,7 @@
 
   @if (activeTab() === 'usage') {
     <ui-lib-panel variant="minimal">
-      <app-doc-code-example [html]="usageHtml" [typescript]="usageTs" [showLineNumbers]="true" />
+      <app-doc-code-example [html]="usageHtml" [showLineNumbers]="true" [typescript]="usageTs" />
     </ui-lib-panel>
   }
 
@@ -345,9 +345,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -355,8 +355,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

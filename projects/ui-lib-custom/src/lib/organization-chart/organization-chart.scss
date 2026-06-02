@@ -43,19 +43,19 @@
     --uilib-org-chart-node-shadow: none;
     --uilib-org-chart-node-selected-shadow: none;
     --uilib-org-chart-toggle-shadow: none;
+    align-items: center;
+    animation: var(--uilib-org-chart-mount-animation);
 
     display: flex;
-    animation: var(--uilib-org-chart-mount-animation);
     flex-direction: column;
-    align-items: center;
     overflow: auto;
 
     // ─── Root wrapper ─────────────────────────────────────────────────────────
     .uilib-org-chart-root {
+      align-items: flex-start;
       display: flex;
       gap: var(--uilib-org-chart-gap);
       justify-content: center;
-      align-items: flex-start;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -63,30 +63,30 @@
 
     // ─── Node wrapper (host of OrganizationChartNodeComponent) ───────────────
     .uilib-org-chart-node-wrapper {
+      align-items: center;
       display: flex;
       flex-direction: column;
-      align-items: center;
     }
 
     // ─── Node cell ────────────────────────────────────────────────────────────
     .uilib-org-chart-node-cell {
-      position: relative;
-      display: inline-flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-width: var(--uilib-org-chart-node-min-width);
-      padding: var(--uilib-org-chart-node-padding);
       background: var(--uilib-org-chart-node-bg);
       border: var(--uilib-org-chart-node-border);
       border-radius: var(--uilib-org-chart-node-border-radius);
-      color: var(--uilib-org-chart-node-color);
-      text-align: center;
-      white-space: nowrap;
-      transition: var(--uilib-org-chart-node-transition);
-      outline: none;
 
       box-shadow: var(--uilib-org-chart-node-shadow);
+      color: var(--uilib-org-chart-node-color);
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: var(--uilib-org-chart-node-min-width);
+      outline: none;
+      padding: var(--uilib-org-chart-node-padding);
+      position: relative;
+      text-align: center;
+      transition: var(--uilib-org-chart-node-transition);
+      white-space: nowrap;
 
       &:focus-visible {
         box-shadow: var(--uilib-org-chart-focus-shadow);
@@ -103,8 +103,8 @@
       &--selected {
         background: var(--uilib-org-chart-node-selected-bg);
         border-color: var(--uilib-org-chart-node-selected-border);
-        color: var(--uilib-org-chart-node-selected-color);
         box-shadow: var(--uilib-org-chart-node-selected-shadow);
+        color: var(--uilib-org-chart-node-selected-color);
       }
     }
 
@@ -115,31 +115,31 @@
 
     // ─── Toggle button ────────────────────────────────────────────────────────
     .uilib-org-chart-toggle-btn {
-      position: absolute;
-      bottom: calc(var(--uilib-org-chart-toggle-size) / -2);
-      left: 50%;
-      transform: translateX(-50%);
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: var(--uilib-org-chart-toggle-size);
-      height: var(--uilib-org-chart-toggle-size);
-      padding: 0;
       background: var(--uilib-org-chart-toggle-bg);
       border: var(--uilib-org-chart-toggle-border);
       border-radius: var(--uilib-org-chart-toggle-radius);
+      bottom: calc(var(--uilib-org-chart-toggle-size) / -2);
+
+      box-shadow: var(--uilib-org-chart-toggle-shadow);
       color: var(--uilib-org-chart-toggle-color);
       cursor: pointer;
+      display: inline-flex;
       font-size: var(--uilib-org-chart-toggle-font-size);
+      height: var(--uilib-org-chart-toggle-size);
+      justify-content: center;
+      left: 50%;
       line-height: 1;
-      z-index: 1;
       outline: none;
+      padding: 0;
+      position: absolute;
+      transform: translateX(-50%);
+      width: var(--uilib-org-chart-toggle-size);
+      z-index: 1;
 
       &:hover {
         background: var(--uilib-org-chart-node-hover-bg);
       }
-
-      box-shadow: var(--uilib-org-chart-toggle-shadow);
 
       &:focus-visible {
         box-shadow: var(--uilib-org-chart-focus-shadow);
@@ -148,8 +148,8 @@
 
     .uilib-org-chart-toggle-icon {
       display: inline-block;
-      transition: transform var(--uilib-org-chart-toggle-transition);
       transform: rotate(0deg);
+      transition: transform var(--uilib-org-chart-toggle-transition);
 
       &--expanded {
         transform: rotate(180deg);
@@ -160,16 +160,16 @@
 
     // Vertical line from node cell down to the horizontal children bar
     .uilib-org-chart-connector-down {
-      width: var(--uilib-org-chart-connector-width);
-      height: var(--uilib-org-chart-connector-height);
       background: var(--uilib-org-chart-connector-color);
+      height: var(--uilib-org-chart-connector-height);
       margin-block-start: calc(var(--uilib-org-chart-toggle-size) / 2);
+      width: var(--uilib-org-chart-connector-width);
     }
 
     // Row that holds all child columns
     .uilib-org-chart-children-row {
-      display: flex;
       align-items: flex-start;
+      display: flex;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -177,15 +177,15 @@
 
     // Each child column: contributes the horizontal bar segment + vertical drop
     .uilib-org-chart-child-col {
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 0 var(--uilib-org-chart-gap);
-      list-style: none;
 
       // Horizontal bar drawn via top border
       border-top: var(--uilib-org-chart-connector-width) solid
         var(--uilib-org-chart-connector-color);
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      padding: 0 var(--uilib-org-chart-gap);
 
       // First child: no left border (bar starts at center)
       &--first {
@@ -217,9 +217,9 @@
 
     // Vertical connector from horizontal bar down to child node
     .uilib-org-chart-connector-up {
-      width: var(--uilib-org-chart-connector-width);
-      height: var(--uilib-org-chart-connector-height);
       background: var(--uilib-org-chart-connector-color);
+      height: var(--uilib-org-chart-connector-height);
+      width: var(--uilib-org-chart-connector-width);
     }
 
     // ─── Variant: Material ────────────────────────────────────────────────────

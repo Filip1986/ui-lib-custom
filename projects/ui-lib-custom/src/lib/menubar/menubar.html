@@ -8,45 +8,45 @@
   <button
     class="ui-lib-menubar__toggle"
     type="button"
+    [attr.aria-controls]="rootListId"
     [attr.aria-expanded]="mobileMenuOpen() ? 'true' : 'false'"
     [attr.aria-label]="i18n.translate('menubar.toggle')"
-    [attr.aria-controls]="rootListId"
     (click)="toggleMobileMenu()"
   >
-    <span class="ui-lib-menubar__toggle-bar" aria-hidden="true"></span>
-    <span class="ui-lib-menubar__toggle-bar" aria-hidden="true"></span>
-    <span class="ui-lib-menubar__toggle-bar" aria-hidden="true"></span>
+    <span aria-hidden="true" class="ui-lib-menubar__toggle-bar"></span>
+    <span aria-hidden="true" class="ui-lib-menubar__toggle-bar"></span>
+    <span aria-hidden="true" class="ui-lib-menubar__toggle-bar"></span>
   </button>
 
   <!-- Root navigation list -->
   <ul
     class="ui-lib-menubar__root-list"
-    [class.ui-lib-menubar__root-list--open]="mobileMenuOpen()"
-    [attr.id]="rootListId"
     role="menubar"
+    [attr.id]="rootListId"
+    [class.ui-lib-menubar__root-list--open]="mobileMenuOpen()"
   >
     @for (item of visibleItems(); track $index) {
       @if (item.separator) {
-        <li class="ui-lib-menubar__root-separator" role="separator" aria-hidden="true"></li>
+        <li aria-hidden="true" class="ui-lib-menubar__root-separator" role="separator"></li>
       } @else {
-        <li [class]="getRootItemClasses(item, $index)" role="none">
+        <li role="none" [class]="getRootItemClasses(item, $index)">
           @if (item.url && !item.items?.length) {
             <a
               class="ui-lib-menubar__root-link"
-              [href]="item.url"
-              [attr.target]="item.target || null"
               role="menuitem"
               [attr.aria-disabled]="item.disabled ? 'true' : null"
-              [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
               [attr.aria-expanded]="
                 item.items?.length ? (isPanelOpen($index) ? 'true' : 'false') : null
               "
+              [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
               [attr.tabindex]="getRootTabIndex(item, $index)"
+              [attr.target]="item.target || null"
+              [href]="item.url"
               (click)="onRootItemClick($event, item, $index)"
               (keydown)="onRootItemKeyDown($event, item, $index)"
             >
               @if (item.icon) {
-                <span class="ui-lib-menubar__root-icon {{ item.icon }}" aria-hidden="true"></span>
+                <span aria-hidden="true" class="ui-lib-menubar__root-icon {{ item.icon }}"></span>
               }
               @if (item.label) {
                 <span class="ui-lib-menubar__root-label">{{ item.label }}</span>
@@ -57,22 +57,22 @@
               class="ui-lib-menubar__root-link"
               role="menuitem"
               [attr.aria-disabled]="item.disabled ? 'true' : null"
-              [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
               [attr.aria-expanded]="
                 item.items?.length ? (isPanelOpen($index) ? 'true' : 'false') : null
               "
+              [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
               [attr.tabindex]="getRootTabIndex(item, $index)"
               (click)="onRootItemClick($event, item, $index)"
               (keydown)="onRootItemKeyDown($event, item, $index)"
             >
               @if (item.icon) {
-                <span class="ui-lib-menubar__root-icon {{ item.icon }}" aria-hidden="true"></span>
+                <span aria-hidden="true" class="ui-lib-menubar__root-icon {{ item.icon }}"></span>
               }
               @if (item.label) {
                 <span class="ui-lib-menubar__root-label">{{ item.label }}</span>
               }
               @if (item.items?.length) {
-                <span class="ui-lib-menubar__root-caret" aria-hidden="true"></span>
+                <span aria-hidden="true" class="ui-lib-menubar__root-caret"></span>
               }
             </a>
           }
@@ -82,8 +82,8 @@
               <ui-lib-menubar-sub
                 [items]="item.items!"
                 [level]="1"
-                (itemActivated)="onItemActivated($event)"
                 (escapePanel)="onSubMenuEscape($index)"
+                (itemActivated)="onItemActivated($event)"
               />
             </div>
           }

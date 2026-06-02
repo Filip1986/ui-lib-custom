@@ -1,26 +1,27 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
   computed,
   inject,
   input,
-  signal,
   type InputSignal,
   type Signal,
+  signal,
   type WritableSignal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ThemeConfigService, ThemeEditorService, ThemePresetService } from 'ui-lib-custom/theme';
-import type {
-  ThemePreset,
-  ThemeVariant,
-  ThemeShape,
-  ThemeMode,
-  ThemeDensity,
-} from 'ui-lib-custom/theme';
+
 import { Button } from 'ui-lib-custom/button';
 import { UiLibInput } from 'ui-lib-custom/input';
+import type {
+  ThemeDensity,
+  ThemeMode,
+  ThemePreset,
+  ThemeShape,
+  ThemeVariant,
+} from 'ui-lib-custom/theme';
+import { ThemeConfigService, ThemeEditorService, ThemePresetService } from 'ui-lib-custom/theme';
 
 interface ToggleOption<T> {
   label: string;

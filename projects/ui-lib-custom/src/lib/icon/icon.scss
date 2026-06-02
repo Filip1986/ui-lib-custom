@@ -1,10 +1,10 @@
 @layer uilib.components {
   ui-lib-icon.ui-lib-icon {
-    display: inline-flex;
     align-items: center;
+    color: var(--uilib-icon-color, currentColor);
+    display: inline-flex;
     justify-content: center;
     line-height: 1;
-    color: var(--uilib-icon-color, currentColor);
     transition: var(--uilib-icon-transition, 150ms ease);
   }
 

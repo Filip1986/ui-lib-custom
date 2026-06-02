@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import { Card } from 'ui-lib-custom/card';
 
 /**

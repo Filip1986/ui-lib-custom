@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+
 import type { PanelMenuItem } from './panel-menu.types';
 
 /**

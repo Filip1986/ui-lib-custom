@@ -4,11 +4,11 @@
 
 .demo-radio-fieldset {
   border: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin: 0;
+  padding: 0;
 }
 
 .demo-radio-group {
@@ -18,25 +18,25 @@
 }
 
 .demo-radio-hint {
-  margin: 0;
-  font-size: 0.85rem;
   color: var(--uilib-muted, #6b7280);
+  font-size: 0.85rem;
+  margin: 0;
 }
 
 // ---- Variant comparison rows ---------------------------------------
 
 .demo-radio-variant-row {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 1.5rem;
 }
 
 .demo-radio-variant-label {
+  color: var(--uilib-muted, #6b7280);
+  flex-shrink: 0;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--uilib-muted, #6b7280);
-  text-transform: uppercase;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
   width: 5rem;
-  flex-shrink: 0;
 }

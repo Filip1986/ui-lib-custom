@@ -1,16 +1,16 @@
 <button
   type="button"
-  [class]="buttonClasses()"
   [attr.aria-busy]="loading() ? 'true' : null"
   [attr.aria-disabled]="isDisabled() ? 'true' : null"
   [attr.aria-label]="ariaLabelResolved()"
+  [class]="buttonClasses()"
   [disabled]="isDisabled()"
 >
   <ui-lib-icon
+    aria-hidden="true"
+    class="ui-lib-icon-button__icon"
     [name]="resolvedIconName()"
     [size]="iconSize()"
     [variant]="variant()"
-    class="ui-lib-icon-button__icon"
-    aria-hidden="true"
   />
 </button>

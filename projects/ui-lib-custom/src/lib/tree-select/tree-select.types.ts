@@ -5,7 +5,7 @@ import type {
   TreeNodeSelectEvent,
 } from 'ui-lib-custom/tree';
 
-export type { TreeNode, TreeNodeSelectEvent, TreeNodeExpandEvent, TreeNodeCollapseEvent };
+export type { TreeNode, TreeNodeCollapseEvent, TreeNodeExpandEvent, TreeNodeSelectEvent };
 
 /** Design variant applied to the TreeSelect component. */
 export type TreeSelectVariant = 'material' | 'bootstrap' | 'minimal';

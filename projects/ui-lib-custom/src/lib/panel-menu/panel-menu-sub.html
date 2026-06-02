@@ -1,4 +1,4 @@
-<ul class="ui-lib-panel-menu__sub-list" [style.--pm-depth]="depth()" role="menu">
+<ul class="ui-lib-panel-menu__sub-list" role="menu" [style.--pm-depth]="depth()">
   @for (item of visibleItems(); track item.id ?? item.label ?? $index) {
     @if (item.separator) {
       <!-- Separator -->
@@ -7,41 +7,41 @@
       <!-- Expandable sub-group -->
       <li
         class="ui-lib-panel-menu__sub-item ui-lib-panel-menu__sub-item--has-children"
+        role="none"
         [class.ui-lib-panel-menu__sub-item--disabled]="item.disabled"
         [class.ui-lib-panel-menu__sub-item--expanded]="isItemExpanded($index)"
-        role="none"
       >
         <button
-          type="button"
           class="ui-lib-panel-menu__sub-header"
-          [class.ui-lib-panel-menu__sub-header--expanded]="isItemExpanded($index)"
           role="menuitem"
-          [attr.aria-haspopup]="popupRole"
-          [attr.aria-expanded]="isItemExpanded($index) ? 'true' : 'false'"
+          type="button"
           [attr.aria-disabled]="item.disabled ? 'true' : null"
+          [attr.aria-expanded]="isItemExpanded($index) ? 'true' : 'false'"
+          [attr.aria-haspopup]="popupRole"
+          [class.ui-lib-panel-menu__sub-header--expanded]="isItemExpanded($index)"
           [disabled]="item.disabled ? true : null"
           (click)="onToggle($event, item, $index)"
           (keydown)="onItemKeyDown($event, item, $index, true)"
         >
           @if (item.icon) {
-            <span class="ui-lib-panel-menu__sub-icon {{ item.icon }}" aria-hidden="true"></span>
+            <span aria-hidden="true" class="ui-lib-panel-menu__sub-icon {{ item.icon }}"></span>
           }
           <span class="ui-lib-panel-menu__sub-label">{{ item.label }}</span>
-          <span class="ui-lib-panel-menu__sub-toggle" aria-hidden="true"></span>
+          <span aria-hidden="true" class="ui-lib-panel-menu__sub-toggle"></span>
         </button>
 
         <!-- Nested sub-list (always in DOM, CSS controls visibility for animation) -->
         <div
           class="ui-lib-panel-menu__sub-content"
-          [class.ui-lib-panel-menu__sub-content--visible]="isItemExpanded($index)"
           [attr.aria-hidden]="!isItemExpanded($index) ? 'true' : null"
           [attr.inert]="!isItemExpanded($index) ? true : null"
+          [class.ui-lib-panel-menu__sub-content--visible]="isItemExpanded($index)"
         >
           <div class="ui-lib-panel-menu__sub-content-inner">
             <ui-lib-panel-menu-sub
+              [depth]="depth() + 1"
               [items]="item.items"
               [parentKey]="getItemKey($index)"
-              [depth]="depth() + 1"
             />
           </div>
         </div>
@@ -50,27 +50,27 @@
       <!-- Leaf item -->
       <li
         class="ui-lib-panel-menu__sub-item"
-        [class.ui-lib-panel-menu__sub-item--disabled]="item.disabled"
         role="none"
+        [class.ui-lib-panel-menu__sub-item--disabled]="item.disabled"
       >
         @if (item.url) {
           <a
             class="ui-lib-panel-menu__sub-link"
+            role="menuitem"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            [attr.tabindex]="item.disabled ? '-1' : '0'"
+            [attr.target]="item.target || null"
             [class]="
               item.styleClass
                 ? 'ui-lib-panel-menu__sub-link ' + item.styleClass
                 : 'ui-lib-panel-menu__sub-link'
             "
-            role="menuitem"
             [href]="item.url"
-            [attr.target]="item.target || null"
-            [attr.aria-disabled]="item.disabled ? 'true' : null"
-            [attr.tabindex]="item.disabled ? '-1' : '0'"
             (click)="onActivate($event, item)"
             (keydown)="onItemKeyDown($event, item, $index, false)"
           >
             @if (item.icon) {
-              <span class="ui-lib-panel-menu__sub-icon {{ item.icon }}" aria-hidden="true"></span>
+              <span aria-hidden="true" class="ui-lib-panel-menu__sub-icon {{ item.icon }}"></span>
             }
             @if (item.label) {
               <span class="ui-lib-panel-menu__sub-label">{{ item.label }}</span>
@@ -79,19 +79,19 @@
         } @else {
           <a
             class="ui-lib-panel-menu__sub-link"
+            role="menuitem"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            [attr.tabindex]="item.disabled ? '-1' : '0'"
             [class]="
               item.styleClass
                 ? 'ui-lib-panel-menu__sub-link ' + item.styleClass
                 : 'ui-lib-panel-menu__sub-link'
             "
-            role="menuitem"
-            [attr.aria-disabled]="item.disabled ? 'true' : null"
-            [attr.tabindex]="item.disabled ? '-1' : '0'"
             (click)="onActivate($event, item)"
             (keydown)="onItemKeyDown($event, item, $index, false)"
           >
             @if (item.icon) {
-              <span class="ui-lib-panel-menu__sub-icon {{ item.icon }}" aria-hidden="true"></span>
+              <span aria-hidden="true" class="ui-lib-panel-menu__sub-icon {{ item.icon }}"></span>
             }
             @if (item.label) {
               <span class="ui-lib-panel-menu__sub-label">{{ item.label }}</span>

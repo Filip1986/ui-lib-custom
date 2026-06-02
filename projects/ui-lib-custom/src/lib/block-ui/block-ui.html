@@ -2,12 +2,12 @@
   <ng-content />
 </div>
 <div
+  aria-live="polite"
   class="ui-lib-block-ui__mask"
+  role="status"
+  [attr.aria-hidden]="blocked() ? null : 'true'"
   [class.ui-lib-block-ui__mask--visible]="blocked()"
   [style.z-index]="maskZIndex()"
-  [attr.aria-hidden]="blocked() ? null : 'true'"
-  role="status"
-  aria-live="polite"
 >
   <ng-content select="[blockTemplate]" />
 </div>

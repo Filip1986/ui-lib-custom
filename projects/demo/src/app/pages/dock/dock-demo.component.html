@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A macOS-style icon bar with a hover magnification effect. Items scale up smoothly when hovered, with neighbouring items receiving a proportional cascade. Supports four positions (bottom, top, left, right), three design variants, and three size tokens."
     docHeader
     title="Dock"
     [importCode]="importCode"
-    description="A macOS-style icon bar with a hover magnification effect. Items scale up smoothly when hovered, with neighbouring items receiving a proportional cascade. Supports four positions (bottom, top, left, right), three design variants, and three size tokens."
   />
 
   <!-- ── Basic ──────────────────────────────────────────────────────────────── -->
@@ -13,14 +13,14 @@
       Hover over items to see the magnification effect; click to trigger the command.
     </p>
     <div class="demo-section__preview demo-section__preview--centered">
-      <ui-lib-dock [items]="osItems" position="bottom" variant="material" size="md" />
+      <ui-lib-dock position="bottom" size="md" variant="material" [items]="osItems" />
     </div>
     <div class="demo-section__code">
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetBasic"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -35,16 +35,16 @@
     @for (v of variants; track v) {
       <div class="demo-section__variant-row">
         <span class="demo-section__variant-label">{{ v }}</span>
-        <ui-lib-dock [items]="osItems" position="bottom" [variant]="v" size="md" />
+        <ui-lib-dock position="bottom" size="md" [items]="osItems" [variant]="v" />
       </div>
     }
 
     <div class="demo-section__code">
       <ui-lib-code-snippet
         language="html"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetVariants"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -58,16 +58,16 @@
     @for (s of sizes; track s) {
       <div class="demo-section__variant-row">
         <span class="demo-section__variant-label">{{ s }}</span>
-        <ui-lib-dock [items]="osItems" position="bottom" variant="material" [size]="s" />
+        <ui-lib-dock position="bottom" variant="material" [items]="osItems" [size]="s" />
       </div>
     }
 
     <div class="demo-section__code">
       <ui-lib-code-snippet
         language="html"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetSizes"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -83,7 +83,7 @@
       @for (p of positions; track p) {
         <div class="demo-position-cell">
           <span class="demo-section__variant-label">{{ p }}</span>
-          <ui-lib-dock [items]="osItems.slice(0, 5)" [position]="p" variant="material" size="sm" />
+          <ui-lib-dock size="sm" variant="material" [items]="osItems.slice(0, 5)" [position]="p" />
         </div>
       }
     </div>
@@ -91,9 +91,9 @@
     <div class="demo-section__code">
       <ui-lib-code-snippet
         language="html"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetPositions"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -105,14 +105,14 @@
       useful in compact layouts or for users who prefer reduced motion.
     </p>
     <div class="demo-section__preview demo-section__preview--centered">
-      <ui-lib-dock [items]="osItems" position="bottom" variant="material" [magnification]="false" />
+      <ui-lib-dock position="bottom" variant="material" [items]="osItems" [magnification]="false" />
     </div>
     <div class="demo-section__code">
       <ui-lib-code-snippet
         language="html"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetNoMagnification"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -125,14 +125,14 @@
       <code>aria-disabled</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--centered">
-      <ui-lib-dock [items]="itemsWithDisabled" position="bottom" variant="material" />
+      <ui-lib-dock position="bottom" variant="material" [items]="itemsWithDisabled" />
     </div>
     <div class="demo-section__code">
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetDisabledItems"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -145,14 +145,14 @@
       <code>&lt;button&gt;</code> elements.
     </p>
     <div class="demo-section__preview demo-section__preview--centered">
-      <ui-lib-dock [items]="linkItems" position="bottom" variant="material" />
+      <ui-lib-dock position="bottom" variant="material" [items]="linkItems" />
     </div>
     <div class="demo-section__code">
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetLinkItems"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -171,10 +171,10 @@
           <div class="demo-playground__buttons">
             @for (v of variants; track v) {
               <ui-lib-button
-                type="button"
-                [appearance]="variant() === v ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="variant() === v ? 'solid' : 'outline'"
                 (click)="setVariant(v)"
                 >{{ v }}</ui-lib-button
               >
@@ -187,10 +187,10 @@
           <div class="demo-playground__buttons">
             @for (s of sizes; track s) {
               <ui-lib-button
-                type="button"
-                [appearance]="size() === s ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="size() === s ? 'solid' : 'outline'"
                 (click)="setSize(s)"
                 >{{ s }}</ui-lib-button
               >
@@ -203,10 +203,10 @@
           <div class="demo-playground__buttons">
             @for (p of positions; track p) {
               <ui-lib-button
-                type="button"
-                [appearance]="position() === p ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="position() === p ? 'solid' : 'outline'"
                 (click)="setPosition(p)"
                 >{{ p }}</ui-lib-button
               >
@@ -218,18 +218,18 @@
           <label class="demo-playground__label">Magnification</label>
           <div class="demo-playground__buttons">
             <ui-lib-button
-              type="button"
-              [appearance]="magnification() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="magnification() ? 'solid' : 'outline'"
               (click)="magnification.set(true)"
               >On</ui-lib-button
             >
             <ui-lib-button
-              type="button"
-              [appearance]="!magnification() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="!magnification() ? 'solid' : 'outline'"
               (click)="magnification.set(false)"
               >Off</ui-lib-button
             >
@@ -241,11 +241,11 @@
       <div class="demo-playground__preview">
         <ui-lib-dock
           [items]="osItems"
-          [variant]="variant()"
-          [size]="size()"
-          [position]="position()"
           [magnification]="magnification()"
           [magnificationLevel]="magnificationLevel()"
+          [position]="position()"
+          [size]="size()"
+          [variant]="variant()"
           (itemClick)="onItemClick($event)"
         />
       </div>
@@ -281,9 +281,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -291,8 +291,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

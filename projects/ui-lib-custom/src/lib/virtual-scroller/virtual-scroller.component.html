@@ -1,16 +1,16 @@
 @if (!disabled()) {
-  <div class="uilib-scroller-sr-only" aria-live="polite" aria-atomic="true">
+  <div aria-atomic="true" aria-live="polite" class="uilib-scroller-sr-only">
     {{ liveRegionMessage() }}
   </div>
   <div
     #scrollerEl
-    [attr.id]="id()"
-    [attr.tabindex]="tabIndex()"
     class="uilib-scroller-viewport"
-    [attr.role]="contentRole()"
+    [attr.aria-busy]="internalLoading() ? 'true' : null"
     [attr.aria-label]="resolvedAriaLabel()"
     [attr.aria-rowcount]="ariaRowCount()"
-    [attr.aria-busy]="internalLoading() ? 'true' : null"
+    [attr.id]="id()"
+    [attr.role]="contentRole()"
+    [attr.tabindex]="tabIndex()"
     (keydown)="onViewportKeydown($event)"
   >
     @if (contentTpl()) {
@@ -24,17 +24,17 @@
       <div
         #contentEl
         class="uilib-scroller-content"
-        [style]="contentStyle()"
-        [class.uilib-scroller-loading]="internalLoading()"
         role="presentation"
+        [class.uilib-scroller-loading]="internalLoading()"
+        [style]="contentStyle()"
       >
         @for (item of loadedRows(); track trackItem($index, item)) {
           <div
             class="uilib-scroller-item"
-            [attr.role]="itemRole()"
-            [attr.aria-setsize]="itemAriaSetSize($index)"
             [attr.aria-posinset]="itemAriaPosInSet($index)"
             [attr.aria-rowindex]="itemAriaRowIndex($index)"
+            [attr.aria-setsize]="itemAriaSetSize($index)"
+            [attr.role]="itemRole()"
           >
             @if (itemTpl()) {
               <ng-container
@@ -53,10 +53,10 @@
     <!-- Spacer: an invisible 1×1 element scaled to the full virtual height/width. -->
     @if (showSpacer()) {
       <div
-        class="uilib-scroller-spacer"
-        [style]="spacerStyle()"
-        role="presentation"
         aria-hidden="true"
+        class="uilib-scroller-spacer"
+        role="presentation"
+        [style]="spacerStyle()"
       ></div>
     }
 
@@ -64,9 +64,9 @@
     @if (!loaderDisabled() && showLoader() && internalLoading()) {
       <div
         class="uilib-scroller-loader"
-        [class.uilib-scroller-loader-mask]="!loaderTpl()"
         role="status"
         [attr.aria-label]="i18n.translate('global.loading')"
+        [class.uilib-scroller-loader-mask]="!loaderTpl()"
       >
         @if (loaderTpl()) {
           @for (loaderItem of loaderArr(); track $index) {
@@ -83,7 +83,7 @@
             [ngTemplateOutletContext]="{ options: { styleClass: 'uilib-scroller-loading-icon' } }"
           />
         } @else {
-          <span class="uilib-scroller-loading-icon" aria-hidden="true"></span>
+          <span aria-hidden="true" class="uilib-scroller-loading-icon"></span>
         }
       </div>
     }

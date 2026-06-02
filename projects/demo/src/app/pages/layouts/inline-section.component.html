@@ -1,20 +1,20 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Inline layout for chips, tags, and controls with wrapping and semantic gaps."
     docHeader
     title="Inline"
-    description="Inline layout for chips, tags, and controls with wrapping and semantic gaps."
   />
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="demo" label="Demo" />
-      <ui-lib-tab value="usage" label="Usage" />
-      <ui-lib-tab value="api" label="API Reference" />
+      <ui-lib-tab label="Demo" value="demo" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="API Reference" value="api" />
     </ui-lib-tabs>
   </div>
 
@@ -22,7 +22,7 @@
     <ui-lib-panel variant="minimal">
       <p>Tune spacing, alignment, and distribution to see the inline layout adapt in real time.</p>
       <div class="doc-demo-group spacing-playground">
-        <ui-lib-stack spacing="lg" class="spacing-stack">
+        <ui-lib-stack class="spacing-stack" spacing="lg">
           <div class="control-panel">
             <ui-lib-stack spacing="md">
               <div class="panel-title">
@@ -34,20 +34,20 @@
               <div class="control-grid">
                 <ui-lib-select
                   label="Spacing"
-                  [options]="spacingOptions"
                   [ngModel]="spacing()"
+                  [options]="spacingOptions"
                   (ngModelChange)="setSpacing($event)"
                 />
                 <ui-lib-select
                   label="Justify"
-                  [options]="justifyOptions"
                   [ngModel]="justify()"
+                  [options]="justifyOptions"
                   (ngModelChange)="setJustify($event)"
                 />
                 <ui-lib-select
                   label="Align"
-                  [options]="alignOptions"
                   [ngModel]="align()"
+                  [options]="alignOptions"
                   (ngModelChange)="setAlign($event)"
                 />
               </div>
@@ -62,10 +62,10 @@
 
           <app-doc-demo-viewport>
             <div class="doc-demo spacing-preview">
-              <ui-lib-grid spacing="md" [columns]="2" class="preview-grid">
-                <ui-lib-stack spacing="sm" class="preview-block">
+              <ui-lib-grid class="preview-grid" spacing="md" [columns]="2">
+                <ui-lib-stack class="preview-block" spacing="sm">
                   <h4>Tags with wrap</h4>
-                  <ui-lib-inline [spacing]="spacing()" [justify]="justify()" [align]="align()">
+                  <ui-lib-inline [align]="align()" [justify]="justify()" [spacing]="spacing()">
                     <span class="demo-tag">JavaScript</span>
                     <span class="demo-tag">TypeScript</span>
                     <span class="demo-tag">Angular</span>
@@ -77,9 +77,9 @@
                   </ui-lib-inline>
                 </ui-lib-stack>
 
-                <ui-lib-stack spacing="sm" class="preview-block">
+                <ui-lib-stack class="preview-block" spacing="sm">
                   <h4>Toolbar</h4>
-                  <ui-lib-inline [spacing]="spacing()" [justify]="justify()" [align]="align()">
+                  <ui-lib-inline [align]="align()" [justify]="justify()" [spacing]="spacing()">
                     <span class="demo-tag">Left</span>
                     <span class="demo-tag">Center</span>
                     <span class="demo-tag">Right</span>
@@ -97,8 +97,8 @@
     <ui-lib-panel variant="minimal">
       <app-doc-code-example
         [html]="usageSnippet"
-        [typescript]="usageSnippetTs"
         [showLineNumbers]="true"
+        [typescript]="usageSnippetTs"
       />
     </ui-lib-panel>
   }

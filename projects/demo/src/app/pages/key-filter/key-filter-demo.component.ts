@@ -1,47 +1,48 @@
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
-import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
+import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 import { Panel } from 'ui-lib-custom/panel';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
 import {
-  alphanumHtml,
   alphaHtml,
-  pintHtml,
-  intHtml,
-  numHtml,
-  hexHtml,
-  moneyHtml,
-  emailHtml,
-  customHtml,
-  customTs,
-  bypassHtml,
-  bypassTs,
+  alphanumHtml,
   alphanumTs,
   alphaTs,
-  pintTs,
-  intTs,
-  numTs,
-  hexTs,
-  moneyTs,
+  bypassHtml,
+  bypassTs,
+  customHtml,
+  customTs,
+  emailHtml,
   emailTs,
+  hexHtml,
+  hexTs,
+  intHtml,
+  intTs,
+  moneyHtml,
+  moneyTs,
+  numHtml,
+  numTs,
+  pintHtml,
+  pintTs,
 } from './snippets.generated';
-
-import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 /**
  * Demo page for the KeyFilter directive, showing all built-in presets,
  * custom RegExp usage, and the bypass toggle.

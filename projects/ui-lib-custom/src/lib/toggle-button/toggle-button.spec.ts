@@ -1,13 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   signal,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideZonelessChangeDetection } from '@angular/core';
+
 import { ToggleButton } from './toggle-button';
 import type {
   ToggleButtonChangeEvent,

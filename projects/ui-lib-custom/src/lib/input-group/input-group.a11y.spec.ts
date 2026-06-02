@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } fr
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
+import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { UiLibInput } from '../input';
 import { InputMaskComponent } from '../input-mask';
 import { InputNumberComponent } from '../input-number';
-import { UiLibInput } from '../input';
 import { PasswordComponent } from '../password';
-import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
-import { InputGroupAddonComponent } from './input-group-addon';
 import { InputGroupComponent } from './input-group';
+import { InputGroupAddonComponent } from './input-group-addon';
 
 @Component({
   standalone: true,

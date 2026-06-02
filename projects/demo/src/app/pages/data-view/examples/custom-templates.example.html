@@ -1,6 +1,6 @@
-<ui-lib-data-view [value]="customTemplateProducts" [paginator]="true" [rows]="6">
+<ui-lib-data-view [paginator]="true" [rows]="6" [value]="customTemplateProducts">
   <ng-template uiDataViewHeader>...</ng-template>
   <ng-template uiDataViewFooter>...</ng-template>
-  <ng-template uiDataViewListItem let-item>...</ng-template>
-  <ng-template uiDataViewGridItem let-item>...</ng-template>
+  <ng-template let-item uiDataViewListItem>...</ng-template>
+  <ng-template let-item uiDataViewGridItem>...</ng-template>
 </ui-lib-data-view>

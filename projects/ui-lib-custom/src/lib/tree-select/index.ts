@@ -2,13 +2,13 @@ export { TreeSelect } from './tree-select.component';
 export { TREE_SELECT_DEFAULTS } from './tree-select.constants';
 export type {
   TreeNode,
-  TreeNodeSelectEvent,
-  TreeNodeExpandEvent,
   TreeNodeCollapseEvent,
-  TreeSelectVariant,
-  TreeSelectSize,
-  TreeSelectSelectionMode,
+  TreeNodeExpandEvent,
+  TreeNodeSelectEvent,
   TreeSelectChangeEvent,
-  TreeSelectShowEvent,
   TreeSelectHideEvent,
+  TreeSelectSelectionMode,
+  TreeSelectShowEvent,
+  TreeSelectSize,
+  TreeSelectVariant,
 } from './tree-select.types';

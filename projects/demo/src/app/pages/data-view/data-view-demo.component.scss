@@ -11,28 +11,28 @@
 }
 
 .helper-text {
-  margin: 0;
   color: var(--uilib-muted);
   font-size: 0.875rem;
+  margin: 0;
 }
 
 .mini-heading {
-  margin: 0 0 0.5rem;
   color: var(--uilib-muted);
   font-size: 0.875rem;
-  text-transform: uppercase;
   letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
 }
 
 .demo-list-item {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 0.75rem;
   align-items: center;
-  padding: 0.75rem;
+  background: var(--uilib-surface-0, #fff);
   border: 1px solid var(--uilib-surface-300, rgba(0, 0, 0, 0.08));
   border-radius: 0.75rem;
-  background: var(--uilib-surface-0, #fff);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: auto 1fr auto;
+  padding: 0.75rem;
 }
 
 .demo-list-item--compact {
@@ -40,11 +40,11 @@
 }
 
 .demo-product-image {
-  width: 72px;
+  border: 1px solid var(--uilib-surface-300, rgba(0, 0, 0, 0.08));
+  border-radius: 0.5rem;
   height: 56px;
   object-fit: cover;
-  border-radius: 0.5rem;
-  border: 1px solid var(--uilib-surface-300, rgba(0, 0, 0, 0.08));
+  width: 72px;
 }
 
 .demo-list-content {
@@ -58,9 +58,9 @@
 
 .demo-list-content > span,
 .demo-list-content > p {
-  margin: 0;
   color: var(--uilib-muted);
   font-size: 0.82rem;
+  margin: 0;
 }
 
 .demo-list-meta {
@@ -70,32 +70,32 @@
 }
 
 .demo-grid-item {
+  background: var(--uilib-surface-0, #fff);
+  border: 1px solid var(--uilib-surface-300, rgba(0, 0, 0, 0.08));
+  border-radius: 0.75rem;
   display: grid;
   gap: 0.45rem;
   padding: 0.75rem;
-  border: 1px solid var(--uilib-surface-300, rgba(0, 0, 0, 0.08));
-  border-radius: 0.75rem;
-  background: var(--uilib-surface-0, #fff);
 }
 
 .demo-grid-item--tight {
-  padding: 0.5rem;
   font-size: 0.85rem;
+  padding: 0.5rem;
 }
 
 .price {
-  font-weight: 700;
   color: var(--uilib-page-fg);
+  font-weight: 700;
 }
 
 .inventory-pill {
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
   border-radius: 999px;
-  padding: 0.2rem 0.5rem;
+  display: inline-flex;
   font-size: 0.72rem;
+  justify-content: center;
   line-height: 1;
+  padding: 0.2rem 0.5rem;
   white-space: nowrap;
 }
 
@@ -120,11 +120,11 @@
 
 .empty-template,
 .loading-template {
+  background: var(--uilib-surface-100, rgba(0, 0, 0, 0.02));
+  border-radius: 0.75rem;
   display: grid;
   gap: 0.35rem;
   padding: 1rem;
-  border-radius: 0.75rem;
-  background: var(--uilib-surface-100, rgba(0, 0, 0, 0.02));
 }
 
 .theme-surface {

@@ -1,5 +1,6 @@
-import { Directive, TemplateRef, inject, input } from '@angular/core';
 import type { InputSignal } from '@angular/core';
+import { Directive, inject, input, TemplateRef } from '@angular/core';
+
 import type { OrganizationChartNode } from './organization-chart.types';
 
 /**

@@ -10,28 +10,28 @@
         [attr.aria-label]="i18n.translate('upload.toolbar')"
       >
         <button
-          type="button"
           class="ui-lib-upload__btn ui-lib-upload__btn--choose"
-          [disabled]="isChooseDisabled()"
+          type="button"
           [attr.aria-disabled]="isChooseDisabled() || null"
+          [disabled]="isChooseDisabled()"
           (click)="onChoose()"
         >
-          <span class="ui-lib-upload__btn-icon" aria-hidden="true">
+          <span aria-hidden="true" class="ui-lib-upload__btn-icon">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
+              aria-hidden="true"
               fill="none"
+              height="16"
               stroke="currentColor"
-              stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
               width="16"
-              height="16"
-              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
+              <line x1="12" x2="12" y1="3" y2="15" />
             </svg>
           </span>
           <span>{{ resolvedChooseLabel() }}</span>
@@ -39,27 +39,27 @@
 
         @if (showUploadButton()) {
           <button
-            type="button"
             class="ui-lib-upload__btn ui-lib-upload__btn--upload"
-            [disabled]="isUploadDisabled()"
+            type="button"
             [attr.aria-disabled]="isUploadDisabled() || null"
+            [disabled]="isUploadDisabled()"
             (click)="onUpload()"
           >
-            <span class="ui-lib-upload__btn-icon" aria-hidden="true">
+            <span aria-hidden="true" class="ui-lib-upload__btn-icon">
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
+                aria-hidden="true"
                 fill="none"
+                height="16"
                 stroke="currentColor"
-                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
                 width="16"
-                height="16"
-                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <polyline points="16 16 12 12 8 16" />
-                <line x1="12" y1="12" x2="12" y2="21" />
+                <line x1="12" x2="12" y1="12" y2="21" />
                 <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
               </svg>
             </span>
@@ -69,27 +69,27 @@
 
         @if (showCancelButton()) {
           <button
-            type="button"
             class="ui-lib-upload__btn ui-lib-upload__btn--cancel"
-            [disabled]="isCancelDisabled()"
+            type="button"
             [attr.aria-disabled]="isCancelDisabled() || null"
+            [disabled]="isCancelDisabled()"
             (click)="onCancel()"
           >
-            <span class="ui-lib-upload__btn-icon" aria-hidden="true">
+            <span aria-hidden="true" class="ui-lib-upload__btn-icon">
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
+                aria-hidden="true"
                 fill="none"
+                height="16"
                 stroke="currentColor"
-                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
                 width="16"
-                height="16"
-                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
+                <line x1="18" x2="6" y1="6" y2="18" />
+                <line x1="6" x2="18" y1="6" y2="18" />
               </svg>
             </span>
             <span>{{ resolvedCancelLabel() }}</span>
@@ -100,18 +100,18 @@
   }
 
   <!-- ── Hidden native file input ────────────────────────────────────────── -->
-  <label [for]="fileInputId" class="ui-lib-upload__sr-only">Choose files to upload</label>
+  <label class="ui-lib-upload__sr-only" [for]="fileInputId">Choose files to upload</label>
   <input
     #fileInput
-    type="file"
+    aria-hidden="true"
     class="ui-lib-upload__input"
-    [id]="fileInputId"
-    [attr.multiple]="multiple() ? '' : null"
+    tabindex="-1"
+    type="file"
     [attr.accept]="accept() || null"
     [attr.disabled]="disabled() ? '' : null"
+    [attr.multiple]="multiple() ? '' : null"
+    [id]="fileInputId"
     (change)="onFileInputChange($event)"
-    aria-hidden="true"
-    tabindex="-1"
   />
 
   <!-- ── Content: custom slot or default drop zone + file list ───────────── -->
@@ -121,11 +121,11 @@
     <div
       class="ui-lib-upload__content"
       role="region"
-      [attr.aria-label]="i18n.translate('upload.area')"
       [attr.aria-disabled]="disabled() || null"
+      [attr.aria-label]="i18n.translate('upload.area')"
       (dragenter)="onDragEnter($event)"
-      (dragover)="onDragOver($event)"
       (dragleave)="onDragLeave($event)"
+      (dragover)="onDragOver($event)"
       (drop)="onDrop($event)"
     >
       @if (!hasFiles()) {
@@ -133,30 +133,30 @@
           <ng-container [ngTemplateOutlet]="emptyTemplate()!" />
         } @else {
           <div class="ui-lib-upload__empty">
-            <span class="ui-lib-upload__empty-icon" aria-hidden="true">
+            <span aria-hidden="true" class="ui-lib-upload__empty-icon">
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
+                aria-hidden="true"
                 fill="none"
+                height="48"
                 stroke="currentColor"
-                stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
                 width="48"
-                height="48"
-                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="17 8 12 3 7 8" />
-                <line x1="12" y1="3" x2="12" y2="15" />
+                <line x1="12" x2="12" y1="3" y2="15" />
               </svg>
             </span>
             <p class="ui-lib-upload__empty-message">{{ resolvedEmptyMessage() }}</p>
             <p class="ui-lib-upload__empty-hint">
               or
               <button
-                type="button"
                 class="ui-lib-upload__empty-choose-link"
+                type="button"
                 [disabled]="isChooseDisabled()"
                 (click)="onChoose()"
               >
@@ -185,24 +185,24 @@
                   @if (isImage(item.file) && item.objectUrl) {
                     <img
                       class="ui-lib-upload__file-preview"
-                      [src]="item.objectUrl"
                       [alt]="item.file.name"
-                      [style.width.px]="previewWidth()"
+                      [src]="item.objectUrl"
                       [style.height.px]="previewWidth()"
+                      [style.width.px]="previewWidth()"
                     />
                   } @else {
-                    <span class="ui-lib-upload__file-icon" aria-hidden="true">
+                    <span aria-hidden="true" class="ui-lib-upload__file-icon">
                       <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
+                        aria-hidden="true"
                         fill="none"
+                        height="24"
                         stroke="currentColor"
-                        stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
                         width="24"
-                        height="24"
-                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
                         <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
                         <polyline points="13 2 13 9 20 9" />
@@ -217,25 +217,25 @@
                 </div>
 
                 <button
-                  type="button"
                   class="ui-lib-upload__file-remove"
+                  type="button"
                   [attr.aria-label]="'Remove ' + item.file.name"
                   (click)="removeFile($event, index)"
                 >
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
+                    aria-hidden="true"
                     fill="none"
+                    height="16"
                     stroke="currentColor"
-                    stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
                     width="16"
-                    height="16"
-                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
+                    <line x1="18" x2="6" y1="6" y2="18" />
+                    <line x1="6" x2="18" y1="6" y2="18" />
                   </svg>
                 </button>
               }
@@ -247,13 +247,13 @@
   }
 
   <!-- ── Drag-over live region (polite screen-reader announcement) ──────── -->
-  <div class="ui-lib-upload__sr-only" aria-live="polite" aria-atomic="true">
+  <div aria-atomic="true" aria-live="polite" class="ui-lib-upload__sr-only">
     {{ dragStatusMessage() }}
   </div>
 
   <!-- ── Validation messages ─────────────────────────────────────────────── -->
   @if (validationMessages().length > 0) {
-    <div class="ui-lib-upload__messages" role="alert" aria-live="assertive">
+    <div aria-live="assertive" class="ui-lib-upload__messages" role="alert">
       <ul class="ui-lib-upload__messages-list">
         @for (message of validationMessages(); track message.detail) {
           <li class="ui-lib-upload__message">
@@ -263,25 +263,25 @@
         }
       </ul>
       <button
-        type="button"
         class="ui-lib-upload__messages-close"
+        type="button"
         [attr.aria-label]="i18n.translate('upload.dismiss')"
         (click)="clearMessages()"
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
+          aria-hidden="true"
           fill="none"
+          height="14"
           stroke="currentColor"
-          stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
           width="14"
-          height="14"
-          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
+          <line x1="18" x2="6" y1="6" y2="18" />
+          <line x1="6" x2="18" y1="6" y2="18" />
         </svg>
       </button>
     </div>

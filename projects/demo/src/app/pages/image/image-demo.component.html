@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Displays an image with optional preview overlay, zoom controls, and rotation. Supports fallback images, custom error templates, and a customisable hover indicator."
     docHeader
     title="Image"
     [importCode]="importCode"
-    description="Displays an image with optional preview overlay, zoom controls, and rotation. Supports fallback images, custom error templates, and a customisable hover indicator."
   />
 
   <!-- ── a. Basic ─────────────────────────────────────────────────────────── -->
@@ -13,7 +13,7 @@
     </p>
     <ui-lib-panel variant="minimal">
       <div class="demo-row">
-        <ui-lib-image src="https://picsum.photos/seed/demo/400/300" alt="A scenic landscape" />
+        <ui-lib-image alt="A scenic landscape" src="https://picsum.photos/seed/demo/400/300" />
       </div>
     </ui-lib-panel>
     <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
@@ -30,13 +30,13 @@
     <ui-lib-panel variant="minimal">
       <div class="demo-row">
         <ui-lib-image
-          src="https://picsum.photos/seed/preview1/400/300"
           alt="Click to preview"
+          src="https://picsum.photos/seed/preview1/400/300"
           [preview]="true"
         />
         <ui-lib-image
-          src="https://picsum.photos/seed/preview2/400/300"
           alt="Another preview"
+          src="https://picsum.photos/seed/preview2/400/300"
           [preview]="true"
         />
       </div>
@@ -53,8 +53,8 @@
     <ui-lib-panel variant="minimal">
       <div class="demo-row">
         <ui-lib-image
-          src="https://picsum.photos/seed/custom/400/300"
           alt="Custom indicator demo"
+          src="https://picsum.photos/seed/custom/400/300"
           [preview]="true"
         >
           <ng-template #imageIndicator>
@@ -75,9 +75,9 @@
     <ui-lib-panel variant="minimal">
       <div class="demo-row">
         <ui-lib-image
-          src="https://this-will-fail.invalid/broken.jpg"
-          errorSrc="https://picsum.photos/seed/fallback/400/300"
           alt="Fallback on error"
+          errorSrc="https://picsum.photos/seed/fallback/400/300"
+          src="https://this-will-fail.invalid/broken.jpg"
         />
       </div>
     </ui-lib-panel>
@@ -94,27 +94,27 @@
       <div class="demo-row demo-row--align-end">
         <div class="size-item">
           <ui-lib-image
-            src="https://picsum.photos/seed/size-sm/200/150"
             alt="Small"
             size="sm"
+            src="https://picsum.photos/seed/size-sm/200/150"
             [preview]="true"
           />
           <span class="size-label">sm</span>
         </div>
         <div class="size-item">
           <ui-lib-image
-            src="https://picsum.photos/seed/size-md/200/150"
             alt="Medium"
             size="md"
+            src="https://picsum.photos/seed/size-md/200/150"
             [preview]="true"
           />
           <span class="size-label">md</span>
         </div>
         <div class="size-item">
           <ui-lib-image
-            src="https://picsum.photos/seed/size-lg/200/150"
             alt="Large"
             size="lg"
+            src="https://picsum.photos/seed/size-lg/200/150"
             [preview]="true"
           />
           <span class="size-label">lg</span>
@@ -135,8 +135,8 @@
       <div class="demo-row">
         <div class="variant-item">
           <ui-lib-image
-            src="https://picsum.photos/seed/var-mat/200/150"
             alt="Material"
+            src="https://picsum.photos/seed/var-mat/200/150"
             variant="material"
             [preview]="true"
           />
@@ -144,8 +144,8 @@
         </div>
         <div class="variant-item">
           <ui-lib-image
-            src="https://picsum.photos/seed/var-boot/200/150"
             alt="Bootstrap"
+            src="https://picsum.photos/seed/var-boot/200/150"
             variant="bootstrap"
             [preview]="true"
           />
@@ -153,8 +153,8 @@
         </div>
         <div class="variant-item">
           <ui-lib-image
-            src="https://picsum.photos/seed/var-min/200/150"
             alt="Minimal"
+            src="https://picsum.photos/seed/var-min/200/150"
             variant="minimal"
             [preview]="true"
           />
@@ -173,7 +173,7 @@
     </p>
     <ui-lib-panel variant="minimal">
       <div class="demo-row">
-        <ui-lib-image src="https://this-will-fail.invalid/broken.jpg" alt="Broken image">
+        <ui-lib-image alt="Broken image" src="https://this-will-fail.invalid/broken.jpg">
           <ng-template #imageError>
             <div class="custom-error-placeholder">
               <span class="custom-error-icon">⚠️</span>
@@ -195,10 +195,10 @@
     <ui-lib-panel variant="minimal">
       <div class="demo-row">
         <ui-lib-image
-          src="https://picsum.photos/seed/wide/800/200"
           alt="Wide constrained image"
-          width="400"
           height="100"
+          src="https://picsum.photos/seed/wide/800/200"
+          width="400"
         />
       </div>
     </ui-lib-panel>
@@ -215,8 +215,8 @@
       <div class="demo-col">
         <div class="demo-row">
           <ui-lib-image
-            src="https://picsum.photos/seed/binding/400/300"
             alt="Two-way binding demo"
+            src="https://picsum.photos/seed/binding/400/300"
             [preview]="true"
             [(previewVisible)]="previewVisible"
           />
@@ -232,8 +232,8 @@
   <!-- ── API Table ─────────────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <app-doc-api-reference [rows]="apiInputRows" />
-    <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
-    <app-doc-api-reference [rows]="apiSlotRows" kind="name" [showDefault]="false" />
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+    <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
   </app-doc-section>
 
   <!-- ── Accessibility ─────────────────────────────────────────── -->
@@ -246,9 +246,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -257,8 +257,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

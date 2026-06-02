@@ -1,22 +1,22 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A ready-to-use application shell layout: sticky topbar, collapsible sidebar, and a main content area — all wired up with ui-lib-custom components."
     docHeader
     title="App Shell Template"
-    description="A ready-to-use application shell layout: sticky topbar, collapsible sidebar, and a main content area — all wired up with ui-lib-custom components."
     [tags]="['Free', 'Layout', 'Template']"
   />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>
 
   <!-- Overview ─────────────────────────────────────────────────────────────── -->
-  <section id="overview" data-doc-anchor>
+  <section data-doc-anchor id="overview">
     <h2>Overview</h2>
     <p>
       The App Shell template provides the structural bones every application needs: a sticky top
@@ -49,7 +49,7 @@
   </section>
 
   <!-- Live Preview ─────────────────────────────────────────────────────────── -->
-  <section id="preview" data-doc-anchor>
+  <section data-doc-anchor id="preview">
     <h2>Live Preview</h2>
     <p>An interactive mockup of the App Shell rendered entirely with library components.</p>
 
@@ -67,9 +67,9 @@
           </div>
         </div>
         <div class="shell-topbar-right">
-          <div class="shell-notif-btn" role="button" aria-label="Notifications">
+          <div aria-label="Notifications" class="shell-notif-btn" role="button">
             <i class="pi pi-bell"></i>
-            <span class="shell-notif-dot" aria-hidden="true"></span>
+            <span aria-hidden="true" class="shell-notif-dot"></span>
           </div>
           <ui-lib-avatar label="JD" shape="circle" size="md" />
         </div>
@@ -78,7 +78,7 @@
       <!-- ── Body ───────────────────────────────────────────────── -->
       <div class="shell-body">
         <!-- Sidebar -->
-        <nav class="shell-sidebar" aria-label="Main navigation">
+        <nav aria-label="Main navigation" class="shell-sidebar">
           <ul class="shell-nav" role="list">
             <li class="shell-nav-group-label">Main</li>
             <li class="shell-nav-item shell-nav-item--active">
@@ -142,7 +142,7 @@
             <ui-lib-panel class="shell-panel shell-panel--main">
               <div class="shell-panel-header">
                 <h3>Recent Activity</h3>
-                <ui-lib-button variant="minimal" size="sm" label="View all" />
+                <ui-lib-button label="View all" size="sm" variant="minimal" />
               </div>
               <ul class="shell-activity-list" role="list">
                 <li class="shell-activity-item">
@@ -203,16 +203,16 @@
   </section>
 
   <!-- Usage ────────────────────────────────────────────────────────────────── -->
-  <section id="usage" data-doc-anchor>
+  <section data-doc-anchor id="usage">
     <h2>Usage</h2>
     <p>
       Copy the snippet below into your project. Replace the mock nav items with your real routes and
       swap the stat values for data from your services.
     </p>
-    <ui-lib-code-snippet [code]="codeSnippet" language="typescript" />
+    <ui-lib-code-snippet language="typescript" [code]="codeSnippet" />
     <div class="template-download-cta">
-      <ui-lib-button variant="material" label="Copy Template" leftIcon="pi pi-copy" />
-      <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
+      <ui-lib-button label="Copy Template" leftIcon="pi pi-copy" variant="material" />
+      <ui-lib-button label="View on GitHub" leftIcon="pi pi-github" variant="minimal" />
     </div>
   </section>
 </app-doc-page-layout>

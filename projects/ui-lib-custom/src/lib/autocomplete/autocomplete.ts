@@ -1,54 +1,44 @@
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
+  type AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  HostListener,
-  TemplateRef,
-  ViewEncapsulation,
   computed,
   contentChild,
+  ElementRef,
   forwardRef,
+  HostListener,
   inject,
   input,
-  output,
-  signal,
-  type AfterViewChecked,
   type InputSignal,
   type OnDestroy,
+  output,
   type OutputEmitterRef,
   type Signal,
-  type WritableSignal,
+  signal,
+  TemplateRef,
   viewChild,
+  ViewEncapsulation,
+  type WritableSignal,
 } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import {
-  KEYBOARD_KEYS,
   claimOverlayZIndex,
+  KEYBOARD_KEYS,
   releaseOverlayZIndex,
   resolveOverlayAppendTarget,
 } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import {
   AUTOCOMPLETE_ID_PREFIX,
   AUTOCOMPLETE_LISTBOX_ROLE,
   AUTOCOMPLETE_OPTION_ID_SEPARATOR,
   AUTOCOMPLETE_OPTION_ROLE,
 } from './autocomplete.constants';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import type {
-  AutoCompleteCompleteEvent,
-  AutoCompleteDropdownClickEvent,
-  AutoCompleteDropdownMode,
-  AutoCompleteGroupContext,
-  AutoCompleteItemContext,
-  AutoCompleteSelectEvent,
-  AutoCompleteSelectedItemContext,
-  AutoCompleteSize,
-  AutoCompleteUnselectEvent,
-  AutoCompleteVariant,
-} from './autocomplete.types';
 import {
   AutoCompleteDropdownIconDirective,
   AutoCompleteEmptyDirective,
@@ -60,6 +50,18 @@ import {
   AutoCompleteRemoveTokenIconDirective,
   AutoCompleteSelectedItemDirective,
 } from './autocomplete.template-directives';
+import type {
+  AutoCompleteCompleteEvent,
+  AutoCompleteDropdownClickEvent,
+  AutoCompleteDropdownMode,
+  AutoCompleteGroupContext,
+  AutoCompleteItemContext,
+  AutoCompleteSelectedItemContext,
+  AutoCompleteSelectEvent,
+  AutoCompleteSize,
+  AutoCompleteUnselectEvent,
+  AutoCompleteVariant,
+} from './autocomplete.types';
 
 let autocompleteIdCounter: number = 0;
 const AUTOCOMPLETE_PANEL_MODE_CLASSES: readonly string[] = [

@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Individual-cell OTP entry with paste support, keyboard navigation, mask mode, integer-only mode, three size tokens, and full Angular forms integration."
     docHeader
     title="InputOtp"
     [importCode]="importCode"
-    description="Individual-cell OTP entry with paste support, keyboard navigation, mask mode, integer-only mode, three size tokens, and full Angular forms integration."
   />
 
   <app-doc-demo-viewport [autoHeight]="true">
@@ -49,8 +49,8 @@
         <ui-lib-panel variant="minimal">
           <div class="stack-sm">
             <ui-lib-input-otp
-              [length]="4"
               [integerOnly]="true"
+              [length]="4"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="integerValue"
             />
@@ -71,8 +71,8 @@
             <div class="stack-xs">
               <label>Small</label>
               <ui-lib-input-otp
-                [length]="4"
                 size="sm"
+                [length]="4"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizeValues.sm"
               />
@@ -80,8 +80,8 @@
             <div class="stack-xs">
               <label>Medium</label>
               <ui-lib-input-otp
-                [length]="4"
                 size="md"
+                [length]="4"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizeValues.md"
               />
@@ -89,8 +89,8 @@
             <div class="stack-xs">
               <label>Large</label>
               <ui-lib-input-otp
-                [length]="4"
                 size="lg"
+                [length]="4"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizeValues.lg"
               />
@@ -108,8 +108,8 @@
         </p>
         <ui-lib-panel variant="minimal">
           <ui-lib-input-otp
-            [length]="4"
             [filled]="true"
+            [length]="4"
             [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="filledValue"
           />
@@ -123,8 +123,8 @@
         <p class="section-text">All cells are non-interactive and rendered with reduced opacity.</p>
         <ui-lib-panel variant="minimal">
           <ui-lib-input-otp
-            [length]="4"
             [disabled]="true"
+            [length]="4"
             [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="disabledValue"
           />
@@ -138,8 +138,8 @@
         <p class="section-text">Error border applied to all cells when validation fails.</p>
         <ui-lib-panel variant="minimal">
           <ui-lib-input-otp
-            [length]="4"
             [invalid]="true"
+            [length]="4"
             [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="invalidValue"
           />
@@ -154,8 +154,8 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-input-otp
             [length]="4"
-            [readonly]="true"
             [ngModelOptions]="{ standalone: true }"
+            [readonly]="true"
             [(ngModel)]="readonlyValue"
           />
         </ui-lib-panel>
@@ -173,12 +173,12 @@
           <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
             <div class="stack-md">
               <ui-lib-input-otp
-                [length]="6"
-                [integerOnly]="true"
                 formControlName="code"
+                [integerOnly]="true"
                 [invalid]="reactiveForm.controls.code.invalid && reactiveForm.controls.code.touched"
+                [length]="6"
               />
-              <ui-lib-button type="submit" color="primary">Verify</ui-lib-button>
+              <ui-lib-button color="primary" type="submit">Verify</ui-lib-button>
               @if (submittedCode !== null) {
                 <span class="value-text">Submitted: {{ submittedCode }}</span>
               }
@@ -212,9 +212,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -223,8 +223,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

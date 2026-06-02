@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A reorderable list component with button controls, optional inline filtering, drag-and-drop, custom item templates, and full keyboard accessibility."
     docHeader
     title="OrderList"
     [importCode]="importCode"
-    description="A reorderable list component with button controls, optional inline filtering, drag-and-drop, custom item templates, and full keyboard accessibility."
   />
 
   <!-- 1. Basic -->
@@ -13,13 +13,13 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-order-list
-        [value]="products()"
-        (valueChange)="products.set($any($event))"
-        [selection]="selection()"
-        (selectionChange)="selection.set($any($event))"
         header="Products"
+        [selection]="selection()"
+        [value]="products()"
+        (selectionChange)="selection.set($any($event))"
+        (valueChange)="products.set($any($event))"
       >
-        <ng-template uiOrderListItem let-item>
+        <ng-template let-item uiOrderListItem>
           <div class="demo-ol-row">
             <span class="demo-ol-name">{{ item.name }}</span>
             <span class="demo-ol-price">{{ formatPrice(item.price) }}</span>
@@ -27,7 +27,7 @@
         </ng-template>
       </ui-lib-order-list>
     </ui-lib-panel>
-    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" [showLineNumbers]="true" />
+    <app-doc-code-example [html]="basicHtml" [showLineNumbers]="true" [typescript]="basicTs" />
   </app-doc-section>
 
   <!-- 2. Filter -->
@@ -38,12 +38,12 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-order-list
-        [value]="filterProducts()"
-        (valueChange)="filterProducts.set($any($event))"
         filterBy="name"
         filterPlaceholder="Search products…"
+        [value]="filterProducts()"
+        (valueChange)="filterProducts.set($any($event))"
       >
-        <ng-template uiOrderListItem let-item>
+        <ng-template let-item uiOrderListItem>
           <div class="demo-ol-row">
             <span class="demo-ol-name">{{ item.name }}</span>
             <span class="demo-ol-category">{{ item.category }}</span>
@@ -51,7 +51,7 @@
         </ng-template>
       </ui-lib-order-list>
     </ui-lib-panel>
-    <app-doc-code-example [html]="filterHtml" [typescript]="filterTs" [showLineNumbers]="true" />
+    <app-doc-code-example [html]="filterHtml" [showLineNumbers]="true" [typescript]="filterTs" />
   </app-doc-section>
 
   <!-- 3. Custom Templates -->
@@ -62,17 +62,17 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-order-list
-        [value]="templateProducts()"
-        (valueChange)="templateProducts.set($any($event))"
-        [selection]="templateSelection()"
-        (selectionChange)="templateSelection.set($any($event))"
         filterBy="name"
         filterPlaceholder="Search…"
+        [selection]="templateSelection()"
+        [value]="templateProducts()"
+        (selectionChange)="templateSelection.set($any($event))"
+        (valueChange)="templateProducts.set($any($event))"
       >
         <ng-template uiOrderListHeader>
           <span>Products ({{ templateProducts().length }})</span>
         </ng-template>
-        <ng-template uiOrderListItem let-item>
+        <ng-template let-item uiOrderListItem>
           <div class="demo-ol-card-row">
             <span class="demo-ol-category-badge">{{ item.category }}</span>
             <strong class="demo-ol-name">{{ item.name }}</strong>
@@ -87,8 +87,8 @@
     </ui-lib-panel>
     <app-doc-code-example
       [html]="templateHtml"
-      [typescript]="templateTs"
       [showLineNumbers]="true"
+      [typescript]="templateTs"
     />
   </app-doc-section>
 
@@ -101,12 +101,12 @@
     <ui-lib-panel variant="minimal">
       <ui-lib-stack [gap]="3">
         <ui-lib-order-list
-          [value]="dragProducts()"
-          (valueChange)="dragProducts.set($any($event))"
           [dragDrop]="true"
+          [value]="dragProducts()"
           (reordered)="onReorder($event)"
+          (valueChange)="dragProducts.set($any($event))"
         >
-          <ng-template uiOrderListItem let-item>
+          <ng-template let-item uiOrderListItem>
             <div class="demo-ol-row">
               <span class="demo-ol-drag-hint">⠿</span>
               <span class="demo-ol-name">{{ item.name }}</span>
@@ -120,8 +120,8 @@
     </ui-lib-panel>
     <app-doc-code-example
       [html]="dragDropHtml"
-      [typescript]="dragDropTs"
       [showLineNumbers]="true"
+      [typescript]="dragDropTs"
     />
   </app-doc-section>
 
@@ -138,8 +138,8 @@
     <app-doc-api-reference [rows]="apiInputRows" />
     <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     <app-doc-api-reference
-      title="Template Slots"
       kind="name"
+      title="Template Slots"
       [rows]="apiSlotRows"
       [showDefault]="false"
     />
@@ -147,9 +147,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -158,8 +158,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -4,14 +4,16 @@ import {
   computed,
   inject,
   input,
-  output,
-  ViewEncapsulation,
   type InputSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { TagSeverity, TagSize, TagVariant } from './tag.types';
 
 export type { TagSeverity, TagSize, TagVariant } from './tag.types';

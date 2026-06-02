@@ -1,22 +1,24 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  type DebugElement,
   signal,
   type WritableSignal,
-  type DebugElement,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { RadioButton } from './radio-button';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { SHARED_SIZE_OPTIONS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
 import type {
   RadioButtonAppearance,
+  RadioButtonChangeEvent,
   RadioButtonSize,
   RadioButtonVariant,
-  RadioButtonChangeEvent,
 } from './radio-button';
+import { RadioButton } from './radio-button';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 

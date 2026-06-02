@@ -1,16 +1,16 @@
 <button
   class="ui-lib-toggle-button__inner"
   type="button"
-  [attr.id]="buttonId()"
-  [attr.aria-pressed]="ariaPressed()"
   [attr.aria-label]="ariaLabelResolved()"
   [attr.aria-labelledby]="ariaLabelledByResolved()"
+  [attr.aria-pressed]="ariaPressed()"
+  [attr.id]="buttonId()"
   [attr.tabindex]="effectiveTabindex()"
   [disabled]="isDisabled()"
-  (click)="onToggle($event)"
-  (keydown)="onKeyDown($event)"
-  (focus)="onFocus($event)"
   (blur)="onBlurInternal($event)"
+  (click)="onToggle($event)"
+  (focus)="onFocus($event)"
+  (keydown)="onKeyDown($event)"
 >
   @if (iconLeftClass()) {
     <ui-lib-icon

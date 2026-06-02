@@ -1,15 +1,16 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { MenubarSubComponent } from './menubar-submenu';
+
 import type { MenubarCommandEvent, MenubarItem } from './menubar.types';
+import { MenubarSubComponent } from './menubar-submenu';
 
 /**
  * MenubarSubComponent is the recursive dropdown panel. It owns the submenu

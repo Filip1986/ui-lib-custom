@@ -1,5 +1,5 @@
-<ui-lib-order-list [value]="filterProducts" filterBy="name" filterPlaceholder="Search products…">
-  <ng-template uiOrderListItem let-item>
+<ui-lib-order-list filterBy="name" filterPlaceholder="Search products…" [value]="filterProducts">
+  <ng-template let-item uiOrderListItem>
     <span>{{ item.name }}</span>
   </ng-template>
 </ui-lib-order-list>

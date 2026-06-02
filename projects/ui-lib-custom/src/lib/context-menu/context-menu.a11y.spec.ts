@@ -1,14 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  type DebugElement,
   provideZonelessChangeDetection,
   signal,
-  type DebugElement,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
-import { ContextMenu, CONTEXT_MENU_DEFAULT_ARIA_LABEL } from './context-menu';
+import { CONTEXT_MENU_DEFAULT_ARIA_LABEL, ContextMenu } from './context-menu';
 import type { ContextMenuItem } from './context-menu.types';
 
 /**

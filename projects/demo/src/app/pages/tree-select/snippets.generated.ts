@@ -3,9 +3,9 @@
 // Do not edit manually.
 
 export const basicHtml = `<ui-lib-tree-select
-  [nodes]="nodes"
-  selectionMode="single"
   placeholder="Select a file..."
+  selectionMode="single"
+  [nodes]="nodes"
   [(selection)]="selectedNode"
 />`;
 
@@ -28,9 +28,9 @@ export class MyComponent {
 }`;
 
 export const checkboxHtml = `<ui-lib-tree-select
-  [nodes]="nodes"
-  selectionMode="checkbox"
   placeholder="Select items..."
+  selectionMode="checkbox"
+  [nodes]="nodes"
   [(selection)]="checkedNodes"
 />`;
 
@@ -52,11 +52,7 @@ export class MyComponent {
   public readonly checkedNodes = signal<TreeNode[]>([]);
 }`;
 
-export const disabledHtml = `<ui-lib-tree-select
-  [nodes]="nodes"
-  [disabled]="true"
-  placeholder="Disabled"
-/>`;
+export const disabledHtml = `<ui-lib-tree-select placeholder="Disabled" [disabled]="true" [nodes]="nodes" />`;
 
 export const disabledTs = `import { Component } from '@angular/core';
 import { TreeSelect } from 'ui-lib-custom/tree-select';
@@ -72,11 +68,11 @@ export class MyComponent {
 }`;
 
 export const filterHtml = `<ui-lib-tree-select
-  [nodes]="nodes"
-  selectionMode="single"
-  [filter]="true"
   filterPlaceholder="Search files..."
   placeholder="Select a file..."
+  selectionMode="single"
+  [filter]="true"
+  [nodes]="nodes"
   [(selection)]="selectedNode"
 />`;
 
@@ -98,11 +94,7 @@ export class MyComponent {
   public readonly selectedNode = signal<TreeNode | null>(null);
 }`;
 
-export const loadingHtml = `<ui-lib-tree-select
-  [nodes]="nodes"
-  [loading]="true"
-  placeholder="Loading..."
-/>`;
+export const loadingHtml = `<ui-lib-tree-select placeholder="Loading..." [loading]="true" [nodes]="nodes" />`;
 
 export const loadingTs = `import { Component } from '@angular/core';
 import { TreeSelect } from 'ui-lib-custom/tree-select';
@@ -118,9 +110,9 @@ export class MyComponent {
 }`;
 
 export const multipleHtml = `<ui-lib-tree-select
-  [nodes]="nodes"
-  selectionMode="multiple"
   placeholder="Select files..."
+  selectionMode="multiple"
+  [nodes]="nodes"
   [(selection)]="selectedNodes"
 />`;
 
@@ -142,11 +134,7 @@ export class MyComponent {
   public readonly selectedNodes = signal<TreeNode[]>([]);
 }`;
 
-export const ngModelHtml = `<ui-lib-tree-select
-  [nodes]="nodes"
-  [(ngModel)]="selectedNode"
-  placeholder="Select a file..."
-/>`;
+export const ngModelHtml = `<ui-lib-tree-select placeholder="Select a file..." [nodes]="nodes" [(ngModel)]="selectedNode" />`;
 
 export const ngModelTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -167,9 +155,9 @@ export class MyComponent {
 
 export const reactiveHtml = `<form [formGroup]="form">
   <ui-lib-tree-select
-    [nodes]="nodes"
     formControlName="selectedNode"
     placeholder="Select a file..."
+    [nodes]="nodes"
   />
 </form>`;
 
@@ -193,10 +181,10 @@ export class MyComponent {
 }`;
 
 export const showClearHtml = `<ui-lib-tree-select
-  [nodes]="nodes"
-  selectionMode="single"
-  [showClear]="true"
   placeholder="Select a file..."
+  selectionMode="single"
+  [nodes]="nodes"
+  [showClear]="true"
   [(selection)]="selectedNode"
 />`;
 
@@ -216,9 +204,9 @@ export class MyComponent {
   public readonly selectedNode = signal<TreeNode | null>(null);
 }`;
 
-export const sizesHtml = `<ui-lib-tree-select [nodes]="nodes" size="sm" placeholder="Small" />
-<ui-lib-tree-select [nodes]="nodes" size="md" placeholder="Medium" />
-<ui-lib-tree-select [nodes]="nodes" size="lg" placeholder="Large" />`;
+export const sizesHtml = `<ui-lib-tree-select placeholder="Small" size="sm" [nodes]="nodes" />
+<ui-lib-tree-select placeholder="Medium" size="md" [nodes]="nodes" />
+<ui-lib-tree-select placeholder="Large" size="lg" [nodes]="nodes" />`;
 
 export const sizesTs = `import { Component } from '@angular/core';
 import { TreeSelect } from 'ui-lib-custom/tree-select';
@@ -236,9 +224,9 @@ export class MyComponent {
   ];
 }`;
 
-export const variantsHtml = `<ui-lib-tree-select [nodes]="nodes" variant="material" placeholder="Material" />
-<ui-lib-tree-select [nodes]="nodes" variant="bootstrap" placeholder="Bootstrap" />
-<ui-lib-tree-select [nodes]="nodes" variant="minimal" placeholder="Minimal" />`;
+export const variantsHtml = `<ui-lib-tree-select placeholder="Material" variant="material" [nodes]="nodes" />
+<ui-lib-tree-select placeholder="Bootstrap" variant="bootstrap" [nodes]="nodes" />
+<ui-lib-tree-select placeholder="Minimal" variant="minimal" [nodes]="nodes" />`;
 
 export const variantsTs = `import { Component } from '@angular/core';
 import { TreeSelect } from 'ui-lib-custom/tree-select';

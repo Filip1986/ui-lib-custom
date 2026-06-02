@@ -2,7 +2,7 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const checkboxExampleHtml = `<ui-lib-checkbox label="Receive updates" [(checked)]="checkedPrimary"></ui-lib-checkbox>`;
+export const checkboxExampleHtml = `<ui-lib-checkbox label="Receive updates" [(checked)]="checkedPrimary" />`;
 
 export const checkboxExampleTs = `import { Component } from '@angular/core';
 import { Checkbox } from 'ui-lib-custom/checkbox';
@@ -17,16 +17,16 @@ export class MyComponent {
 }`;
 
 export const usageHtml = `<ui-lib-checkbox
-  label="Sync data"
-  description="Keep devices aligned"
-  variant="material"
   appearance="filled"
+  description="Keep devices aligned"
+  label="Sync data"
   size="md"
+  variant="material"
   [binary]="true"
-  [trueValue]="'ENABLED'"
   [falseValue]="'DISABLED'"
-  [(ngModel)]="syncStatus">
-</ui-lib-checkbox>`;
+  [trueValue]="'ENABLED'"
+  [(ngModel)]="syncStatus"
+/>`;
 
 export const usageTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';

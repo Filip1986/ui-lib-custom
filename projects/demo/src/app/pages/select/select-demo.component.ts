@@ -1,45 +1,47 @@
 import { CommonModule } from '@angular/common';
+import type { Signal, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewChild,
-  signal,
   computed,
-  inject,
   effect,
+  inject,
+  signal,
+  ViewChild,
   viewChild,
 } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UiLibSelect } from 'ui-lib-custom/select';
-import type { SelectOption, SelectVariant } from 'ui-lib-custom/select';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { Button } from 'ui-lib-custom/button';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import { Panel } from 'ui-lib-custom/panel';
+import type { SelectOption, SelectVariant } from 'ui-lib-custom/select';
+import { UiLibSelect } from 'ui-lib-custom/select';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import { SelectBasicExampleComponent } from '@demo/examples/select-basic-example.component';
+import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
-import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
-import { SelectBasicExampleComponent } from '@demo/examples/select-basic-example.component';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
-import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
-import { Panel } from 'ui-lib-custom/panel';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { selectExampleHtml, selectExampleTs, usageHtml, usageTs } from './snippets.generated';
-import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 type TabKey =
   | 'playground'
   | 'variants'

@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  InjectionToken,
   computed,
+  InjectionToken,
   input,
-  ViewEncapsulation,
   type InputSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
 export type AvatarGroupMax = number;
 export const AVATAR_GROUP_CONTEXT: InjectionToken<boolean> = new InjectionToken<boolean>(

@@ -12,68 +12,68 @@
         <!-- Root panel -->
         <div
           class="ui-lib-panel-menu__panel"
-          [class.ui-lib-panel-menu__panel--expanded]="isItemExpanded(getRootKey($index))"
-          [class.ui-lib-panel-menu__panel--disabled]="item.disabled"
           role="none"
+          [class.ui-lib-panel-menu__panel--disabled]="item.disabled"
+          [class.ui-lib-panel-menu__panel--expanded]="isItemExpanded(getRootKey($index))"
         >
           @if (item.items && item.items.length > 0) {
             <!-- Panel header button -->
             <button
-              type="button"
               class="ui-lib-panel-menu__header"
-              [id]="getPanelHeaderId($index)"
+              type="button"
+              [attr.aria-controls]="getPanelContentId($index)"
+              [attr.aria-disabled]="item.disabled ? 'true' : null"
+              [attr.aria-expanded]="isItemExpanded(getRootKey($index)) ? 'true' : 'false'"
+              [attr.aria-haspopup]="popupRole"
               [class.ui-lib-panel-menu__header--expanded]="isItemExpanded(getRootKey($index))"
               [class.ui-lib-panel-menu__header--has-children]="item.items && item.items.length > 0"
-              [attr.aria-expanded]="isItemExpanded(getRootKey($index)) ? 'true' : 'false'"
-              [attr.aria-controls]="getPanelContentId($index)"
-              [attr.aria-haspopup]="popupRole"
-              [attr.aria-disabled]="item.disabled ? 'true' : null"
               [disabled]="item.disabled ? true : null"
+              [id]="getPanelHeaderId($index)"
               (click)="onRootItemClick($event, item, $index)"
               (keydown)="onRootItemKeyDown($event, item, $index)"
             >
               @if (item.icon) {
                 <span
-                  class="ui-lib-panel-menu__header-icon {{ item.icon }}"
                   aria-hidden="true"
+                  class="ui-lib-panel-menu__header-icon {{ item.icon }}"
                 ></span>
               }
               <span class="ui-lib-panel-menu__header-label">{{ item.label }}</span>
-              <span class="ui-lib-panel-menu__header-toggle" aria-hidden="true"></span>
+              <span aria-hidden="true" class="ui-lib-panel-menu__header-toggle"></span>
             </button>
 
             <!-- Panel content (always in DOM; CSS grid drives animation) -->
             <div
               class="ui-lib-panel-menu__content"
-              [id]="getPanelContentId($index)"
               role="region"
-              [class.ui-lib-panel-menu__content--visible]="isItemExpanded(getRootKey($index))"
-              [attr.aria-labelledby]="getPanelHeaderId($index)"
               [attr.aria-hidden]="!isItemExpanded(getRootKey($index)) ? 'true' : null"
+              [attr.aria-labelledby]="getPanelHeaderId($index)"
               [attr.inert]="!isItemExpanded(getRootKey($index)) ? true : null"
+              [class.ui-lib-panel-menu__content--visible]="isItemExpanded(getRootKey($index))"
+              [id]="getPanelContentId($index)"
             >
               <div class="ui-lib-panel-menu__content-inner">
                 <ui-lib-panel-menu-sub
+                  [depth]="1"
                   [items]="item.items"
                   [parentKey]="getRootKey($index)"
-                  [depth]="1"
                 />
               </div>
             </div>
           } @else {
             <a
               class="ui-lib-panel-menu__header ui-lib-panel-menu__root-link"
-              [href]="item.url || null"
-              [attr.target]="item.target || null"
               [attr.aria-disabled]="item.disabled ? 'true' : null"
               [attr.tabindex]="item.disabled ? '-1' : '0'"
+              [attr.target]="item.target || null"
+              [href]="item.url || null"
               (click)="onRootItemClick($event, item, $index)"
               (keydown)="onRootItemKeyDown($event, item, $index)"
             >
               @if (item.icon) {
                 <span
-                  class="ui-lib-panel-menu__header-icon {{ item.icon }}"
                   aria-hidden="true"
+                  class="ui-lib-panel-menu__header-icon {{ item.icon }}"
                 ></span>
               }
               <span class="ui-lib-panel-menu__header-label">{{ item.label }}</span>

@@ -23,9 +23,9 @@ export class MyComponent {
 }`;
 
 export const checkboxHtml = `<ui-lib-listbox
-  [options]="cities"
-  [multiple]="true"
   [checkbox]="true"
+  [multiple]="true"
+  [options]="cities"
   [(ngModel)]="selectedCities"
 />`;
 
@@ -47,7 +47,7 @@ export class MyComponent {
   public selectedCities: unknown[] = [];
 }`;
 
-export const disabledHtml = `<ui-lib-listbox [options]="cities" [disabled]="true" [(ngModel)]="value" />`;
+export const disabledHtml = `<ui-lib-listbox [disabled]="true" [options]="cities" [(ngModel)]="value" />`;
 
 export const disabledTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -68,10 +68,15 @@ export class MyComponent {
 }`;
 
 export const filterMatchModesHtml = `<!-- starts with -->
-<ui-lib-listbox [options]="cities" [filter]="true" filterMatchMode="startsWith" [(ngModel)]="value" />
+<ui-lib-listbox
+  filterMatchMode="startsWith"
+  [filter]="true"
+  [options]="cities"
+  [(ngModel)]="value"
+/>
 
 <!-- ends with -->
-<ui-lib-listbox [options]="cities" [filter]="true" filterMatchMode="endsWith" [(ngModel)]="value" />`;
+<ui-lib-listbox filterMatchMode="endsWith" [filter]="true" [options]="cities" [(ngModel)]="value" />`;
 
 export const filterMatchModesTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -91,7 +96,7 @@ export class MyComponent {
   public value: unknown = null;
 }`;
 
-export const filterHtml = `<ui-lib-listbox [options]="cities" [filter]="true" [(ngModel)]="selectedCity" />`;
+export const filterHtml = `<ui-lib-listbox [filter]="true" [options]="cities" [(ngModel)]="selectedCity" />`;
 
 export const filterTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -112,10 +117,10 @@ export class MyComponent {
 }`;
 
 export const groupsHtml = `<ui-lib-listbox
-  [options]="groupedCities"
-  [group]="true"
-  optionGroupLabel="label"
   optionGroupChildren="items"
+  optionGroupLabel="label"
+  [group]="true"
+  [options]="groupedCities"
   [(ngModel)]="selectedCity"
 />`;
 
@@ -137,7 +142,7 @@ export class MyComponent {
   public selectedCity: unknown = null;
 }`;
 
-export const multipleHtml = `<ui-lib-listbox [options]="cities" [multiple]="true" [(ngModel)]="selectedCities" />`;
+export const multipleHtml = `<ui-lib-listbox [multiple]="true" [options]="cities" [(ngModel)]="selectedCities" />`;
 
 export const multipleTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -158,7 +163,7 @@ export class MyComponent {
 }`;
 
 export const reactiveHtml = `<form [formGroup]="form">
-  <ui-lib-listbox [options]="cities" formControlName="city" />
+  <ui-lib-listbox formControlName="city" [options]="cities" />
 </form>`;
 
 export const reactiveTs = `import { Component } from '@angular/core';
@@ -183,9 +188,9 @@ export class MyComponent {
 }`;
 
 export const toggleAllHtml = `<ui-lib-listbox
-  [options]="cities"
-  [multiple]="true"
   [checkbox]="true"
+  [multiple]="true"
+  [options]="cities"
   [showToggleAll]="true"
   [(ngModel)]="selectedCities"
 />`;

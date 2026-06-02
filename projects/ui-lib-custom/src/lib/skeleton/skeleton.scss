@@ -36,11 +36,11 @@
     }
 
     &__placeholder {
-      position: absolute;
-      inset: 0;
-      display: block;
-      pointer-events: none;
       border-radius: inherit;
+      display: block;
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
     }
 
     &--loading {
@@ -52,14 +52,15 @@
     // ---- Shimmer inner element -------------------------------------
     &__shimmer {
       display: block;
-      position: absolute;
       inset: 0;
       pointer-events: none;
+      position: absolute;
     }
 
     // ---- Wave animation --------------------------------------------
     &--wave {
       .ui-lib-skeleton__shimmer {
+        animation: var(--uilib-skeleton-animation);
         background: linear-gradient(
           90deg,
           transparent 0%,
@@ -68,7 +69,6 @@
           transparent 100%
         );
         background-size: 200% 100%;
-        animation: var(--uilib-skeleton-animation);
       }
     }
 

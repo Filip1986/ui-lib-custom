@@ -5,12 +5,13 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+
+import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { ListboxComponent } from './listbox.component';
 import type { ListboxOption } from './listbox.types';
-import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 
 const SKIP_LISTBOX_STRUCTURE_RULES: Record<string, { enabled: boolean }> = {
   ...SKIP_COLOR_CONTRAST_RULES,

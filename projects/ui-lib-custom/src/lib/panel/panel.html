@@ -11,19 +11,19 @@
     <span #projectedIconsSlot style="display: contents"><ng-content select="[panelIcons]" /></span>
     @if (toggleable()) {
       <button
-        type="button"
         class="ui-lib-panel__toggle-button"
-        [attr.aria-expanded]="!collapsed()"
+        type="button"
         [attr.aria-controls]="contentId"
+        [attr.aria-expanded]="!collapsed()"
         [attr.aria-label]="i18n.translate('panel.toggle')"
         (click)="handleToggleClick($event)"
         (keydown.enter)="handleToggleKeydown($event)"
         (keydown.space)="handleToggleKeydown($event)"
       >
         <span
+          aria-hidden="true"
           class="ui-lib-panel__toggle-icon"
           [class.ui-lib-panel__toggle-icon--collapsed]="collapsed()"
-          aria-hidden="true"
         ></span>
       </button>
     }
@@ -31,9 +31,9 @@
 </div>
 <div
   class="ui-lib-panel__content-wrapper"
+  [attr.aria-hidden]="toggleable() && collapsed() ? 'true' : null"
   [class.ui-lib-panel__content-wrapper--collapsed]="toggleable() && collapsed()"
   [id]="contentId"
-  [attr.aria-hidden]="toggleable() && collapsed() ? 'true' : null"
 >
   <div class="ui-lib-panel__content-inner">
     <ng-content />

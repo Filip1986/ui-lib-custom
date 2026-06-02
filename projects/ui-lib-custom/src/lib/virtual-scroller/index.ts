@@ -1,17 +1,17 @@
 export { VirtualScrollerComponent } from './virtual-scroller.component';
 export {
-  ScrollerItemDirective,
   ScrollerContentDirective,
+  ScrollerItemDirective,
   ScrollerLoaderDirective,
   ScrollerLoaderIconDirective,
 } from './virtual-scroller.directives';
 export type {
-  VirtualScrollerOrientation,
-  VirtualScrollerToType,
-  VirtualScrollerItemOptions,
-  VirtualScrollerLoaderOptions,
   VirtualScrollerContentOptions,
+  VirtualScrollerItemOptions,
   VirtualScrollerLazyLoadEvent,
-  VirtualScrollerScrollIndexChangeEvent,
+  VirtualScrollerLoaderOptions,
+  VirtualScrollerOrientation,
   VirtualScrollerScrollEvent,
+  VirtualScrollerScrollIndexChangeEvent,
+  VirtualScrollerToType,
 } from './virtual-scroller.types';

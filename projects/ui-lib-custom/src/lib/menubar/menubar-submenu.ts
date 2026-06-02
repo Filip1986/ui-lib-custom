@@ -1,17 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   input,
-  output,
-  signal,
   type InputSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+
 import type { MenubarCommandEvent, MenubarItem } from './menubar.types';
 
 /**

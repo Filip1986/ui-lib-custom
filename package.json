@@ -31,6 +31,7 @@
     "build-storybook": "cross-env NODE_ENV=production ng run ui-lib-custom:build-storybook",
     "lint": "npx eslint",
     "lint:fix": "eslint . --fix",
+    "lint:organization:fix": "eslint \"projects/**/*.{ts,html}\" \"e2e/**/*.{ts,html}\" \".storybook/**/*.{ts,html}\" \"setup-a11y.ts\" --fix --no-warn-ignored",
     "lint:ci": "eslint . --max-warnings 0",
     "lint:css": "stylelint \"**/*.{scss,css}\" --allow-empty-input",
     "lint:css:fix": "stylelint \"**/*.{scss,css}\" --allow-empty-input --fix",
@@ -99,6 +100,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^9.39.4",
     "eslint-plugin-jsdoc": "^62.9.0",
+    "eslint-plugin-simple-import-sort": "^13.0.0",
     "husky": "^9.1.7",
     "jest": "^30.4.2",
     "jest-axe": "^7.0.0",
@@ -115,6 +117,7 @@
     "stylelint": "^17.12.0",
     "stylelint-declaration-strict-value": "^1.11.1",
     "stylelint-high-performance-animation": "^2.0.0",
+    "stylelint-order": "^8.1.1",
     "stylelint-scss": "^7.1.1",
     "ts-node": "^10.9.2",
     "typescript": "5.9"
@@ -536,7 +539,8 @@
       "scripts/lint-staged-eslint.sh"
     ],
     "*.html": [
-      "prettier --write"
+      "prettier --write",
+      "scripts/lint-staged-eslint.sh"
     ],
     "*.{scss,css}": [
       "prettier --write"

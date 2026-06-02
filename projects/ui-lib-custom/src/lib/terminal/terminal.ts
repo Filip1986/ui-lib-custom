@@ -1,27 +1,29 @@
 import {
+  type AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
-  ViewChild,
-  ViewEncapsulation,
   computed,
+  type ElementRef,
   inject,
   input,
-  signal,
-  type AfterViewChecked,
-  type ElementRef,
   type InputSignal,
   type Signal,
+  signal,
+  ViewChild,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { TerminalService } from './terminal.service';
 import type { TerminalHistoryItem, TerminalVariant } from './terminal.types';
 
 let nextTerminalId: number = 0;
 
-export type { TerminalHistoryItem, TerminalVariant } from './terminal.types';
 export { TerminalService } from './terminal.service';
+export type { TerminalHistoryItem, TerminalVariant } from './terminal.types';
 
 /**
  * Terminal — an interactive command-line interface component.

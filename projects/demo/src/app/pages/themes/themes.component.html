@@ -1,20 +1,20 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description='Toggle between light and dark themes by setting <code>data-theme="light|dark"</code> on <code>html</code> or any container. CSS variables in <code>ui-lib-custom/src/lib/themes/themes.css</code> drive component colors.'
     docHeader
     title="Theme Switcher"
-    description='Toggle between light and dark themes by setting <code>data-theme="light|dark"</code> on <code>html</code> or any container. CSS variables in <code>ui-lib-custom/src/lib/themes/themes.css</code> drive component colors.'
   />
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
-      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
-      <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
+      <ui-lib-tab label="Playground" value="playground" />
+      <ui-lib-tab label="API Reference" value="api-reference" />
+      <ui-lib-tab label="Usage" value="usage" />
     </ui-lib-tabs>
   </div>
 
@@ -26,16 +26,16 @@
         <ui-lib-inline [gap]="2">
           <ui-lib-input
             label="Theme name"
-            placeholder="e.g. brand-x"
             name="themeName"
+            placeholder="e.g. brand-x"
             [ngModel]="themeName()"
             (ngModelChange)="themeName.set($event || '')"
-          ></ui-lib-input>
+          />
           <ui-lib-button color="primary" (click)="saveTheme()">
             <i class="pi pi-save"></i>
             Save theme
           </ui-lib-button>
-          <ui-lib-button variant="bootstrap" color="secondary" (click)="goToProjectStarter()">
+          <ui-lib-button color="secondary" variant="bootstrap" (click)="goToProjectStarter()">
             <i class="pi pi-plus"></i>
             New project
           </ui-lib-button>
@@ -53,8 +53,8 @@
               <div class="panel-body">
                 <ui-lib-inline [gap]="2">
                   <ui-lib-button color="primary">Primary</ui-lib-button>
-                  <ui-lib-button variant="bootstrap" color="success">Success</ui-lib-button>
-                  <ui-lib-button variant="minimal" color="danger">Danger</ui-lib-button>
+                  <ui-lib-button color="success" variant="bootstrap">Success</ui-lib-button>
+                  <ui-lib-button color="danger" variant="minimal">Danger</ui-lib-button>
                 </ui-lib-inline>
 
                 <ui-lib-inline [gap]="2">
@@ -74,8 +74,8 @@
               <div class="panel-body">
                 <ui-lib-inline [gap]="2">
                   <ui-lib-button color="primary">Primary</ui-lib-button>
-                  <ui-lib-button variant="bootstrap" color="success">Success</ui-lib-button>
-                  <ui-lib-button variant="minimal" color="danger">Danger</ui-lib-button>
+                  <ui-lib-button color="success" variant="bootstrap">Success</ui-lib-button>
+                  <ui-lib-button color="danger" variant="minimal">Danger</ui-lib-button>
                 </ui-lib-inline>
 
                 <ui-lib-inline [gap]="2">
@@ -97,7 +97,7 @@
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
-      <app-doc-api-reference [rows]="apiRows" kind="name" [showDefault]="false" />
+      <app-doc-api-reference kind="name" [rows]="apiRows" [showDefault]="false" />
     </ui-lib-panel>
   }
 
@@ -108,15 +108,15 @@
         title="Toggle data-theme"
         [code]="snippets.usage"
         [showLineNumbers]="true"
-      ></ui-lib-code-snippet>
+      />
     </ui-lib-panel>
   }
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

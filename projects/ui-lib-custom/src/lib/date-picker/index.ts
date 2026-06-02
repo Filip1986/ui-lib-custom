@@ -1,11 +1,11 @@
 export { DatePickerComponent } from './date-picker';
 export type {
+  DatePickerAppendTo,
   DatePickerChangeEvent,
   DatePickerDateMeta,
   DatePickerLocale,
   DatePickerMonthChangeEvent,
   DatePickerNavigationState,
-  DatePickerAppendTo,
   DatePickerSelectionMode,
   DatePickerSize,
   DatePickerValue,

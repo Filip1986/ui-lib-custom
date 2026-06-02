@@ -1,29 +1,30 @@
-import type { Routes } from '@angular/router';
 import type { Type } from '@angular/core';
-import { HomeComponent } from './pages/home/home.component';
+import type { Routes } from '@angular/router';
+
+import { AccessibilityComponent } from './pages/accessibility/accessibility.component';
+import { BadgesDemoComponent } from './pages/badges/badges-demo.component';
 import { ButtonsDemoComponent } from './pages/buttons/buttons-demo.component';
 import { CardsDemoComponent } from './pages/cards/cards-demo.component';
-import { BadgesDemoComponent } from './pages/badges/badges-demo.component';
-import { ThemesComponent } from './pages/themes/themes.component';
-import { InputsDemoComponent } from './pages/inputs/inputs-demo.component';
-import { SelectDemoComponent } from './pages/select/select-demo.component';
-import { ProjectStarterComponent } from './pages/project-starter/project-starter.component';
-import { ShadowsComponent } from './pages/shadows/shadows.component';
 import { CheckboxesDemoComponent } from './pages/checkboxes/checkboxes-demo.component';
-import { TabsDemoComponent } from './pages/tabs/tabs-demo.component';
+import { DarkModeComponent } from './pages/dark-mode/dark-mode.component';
+import { HomeComponent } from './pages/home/home.component';
+import { InputsDemoComponent } from './pages/inputs/inputs-demo.component';
+import { LayoutCompositionSectionComponent } from './pages/layouts/composition-section.component';
+import { ContainerSectionComponent } from './pages/layouts/container-section.component';
+import { DesignTokensSectionComponent } from './pages/layouts/design-tokens-section.component';
+import { LayoutExamplesSectionComponent } from './pages/layouts/examples-section.component';
+import { GridSectionComponent } from './pages/layouts/grid-section.component';
+import { InlineSectionComponent } from './pages/layouts/inline-section.component';
 import { SemanticSpacingSectionComponent } from './pages/layouts/semantic-spacing-section.component';
 import { StackSectionComponent } from './pages/layouts/stack-section.component';
-import { InlineSectionComponent } from './pages/layouts/inline-section.component';
-import { GridSectionComponent } from './pages/layouts/grid-section.component';
-import { ContainerSectionComponent } from './pages/layouts/container-section.component';
-import { LayoutCompositionSectionComponent } from './pages/layouts/composition-section.component';
-import { DesignTokensSectionComponent } from './pages/layouts/design-tokens-section.component';
 import { ThemedLayoutsSectionComponent } from './pages/layouts/themed-layouts-section.component';
-import { LayoutExamplesSectionComponent } from './pages/layouts/examples-section.component';
-import { SelectButtonsDemoComponent } from './pages/select-buttons/select-buttons-demo.component';
-import { DarkModeComponent } from './pages/dark-mode/dark-mode.component';
+import { ProjectStarterComponent } from './pages/project-starter/project-starter.component';
 import { ScopedThemingComponent } from './pages/scoped-theming/scoped-theming.component';
-import { AccessibilityComponent } from './pages/accessibility/accessibility.component';
+import { SelectDemoComponent } from './pages/select/select-demo.component';
+import { SelectButtonsDemoComponent } from './pages/select-buttons/select-buttons-demo.component';
+import { ShadowsComponent } from './pages/shadows/shadows.component';
+import { TabsDemoComponent } from './pages/tabs/tabs-demo.component';
+import { ThemesComponent } from './pages/themes/themes.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },

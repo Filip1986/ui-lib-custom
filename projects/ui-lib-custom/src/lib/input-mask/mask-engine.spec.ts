@@ -1,5 +1,5 @@
-import { MaskEngine } from './mask-engine';
 import type { MaskTestEntry } from './input-mask.types';
+import { MaskEngine } from './mask-engine';
 
 describe('MaskEngine', (): void => {
   it('parses phone mask tokens and literals correctly', (): void => {

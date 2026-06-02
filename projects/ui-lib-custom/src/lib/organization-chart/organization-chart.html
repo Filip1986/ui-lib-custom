@@ -2,10 +2,10 @@
   @for (rootNode of value(); track rootNode.key; let index = $index) {
     <li role="none">
       <ui-lib-organization-chart-node
-        [node]="rootNode"
         [depth]="0"
-        [setsize]="value().length"
+        [node]="rootNode"
         [posinset]="index + 1"
+        [setsize]="value().length"
       />
     </li>
   }

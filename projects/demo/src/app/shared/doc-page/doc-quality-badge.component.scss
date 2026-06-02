@@ -37,27 +37,27 @@ $score-estimate-dot: $zinc-400;
 
 // ─── Shell ────────────────────────────────────────────────────────────────────
 .doc-quality-badge {
+  background: var(--uilib-surface-card, #fff);
   border: 1px solid $zinc-200;
   border-radius: 0.5rem;
-  overflow: hidden;
   font-size: 0.8125rem;
-  background: var(--uilib-surface-card, #fff);
+  overflow: hidden;
 }
 
 // ─── Toggle button (always-visible header row) ────────────────────────────────
 .doc-quality-badge__header {
-  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-  padding: 0.625rem 0.875rem;
   background: var(--uilib-surface-ground, #f9fafb);
   border: none;
   border-bottom: 1px solid transparent;
-  cursor: pointer;
-  text-align: left;
   color: $zinc-700;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  text-align: left;
   transition: background 120ms ease;
+  width: 100%;
 
   &:hover {
     background: $zinc-100;
@@ -78,127 +78,127 @@ $score-estimate-dot: $zinc-400;
 }
 
 .doc-quality-badge__shield {
+  align-items: center;
   color: $zinc-400;
   display: flex;
-  align-items: center;
   flex-shrink: 0;
 }
 
 .doc-quality-badge__title {
-  font-weight: 600;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   color: $zinc-500;
   flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 // ─── Tier badge ───────────────────────────────────────────────────────────────
 .doc-quality-badge__tier {
+  border-radius: 0.25rem;
+  flex-shrink: 0;
   font-size: 0.6875rem;
   font-weight: 700;
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
   letter-spacing: 0.02em;
-  flex-shrink: 0;
+  padding: 0.125rem 0.375rem;
 
   &--t1 {
     background: $zinc-200;
-    color: $zinc-600;
     border: 1px solid $zinc-300;
+    color: $zinc-600;
   }
 
   &--t2 {
     background: #ede9fe;
-    color: #5b21b6;
     border: 1px solid #ddd6fe;
+    color: #5b21b6;
   }
 }
 
 // ─── Average score badge ───────────────────────────────────────────────────────
 .doc-quality-badge__avg {
+  border-radius: 0.375rem;
+  flex-shrink: 0;
   font-size: 0.8125rem;
   font-weight: 700;
   padding: 0.125rem 0.5rem;
-  border-radius: 0.375rem;
-  flex-shrink: 0;
 
   &--excellent {
     background: $score-excellent-bg;
-    color: $score-excellent-text;
     border: 1px solid $score-excellent-border;
+    color: $score-excellent-text;
   }
 
   &--pass {
     background: $score-pass-bg;
-    color: $score-pass-text;
     border: 1px solid $score-pass-border;
+    color: $score-pass-text;
   }
 
   &--warn {
     background: $score-warn-bg;
-    color: $score-warn-text;
     border: 1px solid $score-warn-border;
+    color: $score-warn-text;
   }
 
   &--fail {
     background: $score-fail-bg;
-    color: $score-fail-text;
     border: 1px solid $score-fail-border;
+    color: $score-fail-text;
   }
 
   &--estimate {
     background: $score-estimate-bg;
-    color: $score-estimate-text;
     border: 1px solid $score-estimate-border;
+    color: $score-estimate-text;
     font-style: italic;
   }
 }
 
 // ─── Gate badge ───────────────────────────────────────────────────────────────
 .doc-quality-badge__gate {
-  display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  border-radius: 0.375rem;
+  display: inline-flex;
+  flex-shrink: 0;
   font-size: 0.6875rem;
   font-weight: 600;
+  gap: 0.25rem;
   padding: 0.125rem 0.5rem;
-  border-radius: 0.375rem;
-  flex-shrink: 0;
 
   &--pass {
     background: $score-excellent-bg;
-    color: $score-excellent-text;
     border: 1px solid $score-excellent-border;
+    color: $score-excellent-text;
   }
 
   &--fail {
     background: $score-fail-bg;
-    color: $score-fail-text;
     border: 1px solid $score-fail-border;
+    color: $score-fail-text;
   }
 
   // Tier 1 estimated gate states
   &--est-pass {
     background: $zinc-100;
-    color: $zinc-500;
     border: 1px solid $zinc-300;
+    color: $zinc-500;
     font-style: italic;
   }
 
   &--est-fail {
     background: $zinc-100;
-    color: $zinc-500;
     border: 1px solid $zinc-300;
+    color: $zinc-500;
     font-style: italic;
   }
 }
 
 .doc-quality-badge__date {
-  font-size: 0.6875rem;
   color: $zinc-400;
-  margin-left: auto;
   flex-shrink: 0;
+  font-size: 0.6875rem;
+  margin-left: auto;
 }
 
 .doc-quality-badge__chevron {
@@ -217,29 +217,29 @@ $score-estimate-dot: $zinc-400;
 
 // ─── Expandable detail panel ──────────────────────────────────────────────────
 .doc-quality-badge__detail {
-  padding: 1rem 0.875rem;
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
+  padding: 1rem 0.875rem;
 }
 
 // ─── Tier 1 estimate notice ───────────────────────────────────────────────────
 .doc-quality-badge__estimate-notice {
-  display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.375rem;
   background: $zinc-50;
   border: 1px solid $zinc-200;
-  font-size: 0.75rem;
+  border-radius: 0.375rem;
   color: $zinc-600;
+  display: flex;
+  font-size: 0.75rem;
+  gap: 0.5rem;
   line-height: 1.5;
+  padding: 0.5rem 0.75rem;
 
   svg {
+    color: $zinc-400;
     flex-shrink: 0;
     margin-top: 0.125rem;
-    color: $zinc-400;
   }
 }
 
@@ -251,97 +251,97 @@ $score-estimate-dot: $zinc-400;
 }
 
 .doc-quality-badge__score-chip {
-  display: inline-flex;
   align-items: baseline;
+  border: 1px solid;
+  border-radius: 0.375rem;
+  display: inline-flex;
+  font-size: 0.75rem;
   gap: 0.25rem;
   padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  border: 1px solid;
-  font-size: 0.75rem;
 
   &--excellent {
     background: $score-excellent-bg;
-    color: $score-excellent-text;
     border-color: $score-excellent-border;
+    color: $score-excellent-text;
   }
 
   &--pass {
     background: $score-pass-bg;
-    color: $score-pass-text;
     border-color: $score-pass-border;
+    color: $score-pass-text;
   }
 
   &--warn {
     background: $score-warn-bg;
-    color: $score-warn-text;
     border-color: $score-warn-border;
+    color: $score-warn-text;
   }
 
   &--fail {
     background: $score-fail-bg;
-    color: $score-fail-text;
     border-color: $score-fail-border;
+    color: $score-fail-text;
   }
 
   &--estimate {
     background: $score-estimate-bg;
-    color: $score-estimate-text;
     border-color: $score-estimate-border;
+    color: $score-estimate-text;
   }
 }
 
 .doc-quality-badge__score-abbr {
-  font-weight: 600;
   font-size: 0.6875rem;
-  text-transform: uppercase;
+  font-weight: 600;
   letter-spacing: 0.04em;
   opacity: 0.75;
+  text-transform: uppercase;
 }
 
 .doc-quality-badge__score-value {
-  font-weight: 700;
   font-size: 0.8125rem;
+  font-weight: 700;
 }
 
 .doc-quality-badge__score-tilde {
+  font-size: 0.75rem;
   font-weight: 400;
   opacity: 0.7;
-  font-size: 0.75rem;
 }
 
 .doc-quality-badge__score-checkpoints {
   font-size: 0.625rem;
   font-weight: 600;
-  opacity: 0.7;
   margin-left: 0.125rem;
+  opacity: 0.7;
 }
 
 // ─── Categories legend ────────────────────────────────────────────────────────
 .doc-quality-badge__categories-legend {
+  background: $zinc-50;
+  border: 1px solid $zinc-200;
+  border-radius: 0.375rem;
   display: flex;
   flex-direction: column;
   gap: 0.3125rem;
   padding: 0.625rem 0.75rem;
-  background: $zinc-50;
-  border: 1px solid $zinc-200;
-  border-radius: 0.375rem;
 }
 
 .doc-quality-badge__cat-row {
-  display: flex;
   align-items: baseline;
-  gap: 0.5rem;
+  display: flex;
   font-size: 0.75rem;
+  gap: 0.5rem;
   line-height: 1.5;
 }
 
 .doc-quality-badge__cat-dot {
-  width: 6px;
-  height: 6px;
+  align-self: center;
   border-radius: 50%;
   flex-shrink: 0;
+  height: 6px;
   margin-bottom: -1px;
-  align-self: center;
+  width: 6px;
 
   &--excellent {
     background: $score-excellent-dot;
@@ -361,9 +361,9 @@ $score-estimate-dot: $zinc-400;
 }
 
 .doc-quality-badge__cat-name {
-  font-weight: 600;
   color: $zinc-700;
   flex-shrink: 0;
+  font-weight: 600;
   min-width: 140px;
 }
 
@@ -373,60 +373,60 @@ $score-estimate-dot: $zinc-400;
 }
 
 .doc-quality-badge__cat-check-count {
-  margin-left: auto;
-  font-size: 0.6875rem;
-  font-weight: 600;
   color: $score-pass-text;
   flex-shrink: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  margin-left: auto;
 }
 
 // ─── Meta rows ────────────────────────────────────────────────────────────────
 .doc-quality-badge__meta {
+  border-top: 1px solid $zinc-100;
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
   padding-top: 0.5rem;
-  border-top: 1px solid $zinc-100;
 }
 
 .doc-quality-badge__meta-row {
-  display: flex;
   align-items: center;
-  gap: 0.75rem;
+  display: flex;
   font-size: 0.75rem;
+  gap: 0.75rem;
 }
 
 .doc-quality-badge__meta-label {
   color: $zinc-500;
+  flex-shrink: 0;
   font-weight: 500;
   min-width: 140px;
-  flex-shrink: 0;
 }
 
 .doc-quality-badge__meta-link {
-  display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
   color: var(--uilib-color-primary-600, #4f46e5);
-  text-decoration: none;
+  display: inline-flex;
   font-weight: 500;
+  gap: 0.25rem;
+  text-decoration: none;
 
   &:hover {
     text-decoration: underline;
   }
 
   &:focus-visible {
+    border-radius: 0.125rem;
     outline: 2px solid var(--uilib-color-primary-500, #6366f1);
     outline-offset: 2px;
-    border-radius: 0.125rem;
   }
 }
 
 .doc-quality-badge__parity {
-  font-weight: 600;
-  font-size: 0.6875rem;
-  padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.125rem 0.375rem;
 
   &--pass {
     background: $score-excellent-bg;
@@ -446,10 +446,10 @@ $score-estimate-dot: $zinc-400;
 
 // ─── Backlog / human-pending section ─────────────────────────────────────────
 .doc-quality-badge__backlog {
-  padding: 0.625rem 0.75rem;
-  border-radius: 0.375rem;
   background: $zinc-100;
   border: 1px solid $zinc-200;
+  border-radius: 0.375rem;
+  padding: 0.625rem 0.75rem;
 
   &--human {
     background: $score-warn-bg;
@@ -462,24 +462,24 @@ $score-estimate-dot: $zinc-400;
 }
 
 .doc-quality-badge__backlog-title {
+  color: $zinc-500;
   font-size: 0.6875rem;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: $zinc-500;
   margin-bottom: 0.375rem;
+  text-transform: uppercase;
 }
 
 .doc-quality-badge__backlog-list {
-  margin: 0;
-  padding-left: 1.125rem;
   display: flex;
   flex-direction: column;
   gap: 0.1875rem;
+  margin: 0;
+  padding-left: 1.125rem;
 }
 
 .doc-quality-badge__backlog-item {
-  font-size: 0.75rem;
   color: $zinc-600;
+  font-size: 0.75rem;
   line-height: 1.5;
 }

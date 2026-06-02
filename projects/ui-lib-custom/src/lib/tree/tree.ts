@@ -1,17 +1,3 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  computed,
-  contentChildren,
-  inject,
-  input,
-  model,
-  output,
-  signal,
-} from '@angular/core';
 import type {
   InputSignal,
   ModelSignal,
@@ -20,13 +6,25 @@ import type {
   TemplateRef,
   WritableSignal,
 } from '@angular/core';
-import { TREE_CONTEXT } from './tree-context';
-import type { TreeContext } from './tree-context';
-import { TreeNodeTemplateDirective } from './tree-template-directives';
-import { TreeNodeComponent } from './tree-node';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  contentChildren,
+  ElementRef,
+  inject,
+  input,
+  model,
+  output,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   TreeFilterMode,
   TreeNode,
@@ -37,6 +35,10 @@ import type {
   TreeSize,
   TreeVariant,
 } from './tree.types';
+import type { TreeContext } from './tree-context';
+import { TREE_CONTEXT } from './tree-context';
+import { TreeNodeComponent } from './tree-node';
+import { TreeNodeTemplateDirective } from './tree-template-directives';
 
 /** Module-level counter for generating unique tree instance IDs. */
 let nextTreeId: number = 0;

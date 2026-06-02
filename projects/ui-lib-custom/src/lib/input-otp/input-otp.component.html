@@ -1,32 +1,32 @@
 @for (index of cellIndices(); track index) {
   <input
     #cellInput
-    [type]="inputType()"
-    [inputMode]="inputMode()"
-    [value]="getToken(index)"
-    [disabled]="isControlDisabled()"
-    [readOnly]="readonly()"
-    [tabindex]="tabindex()"
-    [attr.aria-label]="getCellAriaLabel(index)"
+    class="ui-lib-input-otp-cell"
     [attr.aria-invalid]="invalid() ? 'true' : null"
+    [attr.aria-label]="getCellAriaLabel(index)"
     [attr.autocomplete]="index === 0 ? 'one-time-code' : 'off'"
     [attr.maxlength]="index === 0 ? length() : 1"
     [class]="styleClass()"
-    class="ui-lib-input-otp-cell"
+    [disabled]="isControlDisabled()"
+    [inputMode]="inputMode()"
+    [readOnly]="readonly()"
+    [tabindex]="tabindex()"
+    [type]="inputType()"
+    [value]="getToken(index)"
+    (blur)="onCellBlur($event)"
+    (focus)="onCellFocus($event)"
     (input)="onCellInput($event, index)"
     (keydown)="onCellKeydown($event, index)"
-    (focus)="onCellFocus($event)"
-    (blur)="onCellBlur($event)"
     (paste)="onCellPaste($event)"
   />
 }
 
 @if (invalid()) {
-  <span [id]="errorId()" role="alert" class="ui-lib-input-otp-error">
+  <span class="ui-lib-input-otp-error" role="alert" [id]="errorId()">
     <ng-content select="[inputOtpError]" />
   </span>
 }
 
-<span aria-live="polite" aria-atomic="true" class="ui-lib-input-otp-sr-only">
+<span aria-atomic="true" aria-live="polite" class="ui-lib-input-otp-sr-only">
   {{ liveAnnouncement() }}
 </span>

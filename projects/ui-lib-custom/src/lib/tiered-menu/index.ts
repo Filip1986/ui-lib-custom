@@ -1,6 +1,6 @@
 export {
-  TieredMenu,
   TIERED_MENU_DEFAULT_ARIA_LABEL,
+  TieredMenu,
   type TieredMenuItem,
   type TieredMenuItemCommandEvent,
   type TieredMenuSize,

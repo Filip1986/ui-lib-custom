@@ -1,21 +1,21 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Configure a theme, preview components, and download starter assets (JSON, CSS, SCSS)."
     docHeader
     title="Project Starter"
-    description="Configure a theme, preview components, and download starter assets (JSON, CSS, SCSS)."
   />
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
-      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
-      <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
-      <ui-lib-tab value="local-install" label="Local Install"></ui-lib-tab>
+      <ui-lib-tab label="Playground" value="playground" />
+      <ui-lib-tab label="API Reference" value="api-reference" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="Local Install" value="local-install" />
     </ui-lib-tabs>
   </div>
 
@@ -29,12 +29,12 @@
         <div class="control-group">
           <label>Theme name</label>
           <input
-            type="text"
             aria-label="Theme name"
+            type="text"
             [ngModel]="themeName()"
             (ngModelChange)="themeName.set($event)"
           />
-          <ui-lib-button type="button" severity="primary" size="sm" (click)="saveTheme()"
+          <ui-lib-button severity="primary" size="sm" type="button" (click)="saveTheme()"
             >Save Theme</ui-lib-button
           >
         </div>
@@ -51,11 +51,11 @@
             }
           </select>
           <ui-lib-button
-            type="button"
             appearance="ghost"
             size="sm"
-            (click)="deleteTheme(selectedSaved())"
+            type="button"
             [disabled]="!selectedSaved()"
+            (click)="deleteTheme(selectedSaved())"
           >
             Delete
           </ui-lib-button>
@@ -63,14 +63,14 @@
         <div class="control-group">
           <label>Import theme.json</label>
           <input
-            type="file"
             accept="application/json"
             aria-label="Import theme JSON file"
+            type="file"
             (change)="importTheme($any($event.target).files)"
           />
         </div>
         <div class="actions">
-          <ui-lib-button type="button" severity="primary" (click)="exportStarterPackage()">
+          <ui-lib-button severity="primary" type="button" (click)="exportStarterPackage()">
             Download Starter Package
           </ui-lib-button>
         </div>
@@ -93,22 +93,18 @@
 
             <ui-lib-panel variant="minimal">
               <div class="stack">
-                <ui-lib-input label="Email" placeholder="you@example.com"></ui-lib-input>
+                <ui-lib-input label="Email" placeholder="you@example.com" />
                 <ui-lib-input
                   label="Password"
+                  placeholder="••••••"
                   type="password"
                   [showTogglePassword]="true"
-                  placeholder="••••••"
-                ></ui-lib-input>
+                />
               </div>
             </ui-lib-panel>
 
             <ui-lib-panel variant="minimal">
-              <ui-lib-select
-                label="Status"
-                [options]="sampleOptions"
-                [searchable]="true"
-              ></ui-lib-select>
+              <ui-lib-select label="Status" [options]="sampleOptions" [searchable]="true" />
             </ui-lib-panel>
           </div>
         </div>
@@ -118,7 +114,7 @@
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
-      <app-doc-api-reference [rows]="apiRows" kind="name" [showDefault]="false" />
+      <app-doc-api-reference kind="name" [rows]="apiRows" [showDefault]="false" />
     </ui-lib-panel>
   }
 
@@ -129,7 +125,7 @@
         title="Theme persistence"
         [code]="snippets.usage"
         [showLineNumbers]="true"
-      ></ui-lib-code-snippet>
+      />
     </ui-lib-panel>
   }
 
@@ -143,11 +139,11 @@
         <h3>Step 0 — build the library</h3>
         <p>Every method below requires a fresh build output in <code>dist/ui-lib-custom/</code>.</p>
         <ui-lib-code-snippet
-          title="Build"
           language="bash"
+          title="Build"
           [code]="snippets.buildLib"
           [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+        />
       </section>
 
       <section class="local-install-section">
@@ -161,35 +157,35 @@
           immediately.
         </p>
         <ui-lib-code-snippet
-          title="1. Register the link (run from dist/ui-lib-custom, not the repo root)"
           language="bash"
+          title="1. Register the link (run from dist/ui-lib-custom, not the repo root)"
           [code]="snippets.npmLink1"
           [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+        />
         <ui-lib-code-snippet
-          title="2. Use the link in your other project"
           language="bash"
+          title="2. Use the link in your other project"
           [code]="snippets.npmLink2"
           [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+        />
         <ui-lib-code-snippet
-          title="3. Import components and directives (secondary entry points)"
           language="typescript"
+          title="3. Import components and directives (secondary entry points)"
           [code]="snippets.npmLinkImport"
           [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+        />
         <ui-lib-code-snippet
-          title="4. Add global theme styles (src/styles.scss)"
           language="scss"
+          title="4. Add global theme styles (src/styles.scss)"
           [code]="snippets.globalStyles"
           [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+        />
         <ui-lib-code-snippet
-          title="5. Add body-level directive styles (e.g. Tooltip)"
           language="scss"
+          title="5. Add body-level directive styles (e.g. Tooltip)"
           [code]="snippets.tooltipStyles"
           [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+        />
       </section>
 
       <section class="local-install-section">
@@ -199,11 +195,11 @@
           symlink needed — good for one-off integration tests.
         </p>
         <ui-lib-code-snippet
-          title="package.json + install"
           language="json"
+          title="package.json + install"
           [code]="snippets.filePath"
           [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+        />
       </section>
 
       <section class="local-install-section">
@@ -213,17 +209,17 @@
           <code>dist/ui-lib-custom/</code>.
         </p>
         <ui-lib-code-snippet
-          title="Update package name"
           language="json"
+          title="Update package name"
           [code]="snippets.publishPackageJson"
           [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+        />
         <ui-lib-code-snippet
-          title="Publish steps"
           language="bash"
+          title="Publish steps"
           [code]="snippets.publishSteps"
           [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+        />
       </section>
     </ui-lib-panel>
   }
@@ -231,8 +227,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

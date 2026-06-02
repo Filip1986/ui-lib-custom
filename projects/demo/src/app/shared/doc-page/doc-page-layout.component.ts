@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  Input,
-  signal,
-  inject,
-} from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import type {
   AfterViewInit,
   OnChanges,
@@ -13,8 +6,17 @@ import type {
   SimpleChanges,
   WritableSignal,
 } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  inject,
+  Input,
+  signal,
+} from '@angular/core';
+
 import { Container } from 'ui-lib-custom/layout';
+
 import type { DocSection } from './doc-section.model';
 
 /**
@@ -54,16 +56,16 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
   private observer: IntersectionObserver | undefined;
   private viewReady: boolean = false;
 
-  public ngAfterViewInit(): void {
-    this.viewReady = true;
-    this.setupObserver();
-  }
-
   public ngOnChanges(changes: SimpleChanges): void {
     if (!this.viewReady) return;
     if (changes['sections'] || changes['topOffset']) {
       this.setupObserver();
     }
+  }
+
+  public ngAfterViewInit(): void {
+    this.viewReady = true;
+    this.setupObserver();
   }
 
   public ngOnDestroy(): void {

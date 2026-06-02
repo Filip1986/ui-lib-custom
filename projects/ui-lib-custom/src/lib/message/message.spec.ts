@@ -1,24 +1,26 @@
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideZonelessChangeDetection } from '@angular/core';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import {
-  bootstrapInfoCircle,
   bootstrapCheckCircle,
   bootstrapExclamationOctagon,
   bootstrapExclamationTriangle,
+  bootstrapInfoCircle,
   bootstrapX,
 } from '@ng-icons/bootstrap-icons';
+import { provideIcons } from '@ng-icons/core';
 import {
-  lucideBadgeInfo,
-  lucideBadgeCheck,
   lucideAlertTriangle,
+  lucideBadgeCheck,
+  lucideBadgeInfo,
   lucideBadgeX,
 } from '@ng-icons/lucide';
-import { provideIcons } from '@ng-icons/core';
+
+import type { MessageSeverity, MessageSize, MessageVariant } from './message';
 import { Message } from './message';
-import type { MessageSeverity, MessageVariant, MessageSize } from './message';
 
 // Typed query helpers
 

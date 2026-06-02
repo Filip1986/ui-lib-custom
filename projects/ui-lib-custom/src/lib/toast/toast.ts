@@ -1,24 +1,26 @@
+import type { InputSignal, Signal, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   computed,
+  DestroyRef,
   effect,
   inject,
   input,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, Signal, WritableSignal } from '@angular/core';
-import { Icon } from 'ui-lib-custom/icon';
-import type { StatusIcon } from 'ui-lib-custom/icon';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import type { StatusIcon } from 'ui-lib-custom/icon';
+import { Icon } from 'ui-lib-custom/icon';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { ToastService } from './toast.service';
 import type { ToastMessage, ToastPosition, ToastSeverity, ToastVariant } from './toast.types';
 
-export type { ToastMessage, ToastPosition, ToastSeverity, ToastVariant } from './toast.types';
 export { ToastService } from './toast.service';
+export type { ToastMessage, ToastPosition, ToastSeverity, ToastVariant } from './toast.types';
 
 /** Maps ToastSeverity to the closest StatusIcon semantic name. */
 const SEVERITY_ICON_MAP: Record<ToastSeverity, StatusIcon> = {

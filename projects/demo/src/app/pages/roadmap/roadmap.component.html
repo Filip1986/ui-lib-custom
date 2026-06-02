@@ -1,13 +1,13 @@
 <app-doc-page-layout [sections]="sections">
   <!-- ── Header ──────────────────────────────────────────────────────────── -->
   <app-doc-page-header
+    description="A comprehensive view of where the library stands today, what has been achieved, what is actively in-flight, and what comes next on the path to v1.0 and beyond."
     docHeader
     title="Library Roadmap &amp; Progress"
-    description="A comprehensive view of where the library stands today, what has been achieved, what is actively in-flight, and what comes next on the path to v1.0 and beyond."
   />
 
   <!-- ── Dashboard ──────────────────────────────────────────────────────── -->
-  <section id="dashboard" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="dashboard">
     <h2 class="section-title">At a Glance</h2>
     <p class="section-subtitle">
       Current state of the library as of May 2026 — component hardening milestone complete.
@@ -72,7 +72,7 @@
   </section>
 
   <!-- ── Milestone Progress ─────────────────────────────────────────────── -->
-  <section id="milestone-progress" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="milestone-progress">
     <h2 class="section-title">Milestone Progress</h2>
     <p class="section-subtitle">
       6 phases from foundation cleanup to v1.0 GA. Phases 0–3 are complete — all 100 components
@@ -150,7 +150,7 @@
   </section>
 
   <!-- ── Component Scoreboard ───────────────────────────────────────────── -->
-  <section id="component-scoreboard" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="component-scoreboard">
     <h2 class="section-title">Component Quality Scoreboard</h2>
     <p class="section-subtitle">
       Every component scored across 10 quality dimensions. Gate: all scores ≥ 8 =
@@ -159,7 +159,7 @@
     </p>
 
     <!-- Scoring methodology notice -->
-    <div class="scoring-method-notice" role="note" aria-label="Scoring methodology notice">
+    <div aria-label="Scoring methodology notice" class="scoring-method-notice" role="note">
       <div class="scoring-method-notice__icon">⚠️</div>
       <div class="scoring-method-notice__body">
         <strong class="scoring-method-notice__title"
@@ -182,21 +182,21 @@
     <!-- Filter bar -->
     <div class="scoreboard-filters">
       <input
+        aria-label="Search components"
         class="scoreboard-search"
-        type="search"
         placeholder="Search components…"
+        type="search"
         [value]="searchQuery()"
         (input)="onSearchChange($event)"
-        aria-label="Search components"
       />
-      <div class="category-filter" role="group" aria-label="Filter by category">
+      <div aria-label="Filter by category" class="category-filter" role="group">
         @for (cat of categories; track trackByCategoryName($index, cat)) {
           <button
             class="category-filter__btn"
+            type="button"
+            [attr.aria-pressed]="activeCategory() === cat"
             [class.active]="activeCategory() === cat"
             (click)="setCategory(cat)"
-            [attr.aria-pressed]="activeCategory() === cat"
-            type="button"
           >
             {{ cat }}
           </button>
@@ -209,23 +209,23 @@
     </p>
 
     <!-- Score table -->
-    <div class="score-table-wrapper" role="region" aria-label="Component scores table">
-      <table class="score-table" aria-label="Component quality scores">
+    <div aria-label="Component scores table" class="score-table-wrapper" role="region">
+      <table aria-label="Component quality scores" class="score-table">
         <thead>
           <tr>
-            <th scope="col" class="col-name">Component</th>
-            <th scope="col" class="col-category">Category</th>
-            <th scope="col" class="col-score">API</th>
-            <th scope="col" class="col-score">A11y</th>
-            <th scope="col" class="col-score">Perf</th>
-            <th scope="col" class="col-score">Comp</th>
-            <th scope="col" class="col-score">Theme</th>
-            <th scope="col" class="col-score">DX</th>
-            <th scope="col" class="col-score">Docs</th>
-            <th scope="col" class="col-score">Polish</th>
-            <th scope="col" class="col-score">Angular</th>
-            <th scope="col" class="col-score">Feel</th>
-            <th scope="col" class="col-avg">Avg</th>
+            <th class="col-name" scope="col">Component</th>
+            <th class="col-category" scope="col">Category</th>
+            <th class="col-score" scope="col">API</th>
+            <th class="col-score" scope="col">A11y</th>
+            <th class="col-score" scope="col">Perf</th>
+            <th class="col-score" scope="col">Comp</th>
+            <th class="col-score" scope="col">Theme</th>
+            <th class="col-score" scope="col">DX</th>
+            <th class="col-score" scope="col">Docs</th>
+            <th class="col-score" scope="col">Polish</th>
+            <th class="col-score" scope="col">Angular</th>
+            <th class="col-score" scope="col">Feel</th>
+            <th class="col-avg" scope="col">Avg</th>
           </tr>
         </thead>
         <tbody>
@@ -263,7 +263,7 @@
     </div>
 
     <!-- Score legend -->
-    <div class="score-legend" aria-label="Score color legend">
+    <div aria-label="Score color legend" class="score-legend">
       <span class="legend-title">Score Legend:</span>
       <span class="legend-item cell-perfect">10 — Perfect</span>
       <span class="legend-item cell-good">9 — Excellent</span>
@@ -310,8 +310,8 @@
         @for (dim of scoringDimensions; track trackByDimension($index, dim)) {
           <div
             class="scoring-dim-card"
-            [class.scoring-dim-card--gate]="dim.column === 'Cat. 11'"
             role="listitem"
+            [class.scoring-dim-card--gate]="dim.column === 'Cat. 11'"
           >
             <div class="scoring-dim-header">
               <span class="scoring-dim-column">{{ dim.column }}</span>
@@ -331,7 +331,7 @@
   </section>
 
   <!-- ── Build Queue ───────────────────────────────────────────────────── -->
-  <section id="build-queue" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="build-queue">
     <h2 class="section-title">Build Queue</h2>
     <p class="section-subtitle">
       Prioritised list of components to build next. Ordered by developer impact and competitive gap.
@@ -384,7 +384,7 @@
   </section>
 
   <!-- ── Documentation Status ───────────────────────────────────────────── -->
-  <section id="documentation-status" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="documentation-status">
     <h2 class="section-title">Documentation Status</h2>
     <p class="section-subtitle">
       Tracking formal reference docs, implementation docs, and demo pages per component.
@@ -392,16 +392,16 @@
       formal documentation.
     </p>
 
-    <div class="doc-status-table-wrapper" role="region" aria-label="Documentation status table">
-      <table class="doc-status-table" aria-label="Documentation status per component">
+    <div aria-label="Documentation status table" class="doc-status-table-wrapper" role="region">
+      <table aria-label="Documentation status per component" class="doc-status-table">
         <thead>
           <tr>
-            <th scope="col" class="doc-col-name">Component</th>
-            <th scope="col" class="doc-col-check">API Doc</th>
-            <th scope="col" class="doc-col-check">Impl Doc</th>
-            <th scope="col" class="doc-col-check">Demo Page</th>
-            <th scope="col" class="doc-col-status">Status</th>
-            <th scope="col" class="doc-col-notes">Notes</th>
+            <th class="doc-col-name" scope="col">Component</th>
+            <th class="doc-col-check" scope="col">API Doc</th>
+            <th class="doc-col-check" scope="col">Impl Doc</th>
+            <th class="doc-col-check" scope="col">Demo Page</th>
+            <th class="doc-col-status" scope="col">Status</th>
+            <th class="doc-col-notes" scope="col">Notes</th>
           </tr>
         </thead>
         <tbody>
@@ -410,23 +410,23 @@
               <td class="doc-col-name">{{ item.component }}</td>
               <td class="doc-col-check doc-check--center">
                 @if (item.hasApiDoc) {
-                  <span class="doc-check doc-check--yes" aria-label="Yes">✓</span>
+                  <span aria-label="Yes" class="doc-check doc-check--yes">✓</span>
                 } @else {
-                  <span class="doc-check doc-check--no" aria-label="No">✗</span>
+                  <span aria-label="No" class="doc-check doc-check--no">✗</span>
                 }
               </td>
               <td class="doc-col-check doc-check--center">
                 @if (item.hasImplDoc) {
-                  <span class="doc-check doc-check--yes" aria-label="Yes">✓</span>
+                  <span aria-label="Yes" class="doc-check doc-check--yes">✓</span>
                 } @else {
-                  <span class="doc-check doc-check--no" aria-label="No">✗</span>
+                  <span aria-label="No" class="doc-check doc-check--no">✗</span>
                 }
               </td>
               <td class="doc-col-check doc-check--center">
                 @if (item.hasDemoPage) {
-                  <span class="doc-check doc-check--yes" aria-label="Yes">✓</span>
+                  <span aria-label="Yes" class="doc-check doc-check--yes">✓</span>
                 } @else {
-                  <span class="doc-check doc-check--no" aria-label="No">✗</span>
+                  <span aria-label="No" class="doc-check doc-check--no">✗</span>
                 }
               </td>
               <td class="doc-col-status">
@@ -447,7 +447,7 @@
   </section>
 
   <!-- ── Competitive Strategy ───────────────────────────────────────────── -->
-  <section id="competitive-strategy" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="competitive-strategy">
     <h2 class="section-title">Competitive Positioning</h2>
     <p class="section-subtitle">
       How this library compares to Angular Material, PrimeNG, and Ng-Zorro on Angular modernity
@@ -455,15 +455,15 @@
     </p>
 
     <h3 class="competitive-group-title">Angular Modernity Scorecard</h3>
-    <div class="modernity-table-wrapper" role="region" aria-label="Angular modernity comparison">
-      <table class="modernity-table" aria-label="Angular modernity feature comparison">
+    <div aria-label="Angular modernity comparison" class="modernity-table-wrapper" role="region">
+      <table aria-label="Angular modernity feature comparison" class="modernity-table">
         <thead>
           <tr>
-            <th scope="col" class="mod-col-check">Check</th>
-            <th scope="col" class="mod-col-lib">Angular Material</th>
-            <th scope="col" class="mod-col-lib">PrimeNG</th>
-            <th scope="col" class="mod-col-lib">Ng-Zorro</th>
-            <th scope="col" class="mod-col-lib mod-col-lib--this">This Library</th>
+            <th class="mod-col-check" scope="col">Check</th>
+            <th class="mod-col-lib" scope="col">Angular Material</th>
+            <th class="mod-col-lib" scope="col">PrimeNG</th>
+            <th class="mod-col-lib" scope="col">Ng-Zorro</th>
+            <th class="mod-col-lib mod-col-lib--this" scope="col">This Library</th>
           </tr>
         </thead>
         <tbody>
@@ -496,8 +496,8 @@
       @for (diff of differentiators; track trackByFeature($index, diff)) {
         <div
           class="differentiator-card"
-          [class.differentiator-card--unique]="diff.isUnique"
           role="listitem"
+          [class.differentiator-card--unique]="diff.isUnique"
         >
           @if (diff.isUnique) {
             <span class="unique-badge">🚀 Unique in Angular ecosystem</span>
@@ -510,7 +510,7 @@
   </section>
 
   <!-- ── CSS Architecture Tracking ───────────────────────────────────────── -->
-  <section id="css-architecture" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="css-architecture">
     <h2 class="section-title">CSS Architecture Tracking</h2>
     <p class="section-subtitle">
       Detailed comparison of CSS architecture, theming, and cascade strategies vs. Angular Material,
@@ -518,7 +518,7 @@
       ui-lib-custom leads and what remains to push further.
     </p>
 
-    <div class="css-arch-legend" role="list" aria-label="Category legend">
+    <div aria-label="Category legend" class="css-arch-legend" role="list">
       @for (cat of cssArchCategories; track cat.value) {
         <span class="css-arch-legend-item" role="listitem">
           <span class="css-arch-legend-dot" [style.background]="cat.color"></span>
@@ -527,18 +527,18 @@
       }
     </div>
 
-    <div class="modernity-table-wrapper" role="region" aria-label="CSS architecture comparison">
+    <div aria-label="CSS architecture comparison" class="modernity-table-wrapper" role="region">
       <table
-        class="modernity-table css-arch-table"
         aria-label="CSS architecture feature comparison"
+        class="modernity-table css-arch-table"
       >
         <thead>
           <tr>
-            <th scope="col" class="mod-col-check">Feature</th>
-            <th scope="col" class="mod-col-lib">Angular Material</th>
-            <th scope="col" class="mod-col-lib">PrimeNG</th>
-            <th scope="col" class="mod-col-lib">Ng-Zorro</th>
-            <th scope="col" class="mod-col-lib mod-col-lib--this">This Library</th>
+            <th class="mod-col-check" scope="col">Feature</th>
+            <th class="mod-col-lib" scope="col">Angular Material</th>
+            <th class="mod-col-lib" scope="col">PrimeNG</th>
+            <th class="mod-col-lib" scope="col">Ng-Zorro</th>
+            <th class="mod-col-lib mod-col-lib--this" scope="col">This Library</th>
           </tr>
         </thead>
         <tbody>
@@ -547,8 +547,8 @@
               <td class="mod-col-check css-arch-check-cell">
                 <span
                   class="css-arch-category-dot"
-                  [style.background]="getCssArchCategoryColor(row.category)"
                   [attr.title]="getCssArchCategoryLabel(row.category)"
+                  [style.background]="getCssArchCategoryColor(row.category)"
                 >
                 </span>
                 <span class="css-arch-check-text">{{ row.check }}</span>
@@ -603,7 +603,7 @@
   </section>
 
   <!-- ── Pro & Enterprise Strategy ────────────────────────────────────────── -->
-  <section id="pro-strategy" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="pro-strategy">
     <h2 class="section-title">Pro &amp; Enterprise Strategy</h2>
     <p class="section-subtitle">
       Beyond commodity components, these are the categories enterprise Angular teams need most and
@@ -648,7 +648,7 @@
   </section>
 
   <!-- ── Launch Sequence ────────────────────────────────────────────────── -->
-  <section id="launch-sequence" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="launch-sequence">
     <h2 class="section-title">Launch Path</h2>
     <p class="section-subtitle">
       The sequenced strategy for going from "done" to "discovered." Build credibility before
@@ -659,7 +659,7 @@
       <h3 class="launch-readiness-title">Launch Readiness Gates</h3>
       <div class="readiness-list" role="list">
         @for (gate of launchReadiness; track trackByReadinessLabel($index, gate)) {
-          <div class="readiness-item" [class]="'readiness-item--' + gate.status" role="listitem">
+          <div class="readiness-item" role="listitem" [class]="'readiness-item--' + gate.status">
             <div class="readiness-icon">
               @if (gate.status === 'done') {
                 <span aria-label="Done">✅</span>
@@ -707,7 +707,7 @@
   </section>
 
   <!-- ── Next Steps ─────────────────────────────────────────────────────── -->
-  <section id="next-steps" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="next-steps">
     <h2 class="section-title">Next Steps</h2>
     <p class="section-subtitle">
       The library hardening milestone is complete. These are the concrete actions standing between
@@ -737,7 +737,7 @@
   </section>
 
   <!-- ── Wow Factors ────────────────────────────────────────────────────── -->
-  <section id="wow-factors" data-doc-anchor class="roadmap-section">
+  <section class="roadmap-section" data-doc-anchor id="wow-factors">
     <h2 class="section-title">The Wow Factors Roadmap</h2>
     <p class="section-subtitle">
       Each "Wow Factor" is a committed narrative strength — something no other Angular library comes
@@ -774,8 +774,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

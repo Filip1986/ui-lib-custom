@@ -29,12 +29,12 @@
     --uilib-confirm-popup-enter-easing: cubic-bezier(0.16, 1, 0.3, 1);
 
     --uilib-confirm-popup-arrow-size: 8px;
+    display: none;
+    inset: 0;
+    pointer-events: none;
 
     position: fixed;
-    inset: 0;
-    display: none;
     z-index: var(--uilib-confirm-popup-z-index);
-    pointer-events: none;
   }
 
   ui-lib-confirm-popup.ui-lib-confirm-popup--open {
@@ -43,31 +43,31 @@
 
   // Transparent click-catcher overlay (no backdrop)
   ui-lib-confirm-popup .ui-lib-confirm-popup__overlay {
-    position: fixed;
-    inset: 0;
     background: transparent;
-    z-index: calc(var(--uilib-confirm-popup-z-index) - 1);
-    pointer-events: auto;
     cursor: default;
+    inset: 0;
+    pointer-events: auto;
+    position: fixed;
+    z-index: calc(var(--uilib-confirm-popup-z-index) - 1);
   }
 
   // Floating popup panel
   ui-lib-confirm-popup .ui-lib-confirm-popup__panel {
-    position: fixed;
-    z-index: var(--uilib-confirm-popup-z-index);
+    background: var(--uilib-confirm-popup-bg);
+    border: var(--uilib-confirm-popup-border);
+    border-radius: var(--uilib-confirm-popup-border-radius);
+    box-shadow: var(--uilib-confirm-popup-shadow);
     display: flex;
     flex-direction: column;
     inline-size: var(--uilib-confirm-popup-width);
-    background: var(--uilib-confirm-popup-bg);
-    border-radius: var(--uilib-confirm-popup-border-radius);
-    border: var(--uilib-confirm-popup-border);
-    box-shadow: var(--uilib-confirm-popup-shadow);
-    pointer-events: auto;
     opacity: 0;
+    pointer-events: auto;
+    position: fixed;
     transform: scale(0.96);
     transition:
       opacity var(--uilib-confirm-popup-enter-duration) var(--uilib-confirm-popup-enter-easing),
       transform var(--uilib-confirm-popup-enter-duration) var(--uilib-confirm-popup-enter-easing);
+    z-index: var(--uilib-confirm-popup-z-index);
   }
 
   ui-lib-confirm-popup .ui-lib-confirm-popup__panel--visible {
@@ -77,76 +77,76 @@
 
   // Arrow
   ui-lib-confirm-popup .ui-lib-confirm-popup__arrow {
+    height: 0;
     position: absolute;
     width: 0;
-    height: 0;
   }
 
   // When popup is above target: arrow at bottom, pointing down
   ui-lib-confirm-popup .ui-lib-confirm-popup__panel--placement-above .ui-lib-confirm-popup__arrow {
+    border-inline-end: var(--uilib-confirm-popup-arrow-size) solid transparent;
+    border-inline-start: var(--uilib-confirm-popup-arrow-size) solid transparent;
+    border-top: var(--uilib-confirm-popup-arrow-size) solid var(--uilib-confirm-popup-bg);
     bottom: calc(-1 * var(--uilib-confirm-popup-arrow-size));
     margin-inline-start: calc(-1 * var(--uilib-confirm-popup-arrow-size));
-    border-inline-start: var(--uilib-confirm-popup-arrow-size) solid transparent;
-    border-inline-end: var(--uilib-confirm-popup-arrow-size) solid transparent;
-    border-top: var(--uilib-confirm-popup-arrow-size) solid var(--uilib-confirm-popup-bg);
   }
 
   // When popup is below target: arrow at top, pointing up
   ui-lib-confirm-popup .ui-lib-confirm-popup__panel--placement-below .ui-lib-confirm-popup__arrow {
-    top: calc(-1 * var(--uilib-confirm-popup-arrow-size));
-    margin-inline-start: calc(-1 * var(--uilib-confirm-popup-arrow-size));
-    border-inline-start: var(--uilib-confirm-popup-arrow-size) solid transparent;
     border-inline-end: var(--uilib-confirm-popup-arrow-size) solid transparent;
+    border-inline-start: var(--uilib-confirm-popup-arrow-size) solid transparent;
     border-bottom: var(--uilib-confirm-popup-arrow-size) solid var(--uilib-confirm-popup-bg);
+    margin-inline-start: calc(-1 * var(--uilib-confirm-popup-arrow-size));
+    top: calc(-1 * var(--uilib-confirm-popup-arrow-size));
   }
 
   // Content row (icon + message)
   ui-lib-confirm-popup .ui-lib-confirm-popup__content {
-    display: flex;
     align-items: flex-start;
+    display: flex;
     gap: var(--uilib-space-3, 0.75rem);
     padding: var(--uilib-confirm-popup-content-padding);
   }
 
   ui-lib-confirm-popup .ui-lib-confirm-popup__icon {
-    font-size: var(--uilib-confirm-popup-icon-size);
     color: var(--uilib-confirm-popup-icon-color);
     flex-shrink: 0;
+    font-size: var(--uilib-confirm-popup-icon-size);
     line-height: 1;
   }
 
   ui-lib-confirm-popup .ui-lib-confirm-popup__message {
-    margin: 0;
+    align-self: center;
     color: var(--uilib-page-fg);
     font-size: var(--uilib-font-size-sm, 0.875rem);
     line-height: 1.6;
-    align-self: center;
+    margin: 0;
   }
 
   // Footer (reject + accept buttons)
   ui-lib-confirm-popup .ui-lib-confirm-popup__footer {
-    display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: var(--uilib-confirm-popup-footer-gap);
-    padding: var(--uilib-confirm-popup-footer-padding);
     border-block-start: var(--uilib-confirm-popup-footer-border-top);
+    display: flex;
+    gap: var(--uilib-confirm-popup-footer-gap);
+    justify-content: flex-end;
+    padding: var(--uilib-confirm-popup-footer-padding);
   }
 
   // Base button styles (shared by accept and reject)
   ui-lib-confirm-popup .ui-lib-confirm-popup__accept-btn,
   ui-lib-confirm-popup .ui-lib-confirm-popup__reject-btn {
-    display: inline-flex;
     align-items: center;
-    gap: var(--uilib-space-2, 0.5rem);
-    padding: var(--uilib-confirm-popup-btn-padding);
     border: 1px solid transparent;
     border-radius: var(--uilib-confirm-popup-btn-radius);
+    cursor: pointer;
+    display: inline-flex;
     font-family: var(--uilib-font-ui, inherit);
     font-size: var(--uilib-confirm-popup-btn-font-size);
     font-weight: var(--uilib-confirm-popup-btn-font-weight);
+    gap: var(--uilib-space-2, 0.5rem);
     line-height: 1.5;
-    cursor: pointer;
+    padding: var(--uilib-confirm-popup-btn-padding);
     transition:
       background-color 120ms ease,
       border-color 120ms ease,

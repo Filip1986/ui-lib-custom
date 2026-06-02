@@ -18,8 +18,8 @@ import { Tabs, Tab } from 'ui-lib-custom/tabs';
 export class MyComponent {}`;
 
 export const closableHtml = `<ui-lib-tabs [closable]="true" (tabClose)="onClose($event)">
-  <ui-lib-tab value="alpha" label="Alpha">Alpha</ui-lib-tab>
-  <ui-lib-tab value="beta" label="Beta">Beta</ui-lib-tab>
+  <ui-lib-tab label="Alpha" value="alpha">Alpha</ui-lib-tab>
+  <ui-lib-tab label="Beta" value="beta">Beta</ui-lib-tab>
 </ui-lib-tabs>`;
 
 export const closableTs = `import { Component } from '@angular/core';
@@ -127,9 +127,9 @@ import { Tabs, Tab } from 'ui-lib-custom/tabs';
 export class MyComponent {}`;
 
 export const tabMenuHtml = `<ui-lib-tabs mode="navigation" (navigate)="onNavigate($event.value)">
-  <ui-lib-tab value="/overview" label="Overview" />
-  <ui-lib-tab value="/billing" label="Billing" />
-  <ui-lib-tab value="/usage" label="Usage" />
+  <ui-lib-tab label="Overview" value="/overview" />
+  <ui-lib-tab label="Billing" value="/billing" />
+  <ui-lib-tab label="Usage" value="/usage" />
 </ui-lib-tabs>`;
 
 export const tabMenuTs = `import { Component, signal } from '@angular/core';

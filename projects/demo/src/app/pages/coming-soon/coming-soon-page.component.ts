@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+
+import { Icon } from 'ui-lib-custom/icon';
+
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { Icon } from 'ui-lib-custom/icon';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 
 export interface ComingSoonData {
   componentName: string;

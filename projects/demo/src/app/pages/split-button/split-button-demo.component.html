@@ -4,7 +4,7 @@
       SplitButton combines a primary action with a secondary menu so related operations stay grouped
       without duplicating controls.
     </p>
-    <p class="action-log" aria-live="polite">{{ lastAction() }}</p>
+    <p aria-live="polite" class="action-log">{{ lastAction() }}</p>
   </app-doc-page-header>
 
   <app-doc-section id="basic" title="Basic">
@@ -19,8 +19,8 @@
     <p>Leading icon on the primary action with icon-capable menu actions.</p>
     <ui-lib-panel variant="minimal">
       <ui-lib-split-button
-        label="Add"
         icon="plus"
+        label="Add"
         [model]="iconItems"
         (buttonClick)="onPrimaryAction()"
       />
@@ -35,8 +35,8 @@
         @for (severity of severities; track severity) {
           <ui-lib-split-button
             [label]="severity"
-            [severity]="severity"
             [model]="items"
+            [severity]="severity"
             (buttonClick)="onPrimaryAction()"
           />
         }
@@ -49,12 +49,12 @@
     <p>Disable all controls, only the main action, or only the menu trigger.</p>
     <ui-lib-panel variant="minimal">
       <div class="split-grid split-grid--three">
-        <ui-lib-split-button label="Disabled" [model]="items" [disabled]="true" />
-        <ui-lib-split-button label="Main Disabled" [model]="items" [buttonDisabled]="true" />
+        <ui-lib-split-button label="Disabled" [disabled]="true" [model]="items" />
+        <ui-lib-split-button label="Main Disabled" [buttonDisabled]="true" [model]="items" />
         <ui-lib-split-button
           label="Menu Disabled"
-          [model]="items"
           [menuButtonDisabled]="true"
+          [model]="items"
           (buttonClick)="onPrimaryAction()"
         />
       </div>
@@ -69,9 +69,9 @@
         @for (severity of severities; track severity) {
           <ui-lib-split-button
             [label]="severity"
-            [severity]="severity"
-            [raised]="true"
             [model]="items"
+            [raised]="true"
+            [severity]="severity"
           />
         }
       </div>
@@ -86,9 +86,9 @@
         @for (severity of severities; track severity) {
           <ui-lib-split-button
             [label]="severity"
-            [severity]="severity"
-            [rounded]="true"
             [model]="items"
+            [rounded]="true"
+            [severity]="severity"
           />
         }
       </div>
@@ -103,9 +103,9 @@
         @for (severity of severities; track severity) {
           <ui-lib-split-button
             [label]="severity"
+            [model]="items"
             [severity]="severity"
             [text]="true"
-            [model]="items"
           />
         }
       </div>
@@ -120,10 +120,10 @@
         @for (severity of severities; track severity) {
           <ui-lib-split-button
             [label]="severity"
-            [severity]="severity"
-            [raised]="true"
-            [text]="true"
             [model]="items"
+            [raised]="true"
+            [severity]="severity"
+            [text]="true"
           />
         }
       </div>
@@ -138,9 +138,9 @@
         @for (severity of severities; track severity) {
           <ui-lib-split-button
             [label]="severity"
-            [severity]="severity"
-            [outlined]="true"
             [model]="items"
+            [outlined]="true"
+            [severity]="severity"
           />
         }
       </div>
@@ -163,7 +163,7 @@
   <app-doc-section id="template" title="Template">
     <p>Custom primary-content projection via <code>[splitButtonContent]</code>.</p>
     <ui-lib-panel variant="minimal">
-      <ui-lib-split-button [model]="items" menuButtonAriaLabel="Template actions">
+      <ui-lib-split-button menuButtonAriaLabel="Template actions" [model]="items">
         <ng-template splitButtonContent>
           <span class="template-content">
             <ui-lib-icon name="save" />
@@ -199,9 +199,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -210,8 +210,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

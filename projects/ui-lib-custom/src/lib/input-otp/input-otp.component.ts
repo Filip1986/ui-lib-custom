@@ -1,16 +1,3 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  forwardRef,
-  inject,
-  input,
-  output,
-  signal,
-  viewChildren,
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type {
   ElementRef,
   InputSignal,
@@ -18,11 +5,26 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  forwardRef,
+  inject,
+  input,
+  output,
+  signal,
+  viewChildren,
+  ViewEncapsulation,
+} from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { INPUT_OTP_DEFAULTS } from './input-otp.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { InputOtpChangeEvent, InputOtpSize } from './input-otp.types';
+import { INPUT_OTP_DEFAULTS } from './input-otp.types';
 
 let nextInputOtpId: number = 0;
 

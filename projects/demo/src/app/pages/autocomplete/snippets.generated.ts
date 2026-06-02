@@ -3,9 +3,9 @@
 // Do not edit manually.
 
 export const basicHtml = `<ui-lib-autocomplete
-  [suggestions]="basicSuggestions"
-  [delay]="150"
   placeholder="Search framework"
+  [delay]="150"
+  [suggestions]="basicSuggestions"
   (completeMethod)="onBasicComplete($event)"
 />`;
 
@@ -31,11 +31,11 @@ export class MyComponent {
 
 export const clippingHtml = `<div class="clipping-card">
   <ui-lib-autocomplete
-    [(ngModel)]="clippingValue"
-    [suggestions]="countrySuggestions"
     optionLabel="name"
     optionValue="code"
     placeholder="Open inside clipped card"
+    [suggestions]="countrySuggestions"
+    [(ngModel)]="clippingValue"
     (completeMethod)="onCountryComplete($event)"
   />
 </div>`;
@@ -64,11 +64,11 @@ export class MyComponent {
 }`;
 
 export const dropdownHtml = `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
+  dropdownMode="current"
   optionLabel="name"
   optionValue="code"
   [dropdown]="true"
-  dropdownMode="current"
+  [suggestions]="countrySuggestions"
   (completeMethod)="onCountryComplete($event)"
 />`;
 
@@ -118,11 +118,11 @@ export class MyComponent {
 }`;
 
 export const forceSelectionHtml = `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
   optionLabel="name"
   optionValue="code"
-  [forceSelection]="true"
   [autoClear]="true"
+  [forceSelection]="true"
+  [suggestions]="countrySuggestions"
   (completeMethod)="onCountryComplete($event)"
 />`;
 
@@ -150,12 +150,12 @@ export class MyComponent {
 }`;
 
 export const groupedHtml = `<ui-lib-autocomplete
-  [suggestions]="groupedCitySuggestions"
-  [group]="true"
   optionLabel="label"
   optionValue="value"
-  [optionGroupLabel]="'label'"
+  [group]="true"
   [optionGroupChildren]="'items'"
+  [optionGroupLabel]="'label'"
+  [suggestions]="groupedCitySuggestions"
   (completeMethod)="onGroupedCitiesComplete($event)"
 />`;
 
@@ -188,18 +188,18 @@ export class MyComponent {
 }`;
 
 export const multipleAdvancedHtml = `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
   optionLabel="name"
   optionValue="code"
-  [multiple]="true"
-  [dropdown]="true"
+  separator=","
   [addOnBlur]="true"
   [addOnTab]="true"
-  separator=","
+  [dropdown]="true"
+  [multiple]="true"
+  [suggestions]="countrySuggestions"
   [unique]="true"
   (completeMethod)="onCountryComplete($event)"
 >
-  <ng-template uiAutoCompleteSelectedItem let-code="code">
+  <ng-template let-code="code" uiAutoCompleteSelectedItem>
     <span class="chip-template">{{ code }}</span>
   </ng-template>
 </ui-lib-autocomplete>`;
@@ -231,10 +231,10 @@ export class MyComponent {
 }`;
 
 export const multipleHtml = `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
   optionLabel="name"
   optionValue="code"
   [multiple]="true"
+  [suggestions]="countrySuggestions"
   (completeMethod)="onCountryComplete($event)"
 />`;
 
@@ -262,10 +262,10 @@ export class MyComponent {
 }`;
 
 export const objectsHtml = `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
   optionLabel="name"
   optionValue="code"
   placeholder="Select country"
+  [suggestions]="countrySuggestions"
   (completeMethod)="onCountryComplete($event)"
 />`;
 
@@ -295,9 +295,9 @@ export class MyComponent {
 export const reactiveHtml = `<form [formGroup]="reactiveForm">
   <ui-lib-autocomplete
     formControlName="country"
-    [suggestions]="countrySuggestions"
     optionLabel="name"
     optionValue="code"
+    [suggestions]="countrySuggestions"
     (completeMethod)="onCountryComplete($event)"
   />
 </form>`;
@@ -371,11 +371,11 @@ export class MyComponent {
 }`;
 
 export const templateDrivenHtml = `<ui-lib-autocomplete
-  [(ngModel)]="templateModel"
-  [ngModelOptions]="{ standalone: true }"
-  [suggestions]="countrySuggestions"
   optionLabel="name"
   optionValue="code"
+  [ngModelOptions]="{ standalone: true }"
+  [suggestions]="countrySuggestions"
+  [(ngModel)]="templateModel"
   (completeMethod)="onCountryComplete($event)"
 />`;
 
@@ -406,16 +406,16 @@ export class MyComponent {
 }`;
 
 export const templatesHtml = `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
   optionLabel="name"
   optionValue="code"
   [multiple]="true"
+  [suggestions]="countrySuggestions"
   (completeMethod)="onCountryComplete($event)"
 >
   <ng-template uiAutoCompleteHeader>
     <strong>Choose country</strong>
   </ng-template>
-  <ng-template uiAutoCompleteItem let-country="country">
+  <ng-template let-country="country" uiAutoCompleteItem>
     <span>{{ country.name }} ({{ country.code }})</span>
   </ng-template>
   <ng-template uiAutoCompleteFooter>
@@ -491,12 +491,12 @@ export class MyComponent {
 }`;
 
 export const virtualHtml = `<ui-lib-autocomplete
-  [suggestions]="virtualSuggestions"
   optionLabel="label"
   optionValue="value"
+  scrollHeight="240px"
+  [suggestions]="virtualSuggestions"
   [virtualScroll]="true"
   [virtualScrollItemSize]="44"
-  scrollHeight="240px"
   (completeMethod)="onVirtualComplete($event)"
 />`;
 

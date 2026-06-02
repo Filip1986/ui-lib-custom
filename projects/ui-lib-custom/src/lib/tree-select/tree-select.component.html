@@ -1,10 +1,10 @@
 <div
   class="ui-lib-tree-select__trigger"
+  tabindex="0"
+  [attr.aria-controls]="panelVisible() ? treeId : null"
   (click)="togglePanel($event)"
   (keydown.enter)="togglePanel($event)"
   (keydown.space)="$event.preventDefault(); togglePanel($event)"
-  [attr.aria-controls]="panelVisible() ? treeId : null"
-  tabindex="0"
 >
   <!-- Value / placeholder display -->
   <span class="ui-lib-tree-select__value" [class.ui-lib-tree-select__placeholder]="!hasValue()">
@@ -18,25 +18,25 @@
   <!-- Actions: clear, loading spinner, chevron -->
   <span class="ui-lib-tree-select__actions">
     @if (loading()) {
-      <span class="ui-lib-tree-select__spinner" aria-hidden="true"></span>
+      <span aria-hidden="true" class="ui-lib-tree-select__spinner"></span>
     }
 
     @if (showClear() && hasValue() && !isDisabled()) {
       <button
-        type="button"
         class="ui-lib-tree-select__clear"
-        (click)="clearSelection($event)"
-        [attr.aria-label]="i18n.translate('tree-select.clear')"
         tabindex="-1"
+        type="button"
+        [attr.aria-label]="i18n.translate('tree-select.clear')"
+        (click)="clearSelection($event)"
       >
         <span aria-hidden="true">×</span>
       </button>
     }
 
     <span
+      aria-hidden="true"
       class="ui-lib-tree-select__chevron"
       [class.ui-lib-tree-select__chevron--open]="panelVisible()"
-      aria-hidden="true"
       >▾</span
     >
   </span>
@@ -48,19 +48,19 @@
     <!-- Tree component -->
     @if (nodes().length > 0) {
       <ui-lib-tree
-        [hostId]="treeId"
         [ariaLabel]="treeAriaLabel()"
-        [value]="nodes()"
-        [selectionMode]="selectionMode()"
-        [variant]="variant()"
-        [size]="size()"
         [filter]="filter()"
         [filterPlaceholder]="resolvedFilterPlaceholder()"
+        [hostId]="treeId"
+        [selectionMode]="selectionMode()"
+        [size]="size()"
+        [value]="nodes()"
+        [variant]="variant()"
         [(selection)]="selection"
+        (nodeCollapse)="handleNodeCollapse($event)"
+        (nodeExpand)="handleNodeExpand($event)"
         (nodeSelect)="handleNodeSelect($event)"
         (nodeUnselect)="handleNodeUnselect($event)"
-        (nodeExpand)="handleNodeExpand($event)"
-        (nodeCollapse)="handleNodeCollapse($event)"
       />
     } @else {
       <div class="ui-lib-tree-select__empty">
@@ -70,6 +70,6 @@
   </div>
 }
 
-<span class="ui-lib-tree-select__sr-live" [id]="liveRegionId" aria-live="polite" aria-atomic="true">
+<span aria-atomic="true" aria-live="polite" class="ui-lib-tree-select__sr-live" [id]="liveRegionId">
   {{ selectionAnnouncement() }}
 </span>

@@ -1,9 +1,9 @@
 <app-doc-page-layout #layout [sections]="sections">
   <app-doc-page-header
+    description="A lightweight, zero-dependency syntax tokenizer for TypeScript, HTML/Angular templates, and SCSS/CSS. No external libraries — pure regex tokenization with VS Code–inspired colours. Fully integrated with ui-lib-code-snippet."
     docHeader
     title="SyntaxHighlighter"
     [importCode]="importCode"
-    description="A lightweight, zero-dependency syntax tokenizer for TypeScript, HTML/Angular templates, and SCSS/CSS. No external libraries — pure regex tokenization with VS Code–inspired colours. Fully integrated with ui-lib-code-snippet."
     [tags]="['Utility']"
   />
 
@@ -54,8 +54,8 @@
         <code>Promise</code> are teal.
       </p>
       <ui-lib-code-snippet
-        language="typescript"
         filename="user-card.component.ts"
+        language="typescript"
         [code]="tsCode"
         [showLineNumbers]="true"
       />
@@ -71,8 +71,8 @@
         language keywords.
       </p>
       <ui-lib-code-snippet
-        language="html"
         filename="user-card.component.html"
+        language="html"
         [code]="htmlCode"
         [showLineNumbers]="true"
       />
@@ -86,8 +86,8 @@
         blue, selectors gold, and numbers with units are teal-green.
       </p>
       <ui-lib-code-snippet
-        language="scss"
         filename="user-card.component.scss"
+        language="scss"
         [code]="scssCode"
         [showLineNumbers]="true"
       />
@@ -103,22 +103,22 @@
 
       <h3 class="demo-section__subtitle">highlight()</h3>
       <ui-lib-code-snippet
-        [code]="snippets.highlightUsage"
         language="typescript"
+        [code]="snippets.highlightUsage"
         [showLineNumbers]="true"
       />
 
       <h3 class="demo-section__subtitle">tokenize()</h3>
       <ui-lib-code-snippet
-        [code]="snippets.tokenizeUsage"
         language="typescript"
+        [code]="snippets.tokenizeUsage"
         [showLineNumbers]="true"
       />
 
       <h3 class="demo-section__subtitle">escapeForCode()</h3>
       <ui-lib-code-snippet
-        [code]="snippets.escapeUsage"
         language="typescript"
+        [code]="snippets.escapeUsage"
         [showLineNumbers]="true"
       />
     </app-doc-section>
@@ -127,7 +127,7 @@
     <app-doc-section id="api" title="API">
       <h2 class="demo-section__title">API</h2>
 
-      <div id="api-highlight" class="api-block">
+      <div class="api-block" id="api-highlight">
         <h3 class="api-block__signature">
           <code>highlight(code: string, language: SyntaxLanguage): string</code>
         </h3>
@@ -138,7 +138,7 @@
         </p>
       </div>
 
-      <div id="api-tokenize" class="api-block">
+      <div class="api-block" id="api-tokenize">
         <h3 class="api-block__signature">
           <code>tokenize(code: string, language: SyntaxLanguage): readonly SyntaxToken[]</code>
         </h3>
@@ -149,7 +149,7 @@
         </p>
       </div>
 
-      <div id="api-escape" class="api-block">
+      <div class="api-block" id="api-escape">
         <h3 class="api-block__signature">
           <code>escapeForCode(code: string): string</code>
         </h3>
@@ -166,8 +166,8 @@
 
       <h3 class="demo-section__subtitle" style="margin-top: 1.5rem">SyntaxToken</h3>
       <ui-lib-code-snippet
-        [code]="syntaxTokenInterfaceCode"
         language="typescript"
+        [code]="syntaxTokenInterfaceCode"
         [showLineNumbers]="true"
       />
     </app-doc-section>
@@ -258,8 +258,8 @@
         container. All token colours are exposed as <code>--uilib-syntax-*</code> variables.
       </p>
       <ui-lib-code-snippet
-        [code]="snippets.themeOverride"
         language="scss"
+        [code]="snippets.themeOverride"
         [showLineNumbers]="true"
       />
     </app-doc-section>
@@ -282,8 +282,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="activeSectionId()"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

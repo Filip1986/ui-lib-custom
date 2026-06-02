@@ -1,7 +1,7 @@
 export * from './radio-button';
 export type {
-  RadioButtonVariant,
-  RadioButtonSize,
   RadioButtonAppearance,
   RadioButtonChangeEvent,
+  RadioButtonSize,
+  RadioButtonVariant,
 } from './radio-button.types';

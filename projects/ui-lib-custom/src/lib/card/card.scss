@@ -23,67 +23,67 @@
 
   ui-lib-card .ui-lib-card {
     background: var(--uilib-card-bg, var(--uilib-surface));
-    color: var(--uilib-card-text-color, var(--uilib-page-fg));
-    border-radius: var(--uilib-card-radius, var(--uilib-radius-lg));
-    box-shadow: var(--uilib-card-shadow, var(--uilib-card-shadow-medium, none));
     border: var(--uilib-card-border-width, 0) solid
       var(--uilib-card-border, var(--uilib-border, currentColor));
+    border-radius: var(--uilib-card-radius, var(--uilib-radius-lg));
+    box-shadow: var(--uilib-card-shadow, var(--uilib-card-shadow-medium, none));
+    color: var(--uilib-card-text-color, var(--uilib-page-fg));
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     transition:
       0.2s ease box-shadow,
       0.2s ease transform;
-    display: flex;
-    flex-direction: column;
 
     &__header {
-      display: flex;
       align-items: flex-start;
-      gap: var(--uilib-space-2, 0.5rem);
-      padding: var(--uilib-card-header-padding);
       background-color: var(
         --uilib-card-header-bg,
         var(--uilib-surface-alt, var(--uilib-card-bg, inherit))
       );
       border-bottom: 1px solid var(--uilib-card-border, var(--uilib-border, currentColor));
+      display: flex;
       font-family: var(--uilib-font-heading, inherit), sans-serif;
+      gap: var(--uilib-space-2, 0.5rem);
+      padding: var(--uilib-card-header-padding);
     }
 
     &__header-text {
       display: flex;
       flex-direction: column;
       gap: 0.125rem;
-      min-width: 0;
-      min-height: calc((1.125rem * 1.4) + 0.125rem + (0.95rem * 1.4));
       justify-content: center;
+      min-height: calc((1.125rem * 1.4) + 0.125rem + (0.95rem * 1.4));
+      min-width: 0;
     }
 
     &__title {
-      font-weight: 600;
-      font-size: var(--uilib-card-media-title-font-size);
-      line-height: 1.4;
       color: var(--uilib-card-text-color, inherit);
+      font-size: var(--uilib-card-media-title-font-size);
+      font-weight: 600;
+      line-height: 1.4;
     }
 
     &__subtitle {
-      font-size: var(--uilib-card-media-subtitle-font-size);
       color: var(--uilib-muted, var(--uilib-color-neutral-600));
+      font-size: var(--uilib-card-media-subtitle-font-size);
       line-height: 1.4;
     }
 
     &__body {
-      padding: var(--uilib-card-body-padding);
       flex: 1;
       font-family: var(--uilib-font-body, inherit), sans-serif;
+      padding: var(--uilib-card-body-padding);
     }
 
     &__footer {
-      padding: var(--uilib-card-footer-padding);
       background-color: var(
         --uilib-card-footer-bg,
         var(--uilib-surface-alt, var(--uilib-card-bg, inherit))
       );
       border-top: 1px solid var(--uilib-card-border, var(--uilib-border, currentColor));
       font-family: var(--uilib-font-ui, inherit), sans-serif;
+      padding: var(--uilib-card-footer-padding);
     }
 
     &--bordered {
@@ -102,14 +102,14 @@
       }
 
       &:focus-visible {
-        outline: 2px solid var(--uilib-color-primary, currentColor);
-        outline-offset: 2px;
         box-shadow:
           var(
             --uilib-card-shadow-hover,
             var(--uilib-card-shadow, var(--uilib-card-shadow-medium, none))
           ),
           0 0 0 4px var(--uilib-focus-ring, rgba(0, 112, 240, 0.25));
+        outline: 2px solid var(--uilib-color-primary, currentColor);
+        outline-offset: 2px;
         transform: translateY(-2px);
       }
     }
@@ -181,14 +181,14 @@
         border-bottom: 0;
 
         &::after {
-          content: '';
-          position: absolute;
-          inset-inline-start: var(--uilib-space-4);
-          inset-inline-end: var(--uilib-space-4);
-          bottom: 0;
-          height: 1px;
           background: var(--uilib-card-border, var(--uilib-border, currentColor));
+          content: '';
+          height: 1px;
+          inset-inline-end: var(--uilib-space-4);
+          inset-inline-start: var(--uilib-space-4);
+          bottom: 0;
           opacity: 0.9;
+          position: absolute;
         }
       }
 
@@ -196,14 +196,14 @@
         border-top: 0;
 
         &::before {
-          content: '';
-          position: absolute;
-          inset-inline-start: var(--uilib-space-4);
-          inset-inline-end: var(--uilib-space-4);
-          top: 0;
-          height: 1px;
           background: var(--uilib-card-border, var(--uilib-border, currentColor));
+          content: '';
+          height: 1px;
+          inset-inline-end: var(--uilib-space-4);
+          inset-inline-start: var(--uilib-space-4);
           opacity: 0.9;
+          position: absolute;
+          top: 0;
         }
       }
     }

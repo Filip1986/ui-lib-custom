@@ -1,15 +1,15 @@
-export { Tabs } from './tabs';
-export { Tab, TabLabel, TabContent } from './tab';
+export { Tab, TabContent, TabLabel } from './tab';
 export { TabPanel } from './tab-panel';
+export { Tabs } from './tabs';
 export type {
-  TabsVariant,
-  TabsSize,
-  TabsValue,
-  TabsOrientation,
+  TabContext,
   TabsActivation,
-  TabsMode,
   TabsAlignment,
   TabsLazyMode,
+  TabsMode,
+  TabsOrientation,
   TabsScrollBehavior,
-  TabContext,
+  TabsSize,
+  TabsValue,
+  TabsVariant,
 } from './tabs.types';

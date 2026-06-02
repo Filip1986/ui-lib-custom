@@ -1,9 +1,9 @@
 <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
   <ui-lib-input-otp
-    [length]="6"
-    [integerOnly]="true"
     formControlName="code"
+    [integerOnly]="true"
     [invalid]="reactiveForm.controls.code.invalid && reactiveForm.controls.code.touched"
+    [length]="6"
   />
-  <ui-lib-button type="submit" color="primary">Verify</ui-lib-button>
+  <ui-lib-button color="primary" type="submit">Verify</ui-lib-button>
 </form>

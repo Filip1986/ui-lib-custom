@@ -2,18 +2,18 @@
   @for (item of allItems(); track item.id ?? item.label ?? $index) {
     <li
       class="ui-lib-breadcrumb__item"
-      [class.ui-lib-breadcrumb__item--active]="isLastItem($index)"
       [class]="
         item.styleClass ? 'ui-lib-breadcrumb__item ' + item.styleClass : 'ui-lib-breadcrumb__item'
       "
+      [class.ui-lib-breadcrumb__item--active]="isLastItem($index)"
     >
       <!-- Anchor with routerLink -->
       @if (item.routerLink && isClickable(item) && !isLastItem($index)) {
         <a
           class="ui-lib-breadcrumb__link"
-          [routerLink]="item.routerLink"
-          [attr.target]="item.target ?? null"
           [attr.aria-label]="getItemAriaLabel(item, $index)"
+          [attr.target]="item.target ?? null"
+          [routerLink]="item.routerLink"
           (click)="onItemClick($event, item)"
         >
           @if (isHomeItem($index) && firstItemTemplate(); as firstItemTpl) {
@@ -23,7 +23,7 @@
             />
           } @else {
             @if (item.icon) {
-              <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+              <span aria-hidden="true" class="ui-lib-breadcrumb__item-icon {{ item.icon }}"></span>
             }
             @if (item.label) {
               <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
@@ -36,9 +36,9 @@
       @else if (item.url && isClickable(item) && !isLastItem($index)) {
         <a
           class="ui-lib-breadcrumb__link"
-          [href]="item.url"
-          [attr.target]="item.target ?? null"
           [attr.aria-label]="getItemAriaLabel(item, $index)"
+          [attr.target]="item.target ?? null"
+          [href]="item.url"
           (click)="onItemClick($event, item)"
         >
           @if (isHomeItem($index) && firstItemTemplate(); as firstItemTpl) {
@@ -48,7 +48,7 @@
             />
           } @else {
             @if (item.icon) {
-              <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+              <span aria-hidden="true" class="ui-lib-breadcrumb__item-icon {{ item.icon }}"></span>
             }
             @if (item.label) {
               <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
@@ -60,10 +60,10 @@
       <!-- Button for command-only items (no url / routerLink) -->
       @else if (item.command && isClickable(item) && !isLastItem($index)) {
         <button
-          type="button"
           class="ui-lib-breadcrumb__link ui-lib-breadcrumb__link--button"
-          [attr.aria-label]="getItemAriaLabel(item, $index)"
+          type="button"
           [attr.aria-disabled]="item.disabled ? 'true' : null"
+          [attr.aria-label]="getItemAriaLabel(item, $index)"
           (click)="onItemClick($event, item)"
           (keydown)="onItemKeyDown($event, item)"
         >
@@ -74,7 +74,7 @@
             />
           } @else {
             @if (item.icon) {
-              <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+              <span aria-hidden="true" class="ui-lib-breadcrumb__item-icon {{ item.icon }}"></span>
             }
             @if (item.label) {
               <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
@@ -88,8 +88,8 @@
         <span
           class="ui-lib-breadcrumb__current"
           [attr.aria-current]="isLastItem($index) ? 'page' : null"
-          [attr.aria-label]="getItemAriaLabel(item, $index)"
           [attr.aria-disabled]="item.disabled ? 'true' : null"
+          [attr.aria-label]="getItemAriaLabel(item, $index)"
         >
           @if (isHomeItem($index) && firstItemTemplate(); as firstItemTpl) {
             <ng-container
@@ -98,7 +98,7 @@
             />
           } @else {
             @if (item.icon) {
-              <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+              <span aria-hidden="true" class="ui-lib-breadcrumb__item-icon {{ item.icon }}"></span>
             }
             @if (item.label) {
               <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
@@ -109,7 +109,7 @@
 
       <!-- Separator (hidden from screen readers) -->
       @if (!isLastItem($index)) {
-        <span class="ui-lib-breadcrumb__separator" aria-hidden="true">
+        <span aria-hidden="true" class="ui-lib-breadcrumb__separator">
           @if (separatorTemplate(); as sepTpl) {
             <ng-container [ngTemplateOutlet]="sepTpl" />
           }

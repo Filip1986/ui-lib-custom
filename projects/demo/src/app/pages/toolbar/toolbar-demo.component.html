@@ -113,7 +113,7 @@
 
     <div class="demo-playground">
       <div class="demo-playground__preview">
-        <ui-lib-toolbar [variant]="playgroundVariant()" [size]="playgroundSize()">
+        <ui-lib-toolbar [size]="playgroundSize()" [variant]="playgroundVariant()">
           <div uiToolbarStart>
             <ui-lib-button type="button">← Back</ui-lib-button>
             <ui-lib-button type="button">⊞</ui-lib-button>
@@ -135,10 +135,10 @@
           <div class="demo-control__buttons">
             @for (variant of variants; track variant) {
               <ui-lib-button
-                type="button"
-                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 (click)="setVariant(variant)"
                 >{{ variant }}</ui-lib-button
               >
@@ -152,10 +152,10 @@
           <div class="demo-control__buttons">
             @for (size of sizes; track size) {
               <ui-lib-button
-                type="button"
-                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
                 (click)="setSize(size)"
                 >{{ size }}</ui-lib-button
               >
@@ -185,9 +185,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -196,8 +196,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

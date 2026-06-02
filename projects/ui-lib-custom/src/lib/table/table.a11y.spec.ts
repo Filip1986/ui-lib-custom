@@ -9,9 +9,10 @@ import {
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
-import { TableColumnComponent } from './table-column.component';
 import { TableComponent } from './table.component';
+import { TableColumnComponent } from './table-column.component';
 import { TableExpansionDirective } from './table-templates.directive';
 
 interface Product {

@@ -4,12 +4,12 @@
 
 export const basicHtml = `<ui-lib-icon-field iconPosition="left">
   <ui-lib-input-icon styleClass="pi pi-search" />
-  <input type="text" placeholder="Search" />
+  <input placeholder="Search" type="text" />
 </ui-lib-icon-field>
 
 <ui-lib-icon-field iconPosition="right">
   <ui-lib-input-icon styleClass="pi pi-spinner pi-spin" />
-  <input type="text" placeholder="Loading" />
+  <input placeholder="Loading" type="text" />
 </ui-lib-icon-field>`;
 
 export const basicTs = `import { Component } from '@angular/core';
@@ -29,7 +29,7 @@ export class MyComponent {
 export const floatLabelHtml = `<ui-lib-float-label variant="over">
   <ui-lib-icon-field iconPosition="left">
     <ui-lib-input-icon styleClass="pi pi-envelope" />
-    <input type="text" placeholder=" " />
+    <input placeholder=" " type="text" />
   </ui-lib-icon-field>
   <label>Email (over)</label>
 </ui-lib-float-label>
@@ -37,7 +37,7 @@ export const floatLabelHtml = `<ui-lib-float-label variant="over">
 <ui-lib-float-label variant="in">
   <ui-lib-icon-field iconPosition="left">
     <ui-lib-input-icon styleClass="pi pi-user" />
-    <input type="text" placeholder=" " />
+    <input placeholder=" " type="text" />
   </ui-lib-icon-field>
   <label>Username (in)</label>
 </ui-lib-float-label>
@@ -45,7 +45,7 @@ export const floatLabelHtml = `<ui-lib-float-label variant="over">
 <ui-lib-float-label variant="on">
   <ui-lib-icon-field iconPosition="left">
     <ui-lib-input-icon styleClass="pi pi-lock" />
-    <input type="password" placeholder=" " />
+    <input placeholder=" " type="password" />
   </ui-lib-icon-field>
   <label>Password (on)</label>
 </ui-lib-float-label>`;
@@ -68,17 +68,17 @@ export class MyComponent {
 
 export const sizesHtml = `<ui-lib-icon-field iconPosition="left">
   <ui-lib-input-icon styleClass="pi pi-search" />
-  <ui-lib-input size="sm" placeholder="Small" />
+  <ui-lib-input placeholder="Small" size="sm" />
 </ui-lib-icon-field>
 
 <ui-lib-icon-field iconPosition="left">
   <ui-lib-input-icon styleClass="pi pi-search" />
-  <ui-lib-input size="md" placeholder="Medium" />
+  <ui-lib-input placeholder="Medium" size="md" />
 </ui-lib-icon-field>
 
 <ui-lib-icon-field iconPosition="left">
   <ui-lib-input-icon styleClass="pi pi-search" />
-  <ui-lib-input size="lg" placeholder="Large" />
+  <ui-lib-input placeholder="Large" size="lg" />
 </ui-lib-icon-field>`;
 
 export const sizesTs = `import { Component } from '@angular/core';
@@ -99,12 +99,12 @@ export class MyComponent {
 
 export const templateHtml = `<ui-lib-icon-field iconPosition="left">
   <ui-lib-input-icon>
-    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <svg aria-hidden="true" viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="7" />
-      <line x1="16.5" y1="16.5" x2="21" y2="21" />
+      <line x1="16.5" x2="21" y1="16.5" y2="21" />
     </svg>
   </ui-lib-input-icon>
-  <input type="text" placeholder="SVG icon" />
+  <input placeholder="SVG icon" type="text" />
 </ui-lib-icon-field>
 
 <ui-lib-icon-field iconPosition="right">
@@ -132,17 +132,17 @@ export class MyComponent {
 
 export const variantsHtml = `<ui-lib-icon-field iconPosition="left">
   <ui-lib-input-icon styleClass="pi pi-search" />
-  <ui-lib-input variant="material" placeholder="Material" />
+  <ui-lib-input placeholder="Material" variant="material" />
 </ui-lib-icon-field>
 
 <ui-lib-icon-field iconPosition="left">
   <ui-lib-input-icon styleClass="pi pi-search" />
-  <ui-lib-input variant="bootstrap" placeholder="Bootstrap" />
+  <ui-lib-input placeholder="Bootstrap" variant="bootstrap" />
 </ui-lib-icon-field>
 
 <ui-lib-icon-field iconPosition="left">
   <ui-lib-input-icon styleClass="pi pi-search" />
-  <ui-lib-input variant="minimal" placeholder="Minimal" />
+  <ui-lib-input placeholder="Minimal" variant="minimal" />
 </ui-lib-icon-field>`;
 
 export const variantsTs = `import { Component } from '@angular/core';

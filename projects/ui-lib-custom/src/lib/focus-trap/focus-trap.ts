@@ -1,16 +1,17 @@
+import type { InputSignal, InputSignalWithTransform, OnDestroy } from '@angular/core';
 import {
-  Directive,
-  ElementRef,
   booleanAttribute,
+  Directive,
   effect,
+  ElementRef,
   inject,
   input,
   isDevMode,
   untracked,
 } from '@angular/core';
-import type { InputSignal, InputSignalWithTransform, OnDestroy } from '@angular/core';
-import { FocusTrap } from 'ui-lib-custom/core';
+
 import type { FocusTrapOptions } from 'ui-lib-custom/core';
+import { FocusTrap } from 'ui-lib-custom/core';
 
 /**
  * FocusTrap directive — constrains keyboard focus within the host element.

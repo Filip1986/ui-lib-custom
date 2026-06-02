@@ -1,10 +1,10 @@
 export * from './select';
 export type {
-  SelectVariant,
-  SelectSize,
-  SelectValueObject,
-  SelectValue,
   SelectCvaValue,
   SelectOption,
   SelectOptionTemplateContext,
+  SelectSize,
+  SelectValue,
+  SelectValueObject,
+  SelectVariant,
 } from './select.types';

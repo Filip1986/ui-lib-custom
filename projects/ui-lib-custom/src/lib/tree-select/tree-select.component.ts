@@ -1,17 +1,3 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  HostListener,
-  ViewEncapsulation,
-  computed,
-  forwardRef,
-  inject,
-  input,
-  model,
-  output,
-  signal,
-} from '@angular/core';
 import type {
   InputSignal,
   ModelSignal,
@@ -19,12 +5,28 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  forwardRef,
+  HostListener,
+  inject,
+  input,
+  model,
+  output,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
-import { Tree } from 'ui-lib-custom/tree';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { Tree } from 'ui-lib-custom/tree';
+
 import { TREE_SELECT_ID_PREFIX } from './tree-select.constants';
 import type {
   TreeNode,
@@ -39,20 +41,19 @@ import type {
   TreeSelectVariant,
 } from './tree-select.types';
 
+export { TREE_SELECT_DEFAULTS } from './tree-select.constants';
 export type {
   TreeNode,
-  TreeNodeSelectEvent,
-  TreeNodeExpandEvent,
   TreeNodeCollapseEvent,
-  TreeSelectVariant,
-  TreeSelectSize,
-  TreeSelectSelectionMode,
+  TreeNodeExpandEvent,
+  TreeNodeSelectEvent,
   TreeSelectChangeEvent,
-  TreeSelectShowEvent,
   TreeSelectHideEvent,
+  TreeSelectSelectionMode,
+  TreeSelectShowEvent,
+  TreeSelectSize,
+  TreeSelectVariant,
 } from './tree-select.types';
-
-export { TREE_SELECT_DEFAULTS } from './tree-select.constants';
 
 let nextTreeSelectId: number = 0;
 

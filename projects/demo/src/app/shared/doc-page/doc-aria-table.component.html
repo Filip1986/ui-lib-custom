@@ -1,24 +1,24 @@
-<ui-lib-table [value]="tableRows()" styleClass="demo-a11y-table">
-  <ui-lib-table-column header="Attribute" field="attribute" width="160px">
-    <ng-template uiTableColumnBody let-row>
+<ui-lib-table styleClass="demo-a11y-table" [value]="tableRows()">
+  <ui-lib-table-column field="attribute" header="Attribute" width="160px">
+    <ng-template let-row uiTableColumnBody>
       <code>{{ row.attribute }}</code>
     </ng-template>
   </ui-lib-table-column>
 
-  <ui-lib-table-column header="Element" field="element" width="150px">
-    <ng-template uiTableColumnBody let-row>
+  <ui-lib-table-column field="element" header="Element" width="150px">
+    <ng-template let-row uiTableColumnBody>
       <span>{{ row.element }}</span>
     </ng-template>
   </ui-lib-table-column>
 
-  <ui-lib-table-column header="Value" field="value" width="160px">
-    <ng-template uiTableColumnBody let-row>
+  <ui-lib-table-column field="value" header="Value" width="160px">
+    <ng-template let-row uiTableColumnBody>
       <code>{{ row.value }}</code>
     </ng-template>
   </ui-lib-table-column>
 
-  <ui-lib-table-column header="Notes" field="notes">
-    <ng-template uiTableColumnBody let-row>
+  <ui-lib-table-column field="notes" header="Notes">
+    <ng-template let-row uiTableColumnBody>
       <span [innerHTML]="row.notes"></span>
     </ng-template>
   </ui-lib-table-column>

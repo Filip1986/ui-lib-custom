@@ -12,15 +12,15 @@
     <ng-content select="[uiLibDialogHeadless]" />
   } @else {
     <div
-      class="ui-lib-dialog-panel"
       #panelElement
-      [class]="panelClasses()"
-      [ngStyle]="panelStyles()"
+      class="ui-lib-dialog-panel"
       role="dialog"
       tabindex="-1"
-      [attr.aria-modal]="modal() || null"
-      [attr.aria-labelledby]="labelledById()"
       [attr.aria-describedby]="ariaDescribedBy() ?? null"
+      [attr.aria-labelledby]="labelledById()"
+      [attr.aria-modal]="modal() || null"
+      [class]="panelClasses()"
+      [ngStyle]="panelStyles()"
       (keydown)="onPanelKeydown($event)"
     >
       <div class="ui-lib-dialog-header" (pointerdown)="onHeaderPointerDown($event)">
@@ -34,32 +34,32 @@
         <div class="ui-lib-dialog-header-actions">
           @if (maximizable()) {
             <button
-              type="button"
               class="ui-lib-dialog-maximize-btn"
-              (click)="toggleMaximize()"
+              type="button"
               [attr.aria-label]="
                 maximized() ? i18n.translate('dialog.minimize') : i18n.translate('dialog.maximize')
               "
+              (click)="toggleMaximize()"
             >
               @if (maximized()) {
                 <svg
+                  aria-hidden="true"
                   class="ui-lib-dialog-action-icon"
+                  focusable="false"
+                  height="16"
                   viewBox="0 0 24 24"
                   width="16"
-                  height="16"
-                  aria-hidden="true"
-                  focusable="false"
                 >
                   <path d="M5 8h14v2H5z" fill="currentColor" />
                 </svg>
               } @else {
                 <svg
+                  aria-hidden="true"
                   class="ui-lib-dialog-action-icon"
+                  focusable="false"
+                  height="16"
                   viewBox="0 0 24 24"
                   width="16"
-                  height="16"
-                  aria-hidden="true"
-                  focusable="false"
                 >
                   <path d="M11 5h2v14h-2zM5 11h14v2H5z" fill="currentColor" />
                 </svg>
@@ -69,18 +69,18 @@
 
           @if (closable()) {
             <button
-              type="button"
               class="ui-lib-dialog-close-btn"
-              (click)="close()"
+              type="button"
               [attr.aria-label]="i18n.translate('dialog.close')"
+              (click)="close()"
             >
               <svg
+                aria-hidden="true"
                 class="ui-lib-dialog-action-icon"
+                focusable="false"
+                height="16"
                 viewBox="0 0 24 24"
                 width="16"
-                height="16"
-                aria-hidden="true"
-                focusable="false"
               >
                 <path
                   d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6L17.6 19l1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"

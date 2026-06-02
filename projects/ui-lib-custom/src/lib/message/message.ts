@@ -4,19 +4,21 @@ import {
   computed,
   inject,
   input,
-  output,
-  ViewEncapsulation,
   type InputSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { Icon } from 'ui-lib-custom/icon';
-import type { StatusIcon } from 'ui-lib-custom/icon';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import type { MessageSeverity, MessageVariant, MessageSize } from './message.types';
 
-export type { MessageSeverity, MessageVariant, MessageSize } from './message.types';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import type { StatusIcon } from 'ui-lib-custom/icon';
+import { Icon } from 'ui-lib-custom/icon';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { MessageSeverity, MessageSize, MessageVariant } from './message.types';
+
+export type { MessageSeverity, MessageSize, MessageVariant } from './message.types';
 
 /** Module-level counter for unique message IDs (SSR-safe: runs per module load). */
 let nextMessageId: number = 0;

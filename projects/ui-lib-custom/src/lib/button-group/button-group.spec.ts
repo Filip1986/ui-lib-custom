@@ -1,15 +1,16 @@
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   provideZonelessChangeDetection,
+  signal,
   type WritableSignal,
 } from '@angular/core';
-import { ButtonGroup } from './button-group';
-import { Button } from '../button/button';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import type { ButtonSize, ButtonVariant } from '../button/button';
+import { Button } from '../button/button';
+import { ButtonGroup } from './button-group';
 
 @Component({
   standalone: true,

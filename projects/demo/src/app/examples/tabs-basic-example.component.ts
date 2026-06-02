@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
+
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
 
 /**
  * Basic tabs example.

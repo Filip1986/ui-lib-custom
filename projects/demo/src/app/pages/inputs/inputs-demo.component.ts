@@ -1,46 +1,48 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  signal,
-  viewChild,
-  computed,
-  inject,
-  effect,
-} from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import type { Signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+  ViewChild,
+  viewChild,
+} from '@angular/core';
 import type { NgForm } from '@angular/forms';
-import { UiLibInput } from 'ui-lib-custom/input';
-import type { InputVariant, InputType, InputLabelFloat } from 'ui-lib-custom/input';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import type { TabsValue } from 'ui-lib-custom/tabs';
-import { Button } from 'ui-lib-custom/button';
-import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
-import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
-import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
-import { InputBasicExampleComponent } from '@demo/examples/input-basic-example.component';
+import { FormsModule } from '@angular/forms';
 
+import { Button } from 'ui-lib-custom/button';
+import type { InputLabelFloat, InputType, InputVariant } from 'ui-lib-custom/input';
+import { UiLibInput } from 'ui-lib-custom/input';
 import { Panel } from 'ui-lib-custom/panel';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import { InputBasicExampleComponent } from '@demo/examples/input-basic-example.component';
+import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-import { inputExampleHtml, inputExampleTs, usageHtml, usageTs } from './snippets.generated';
-import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
+
+import { inputExampleHtml, inputExampleTs, usageHtml, usageTs } from './snippets.generated';
 type TabKey =
   | 'playground'
   | 'variants'

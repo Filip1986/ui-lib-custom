@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { Stack } from './stack';
+
 import { Button } from '../button/button';
+import { Stack } from './stack';
 
 type Story = StoryObj;
 

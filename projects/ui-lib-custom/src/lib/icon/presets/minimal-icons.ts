@@ -1,3 +1,5 @@
+import type { Provider } from '@angular/core';
+
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideAlertCircle,
@@ -10,6 +12,7 @@ import {
   lucideAlignLeft,
   lucideAlignRight,
   lucideAlignVerticalDistributeCenter,
+  lucideArrowsUpFromLine,
   lucideArrowUp,
   lucideArrowUpLeft,
   lucideArrowUpRight,
@@ -17,7 +20,6 @@ import {
   lucideArrowUpRightSquare,
   lucideArrowUpSquare,
   lucideArrowUpToLine,
-  lucideArrowsUpFromLine,
   lucideAtSign,
   lucideAudioWaveform,
   lucideAward,
@@ -51,8 +53,8 @@ import {
   lucideBellDot,
   lucideBellElectric,
 } from '@ng-icons/lucide';
+
 import type { IconMapping } from '../icon.semantics';
-import type { Provider } from '@angular/core';
 
 export const LUCIDE_ICON_MAPPING: IconMapping = {
   // Actions

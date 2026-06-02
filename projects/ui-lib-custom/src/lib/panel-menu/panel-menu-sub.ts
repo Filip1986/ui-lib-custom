@@ -1,17 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   inject,
   input,
   type InputSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import { PANEL_MENU_CONTEXT } from './panel-menu-context';
-import type { PanelMenuContext } from './panel-menu-context';
+
 import type { PanelMenuItem } from './panel-menu.types';
+import type { PanelMenuContext } from './panel-menu-context';
+import { PANEL_MENU_CONTEXT } from './panel-menu-context';
 
 /**
  * Internal recursive sub-component that renders items within an expanded

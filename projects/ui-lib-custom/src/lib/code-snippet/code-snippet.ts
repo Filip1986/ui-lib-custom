@@ -1,35 +1,37 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  ViewEncapsulation,
-  CUSTOM_ELEMENTS_SCHEMA,
-  input,
-  output,
-  signal,
+  Component,
   computed,
+  CUSTOM_ELEMENTS_SCHEMA,
   inject,
+  input,
   type InputSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
 import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { highlight, escapeForCode } from 'ui-lib-custom/syntax-highlighter';
 import type { SyntaxLanguage } from 'ui-lib-custom/syntax-highlighter';
+import { escapeForCode, highlight } from 'ui-lib-custom/syntax-highlighter';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   CodeSnippetFile,
   CodeSnippetLanguage,
-  CodeSnippetVariant,
   CodeSnippetSize,
+  CodeSnippetVariant,
 } from './code-snippet.types';
 
 export type {
   CodeSnippetFile,
   CodeSnippetLanguage,
-  CodeSnippetVariant,
   CodeSnippetSize,
+  CodeSnippetVariant,
 } from './code-snippet.types';
 
 const LANGUAGE_LABELS: Record<CodeSnippetLanguage, string> = {

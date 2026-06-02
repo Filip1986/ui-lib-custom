@@ -59,7 +59,7 @@
 
 ## Git Hooks (Husky)
 
-- **pre-commit** — runs `lint-staged`: Prettier then ESLint on staged `.ts`; Prettier on staged `.html`, `.json`, `.md`, and all `.scss`/`.css`; Stylelint only on staged `projects/ui-lib-custom/**/*.scss` (demo SCSS is Prettier-only).
+- **pre-commit** — runs `lint-staged`: Prettier then ESLint on staged `.ts` and `.html` (import order, lifecycle order, template attribute order — see `docs/standards/CODE-ORGANIZATION.md`); Prettier on `.json`/`.md` and all `.scss`; Stylelint on staged library `.scss` only.
 - **pre-push** — runs `npm run format:check` then `npm run typecheck` (full repo Prettier check + TS across all five tsconfigs). Blocks push on formatting or type errors.
 - **CI** (`lint` job) — runs `npm run lint`, `npm run format:check`, and i18n checks on every PR and push to `main`.
 - To bypass hooks in an emergency: `git push --no-verify` (use sparingly; always fix errors before merging).

@@ -18,12 +18,12 @@
     </p>
     <div class="demo-section__preview">
       @for (severity of severities; track severity) {
-        <ui-lib-tag [value]="severityLabels[severity]" [severity]="severity" />
+        <ui-lib-tag [severity]="severity" [value]="severityLabels[severity]" />
       }
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Severity"
+      language="html"
       [code]="snippets.severity"
       [showLineNumbers]="true"
     />
@@ -37,13 +37,13 @@
       Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--center">
-      <ui-lib-tag value="Small" size="sm" severity="primary" />
-      <ui-lib-tag value="Medium" size="md" severity="primary" />
-      <ui-lib-tag value="Large" size="lg" severity="primary" />
+      <ui-lib-tag severity="primary" size="sm" value="Small" />
+      <ui-lib-tag severity="primary" size="md" value="Medium" />
+      <ui-lib-tag severity="primary" size="lg" value="Large" />
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Sizes"
+      language="html"
       [code]="snippets.sizes"
       [showLineNumbers]="true"
     />
@@ -58,12 +58,12 @@
     </p>
     <div class="demo-section__preview">
       @for (severity of severities; track severity) {
-        <ui-lib-tag [value]="severityLabels[severity]" [severity]="severity" [rounded]="true" />
+        <ui-lib-tag [rounded]="true" [severity]="severity" [value]="severityLabels[severity]" />
       }
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Rounded"
+      language="html"
       [code]="snippets.rounded"
       [showLineNumbers]="true"
     />
@@ -78,15 +78,15 @@
       always marked <code>aria-hidden="true"</code> — they are decorative.
     </p>
     <div class="demo-section__preview">
-      <ui-lib-tag value="Primary" icon="pi pi-tag" severity="primary" />
-      <ui-lib-tag value="Success" icon="pi pi-check-circle" severity="success" />
-      <ui-lib-tag value="Warning" icon="pi pi-exclamation-triangle" severity="warn" />
-      <ui-lib-tag value="Danger" icon="pi pi-times-circle" severity="danger" />
-      <ui-lib-tag value="Info" icon="pi pi-info-circle" severity="info" />
+      <ui-lib-tag icon="pi pi-tag" severity="primary" value="Primary" />
+      <ui-lib-tag icon="pi pi-check-circle" severity="success" value="Success" />
+      <ui-lib-tag icon="pi pi-exclamation-triangle" severity="warn" value="Warning" />
+      <ui-lib-tag icon="pi pi-times-circle" severity="danger" value="Danger" />
+      <ui-lib-tag icon="pi pi-info-circle" severity="info" value="Info" />
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Icons"
+      language="html"
       [code]="snippets.icons"
       [showLineNumbers]="true"
     />
@@ -102,13 +102,13 @@
       not auto-hide — control visibility from the parent via the <code>(removed)</code> output.
     </p>
     <div class="demo-section__preview">
-      <ui-lib-tag value="Python" severity="info" [dismissible]="true" />
-      <ui-lib-tag value="Urgent" severity="danger" [dismissible]="true" icon="pi pi-flag" />
-      <ui-lib-tag value="Stable" severity="success" [dismissible]="true" [rounded]="true" />
+      <ui-lib-tag severity="info" value="Python" [dismissible]="true" />
+      <ui-lib-tag icon="pi pi-flag" severity="danger" value="Urgent" [dismissible]="true" />
+      <ui-lib-tag severity="success" value="Stable" [dismissible]="true" [rounded]="true" />
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Dismissible"
+      language="html"
       [code]="snippets.dismissible"
       [showLineNumbers]="true"
     />
@@ -129,8 +129,8 @@
         <div class="demo-row">
           @for (severity of severities; track severity) {
             <ui-lib-tag
-              [value]="severityLabels[severity]"
               [severity]="severity"
+              [value]="severityLabels[severity]"
               [variant]="variant"
             />
           }
@@ -138,8 +138,8 @@
       </div>
     }
     <ui-lib-code-snippet
-      language="html"
       filename="Variants"
+      language="html"
       [code]="snippets.variants"
       [showLineNumbers]="true"
     />
@@ -154,13 +154,13 @@
     <div class="demo-playground">
       <div class="demo-playground__preview">
         <ui-lib-tag
-          [value]="playgroundValue()"
+          [dismissible]="playgroundDismissible()"
+          [icon]="playgroundIcon()"
+          [rounded]="playgroundRounded()"
           [severity]="playgroundSeverity()"
           [size]="playgroundSize()"
+          [value]="playgroundValue()"
           [variant]="playgroundVariant()"
-          [rounded]="playgroundRounded()"
-          [icon]="playgroundIcon()"
-          [dismissible]="playgroundDismissible()"
         />
       </div>
 
@@ -171,10 +171,10 @@
           <div class="demo-control__buttons">
             @for (severity of severities; track severity) {
               <ui-lib-button
-                type="button"
-                [appearance]="playgroundSeverity() === severity ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="playgroundSeverity() === severity ? 'solid' : 'outline'"
                 (click)="setSeverity(severity)"
                 >{{ severityLabels[severity] }}</ui-lib-button
               >
@@ -188,10 +188,10 @@
           <div class="demo-control__buttons">
             @for (size of sizes; track size) {
               <ui-lib-button
-                type="button"
-                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
                 (click)="setSize(size)"
                 >{{ size }}</ui-lib-button
               >
@@ -205,10 +205,10 @@
           <div class="demo-control__buttons">
             @for (variant of variants; track variant) {
               <ui-lib-button
-                type="button"
-                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 (click)="setVariant(variant)"
                 >{{ variant }}</ui-lib-button
               >
@@ -221,26 +221,26 @@
           <span class="demo-control__label">Options</span>
           <div class="demo-control__buttons">
             <ui-lib-button
-              type="button"
-              [appearance]="playgroundRounded() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="playgroundRounded() ? 'solid' : 'outline'"
               (click)="toggleRounded()"
               >Rounded</ui-lib-button
             >
             <ui-lib-button
-              type="button"
-              [appearance]="playgroundIcon() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="playgroundIcon() ? 'solid' : 'outline'"
               (click)="toggleIcon()"
               >Icon</ui-lib-button
             >
             <ui-lib-button
-              type="button"
-              [appearance]="playgroundDismissible() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="playgroundDismissible() ? 'solid' : 'outline'"
               (click)="toggleDismissible()"
               >Dismissible</ui-lib-button
             >
@@ -254,12 +254,12 @@
        API
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="api" title="API">
-    <div id="api-inputs" data-doc-anchor>
+    <div data-doc-anchor id="api-inputs">
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
-    <div id="api-outputs" data-doc-anchor>
+    <div data-doc-anchor id="api-outputs">
       <h3 class="demo-section__subtitle">Outputs</h3>
       <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
@@ -313,8 +313,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

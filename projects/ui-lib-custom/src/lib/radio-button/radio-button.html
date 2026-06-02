@@ -2,32 +2,32 @@
 <input
   class="ui-lib-radio-button__native-input"
   type="radio"
-  [id]="getNativeInputId()"
-  [name]="name()"
-  [checked]="isChecked()"
-  [required]="required()"
-  [disabled]="isDisabled()"
-  [attr.tabindex]="hostTabIndex()"
+  [attr.aria-describedby]="ariaDescribedby()"
+  [attr.aria-disabled]="isDisabled() ? 'true' : null"
+  [attr.aria-invalid]="invalid() ? 'true' : null"
   [attr.aria-label]="ariaLabel()"
   [attr.aria-labelledby]="ariaLabelledbyResolved()"
-  [attr.aria-describedby]="ariaDescribedby()"
   [attr.aria-required]="required() ? 'true' : null"
-  [attr.aria-invalid]="invalid() ? 'true' : null"
-  [attr.aria-disabled]="isDisabled() ? 'true' : null"
+  [attr.tabindex]="hostTabIndex()"
+  [checked]="isChecked()"
+  [disabled]="isDisabled()"
+  [id]="getNativeInputId()"
+  [name]="name()"
+  [required]="required()"
+  (blur)="onNativeBlur($event)"
   (click)="onSelect($event)"
   (focus)="onFocusIn($event)"
-  (blur)="onNativeBlur($event)"
   (keydown)="onNativeKeydown($event)"
 />
 
 <!-- Custom visual circle indicator -->
-<div class="ui-lib-radio-button__box" role="presentation" aria-hidden="true">
+<div aria-hidden="true" class="ui-lib-radio-button__box" role="presentation">
   <span class="ui-lib-radio-button__icon"></span>
 </div>
 
 <!-- Optional label -->
 @if (label()) {
-  <label [for]="getNativeInputId()" [id]="getLabelElementId()" class="ui-lib-radio-button__label">
+  <label class="ui-lib-radio-button__label" [for]="getNativeInputId()" [id]="getLabelElementId()">
     {{ label() }}
   </label>
 }

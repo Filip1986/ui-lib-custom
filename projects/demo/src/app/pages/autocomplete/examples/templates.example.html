@@ -1,14 +1,14 @@
 <ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
   optionLabel="name"
   optionValue="code"
   [multiple]="true"
+  [suggestions]="countrySuggestions"
   (completeMethod)="onCountryComplete($event)"
 >
   <ng-template uiAutoCompleteHeader>
     <strong>Choose country</strong>
   </ng-template>
-  <ng-template uiAutoCompleteItem let-country="country">
+  <ng-template let-country="country" uiAutoCompleteItem>
     <span>{{ country.name }} ({{ country.code }})</span>
   </ng-template>
   <ng-template uiAutoCompleteFooter>

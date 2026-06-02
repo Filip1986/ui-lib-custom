@@ -1,3 +1,4 @@
+import type { DebugElement } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,8 +6,8 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
-import type { DebugElement } from '@angular/core';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { Menu } from './menu';
 import type { MenuItem } from './menu.types';

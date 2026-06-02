@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Programmatically open <strong>any Angular component</strong> inside a configurable modal shell. No template tag required — just inject <code>DialogService</code> and call <code>open()</code>."
     docHeader
     title="DynamicDialog"
     [importCode]="importCode"
-    description="Programmatically open <strong>any Angular component</strong> inside a configurable modal shell. No template tag required — just inject <code>DialogService</code> and call <code>open()</code>."
   />
 
   <!-- Basic Usage -->
@@ -14,15 +14,15 @@
     </p>
     <div class="demo-card">
       <div class="demo-card__preview">
-        <ui-lib-button type="button" severity="primary" (click)="openSimple()">
+        <ui-lib-button severity="primary" type="button" (click)="openSimple()">
           Open Dialog
         </ui-lib-button>
       </div>
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetBasicOpen"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -35,7 +35,7 @@
     </p>
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--col">
-        <ui-lib-button type="button" severity="primary" (click)="openWithData()">
+        <ui-lib-button severity="primary" type="button" (click)="openWithData()">
           Open with Data
         </ui-lib-button>
         @if (lastResult) {
@@ -46,9 +46,9 @@
       </div>
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetPassingData"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -61,15 +61,15 @@
     </p>
     <div class="demo-card">
       <div class="demo-card__preview">
-        <ui-lib-button type="button" severity="primary" (click)="openScrollable()">
+        <ui-lib-button severity="primary" type="button" (click)="openScrollable()">
           Open Scrollable
         </ui-lib-button>
       </div>
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetScrollable"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -81,21 +81,21 @@
     </p>
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--row">
-        <ui-lib-button type="button" severity="primary" (click)="openWithVariant('material')">
+        <ui-lib-button severity="primary" type="button" (click)="openWithVariant('material')">
           Material
         </ui-lib-button>
-        <ui-lib-button type="button" severity="secondary" (click)="openWithVariant('bootstrap')">
+        <ui-lib-button severity="secondary" type="button" (click)="openWithVariant('bootstrap')">
           Bootstrap
         </ui-lib-button>
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithVariant('minimal')">
+        <ui-lib-button appearance="ghost" type="button" (click)="openWithVariant('minimal')">
           Minimal
         </ui-lib-button>
       </div>
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetVariant"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -107,27 +107,27 @@
     </p>
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--grid">
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('top')"
+        <ui-lib-button appearance="ghost" type="button" (click)="openWithPosition('top')"
           >Top</ui-lib-button
         >
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('center')"
+        <ui-lib-button appearance="ghost" type="button" (click)="openWithPosition('center')"
           >Center</ui-lib-button
         >
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('bottom')"
+        <ui-lib-button appearance="ghost" type="button" (click)="openWithPosition('bottom')"
           >Bottom</ui-lib-button
         >
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('left')"
+        <ui-lib-button appearance="ghost" type="button" (click)="openWithPosition('left')"
           >Left</ui-lib-button
         >
-        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('right')"
+        <ui-lib-button appearance="ghost" type="button" (click)="openWithPosition('right')"
           >Right</ui-lib-button
         >
       </div>
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetPosition"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -136,10 +136,10 @@
   <app-doc-section id="configuration-options" title="Configuration Options">
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--col">
-        <ui-lib-button type="button" severity="secondary" (click)="openDismissable()">
+        <ui-lib-button severity="secondary" type="button" (click)="openDismissable()">
           Dismissable Mask
         </ui-lib-button>
-        <ui-lib-button type="button" severity="secondary" (click)="openNoHeader()">
+        <ui-lib-button severity="secondary" type="button" (click)="openNoHeader()">
           No Header / No Close Button
         </ui-lib-button>
       </div>
@@ -161,7 +161,7 @@
 
   <!-- ── API Overview ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
-    <app-doc-api-reference [rows]="apiRows" kind="property" />
+    <app-doc-api-reference kind="property" [rows]="apiRows" />
   </app-doc-section>
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
@@ -182,8 +182,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

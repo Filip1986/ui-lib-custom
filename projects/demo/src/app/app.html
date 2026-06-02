@@ -1,21 +1,21 @@
 <div class="layout-wrapper">
   <app-topbar
-    (menuButtonClick)="toggleSidebar()"
-    (themeToggle)="toggleTheme()"
-    (loadTheme)="loadTheme($event)"
     [savedThemes]="savedThemes()"
     [theme]="theme()"
     [themeName]="themeName()"
     [themeVariant]="themeVariant()"
-  ></app-topbar>
+    (loadTheme)="loadTheme($event)"
+    (menuButtonClick)="toggleSidebar()"
+    (themeToggle)="toggleTheme()"
+  />
 
-  <app-theme-editor></app-theme-editor>
+  <app-theme-editor />
 
   <div class="layout-container">
-    <app-sidebar [class.mobile-visible]="sidebarVisible()"></app-sidebar>
+    <app-sidebar [class.mobile-visible]="sidebarVisible()" />
 
     <div class="layout-content">
-      <router-outlet></router-outlet>
+      <router-outlet />
     </div>
   </div>
 </div>

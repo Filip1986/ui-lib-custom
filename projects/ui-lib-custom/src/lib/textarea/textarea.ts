@@ -1,17 +1,3 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  ElementRef,
-  effect,
-  forwardRef,
-  inject,
-  input,
-  output,
-  signal,
-  ViewEncapsulation,
-  viewChild,
-} from '@angular/core';
 import type {
   AfterContentInit,
   InputSignal,
@@ -19,13 +5,29 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  forwardRef,
+  inject,
+  input,
+  output,
+  signal,
+  viewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { TEXTAREA_DEFAULTS } from './textarea.types';
-import type { TextareaResize, TextareaSize, TextareaVariant } from './textarea.types';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export type { TextareaVariant, TextareaSize, TextareaResize } from './textarea.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { TextareaResize, TextareaSize, TextareaVariant } from './textarea.types';
+import { TEXTAREA_DEFAULTS } from './textarea.types';
+
+export type { TextareaResize, TextareaSize, TextareaVariant } from './textarea.types';
 export { TEXTAREA_DEFAULTS } from './textarea.types';
 
 let textareaIdCounter: number = 0;

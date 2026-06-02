@@ -4,20 +4,20 @@
 
   <!-- Declarative ConfirmPopup instance (key-scoped) -->
   <ui-lib-confirm-popup
-    key="declarative"
-    [(visible)]="declarativeVisible"
-    message="This is a declarative popup — driven by [(visible)] binding."
     acceptLabel="Got it"
+    key="declarative"
+    message="This is a declarative popup — driven by [(visible)] binding."
     rejectLabel="Close"
+    [(visible)]="declarativeVisible"
     (accepted)="lastResult.set('Declarative accepted')"
     (rejected)="lastResult.set('Declarative rejected')"
   />
 
   <app-doc-page-header
+    description="A lightweight anchored popup for inline confirmations — positions itself next to the trigger element with an arrow indicator. No modal backdrop, less visual disruption than ConfirmDialog."
     docHeader
     title="ConfirmPopup"
     [importCode]="importCode"
-    description="A lightweight anchored popup for inline confirmations — positions itself next to the trigger element with an arrow indicator. No modal backdrop, less visual disruption than ConfirmDialog."
   />
 
   <!-- ---- Basic usage ---- -->
@@ -32,9 +32,9 @@
 
     <ui-lib-code-snippet
       language="typescript"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetBasicConfirm"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -52,9 +52,9 @@
 
     <ui-lib-code-snippet
       language="typescript"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetIconConfirm"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -103,8 +103,8 @@
 
     <app-doc-code-example
       [html]="declarativeUsageHtml"
-      [typescript]="declarativeUsageTs"
       [showLineNumbers]="true"
+      [typescript]="declarativeUsageTs"
     />
   </app-doc-section>
 
@@ -123,10 +123,10 @@
     <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="demo-section__subtitle">Outputs</h3>
-    <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
     <h3 class="demo-section__subtitle">ConfirmPopupService</h3>
-    <app-doc-api-reference [rows]="apiServiceRows" kind="property" [showDefault]="false" />
+    <app-doc-api-reference kind="property" [rows]="apiServiceRows" [showDefault]="false" />
   </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
@@ -139,9 +139,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -149,8 +149,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -70,14 +70,14 @@
       box-shadow var(--uilib-transition-fast, 150ms ease),
       background-color var(--uilib-transition-fast, 150ms ease),
       color var(--uilib-transition-fast, 150ms ease);
+    align-items: stretch;
+    color: var(--uilib-input-number-text);
 
     display: inline-flex;
-    align-items: stretch;
-    gap: var(--uilib-input-number-gap);
-    color: var(--uilib-input-number-text);
     font-family: var(--uilib-input-number-font-family, var(--uilib-font-ui, system-ui, sans-serif));
     font-size: var(--uilib-input-number-font-size);
     font-weight: var(--uilib-input-number-font-weight);
+    gap: var(--uilib-input-number-gap);
   }
 
   ui-lib-input-number.ui-lib-input-number--fluid {
@@ -86,15 +86,15 @@
   }
 
   ui-lib-input-number .ui-lib-input-number-input-wrapper {
-    position: relative;
-    display: flex;
-    flex: 1 1 auto;
     align-items: center;
-    min-height: var(--uilib-input-number-input-height);
     background: var(--uilib-input-number-bg);
     border: var(--uilib-input-number-border-width) var(--uilib-input-number-border-style)
       var(--uilib-input-number-border-color);
     border-radius: var(--uilib-input-number-border-radius);
+    display: flex;
+    flex: 1 1 auto;
+    min-height: var(--uilib-input-number-input-height);
+    position: relative;
     transition: var(--uilib-input-number-transition);
   }
 
@@ -112,14 +112,14 @@
   }
 
   ui-lib-input-number .ui-lib-input-number-input {
-    flex: 1 1 auto;
-    min-width: 0;
-    min-height: var(--uilib-input-number-input-height);
-    border: 0;
-    outline: none;
     background: transparent;
+    border: 0;
     color: inherit;
+    flex: 1 1 auto;
     font: inherit;
+    min-height: var(--uilib-input-number-input-height);
+    min-width: 0;
+    outline: none;
     padding-block: var(--uilib-input-number-padding-y);
     padding-inline: var(--uilib-input-number-padding-x);
     padding-inline-end: calc(
@@ -134,11 +134,11 @@
 
   ui-lib-input-number .ui-lib-input-number-prefix,
   ui-lib-input-number .ui-lib-input-number-suffix {
-    display: inline-flex;
     align-items: center;
-    white-space: nowrap;
     color: var(--uilib-input-number-prefix-color);
+    display: inline-flex;
     font: inherit;
+    white-space: nowrap;
   }
 
   ui-lib-input-number .ui-lib-input-number-prefix {
@@ -153,34 +153,34 @@
   }
 
   ui-lib-input-number .ui-lib-input-number-clear {
-    position: absolute;
-    inset-inline-end: var(--uilib-input-number-clear-offset);
-    border: 0;
+    align-items: center;
     background: transparent;
+    block-size: var(--uilib-input-number-button-width);
+    border: 0;
     color: var(--uilib-input-number-clear-color);
+    cursor: pointer;
+    display: inline-flex;
     font-size: var(--uilib-input-number-clear-size);
     inline-size: var(--uilib-input-number-button-width);
-    block-size: var(--uilib-input-number-button-width);
-    display: inline-flex;
-    align-items: center;
+    inset-inline-end: var(--uilib-input-number-clear-offset);
     justify-content: center;
-    cursor: pointer;
+    position: absolute;
     transition: var(--uilib-input-number-transition);
   }
 
   ui-lib-input-number .ui-lib-input-number-button {
+    align-items: center;
+    background: var(--uilib-input-number-button-bg);
     border: var(--uilib-input-number-border-width) var(--uilib-input-number-border-style)
       var(--uilib-input-number-button-border-color);
-    background: var(--uilib-input-number-button-bg);
     color: var(--uilib-input-number-button-text);
+    cursor: pointer;
+    display: inline-flex;
     font: inherit;
     inline-size: var(--uilib-input-number-button-width);
-    min-inline-size: var(--uilib-input-number-button-width);
-    min-block-size: var(--uilib-input-number-button-width);
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
-    cursor: pointer;
+    min-block-size: var(--uilib-input-number-button-width);
+    min-inline-size: var(--uilib-input-number-button-width);
     transition: var(--uilib-input-number-transition);
   }
 
@@ -212,16 +212,16 @@
   }
 
   ui-lib-input-number.ui-lib-input-number--stacked .ui-lib-input-number-button {
-    flex: 1 1 50%;
     block-size: calc(var(--uilib-input-number-input-height) / 2);
+    flex: 1 1 50%;
   }
 
   ui-lib-input-number.ui-lib-input-number--horizontal {
     display: grid;
+    gap: 0;
     grid-template-columns: var(--uilib-input-number-button-width) minmax(0, 1fr) var(
         --uilib-input-number-button-width
       );
-    gap: 0;
   }
 
   ui-lib-input-number.ui-lib-input-number--horizontal .ui-lib-input-number-input-wrapper {
@@ -229,15 +229,15 @@
   }
 
   ui-lib-input-number.ui-lib-input-number--horizontal .ui-lib-input-number-button-down {
-    border-start-start-radius: var(--uilib-input-number-border-radius);
     border-end-start-radius: var(--uilib-input-number-border-radius);
     border-inline-end-width: 0;
+    border-start-start-radius: var(--uilib-input-number-border-radius);
   }
 
   ui-lib-input-number.ui-lib-input-number--horizontal .ui-lib-input-number-button-up {
-    border-start-end-radius: var(--uilib-input-number-border-radius);
     border-end-end-radius: var(--uilib-input-number-border-radius);
     border-inline-start-width: 0;
+    border-start-end-radius: var(--uilib-input-number-border-radius);
   }
 
   ui-lib-input-number.ui-lib-input-number--vertical {
@@ -250,9 +250,9 @@
   }
 
   ui-lib-input-number.ui-lib-input-number--vertical .ui-lib-input-number-button-up {
-    border-end-start-radius: 0;
-    border-end-end-radius: 0;
     border-block-end-width: 0;
+    border-end-end-radius: 0;
+    border-end-start-radius: 0;
   }
 
   ui-lib-input-number.ui-lib-input-number--vertical .ui-lib-input-number-input-wrapper {
@@ -260,9 +260,9 @@
   }
 
   ui-lib-input-number.ui-lib-input-number--vertical .ui-lib-input-number-button-down {
-    border-start-start-radius: 0;
-    border-start-end-radius: 0;
     border-block-start-width: 0;
+    border-start-end-radius: 0;
+    border-start-start-radius: 0;
   }
 
   ui-lib-input-number.ui-lib-input-number--sm {

@@ -1,20 +1,4 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  ElementRef,
-  HostListener,
-  ViewChild,
-  ViewEncapsulation,
-  computed,
-  effect,
-  forwardRef,
-  inject,
-  input,
-  output,
-  signal,
-} from '@angular/core';
 import type {
   AfterViewChecked,
   InputSignal,
@@ -23,16 +7,34 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import type { ControlValueAccessor } from '@angular/forms';
 import {
-  KEYBOARD_KEYS,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  effect,
+  ElementRef,
+  forwardRef,
+  HostListener,
+  inject,
+  input,
+  output,
+  signal,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+import type { ControlValueAccessor } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import {
   claimOverlayZIndex,
+  KEYBOARD_KEYS,
   releaseOverlayZIndex,
   resolveOverlayAppendTarget,
 } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import {
   COLOR_PICKER_CLASSNAMES,
   COLOR_PICKER_DEFAULTS,
@@ -40,7 +42,6 @@ import {
   COLOR_PICKER_KEYBOARD_STEPS,
   COLOR_PICKER_LIMITS,
 } from './color-picker.constants';
-import { clamp, formatColorValue, hsbToHex, toHsbColor } from './color-utils';
 import type {
   ColorFormat,
   ColorPickerAppendTo,
@@ -49,6 +50,7 @@ import type {
   ColorPickerVariant,
   HsbColor,
 } from './color-picker.types';
+import { clamp, formatColorValue, hsbToHex, toHsbColor } from './color-utils';
 
 let colorPickerIdCounter: number = 0;
 const COLOR_PICKER_PANEL_MODE_CLASSES: readonly string[] = [

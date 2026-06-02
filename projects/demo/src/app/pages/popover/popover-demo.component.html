@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A lightweight floating panel anchored to a trigger element. Supports arbitrary projected content, an optional header, and auto-placement above or below the trigger."
     docHeader
     title="Popover"
     [importCode]="importCode"
-    description="A lightweight floating panel anchored to a trigger element. Supports arbitrary projected content, an optional header, and auto-placement above or below the trigger."
   />
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -27,7 +27,7 @@
       </ui-lib-popover>
     </div>
 
-    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" [showLineNumbers]="true" />
+    <app-doc-code-example [html]="basicHtml" [showLineNumbers]="true" [typescript]="basicTs" />
   </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -57,8 +57,8 @@
 
     <app-doc-code-example
       [html]="headerCloseHtml"
-      [typescript]="headerCloseTs"
       [showLineNumbers]="true"
+      [typescript]="headerCloseTs"
     />
   </app-doc-section>
 
@@ -106,7 +106,7 @@
           {{ variant }}
         </ui-lib-button>
 
-        <ui-lib-popover #variantPopover [variant]="variant" [header]="variant">
+        <ui-lib-popover #variantPopover [header]="variant" [variant]="variant">
           <p class="demo-popover-text">
             This popover uses the <strong>{{ variant }}</strong> design variant.
           </p>
@@ -132,8 +132,8 @@
       <ui-lib-popover
         #noClickPopover
         header="Sticky Popover"
-        [showCloseButton]="true"
         [dismissable]="false"
+        [showCloseButton]="true"
       >
         <p class="demo-popover-text">
           Clicking outside will <strong>not</strong> close this popover. Use the &#x00D7; button or
@@ -157,7 +157,7 @@
         Open
       </ui-lib-button>
 
-      <ui-lib-popover #eventPopover (shown)="onShown()" (hidden)="onHidden()">
+      <ui-lib-popover #eventPopover (hidden)="onHidden()" (shown)="onShown()">
         <p class="demo-popover-text">Watch the event log below.</p>
       </ui-lib-popover>
     </div>
@@ -183,9 +183,9 @@
     </div>
 
     <ui-lib-popover
-      [(visible)]="declarativeVisible"
       header="Declarative Control"
       [showCloseButton]="true"
+      [(visible)]="declarativeVisible"
     >
       <p class="demo-popover-text">
         Driven by <code>[(visible)]</code>. Current state:
@@ -195,8 +195,8 @@
 
     <app-doc-code-example
       [html]="declarativeHtml"
-      [typescript]="declarativeTs"
       [showLineNumbers]="true"
+      [typescript]="declarativeTs"
     />
   </app-doc-section>
 
@@ -228,9 +228,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -238,8 +238,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

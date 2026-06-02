@@ -1,5 +1,5 @@
-import { Pipe } from '@angular/core';
 import type { PipeTransform } from '@angular/core';
+import { Pipe } from '@angular/core';
 
 /**
  * ClassNameValue — accepted input for {@link classNames} and {@link ClassNamesPipe}.

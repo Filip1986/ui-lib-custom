@@ -1,20 +1,20 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Compose layout primitives together for dashboards and page scaffolds."
     docHeader
     title="Composition"
-    description="Compose layout primitives together for dashboards and page scaffolds."
   />
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="demo" label="Demo" />
-      <ui-lib-tab value="usage" label="Usage" />
-      <ui-lib-tab value="api" label="API Reference" />
+      <ui-lib-tab label="Demo" value="demo" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="API Reference" value="api" />
     </ui-lib-tabs>
   </div>
 
@@ -22,7 +22,7 @@
     <ui-lib-panel variant="minimal">
       <p>Tweak container, stack, and grid props to see a dashboard layout adapt in real time.</p>
       <div class="doc-demo-group spacing-playground">
-        <ui-lib-stack spacing="lg" class="spacing-stack">
+        <ui-lib-stack class="spacing-stack" spacing="lg">
           <div class="control-panel">
             <ui-lib-stack spacing="md">
               <div class="panel-title">
@@ -34,56 +34,56 @@
               <div class="control-grid">
                 <ui-lib-select
                   label="Container size"
-                  [options]="sizeOptions"
                   [ngModel]="containerSize()"
+                  [options]="sizeOptions"
                   (ngModelChange)="setContainerSize($event)"
                 />
                 <ui-lib-select
                   label="Container inset"
-                  [options]="insetOptions"
                   [ngModel]="containerInset()"
+                  [options]="insetOptions"
                   (ngModelChange)="setContainerInset($event)"
                 />
                 <ui-lib-select
                   label="Stack spacing"
-                  [options]="spacingOptions"
                   [ngModel]="stackSpacing()"
+                  [options]="spacingOptions"
                   (ngModelChange)="setStackSpacing($event)"
                 />
                 <ui-lib-select
                   label="Grid spacing"
-                  [options]="spacingOptions"
                   [ngModel]="gridSpacing()"
+                  [options]="spacingOptions"
                   (ngModelChange)="setGridSpacing($event)"
                 />
                 <ui-lib-select
                   label="Grid columns"
-                  [options]="gridColumnOptions"
                   [ngModel]="gridColumns()"
+                  [options]="gridColumnOptions"
                   (ngModelChange)="setGridColumns($event)"
                 />
                 <ui-lib-select
                   label="Grid min width"
-                  [options]="minWidthOptions"
                   [ngModel]="gridMinWidth()"
+                  [options]="minWidthOptions"
                   (ngModelChange)="setGridMinWidth($event)"
                 />
                 <ui-lib-select
                   label="Grid align"
-                  [options]="alignOptions"
                   [ngModel]="gridAlign()"
+                  [options]="alignOptions"
                   (ngModelChange)="setGridAlign($event)"
                 />
                 <ui-lib-select
                   label="Grid justify"
-                  [options]="justifyOptions"
                   [ngModel]="gridJustify()"
+                  [options]="justifyOptions"
                   (ngModelChange)="setGridJustify($event)"
                 />
                 <ui-lib-select
                   label="Inline spacing"
-                  [options]="inlineSpacingOptions"
                   [ngModel]="inlineSpacing()"
+                  [options]="inlineSpacingOptions"
                   (ngModelChange)="setInlineSpacing($event)"
                 />
               </div>
@@ -104,19 +104,19 @@
           <app-doc-demo-viewport>
             <div class="doc-demo spacing-preview">
               <ui-lib-container
-                [size]="containerSize()"
-                [inset]="containerInset()"
-                [centered]="true"
                 style="background: #f5f5f5"
+                [centered]="true"
+                [inset]="containerInset()"
+                [size]="containerSize()"
               >
                 <ui-lib-stack [spacing]="stackSpacing()">
                   <h3>Dashboard Layout</h3>
                   <ui-lib-grid
-                    [columns]="gridColumns()"
-                    [spacing]="gridSpacing()"
-                    [minColumnWidth]="gridMinWidth() || undefined"
                     [align]="gridAlign()"
+                    [columns]="gridColumns()"
                     [justify]="gridJustify()"
+                    [minColumnWidth]="gridMinWidth() || undefined"
+                    [spacing]="gridSpacing()"
                   >
                     <div class="demo-card">
                       <ui-lib-stack spacing="sm">
@@ -164,8 +164,8 @@
     <ui-lib-panel variant="minimal">
       <app-doc-code-example
         [html]="usageSnippetHtml"
-        [typescript]="usageSnippetTs"
         [showLineNumbers]="true"
+        [typescript]="usageSnippetTs"
       />
     </ui-lib-panel>
   }

@@ -1,4 +1,5 @@
-import { Directive, ElementRef, effect, inject, input, type InputSignal } from '@angular/core';
+import { Directive, effect, ElementRef, inject, input, type InputSignal } from '@angular/core';
+
 import { ThemeConfigService } from './theme-config.service';
 import type { ThemePreset, ThemePresetColors, ThemeVariant } from './theme-preset.interface';
 

@@ -63,35 +63,35 @@
   // ── Container ─────────────────────────────────────────────────────────────────
 
   ui-lib-dock .ui-lib-dock__container {
-    display: inline-flex;
     align-items: flex-end;
+    display: inline-flex;
     justify-content: center;
   }
 
   // ── List ──────────────────────────────────────────────────────────────────────
 
   ui-lib-dock .ui-lib-dock__list {
-    display: flex;
     align-items: flex-end;
-    gap: var(--uilib-dock-gap);
-    list-style: none;
-    margin: 0;
-    padding: var(--uilib-dock-padding);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     background: var(--uilib-dock-bg);
     border: 1px solid var(--uilib-dock-border-color);
     border-radius: var(--uilib-dock-radius);
     box-shadow: var(--uilib-dock-shadow);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    gap: var(--uilib-dock-gap);
+    list-style: none;
+    margin: 0;
+    padding: var(--uilib-dock-padding);
   }
 
   // ── Item ──────────────────────────────────────────────────────────────────────
 
   ui-lib-dock .ui-lib-dock__item {
-    position: relative;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    position: relative;
     // transform-origin at bottom so items grow upward from the bar
     transform-origin: bottom center;
     transition: var(--uilib-dock-item-transition);
@@ -101,24 +101,24 @@
   // ── Item link / button / static span ──────────────────────────────────────────
 
   ui-lib-dock .ui-lib-dock__item-link {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    width: var(--uilib-dock-item-size);
-    height: var(--uilib-dock-item-size);
-    border-radius: var(--uilib-dock-item-radius);
     background: var(--uilib-dock-item-bg);
-    color: var(--uilib-dock-item-color);
-    text-decoration: none;
-    cursor: pointer;
-    outline: none;
     border: none;
-    padding: 0;
-    font-size: inherit;
+    border-radius: var(--uilib-dock-item-radius);
+    color: var(--uilib-dock-item-color);
+    cursor: pointer;
+    display: flex;
     font-family: inherit;
+    font-size: inherit;
+    height: var(--uilib-dock-item-size);
+    justify-content: center;
+    outline: none;
+    padding: 0;
+    text-decoration: none;
+    transition: background-color 0.12s ease;
     -webkit-user-select: none;
     user-select: none;
-    transition: background-color 0.12s ease;
+    width: var(--uilib-dock-item-size);
   }
 
   ui-lib-dock .ui-lib-dock__item-link:hover,
@@ -147,8 +147,8 @@
   // ── Icon ──────────────────────────────────────────────────────────────────────
 
   ui-lib-dock .ui-lib-dock__item-icon {
-    display: inline-flex;
     align-items: center;
+    display: inline-flex;
     justify-content: center;
     line-height: 1;
     pointer-events: none;
@@ -156,31 +156,31 @@
     // NgIcon sets width/height directly on the SVG element; override via CSS
     // so the dock's own size token controls icon dimensions across all sizes.
     svg {
-      width: var(--uilib-dock-icon-size);
       height: var(--uilib-dock-icon-size);
+      width: var(--uilib-dock-icon-size);
     }
   }
 
   // ── Tooltip ───────────────────────────────────────────────────────────────────
 
   ui-lib-dock .ui-lib-dock__tooltip {
-    position: absolute;
-    bottom: calc(100% + 0.5rem);
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
     background: var(--uilib-dock-tooltip-bg);
+    border-radius: var(--uilib-dock-tooltip-radius);
+    bottom: calc(100% + 0.5rem);
+    box-shadow: var(--uilib-dock-tooltip-shadow);
     color: var(--uilib-dock-tooltip-color);
     font-size: var(--uilib-dock-tooltip-font-size);
-    padding: var(--uilib-dock-tooltip-padding);
-    border-radius: var(--uilib-dock-tooltip-radius);
-    box-shadow: var(--uilib-dock-tooltip-shadow);
-    pointer-events: none;
+    left: 50%;
     opacity: 0;
+    padding: var(--uilib-dock-tooltip-padding);
+    pointer-events: none;
+    position: absolute;
     scale: 0.85;
+    transform: translateX(-50%);
     transition:
       opacity 0.12s ease,
       scale 0.12s ease;
+    white-space: nowrap;
     z-index: 10;
   }
 
@@ -206,10 +206,10 @@
     }
 
     .ui-lib-dock__tooltip {
-      bottom: calc(100% + 0.5rem);
-      top: auto;
-      left: 50%;
       inset-inline-end: auto;
+      bottom: calc(100% + 0.5rem);
+      left: 50%;
+      top: auto;
       transform: translateX(-50%);
     }
   }
@@ -225,15 +225,15 @@
     }
 
     .ui-lib-dock__item {
-      transform-origin: top center;
       flex-direction: column-reverse;
+      transform-origin: top center;
     }
 
     .ui-lib-dock__tooltip {
-      top: calc(100% + 0.5rem);
+      inset-inline-end: auto;
       bottom: auto;
       left: 50%;
-      inset-inline-end: auto;
+      top: calc(100% + 0.5rem);
       transform: translateX(-50%);
     }
   }
@@ -245,20 +245,20 @@
     }
 
     .ui-lib-dock__list {
-      flex-direction: column;
       align-items: flex-start;
+      flex-direction: column;
     }
 
     .ui-lib-dock__item {
-      transform-origin: center left;
       flex-direction: row;
+      transform-origin: center left;
     }
 
     .ui-lib-dock__tooltip {
-      inset-inline-start: calc(100% + 0.5rem);
-      top: 50%;
-      bottom: auto;
       inset-inline-end: auto;
+      inset-inline-start: calc(100% + 0.5rem);
+      bottom: auto;
+      top: 50%;
       transform: translateY(-50%);
     }
   }
@@ -270,20 +270,20 @@
     }
 
     .ui-lib-dock__list {
-      flex-direction: column;
       align-items: flex-end;
+      flex-direction: column;
     }
 
     .ui-lib-dock__item {
-      transform-origin: center right;
       flex-direction: row-reverse;
+      transform-origin: center right;
     }
 
     .ui-lib-dock__tooltip {
       inset-inline-end: calc(100% + 0.5rem);
-      top: 50%;
-      bottom: auto;
       inset-inline-start: auto;
+      bottom: auto;
+      top: 50%;
       transform: translateY(-50%);
     }
   }
@@ -312,8 +312,8 @@
     --uilib-dock-item-color-hover: var(--uilib-color-neutral-900, #111827);
 
     .ui-lib-dock__list {
-      backdrop-filter: none;
       -webkit-backdrop-filter: none;
+      backdrop-filter: none;
     }
   }
 
@@ -327,11 +327,11 @@
     --uilib-dock-item-bg-hover: var(--uilib-color-neutral-100, #f3f4f6);
 
     .ui-lib-dock__list {
-      backdrop-filter: none;
       -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      background: transparent;
       border: none;
       box-shadow: none;
-      background: transparent;
     }
   }
 
@@ -365,8 +365,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     ui-lib-dock .ui-lib-dock__item {
-      transition: none;
       transform: none !important;
+      transition: none;
     }
 
     ui-lib-dock .ui-lib-dock__item-link {

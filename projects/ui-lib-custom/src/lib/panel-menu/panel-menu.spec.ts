@@ -1,19 +1,21 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { PanelMenu } from './panel-menu';
 import type {
   PanelMenuCommandEvent,
   PanelMenuItem,
   PanelMenuPanelToggleEvent,
 } from './panel-menu.types';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 @Component({
   standalone: true,

@@ -17,27 +17,27 @@
     --uilib-tooltip-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
     --uilib-tooltip-enter-duration: 140ms;
     --uilib-tooltip-enter-easing: ease-out;
-
-    // ---- Base layout ----
-    position: fixed;
-    z-index: var(--uilib-tooltip-z-index);
     background: var(--uilib-tooltip-bg);
-    color: var(--uilib-tooltip-color);
     border-radius: var(--uilib-tooltip-border-radius);
-    padding: var(--uilib-tooltip-padding-y) var(--uilib-tooltip-padding-x);
+    box-shadow: var(--uilib-tooltip-shadow);
+    color: var(--uilib-tooltip-color);
     font-size: var(--uilib-tooltip-font-size);
     line-height: 1.4;
     max-width: var(--uilib-tooltip-max-width);
-    box-shadow: var(--uilib-tooltip-shadow);
-    pointer-events: none;
-    word-break: break-word;
 
     // Hidden state — fade + scale
     opacity: 0;
+    padding: var(--uilib-tooltip-padding-y) var(--uilib-tooltip-padding-x);
+    pointer-events: none;
+
+    // ---- Base layout ----
+    position: fixed;
     transform: scale(0.92);
     transition:
       opacity var(--uilib-tooltip-enter-duration) var(--uilib-tooltip-enter-easing),
       transform var(--uilib-tooltip-enter-duration) var(--uilib-tooltip-enter-easing);
+    word-break: break-word;
+    z-index: var(--uilib-tooltip-z-index);
   }
 
   // Visible state
@@ -54,49 +54,49 @@
 
   // ---- Arrow ----
   .ui-lib-tooltip__arrow {
+    height: 0;
     position: absolute;
     width: 0;
-    height: 0;
   }
 
   // pos-top: tooltip is ABOVE the host — arrow points DOWN at the bottom edge
   .ui-lib-tooltip--pos-top .ui-lib-tooltip__arrow {
-    top: 100%;
+    border-inline-end: var(--uilib-tooltip-arrow-size) solid transparent;
+    border-inline-start: var(--uilib-tooltip-arrow-size) solid transparent;
+    border-top: var(--uilib-tooltip-arrow-size) solid var(--uilib-tooltip-bg);
     left: 50%;
     margin-inline-start: calc(-1 * var(--uilib-tooltip-arrow-size));
-    border-inline-start: var(--uilib-tooltip-arrow-size) solid transparent;
-    border-inline-end: var(--uilib-tooltip-arrow-size) solid transparent;
-    border-top: var(--uilib-tooltip-arrow-size) solid var(--uilib-tooltip-bg);
+    top: 100%;
   }
 
   // pos-bottom: tooltip is BELOW the host — arrow points UP at the top edge
   .ui-lib-tooltip--pos-bottom .ui-lib-tooltip__arrow {
+    border-inline-end: var(--uilib-tooltip-arrow-size) solid transparent;
+    border-inline-start: var(--uilib-tooltip-arrow-size) solid transparent;
+    border-bottom: var(--uilib-tooltip-arrow-size) solid var(--uilib-tooltip-bg);
     bottom: 100%;
     left: 50%;
     margin-inline-start: calc(-1 * var(--uilib-tooltip-arrow-size));
-    border-inline-start: var(--uilib-tooltip-arrow-size) solid transparent;
-    border-inline-end: var(--uilib-tooltip-arrow-size) solid transparent;
-    border-bottom: var(--uilib-tooltip-arrow-size) solid var(--uilib-tooltip-bg);
   }
 
   // pos-left: tooltip is LEFT of the host — arrow points RIGHT at the right edge
   .ui-lib-tooltip--pos-left .ui-lib-tooltip__arrow {
-    inset-inline-start: 100%;
-    top: 50%;
-    margin-top: calc(-1 * var(--uilib-tooltip-arrow-size));
-    border-top: var(--uilib-tooltip-arrow-size) solid transparent;
-    border-bottom: var(--uilib-tooltip-arrow-size) solid transparent;
     border-inline-start: var(--uilib-tooltip-arrow-size) solid var(--uilib-tooltip-bg);
+    border-bottom: var(--uilib-tooltip-arrow-size) solid transparent;
+    border-top: var(--uilib-tooltip-arrow-size) solid transparent;
+    inset-inline-start: 100%;
+    margin-top: calc(-1 * var(--uilib-tooltip-arrow-size));
+    top: 50%;
   }
 
   // pos-right: tooltip is RIGHT of the host — arrow points LEFT at the left edge
   .ui-lib-tooltip--pos-right .ui-lib-tooltip__arrow {
-    inset-inline-end: 100%;
-    top: 50%;
-    margin-top: calc(-1 * var(--uilib-tooltip-arrow-size));
-    border-top: var(--uilib-tooltip-arrow-size) solid transparent;
-    border-bottom: var(--uilib-tooltip-arrow-size) solid transparent;
     border-inline-end: var(--uilib-tooltip-arrow-size) solid var(--uilib-tooltip-bg);
+    border-bottom: var(--uilib-tooltip-arrow-size) solid transparent;
+    border-top: var(--uilib-tooltip-arrow-size) solid transparent;
+    inset-inline-end: 100%;
+    margin-top: calc(-1 * var(--uilib-tooltip-arrow-size));
+    top: 50%;
   }
 
   // ---- Variant: material ----

@@ -1,3 +1,4 @@
+import type { InputSignal, Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,13 +7,13 @@ import {
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
+
 import {
   TableColumnBodyDirective,
   TableColumnFilterDirective,
   TableColumnFooterDirective,
   TableColumnHeaderDirective,
 } from './table-templates.directive';
-import type { InputSignal, Signal } from '@angular/core';
 
 /**
  * Defines a single column within a `<ui-lib-table>`.

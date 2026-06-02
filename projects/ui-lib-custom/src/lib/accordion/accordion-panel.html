@@ -1,20 +1,20 @@
 <button
   #headerButton
-  type="button"
   class="ui-lib-accordion-panel__header"
   role="button"
-  [attr.id]="headerId()"
-  [attr.aria-expanded]="isExpanded()"
+  type="button"
   [attr.aria-controls]="panelId()"
   [attr.aria-disabled]="disabled() ? true : null"
+  [attr.aria-expanded]="isExpanded()"
+  [attr.id]="headerId()"
   (click)="toggle()"
   (keydown)="onKeydown($event)"
 >
   @if (showIcon() && iconPosition() === 'start') {
     <span
+      aria-hidden="true"
       class="ui-lib-accordion-panel__icon ui-lib-accordion-panel__icon--start"
       [class.ui-lib-accordion-panel__icon--expanded]="isExpanded()"
-      aria-hidden="true"
     >
       @if (toggleIconTemplate(); as iconTpl) {
         <span class="ui-lib-accordion-panel__icon-collapsed">
@@ -41,9 +41,9 @@
   }
   @if (showIcon() && iconPosition() === 'end') {
     <span
+      aria-hidden="true"
       class="ui-lib-accordion-panel__icon ui-lib-accordion-panel__icon--end"
       [class.ui-lib-accordion-panel__icon--expanded]="isExpanded()"
-      aria-hidden="true"
     >
       @if (toggleIconTemplate(); as iconTpl) {
         <span class="ui-lib-accordion-panel__icon-collapsed">
@@ -67,12 +67,12 @@
 </button>
 <div
   class="ui-lib-accordion-panel__content"
-  [class.ui-lib-accordion-panel__content--expanded]="isExpanded()"
-  [attr.id]="panelId()"
   role="region"
   [attr.aria-labelledby]="headerId()"
-  [attr.hidden]="isExpanded() ? null : ''"
   [attr.data-state]="isExpanded() ? panelStates.Expanded : panelStates.Collapsed"
+  [attr.hidden]="isExpanded() ? null : ''"
+  [attr.id]="panelId()"
+  [class.ui-lib-accordion-panel__content--expanded]="isExpanded()"
 >
   <div class="ui-lib-accordion-panel__body">
     <div class="ui-lib-accordion-panel__body-inner">

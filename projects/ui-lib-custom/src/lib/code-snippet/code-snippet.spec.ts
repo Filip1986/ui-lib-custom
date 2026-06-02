@@ -1,17 +1,19 @@
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
   provideZonelessChangeDetection,
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { CodeSnippet } from './code-snippet';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+
+import { CodeSnippet } from './code-snippet';
 import type {
   CodeSnippetLanguage,
-  CodeSnippetVariant,
   CodeSnippetSize,
+  CodeSnippetVariant,
 } from './code-snippet.types';
 
 // ─── Typed query helpers ───────────────────────────────────────────────────────

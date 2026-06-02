@@ -38,18 +38,18 @@
 
     // ---- Motion ------------------------------------------------------------
     --uilib-alert-transition: var(--uilib-transition-fast, 150ms ease);
+    align-items: center;
+    background-color: var(--uilib-alert-bg);
+    border: var(--uilib-alert-border);
+    border-radius: var(--uilib-alert-border-radius);
+    box-shadow: var(--uilib-alert-shadow);
+    color: var(--uilib-alert-fg);
 
     // ---- Host layout -------------------------------------------------------
     display: grid;
-    grid-template-columns: auto 1fr auto;
     gap: var(--uilib-alert-gap);
-    align-items: center;
+    grid-template-columns: auto 1fr auto;
     padding: var(--uilib-alert-padding);
-    border-radius: var(--uilib-alert-border-radius);
-    background-color: var(--uilib-alert-bg);
-    color: var(--uilib-alert-fg);
-    border: var(--uilib-alert-border);
-    box-shadow: var(--uilib-alert-shadow);
 
     // ---- Severity modifiers ------------------------------------------------
 
@@ -118,8 +118,8 @@
       --uilib-alert-border-radius: 0;
       --uilib-alert-shadow: none;
       --uilib-alert-border: none;
-      border-block-start: 3px solid currentColor;
       background-color: transparent;
+      border-block-start: 3px solid currentColor;
     }
   }
 
@@ -132,15 +132,15 @@
   // ---- Dismiss button ------------------------------------------------------
 
   ui-lib-alert .ui-lib-alert__close {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 0.25rem;
+    background: var(--uilib-alert-close-btn-bg);
     border: 0;
     border-radius: var(--uilib-alert-close-btn-border-radius);
-    background: var(--uilib-alert-close-btn-bg);
-    cursor: pointer;
     color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    padding: 0.25rem;
     transition: background-color var(--uilib-alert-transition);
 
     &:hover {

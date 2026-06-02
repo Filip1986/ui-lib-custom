@@ -11,17 +11,17 @@
 }
 
 .section-text {
-  margin: 0;
   color: var(--uilib-page-muted-fg, #6b7280);
   font-size: 0.9rem;
   line-height: 1.5;
+  margin: 0;
 }
 
 .knob-row {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  align-items: center;
   justify-content: flex-start;
   padding: 1rem 0;
 
@@ -31,15 +31,15 @@
 }
 
 .knob-item {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.5rem;
 }
 
 .knob-caption {
-  font-size: 0.8rem;
   color: var(--uilib-page-muted-fg, #6b7280);
+  font-size: 0.8rem;
   text-align: center;
   white-space: nowrap;
 }

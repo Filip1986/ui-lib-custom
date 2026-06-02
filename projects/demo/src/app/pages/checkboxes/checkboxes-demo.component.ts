@@ -1,48 +1,50 @@
+import type { Signal, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewChild,
-  ViewEncapsulation,
   computed,
   signal,
+  ViewChild,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   FormsModule,
+  type NgForm,
   ReactiveFormsModule,
   Validators,
-  type NgForm,
 } from '@angular/forms';
+
+import { Button } from 'ui-lib-custom/button';
+import type { CheckboxAppearance, CheckboxSize, CheckboxVariant } from 'ui-lib-custom/checkbox';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import type { CheckboxAppearance, CheckboxSize, CheckboxVariant } from 'ui-lib-custom/checkbox';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import { Panel } from 'ui-lib-custom/panel';
 import type { TabsValue } from 'ui-lib-custom/tabs';
-import { Button } from 'ui-lib-custom/button';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+
+import { CheckboxBasicExampleComponent } from '@demo/examples/checkbox-basic-example.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { CheckboxBasicExampleComponent } from '@demo/examples/checkbox-basic-example.component';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-
-import { Panel } from 'ui-lib-custom/panel';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-import { checkboxExampleHtml, checkboxExampleTs, usageTs } from './snippets.generated';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
+import { checkboxExampleHtml, checkboxExampleTs, usageTs } from './snippets.generated';
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 type CheckboxOption = { label: string; value: string; disabled?: boolean };

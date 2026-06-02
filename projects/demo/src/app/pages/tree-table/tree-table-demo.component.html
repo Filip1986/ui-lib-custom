@@ -16,7 +16,7 @@
     </p>
 
     <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()">
-      <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+      <ui-lib-tree-table-column field="name" header="Name" width="40%" [expander]="true" />
       <ui-lib-tree-table-column field="size" header="Size" width="15%" />
       <ui-lib-tree-table-column field="type" header="Type" width="20%" />
       <ui-lib-tree-table-column field="date" header="Modified" />
@@ -36,12 +36,12 @@
       <ui-lib-tree-table-column
         field="name"
         header="Name"
+        width="40%"
         [expander]="true"
         [sortable]="true"
-        width="40%"
       />
-      <ui-lib-tree-table-column field="size" header="Size" [sortable]="true" width="15%" />
-      <ui-lib-tree-table-column field="type" header="Type" [sortable]="true" width="20%" />
+      <ui-lib-tree-table-column field="size" header="Size" width="15%" [sortable]="true" />
+      <ui-lib-tree-table-column field="type" header="Type" width="20%" [sortable]="true" />
       <ui-lib-tree-table-column field="date" header="Modified" [sortable]="true" />
     </ui-lib-tree-table>
   </app-doc-section>
@@ -56,12 +56,12 @@
     </p>
 
     <ui-lib-tree-table
+      globalFilterPlaceholder="Search files and folders..."
+      [globalFilter]="true"
       [value]="fileSystemNodes"
       [variant]="activeVariant()"
-      [globalFilter]="true"
-      globalFilterPlaceholder="Search files and folders..."
     >
-      <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+      <ui-lib-tree-table-column field="name" header="Name" width="40%" [expander]="true" />
       <ui-lib-tree-table-column field="size" header="Size" width="15%" />
       <ui-lib-tree-table-column field="type" header="Type" width="20%" />
       <ui-lib-tree-table-column field="date" header="Modified" />
@@ -83,10 +83,10 @@
         <div class="demo-button-group">
           @for (m of ['single', 'multiple', 'checkbox', null]; track m) {
             <ui-lib-button
-              type="button"
-              size="sm"
-              [appearance]="selectionMode() === m ? 'solid' : 'outline'"
               severity="primary"
+              size="sm"
+              type="button"
+              [appearance]="selectionMode() === m ? 'solid' : 'outline'"
               (click)="setSelectionMode($any(m))"
               >{{ m ?? 'none' }}</ui-lib-button
             >
@@ -101,12 +101,12 @@
 
     @if (selectionMode() === 'single') {
       <ui-lib-tree-table
+        selectionMode="single"
         [value]="fileSystemNodes"
         [variant]="activeVariant()"
-        selectionMode="single"
         [(selection)]="singleSelection"
       >
-        <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+        <ui-lib-tree-table-column field="name" header="Name" width="40%" [expander]="true" />
         <ui-lib-tree-table-column field="size" header="Size" width="15%" />
         <ui-lib-tree-table-column field="type" header="Type" />
       </ui-lib-tree-table>
@@ -114,12 +114,12 @@
 
     @if (selectionMode() === 'multiple') {
       <ui-lib-tree-table
+        selectionMode="multiple"
         [value]="fileSystemNodes"
         [variant]="activeVariant()"
-        selectionMode="multiple"
         [(selection)]="multipleSelection"
       >
-        <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+        <ui-lib-tree-table-column field="name" header="Name" width="40%" [expander]="true" />
         <ui-lib-tree-table-column field="size" header="Size" width="15%" />
         <ui-lib-tree-table-column field="type" header="Type" />
       </ui-lib-tree-table>
@@ -127,12 +127,12 @@
 
     @if (selectionMode() === 'checkbox') {
       <ui-lib-tree-table
+        selectionMode="checkbox"
         [value]="fileSystemNodes"
         [variant]="activeVariant()"
-        selectionMode="checkbox"
         [(selection)]="checkboxSelection"
       >
-        <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+        <ui-lib-tree-table-column field="name" header="Name" width="40%" [expander]="true" />
         <ui-lib-tree-table-column field="size" header="Size" width="15%" />
         <ui-lib-tree-table-column field="type" header="Type" />
       </ui-lib-tree-table>
@@ -140,7 +140,7 @@
 
     @if (selectionMode() === null) {
       <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()">
-        <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+        <ui-lib-tree-table-column field="name" header="Name" width="40%" [expander]="true" />
         <ui-lib-tree-table-column field="size" header="Size" width="15%" />
         <ui-lib-tree-table-column field="type" header="Type" />
       </ui-lib-tree-table>
@@ -158,12 +158,12 @@
 
     <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()">
       <!-- Name column with icon -->
-      <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="45%">
-        <ng-template uiTreeTableColumnBody let-node>
+      <ui-lib-tree-table-column field="name" header="Name" width="45%" [expander]="true">
+        <ng-template let-node uiTreeTableColumnBody>
           <span
+            aria-hidden="true"
             class="demo-file-icon"
             [class]="getTypeIconClass(node.data?.['type'])"
-            aria-hidden="true"
           ></span>
           <span>{{ node.data?.['name'] }}</span>
         </ng-template>
@@ -171,7 +171,7 @@
 
       <!-- Size with badge styling -->
       <ui-lib-tree-table-column field="size" header="Size" width="15%">
-        <ng-template uiTreeTableColumnBody let-node>
+        <ng-template let-node uiTreeTableColumnBody>
           @if (node.data?.['size'] !== '--') {
             <span class="demo-size-badge">{{ node.data?.['size'] }}</span>
           }
@@ -180,7 +180,7 @@
 
       <!-- Type with color-coded tag -->
       <ui-lib-tree-table-column field="type" header="Type">
-        <ng-template uiTreeTableColumnBody let-node>
+        <ng-template let-node uiTreeTableColumnBody>
           <span
             class="demo-type-tag"
             [class]="'demo-type-tag--' + (node.data?.['type'] === 'Folder' ? 'folder' : 'file')"
@@ -203,26 +203,26 @@
     </p>
 
     <ui-lib-tree-table
-      [value]="orgNodes"
-      [variant]="activeVariant()"
+      globalFilterPlaceholder="Search departments..."
       selectionMode="checkbox"
       [globalFilter]="true"
-      globalFilterPlaceholder="Search departments..."
+      [value]="orgNodes"
+      [variant]="activeVariant()"
     >
       <ui-lib-tree-table-column
         field="department"
         header="Department"
+        width="35%"
         [expander]="true"
         [sortable]="true"
-        width="35%"
       />
       <ui-lib-tree-table-column
         field="headcount"
         header="Headcount"
-        [sortable]="true"
         width="15%"
+        [sortable]="true"
       />
-      <ui-lib-tree-table-column field="budget" header="Budget" [sortable]="true" width="20%" />
+      <ui-lib-tree-table-column field="budget" header="Budget" width="20%" [sortable]="true" />
       <ui-lib-tree-table-column field="location" header="Location" />
     </ui-lib-tree-table>
   </app-doc-section>
@@ -235,8 +235,8 @@
 
     @for (size of ['sm', 'md', 'lg']; track size) {
       <h3 class="demo-subsection-title">{{ size }}</h3>
-      <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()" [size]="$any(size)">
-        <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+      <ui-lib-tree-table [size]="$any(size)" [value]="fileSystemNodes" [variant]="activeVariant()">
+        <ui-lib-tree-table-column field="name" header="Name" width="40%" [expander]="true" />
         <ui-lib-tree-table-column field="size" header="Size" width="15%" />
         <ui-lib-tree-table-column field="type" header="Type" />
       </ui-lib-tree-table>
@@ -262,9 +262,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -273,8 +273,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -6,11 +6,12 @@ import {
   type Type,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { Badge } from './badge';
-import type { BadgeColor, BadgeSize, BadgeVariant } from './badge';
+import { TestBed } from '@angular/core/testing';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import type { BadgeColor, BadgeSize, BadgeVariant } from './badge';
+import { Badge } from './badge';
 
 @Component({
   standalone: true,

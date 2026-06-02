@@ -1,12 +1,14 @@
+import type { WritableSignal } from '@angular/core';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import type { WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UiLibCascadeSelect } from './cascade-select';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { UiLibCascadeSelect } from './cascade-select';
 
 interface CountryNode {
   name: string;

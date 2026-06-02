@@ -7,8 +7,9 @@ import {
 } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { DoughnutChartComponent } from './doughnut-chart.component';
+
 import type { ChartData } from './chart.types';
+import { DoughnutChartComponent } from './doughnut-chart.component';
 
 jest.mock('chart.js', (): { Chart: jest.Mock } => ({
   Chart: jest.fn(),

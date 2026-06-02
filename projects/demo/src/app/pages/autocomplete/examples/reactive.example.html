@@ -1,9 +1,9 @@
 <form [formGroup]="reactiveForm">
   <ui-lib-autocomplete
     formControlName="country"
-    [suggestions]="countrySuggestions"
     optionLabel="name"
     optionValue="code"
+    [suggestions]="countrySuggestions"
     (completeMethod)="onCountryComplete($event)"
   />
 </form>

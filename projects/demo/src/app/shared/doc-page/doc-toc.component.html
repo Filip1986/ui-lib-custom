@@ -1,4 +1,4 @@
-<nav class="doc-toc" aria-label="On-page navigation">
+<nav aria-label="On-page navigation" class="doc-toc">
   @if (sections().length === 0) {
     <p class="doc-toc__empty">Sections will appear here.</p>
   } @else {
@@ -6,8 +6,8 @@
       @for (section of sections(); track section.id) {
         <li class="doc-toc__item">
           <button
-            type="button"
             class="doc-toc__link"
+            type="button"
             [class.active]="activeId() === section.id"
             (click)="onSelect(section.id)"
           >
@@ -19,8 +19,8 @@
               @for (child of section.children; track child.id) {
                 <li class="doc-toc__item is-child">
                   <button
-                    type="button"
                     class="doc-toc__link"
+                    type="button"
                     [class.active]="activeId() === child.id"
                     (click)="onSelect(child.id)"
                   >

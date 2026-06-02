@@ -47,7 +47,7 @@ export class MyComponent {
   value: number = 55;
 }`;
 
-export const minmaxHtml = `<ui-lib-slider [min]="-50" [max]="50" [step]="10" [(ngModel)]="value" />`;
+export const minmaxHtml = `<ui-lib-slider [max]="50" [min]="-50" [step]="10" [(ngModel)]="value" />`;
 
 export const minmaxTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';

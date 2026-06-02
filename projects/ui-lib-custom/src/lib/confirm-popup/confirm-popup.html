@@ -1,29 +1,29 @@
 @if (visible()) {
   <!-- Transparent overlay catches click-away to dismiss the popup -->
-  <div class="ui-lib-confirm-popup__overlay" aria-hidden="true" (click)="onOverlayClick()"></div>
+  <div aria-hidden="true" class="ui-lib-confirm-popup__overlay" (click)="onOverlayClick()"></div>
 
   <!-- The floating popup panel, anchored near the target element -->
   <div
-    [class]="panelClasses()"
-    [style.top.px]="panelTop()"
-    [style.left.px]="panelLeft()"
-    role="alertdialog"
     aria-modal="true"
+    role="alertdialog"
     tabindex="-1"
-    [attr.aria-label]="panelAriaLabel()"
     [attr.aria-describedby]="messageId"
+    [attr.aria-label]="panelAriaLabel()"
+    [class]="panelClasses()"
+    [style.left.px]="panelLeft()"
+    [style.top.px]="panelTop()"
     (keydown)="onPanelKeydown($event)"
   >
     <!-- Arrow pointing toward the target element -->
     <div
+      aria-hidden="true"
       class="ui-lib-confirm-popup__arrow"
       [style.left.px]="arrowLeftOffset()"
-      aria-hidden="true"
     ></div>
 
     <div class="ui-lib-confirm-popup__content" [id]="messageId">
       @if (resolvedIcon()) {
-        <i [class]="resolvedIcon()" class="ui-lib-confirm-popup__icon" aria-hidden="true"></i>
+        <i aria-hidden="true" class="ui-lib-confirm-popup__icon" [class]="resolvedIcon()"></i>
       }
       <p class="ui-lib-confirm-popup__message">{{ resolvedMessage() }}</p>
     </div>
@@ -31,14 +31,14 @@
     <div class="ui-lib-confirm-popup__footer">
       <button type="button" [class]="rejectBtnClasses()" (click)="handleReject()">
         @if (resolvedRejectIcon()) {
-          <i [class]="resolvedRejectIcon()" aria-hidden="true"></i>
+          <i aria-hidden="true" [class]="resolvedRejectIcon()"></i>
         }
         {{ resolvedRejectLabel() }}
       </button>
 
       <button type="button" [class]="acceptBtnClasses()" (click)="handleAccept()">
         @if (resolvedAcceptIcon()) {
-          <i [class]="resolvedAcceptIcon()" aria-hidden="true"></i>
+          <i aria-hidden="true" [class]="resolvedAcceptIcon()"></i>
         }
         {{ resolvedAcceptLabel() }}
       </button>

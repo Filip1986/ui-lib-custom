@@ -1,4 +1,4 @@
-import { NumberFormatService, type NumberFormatConfig } from './number-format.service';
+import { type NumberFormatConfig, NumberFormatService } from './number-format.service';
 
 describe('NumberFormatService', (): void => {
   const createService: (config: NumberFormatConfig) => NumberFormatService = (

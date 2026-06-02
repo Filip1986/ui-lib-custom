@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 
 interface FontsResponse {
   items: { family: string; category: string; variants: string[] }[];

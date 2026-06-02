@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { Popover } from './popover';
-import type { PopoverVariant } from './popover.types';
+
 import { Button } from 'ui-lib-custom/button';
 import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
+import { Popover } from './popover';
+import type { PopoverVariant } from './popover.types';
 
 type PopoverStoryArgs = {
   header: string | null;

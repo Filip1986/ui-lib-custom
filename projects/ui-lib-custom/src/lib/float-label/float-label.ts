@@ -1,13 +1,14 @@
+import type { AfterViewChecked, InputSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  Renderer2,
-  ViewEncapsulation,
   inject,
   input,
+  Renderer2,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { AfterViewChecked, InputSignal } from '@angular/core';
+
 import type { FloatLabelVariant } from './float-label.types';
 
 let nextFloatLabelLabelId: number = 0;

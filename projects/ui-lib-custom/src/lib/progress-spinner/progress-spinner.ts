@@ -4,14 +4,16 @@ import {
   computed,
   inject,
   input,
-  ViewEncapsulation,
   type InputSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { PROGRESS_SPINNER_DEFAULTS } from './progress-spinner.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { ProgressSpinnerSize, ProgressSpinnerVariant } from './progress-spinner.types';
+import { PROGRESS_SPINNER_DEFAULTS } from './progress-spinner.types';
 
 /** Module-level counter for unique ProgressSpinner host IDs. */
 let nextProgressSpinnerId: number = 0;

@@ -1,9 +1,11 @@
+import { provideZonelessChangeDetection } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { provideZonelessChangeDetection } from '@angular/core';
-import { Container } from './container';
+
 import type { ContainerSize, InsetToken, SpacingToken } from 'ui-lib-custom/tokens';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+
+import { Container } from './container';
 
 type ContainerSizeInput = Exclude<ContainerSize, 'xs' | '2xl' | 'full'>;
 type ContainerInsetInput = Exclude<InsetToken, 'xs'>;

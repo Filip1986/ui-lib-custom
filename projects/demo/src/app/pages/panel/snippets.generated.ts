@@ -16,7 +16,7 @@ import { Panel } from 'ui-lib-custom/panel';
 })
 export class MyComponent {}`;
 
-export const collapsedDefaultHtml = `<ui-lib-panel header="Advanced Options" [toggleable]="true" [collapsed]="true">
+export const collapsedDefaultHtml = `<ui-lib-panel header="Advanced Options" [collapsed]="true" [toggleable]="true">
   <p>Hidden until expanded.</p>
 </ui-lib-panel>`;
 
@@ -139,9 +139,9 @@ export class MyComponent {
   }
 }`;
 
-export const variantsHtml = `<ui-lib-panel header="Material Panel"  variant="material"  [toggleable]="true" />
+export const variantsHtml = `<ui-lib-panel header="Material Panel" variant="material" [toggleable]="true" />
 <ui-lib-panel header="Bootstrap Panel" variant="bootstrap" [toggleable]="true" />
-<ui-lib-panel header="Minimal Panel"   variant="minimal"   [toggleable]="true" />`;
+<ui-lib-panel header="Minimal Panel" variant="minimal" [toggleable]="true" />`;
 
 export const variantsTs = `import { Component } from '@angular/core';
 import { Panel } from 'ui-lib-custom/panel';

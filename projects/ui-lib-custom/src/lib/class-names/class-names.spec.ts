@@ -1,5 +1,5 @@
-import { classNames, ClassNamesPipe } from './class-names';
 import type { ClassNameValue } from './class-names';
+import { classNames, ClassNamesPipe } from './class-names';
 
 // ---------------------------------------------------------------------------
 // classNames function

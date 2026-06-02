@@ -1,8 +1,8 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Guidance and demos for accessibility features, including high contrast mode."
     docHeader
     title="Accessibility"
-    description="Guidance and demos for accessibility features, including high contrast mode."
   />
 
   <ui-lib-panel variant="minimal">
@@ -14,7 +14,7 @@
       <ui-lib-button [disabled]="true">Disabled</ui-lib-button>
       <ui-lib-input label="Input" />
       <ui-lib-checkbox label="Checkbox" />
-      <ui-lib-select [options]="options" placeholder="Select" ariaLabel="Example option" />
+      <ui-lib-select ariaLabel="Example option" placeholder="Select" [options]="options" />
       <ui-lib-badge>Badge</ui-lib-badge>
     </div>
   </ui-lib-panel>
@@ -22,8 +22,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

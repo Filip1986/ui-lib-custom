@@ -1,14 +1,16 @@
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+import { Avatar } from 'ui-lib-custom/avatar';
+import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { Panel } from 'ui-lib-custom/panel';
+
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { Panel } from 'ui-lib-custom/panel';
-import { Button } from 'ui-lib-custom/button';
-import { Avatar } from 'ui-lib-custom/avatar';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 
 /** Free template: App Shell layout using the ui-lib-custom component library. */
 @Component({

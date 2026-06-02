@@ -1,6 +1,6 @@
 .carousel-demo {
-  max-width: 900px;
   margin: 0 auto;
+  max-width: 900px;
   padding: 2rem 1.5rem;
 
   &__description {
@@ -12,23 +12,23 @@
     margin-bottom: 3rem;
 
     h2 {
+      color: var(--uilib-color-text-primary, #1a1a1a);
       font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 0.25rem;
-      color: var(--uilib-color-text-primary, #1a1a1a);
     }
 
     > p {
-      font-size: 0.875rem;
       color: var(--uilib-color-text-secondary, #666);
+      font-size: 0.875rem;
       margin-bottom: 1rem;
     }
 
     code {
       background: var(--uilib-surface-100, #f5f5f5);
       border-radius: 4px;
-      padding: 0.1em 0.35em;
       font-size: 0.85em;
+      padding: 0.1em 0.35em;
     }
   }
 }
@@ -36,19 +36,19 @@
 // ─── Slide ────────────────────────────────────────────────────────────────────
 
 .demo-slide {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  height: 120px;
-  border-radius: var(--uilib-radius-md, 0.5rem);
   background: linear-gradient(
     135deg,
     var(--uilib-color-primary, #1976d2) 0%,
     var(--uilib-color-primary-dark, #1565c0) 100%
   );
+  border-radius: var(--uilib-radius-md, 0.5rem);
   color: #fff;
+  display: flex;
   font-size: 1.1rem;
   font-weight: 600;
+  height: 120px;
+  justify-content: center;
   user-select: none;
 
   &--vertical {
@@ -56,24 +56,24 @@
   }
 
   &--sm {
-    height: 80px;
     font-size: 0.875rem;
+    height: 80px;
   }
 
   &--lg {
-    height: 160px;
     font-size: 1.25rem;
+    height: 160px;
   }
 }
 
 // ─── Product card ─────────────────────────────────────────────────────────────
 
 .demo-product-card {
+  background: var(--uilib-surface-50, #fff);
+  border: 1px solid var(--uilib-surface-200, #e0e0e0);
+  border-radius: var(--uilib-radius-md, 0.5rem);
   display: flex;
   flex-direction: column;
-  border-radius: var(--uilib-radius-md, 0.5rem);
-  border: 1px solid var(--uilib-surface-200, #e0e0e0);
-  background: var(--uilib-surface-50, #fff);
   overflow: hidden;
   transition: box-shadow 200ms ease;
 
@@ -82,12 +82,12 @@
   }
 
   &__image {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    height: 120px;
     background: var(--uilib-surface-100, #f5f5f5);
+    display: flex;
     font-size: 3rem;
+    height: 120px;
+    justify-content: center;
   }
 
   &__body {
@@ -97,21 +97,21 @@
     padding: 0.75rem;
 
     h4 {
-      margin: 0;
+      color: var(--uilib-color-text-primary, #1a1a1a);
       font-size: 0.9rem;
       font-weight: 600;
-      color: var(--uilib-color-text-primary, #1a1a1a);
+      margin: 0;
     }
   }
 
   &__category {
-    font-size: 0.75rem;
     color: var(--uilib-color-text-secondary, #666);
+    font-size: 0.75rem;
   }
 
   &__price {
-    font-size: 1rem;
     color: var(--uilib-color-primary, #1976d2);
+    font-size: 1rem;
   }
 
   // Bootstrap variant styling
@@ -122,36 +122,36 @@
   // Minimal variant styling
   &--minimal {
     border: none;
-    border-radius: 0;
     border-bottom: 1px solid var(--uilib-surface-200, #e0e0e0);
+    border-radius: 0;
   }
 }
 
 // ─── Header / Footer ──────────────────────────────────────────────────────────
 
 .demo-header {
-  display: flex;
   align-items: baseline;
+  display: flex;
   gap: 0.75rem;
   padding-bottom: 0.5rem;
 
   h3 {
-    margin: 0;
     font-size: 1rem;
     font-weight: 600;
+    margin: 0;
   }
 
   &__subtitle {
-    font-size: 0.8rem;
     color: var(--uilib-color-text-secondary, #666);
+    font-size: 0.8rem;
   }
 }
 
 .demo-footer {
-  font-size: 0.8rem;
   color: var(--uilib-color-text-secondary, #666);
-  text-align: center;
+  font-size: 0.8rem;
   margin: 0.25rem 0 0;
+  text-align: center;
 }
 
 .demo-event-display {
@@ -167,6 +167,12 @@
 
 .demo-size-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-product-card {
+    /* TODO: set transition / animation to none */
+  }
 }

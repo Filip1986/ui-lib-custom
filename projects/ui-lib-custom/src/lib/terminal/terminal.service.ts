@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+
 import type { TerminalCommand, TerminalHistoryItem } from './terminal.types';
 
 /** Auto-incrementing counter for unique command IDs. */

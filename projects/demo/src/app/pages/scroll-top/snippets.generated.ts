@@ -2,7 +2,7 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const parentTargetHtml = `<div style="height: 300px; overflow-y: auto; position: relative;">
+export const parentTargetHtml = `<div style="height: 300px; overflow-y: auto; position: relative">
   <ui-lib-scroll-top target="parent" [threshold]="100" />
   <!-- scrollable content -->
 </div>`;

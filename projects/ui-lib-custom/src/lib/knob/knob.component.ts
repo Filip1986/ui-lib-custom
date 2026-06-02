@@ -1,17 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  ViewEncapsulation,
-  computed,
-  contentChild,
-  forwardRef,
-  inject,
-  input,
-  model,
-  output,
-  signal,
-} from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import type {
   InputSignal,
   ModelSignal,
@@ -20,13 +7,28 @@ import type {
   TemplateRef,
   WritableSignal,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  contentChild,
+  DestroyRef,
+  forwardRef,
+  inject,
+  input,
+  model,
+  output,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { KNOB_DEFAULTS, KNOB_SVG } from './knob.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { KnobChangeEvent, KnobSize, KnobValueContext, KnobVariant } from './knob.types';
+import { KNOB_DEFAULTS, KNOB_SVG } from './knob.types';
 
 /** Counter for generating unique IDs. */
 let knobIdCounter: number = 0;

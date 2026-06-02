@@ -92,7 +92,7 @@
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-panel [toggleable]="true">
-        <span panelHeader class="demo-custom-header">
+        <span class="demo-custom-header" panelHeader>
           <span class="demo-custom-header__icon">&#9733;</span>
           <strong>Featured</strong>
           <span class="demo-custom-header__badge">New</span>
@@ -116,8 +116,8 @@
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-panel header="Report" [toggleable]="true">
-        <button panelIcons type="button" class="demo-icon-btn" title="Refresh">&#8635;</button>
-        <button panelIcons type="button" class="demo-icon-btn" title="Download">&#8595;</button>
+        <button class="demo-icon-btn" panelIcons title="Refresh" type="button">&#8635;</button>
+        <button class="demo-icon-btn" panelIcons title="Download" type="button">&#8595;</button>
         <p>Panel body with custom action icons in the header.</p>
       </ui-lib-panel>
     </div>
@@ -138,9 +138,9 @@
           By using this service you agree to the terms outlined below. Please read carefully before
           proceeding.
         </p>
-        <div panelFooter class="demo-footer-actions">
-          <ui-lib-button type="button" severity="secondary">Decline</ui-lib-button>
-          <ui-lib-button type="button" severity="primary">Accept</ui-lib-button>
+        <div class="demo-footer-actions" panelFooter>
+          <ui-lib-button severity="secondary" type="button">Decline</ui-lib-button>
+          <ui-lib-button severity="primary" type="button">Accept</ui-lib-button>
         </div>
       </ui-lib-panel>
     </div>
@@ -168,9 +168,9 @@
       <!-- Panel with footer but no header -->
       <ui-lib-panel>
         <p style="margin: 0; font-size: 0.875rem">A footer can still be used without a header.</p>
-        <div panelFooter class="demo-footer-actions">
-          <ui-lib-button type="button" severity="secondary" size="sm">Cancel</ui-lib-button>
-          <ui-lib-button type="button" severity="primary" size="sm">Confirm</ui-lib-button>
+        <div class="demo-footer-actions" panelFooter>
+          <ui-lib-button severity="secondary" size="sm" type="button">Cancel</ui-lib-button>
+          <ui-lib-button severity="primary" size="sm" type="button">Confirm</ui-lib-button>
         </div>
       </ui-lib-panel>
     </div>
@@ -217,10 +217,10 @@
       <div class="demo-playground__preview">
         <ui-lib-panel
           header="Playground Panel"
-          [toggleable]="playgroundToggleable()"
-          [(collapsed)]="playgroundCollapsed"
-          [variant]="playgroundVariant()"
           style="width: 100%"
+          [toggleable]="playgroundToggleable()"
+          [variant]="playgroundVariant()"
+          [(collapsed)]="playgroundCollapsed"
         >
           <p style="margin: 0 0 0.5rem">
             Variant: <strong>{{ playgroundVariant() }}</strong> — Toggleable:
@@ -229,7 +229,7 @@
           <p style="margin: 0; font-size: 0.875rem; color: var(--uilib-muted)">
             Edit the controls to see the panel change in real time.
           </p>
-          <div panelFooter class="demo-footer-info">Footer — always visible.</div>
+          <div class="demo-footer-info" panelFooter>Footer — always visible.</div>
         </ui-lib-panel>
       </div>
 
@@ -239,10 +239,10 @@
           <span class="demo-control__label">Toggleable</span>
           <div class="demo-control__buttons">
             <ui-lib-button
-              type="button"
-              [appearance]="playgroundToggleable() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="playgroundToggleable() ? 'solid' : 'outline'"
               (click)="togglePlaygroundToggleable()"
               >{{ playgroundToggleable() ? 'On' : 'Off' }}</ui-lib-button
             >
@@ -254,10 +254,10 @@
           <span class="demo-control__label">Collapsed</span>
           <div class="demo-control__buttons">
             <ui-lib-button
-              type="button"
-              [appearance]="playgroundCollapsed() && playgroundToggleable() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="playgroundCollapsed() && playgroundToggleable() ? 'solid' : 'outline'"
               (click)="togglePlaygroundCollapsed()"
               >{{ playgroundCollapsed() ? 'On' : 'Off' }}</ui-lib-button
             >
@@ -270,10 +270,10 @@
           <div class="demo-control__buttons">
             @for (variant of variants; track variant) {
               <ui-lib-button
-                type="button"
-                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 (click)="setPlaygroundVariant(variant)"
                 >{{ variant }}</ui-lib-button
               >
@@ -289,26 +289,26 @@
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="api" title="API">
     <!-- Inputs -->
-    <div id="api-inputs" data-doc-anchor>
+    <div data-doc-anchor id="api-inputs">
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <ui-lib-table [value]="inputRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Input" field="input" width="160px">
-          <ng-template uiTableColumnBody let-row>
+      <ui-lib-table styleClass="demo-a11y-table" [value]="inputRows">
+        <ui-lib-table-column field="input" header="Input" width="160px">
+          <ng-template let-row uiTableColumnBody>
             <span [innerHTML]="row.input"></span>
           </ng-template>
         </ui-lib-table-column>
-        <ui-lib-table-column header="Type" field="type" width="220px">
-          <ng-template uiTableColumnBody let-row>
+        <ui-lib-table-column field="type" header="Type" width="220px">
+          <ng-template let-row uiTableColumnBody>
             <span [innerHTML]="row.type"></span>
           </ng-template>
         </ui-lib-table-column>
-        <ui-lib-table-column header="Default" field="default" width="120px">
-          <ng-template uiTableColumnBody let-row>
+        <ui-lib-table-column field="default" header="Default" width="120px">
+          <ng-template let-row uiTableColumnBody>
             <span [innerHTML]="row.default"></span>
           </ng-template>
         </ui-lib-table-column>
-        <ui-lib-table-column header="Description" field="description">
-          <ng-template uiTableColumnBody let-row>
+        <ui-lib-table-column field="description" header="Description">
+          <ng-template let-row uiTableColumnBody>
             <span [innerHTML]="row.description"></span>
           </ng-template>
         </ui-lib-table-column>
@@ -316,21 +316,21 @@
     </div>
 
     <!-- Outputs -->
-    <div id="api-outputs" data-doc-anchor>
+    <div data-doc-anchor id="api-outputs">
       <h3 class="demo-section__subtitle">Outputs</h3>
-      <ui-lib-table [value]="outputRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Output" field="output" width="160px">
-          <ng-template uiTableColumnBody let-row>
+      <ui-lib-table styleClass="demo-a11y-table" [value]="outputRows">
+        <ui-lib-table-column field="output" header="Output" width="160px">
+          <ng-template let-row uiTableColumnBody>
             <span [innerHTML]="row.output"></span>
           </ng-template>
         </ui-lib-table-column>
-        <ui-lib-table-column header="Type" field="type" width="200px">
-          <ng-template uiTableColumnBody let-row>
+        <ui-lib-table-column field="type" header="Type" width="200px">
+          <ng-template let-row uiTableColumnBody>
             <span [innerHTML]="row.type"></span>
           </ng-template>
         </ui-lib-table-column>
-        <ui-lib-table-column header="Description" field="description">
-          <ng-template uiTableColumnBody let-row>
+        <ui-lib-table-column field="description" header="Description">
+          <ng-template let-row uiTableColumnBody>
             <span [innerHTML]="row.description"></span>
           </ng-template>
         </ui-lib-table-column>
@@ -342,21 +342,21 @@
     </div>
 
     <!-- Content Projection -->
-    <div id="api-projection" data-doc-anchor>
+    <div data-doc-anchor id="api-projection">
       <h3 class="demo-section__subtitle">Content Projection</h3>
-      <ui-lib-table [value]="projectionRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Slot" field="slot" width="160px">
-          <ng-template uiTableColumnBody let-row>
+      <ui-lib-table styleClass="demo-a11y-table" [value]="projectionRows">
+        <ui-lib-table-column field="slot" header="Slot" width="160px">
+          <ng-template let-row uiTableColumnBody>
             <span [innerHTML]="row.slot"></span>
           </ng-template>
         </ui-lib-table-column>
-        <ui-lib-table-column header="Selector" field="selector" width="180px">
-          <ng-template uiTableColumnBody let-row>
+        <ui-lib-table-column field="selector" header="Selector" width="180px">
+          <ng-template let-row uiTableColumnBody>
             <span [innerHTML]="row.selector"></span>
           </ng-template>
         </ui-lib-table-column>
-        <ui-lib-table-column header="Description" field="description">
-          <ng-template uiTableColumnBody let-row>
+        <ui-lib-table-column field="description" header="Description">
+          <ng-template let-row uiTableColumnBody>
             <span [innerHTML]="row.description"></span>
           </ng-template>
         </ui-lib-table-column>
@@ -425,8 +425,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -1,8 +1,8 @@
 @layer uilib.components {
   ui-lib-input .ui-input {
+    color: var(--uilib-input-text, var(--uilib-page-fg));
     display: grid;
     gap: 0.35rem;
-    color: var(--uilib-input-text, var(--uilib-page-fg));
     --uilib-input-transition: border-color 0.15s ease, box-shadow 0.15s ease;
     --uilib-input-label-transition:
       transform 0.15s ease, font-size 0.15s ease, color 0.15s ease, padding 0.15s ease,
@@ -18,18 +18,18 @@
   }
 
   ui-lib-input .ui-input-label {
-    font-weight: 600;
-    color: var(--uilib-input-label-color, var(--uilib-input-text, var(--uilib-page-fg)));
-    display: inline-flex;
     align-items: center;
+    color: var(--uilib-input-label-color, var(--uilib-input-text, var(--uilib-page-fg)));
+    cursor: text;
+    display: inline-flex;
+    font-weight: 600;
     gap: 0.25rem;
     pointer-events: auto;
-    cursor: text;
   }
 
   ui-lib-input .ui-input-label-text {
-    display: inline-flex;
     align-items: center;
+    display: inline-flex;
     gap: 0.25rem;
   }
 
@@ -42,97 +42,97 @@
   }
 
   ui-lib-input .ui-input-field {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 0.5rem;
     background: var(--uilib-input-bg, var(--uilib-surface));
     border: 1px solid var(--uilib-input-border, var(--uilib-border));
     border-radius: var(--uilib-input-radius, var(--uilib-shape-base, 6px));
-    padding: var(--uilib-input-padding-y, 0.5rem) var(--uilib-input-padding-x, 0.75rem);
-    min-height: var(--uilib-input-min-height, 44px);
-    transition: var(--uilib-input-transition);
-    position: relative;
     cursor: text;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: auto 1fr auto;
+    min-height: var(--uilib-input-min-height, 44px);
+    padding: var(--uilib-input-padding-y, 0.5rem) var(--uilib-input-padding-x, 0.75rem);
+    position: relative;
+    transition: var(--uilib-input-transition);
   }
 
   ui-lib-input .ui-input-float-in .ui-input-field {
-    padding-top: calc(
-      var(--uilib-input-padding-y, 0.5rem) + var(--uilib-input-float-in-extra-pad, 0.35rem)
+    cursor: text;
+    min-height: calc(
+      var(--uilib-input-min-height, 44px) + (var(--uilib-input-float-in-extra-pad, 0.35rem) * 2)
     );
     padding-bottom: calc(
       var(--uilib-input-padding-y, 0.5rem) + var(--uilib-input-float-in-extra-pad, 0.35rem)
     );
-    min-height: calc(
-      var(--uilib-input-min-height, 44px) + (var(--uilib-input-float-in-extra-pad, 0.35rem) * 2)
+    padding-top: calc(
+      var(--uilib-input-padding-y, 0.5rem) + var(--uilib-input-float-in-extra-pad, 0.35rem)
     );
-    cursor: text;
   }
 
   ui-lib-input .ui-input-control-wrapper {
-    position: relative;
-    display: flex;
     align-items: center;
+    display: flex;
+    position: relative;
   }
 
   ui-lib-input .ui-input input {
-    width: 100%;
-    border: none;
-    outline: none;
     background: transparent;
+    border: none;
     color: inherit;
     font: inherit;
+    outline: none;
     padding: 0;
+    width: 100%;
     &::placeholder {
       color: var(--uilib-input-placeholder, var(--uilib-muted));
     }
   }
 
   ui-lib-input .ui-input-has-floating .ui-input-label {
-    position: absolute;
+    background: transparent;
     inset-inline-start: 0;
+    padding: 0;
+    pointer-events: none; // prevent overlap clicks while floating
+    position: absolute;
     top: 50%;
     transform: translate(var(--uilib-input-label-offset-x, 0), -50%);
     transform-origin: left top;
     transition: var(--uilib-input-label-transition);
-    background: transparent;
     z-index: 1;
-    padding: 0;
-    pointer-events: none; // prevent overlap clicks while floating
   }
 
   ui-lib-input .ui-input-floating-active.ui-input-float-in .ui-input-label {
-    transform: translate(var(--uilib-input-label-offset-x, 0), calc(-145%)) scale(0.8);
     background: transparent;
-    padding: 0;
     color: var(--uilib-input-placeholder, var(--uilib-muted));
+    padding: 0;
+    transform: translate(var(--uilib-input-label-offset-x, 0), calc(-145%)) scale(0.8);
   }
 
   ui-lib-input .ui-input-floating-active.ui-input-float-on .ui-input-label {
+    background: var(--uilib-input-label-bg, var(--uilib-input-bg, var(--uilib-surface)));
+    color: var(--uilib-input-placeholder, var(--uilib-muted));
+    padding: 0 0.35rem 0 0;
     transform: translate(var(--uilib-input-label-offset-x, 0), calc(-175%))
       scale(var(--uilib-input-label-floating-scale, 0.85));
-    background: var(--uilib-input-label-bg, var(--uilib-input-bg, var(--uilib-surface)));
-    padding: 0 0.35rem 0 0;
-    color: var(--uilib-input-placeholder, var(--uilib-muted));
   }
 
   ui-lib-input .ui-input-prefix,
   ui-lib-input .ui-input-suffix {
-    display: inline-flex;
     align-items: center;
     color: var(--uilib-input-placeholder, var(--uilib-muted));
+    display: inline-flex;
   }
 
   ui-lib-input .ui-input-clear,
   ui-lib-input .ui-input-toggle {
-    position: absolute;
-    inset-inline-end: 0.35rem;
-    border: none;
     background: transparent;
+    border: none;
     color: var(--uilib-input-placeholder, var(--uilib-muted));
     cursor: pointer;
-    padding: 0.15rem 0.35rem;
     font: inherit;
+    inset-inline-end: 0.35rem;
+    padding: 0.15rem 0.35rem;
+    position: absolute;
   }
 
   ui-lib-input .ui-input-toggle {
@@ -140,11 +140,11 @@
   }
 
   ui-lib-input .ui-input-meta {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
-    font-size: var(--uilib-input-meta-font-size);
     color: var(--uilib-input-placeholder, var(--uilib-muted));
+    display: flex;
+    font-size: var(--uilib-input-meta-font-size);
+    gap: 0.5rem;
+    justify-content: space-between;
   }
 
   ui-lib-input .ui-input-error-text {
@@ -169,8 +169,8 @@
   }
 
   ui-lib-input .ui-input.ui-input-minimal .ui-input-field {
-    border: 1px solid var(--uilib-input-border, var(--uilib-border));
     background: transparent;
+    border: 1px solid var(--uilib-input-border, var(--uilib-border));
   }
 
   ui-lib-input .ui-input-field:focus-within {

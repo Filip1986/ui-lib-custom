@@ -6,7 +6,7 @@
       <strong>roving tabindex</strong> pattern for accessible keyboard navigation.
     </p>
     <div class="demo-page-header__preview">
-      <ui-lib-code-snippet [code]="importTs" language="typescript" [showLineNumbers]="true" />
+      <ui-lib-code-snippet language="typescript" [code]="importTs" [showLineNumbers]="true" />
     </div>
   </app-doc-page-header>
 
@@ -43,7 +43,7 @@
       <ui-lib-menu [model]="basicItems" (itemClick)="onItemClick($event)" />
     </div>
     @if (eventLog().length > 0) {
-      <div class="demo-event-log" aria-live="polite">
+      <div aria-live="polite" class="demo-event-log">
         <ul class="demo-event-log__list">
           @for (entry of eventLog(); track $index) {
             <li class="demo-event-log__entry">{{ entry }}</li>
@@ -63,7 +63,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="separatorItems" />
     </div>
-    <ui-lib-code-snippet [code]="separatorTs" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="separatorTs" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── Disabled Items ────────────────────────────────────────────────────── -->
@@ -88,7 +88,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="groupedItems" />
     </div>
-    <ui-lib-code-snippet [code]="groupedTs" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="groupedTs" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
@@ -103,9 +103,9 @@
       <ui-lib-button
         severity="primary"
         type="button"
-        [attr.aria-haspopup]="'menu'"
-        [attr.aria-expanded]="popupMenu.isVisible()"
         [attr.aria-controls]="popupMenu.menuId"
+        [attr.aria-expanded]="popupMenu.isVisible()"
+        [attr.aria-haspopup]="'menu'"
         (click)="popupMenu.toggle($any($event.currentTarget))"
       >
         Options
@@ -118,7 +118,7 @@
       />
     </div>
     @if (eventLog().length > 0) {
-      <div class="demo-event-log" aria-live="polite">
+      <div aria-live="polite" class="demo-event-log">
         <ul class="demo-event-log__list">
           @for (entry of eventLog(); track $index) {
             <li class="demo-event-log__entry">{{ entry }}</li>
@@ -139,9 +139,9 @@
       <ui-lib-button
         severity="primary"
         type="button"
-        [attr.aria-haspopup]="'menu'"
-        [attr.aria-expanded]="popupGroupedMenu.isVisible()"
         [attr.aria-controls]="popupGroupedMenu.menuId"
+        [attr.aria-expanded]="popupGroupedMenu.isVisible()"
+        [attr.aria-haspopup]="'menu'"
         (click)="popupGroupedMenu.toggle($any($event.currentTarget))"
       >
         File Menu
@@ -154,7 +154,7 @@
       />
     </div>
     @if (eventLog().length > 0) {
-      <div class="demo-event-log" aria-live="polite">
+      <div aria-live="polite" class="demo-event-log">
         <ul class="demo-event-log__list">
           @for (entry of eventLog(); track $index) {
             <li class="demo-event-log__entry">{{ entry }}</li>
@@ -175,7 +175,7 @@
       <ui-lib-menu [model]="commandItems" (itemClick)="onItemClick($event)" />
     </div>
     @if (eventLog().length > 0) {
-      <div class="demo-event-log" aria-live="polite">
+      <div aria-live="polite" class="demo-event-log">
         <ul class="demo-event-log__list">
           @for (entry of eventLog(); track $index) {
             <li class="demo-event-log__entry">{{ entry }}</li>
@@ -183,7 +183,7 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="commandsTs" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="commandsTs" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
@@ -195,7 +195,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="urlItems" />
     </div>
-    <ui-lib-code-snippet [code]="urlItemsTs" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="urlItemsTs" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
@@ -208,15 +208,15 @@
     <div class="demo-menu-variant-grid">
       <div class="demo-menu-variant-col">
         <p class="demo-menu-variant-label">Material</p>
-        <ui-lib-menu [model]="variantItems" variant="material" />
+        <ui-lib-menu variant="material" [model]="variantItems" />
       </div>
       <div class="demo-menu-variant-col">
         <p class="demo-menu-variant-label">Bootstrap</p>
-        <ui-lib-menu [model]="variantItems" variant="bootstrap" />
+        <ui-lib-menu variant="bootstrap" [model]="variantItems" />
       </div>
       <div class="demo-menu-variant-col">
         <p class="demo-menu-variant-label">Minimal</p>
-        <ui-lib-menu [model]="variantItems" variant="minimal" />
+        <ui-lib-menu variant="minimal" [model]="variantItems" />
       </div>
     </div>
     <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
@@ -231,15 +231,15 @@
     <div class="demo-menu-size-grid">
       <div class="demo-menu-size-col">
         <p class="demo-menu-variant-label">Small</p>
-        <ui-lib-menu [model]="sizeItems" size="sm" />
+        <ui-lib-menu size="sm" [model]="sizeItems" />
       </div>
       <div class="demo-menu-size-col">
         <p class="demo-menu-variant-label">Medium</p>
-        <ui-lib-menu [model]="sizeItems" size="md" />
+        <ui-lib-menu size="md" [model]="sizeItems" />
       </div>
       <div class="demo-menu-size-col">
         <p class="demo-menu-variant-label">Large</p>
-        <ui-lib-menu [model]="sizeItems" size="lg" />
+        <ui-lib-menu size="lg" [model]="sizeItems" />
       </div>
     </div>
     <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
@@ -248,81 +248,81 @@
   <!-- ── API ───────────────────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API">
     <h3 class="demo-section__subtitle">Inputs</h3>
-    <ui-lib-table [value]="inputRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Name" field="name" width="160px">
-        <ng-template uiTableColumnBody let-row>
+    <ui-lib-table styleClass="demo-a11y-table" [value]="inputRows">
+      <ui-lib-table-column field="name" header="Name" width="160px">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.name"></span>
         </ng-template>
       </ui-lib-table-column>
-      <ui-lib-table-column header="Type" field="type" width="220px">
-        <ng-template uiTableColumnBody let-row>
+      <ui-lib-table-column field="type" header="Type" width="220px">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.type"></span>
         </ng-template>
       </ui-lib-table-column>
-      <ui-lib-table-column header="Default" field="default" width="120px">
-        <ng-template uiTableColumnBody let-row>
+      <ui-lib-table-column field="default" header="Default" width="120px">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.default"></span>
         </ng-template>
       </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
+      <ui-lib-table-column field="description" header="Description">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.description"></span>
         </ng-template>
       </ui-lib-table-column>
     </ui-lib-table>
 
     <h3 class="demo-section__subtitle">Outputs</h3>
-    <ui-lib-table [value]="outputRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Name" field="name" width="160px">
-        <ng-template uiTableColumnBody let-row>
+    <ui-lib-table styleClass="demo-a11y-table" [value]="outputRows">
+      <ui-lib-table-column field="name" header="Name" width="160px">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.name"></span>
         </ng-template>
       </ui-lib-table-column>
-      <ui-lib-table-column header="Payload" field="payload" width="200px">
-        <ng-template uiTableColumnBody let-row>
+      <ui-lib-table-column field="payload" header="Payload" width="200px">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.payload"></span>
         </ng-template>
       </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
+      <ui-lib-table-column field="description" header="Description">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.description"></span>
         </ng-template>
       </ui-lib-table-column>
     </ui-lib-table>
 
     <h3 class="demo-section__subtitle">Methods</h3>
-    <ui-lib-table [value]="methodRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Name" field="name" width="160px">
-        <ng-template uiTableColumnBody let-row>
+    <ui-lib-table styleClass="demo-a11y-table" [value]="methodRows">
+      <ui-lib-table-column field="name" header="Name" width="160px">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.name"></span>
         </ng-template>
       </ui-lib-table-column>
-      <ui-lib-table-column header="Parameters" field="parameters" width="160px">
-        <ng-template uiTableColumnBody let-row>
+      <ui-lib-table-column field="parameters" header="Parameters" width="160px">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.parameters"></span>
         </ng-template>
       </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
+      <ui-lib-table-column field="description" header="Description">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.description"></span>
         </ng-template>
       </ui-lib-table-column>
     </ui-lib-table>
 
     <h3 class="demo-section__subtitle">MenuItem</h3>
-    <ui-lib-table [value]="menuItemRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Property" field="property" width="160px">
-        <ng-template uiTableColumnBody let-row>
+    <ui-lib-table styleClass="demo-a11y-table" [value]="menuItemRows">
+      <ui-lib-table-column field="property" header="Property" width="160px">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.property"></span>
         </ng-template>
       </ui-lib-table-column>
-      <ui-lib-table-column header="Type" field="type" width="160px">
-        <ng-template uiTableColumnBody let-row>
+      <ui-lib-table-column field="type" header="Type" width="160px">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.type"></span>
         </ng-template>
       </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
+      <ui-lib-table-column field="description" header="Description">
+        <ng-template let-row uiTableColumnBody>
           <span [innerHTML]="row.description"></span>
         </ng-template>
       </ui-lib-table-column>
@@ -365,9 +365,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -375,8 +375,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

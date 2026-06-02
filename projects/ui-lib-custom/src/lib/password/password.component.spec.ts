@@ -1,13 +1,14 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import type { WritableSignal } from '@angular/core';
+
 import { PasswordComponent } from './password.component';
 import type { PasswordSize, PasswordVariant } from './password.types';
 

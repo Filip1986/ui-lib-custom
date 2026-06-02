@@ -2,8 +2,8 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const basicGridHtml = `<ui-lib-data-view [value]="products" layout="grid" [gridColumns]="4">
-  <ng-template uiDataViewGridItem let-item>
+export const basicGridHtml = `<ui-lib-data-view layout="grid" [gridColumns]="4" [value]="products">
+  <ng-template let-item uiDataViewGridItem>
     <article class="demo-grid-card">{{ item.name }}</article>
   </ng-template>
 </ui-lib-data-view>`;
@@ -21,7 +21,7 @@ export class MyComponent {
 }`;
 
 export const basicListHtml = `<ui-lib-data-view [value]="products">
-  <ng-template uiDataViewListItem let-item>
+  <ng-template let-item uiDataViewListItem>
     <article class="demo-card">{{ item.name }}</article>
   </ng-template>
 </ui-lib-data-view>`;
@@ -39,10 +39,10 @@ export class MyComponent {
 }`;
 
 export const customPageReportHtml = `<ui-lib-data-view
-  [value]="products"
+  currentPageReportTemplate="Page {currentPage} of {totalPages} ({first}-{last} / {totalRecords})"
   [paginator]="true"
   [rows]="5"
-  currentPageReportTemplate="Page {currentPage} of {totalPages} ({first}-{last} / {totalRecords})"
+  [value]="products"
 >
   ...
 </ui-lib-data-view>`;
@@ -61,7 +61,7 @@ export class MyComponent {
   ];
 }`;
 
-export const customPaginatorSlotsHtml = `<ui-lib-data-view [value]="products" [paginator]="true" [rows]="5">
+export const customPaginatorSlotsHtml = `<ui-lib-data-view [paginator]="true" [rows]="5" [value]="products">
   <ng-template uiDataViewPaginatorLeft>Left slot content</ng-template>
   <ng-template uiDataViewPaginatorRight>Right slot content</ng-template>
 </ui-lib-data-view>`;
@@ -90,11 +90,11 @@ export class MyComponent {
   ];
 }`;
 
-export const customTemplatesHtml = `<ui-lib-data-view [value]="customTemplateProducts" [paginator]="true" [rows]="6">
+export const customTemplatesHtml = `<ui-lib-data-view [paginator]="true" [rows]="6" [value]="customTemplateProducts">
   <ng-template uiDataViewHeader>...</ng-template>
   <ng-template uiDataViewFooter>...</ng-template>
-  <ng-template uiDataViewListItem let-item>...</ng-template>
-  <ng-template uiDataViewGridItem let-item>...</ng-template>
+  <ng-template let-item uiDataViewListItem>...</ng-template>
+  <ng-template let-item uiDataViewGridItem>...</ng-template>
 </ui-lib-data-view>`;
 
 export const customTemplatesTs = `import { Component } from '@angular/core';
@@ -123,7 +123,7 @@ export class MyComponent {
   ];
 }`;
 
-export const emptyStateHtml = `<ui-lib-data-view [value]="[]" emptyMessage="No inventory records found." />
+export const emptyStateHtml = `<ui-lib-data-view emptyMessage="No inventory records found." [value]="[]" />
 <ui-lib-data-view [value]="[]">
   <ng-template uiDataViewEmpty>No products available.</ng-template>
 </ui-lib-data-view>`;
@@ -138,9 +138,9 @@ import { DataViewComponent, DataViewEmptyDirective } from 'ui-lib-custom/data-vi
 })
 export class MyComponent {}`;
 
-export const gridColumnsHtml = `<ui-lib-data-view [value]="products" layout="grid" [gridColumns]="2">...</ui-lib-data-view>
-<ui-lib-data-view [value]="products" layout="grid" [gridColumns]="3">...</ui-lib-data-view>
-<ui-lib-data-view [value]="products" layout="grid" [gridColumns]="4">...</ui-lib-data-view>`;
+export const gridColumnsHtml = `<ui-lib-data-view layout="grid" [gridColumns]="2" [value]="products">...</ui-lib-data-view>
+<ui-lib-data-view layout="grid" [gridColumns]="3" [value]="products">...</ui-lib-data-view>
+<ui-lib-data-view layout="grid" [gridColumns]="4" [value]="products">...</ui-lib-data-view>`;
 
 export const gridColumnsTs = `import { Component } from '@angular/core';
 import { DataViewComponent, DataViewGridItemDirective } from 'ui-lib-custom/data-view';
@@ -177,8 +177,8 @@ export class MyComponent {
   public switchableLayout: DataViewLayout = 'list';
 }`;
 
-export const loadingStateHtml = `<ui-lib-data-view [value]="products" [loading]="true" />
-<ui-lib-data-view [value]="products" [loading]="true">
+export const loadingStateHtml = `<ui-lib-data-view [loading]="true" [value]="products" />
+<ui-lib-data-view [loading]="true" [value]="products">
   <ng-template uiDataViewLoading>Syncing catalog...</ng-template>
 </ui-lib-data-view>`;
 
@@ -194,7 +194,7 @@ export class MyComponent {
   public readonly products = [/* array of products */];
 }`;
 
-export const paginationClientHtml = `<ui-lib-data-view [value]="products" [paginator]="true" [rows]="5">...</ui-lib-data-view>`;
+export const paginationClientHtml = `<ui-lib-data-view [paginator]="true" [rows]="5" [value]="products">...</ui-lib-data-view>`;
 
 export const paginationClientTs = `import { Component } from '@angular/core';
 import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';
@@ -208,9 +208,9 @@ export class MyComponent {
   public readonly products = [/* array of products */];
 }`;
 
-export const paginationPositionHtml = `<ui-lib-data-view [paginator]="true" paginatorPosition="top">...</ui-lib-data-view>
-<ui-lib-data-view [paginator]="true" paginatorPosition="bottom">...</ui-lib-data-view>
-<ui-lib-data-view [paginator]="true" paginatorPosition="both">...</ui-lib-data-view>`;
+export const paginationPositionHtml = `<ui-lib-data-view paginatorPosition="top" [paginator]="true">...</ui-lib-data-view>
+<ui-lib-data-view paginatorPosition="bottom" [paginator]="true">...</ui-lib-data-view>
+<ui-lib-data-view paginatorPosition="both" [paginator]="true">...</ui-lib-data-view>`;
 
 export const paginationPositionTs = `import { Component } from '@angular/core';
 import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';
@@ -225,10 +225,10 @@ export class MyComponent {
 }`;
 
 export const rowsPerPageHtml = `<ui-lib-data-view
-  [value]="products"
   [paginator]="true"
   [rows]="5"
   [rowsPerPageOptions]="[5, 10, 25]"
+  [value]="products"
 >
   ...
 </ui-lib-data-view>`;
@@ -246,12 +246,12 @@ export class MyComponent {
 }`;
 
 export const serverSidePaginationHtml = `<ui-lib-data-view
-  [value]="serverProducts"
+  [first]="serverFirst"
   [loading]="serverLoading"
   [paginator]="true"
   [rows]="serverRows"
   [totalRecords]="serverTotalRecords"
-  [first]="serverFirst"
+  [value]="serverProducts"
   (pageChange)="onServerPageChange($event)"
 >
   ...
@@ -282,9 +282,9 @@ export class MyComponent {
   }
 }`;
 
-export const sizesHtml = `<ui-lib-data-view [value]="miniProducts" size="sm">...</ui-lib-data-view>
-<ui-lib-data-view [value]="miniProducts" size="md">...</ui-lib-data-view>
-<ui-lib-data-view [value]="miniProducts" size="lg">...</ui-lib-data-view>`;
+export const sizesHtml = `<ui-lib-data-view size="sm" [value]="miniProducts">...</ui-lib-data-view>
+<ui-lib-data-view size="md" [value]="miniProducts">...</ui-lib-data-view>
+<ui-lib-data-view size="lg" [value]="miniProducts">...</ui-lib-data-view>`;
 
 export const sizesTs = `import { Component } from '@angular/core';
 import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';

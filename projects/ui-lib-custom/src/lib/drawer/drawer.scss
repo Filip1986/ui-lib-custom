@@ -34,11 +34,11 @@
     --uilib-drawer-close-hover-bg: var(--uilib-color-surface-hover, rgba(0, 0, 0, 0.06));
     --uilib-drawer-close-size: 2rem;
     --uilib-drawer-close-transition: background-color 0.15s ease, color 0.15s ease;
+    inset: 0;
+    pointer-events: none;
 
     position: fixed;
-    inset: 0;
     z-index: var(--uilib-drawer-z-index);
-    pointer-events: none;
 
     &.ui-lib-drawer--open {
       pointer-events: auto;
@@ -47,11 +47,11 @@
 
   /* ── Backdrop ───────────────────────────────────────────────────── */
   .ui-lib-drawer__backdrop {
-    position: absolute;
-    inset: 0;
     background-color: var(--uilib-drawer-backdrop-bg);
+    inset: 0;
     opacity: 0;
     pointer-events: none;
+    position: absolute;
     transition: opacity var(--uilib-drawer-transition-duration) ease;
   }
 
@@ -62,26 +62,26 @@
 
   /* ── Panel shared ───────────────────────────────────────────────── */
   .ui-lib-drawer__panel {
-    position: absolute;
     background-color: var(--uilib-drawer-panel-bg);
     border-radius: var(--uilib-drawer-border-radius);
     box-shadow: var(--uilib-drawer-panel-shadow);
-    outline: none;
     display: flex;
     flex-direction: column;
+    outline: none;
     overflow: hidden;
-    /* Promote panel to its own compositor layer so slide animations are GPU-accelerated */
-    will-change: transform;
+    position: absolute;
     transition: transform var(--uilib-drawer-transition-duration)
       var(--uilib-drawer-transition-easing);
+    /* Promote panel to its own compositor layer so slide animations are GPU-accelerated */
+    will-change: transform;
   }
 
   /* ── Position: right (default) ──────────────────────────────────── */
   .ui-lib-drawer--right .ui-lib-drawer__panel {
+    inline-size: var(--uilib-drawer-size);
+    inset-block-end: 0;
     inset-block-start: 0;
     inset-inline-end: 0;
-    inset-block-end: 0;
-    inline-size: var(--uilib-drawer-size);
     max-inline-size: 100vw;
     transform: translateX(100%);
 
@@ -92,10 +92,10 @@
 
   /* ── Position: left ─────────────────────────────────────────────── */
   .ui-lib-drawer--left .ui-lib-drawer__panel {
+    inline-size: var(--uilib-drawer-size);
+    inset-block-end: 0;
     inset-block-start: 0;
     inset-inline-start: 0;
-    inset-block-end: 0;
-    inline-size: var(--uilib-drawer-size);
     max-inline-size: 100vw;
     transform: translateX(-100%);
 
@@ -106,10 +106,10 @@
 
   /* ── Position: top ──────────────────────────────────────────────── */
   .ui-lib-drawer--top .ui-lib-drawer__panel {
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    inset-inline-end: 0;
     block-size: var(--uilib-drawer-size);
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     max-block-size: 100vh;
     transform: translateY(-100%);
 
@@ -120,10 +120,10 @@
 
   /* ── Position: bottom ───────────────────────────────────────────── */
   .ui-lib-drawer--bottom .ui-lib-drawer__panel {
-    inset-block-end: 0;
-    inset-inline-start: 0;
-    inset-inline-end: 0;
     block-size: var(--uilib-drawer-size);
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     max-block-size: 100vh;
     transform: translateY(100%);
 
@@ -134,36 +134,36 @@
 
   /* ── Header ─────────────────────────────────────────────────────── */
   .ui-lib-drawer__header {
-    display: flex;
     align-items: center;
+    background-color: var(--uilib-drawer-header-bg);
+    border-block-end: var(--uilib-drawer-header-border);
+    display: flex;
+    flex-shrink: 0;
     justify-content: space-between;
     padding: var(--uilib-drawer-padding);
     padding-block-end: calc(var(--uilib-drawer-padding) * 0.75);
-    background-color: var(--uilib-drawer-header-bg);
-    border-block-end: var(--uilib-drawer-header-border);
-    flex-shrink: 0;
   }
 
   .ui-lib-drawer__title {
+    color: var(--uilib-drawer-title-color);
+    flex: 1 1 auto;
     font-size: var(--uilib-drawer-title-font-size);
     font-weight: var(--uilib-drawer-title-font-weight);
-    color: var(--uilib-drawer-title-color);
     line-height: 1.4;
-    flex: 1 1 auto;
   }
 
   .ui-lib-drawer__close {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    inline-size: var(--uilib-drawer-close-size);
+    background: transparent;
     block-size: var(--uilib-drawer-close-size);
     border: none;
-    background: transparent;
     border-radius: var(--uilib-radius-full, 9999px);
     color: var(--uilib-drawer-close-color);
     cursor: pointer;
+    display: flex;
     flex-shrink: 0;
+    inline-size: var(--uilib-drawer-close-size);
+    justify-content: center;
     transition: var(--uilib-drawer-close-transition);
 
     &:hover {
@@ -178,10 +178,10 @@
 
   /* ── Content ────────────────────────────────────────────────────── */
   .ui-lib-drawer__content {
-    padding: var(--uilib-drawer-padding);
-    overflow-y: auto;
     flex: 1 1 auto;
+    overflow-y: auto;
     overscroll-behavior: contain;
+    padding: var(--uilib-drawer-padding);
   }
 
   /* ── Footer ─────────────────────────────────────────────────────── */

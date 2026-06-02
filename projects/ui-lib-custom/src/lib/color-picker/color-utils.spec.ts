@@ -1,4 +1,3 @@
-import type { HsbColor, RgbColor } from './index';
 import {
   formatColorValue,
   hexToHsb,
@@ -10,6 +9,7 @@ import {
   rgbToHsb,
   toHsbColor,
 } from './color-utils';
+import type { HsbColor, RgbColor } from './index';
 
 describe('color-utils', (): void => {
   describe('normalizeHex', (): void => {

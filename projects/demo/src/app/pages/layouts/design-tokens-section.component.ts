@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+
+import { Panel } from 'ui-lib-custom/panel';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-
-import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for design tokens usage.
  */

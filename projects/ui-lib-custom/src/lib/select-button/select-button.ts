@@ -1,37 +1,39 @@
 import { NgTemplateOutlet } from '@angular/common';
+import type {
+  InputSignal,
+  OutputEmitterRef,
+  Signal,
+  TemplateRef,
+  WritableSignal,
+} from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  HostListener,
-  ViewEncapsulation,
   computed,
   contentChild,
   effect,
+  ElementRef,
   forwardRef,
+  HostListener,
+  inject,
   input,
   output,
   signal,
-  inject,
+  ViewEncapsulation,
 } from '@angular/core';
-import type {
-  TemplateRef,
-  InputSignal,
-  WritableSignal,
-  Signal,
-  OutputEmitterRef,
-} from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { Button } from 'ui-lib-custom/button';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
+  KEYBOARD_KEYS,
   SHARED_DEFAULTS,
   SHARED_SIZES,
   SHARED_THEME_VARIANTS,
-  KEYBOARD_KEYS,
 } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   SelectButtonChangeEvent,
   SelectButtonItemContext,

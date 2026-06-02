@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } fr
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { Button } from '../button';
 import { FloatLabelComponent } from '../float-label';
-import { InputGroupAddonComponent } from './input-group-addon';
 import { InputGroupComponent } from './input-group';
+import { InputGroupAddonComponent } from './input-group-addon';
 
 @Component({
   standalone: true,

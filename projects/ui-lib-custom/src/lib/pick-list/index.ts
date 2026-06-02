@@ -1,17 +1,17 @@
 // Public types
 export type {
-  PickListVariant,
-  PickListSize,
-  PickListFilterMatchMode,
-  PickListMoveToTargetEvent,
-  PickListMoveToSourceEvent,
-  PickListMoveAllToTargetEvent,
-  PickListMoveAllToSourceEvent,
-  PickListSelectionChangeEvent,
-  PickListFilterEvent,
-  PickListReorderEvent,
-  PickListItemContext,
   PickListEmptyContext,
+  PickListFilterEvent,
+  PickListFilterMatchMode,
+  PickListItemContext,
+  PickListMoveAllToSourceEvent,
+  PickListMoveAllToTargetEvent,
+  PickListMoveToSourceEvent,
+  PickListMoveToTargetEvent,
+  PickListReorderEvent,
+  PickListSelectionChangeEvent,
+  PickListSize,
+  PickListVariant,
 } from './pick-list.types';
 
 // Public constants
@@ -22,8 +22,8 @@ export { PickListComponent } from './pick-list.component';
 
 // Template directives
 export {
+  PickListEmptyDirective,
   PickListItemDirective,
   PickListSourceHeaderDirective,
   PickListTargetHeaderDirective,
-  PickListEmptyDirective,
 } from './pick-list-templates.directive';

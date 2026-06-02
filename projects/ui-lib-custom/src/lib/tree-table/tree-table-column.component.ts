@@ -1,12 +1,13 @@
+import type { InputSignal, Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   contentChild,
   input,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, Signal } from '@angular/core';
 import { TemplateRef } from '@angular/core';
+
 import {
   TreeTableColumnBodyDirective,
   TreeTableColumnFooterDirective,

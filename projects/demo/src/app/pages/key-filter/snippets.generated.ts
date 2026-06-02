@@ -2,7 +2,7 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const alphaHtml = `<input [uilibKeyFilter]="'alpha'" placeholder="Letters only" />`;
+export const alphaHtml = `<input placeholder="Letters only" [uilibKeyFilter]="'alpha'" />`;
 
 export const alphaTs = `import { Component } from '@angular/core';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
@@ -14,7 +14,11 @@ import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 })
 export class MyComponent {}`;
 
-export const alphanumHtml = `<input [uilibKeyFilter]="'alphanum'" hintText="Letters and numbers only" placeholder="Enter account ID" />`;
+export const alphanumHtml = `<input
+  hintText="Letters and numbers only"
+  placeholder="Enter account ID"
+  [uilibKeyFilter]="'alphanum'"
+/>`;
 
 export const alphanumTs = `import { Component } from '@angular/core';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
@@ -27,9 +31,9 @@ import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 export class MyComponent {}`;
 
 export const bypassHtml = `<input
-  [uilibKeyFilter]="'pint'"
-  [keyFilterBypass]="bypassEnabled"
   placeholder="Positive integers (bypass toggleable)"
+  [keyFilterBypass]="bypassEnabled"
+  [uilibKeyFilter]="'pint'"
 />`;
 
 export const bypassTs = `import { Component } from '@angular/core';
@@ -44,7 +48,7 @@ export class MyComponent {
   public bypassEnabled: boolean = false;
 }`;
 
-export const customHtml = `<input [uilibKeyFilter]="vowelPattern" placeholder="Vowels only (a e i o u)" />`;
+export const customHtml = `<input placeholder="Vowels only (a e i o u)" [uilibKeyFilter]="vowelPattern" />`;
 
 export const customTs = `import { Component } from '@angular/core';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
@@ -58,7 +62,7 @@ export class MyComponent {
   public readonly vowelPattern: RegExp = /[aeiouAEIOU]/;
 }`;
 
-export const emailHtml = `<input [uilibKeyFilter]="'email'" placeholder="Email characters" />`;
+export const emailHtml = `<input placeholder="Email characters" [uilibKeyFilter]="'email'" />`;
 
 export const emailTs = `import { Component } from '@angular/core';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
@@ -70,7 +74,7 @@ import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 })
 export class MyComponent {}`;
 
-export const hexHtml = `<input [uilibKeyFilter]="'hex'" placeholder="Hex digits (0-9, a-f)" />`;
+export const hexHtml = `<input placeholder="Hex digits (0-9, a-f)" [uilibKeyFilter]="'hex'" />`;
 
 export const hexTs = `import { Component } from '@angular/core';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
@@ -82,7 +86,7 @@ import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 })
 export class MyComponent {}`;
 
-export const intHtml = `<input [uilibKeyFilter]="'int'" placeholder="Integers (with minus sign)" />`;
+export const intHtml = `<input placeholder="Integers (with minus sign)" [uilibKeyFilter]="'int'" />`;
 
 export const intTs = `import { Component } from '@angular/core';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
@@ -94,7 +98,7 @@ import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 })
 export class MyComponent {}`;
 
-export const moneyHtml = `<input [uilibKeyFilter]="'money'" placeholder="Money (digits, - . ,)" />`;
+export const moneyHtml = `<input placeholder="Money (digits, - . ,)" [uilibKeyFilter]="'money'" />`;
 
 export const moneyTs = `import { Component } from '@angular/core';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
@@ -106,7 +110,7 @@ import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 })
 export class MyComponent {}`;
 
-export const numHtml = `<input [uilibKeyFilter]="'num'" placeholder="Numbers (decimal, minus)" />`;
+export const numHtml = `<input placeholder="Numbers (decimal, minus)" [uilibKeyFilter]="'num'" />`;
 
 export const numTs = `import { Component } from '@angular/core';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
@@ -118,7 +122,7 @@ import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 })
 export class MyComponent {}`;
 
-export const pintHtml = `<input [uilibKeyFilter]="'pint'" placeholder="Positive integers only" />`;
+export const pintHtml = `<input placeholder="Positive integers only" [uilibKeyFilter]="'pint'" />`;
 
 export const pintTs = `import { Component } from '@angular/core';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';

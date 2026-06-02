@@ -1,76 +1,77 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import {
-  FormsModule,
-  ReactiveFormsModule,
   FormControl,
   FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+
 import { Button } from 'ui-lib-custom/button';
 import {
-  UiLibCascadeSelect,
-  CascadeSelectOptionDirective,
-  CascadeSelectValueDirective,
-  CascadeSelectHeaderDirective,
-  CascadeSelectFooterDirective,
-  CascadeSelectLoadingDirective,
   CascadeSelectDropdownIconDirective,
+  CascadeSelectFooterDirective,
+  CascadeSelectHeaderDirective,
+  CascadeSelectLoadingDirective,
+  CascadeSelectOptionDirective,
   CascadeSelectOptionGroupIconDirective,
+  CascadeSelectValueDirective,
+  UiLibCascadeSelect,
 } from 'ui-lib-custom/cascade-select';
+import { Panel } from 'ui-lib-custom/panel';
+
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
 import {
   CASCADE_SELECT_COUNTRIES,
-  type CascadeCountry,
   type CascadeCity,
+  type CascadeCountry,
   type CascadeState,
 } from './cascade-select-demo.data';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
-import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-
-import { Panel } from 'ui-lib-custom/panel';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import {
   basicHtml,
   basicTs,
-  templateHtml,
-  templateTs,
-  loadingHtml,
-  loadingTs,
   clearHtml,
   clearTs,
-  sizesHtml,
-  sizesTs,
+  clippingHtml,
+  clippingTs,
   filledHtml,
   filledTs,
   fluidHtml,
   fluidTs,
-  statesHtml,
-  statesTs,
   formsHtml,
   formsTs,
+  loadingHtml,
+  loadingTs,
   reactiveHtml,
   reactiveTs,
+  sizesHtml,
+  sizesTs,
+  statesHtml,
+  statesTs,
+  templateHtml,
+  templateTs,
   variantsHtml,
   variantsTs,
-  clippingHtml,
-  clippingTs,
 } from './snippets.generated';
-
-import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
 
 /**

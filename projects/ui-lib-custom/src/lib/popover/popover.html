@@ -1,27 +1,27 @@
 @if (visible()) {
   <!-- Transparent overlay catches click-away to dismiss -->
   <div
-    class="ui-lib-popover__overlay"
     aria-hidden="true"
+    class="ui-lib-popover__overlay"
     [class.ui-lib-popover__overlay--active]="dismissable()"
     (click)="onOverlayClick()"
   ></div>
 
   <!-- Floating panel anchored near the target element -->
   <div
-    [id]="panelId"
-    [class]="panelClasses()"
-    [style.top.px]="panelTop()"
-    [style.left.px]="panelLeft()"
-    role="dialog"
     aria-modal="false"
+    role="dialog"
     tabindex="-1"
-    [attr.aria-labelledby]="header() ? titleId : null"
     [attr.aria-label]="header() ? null : i18n.translate('popover.label')"
+    [attr.aria-labelledby]="header() ? titleId : null"
+    [class]="panelClasses()"
+    [id]="panelId"
+    [style.left.px]="panelLeft()"
+    [style.top.px]="panelTop()"
     (keydown)="onPanelKeydown($event)"
   >
     <!-- Arrow pointing toward the trigger element -->
-    <div class="ui-lib-popover__arrow" [style.left.px]="arrowLeftOffset()" aria-hidden="true"></div>
+    <div aria-hidden="true" class="ui-lib-popover__arrow" [style.left.px]="arrowLeftOffset()"></div>
 
     @if (header() || showCloseButton()) {
       <div class="ui-lib-popover__header">
@@ -30,26 +30,26 @@
         }
         @if (showCloseButton()) {
           <button
-            type="button"
             class="ui-lib-popover__close-btn"
+            type="button"
             [attr.aria-label]="i18n.translate('popover.close')"
             (click)="hide()"
           >
             <svg
               aria-hidden="true"
-              focusable="false"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
               fill="none"
+              focusable="false"
+              height="14"
               stroke="currentColor"
-              stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
               width="14"
-              height="14"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" x2="6" y1="6" y2="18" />
+              <line x1="6" x2="18" y1="6" y2="18" />
             </svg>
           </button>
         }

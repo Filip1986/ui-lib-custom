@@ -1,25 +1,27 @@
-import { Component, ChangeDetectionStrategy, signal, viewChild } from '@angular/core';
-import type { WritableSignal, Signal } from '@angular/core';
-import { Button } from 'ui-lib-custom/button';
+import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+
+import { Button } from 'ui-lib-custom/button';
+import { Panel } from 'ui-lib-custom/panel';
+
+import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import type { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
+import { LayoutCompositionSectionComponent } from './composition-section.component';
+import { ContainerSectionComponent } from './container-section.component';
+import { DesignTokensSectionComponent } from './design-tokens-section.component';
+import { LayoutExamplesSectionComponent } from './examples-section.component';
+import { GridSectionComponent } from './grid-section.component';
+import { InlineSectionComponent } from './inline-section.component';
 import { SemanticSpacingSectionComponent } from './semantic-spacing-section.component';
 import { StackSectionComponent } from './stack-section.component';
-import { InlineSectionComponent } from './inline-section.component';
-import { GridSectionComponent } from './grid-section.component';
-import { ContainerSectionComponent } from './container-section.component';
-import { LayoutCompositionSectionComponent } from './composition-section.component';
-import { DesignTokensSectionComponent } from './design-tokens-section.component';
 import { ThemedLayoutsSectionComponent } from './themed-layouts-section.component';
-import { LayoutExamplesSectionComponent } from './examples-section.component';
-import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example.component';
-
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page aggregating layout primitives and sections.
  */

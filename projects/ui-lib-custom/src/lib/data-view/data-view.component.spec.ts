@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  type DebugElement,
   provideZonelessChangeDetection,
   signal,
-  type DebugElement,
   type WritableSignal,
 } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { DataViewComponent } from './data-view.component';
-import type { DataViewPageEvent, DataViewSortEvent, DataViewSortOrder } from './data-view.types';
 import {
   DataViewEmptyDirective,
   DataViewFooterDirective,
@@ -21,6 +21,7 @@ import {
   DataViewPaginatorLeftDirective,
   DataViewPaginatorRightDirective,
 } from './data-view.template-directives';
+import type { DataViewPageEvent, DataViewSortEvent, DataViewSortOrder } from './data-view.types';
 
 interface DataViewItem {
   id: number;

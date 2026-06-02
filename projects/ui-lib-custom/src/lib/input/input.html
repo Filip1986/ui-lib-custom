@@ -4,7 +4,7 @@
       <span class="ui-input-label-text">
         {{ label() }}
         @if (required()) {
-          <span class="required-indicator" aria-hidden="true">*</span>
+          <span aria-hidden="true" class="required-indicator">*</span>
         }
       </span>
     </label>
@@ -12,10 +12,10 @@
 
   <div
     class="ui-input-field"
+    role="presentation"
+    tabindex="-1"
     (click)="focusInput($event)"
     (keydown.enter)="focusInput()"
-    tabindex="-1"
-    role="presentation"
   >
     <span class="ui-input-prefix">
       <ng-content select="[prefix]" />
@@ -27,7 +27,7 @@
           <span class="ui-input-label-text">
             {{ label() }}
             @if (required()) {
-              <span class="required-indicator" aria-hidden="true">*</span>
+              <span aria-hidden="true" class="required-indicator">*</span>
             }
           </span>
         </label>
@@ -35,31 +35,31 @@
 
       <input
         #inputEl
-        [id]="controlId()"
-        [name]="name() ?? controlId()"
-        [type]="inputType()"
-        [placeholder]="displayPlaceholder()"
-        [disabled]="isDisabled()"
-        [readOnly]="readonly()"
-        [required]="required() || null"
+        [attr.aria-describedby]="ariaDescribedBy()"
+        [attr.aria-invalid]="isInvalid() ? 'true' : null"
         [attr.aria-label]="ariaLabel() || null"
         [attr.aria-labelledby]="ariaLabelledBy() || null"
-        [attr.aria-invalid]="isInvalid() ? 'true' : null"
-        [attr.aria-required]="required() ? 'true' : null"
         [attr.aria-readonly]="readonly() ? 'true' : null"
-        [attr.aria-describedby]="ariaDescribedBy()"
+        [attr.aria-required]="required() ? 'true' : null"
+        [disabled]="isDisabled()"
+        [id]="controlId()"
+        [name]="name() ?? controlId()"
+        [placeholder]="displayPlaceholder()"
+        [readOnly]="readonly()"
+        [required]="required() || null"
+        [type]="inputType()"
         [value]="value()"
-        (input)="onInput($any($event.target).value)"
-        (focus)="onFocus()"
         (blur)="onBlur()"
+        (focus)="onFocus()"
+        (input)="onInput($any($event.target).value)"
       />
 
       @if (showClear() && value() && !isDisabled()) {
         <button
-          type="button"
           class="ui-input-clear"
-          (click)="clear()"
+          type="button"
           [attr.aria-label]="i18n.translate('input.clear')"
+          (click)="clear()"
         >
           ×
         </button>
@@ -67,10 +67,10 @@
 
       @if (type() === 'password' && showTogglePassword()) {
         <button
-          type="button"
           class="ui-input-toggle"
-          (click)="togglePassword()"
+          type="button"
           [attr.aria-label]="i18n.translate('input.password-toggle')"
+          (click)="togglePassword()"
         >
           <span aria-hidden="true">{{ showPassword() ? 'Hide' : 'Show' }}</span>
         </button>
@@ -84,7 +84,7 @@
 
   <div class="ui-input-meta">
     @if (error()) {
-      <div class="ui-input-error-text" [id]="errorId()" role="alert">
+      <div class="ui-input-error-text" role="alert" [id]="errorId()">
         {{ error() }}
       </div>
     }

@@ -1,10 +1,12 @@
+import { provideZonelessChangeDetection } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { provideZonelessChangeDetection } from '@angular/core';
-import { Grid } from './grid';
-import type { GridAlign, GridJustify } from './grid';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import type { GridColumns, SpacingToken, StackToken } from 'ui-lib-custom/tokens';
+
+import type { GridAlign, GridJustify } from './grid';
+import { Grid } from './grid';
 
 @Component({
   standalone: true,

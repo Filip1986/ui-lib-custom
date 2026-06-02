@@ -1,13 +1,13 @@
+import type { InputSignal, Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   computed,
+  ElementRef,
+  inject,
   input,
   ViewEncapsulation,
-  inject,
 } from '@angular/core';
-import type { InputSignal, Signal } from '@angular/core';
 
 /**
  * Tab panel content container tied to a tab trigger.

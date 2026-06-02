@@ -1,7 +1,7 @@
 <div
   class="ui-lib-progress-bar__fill"
-  [style.width]="mode() === 'determinate' ? clampedValue() + '%' : null"
   [style.background-color]="color()"
+  [style.width]="mode() === 'determinate' ? clampedValue() + '%' : null"
 >
   @if (mode() === 'determinate' && showValue()) {
     <span class="ui-lib-progress-bar__label">
@@ -17,7 +17,7 @@
   }
 </div>
 @if (clampedValue() === 100) {
-  <span aria-live="polite" aria-atomic="true" class="ui-lib-progress-bar__sr-only">
+  <span aria-atomic="true" aria-live="polite" class="ui-lib-progress-bar__sr-only">
     {{ completionLabel() !== null ? completionLabel() : i18n.translate('progressbar.complete') }}
   </span>
 }

@@ -1,26 +1,28 @@
 import {
-  Injectable,
   computed,
   inject,
-  signal,
+  Injectable,
   type Signal,
+  signal,
   type WritableSignal,
 } from '@angular/core';
-import { ThemeConfigService, type ThemeIconConfig, type ThemePreset } from 'ui-lib-custom/theme';
+
 import type { ThemeVariant } from 'ui-lib-custom/theme';
+import { ThemeConfigService, type ThemeIconConfig, type ThemePreset } from 'ui-lib-custom/theme';
+
+import type { IconMapping, SemanticIcon } from './icon.semantics';
 import { ICON_CONFIG } from './icon.tokens';
 import {
   type ComponentVariant,
   DEFAULT_ICON_CONFIG,
+  ICON_SIZES,
   type IconConfig,
   type IconLibrary,
   type IconSize,
-  ICON_SIZES,
 } from './icon.types';
 import { LUCIDE_ICON_MAPPING } from './presets';
 import { BOOTSTRAP_ICON_MAPPING } from './presets';
 import { MATERIAL_ICON_MAPPING } from './presets';
-import type { IconMapping, SemanticIcon } from './icon.semantics';
 
 /**
  * Resolves icon libraries, sizes, and semantic mappings for ui-lib icons.

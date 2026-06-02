@@ -76,20 +76,20 @@
   // -----------------------------------------------------------------------------
 
   .ui-lib-menubar__nav {
-    display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 0.5rem;
     background: var(--uilib-menubar-bar-bg);
     border: var(--uilib-menubar-bar-border);
     border-radius: var(--uilib-menubar-bar-border-radius);
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
     padding: var(--uilib-menubar-bar-padding);
   }
 
   .ui-lib-menubar__start,
   .ui-lib-menubar__end {
-    display: flex;
     align-items: center;
+    display: flex;
     flex-shrink: 0;
   }
 
@@ -100,29 +100,29 @@
 
   // Root list — horizontal row
   .ui-lib-menubar__root-list {
+    align-items: center;
     display: flex;
+    flex: 1 1 auto;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
+    gap: 0.125rem;
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 0.125rem;
-    flex: 1 1 auto;
   }
 
   // Root separator (vertical divider between root items)
   .ui-lib-menubar__root-separator {
-    width: 1px;
-    height: 1.25rem;
     background-color: var(--uilib-menubar-separator-color);
+    height: 1.25rem;
     margin: 0 0.25rem;
+    width: 1px;
   }
 
   // Root item
   .ui-lib-menubar__root-item {
-    position: relative;
     list-style: none;
+    position: relative;
   }
 
   // -----------------------------------------------------------------------------
@@ -130,26 +130,26 @@
   // -----------------------------------------------------------------------------
 
   .ui-lib-menubar__root-link {
-    display: inline-flex;
     align-items: center;
-    gap: var(--uilib-menubar-root-link-gap);
-    padding: var(--uilib-menubar-root-link-padding);
     border-radius: var(--uilib-menubar-root-link-border-radius);
     color: var(--uilib-menubar-root-link-color);
+    cursor: pointer;
+    display: inline-flex;
     font-size: var(--uilib-menubar-root-link-font-size-md);
     font-weight: var(--uilib-menubar-root-link-font-weight);
-    text-decoration: none;
-    cursor: pointer;
-    white-space: nowrap;
-    user-select: none;
+    gap: var(--uilib-menubar-root-link-gap);
     outline: none;
+    padding: var(--uilib-menubar-root-link-padding);
+    text-decoration: none;
     transition:
       color var(--uilib-menubar-transition),
       background-color var(--uilib-menubar-transition);
+    user-select: none;
+    white-space: nowrap;
 
     &:hover {
-      color: var(--uilib-menubar-root-link-color-hover);
       background-color: var(--uilib-menubar-root-link-bg-hover);
+      color: var(--uilib-menubar-root-link-color-hover);
     }
 
     &:focus-visible {
@@ -159,26 +159,26 @@
   }
 
   .ui-lib-menubar__root-item--active > .ui-lib-menubar__root-link {
-    color: var(--uilib-menubar-root-link-color-active);
     background-color: var(--uilib-menubar-root-link-bg-active);
+    color: var(--uilib-menubar-root-link-color-active);
   }
 
   .ui-lib-menubar__root-item--disabled > .ui-lib-menubar__root-link {
+    cursor: not-allowed;
     opacity: 0.5;
     pointer-events: none;
-    cursor: not-allowed;
   }
 
   // Root caret — down-pointing triangle
   .ui-lib-menubar__root-caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-inline-start: var(--uilib-menubar-caret-size) solid transparent;
     border-inline-end: var(--uilib-menubar-caret-size) solid transparent;
+    border-inline-start: var(--uilib-menubar-caret-size) solid transparent;
     border-top: var(--uilib-menubar-caret-size) solid var(--uilib-menubar-caret-color);
+    display: inline-block;
+    height: 0;
     margin-inline-start: 0.125rem;
     transition: transform var(--uilib-menubar-transition);
+    width: 0;
   }
 
   .ui-lib-menubar__root-item--active > .ui-lib-menubar__root-link .ui-lib-menubar__root-caret {
@@ -195,22 +195,22 @@
   // -----------------------------------------------------------------------------
 
   .ui-lib-menubar__panel {
-    position: absolute;
-    top: calc(100% + 4px);
-    inset-inline-start: 0;
-    z-index: var(--uilib-z-overlay, 1000);
+    animation: uilib-menubar-panel-appear var(--uilib-menubar-transition);
     background: var(--uilib-menubar-panel-bg);
     border: var(--uilib-menubar-panel-border);
     border-radius: var(--uilib-menubar-panel-border-radius);
     box-shadow: var(--uilib-menubar-panel-shadow);
+    inset-inline-start: 0;
     min-width: var(--uilib-menubar-panel-min-width);
     padding: var(--uilib-menubar-panel-padding);
-    animation: uilib-menubar-panel-appear var(--uilib-menubar-transition);
+    position: absolute;
+    top: calc(100% + 4px);
+    z-index: var(--uilib-z-overlay, 1000);
 
     // Nested panels open to the right of the parent sub-item
     &.ui-lib-menubar__panel--nested {
-      top: -4px;
       inset-inline-start: calc(100% + 4px);
+      top: -4px;
     }
   }
 
@@ -231,11 +231,11 @@
   // -----------------------------------------------------------------------------
 
   .ui-lib-menubar__sub-list {
+    display: flex;
+    flex-direction: column;
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
   }
 
   .ui-lib-menubar__sub-item {
@@ -244,25 +244,25 @@
   }
 
   .ui-lib-menubar__sub-link {
-    display: flex;
     align-items: center;
-    gap: var(--uilib-menubar-sub-link-gap);
-    padding: var(--uilib-menubar-sub-link-padding);
     border-radius: var(--uilib-menubar-sub-link-border-radius);
     color: var(--uilib-menubar-sub-link-color);
-    font-size: var(--uilib-menubar-sub-link-font-size);
-    text-decoration: none;
     cursor: pointer;
-    white-space: nowrap;
-    user-select: none;
+    display: flex;
+    font-size: var(--uilib-menubar-sub-link-font-size);
+    gap: var(--uilib-menubar-sub-link-gap);
     outline: none;
+    padding: var(--uilib-menubar-sub-link-padding);
+    text-decoration: none;
     transition:
       color var(--uilib-menubar-transition),
       background-color var(--uilib-menubar-transition);
+    user-select: none;
+    white-space: nowrap;
 
     &:hover {
-      color: var(--uilib-menubar-sub-link-color-hover);
       background-color: var(--uilib-menubar-sub-link-bg-hover);
+      color: var(--uilib-menubar-sub-link-color-hover);
     }
 
     &:focus-visible {
@@ -271,9 +271,9 @@
     }
 
     &[aria-disabled='true'] {
+      cursor: not-allowed;
       opacity: var(--uilib-menubar-sub-link-disabled-opacity);
       pointer-events: none;
-      cursor: not-allowed;
     }
   }
 
@@ -284,26 +284,26 @@
 
   // Sub-item caret — right-pointing triangle for nested sub-menus
   .ui-lib-menubar__sub-caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-top: var(--uilib-menubar-caret-size) solid transparent;
-    border-bottom: var(--uilib-menubar-caret-size) solid transparent;
     border-inline-start: var(--uilib-menubar-caret-size) solid var(--uilib-menubar-sub-caret-color);
+    border-bottom: var(--uilib-menubar-caret-size) solid transparent;
+    border-top: var(--uilib-menubar-caret-size) solid transparent;
+    display: inline-block;
+    height: 0;
     margin-inline-start: auto;
+    width: 0;
   }
 
   // Separator line inside a submenu
   .ui-lib-menubar__sub-separator {
-    height: 1px;
     background-color: var(--uilib-menubar-separator-color);
+    height: 1px;
     margin: var(--uilib-menubar-separator-margin);
   }
 
   // Active state when sub-sub-panel is open
   .ui-lib-menubar__sub-item--active > .ui-lib-menubar__sub-link {
-    color: var(--uilib-menubar-sub-link-color-hover);
     background-color: var(--uilib-menubar-sub-link-bg-hover);
+    color: var(--uilib-menubar-sub-link-color-hover);
   }
 
   // -----------------------------------------------------------------------------
@@ -311,31 +311,31 @@
   // -----------------------------------------------------------------------------
 
   .ui-lib-menubar__toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: var(--uilib-menubar-toggle-bar-gap);
     background: transparent;
     border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    margin-inline-start: auto;
     color: var(--uilib-menubar-toggle-color);
+    cursor: pointer;
+    display: none;
+    flex-direction: column;
+    gap: var(--uilib-menubar-toggle-bar-gap);
+    justify-content: center;
+    margin-inline-start: auto;
+    padding: 0.5rem;
 
     &:focus-visible {
+      border-radius: var(--uilib-radius-sm, 3px);
       outline: 2px solid var(--uilib-color-primary, #007bff);
       outline-offset: 2px;
-      border-radius: var(--uilib-radius-sm, 3px);
     }
   }
 
   .ui-lib-menubar__toggle-bar {
-    display: block;
-    width: var(--uilib-menubar-toggle-bar-width);
-    height: var(--uilib-menubar-toggle-bar-height);
     background-color: currentColor;
     border-radius: 1px;
+    display: block;
+    height: var(--uilib-menubar-toggle-bar-height);
+    width: var(--uilib-menubar-toggle-bar-width);
   }
 
   // -----------------------------------------------------------------------------
@@ -393,22 +393,22 @@
       color: var(--uilib-color-primary, #1976d2);
 
       &::after {
-        content: '';
-        position: absolute;
-        bottom: -0.375rem;
-        inset-inline-start: 0.75rem;
-        inset-inline-end: 0.75rem;
-        height: 2px;
         background-color: var(--uilib-color-primary, #1976d2);
         border-radius: 1px;
+        bottom: -0.375rem;
+        content: '';
+        height: 2px;
+        inset-inline-end: 0.75rem;
+        inset-inline-start: 0.75rem;
+        position: absolute;
       }
     }
 
     --uilib-menubar-sub-link-bg-hover: rgba(25, 118, 210, 0.06);
 
     .ui-lib-menubar__sub-link:hover {
-      color: var(--uilib-color-primary, #1976d2);
       background-color: var(--uilib-menubar-sub-link-bg-hover);
+      color: var(--uilib-color-primary, #1976d2);
     }
   }
 
@@ -469,10 +469,10 @@
     }
 
     .ui-lib-menubar__root-list {
-      display: none;
-      width: 100%;
-      flex-direction: column;
       align-items: stretch;
+      display: none;
+      flex-direction: column;
+      width: 100%;
 
       &.ui-lib-menubar__root-list--open {
         display: flex;
@@ -489,12 +489,12 @@
 
     // On mobile, dropdowns expand inline (position: static)
     .ui-lib-menubar__panel {
-      position: static;
-      box-shadow: none;
-      border-radius: 0;
       animation: none;
       border-inline-start: 3px solid var(--uilib-color-primary, #007bff);
+      border-radius: 0;
+      box-shadow: none;
       padding-inline-start: 0.75rem;
+      position: static;
 
       &.ui-lib-menubar__panel--nested {
         inset-inline-start: auto;

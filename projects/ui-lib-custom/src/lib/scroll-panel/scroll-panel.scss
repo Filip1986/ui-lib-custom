@@ -19,34 +19,34 @@
 
   // ---- Base host -----------------------------------------------------------
   .ui-lib-scroll-panel {
-    display: block;
-    position: relative;
-    overflow: hidden;
+    background: var(--uilib-scroll-panel-bg);
     border: 1px solid var(--uilib-scroll-panel-border-color);
     border-radius: var(--uilib-scroll-panel-border-radius);
-    background: var(--uilib-scroll-panel-bg);
+    display: block;
+    overflow: hidden;
+    position: relative;
 
     // ---- Scrollable content wrapper ----------------------------------------
     &__content {
-      width: 100%;
       height: 100%;
-      overflow: auto;
       outline: none;
+      overflow: auto;
+      scrollbar-color: var(--uilib-scroll-panel-scrollbar-thumb-bg)
+        var(--uilib-scroll-panel-scrollbar-track-bg);
+
+      // Firefox scrollbar styling
+      scrollbar-width: thin;
+      width: 100%;
 
       &:focus-visible {
         outline: 2px solid var(--uilib-color-primary, #6366f1);
         outline-offset: -2px;
       }
 
-      // Firefox scrollbar styling
-      scrollbar-width: thin;
-      scrollbar-color: var(--uilib-scroll-panel-scrollbar-thumb-bg)
-        var(--uilib-scroll-panel-scrollbar-track-bg);
-
       // Webkit scrollbar styling (Chrome, Safari, Edge)
       &::-webkit-scrollbar {
-        width: var(--uilib-scroll-panel-scrollbar-width);
         height: var(--uilib-scroll-panel-scrollbar-width);
+        width: var(--uilib-scroll-panel-scrollbar-width);
       }
 
       &::-webkit-scrollbar-track {

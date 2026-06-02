@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A styled scrollable container with variant-aware custom scrollbar theming. Constrain width and height via CSS or inline styles; content that overflows will scroll with beautifully themed scrollbars."
     docHeader
     title="ScrollPanel"
     [importCode]="importCode"
-    description="A styled scrollable container with variant-aware custom scrollbar theming. Constrain width and height via CSS or inline styles; content that overflows will scroll with beautifully themed scrollbars."
   />
 
   <!-- ── Basic Usage ───────────────────────────────────────────────────── -->
@@ -23,8 +23,8 @@
     <div class="demo-section__code">
       <app-doc-code-example
         [html]="basicUsageHtml"
-        [typescript]="basicUsageTs"
         [showLineNumbers]="true"
+        [typescript]="basicUsageTs"
       />
     </div>
   </app-doc-section>
@@ -39,7 +39,7 @@
       @for (variant of variants; track variant) {
         <div class="demo-variant-card">
           <span class="demo-variant-label">{{ variant }}</span>
-          <ui-lib-scroll-panel [variant]="variant" class="demo-panel--fixed-height">
+          <ui-lib-scroll-panel class="demo-panel--fixed-height" [variant]="variant">
             @for (paragraph of longParagraphs; track paragraph) {
               <p class="demo-text">{{ paragraph }}</p>
             }
@@ -50,8 +50,8 @@
     <div class="demo-section__code">
       <app-doc-code-example
         [html]="variantsHtml"
-        [typescript]="variantsTs"
         [showLineNumbers]="true"
+        [typescript]="variantsTs"
       />
     </div>
   </app-doc-section>
@@ -76,8 +76,8 @@
     <div class="demo-section__code">
       <app-doc-code-example
         [html]="horizontalHtml"
-        [typescript]="horizontalTs"
         [showLineNumbers]="true"
+        [typescript]="horizontalTs"
       />
     </div>
   </app-doc-section>
@@ -92,17 +92,17 @@
       <div class="demo-controls">
         @for (variant of variants; track variant) {
           <ui-lib-button
-            type="button"
-            [appearance]="activeVariant() === variant ? 'solid' : 'outline'"
             severity="primary"
             size="sm"
+            type="button"
+            [appearance]="activeVariant() === variant ? 'solid' : 'outline'"
             (click)="setVariant(variant)"
           >
             {{ variant }}
           </ui-lib-button>
         }
       </div>
-      <ui-lib-scroll-panel [variant]="activeVariant()" class="demo-panel--fixed-height">
+      <ui-lib-scroll-panel class="demo-panel--fixed-height" [variant]="activeVariant()">
         @for (paragraph of longParagraphs; track paragraph) {
           <p class="demo-text">{{ paragraph }}</p>
         }
@@ -111,8 +111,8 @@
     <div class="demo-section__code">
       <app-doc-code-example
         [html]="interactiveHtml"
-        [typescript]="interactiveTs"
         [showLineNumbers]="true"
+        [typescript]="interactiveTs"
       />
     </div>
   </app-doc-section>
@@ -133,9 +133,9 @@
     <div class="demo-section__code">
       <ui-lib-code-snippet
         language="css"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetCssProperties"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -159,9 +159,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -170,8 +170,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

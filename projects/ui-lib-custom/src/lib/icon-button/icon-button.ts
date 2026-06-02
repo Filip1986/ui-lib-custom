@@ -1,23 +1,25 @@
 import {
+  type AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   computed,
   inject,
   input,
-  isDevMode,
-  ViewEncapsulation,
-  type AfterViewInit,
   type InputSignal,
+  isDevMode,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { Icon } from 'ui-lib-custom/icon';
-import type { IconSize } from 'ui-lib-custom/icon';
-import type { SemanticIcon } from 'ui-lib-custom/icon';
+
 import { SHARED_DEFAULTS, SHARED_SIZES } from 'ui-lib-custom/core';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import type { IconButtonSize, IconButtonVariant, IconButtonColor } from './icon-button.types';
+import type { IconSize } from 'ui-lib-custom/icon';
+import type { SemanticIcon } from 'ui-lib-custom/icon';
+import { Icon } from 'ui-lib-custom/icon';
 
-export type { IconButtonSize, IconButtonVariant, IconButtonColor } from './icon-button.types';
+import type { IconButtonColor, IconButtonSize, IconButtonVariant } from './icon-button.types';
+
+export type { IconButtonColor, IconButtonSize, IconButtonVariant } from './icon-button.types';
 
 /**
  * Icon-only button component with size and variant support.

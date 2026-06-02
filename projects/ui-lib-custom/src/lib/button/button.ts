@@ -1,25 +1,26 @@
+import { NgClass } from '@angular/common';
 import {
+  type AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
   computed,
+  type ElementRef,
   inject,
   input,
+  type InputSignal,
+  type Signal,
   signal,
   ViewChild,
   ViewEncapsulation,
-  type AfterViewChecked,
-  type ElementRef,
-  type InputSignal,
-  type Signal,
   type WritableSignal,
 } from '@angular/core';
-import { NgClass } from '@angular/common';
-import { Icon } from 'ui-lib-custom/icon';
-import type { IconSize, SemanticIcon } from 'ui-lib-custom/icon';
-import { Badge } from 'ui-lib-custom/badge';
+
 import type { BadgeColor } from 'ui-lib-custom/badge';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { Badge } from 'ui-lib-custom/badge';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import type { IconSize, SemanticIcon } from 'ui-lib-custom/icon';
+import { Icon } from 'ui-lib-custom/icon';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type ButtonVariant = 'material' | 'bootstrap' | 'minimal';
 export type ButtonAppearance =

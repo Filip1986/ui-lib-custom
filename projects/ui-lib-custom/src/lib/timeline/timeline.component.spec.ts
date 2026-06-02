@@ -7,19 +7,20 @@ import {
 } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+
 import { TimelineComponent } from './timeline.component';
-import {
-  TimelineContentDirective,
-  TimelineMarkerDirective,
-  TimelineOppositeDirective,
-} from './timeline-template-directives';
+import { TIMELINE_DEFAULTS } from './timeline.constants';
 import type {
   TimelineAlign,
   TimelineLayout,
   TimelineSize,
   TimelineVariant,
 } from './timeline.types';
-import { TIMELINE_DEFAULTS } from './timeline.constants';
+import {
+  TimelineContentDirective,
+  TimelineMarkerDirective,
+  TimelineOppositeDirective,
+} from './timeline-template-directives';
 interface TimelineEvent {
   id: number;
   title: string;

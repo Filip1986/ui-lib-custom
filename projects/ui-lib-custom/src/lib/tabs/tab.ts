@@ -1,15 +1,16 @@
+import type { InputSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
   Directive,
+  inject,
+  input,
   TemplateRef,
   ViewChild,
   ViewEncapsulation,
-  inject,
-  input,
 } from '@angular/core';
-import type { InputSignal } from '@angular/core';
+
 import type { TabsLazyMode, TabsValue } from './tabs.types';
 /**
  * Template directive for custom tab labels.

@@ -1,10 +1,10 @@
 // ── Page container ────────────────────────────────────────────────────────────
 .demo-page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
-  font-family: var(--uilib-font-body, sans-serif);
   color: var(--uilib-color-text, #374151);
+  font-family: var(--uilib-font-body, sans-serif);
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 2rem 1.5rem 4rem;
 }
 
 // ── Hero ─────────────────────────────────────────────────────────────────────
@@ -12,25 +12,25 @@
   margin-bottom: 3rem;
 
   &__title {
+    color: var(--uilib-page-fg, #111827);
     font-size: 2rem;
     font-weight: 700;
-    color: var(--uilib-page-fg, #111827);
     margin: 0 0 0.5rem;
   }
 
   &__desc {
-    font-size: 1rem;
     color: var(--uilib-surface-600, #4b5563);
-    margin: 0 0 1.25rem;
+    font-size: 1rem;
     line-height: 1.6;
+    margin: 0 0 1.25rem;
 
     code {
-      font-family: var(--uilib-font-mono, monospace);
-      font-size: 0.875em;
       background: var(--uilib-surface-100, #f3f4f6);
-      padding: 0.1em 0.35em;
       border-radius: 3px;
       color: var(--uilib-color-primary, #6366f1);
+      font-family: var(--uilib-font-mono, monospace);
+      font-size: 0.875em;
+      padding: 0.1em 0.35em;
     }
   }
 
@@ -47,25 +47,25 @@
   margin-bottom: 3rem;
 
   &__title {
+    color: var(--uilib-page-fg, #111827);
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0 0 0.375rem;
-    color: var(--uilib-page-fg, #111827);
   }
 
   &__desc {
-    font-size: 0.9375rem;
     color: var(--uilib-surface-600, #4b5563);
-    margin: 0 0 1rem;
+    font-size: 0.9375rem;
     line-height: 1.6;
+    margin: 0 0 1rem;
 
     code {
-      font-family: var(--uilib-font-mono, monospace);
-      font-size: 0.875em;
       background: var(--uilib-surface-100, #f3f4f6);
-      padding: 0.1em 0.35em;
       border-radius: 3px;
       color: var(--uilib-color-primary, #6366f1);
+      font-family: var(--uilib-font-mono, monospace);
+      font-size: 0.875em;
+      padding: 0.1em 0.35em;
     }
   }
 }
@@ -75,10 +75,10 @@
   margin-bottom: 1.5rem;
 
   &__label {
+    color: var(--uilib-surface-500, #6b7280);
+    font-family: var(--uilib-font-mono, monospace);
     font-size: 0.8125rem;
     font-weight: 600;
-    font-family: var(--uilib-font-mono, monospace);
-    color: var(--uilib-surface-500, #6b7280);
     margin: 0 0 0.5rem;
     text-transform: capitalize;
   }
@@ -86,21 +86,21 @@
 
 // ── Toolbar title helper used inside toolbar slots ────────────────────────────
 .demo-toolbar-title {
+  color: var(--uilib-color-text, #374151);
   font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--uilib-color-text, #374151);
 }
 
 // ── Small action buttons used inside toolbar slots ────────────────────────────
 .demo-btn {
-  padding: 0.3rem 0.75rem;
+  background: var(--uilib-surface-0, #ffffff);
   border: 1px solid var(--uilib-surface-300, #d1d5db);
   border-radius: 6px;
-  background: var(--uilib-surface-0, #ffffff);
   color: var(--uilib-color-text, #374151);
-  font-size: 0.8125rem;
-  font-family: var(--uilib-font-ui, inherit);
   cursor: pointer;
+  font-family: var(--uilib-font-ui, inherit);
+  font-size: 0.8125rem;
+  padding: 0.3rem 0.75rem;
   transition:
     background-color 150ms ease,
     border-color 150ms ease,
@@ -126,24 +126,24 @@
 
 // ── Playground layout ─────────────────────────────────────────────────────────
 .demo-playground {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 1.5rem;
   align-items: start;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 220px 1fr;
 
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
   }
 
   &__controls {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
     background: var(--uilib-surface-50, #f9fafb);
     border: 1px solid var(--uilib-surface-200, #e5e7eb);
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     order: -1; // controls left, preview right on desktop
+    padding: 1rem;
 
     @media (min-width: 641px) {
       order: 0;
@@ -158,16 +158,16 @@
 }
 
 .demo-control {
+  color: var(--uilib-color-text, #374151);
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
   font-size: 0.875rem;
-  color: var(--uilib-color-text, #374151);
+  gap: 0.375rem;
 
   &__label {
-    font-weight: 600;
-    font-size: 0.8125rem;
     color: var(--uilib-surface-600, #4b5563);
+    font-size: 0.8125rem;
+    font-weight: 600;
   }
 
   &__buttons {
@@ -179,37 +179,42 @@
 
 // ── API table ─────────────────────────────────────────────────────────────────
 .demo-api-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
   margin-top: 0.5rem;
+  width: 100%;
 
   th {
-    text-align: left;
-    padding: 0.5rem 0.75rem;
     background: var(--uilib-surface-100, #f3f4f6);
     border-bottom: 2px solid var(--uilib-surface-200, #e5e7eb);
-    font-weight: 600;
     color: var(--uilib-color-text, #374151);
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
   }
 
   td {
-    padding: 0.5rem 0.75rem;
     border-bottom: 1px solid var(--uilib-surface-100, #f3f4f6);
     color: var(--uilib-surface-700, #374151);
+    padding: 0.5rem 0.75rem;
     vertical-align: top;
 
     code {
+      background: var(--uilib-surface-100, #f3f4f6);
+      border-radius: 3px;
       font-family: var(--uilib-font-mono, monospace);
       font-size: 0.8125em;
-      background: var(--uilib-surface-100, #f3f4f6);
       padding: 0.1em 0.35em;
-      border-radius: 3px;
       white-space: nowrap;
     }
   }
 
   tr:last-child td {
     border-bottom: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-btn {
+    /* TODO: set transition / animation to none */
   }
 }

@@ -2,14 +2,14 @@
 @if (filter()) {
   <div class="uilib-tree-filter">
     <input
-      type="text"
       class="uilib-tree-filter-input"
+      type="text"
+      [attr.aria-label]="i18n.translate('tree.filter-placeholder')"
       [placeholder]="resolvedFilterPlaceholder()"
       [value]="filterText()"
-      [attr.aria-label]="i18n.translate('tree.filter-placeholder')"
       (input)="onFilterInput($event)"
     />
-    <span class="uilib-tree-filter-icon pi pi-search" aria-hidden="true"></span>
+    <span aria-hidden="true" class="uilib-tree-filter-icon pi pi-search"></span>
   </div>
 }
 
@@ -19,10 +19,10 @@
     @if (isNodeFiltered(rootNode)) {
       <li role="none">
         <ui-lib-tree-node
-          [node]="rootNode"
           [depth]="0"
-          [setsize]="value().length"
+          [node]="rootNode"
           [posinset]="i + 1"
+          [setsize]="value().length"
         />
       </li>
     }

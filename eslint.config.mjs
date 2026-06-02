@@ -6,6 +6,7 @@ import angularPlugin from '@angular-eslint/eslint-plugin';
 import angularTemplateParser from '@angular-eslint/template-parser';
 import angularTemplatePlugin from '@angular-eslint/eslint-plugin-template';
 import jsdoc from 'eslint-plugin-jsdoc';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 const tsconfigRootDir = path.dirname(fileURLToPath(import.meta.url));
 
@@ -44,6 +45,7 @@ export default [
       '@typescript-eslint': tseslint,
       '@angular-eslint': angularPlugin,
       jsdoc: jsdoc,
+      'simple-import-sort': simpleImportSort,
     },
     rules: {
       // TypeScript safety and correctness.
@@ -113,9 +115,26 @@ export default [
       'prefer-const': 'error',
       eqeqeq: 'error',
 
+      // Import / export ordering (auto-fix). See docs/standards/CODE-ORGANIZATION.md.
+      'simple-import-sort/imports': [
+        'error',
+        {
+          groups: [
+            ['^\\u0000'],
+            ['^@angular/', '^@angular\\u0000', '^rxjs', '^rxjs\\u0000'],
+            ['^@?\\w'],
+            ['^ui-lib-custom'],
+            ['^@demo/'],
+            ['^\\.'],
+          ],
+        },
+      ],
+      'simple-import-sort/exports': 'error',
+
       // Angular-specific best practices.
       '@angular-eslint/no-lifecycle-call': 'error',
       '@angular-eslint/use-lifecycle-interface': 'error',
+      '@angular-eslint/sort-lifecycle-methods': 'error',
       '@angular-eslint/no-output-on-prefix': 'error',
       '@angular-eslint/prefer-on-push-component-change-detection': 'error',
       '@angular-eslint/no-inputs-metadata-property': 'error',
@@ -184,6 +203,22 @@ export default [
       '@angular-eslint/template/use-track-by-function': 'warn',
       // Prefer self-closing tags: <uilib-button /> not <uilib-button></uilib-button> — §3
       '@angular-eslint/template/prefer-self-closing-tags': 'warn',
+
+      // Attribute / binding order (auto-fix). See docs/standards/CODE-ORGANIZATION.md.
+      '@angular-eslint/template/attributes-order': [
+        'error',
+        {
+          alphabetical: true,
+          order: [
+            'STRUCTURAL_DIRECTIVE',
+            'TEMPLATE_REFERENCE',
+            'ATTRIBUTE_BINDING',
+            'INPUT_BINDING',
+            'TWO_WAY_BINDING',
+            'OUTPUT_BINDING',
+          ],
+        },
+      ],
     },
   },
   // NestJS controller heuristics: keep business logic out of controllers.

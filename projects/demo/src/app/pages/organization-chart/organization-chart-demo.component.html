@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A hierarchical tree chart for visualising organisational structures. Supports collapsible subtrees, single and multiple node selection, custom node templates, and three design variants."
     docHeader
     title="OrganizationChart"
     [importCode]="importCode"
-    description="A hierarchical tree chart for visualising organisational structures. Supports collapsible subtrees, single and multiple node selection, custom node templates, and three design variants."
   />
 
   <!-- 1. Basic -->
@@ -26,10 +26,10 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-organization-chart
-        [value]="collapsibleNodes()"
         [collapsible]="true"
-        (nodeExpand)="onNodeExpand($event)"
+        [value]="collapsibleNodes()"
         (nodeCollapse)="onNodeCollapse($event)"
+        (nodeExpand)="onNodeExpand($event)"
       />
       @if (eventLog().length > 0) {
         <div class="demo-event-log">
@@ -50,12 +50,12 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-organization-chart
-        [value]="singleNodes()"
         selectionMode="single"
         [selection]="singleSelection()"
-        (selectionChange)="singleSelection.set($any($event))"
+        [value]="singleNodes()"
         (nodeSelect)="onNodeSelect($event)"
         (nodeUnselect)="onNodeUnselect($event)"
+        (selectionChange)="singleSelection.set($any($event))"
       />
       <p class="demo-selection-status">
         Selected: <strong>{{ formatSelection(singleSelection()) }}</strong>
@@ -72,12 +72,12 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-organization-chart
-        [value]="multipleNodes()"
         selectionMode="multiple"
         [selection]="multipleSelection()"
-        (selectionChange)="multipleSelection.set($any($event))"
+        [value]="multipleNodes()"
         (nodeSelect)="onNodeSelect($event)"
         (nodeUnselect)="onNodeUnselect($event)"
+        (selectionChange)="multipleSelection.set($any($event))"
       />
       <p class="demo-selection-status">
         Selected: <strong>{{ formatSelection(multipleSelection()) }}</strong>
@@ -96,7 +96,7 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-organization-chart [value]="customTemplateNodes()">
-        <ng-template uiOrgChartNode let-node>
+        <ng-template let-node uiOrgChartNode>
           <div class="demo-person-node">
             <span class="demo-person-node__avatar">{{ initials(node.label) }}</span>
             <strong class="demo-person-node__name">{{ node.label }}</strong>
@@ -116,9 +116,9 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-organization-chart
-        [value]="bootstrapNodes()"
         variant="bootstrap"
         [collapsible]="true"
+        [value]="bootstrapNodes()"
       />
     </ui-lib-panel>
     <app-doc-code-example [html]="bootstrapHtml" [typescript]="bootstrapTs" />
@@ -131,7 +131,7 @@
       a lightweight look.
     </p>
     <ui-lib-panel variant="minimal">
-      <ui-lib-organization-chart [value]="minimalNodes()" variant="minimal" [collapsible]="true" />
+      <ui-lib-organization-chart variant="minimal" [collapsible]="true" [value]="minimalNodes()" />
     </ui-lib-panel>
     <app-doc-code-example [html]="minimalHtml" [typescript]="minimalTs" />
   </app-doc-section>
@@ -147,16 +147,16 @@
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
     <h3 class="demo-section__subtitle">Outputs</h3>
-    <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     <h3 class="demo-section__subtitle">Template Slots</h3>
-    <app-doc-api-reference [rows]="apiSlotRows" kind="name" [showDefault]="false" />
+    <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
   </app-doc-section>
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -165,8 +165,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

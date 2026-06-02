@@ -55,7 +55,7 @@ export class MyComponent {
   }
 }`;
 
-export const verticalHtml = `<ui-lib-mega-menu [model]="items" orientation="vertical" />`;
+export const verticalHtml = `<ui-lib-mega-menu orientation="vertical" [model]="items" />`;
 
 export const verticalTs = `import { Component } from '@angular/core';
 import { MegaMenu } from 'ui-lib-custom/mega-menu';

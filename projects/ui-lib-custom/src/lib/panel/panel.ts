@@ -3,22 +3,24 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  type ElementRef,
   inject,
   input,
+  type InputSignal,
   model,
+  type ModelSignal,
   output,
+  type OutputEmitterRef,
+  type Signal,
   signal,
   viewChild,
   ViewEncapsulation,
-  type ElementRef,
-  type InputSignal,
-  type ModelSignal,
-  type OutputEmitterRef,
-  type Signal,
   type WritableSignal,
 } from '@angular/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { PanelToggleEvent, PanelVariant } from './panel.types';
 
 export type { PanelToggleEvent, PanelVariant } from './panel.types';

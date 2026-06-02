@@ -59,10 +59,10 @@
     // Transition
     --uilib-paginator-transition:
       background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+    align-items: center;
 
     // Base layout
     display: flex;
-    align-items: center;
     justify-content: center;
   }
 
@@ -112,14 +112,14 @@
     .uilib-paginator-content {
       border: 1px solid var(--uilib-color-border, #dee2e6);
       border-radius: 0.375rem;
-      padding: 0;
       overflow: hidden;
+      padding: 0;
     }
 
     .uilib-paginator-button {
-      border-radius: 0;
       border: none;
       border-inline-end: 1px solid var(--uilib-color-border, #dee2e6);
+      border-radius: 0;
 
       &:last-of-type {
         border-inline-end: none;
@@ -148,45 +148,45 @@
   // ── Layout ────────────────────────────────────────────────────────────────────
 
   .uilib-paginator-content {
-    display: flex;
     align-items: center;
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--uilib-paginator-gap);
     padding: var(--uilib-paginator-padding);
-    flex-wrap: wrap;
     position: relative;
   }
 
   .uilib-paginator-pages {
-    display: flex;
     align-items: center;
+    display: flex;
     gap: var(--uilib-paginator-gap);
   }
 
   // ── Base button ───────────────────────────────────────────────────────────────
   .uilib-paginator-button {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: var(--uilib-paginator-button-size);
-    height: var(--uilib-paginator-button-size);
-    min-width: var(--uilib-paginator-button-size);
-    padding: 0;
+    background: var(--uilib-paginator-button-bg);
     border: var(--uilib-paginator-button-border);
     border-radius: var(--uilib-paginator-button-radius);
-    background: var(--uilib-paginator-button-bg);
     color: var(--uilib-paginator-button-color);
-    font-size: var(--uilib-paginator-button-font-size);
-    font-family: inherit;
-    line-height: 1;
     cursor: pointer;
-    user-select: none;
-    transition: var(--uilib-paginator-transition);
+    display: inline-flex;
+    font-family: inherit;
+    font-size: var(--uilib-paginator-button-font-size);
+    height: var(--uilib-paginator-button-size);
+    justify-content: center;
+    line-height: 1;
+    min-width: var(--uilib-paginator-button-size);
     outline: none;
+    padding: 0;
+    transition: var(--uilib-paginator-transition);
+    user-select: none;
+    width: var(--uilib-paginator-button-size);
 
     svg {
-      width: var(--uilib-paginator-icon-size);
-      height: var(--uilib-paginator-icon-size);
       flex-shrink: 0;
+      height: var(--uilib-paginator-icon-size);
+      width: var(--uilib-paginator-icon-size);
     }
 
     // Hover (not disabled, not selected)
@@ -222,35 +222,35 @@
   .uilib-paginator-current {
     color: var(--uilib-paginator-current-color);
     font-size: var(--uilib-paginator-current-font-size);
-    white-space: nowrap;
     padding: 0 0.5rem;
+    white-space: nowrap;
   }
 
   .uilib-paginator-live {
-    position: absolute;
-    width: 1px;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
     height: 1px;
-    padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    padding: 0;
+    position: absolute;
     white-space: nowrap;
-    border: 0;
+    width: 1px;
   }
 
   // ── Jump-to-page input ────────────────────────────────────────────────────────
   .uilib-paginator-jtp-input {
-    width: var(--uilib-paginator-jtp-width);
-    height: var(--uilib-paginator-jtp-height);
+    background: var(--uilib-paginator-jtp-bg);
     border: var(--uilib-paginator-jtp-border);
     border-radius: var(--uilib-paginator-jtp-radius);
-    background: var(--uilib-paginator-jtp-bg);
     color: var(--uilib-paginator-jtp-color);
-    font-size: var(--uilib-paginator-jtp-font-size);
     font-family: inherit;
-    text-align: center;
+    font-size: var(--uilib-paginator-jtp-font-size);
+    height: var(--uilib-paginator-jtp-height);
     outline: none;
+    text-align: center;
     transition: var(--uilib-paginator-transition);
+    width: var(--uilib-paginator-jtp-width);
 
     // Hide number input spinners
     &::-webkit-inner-spin-button,
@@ -269,23 +269,23 @@
     }
 
     &:disabled {
-      opacity: 0.5;
       cursor: not-allowed;
+      opacity: 0.5;
     }
   }
 
   // ── Rows-per-page select ──────────────────────────────────────────────────────
   .uilib-paginator-rpp-select {
-    height: var(--uilib-paginator-rpp-height);
-    padding: var(--uilib-paginator-rpp-padding);
+    background: var(--uilib-paginator-rpp-bg);
     border: var(--uilib-paginator-rpp-border);
     border-radius: var(--uilib-paginator-rpp-radius);
-    background: var(--uilib-paginator-rpp-bg);
     color: var(--uilib-paginator-rpp-color);
-    font-size: var(--uilib-paginator-rpp-font-size);
-    font-family: inherit;
     cursor: pointer;
+    font-family: inherit;
+    font-size: var(--uilib-paginator-rpp-font-size);
+    height: var(--uilib-paginator-rpp-height);
     outline: none;
+    padding: var(--uilib-paginator-rpp-padding);
     transition: var(--uilib-paginator-transition);
 
     &:focus-visible {
@@ -294,8 +294,8 @@
     }
 
     &:disabled {
-      opacity: 0.5;
       cursor: not-allowed;
+      opacity: 0.5;
     }
   }
 

@@ -1,16 +1,16 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Chart wrappers and generic chart demos for business analytics scenarios, theme token bridging, and interactive event handling."
     docHeader
     title="Chart"
     [importCode]="importCode"
-    description="Chart wrappers and generic chart demos for business analytics scenarios, theme token bridging, and interactive event handling."
   />
 
   <div class="examples">
     <app-doc-section id="basic-bar" title="Basic Bar Chart">
       <h3>1. Basic Bar Chart</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-bar-chart [data]="monthlyRevenueData" ariaLabel="Monthly revenue bar chart" />
+        <ui-lib-bar-chart ariaLabel="Monthly revenue bar chart" [data]="monthlyRevenueData" />
       </ui-lib-panel>
       <app-doc-code-example [html]="basicBarHtml" [typescript]="basicBarTsTs" />
     </app-doc-section>
@@ -18,7 +18,7 @@
     <app-doc-section id="basic-line" title="Basic Line Chart">
       <h3>2. Basic Line Chart</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-line-chart [data]="userGrowthData" ariaLabel="User growth trend line chart" />
+        <ui-lib-line-chart ariaLabel="User growth trend line chart" [data]="userGrowthData" />
       </ui-lib-panel>
       <app-doc-code-example [html]="basicLineHtml" [typescript]="basicLineTsTs" />
     </app-doc-section>
@@ -26,7 +26,7 @@
     <app-doc-section id="pie-chart" title="Pie Chart">
       <h3>3. Pie Chart</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-pie-chart [data]="marketShareData" ariaLabel="Market share pie chart" />
+        <ui-lib-pie-chart ariaLabel="Market share pie chart" [data]="marketShareData" />
       </ui-lib-panel>
       <app-doc-code-example [html]="pieHtml" [typescript]="pieTsTs" />
     </app-doc-section>
@@ -35,8 +35,8 @@
       <h3>4. Doughnut Chart</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-doughnut-chart
-          [data]="channelMixData"
           ariaLabel="Acquisition channel doughnut chart"
+          [data]="channelMixData"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="doughnutHtml" [typescript]="doughnutTsTs" />
@@ -47,8 +47,8 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-chart
           type="radar"
-          [data]="radarCapabilityData"
           [ariaLabel]="'Platform capability radar chart'"
+          [data]="radarCapabilityData"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="radarHtml" [typescript]="radarTsTs" />
@@ -59,8 +59,8 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-chart
           type="polarArea"
-          [data]="polarPriorityData"
           [ariaLabel]="'Roadmap priority polar area chart'"
+          [data]="polarPriorityData"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="polarAreaHtml" [typescript]="polarAreaTsTs" />
@@ -71,8 +71,8 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-chart
           type="bubble"
-          [data]="bubbleSegmentData"
           [ariaLabel]="'Customer segment bubble chart'"
+          [data]="bubbleSegmentData"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="bubbleHtml" [typescript]="bubbleTsTs" />
@@ -83,8 +83,8 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-chart
           type="scatter"
-          [data]="scatterConversionData"
           [ariaLabel]="'Campaign conversion scatter plot'"
+          [data]="scatterConversionData"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="scatterHtml" [typescript]="scatterTsTs" />
@@ -93,7 +93,7 @@
     <app-doc-section id="multi-dataset-bar" title="Multi-Dataset Bar">
       <h3>9. Multi-Dataset Bar</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-bar-chart [data]="regionalRevenueData" ariaLabel="Quarterly revenue by segment" />
+        <ui-lib-bar-chart ariaLabel="Quarterly revenue by segment" [data]="regionalRevenueData" />
       </ui-lib-panel>
       <app-doc-code-example [html]="multiDatasetBarHtml" [typescript]="multiDatasetBarTsTs" />
     </app-doc-section>
@@ -102,9 +102,9 @@
       <h3>10. Stacked Bar</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-bar-chart
+          ariaLabel="Stacked cost chart"
           [data]="stackedCostData"
           [options]="stackedBarOptions"
-          ariaLabel="Stacked cost chart"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="stackedBarHtml" [typescript]="stackedBarTsTs" />
@@ -113,7 +113,7 @@
     <app-doc-section id="line-area-fill" title="Line with Area Fill">
       <h3>11. Line with Area Fill</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-line-chart [data]="trafficAreaData" ariaLabel="Weekly site sessions area chart" />
+        <ui-lib-line-chart ariaLabel="Weekly site sessions area chart" [data]="trafficAreaData" />
       </ui-lib-panel>
       <app-doc-code-example [html]="lineAreaHtml" [typescript]="lineAreaTsTs" />
     </app-doc-section>
@@ -123,9 +123,9 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-chart
           type="bar"
+          [ariaLabel]="'Mixed revenue and conversion chart'"
           [data]="mixedKpiData"
           [options]="mixedChartOptions"
-          [ariaLabel]="'Mixed revenue and conversion chart'"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="mixedHtml" [typescript]="mixedTsTs" />
@@ -134,18 +134,18 @@
     <app-doc-section id="sizes" title="Sizes">
       <h3>13. Sizes</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-grid [columns]="3" spacing="md" class="size-grid">
+        <ui-lib-grid class="size-grid" spacing="md" [columns]="3">
           <ui-lib-stack [gap]="2">
             <p class="mini-heading">Small</p>
-            <ui-lib-bar-chart [data]="sizePreviewData" size="sm" ariaLabel="Small chart" />
+            <ui-lib-bar-chart ariaLabel="Small chart" size="sm" [data]="sizePreviewData" />
           </ui-lib-stack>
           <ui-lib-stack [gap]="2">
             <p class="mini-heading">Medium</p>
-            <ui-lib-bar-chart [data]="sizePreviewData" size="md" ariaLabel="Medium chart" />
+            <ui-lib-bar-chart ariaLabel="Medium chart" size="md" [data]="sizePreviewData" />
           </ui-lib-stack>
           <ui-lib-stack [gap]="2">
             <p class="mini-heading">Large</p>
-            <ui-lib-bar-chart [data]="sizePreviewData" size="lg" ariaLabel="Large chart" />
+            <ui-lib-bar-chart ariaLabel="Large chart" size="lg" [data]="sizePreviewData" />
           </ui-lib-stack>
         </ui-lib-grid>
       </ui-lib-panel>
@@ -156,10 +156,10 @@
       <h3>14. Custom Dimensions</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-line-chart
-          [data]="customDimensionData"
+          ariaLabel="Custom dimension line chart"
           height="320px"
           width="640px"
-          ariaLabel="Custom dimension line chart"
+          [data]="customDimensionData"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="customDimensionsHtml" [typescript]="customDimensionsTsTs" />
@@ -169,13 +169,13 @@
       <h3>15. Dynamic Data Update</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="3">
-          <ui-lib-inline [gap]="2" align="center">
+          <ui-lib-inline align="center" [gap]="2">
             <ui-lib-button color="primary" (click)="randomizeRevenueData()"
               >Randomize Revenue</ui-lib-button
             >
             <span class="helper-text">Updates chart data reactively.</span>
           </ui-lib-inline>
-          <ui-lib-bar-chart [data]="dynamicRevenueData" ariaLabel="Dynamic revenue bar chart" />
+          <ui-lib-bar-chart ariaLabel="Dynamic revenue bar chart" [data]="dynamicRevenueData" />
         </ui-lib-stack>
       </ui-lib-panel>
       <app-doc-code-example [html]="dynamicUpdateHtml" [typescript]="dynamicUpdateTsTs" />
@@ -189,7 +189,7 @@
       </p>
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="3">
-          <ui-lib-inline [gap]="2" align="center">
+          <ui-lib-inline align="center" [gap]="2">
             <ui-lib-button
               [severity]="selectedThemeProfile === 'material' ? 'primary' : 'secondary'"
               (click)="setThemeProfile('material', themeBridgeChart)"
@@ -213,8 +213,8 @@
           <div class="theme-bridge-surface" [ngStyle]="themeCssVariables()">
             <ui-lib-line-chart
               #themeBridgeChart
-              [data]="themeBridgeData"
               ariaLabel="Theme bridge line chart"
+              [data]="themeBridgeData"
             />
           </div>
         </ui-lib-stack>
@@ -227,11 +227,11 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="3">
           <ui-lib-bar-chart
-            [data]="clickableRevenueData"
             ariaLabel="Clickable revenue chart"
+            [data]="clickableRevenueData"
             (chartClick)="onChartClick($event)"
           />
-          <p class="selection-feedback" aria-live="polite">{{ selectedPointLabel }}</p>
+          <p aria-live="polite" class="selection-feedback">{{ selectedPointLabel }}</p>
         </ui-lib-stack>
       </ui-lib-panel>
       <app-doc-code-example [html]="clickEventsHtml" [typescript]="clickEventsTsTs" />
@@ -241,9 +241,9 @@
       <h3>18. Custom Options</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-doughnut-chart
+          ariaLabel="Custom legend and tooltip chart"
           [data]="customOptionsData"
           [options]="customLegendOptions"
-          ariaLabel="Custom legend and tooltip chart"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="customOptionsHtml" [typescript]="customOptionsTsTs" />
@@ -269,9 +269,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -280,8 +280,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

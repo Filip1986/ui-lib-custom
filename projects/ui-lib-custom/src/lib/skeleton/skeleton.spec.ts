@@ -1,11 +1,12 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { Skeleton } from './skeleton';
 import type { SkeletonAnimation, SkeletonShape, SkeletonVariant } from './skeleton.types';
 

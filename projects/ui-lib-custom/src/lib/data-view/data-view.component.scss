@@ -37,28 +37,28 @@
     --uilib-data-view-font-size: 1rem;
     --uilib-data-view-control-label-font-size: var(--uilib-font-size-sm, 0.8125rem);
     --uilib-data-view-controls-gap: 0.75rem;
-
-    display: block;
     animation: uilib-data-view-mount var(--uilib-transition-duration-fast, 0.15s)
       var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
+    background: var(--uilib-data-view-bg);
     border: var(--uilib-data-view-border);
     border-radius: var(--uilib-data-view-border-radius);
-    background: var(--uilib-data-view-bg);
     color: var(--uilib-data-view-fg);
+
+    display: block;
     font-size: var(--uilib-data-view-font-size);
   }
 
   .ui-lib-data-view__header {
-    padding: var(--uilib-data-view-header-padding);
     background: var(--uilib-data-view-header-bg);
     border-bottom: var(--uilib-data-view-item-border);
     font-weight: var(--uilib-data-view-header-font-weight);
+    padding: var(--uilib-data-view-header-padding);
   }
 
   .ui-lib-data-view__footer {
-    padding: var(--uilib-data-view-footer-padding);
     background: var(--uilib-data-view-footer-bg);
     border-top: var(--uilib-data-view-item-border);
+    padding: var(--uilib-data-view-footer-padding);
   }
 
   .ui-lib-data-view__content--list {
@@ -67,8 +67,8 @@
   }
 
   .ui-lib-data-view__content--list .ui-lib-data-view__item {
-    padding: var(--uilib-data-view-item-padding);
     border-bottom: var(--uilib-data-view-item-border);
+    padding: var(--uilib-data-view-item-padding);
   }
 
   .ui-lib-data-view__content--list .ui-lib-data-view__item:last-child {
@@ -77,16 +77,16 @@
 
   .ui-lib-data-view__content--grid {
     display: grid;
-    grid-template-columns: repeat(var(--uilib-data-view-grid-columns, 3), 1fr);
     gap: var(--uilib-data-view-grid-gap, 1rem);
+    grid-template-columns: repeat(var(--uilib-data-view-grid-columns, 3), 1fr);
     padding: var(--uilib-data-view-item-padding);
   }
 
   .ui-lib-data-view__content--grid .ui-lib-data-view__item {
-    min-width: 0;
+    background: var(--uilib-data-view-bg);
     border: var(--uilib-data-view-item-border);
     border-radius: var(--uilib-data-view-border-radius);
-    background: var(--uilib-data-view-bg);
+    min-width: 0;
   }
 
   .ui-lib-data-view__item {
@@ -103,12 +103,12 @@
   }
 
   .ui-lib-data-view__controls {
+    align-items: end;
+    border-top: var(--uilib-data-view-item-border);
     display: flex;
     flex-wrap: wrap;
-    align-items: end;
     gap: var(--uilib-data-view-controls-gap, 0.75rem);
     padding: var(--uilib-data-view-header-padding);
-    border-top: var(--uilib-data-view-item-border);
   }
 
   .ui-lib-data-view__control-field {
@@ -124,11 +124,11 @@
 
   .ui-lib-data-view__filter-input,
   .ui-lib-data-view__sort-select {
-    min-height: var(--uilib-data-view-paginator-button-size);
+    background: var(--uilib-data-view-bg);
     border: var(--uilib-data-view-item-border);
     border-radius: var(--uilib-data-view-paginator-button-radius);
-    background: var(--uilib-data-view-bg);
     color: inherit;
+    min-height: var(--uilib-data-view-paginator-button-size);
     padding: 0 0.5rem;
     transition:
       border-color var(--uilib-transition-fast, 150ms ease),
@@ -136,19 +136,19 @@
   }
 
   .ui-lib-data-view__layout-toggle {
-    display: inline-flex;
     align-items: center;
+    display: inline-flex;
     gap: 0.35rem;
   }
 
   .ui-lib-data-view__layout-button {
-    min-height: var(--uilib-data-view-paginator-button-size);
-    min-width: 4rem;
+    background: var(--uilib-data-view-bg);
     border: var(--uilib-data-view-item-border);
     border-radius: var(--uilib-data-view-paginator-button-radius);
-    background: var(--uilib-data-view-bg);
     color: inherit;
     cursor: pointer;
+    min-height: var(--uilib-data-view-paginator-button-size);
+    min-width: 4rem;
     transition:
       background-color var(--uilib-transition-fast, 150ms ease),
       border-color var(--uilib-transition-fast, 150ms ease);
@@ -171,40 +171,40 @@
   }
 
   .ui-lib-data-view__empty-default {
-    padding: var(--uilib-data-view-empty-padding);
     color: var(--uilib-data-view-empty-color);
+    padding: var(--uilib-data-view-empty-padding);
     text-align: center;
   }
 
   .ui-lib-data-view__loading {
-    position: relative;
-    display: flex;
     align-items: center;
+    display: flex;
     justify-content: center;
     min-height: var(--uilib-data-view-loading-min-height);
     padding: var(--uilib-data-view-item-padding);
+    position: relative;
   }
 
   .ui-lib-data-view__loading-default {
-    color: var(--uilib-data-view-empty-color);
     animation: ui-lib-data-view-pulse 1.2s ease-in-out infinite;
+    color: var(--uilib-data-view-empty-color);
   }
 
   .ui-lib-data-view__paginator {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--uilib-data-view-paginator-gap);
-    padding: var(--uilib-data-view-paginator-padding);
     border-top: var(--uilib-data-view-paginator-border);
+    display: flex;
+    gap: var(--uilib-data-view-paginator-gap);
+    justify-content: space-between;
+    padding: var(--uilib-data-view-paginator-padding);
   }
 
   .ui-lib-data-view__paginator-start,
   .ui-lib-data-view__paginator-main,
   .ui-lib-data-view__paginator-end,
   .ui-lib-data-view__paginator-pages {
-    display: flex;
     align-items: center;
+    display: flex;
     gap: var(--uilib-data-view-paginator-gap);
   }
 
@@ -216,11 +216,11 @@
   .ui-lib-data-view__paginator-page,
   .ui-lib-data-view__paginator-button,
   .ui-lib-data-view__rows-select {
-    min-height: var(--uilib-data-view-paginator-button-size);
+    background: var(--uilib-data-view-bg);
     border: var(--uilib-data-view-item-border);
     border-radius: var(--uilib-data-view-paginator-button-radius);
-    background: var(--uilib-data-view-bg);
     color: inherit;
+    min-height: var(--uilib-data-view-paginator-button-size);
     transition:
       background-color var(--uilib-transition-fast, 150ms ease),
       color var(--uilib-transition-fast, 150ms ease),
@@ -229,9 +229,9 @@
 
   .ui-lib-data-view__paginator-page,
   .ui-lib-data-view__paginator-button {
+    cursor: pointer;
     min-width: var(--uilib-data-view-paginator-button-size);
     padding: 0 0.625rem;
-    cursor: pointer;
   }
 
   .ui-lib-data-view__paginator-page:hover:not(:disabled),
@@ -251,27 +251,27 @@
   .ui-lib-data-view__layout-button:focus-visible,
   .ui-lib-data-view__filter-input:focus-visible,
   .ui-lib-data-view__sort-select:focus-visible {
-    outline: 0;
     box-shadow: var(--uilib-data-view-focus-ring);
+    outline: 0;
   }
 
   .ui-lib-data-view__paginator-page:disabled,
   .ui-lib-data-view__paginator-button:disabled,
   .ui-lib-data-view__rows-select:disabled {
-    opacity: var(--uilib-data-view-paginator-disabled-opacity);
     cursor: not-allowed;
+    opacity: var(--uilib-data-view-paginator-disabled-opacity);
   }
 
   .ui-lib-data-view__rows-label {
-    display: inline-flex;
     align-items: center;
-    gap: var(--uilib-data-view-paginator-gap);
     color: var(--uilib-data-view-empty-color);
+    display: inline-flex;
+    gap: var(--uilib-data-view-paginator-gap);
   }
 
   .ui-lib-data-view__rows-select {
-    padding: 0 0.5rem;
     min-width: 4rem;
+    padding: 0 0.5rem;
   }
 
   .ui-lib-data-view__page-report {
@@ -279,23 +279,23 @@
   }
 
   .ui-lib-data-view__paginator-ellipsis {
-    display: inline-flex;
     align-items: center;
+    color: var(--uilib-data-view-empty-color);
+    display: inline-flex;
     justify-content: center;
     min-width: var(--uilib-data-view-paginator-button-size);
-    color: var(--uilib-data-view-empty-color);
   }
 
   .ui-lib-data-view__sr-live {
-    position: absolute;
-    width: 1px;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
     height: 1px;
-    padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    padding: 0;
+    position: absolute;
     white-space: nowrap;
-    border: 0;
+    width: 1px;
   }
 
   .ui-lib-data-view--sm {
@@ -360,8 +360,8 @@
 
   .ui-lib-variant-minimal .ui-lib-data-view .ui-lib-data-view__paginator-page,
   .ui-lib-variant-minimal .ui-lib-data-view .ui-lib-data-view__paginator-button {
-    border-color: transparent;
     background: transparent;
+    border-color: transparent;
   }
 
   @keyframes uilib-data-view-mount {

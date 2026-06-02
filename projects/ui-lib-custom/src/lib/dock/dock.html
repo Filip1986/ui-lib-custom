@@ -3,8 +3,8 @@
     @for (item of visibleItems(); track $index) {
       <li
         class="ui-lib-dock__item"
-        [class.ui-lib-dock__item--disabled]="item.disabled"
         [class]="item.styleClass ? 'ui-lib-dock__item ' + item.styleClass : 'ui-lib-dock__item'"
+        [class.ui-lib-dock__item--disabled]="item.disabled"
         [style.transform]="itemScale($index)"
         (mouseenter)="onItemMouseEnter($index)"
         (mouseleave)="onItemMouseLeave()"
@@ -13,10 +13,10 @@
         @if (item.routerLink) {
           <a
             class="ui-lib-dock__item-link"
-            [routerLink]="item.disabled ? null : item.routerLink"
-            [attr.target]="item.target ?? null"
-            [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
+            [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
+            [attr.target]="item.target ?? null"
+            [routerLink]="item.disabled ? null : item.routerLink"
             (click)="onItemClick($event, item)"
           >
             @if (itemTemplate()) {
@@ -26,7 +26,7 @@
               />
             } @else {
               @if (item.icon) {
-                <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" aria-hidden="true" />
+                <ui-lib-icon aria-hidden="true" class="ui-lib-dock__item-icon" [name]="item.icon" />
               }
             }
           </a>
@@ -36,10 +36,10 @@
         @else if (item.url) {
           <a
             class="ui-lib-dock__item-link"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
             [attr.href]="item.disabled ? null : item.url"
             [attr.target]="item.target ?? null"
-            [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
-            [attr.aria-disabled]="item.disabled ? 'true' : null"
             (click)="onItemClick($event, item)"
           >
             @if (itemTemplate()) {
@@ -49,7 +49,7 @@
               />
             } @else {
               @if (item.icon) {
-                <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" aria-hidden="true" />
+                <ui-lib-icon aria-hidden="true" class="ui-lib-dock__item-icon" [name]="item.icon" />
               }
             }
           </a>
@@ -58,10 +58,10 @@
         <!-- Button for command-only items (disabled: button with disabled attribute) -->
         @else if (item.command) {
           <button
-            type="button"
             class="ui-lib-dock__item-link"
-            [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
+            type="button"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
+            [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
             [disabled]="item.disabled ? true : null"
             (click)="onItemClick($event, item)"
             (keydown)="onItemKeyDown($event, item)"
@@ -73,7 +73,7 @@
               />
             } @else {
               @if (item.icon) {
-                <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" aria-hidden="true" />
+                <ui-lib-icon aria-hidden="true" class="ui-lib-dock__item-icon" [name]="item.icon" />
               }
             }
           </button>
@@ -83,8 +83,8 @@
         @else {
           <span
             class="ui-lib-dock__item-link ui-lib-dock__item-link--static"
-            [attr.role]="(item.ariaLabel ?? item.label) ? 'img' : null"
             [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
+            [attr.role]="(item.ariaLabel ?? item.label) ? 'img' : null"
           >
             @if (itemTemplate()) {
               <ng-container
@@ -93,7 +93,7 @@
               />
             } @else {
               @if (item.icon) {
-                <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" aria-hidden="true" />
+                <ui-lib-icon aria-hidden="true" class="ui-lib-dock__item-icon" [name]="item.icon" />
               }
             }
           </span>
@@ -101,7 +101,7 @@
 
         <!-- Tooltip label (decorative, hidden from AT) -->
         @if (item.label) {
-          <div class="ui-lib-dock__tooltip" aria-hidden="true">{{ item.label }}</div>
+          <div aria-hidden="true" class="ui-lib-dock__tooltip">{{ item.label }}</div>
         }
       </li>
     }

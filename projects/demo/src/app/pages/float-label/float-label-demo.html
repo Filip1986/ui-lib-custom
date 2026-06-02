@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="CSS-driven floating labels for native controls and ui-lib wrapper inputs with `over`, `in`, and `on` variants."
     docHeader
     title="FloatLabel"
     [importCode]="importCode"
-    description="CSS-driven floating labels for native controls and ui-lib wrapper inputs with `over`, `in`, and `on` variants."
   />
   <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
@@ -72,8 +72,8 @@
       <div class="stack-md">
         <ui-lib-float-label>
           <ui-lib-select
-            [options]="cityOptions"
             [ngModelOptions]="{ standalone: true }"
+            [options]="cityOptions"
             [(ngModel)]="selectedCity"
           />
           <label>City</label>
@@ -103,22 +103,22 @@
       Required validation with dirty state across all variants.
     </p>
     <ui-lib-panel variant="minimal">
-      <form [formGroup]="invalidForm" class="stack-md" novalidate>
+      <form class="stack-md" novalidate [formGroup]="invalidForm">
         <div class="row-3">
           <ui-lib-float-label variant="over">
-            <input placeholder=" " formControlName="over" />
+            <input formControlName="over" placeholder=" " />
             <label>Required over</label>
           </ui-lib-float-label>
           <ui-lib-float-label variant="in">
-            <input placeholder=" " formControlName="in" />
+            <input formControlName="in" placeholder=" " />
             <label>Required in</label>
           </ui-lib-float-label>
           <ui-lib-float-label variant="on">
-            <input placeholder=" " formControlName="on" />
+            <input formControlName="on" placeholder=" " />
             <label>Required on</label>
           </ui-lib-float-label>
         </div>
-        <ui-lib-button type="button" severity="primary" (click)="markInvalidAsDirty()">
+        <ui-lib-button severity="primary" type="button" (click)="markInvalidAsDirty()">
           Mark invalid controls dirty
         </ui-lib-button>
       </form>
@@ -130,20 +130,20 @@
       FloatLabel inside a FormGroup with native and wrapper controls.
     </p>
     <ui-lib-panel variant="minimal">
-      <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
+      <form class="stack-md" [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
         <ui-lib-float-label>
-          <input placeholder=" " formControlName="firstName" />
+          <input formControlName="firstName" placeholder=" " />
           <label>First name</label>
         </ui-lib-float-label>
         <ui-lib-float-label>
-          <ui-lib-select [options]="cityOptions" formControlName="city" />
+          <ui-lib-select formControlName="city" [options]="cityOptions" />
           <label>City</label>
         </ui-lib-float-label>
         <ui-lib-float-label variant="in">
-          <textarea placeholder=" " rows="3" formControlName="bio"></textarea>
+          <textarea formControlName="bio" placeholder=" " rows="3"></textarea>
           <label>Bio</label>
         </ui-lib-float-label>
-        <ui-lib-button type="submit" severity="primary">Submit reactive form</ui-lib-button>
+        <ui-lib-button severity="primary" type="submit">Submit reactive form</ui-lib-button>
         <pre class="value-pre">{{ submittedReactiveValue | json }}</pre>
       </form>
     </ui-lib-panel>
@@ -181,8 +181,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

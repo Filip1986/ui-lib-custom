@@ -1,11 +1,10 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Floating action menu with linear and radial layouts, template customization, tooltips, and masking."
     docHeader
     title="SpeedDial"
     [importCode]="importCode"
-    description="Floating action menu with linear and radial layouts, template customization, tooltips, and masking."
-  >
-  </app-doc-page-header>
+  />
 
   <!-- Section 1: Linear -->
   <app-doc-section id="linear" title="Linear">
@@ -19,8 +18,8 @@
           <p class="speed-dial-demo__cell-label">{{ direction }}</p>
           <div class="speed-dial-demo__arena">
             <ui-lib-speed-dial
-              [model]="items"
               [direction]="direction"
+              [model]="items"
               [variant]="activeVariant()"
               (itemCommand)="logEvent($event.item.label ?? 'action')"
             />
@@ -40,8 +39,8 @@
     <div class="speed-dial-demo__grid speed-dial-demo__grid--single">
       <div class="speed-dial-demo__arena speed-dial-demo__arena--tall">
         <ui-lib-speed-dial
-          [model]="items"
           type="circle"
+          [model]="items"
           [radius]="80"
           [variant]="activeVariant()"
           (itemCommand)="logEvent($event.item.label ?? 'action')"
@@ -62,9 +61,9 @@
           <p class="speed-dial-demo__cell-label">{{ direction }}</p>
           <div class="speed-dial-demo__arena">
             <ui-lib-speed-dial
-              [model]="items"
               type="semi-circle"
               [direction]="direction"
+              [model]="items"
               [radius]="80"
               [variant]="activeVariant()"
               (itemCommand)="logEvent($event.item.label ?? 'action')"
@@ -87,9 +86,9 @@
           <p class="speed-dial-demo__cell-label">{{ direction }}</p>
           <div class="speed-dial-demo__arena">
             <ui-lib-speed-dial
-              [model]="items"
               type="quarter-circle"
               [direction]="direction"
+              [model]="items"
               [radius]="80"
               [variant]="activeVariant()"
               (itemCommand)="logEvent($event.item.label ?? 'action')"
@@ -126,8 +125,8 @@
     <div class="speed-dial-demo__grid speed-dial-demo__grid--single">
       <div class="speed-dial-demo__arena speed-dial-demo__arena--tall">
         <ui-lib-speed-dial
-          [model]="items"
           [mask]="true"
+          [model]="items"
           [variant]="activeVariant()"
           (itemCommand)="logEvent($event.item.label ?? 'action')"
         />
@@ -149,11 +148,11 @@
           [variant]="activeVariant()"
           (itemCommand)="logEvent($event.item.label ?? 'action')"
         >
-          <ng-template speedDialIcon let-visible="$implicit">
+          <ng-template let-visible="$implicit" speedDialIcon>
             <ui-lib-icon [name]="visible ? 'times' : 'plus'" />
           </ng-template>
 
-          <ng-template speedDialItem let-item="$implicit" let-index="index">
+          <ng-template let-index="index" let-item="$implicit" speedDialItem>
             <span class="speed-dial-demo__template-item">
               <ui-lib-icon [name]="item.icon ?? 'plus'" />
               <span>{{ item.label }}</span>
@@ -173,7 +172,7 @@
 
     <div class="speed-dial-demo__grid speed-dial-demo__grid--single">
       <div class="speed-dial-demo__arena speed-dial-demo__arena--tall">
-        <ui-lib-speed-dial [model]="items" [disabled]="true" [variant]="activeVariant()" />
+        <ui-lib-speed-dial [disabled]="true" [model]="items" [variant]="activeVariant()" />
       </div>
     </div>
   </app-doc-section>
@@ -215,9 +214,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -225,8 +224,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

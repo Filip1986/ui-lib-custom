@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A slide-up overlay panel anchored to the bottom of the viewport. Ideal for contextual actions, share menus, and quick forms on mobile and desktop. Includes a focus trap, focus restoration on close, scroll locking, and full keyboard + screen-reader support."
     docHeader
     title="BottomSheet"
     [importCode]="importCode"
-    description="A slide-up overlay panel anchored to the bottom of the viewport. Ideal for contextual actions, share menus, and quick forms on mobile and desktop. Includes a focus trap, focus restoration on close, scroll locking, and full keyboard + screen-reader support."
   />
 
   <div class="demo-page-header__preview">
@@ -21,8 +21,8 @@
       <ui-lib-button (click)="basicOpen.set(true)">Open Sheet</ui-lib-button>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Basic"
+      language="html"
       [code]="snippets.basic"
       [showLineNumbers]="true"
     />
@@ -38,8 +38,8 @@
       <ui-lib-button (click)="headerOpen.set(true)">Open with Header</ui-lib-button>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="With header"
+      language="html"
       [code]="snippets.withHeader"
       [showLineNumbers]="true"
     />
@@ -55,8 +55,8 @@
       <ui-lib-button (click)="footerOpen.set(true)">Open with Footer</ui-lib-button>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Footer slot"
+      language="html"
       [code]="snippets.footerSlot"
       [showLineNumbers]="true"
     />
@@ -72,8 +72,8 @@
       <ui-lib-button (click)="noBackdropOpen.set(true)">Open (backdrop locked)</ui-lib-button>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Disable backdrop dismiss"
+      language="html"
       [code]="snippets.backdropDismiss"
       [showLineNumbers]="true"
     />
@@ -91,8 +91,8 @@
       }
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Variants"
+      language="html"
       [code]="snippets.variants"
       [showLineNumbers]="true"
     />
@@ -100,22 +100,22 @@
 
   <!-- ---- API ------------------------------------------------------ -->
   <app-doc-section id="api" title="API Reference">
-    <div id="api-inputs" data-doc-anchor>
+    <div data-doc-anchor id="api-inputs">
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
-    <div id="api-outputs" data-doc-anchor>
+    <div data-doc-anchor id="api-outputs">
       <h3 class="demo-section__subtitle">Outputs</h3>
       <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
 
-    <div id="api-slots" data-doc-anchor>
+    <div data-doc-anchor id="api-slots">
       <h3 class="demo-section__subtitle">Content Slots</h3>
       <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
     </div>
 
-    <div id="api-css" data-doc-anchor>
+    <div data-doc-anchor id="api-css">
       <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
       <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
@@ -123,7 +123,7 @@
 
   <!-- ---- Accessibility -------------------------------------------- -->
   <app-doc-section id="accessibility" title="Accessibility">
-    <div id="a11y-aria" data-doc-anchor>
+    <div data-doc-anchor id="a11y-aria">
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <app-doc-aria-table [rows]="ariaRows" />
     </div>
@@ -156,9 +156,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -166,8 +166,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>
@@ -179,14 +179,14 @@
   <p>This is the basic bottom sheet. Click the backdrop or press <kbd>Escape</kbd> to close.</p>
 </ui-lib-bottom-sheet>
 
-<ui-lib-bottom-sheet [(visible)]="headerOpen" header="Share">
+<ui-lib-bottom-sheet header="Share" [(visible)]="headerOpen">
   <p>
     Choose where to share this item. The header includes a built-in close button and is wired to
     <code>aria-labelledby</code> automatically.
   </p>
 </ui-lib-bottom-sheet>
 
-<ui-lib-bottom-sheet [(visible)]="footerOpen" header="Confirm action">
+<ui-lib-bottom-sheet header="Confirm action" [(visible)]="footerOpen">
   <p>
     This sheet has a sticky footer with action buttons projected via the
     <code>[bottomSheetFooter]</code> slot.
@@ -198,21 +198,21 @@
 </ui-lib-bottom-sheet>
 
 <ui-lib-bottom-sheet
-  [(visible)]="noBackdropOpen"
   header="Backdrop locked"
   [closeOnBackdrop]="false"
+  [(visible)]="noBackdropOpen"
 >
   <p>The backdrop click is disabled. Use the close button or press <kbd>Escape</kbd> to dismiss.</p>
 </ui-lib-bottom-sheet>
 
-<ui-lib-bottom-sheet [(visible)]="materialOpen" header="Material variant" variant="material">
+<ui-lib-bottom-sheet header="Material variant" variant="material" [(visible)]="materialOpen">
   <p>Larger corner radius (20 px), elevation shadow, and indigo close button accent.</p>
 </ui-lib-bottom-sheet>
 
-<ui-lib-bottom-sheet [(visible)]="bootstrapOpen" header="Bootstrap variant" variant="bootstrap">
+<ui-lib-bottom-sheet header="Bootstrap variant" variant="bootstrap" [(visible)]="bootstrapOpen">
   <p>Sharp corners (4 px), flat box-shadow, and standard Bootstrap-style look.</p>
 </ui-lib-bottom-sheet>
 
-<ui-lib-bottom-sheet [(visible)]="minimalOpen" header="Minimal variant" variant="minimal">
+<ui-lib-bottom-sheet header="Minimal variant" variant="minimal" [(visible)]="minimalOpen">
   <p>Subtle shadow, medium radius (12 px), and a clean low-contrast style.</p>
 </ui-lib-bottom-sheet>

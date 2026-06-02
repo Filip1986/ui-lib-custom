@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 import {
   SHARED_DEFAULTS,
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
-import { UiLibInput } from './input';
+
 import type { InputSize, InputVariant } from './input';
+import { UiLibInput } from './input';
 
 type InputStoryArgs = {
   label: string;

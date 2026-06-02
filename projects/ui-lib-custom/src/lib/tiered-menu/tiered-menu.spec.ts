@@ -2,13 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
+  type Signal,
   signal,
   viewChild,
-  type Signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
-import { TieredMenu, TIERED_MENU_DEFAULT_ARIA_LABEL } from './tiered-menu';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { TIERED_MENU_DEFAULT_ARIA_LABEL, TieredMenu } from './tiered-menu';
 import type { TieredMenuItem, TieredMenuItemCommandEvent } from './tiered-menu.types';
 
 // ── Helper ────────────────────────────────────────────────────────────────────

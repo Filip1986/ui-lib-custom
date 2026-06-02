@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+
 import { LiveAnnouncerService } from './live-announcer.service';
 
 describe('LiveAnnouncerService', (): void => {

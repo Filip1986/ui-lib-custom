@@ -3,7 +3,7 @@
 // Do not edit manually.
 
 export const allowEmptyHtml = `<!-- Cannot uncheck once checked -->
-<ui-lib-toggle-button [allowEmpty]="false" onLabel="Confirmed" offLabel="Confirm" />`;
+<ui-lib-toggle-button offLabel="Confirm" onLabel="Confirmed" [allowEmpty]="false" />`;
 
 export const allowEmptyTs = `import { Component } from '@angular/core';
 import { ToggleButton } from 'ui-lib-custom/toggle-button';
@@ -29,7 +29,7 @@ export class MyComponent {
   public readonly isActive = signal<boolean>(false);
 }`;
 
-export const disabledHtml = `<ui-lib-toggle-button [disabled]="true" onLabel="On" offLabel="Off" />`;
+export const disabledHtml = `<ui-lib-toggle-button offLabel="Off" onLabel="On" [disabled]="true" />`;
 
 export const disabledTs = `import { Component } from '@angular/core';
 import { ToggleButton } from 'ui-lib-custom/toggle-button';
@@ -42,10 +42,10 @@ import { ToggleButton } from 'ui-lib-custom/toggle-button';
 export class MyComponent {}`;
 
 export const iconsHtml = `<ui-lib-toggle-button
-  onLabel="Muted"
+  offIcon="volumeHigh"
   offLabel="Sound"
   onIcon="volumeOff"
-  offIcon="volumeHigh"
+  onLabel="Muted"
   [(checked)]="muted"
 />`;
 
@@ -61,11 +61,7 @@ export class MyComponent {
   public readonly muted = signal<boolean>(false);
 }`;
 
-export const labelsHtml = `<ui-lib-toggle-button
-  onLabel="Active"
-  offLabel="Inactive"
-  [(checked)]="status"
-/>`;
+export const labelsHtml = `<ui-lib-toggle-button offLabel="Inactive" onLabel="Active" [(checked)]="status" />`;
 
 export const labelsTs = `import { Component, signal } from '@angular/core';
 import { ToggleButton } from 'ui-lib-custom/toggle-button';
@@ -117,13 +113,13 @@ export class MyComponent {
 }`;
 
 export const sizesHtml = `<!-- Small -->
-<ui-lib-toggle-button size="sm" onLabel="On" offLabel="Off" />
+<ui-lib-toggle-button offLabel="Off" onLabel="On" size="sm" />
 
 <!-- Medium (default) -->
-<ui-lib-toggle-button size="md" onLabel="On" offLabel="Off" />
+<ui-lib-toggle-button offLabel="Off" onLabel="On" size="md" />
 
 <!-- Large -->
-<ui-lib-toggle-button size="lg" onLabel="On" offLabel="Off" />`;
+<ui-lib-toggle-button offLabel="Off" onLabel="On" size="lg" />`;
 
 export const sizesTs = `import { Component } from '@angular/core';
 import { ToggleButton } from 'ui-lib-custom/toggle-button';

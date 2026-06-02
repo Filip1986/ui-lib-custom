@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,34 +8,36 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SelectButton } from 'ui-lib-custom/select-button';
+
+import { Button } from 'ui-lib-custom/button';
+import { Icon } from 'ui-lib-custom/icon';
+import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
+import { Panel } from 'ui-lib-custom/panel';
 import type {
   SelectButtonOption,
   SelectButtonSize,
   SelectButtonVariant,
 } from 'ui-lib-custom/select-button';
-import { Button } from 'ui-lib-custom/button';
-import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
-import { Icon } from 'ui-lib-custom/icon';
+import { SelectButton } from 'ui-lib-custom/select-button';
+
+import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-basic-example.component';
+import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
-import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-basic-example.component';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 
-import { Panel } from 'ui-lib-custom/panel';
 import { selectButtonExampleHtml, selectButtonExampleTs } from './snippets.generated';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for select button variants.
  */

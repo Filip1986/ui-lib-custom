@@ -1,25 +1,27 @@
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   type DebugElement,
+  signal,
   type WritableSignal,
 } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
-import { lucideAudioWaveform } from '@ng-icons/lucide';
-import { bootstrapArrowRepeat } from '@ng-icons/bootstrap-icons';
-import { provideUiLibIcons } from 'ui-lib-custom/icon';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { Button } from './button';
-import type { ButtonSeverity, ButtonVariant, ButtonSize } from './button';
-import { SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
-import { BUTTON_SEVERITIES } from './button.constants';
-import { Icon } from 'ui-lib-custom/icon';
+import { bootstrapArrowRepeat } from '@ng-icons/bootstrap-icons';
+import { provideIcons } from '@ng-icons/core';
+import { lucideAudioWaveform } from '@ng-icons/lucide';
+
 import { Badge } from 'ui-lib-custom/badge';
+import { SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
+import { Icon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { ButtonSeverity, ButtonSize, ButtonVariant } from './button';
+import { Button } from './button';
+import { BUTTON_SEVERITIES } from './button.constants';
 
 @Component({
   standalone: true,

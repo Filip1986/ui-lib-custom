@@ -3,20 +3,20 @@
 // ---- Toggle event badge --------------------------------------------------
 
 .demo-event-badge {
-  margin-top: 0.75rem;
-  padding: 0.5rem 0.75rem;
   background: var(--uilib-surface-100, #f3f4f6);
   border: 1px solid var(--uilib-surface-200, #e5e7eb);
   border-radius: 6px;
-  font-size: 0.875rem;
   color: var(--uilib-page-fg, #374151);
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
 }
 
 // ---- Custom header demo --------------------------------------------------
 
 .demo-custom-header {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 0.5rem;
 
   &__icon {
@@ -24,13 +24,13 @@
   }
 
   &__badge {
-    padding: 0.125rem 0.5rem;
-    border-radius: 999px;
     background: var(--uilib-color-primary, #6366f1);
+    border-radius: 999px;
     color: #ffffff;
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.03em;
+    padding: 0.125rem 0.5rem;
     text-transform: uppercase;
   }
 }
@@ -38,20 +38,20 @@
 // ---- Header icon buttons demo --------------------------------------------
 
 .demo-icon-btn {
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  background: transparent;
   border: none;
   border-radius: 4px;
-  background: transparent;
   color: var(--uilib-muted, #6b7280);
   cursor: pointer;
+  display: inline-flex;
   font-size: 1rem;
+  height: 1.75rem;
+  justify-content: center;
   transition:
     background-color 150ms ease,
     color 150ms ease;
+  width: 1.75rem;
 
   &:hover {
     background: var(--uilib-surface-200, #e5e7eb);
@@ -63,21 +63,27 @@
 
 .demo-footer-actions {
   display: flex;
-  justify-content: flex-end;
   gap: 0.5rem;
+  justify-content: flex-end;
 }
 
 .demo-footer-info {
-  font-size: 0.875rem;
   color: var(--uilib-muted, #6b7280);
+  font-size: 0.875rem;
 }
 
 // ---- Variants grid -------------------------------------------------------
 
 .demo-panel-variants {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
   align-items: start;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   margin-bottom: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-icon-btn {
+    /* TODO: set transition / animation to none */
+  }
 }

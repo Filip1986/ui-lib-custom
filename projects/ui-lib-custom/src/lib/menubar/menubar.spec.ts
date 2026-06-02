@@ -1,12 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  type DebugElement,
   provideZonelessChangeDetection,
   signal,
-  type DebugElement,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { Menubar, MENUBAR_DEFAULT_ARIA_LABEL } from './menubar';
 import type { MenubarCommandEvent, MenubarItem } from './menubar.types';
 

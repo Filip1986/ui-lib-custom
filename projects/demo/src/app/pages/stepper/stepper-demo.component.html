@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A multi-step wizard component for guiding users through sequential workflows. Supports horizontal and vertical orientations, linear enforcement, and three design variants."
     docHeader
     title="Stepper"
     [importCode]="importCode"
-    description="A multi-step wizard component for guiding users through sequential workflows. Supports horizontal and vertical orientations, linear enforcement, and three design variants."
   />
 
   <!-- Basic Usage -->
@@ -13,7 +13,7 @@
     </p>
 
     <div class="demo-card">
-      <ui-lib-stepper [(activeStep)]="basicStep" #basicStepper>
+      <ui-lib-stepper #basicStepper [(activeStep)]="basicStep">
         <ui-lib-stepper-panel header="Personal Info">
           <ng-template #stepperContent>
             <div class="demo-step-content">
@@ -79,7 +79,7 @@
     </p>
 
     <div class="demo-card">
-      <ui-lib-stepper [(activeStep)]="linearStep" [linear]="true" #linearStepper>
+      <ui-lib-stepper #linearStepper [linear]="true" [(activeStep)]="linearStep">
         <ui-lib-stepper-panel header="Account">
           <ng-template #stepperContent>
             <div class="demo-step-content">
@@ -144,7 +144,7 @@
     </p>
 
     <div class="demo-card">
-      <ui-lib-stepper [(activeStep)]="verticalStep" orientation="vertical" #verticalStepper>
+      <ui-lib-stepper #verticalStepper orientation="vertical" [(activeStep)]="verticalStep">
         <ui-lib-stepper-panel header="Select Plan">
           <ng-template #stepperContent>
             <div class="demo-step-content">
@@ -213,7 +213,7 @@
       <div class="demo-variant-block">
         <h3 class="demo-variant-label">Material</h3>
         <div class="demo-card">
-          <ui-lib-stepper [(activeStep)]="materialStep" variant="material" #materialStepper>
+          <ui-lib-stepper #materialStepper variant="material" [(activeStep)]="materialStep">
             <ui-lib-stepper-panel header="Step One">
               <ng-template #stepperContent>
                 <div class="demo-step-content"><p>Material design variant step.</p></div>
@@ -275,7 +275,7 @@
       <div class="demo-variant-block">
         <h3 class="demo-variant-label">Bootstrap</h3>
         <div class="demo-card">
-          <ui-lib-stepper [(activeStep)]="bootstrapStep" variant="bootstrap" #bootstrapStepper>
+          <ui-lib-stepper #bootstrapStepper variant="bootstrap" [(activeStep)]="bootstrapStep">
             <ui-lib-stepper-panel header="Step One">
               <ng-template #stepperContent>
                 <div class="demo-step-content"><p>Bootstrap variant step.</p></div>
@@ -337,7 +337,7 @@
       <div class="demo-variant-block">
         <h3 class="demo-variant-label">Minimal</h3>
         <div class="demo-card">
-          <ui-lib-stepper [(activeStep)]="minimalStep" variant="minimal" #minimalStepper>
+          <ui-lib-stepper #minimalStepper variant="minimal" [(activeStep)]="minimalStep">
             <ui-lib-stepper-panel header="Step One">
               <ng-template #stepperContent>
                 <div class="demo-step-content"><p>Minimal variant step.</p></div>
@@ -409,10 +409,10 @@
           <div class="demo-control-buttons">
             @for (variant of variants; track variant) {
               <ui-lib-button
-                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 (click)="setPlaygroundVariant(variant)"
               >
                 {{ variant }}
@@ -426,10 +426,10 @@
           <div class="demo-control-buttons">
             @for (orient of orientations; track orient) {
               <ui-lib-button
-                [appearance]="playgroundOrientation() === orient ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundOrientation() === orient ? 'solid' : 'outline'"
                 (click)="setPlaygroundOrientation(orient)"
               >
                 {{ orient }}
@@ -442,19 +442,19 @@
           <label class="demo-control-label">Linear</label>
           <div class="demo-control-buttons">
             <ui-lib-button
-              [appearance]="!playgroundLinear() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="!playgroundLinear() ? 'solid' : 'outline'"
               (click)="playgroundLinear.set(false); playgroundStep.set(0)"
             >
               Off
             </ui-lib-button>
             <ui-lib-button
-              [appearance]="playgroundLinear() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="playgroundLinear() ? 'solid' : 'outline'"
               (click)="playgroundLinear.set(true); playgroundStep.set(0)"
             >
               On
@@ -465,12 +465,12 @@
 
       <div class="demo-playground-stepper">
         <ui-lib-stepper
-          [(activeStep)]="playgroundStep"
-          [variant]="playgroundVariant()"
-          [orientation]="playgroundOrientation()"
-          [linear]="playgroundLinear()"
-          (stepChange)="handleStepChange($event)"
           #playgroundStepper
+          [linear]="playgroundLinear()"
+          [orientation]="playgroundOrientation()"
+          [variant]="playgroundVariant()"
+          [(activeStep)]="playgroundStep"
+          (stepChange)="handleStepChange($event)"
         >
           <ui-lib-stepper-panel header="Details">
             <ng-template #stepperContent>
@@ -581,9 +581,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -591,8 +591,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

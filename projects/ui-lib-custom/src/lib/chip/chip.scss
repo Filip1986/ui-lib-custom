@@ -45,36 +45,36 @@
 
   // ---- Host element ------------------------------------------------
   .ui-lib-chip {
-    display: inline-flex;
     align-items: center;
-    gap: var(--uilib-chip-gap);
-    padding: var(--uilib-chip-padding-y) var(--uilib-chip-padding-x);
     background: var(--uilib-chip-bg);
-    color: var(--uilib-chip-color);
     border: var(--uilib-chip-border);
     border-radius: var(--uilib-chip-border-radius);
+    color: var(--uilib-chip-color);
+    display: inline-flex;
+    font-family: var(--uilib-font-ui, inherit);
     font-size: var(--uilib-chip-font-size);
     font-weight: var(--uilib-chip-font-weight);
-    font-family: var(--uilib-font-ui, inherit);
+    gap: var(--uilib-chip-gap);
+    padding: var(--uilib-chip-padding-y) var(--uilib-chip-padding-x);
     transition:
       background-color var(--uilib-chip-transition),
       opacity var(--uilib-chip-transition);
-    white-space: nowrap;
     user-select: none;
     vertical-align: middle;
+    white-space: nowrap;
 
     // ---- Parts -------------------------------------------------------
     &__image {
-      width: var(--uilib-chip-image-size);
-      height: var(--uilib-chip-image-size);
       border-radius: var(--uilib-chip-image-border-radius);
-      object-fit: cover;
       flex-shrink: 0;
+      height: var(--uilib-chip-image-size);
+      object-fit: cover;
+      width: var(--uilib-chip-image-size);
     }
 
     &__icon {
-      font-size: var(--uilib-chip-icon-font-size);
       flex-shrink: 0;
+      font-size: var(--uilib-chip-icon-font-size);
     }
 
     &__label {
@@ -82,20 +82,20 @@
     }
 
     &__remove-button {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 1.25em;
-      height: 1.25em;
-      padding: 0;
+      background: var(--uilib-chip-remove-bg);
       border: none;
       border-radius: var(--uilib-chip-remove-border-radius);
-      background: var(--uilib-chip-remove-bg);
       color: var(--uilib-chip-remove-color);
       cursor: pointer;
-      transition: background-color var(--uilib-chip-remove-transition);
+      display: inline-flex;
       flex-shrink: 0;
+      height: 1.25em;
+      justify-content: center;
       line-height: 1;
+      padding: 0;
+      transition: background-color var(--uilib-chip-remove-transition);
+      width: 1.25em;
 
       &:hover {
         background: var(--uilib-chip-remove-bg-hover);
@@ -118,22 +118,22 @@
 
     // ---- Sizes -------------------------------------------------------
     &--size-sm {
-      padding: var(--uilib-chip-padding-y-sm) var(--uilib-chip-padding-x-sm);
       font-size: var(--uilib-chip-font-size-sm);
+      padding: var(--uilib-chip-padding-y-sm) var(--uilib-chip-padding-x-sm);
 
       .ui-lib-chip__image {
-        width: var(--uilib-chip-image-size-sm);
         height: var(--uilib-chip-image-size-sm);
+        width: var(--uilib-chip-image-size-sm);
       }
     }
 
     &--size-lg {
-      padding: var(--uilib-chip-padding-y-lg) var(--uilib-chip-padding-x-lg);
       font-size: var(--uilib-chip-font-size-lg);
+      padding: var(--uilib-chip-padding-y-lg) var(--uilib-chip-padding-x-lg);
 
       .ui-lib-chip__image {
-        width: var(--uilib-chip-image-size-lg);
         height: var(--uilib-chip-image-size-lg);
+        width: var(--uilib-chip-image-size-lg);
       }
     }
 

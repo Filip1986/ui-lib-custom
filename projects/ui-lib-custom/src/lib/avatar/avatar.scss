@@ -27,21 +27,21 @@
     display: inline-flex;
   }
   .ui-lib-avatar {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    inline-size: var(--uilib-avatar-size);
-    block-size: var(--uilib-avatar-size);
+    animation: var(--uilib-avatar-mount-animation);
     background-color: var(--uilib-avatar-bg);
-    color: var(--uilib-avatar-fg);
+    block-size: var(--uilib-avatar-size);
     border: var(--uilib-avatar-border-width) solid var(--uilib-avatar-border-color);
     border-radius: var(--uilib-avatar-radius);
+    color: var(--uilib-avatar-fg);
+    display: inline-flex;
+    flex-shrink: 0;
     font-size: var(--uilib-avatar-font-size);
     font-weight: var(--uilib-avatar-font-weight);
+    inline-size: var(--uilib-avatar-size);
+    justify-content: center;
     overflow: hidden;
     user-select: none;
-    flex-shrink: 0;
-    animation: var(--uilib-avatar-mount-animation);
   }
   .ui-lib-avatar:focus-visible {
     outline: 2px solid var(--uilib-avatar-focus-ring, var(--uilib-color-primary-500, #3b82f6));
@@ -49,11 +49,11 @@
   }
   /* ── Image ─────────────────────────────────────────────────── */
   .ui-lib-avatar__image {
-    inline-size: 100%;
     block-size: 100%;
-    object-fit: cover;
     border-radius: inherit;
     display: block;
+    inline-size: 100%;
+    object-fit: cover;
   }
   /* ── Icon ───────────────────────────────────────────────────── */
   .ui-lib-avatar__icon {

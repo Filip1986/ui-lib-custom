@@ -4,11 +4,13 @@ import {
   computed,
   inject,
   input,
-  ViewEncapsulation,
   type InputSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
+
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   DividerAlign,
   DividerOrientation,

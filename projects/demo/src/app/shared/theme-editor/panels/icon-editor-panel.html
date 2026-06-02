@@ -38,7 +38,7 @@
           [value]="config().sizes[size]"
           (input)="onSizeValueChange(size, $event)"
         />
-        <ui-lib-icon name="star" [size]="size" class="size-preview" />
+        <ui-lib-icon class="size-preview" name="star" [size]="size" />
       </div>
     }
   </div>
@@ -48,7 +48,7 @@
     <div class="icon-preview-grid">
       @for (icon of previewIcons; track icon) {
         <div class="preview-item">
-          <ui-lib-icon [name]="icon" [library]="config().defaultLibrary" size="lg" />
+          <ui-lib-icon size="lg" [library]="config().defaultLibrary" [name]="icon" />
           <span>{{ icon }}</span>
         </div>
       }

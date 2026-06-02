@@ -1,9 +1,9 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Semantic icons with size, variant, and button integrations plus full search."
     docHeader
     title="Icon System"
     [importCode]="importCode"
-    description="Semantic icons with size, variant, and button integrations plus full search."
   />
 
   <app-icon-basic-example />
@@ -11,15 +11,15 @@
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
-      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
-      <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
-      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
+      <ui-lib-tab label="Playground" value="playground" />
+      <ui-lib-tab label="API Reference" value="api-reference" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="Accessibility" value="accessibility" />
     </ui-lib-tabs>
   </div>
 
@@ -77,18 +77,18 @@
               @for (variant of variants; track variant) {
                 <div class="icon-button-group">
                   <h4>{{ variant | titlecase }}</h4>
-                  <ui-lib-icon-button icon="settings" [variant]="variant" ariaLabel="Settings" />
+                  <ui-lib-icon-button ariaLabel="Settings" icon="settings" [variant]="variant" />
                   <ui-lib-icon-button
+                    ariaLabel="Edit"
+                    color="primary"
                     icon="edit"
                     [variant]="variant"
-                    color="primary"
-                    ariaLabel="Edit"
                   />
                   <ui-lib-icon-button
+                    ariaLabel="Delete"
+                    color="danger"
                     icon="delete"
                     [variant]="variant"
-                    color="danger"
-                    ariaLabel="Delete"
                   />
                 </div>
               }
@@ -98,19 +98,19 @@
           <section class="demo-section">
             <h3>Alerts with Icons</h3>
             @for (severity of severities; track severity) {
-              <ui-lib-alert [severity]="severity" [dismissible]="true">
+              <ui-lib-alert [dismissible]="true" [severity]="severity">
                 This is a {{ severity }} alert message.
               </ui-lib-alert>
             }
           </section>
 
-          <section class="demo-section" id="icon-search" data-doc-anchor>
+          <section class="demo-section" data-doc-anchor id="icon-search">
             <h3>Complete Icon Reference</h3>
             <div class="icon-search">
               <ui-lib-icon name="search" />
               <input
-                type="text"
                 placeholder="Search icons..."
+                type="text"
                 [value]="searchQuery()"
                 (input)="onSearch($event)"
               />
@@ -118,7 +118,7 @@
             <div class="icon-grid">
               @for (icon of filteredIcons(); track icon) {
                 <button class="icon-card" type="button" (click)="copyIconName(icon)">
-                  <ui-lib-icon [name]="icon" size="lg" />
+                  <ui-lib-icon size="lg" [name]="icon" />
                   <code>{{ icon }}</code>
                 </button>
               }
@@ -159,9 +159,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -170,8 +170,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

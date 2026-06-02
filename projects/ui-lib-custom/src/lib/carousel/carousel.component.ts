@@ -1,21 +1,4 @@
-import { NgStyle, NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  NgZone,
-  PLATFORM_ID,
-  Renderer2,
-  ViewEncapsulation,
-  computed,
-  contentChild,
-  effect,
-  inject,
-  input,
-  output,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { isPlatformBrowser, NgStyle, NgTemplateOutlet } from '@angular/common';
 import type {
   AfterContentInit,
   AfterViewInit,
@@ -27,6 +10,27 @@ import type {
   TemplateRef,
   WritableSignal,
 } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  contentChild,
+  effect,
+  inject,
+  input,
+  NgZone,
+  output,
+  PLATFORM_ID,
+  Renderer2,
+  signal,
+  viewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import {
   CAROUSEL_DEFAULT_NUM_SCROLL,
   CAROUSEL_DEFAULT_NUM_VISIBLE,
@@ -42,8 +46,6 @@ import type {
   CarouselSize,
   CarouselVariant,
 } from './carousel.types';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
 
 /**
  * Carousel is a content slider with support for multiple visible items,

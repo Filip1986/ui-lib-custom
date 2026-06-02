@@ -101,10 +101,7 @@ export class MyComponent {
   }
 }`;
 
-export const clickEventsHtml = `<ui-lib-bar-chart
-  [data]="clickableRevenueData"
-  (chartClick)="onChartClick($event)"
-/>`;
+export const clickEventsHtml = `<ui-lib-bar-chart [data]="clickableRevenueData" (chartClick)="onChartClick($event)" />`;
 
 export const customDimensionsTsTs = `import { Component } from '@angular/core';
 import { LineChartComponent, provideChartDefaults } from 'ui-lib-custom/chart';
@@ -125,11 +122,7 @@ export class MyComponent {
   };
 }`;
 
-export const customDimensionsHtml = `<ui-lib-line-chart
-  [data]="customDimensionData"
-  height="320px"
-  width="640px"
-/>`;
+export const customDimensionsHtml = `<ui-lib-line-chart height="320px" width="640px" [data]="customDimensionData" />`;
 
 export const customOptionsTsTs = `import { Component } from '@angular/core';
 import { DoughnutChartComponent, provideChartDefaults } from 'ui-lib-custom/chart';
@@ -162,10 +155,7 @@ export class MyComponent {
   };
 }`;
 
-export const customOptionsHtml = `<ui-lib-doughnut-chart
-  [data]="customOptionsData"
-  [options]="customLegendOptions"
-/>`;
+export const customOptionsHtml = `<ui-lib-doughnut-chart [data]="customOptionsData" [options]="customLegendOptions" />`;
 
 export const doughnutTsTs = `import { Component } from '@angular/core';
 import { DoughnutChartComponent, provideChartDefaults } from 'ui-lib-custom/chart';
@@ -220,7 +210,7 @@ export class MyComponent {
   }
 }`;
 
-export const dynamicUpdateHtml = `<ui-lib-inline [gap]="2" align="center">
+export const dynamicUpdateHtml = `<ui-lib-inline align="center" [gap]="2">
   <ui-lib-button (click)="randomizeRevenueData()">Randomize</ui-lib-button>
 </ui-lib-inline>
 <ui-lib-bar-chart [data]="dynamicRevenueData" />`;
@@ -417,10 +407,10 @@ export class MyComponent {
   };
 }`;
 
-export const sizesHtml = `<ui-lib-grid [columns]="3" spacing="md">
-  <ui-lib-bar-chart [data]="sizePreviewData" size="sm" />
-  <ui-lib-bar-chart [data]="sizePreviewData" size="md" />
-  <ui-lib-bar-chart [data]="sizePreviewData" size="lg" />
+export const sizesHtml = `<ui-lib-grid spacing="md" [columns]="3">
+  <ui-lib-bar-chart size="sm" [data]="sizePreviewData" />
+  <ui-lib-bar-chart size="md" [data]="sizePreviewData" />
+  <ui-lib-bar-chart size="lg" [data]="sizePreviewData" />
 </ui-lib-grid>`;
 
 export const stackedBarTsTs = `import { Component } from '@angular/core';

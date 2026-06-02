@@ -11,10 +11,10 @@
 }
 
 .doc-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(1.5rem, 2.5vw, 3rem);
   align-items: flex-start;
+  display: grid;
+  gap: clamp(1.5rem, 2.5vw, 3rem);
+  grid-template-columns: 1fr;
 
   @media (min-width: 1025px) {
     grid-template-columns: minmax(0, 1fr) var(--doc-rail-width);
@@ -22,8 +22,8 @@
 }
 
 .doc-main {
-  min-width: 0;
   max-width: 100%;
+  min-width: 0;
 }
 
 .doc-body {
@@ -34,13 +34,13 @@
 
 /* Rail: sticky right column — single source of truth for all demo pages */
 :host ::ng-deep .demo-page-rail {
-  position: sticky;
-  top: var(--doc-top-offset, 96px);
   align-self: start;
-  padding: 1rem;
   background: var(--uilib-surface-0, #fff);
   border: 1px solid var(--uilib-surface-200, #e5e7eb);
   border-radius: 0.5rem;
+  padding: 1rem;
+  position: sticky;
+  top: var(--doc-top-offset, 96px);
 
   @media (max-width: 1024px) {
     display: none;
@@ -48,13 +48,13 @@
 }
 
 :host ::ng-deep .demo-page-rail__title {
+  color: var(--uilib-muted, #6b7280);
   font-size: 0.7rem;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--uilib-muted, #6b7280);
   margin: 0 0 0.75rem;
   padding: 0 0.625rem;
+  text-transform: uppercase;
 }
 
 :host ::ng-deep [data-doc-anchor] {

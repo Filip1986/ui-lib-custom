@@ -1,5 +1,5 @@
-import { Directive, ElementRef, DestroyRef, inject, input, output } from '@angular/core';
 import type { InputSignal, OnInit, OutputEmitterRef } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, input, output } from '@angular/core';
 
 /**
  * AnimateOnScroll directive — uses the native `IntersectionObserver` API to

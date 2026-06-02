@@ -1,23 +1,25 @@
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
+import type { InputSignal, OnDestroy, Signal, TemplateRef, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  ViewEncapsulation,
   computed,
   contentChild,
+  ElementRef,
   forwardRef,
+  inject,
   input,
   signal,
-  inject,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, OnDestroy, Signal, TemplateRef, WritableSignal } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { KEYBOARD_KEYS, SHARED_DEFAULTS, SHARED_SIZES } from 'ui-lib-custom/core';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { SHARED_DEFAULTS, SHARED_SIZES, KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import {
   SELECT_LISTBOX_ROLE,
   SELECT_OPTION_ID_SEPARATOR,
@@ -33,13 +35,13 @@ import type {
 } from './select.types';
 
 export type {
-  SelectVariant,
-  SelectSize,
-  SelectValueObject,
-  SelectValue,
   SelectCvaValue,
   SelectOption,
   SelectOptionTemplateContext,
+  SelectSize,
+  SelectValue,
+  SelectValueObject,
+  SelectVariant,
 } from './select.types';
 
 let selectIdCounter: number = 0;

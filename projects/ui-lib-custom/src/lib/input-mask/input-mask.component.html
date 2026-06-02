@@ -1,32 +1,32 @@
 <input
   #inputEl
-  [type]="type()"
-  [disabled]="isControlDisabled()"
-  [readonly]="readonly()"
-  [attr.placeholder]="placeholder() ?? null"
-  [attr.name]="name()"
-  [id]="controlId()"
-  [attr.autocomplete]="autocomplete()"
+  [attr.aria-describedby]="ariaDescribedBy()"
+  [attr.aria-invalid]="isInvalid() ? 'true' : null"
   [attr.aria-label]="
     ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('input-mask.input.label'))
   "
   [attr.aria-labelledby]="ariaLabelledBy() || null"
-  [attr.aria-invalid]="isInvalid() ? 'true' : null"
-  [attr.aria-describedby]="ariaDescribedBy()"
+  [attr.autocomplete]="autocomplete()"
+  [attr.name]="name()"
+  [attr.placeholder]="placeholder() ?? null"
   [class.uilib-filled]="filled()"
-  [class.uilib-input-sm]="size() === 'sm'"
   [class.uilib-input-lg]="size() === 'lg'"
-  (focus)="onFocus($event)"
+  [class.uilib-input-sm]="size() === 'sm'"
+  [disabled]="isControlDisabled()"
+  [id]="controlId()"
+  [readonly]="readonly()"
+  [type]="type()"
   (blur)="onBlur($event)"
+  (focus)="onFocus($event)"
+  (input)="onInputChange($event)"
   (keydown)="onKeyDown($event)"
   (keypress)="onKeyPress($event)"
-  (input)="onInputChange($event)"
   (paste)="onPaste($event)"
 />
 @if (showClear() && isFilled() && !isControlDisabled()) {
   <button
-    type="button"
     class="ui-lib-input-mask-clear-icon"
+    type="button"
     [attr.aria-label]="i18n.translate('input-mask.clear')"
     (click)="clear()"
   >
@@ -34,15 +34,15 @@
   </button>
 }
 @if (maskFormatHint()) {
-  <span [id]="hintId()" class="ui-lib-input-mask-sr-only">Format: {{ maskFormatHint() }}</span>
+  <span class="ui-lib-input-mask-sr-only" [id]="hintId()">Format: {{ maskFormatHint() }}</span>
 }
 @if (showError()) {
-  <div [id]="errorId()" class="ui-lib-input-mask-error" role="alert" aria-live="assertive">
+  <div aria-live="assertive" class="ui-lib-input-mask-error" role="alert" [id]="errorId()">
     <ng-content select="[error]">{{ resolvedErrorMessage() }}</ng-content>
   </div>
 }
 @if (blockedCharacterMessage()) {
-  <span class="ui-lib-input-mask-sr-only" aria-live="polite" aria-atomic="true">
+  <span aria-atomic="true" aria-live="polite" class="ui-lib-input-mask-sr-only">
     {{ blockedCharacterMessage() }}
   </span>
 }

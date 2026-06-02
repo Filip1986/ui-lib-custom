@@ -3,11 +3,11 @@
 // Do not edit manually.
 
 export const basicHtml = `<ui-lib-pick-list
-  [(source)]="source"
-  [(target)]="target"
-  trackBy="name"
   sourceHeader="Available"
   targetHeader="Selected"
+  trackBy="name"
+  [(source)]="source"
+  [(target)]="target"
 />`;
 
 export const basicTs = `import { Component, signal } from '@angular/core';
@@ -35,12 +35,12 @@ export class MyComponent {
 }`;
 
 export const dragDropHtml = `<ui-lib-pick-list
-  [(source)]="source"
-  [(target)]="target"
   trackBy="code"
   [dragDrop]="true"
-  (movedToTarget)="onMoveToTarget($event)"
+  [(source)]="source"
+  [(target)]="target"
   (movedToSource)="onMoveToSource($event)"
+  (movedToTarget)="onMoveToTarget($event)"
 />`;
 
 export const dragDropTs = `import { Component, signal } from '@angular/core';
@@ -75,12 +75,12 @@ export class MyComponent {
 }`;
 
 export const filterHtml = `<ui-lib-pick-list
-  [(source)]="source"
-  [(target)]="target"
-  trackBy="name"
   filterBy="name"
   sourceFilterPlaceholder="Search available…"
   targetFilterPlaceholder="Search selected…"
+  trackBy="name"
+  [(source)]="source"
+  [(target)]="target"
 />`;
 
 export const filterTs = `import { Component, signal } from '@angular/core';
@@ -105,14 +105,14 @@ export class MyComponent {
   public readonly target: WritableSignal<Country[]> = signal([]);
 }`;
 
-export const templatesHtml = `<ui-lib-pick-list [(source)]="source" [(target)]="target" trackBy="code">
+export const templatesHtml = `<ui-lib-pick-list trackBy="code" [(source)]="source" [(target)]="target">
   <ng-template uiPickListSourceHeader>
     <span>Available countries</span>
   </ng-template>
   <ng-template uiPickListTargetHeader>
     <span>Selected countries</span>
   </ng-template>
-  <ng-template uiPickListItem let-country>
+  <ng-template let-country uiPickListItem>
     <div class="demo-pl-row">
       <span class="demo-pl-code">{{ country.code }}</span>
       <span class="demo-pl-name">{{ country.name }}</span>

@@ -1,16 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { UiLibAutoComplete } from './autocomplete';
-import type {
-  AutoCompleteCompleteEvent,
-  AutoCompleteSize,
-  AutoCompleteVariant,
-} from './autocomplete.types';
+
 import {
   SHARED_DEFAULTS,
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
+
+import { UiLibAutoComplete } from './autocomplete';
+import type {
+  AutoCompleteCompleteEvent,
+  AutoCompleteSize,
+  AutoCompleteVariant,
+} from './autocomplete.types';
 
 type AutoCompleteStoryArgs = {
   placeholder: string;

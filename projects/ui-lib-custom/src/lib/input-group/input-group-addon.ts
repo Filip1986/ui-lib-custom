@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+
 import { INPUT_GROUP_CLASSES } from './input-group.constants';
 
 /**

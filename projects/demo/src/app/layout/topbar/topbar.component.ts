@@ -1,11 +1,12 @@
-import { Component, ChangeDetectionStrategy, input, output, inject, computed } from '@angular/core';
-import type { Signal, InputSignal, OutputEmitterRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { InputSignal, OutputEmitterRef, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
 import { Button } from 'ui-lib-custom/button';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
-import type { ShapeToken, DensityToken } from 'ui-lib-custom/tokens';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { DensityToken, ShapeToken } from 'ui-lib-custom/tokens';
 
 /**
  * Demo topbar with theme toggles and navigation actions.

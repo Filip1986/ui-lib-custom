@@ -1,3 +1,5 @@
+import { CommonModule } from '@angular/common';
+import type { Signal, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,25 +8,24 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
 import { Badge } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
 import { Checkbox } from 'ui-lib-custom/checkbox';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import type { ThemeMode } from 'ui-lib-custom/theme';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { UiLibInput } from 'ui-lib-custom/input';
-import { UiLibSelect } from 'ui-lib-custom/select';
+import { Panel } from 'ui-lib-custom/panel';
 import type { SelectOption } from 'ui-lib-custom/select';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+import type { ThemeMode } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-
-import { Panel } from 'ui-lib-custom/panel';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 /**
  * Demo page for dark mode theming.
  */

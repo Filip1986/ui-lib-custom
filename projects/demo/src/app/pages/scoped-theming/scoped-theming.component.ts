@@ -1,20 +1,22 @@
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
-import type { Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ThemeScopeDirective, DarkThemeDirective, LightThemeDirective } from 'ui-lib-custom/theme';
-import type { ThemeScopeConfig } from 'ui-lib-custom/theme';
-import { Button } from 'ui-lib-custom/button';
+import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+
 import { Badge } from 'ui-lib-custom/badge';
-import { UiLibInput } from 'ui-lib-custom/input';
+import { Button } from 'ui-lib-custom/button';
 import { Checkbox } from 'ui-lib-custom/checkbox';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { UiLibInput } from 'ui-lib-custom/input';
+import { Panel } from 'ui-lib-custom/panel';
+import type { ThemeScopeConfig } from 'ui-lib-custom/theme';
+import { DarkThemeDirective, LightThemeDirective, ThemeScopeDirective } from 'ui-lib-custom/theme';
+
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
-import { Panel } from 'ui-lib-custom/panel';
 import {
   componentThemeCodeHtml,
   componentThemeCodeTs,

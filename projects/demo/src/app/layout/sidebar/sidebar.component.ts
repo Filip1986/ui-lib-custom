@@ -1,3 +1,5 @@
+import { CommonModule } from '@angular/common';
+import type { WritableSignal } from '@angular/core';
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -7,11 +9,10 @@ import {
   Injector,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
+
 import { Icon } from 'ui-lib-custom/icon';
 
 export interface NavItem {

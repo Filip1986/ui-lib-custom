@@ -139,15 +139,15 @@ export class MyComponent {}`;
 
 export const sizesHtml = `<ui-lib-input-group>
   <ui-lib-input-group-addon>$</ui-lib-input-group-addon>
-  <ui-lib-input size="sm" placeholder="Small" />
+  <ui-lib-input placeholder="Small" size="sm" />
 </ui-lib-input-group>
 
 <ui-lib-input-group>
   <ui-lib-input-group-addon>$</ui-lib-input-group-addon>
-  <ui-lib-input size="md" placeholder="Medium" />
+  <ui-lib-input placeholder="Medium" size="md" />
 </ui-lib-input-group>
 
 <ui-lib-input-group>
   <ui-lib-input-group-addon>$</ui-lib-input-group-addon>
-  <ui-lib-input size="lg" placeholder="Large" />
+  <ui-lib-input placeholder="Large" size="lg" />
 </ui-lib-input-group>`;

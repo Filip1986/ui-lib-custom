@@ -7,11 +7,13 @@ import {
   type Type,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
-import { Tag } from './tag';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+
 import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { Tag } from './tag';
 
 function buildMockTheme(): {
   variant: WritableSignal<ThemeVariant>;

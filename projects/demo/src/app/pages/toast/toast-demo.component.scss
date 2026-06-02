@@ -1,12 +1,12 @@
 // Toast demo page styles
 
 .toast-demo {
-  max-width: 54rem;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  margin: 0 auto;
+  max-width: 54rem;
+  padding: 2rem 1.5rem 4rem;
 }
 
 .toast-demo__header {
@@ -16,24 +16,24 @@
 }
 
 .toast-demo__title {
+  color: var(--uilib-color-neutral-900, #171717);
   font-size: 2rem;
   font-weight: 700;
   margin: 0;
-  color: var(--uilib-color-neutral-900, #171717);
 }
 
 .toast-demo__description {
+  color: var(--uilib-color-neutral-600, #525252);
   font-size: 1rem;
   line-height: 1.7;
-  color: var(--uilib-color-neutral-600, #525252);
   margin: 0;
 
   code {
+    background: var(--uilib-color-neutral-100, #f5f5f5);
+    border-radius: 0.25rem;
     font-family: var(--uilib-font-mono, monospace);
     font-size: 0.875em;
-    background: var(--uilib-color-neutral-100, #f5f5f5);
     padding: 0.1em 0.35em;
-    border-radius: 0.25rem;
   }
 }
 
@@ -44,34 +44,34 @@
 }
 
 .toast-demo__section-title {
+  border-bottom: 1px solid var(--uilib-color-neutral-200, #e5e5e5);
+  color: var(--uilib-color-neutral-800, #262626);
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
-  color: var(--uilib-color-neutral-800, #262626);
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--uilib-color-neutral-200, #e5e5e5);
 }
 
 .toast-demo__section-desc {
+  color: var(--uilib-color-neutral-600, #525252);
   font-size: 0.9375rem;
   line-height: 1.6;
-  color: var(--uilib-color-neutral-600, #525252);
   margin: 0;
 
   code {
+    background: var(--uilib-color-neutral-100, #f5f5f5);
+    border-radius: 0.25rem;
     font-family: var(--uilib-font-mono, monospace);
     font-size: 0.875em;
-    background: var(--uilib-color-neutral-100, #f5f5f5);
     padding: 0.1em 0.35em;
-    border-radius: 0.25rem;
   }
 }
 
 .toast-demo__row {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 0.625rem;
-  align-items: center;
 }
 
 // Position / variant picker
@@ -89,11 +89,11 @@
 }
 
 .toast-demo__picker-label {
+  color: var(--uilib-color-neutral-500, #737373);
   font-size: 0.8125rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--uilib-color-neutral-500, #737373);
+  text-transform: uppercase;
 }
 
 .toast-demo__chip-row {
@@ -103,13 +103,13 @@
 }
 
 .toast-demo__chip {
+  background: transparent;
+  border: 1px solid var(--uilib-color-neutral-300, #d4d4d4);
+  border-radius: 2rem;
+  color: var(--uilib-color-neutral-700, #404040);
+  cursor: pointer;
   font-size: 0.8125rem;
   padding: 0.3rem 0.75rem;
-  border-radius: 2rem;
-  border: 1px solid var(--uilib-color-neutral-300, #d4d4d4);
-  background: transparent;
-  cursor: pointer;
-  color: var(--uilib-color-neutral-700, #404040);
   transition:
     background 0.15s ease,
     border-color 0.15s ease;
@@ -128,28 +128,28 @@
 // API tables
 
 .toast-demo__api-subtitle {
+  color: var(--uilib-color-neutral-700, #404040);
   font-size: 1rem;
   font-weight: 600;
   margin: 0.5rem 0 0.25rem;
-  color: var(--uilib-color-neutral-700, #404040);
 }
 
 .toast-demo__api-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  width: 100%;
 
   th,
   td {
-    text-align: left;
-    padding: 0.5rem 0.75rem;
     border: 1px solid var(--uilib-color-neutral-200, #e5e5e5);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
   }
 
   th {
     background: var(--uilib-color-neutral-50, #fafafa);
-    font-weight: 600;
     color: var(--uilib-color-neutral-700, #404040);
+    font-weight: 600;
   }
 
   td {
@@ -158,11 +158,11 @@
   }
 
   code {
+    background: var(--uilib-color-neutral-100, #f5f5f5);
+    border-radius: 0.25rem;
     font-family: var(--uilib-font-mono, monospace);
     font-size: 0.875em;
-    background: var(--uilib-color-neutral-100, #f5f5f5);
     padding: 0.1em 0.3em;
-    border-radius: 0.25rem;
   }
 }
 
@@ -185,8 +185,8 @@
   }
 
   .toast-demo__section-title {
-    color: var(--uilib-color-neutral-100, #f5f5f5);
     border-bottom-color: var(--uilib-color-neutral-700, #404040);
+    color: var(--uilib-color-neutral-100, #f5f5f5);
   }
 
   .toast-demo__api-subtitle {
@@ -195,13 +195,13 @@
 
   .toast-demo__api-table th {
     background: var(--uilib-color-neutral-800, #262626);
-    color: var(--uilib-color-neutral-200, #e5e5e5);
     border-color: var(--uilib-color-neutral-700, #404040);
+    color: var(--uilib-color-neutral-200, #e5e5e5);
   }
 
   .toast-demo__api-table td {
-    color: var(--uilib-color-neutral-300, #d4d4d4);
     border-color: var(--uilib-color-neutral-700, #404040);
+    color: var(--uilib-color-neutral-300, #d4d4d4);
   }
 
   .toast-demo__api-table td code {
@@ -216,5 +216,11 @@
     &:hover {
       background: var(--uilib-color-neutral-700, #404040);
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-demo__chip {
+    /* TODO: set transition / animation to none */
   }
 }

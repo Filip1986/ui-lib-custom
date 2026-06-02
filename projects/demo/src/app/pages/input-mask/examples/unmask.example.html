@@ -1,11 +1,11 @@
 <ui-lib-input-mask
   mask="(999) 999-9999"
-  [(ngModel)]="maskedModel"
   [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="maskedModel"
 />
 <ui-lib-input-mask
   mask="(999) 999-9999"
+  [ngModelOptions]="{ standalone: true }"
   [unmask]="true"
   [(ngModel)]="unmaskedModel"
-  [ngModelOptions]="{ standalone: true }"
 />

@@ -11,8 +11,8 @@
 
     <ui-lib-upload
       [variant]="activeVariant()"
-      (fileSelect)="onFileSelect($event)"
       (fileRemove)="onFileRemove($event)"
+      (fileSelect)="onFileSelect($event)"
       (uploadClear)="onUploadClear()"
     />
   </app-doc-section>
@@ -22,12 +22,12 @@
     <p class="demo-section__description">Accepts up to 5 files, max 5 MB each.</p>
 
     <ui-lib-upload
-      [variant]="activeVariant()"
-      [multiple]="true"
       [fileLimit]="5"
       [maxFileSize]="5242880"
-      (fileSelect)="onFileSelect($event)"
+      [multiple]="true"
+      [variant]="activeVariant()"
       (fileRemove)="onFileRemove($event)"
+      (fileSelect)="onFileSelect($event)"
       (uploadClear)="onUploadClear()"
     />
   </app-doc-section>
@@ -39,16 +39,16 @@
     </p>
 
     <ui-lib-upload
-      [variant]="activeVariant()"
-      [multiple]="true"
       accept="image/*"
+      [multiple]="true"
       [previewWidth]="60"
-      (fileSelect)="onFileSelect($event)"
+      [variant]="activeVariant()"
       (fileRemove)="onFileRemove($event)"
+      (fileSelect)="onFileSelect($event)"
     >
       <ng-template uiUploadEmpty>
         <div class="upload-demo__custom-empty">
-          <span class="upload-demo__custom-empty-icon" aria-hidden="true">🖼</span>
+          <span aria-hidden="true" class="upload-demo__custom-empty-icon">🖼</span>
           <p>Drop images here or click to browse</p>
           <small>JPG, PNG, GIF, WebP supported</small>
         </div>
@@ -65,12 +65,12 @@
 
     <div class="upload-demo__two-col">
       <ui-lib-upload
-        [variant]="activeVariant()"
-        [multiple]="true"
         [customUpload]="true"
-        (uploadHandler)="onCustomUpload($event)"
-        (fileSelect)="onFileSelect($event)"
+        [multiple]="true"
+        [variant]="activeVariant()"
         (fileRemove)="onFileRemove($event)"
+        (fileSelect)="onFileSelect($event)"
+        (uploadHandler)="onCustomUpload($event)"
       />
 
       <div class="upload-demo__log-panel">
@@ -100,14 +100,14 @@
     </p>
 
     <ui-lib-upload
-      [variant]="activeVariant()"
-      [multiple]="true"
       [auto]="true"
       [customUpload]="true"
-      [showUploadButton]="false"
+      [multiple]="true"
       [showCancelButton]="false"
-      (uploadHandler)="onCustomUpload($event)"
+      [showUploadButton]="false"
+      [variant]="activeVariant()"
       (fileSelect)="onFileSelect($event)"
+      (uploadHandler)="onCustomUpload($event)"
     />
   </app-doc-section>
 
@@ -117,7 +117,7 @@
       @for (size of ['sm', 'md', 'lg']; track size) {
         <div>
           <p class="upload-demo__size-label">{{ size }}</p>
-          <ui-lib-upload [variant]="activeVariant()" [size]="$any(size)" />
+          <ui-lib-upload [size]="$any(size)" [variant]="activeVariant()" />
         </div>
       }
     </div>
@@ -130,8 +130,8 @@
       custom template.
     </p>
 
-    <ui-lib-upload [variant]="activeVariant()" [multiple]="true">
-      <ng-template uiUploadFile let-item let-index="index">
+    <ui-lib-upload [multiple]="true" [variant]="activeVariant()">
+      <ng-template let-index="index" let-item uiUploadFile>
         <div class="upload-demo__custom-file">
           <span class="upload-demo__custom-file-index">{{ index + 1 }}</span>
           <span class="upload-demo__custom-file-name">{{ item.file.name }}</span>
@@ -143,7 +143,7 @@
 
   <!-- ── Section 8: Disabled ─────────────────────────────────────────────── -->
   <app-doc-section id="disabled" title="Disabled">
-    <ui-lib-upload [variant]="activeVariant()" [disabled]="true" />
+    <ui-lib-upload [disabled]="true" [variant]="activeVariant()" />
   </app-doc-section>
 
   <!-- ── Event log ──────────────────────────────────────────────────────────── -->
@@ -183,9 +183,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -194,8 +194,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

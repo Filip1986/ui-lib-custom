@@ -6,20 +6,20 @@
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="demo" label="Demo" />
-      <ui-lib-tab value="usage" label="Usage" />
-      <ui-lib-tab value="api" label="API Reference" />
+      <ui-lib-tab label="Demo" value="demo" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="API Reference" value="api" />
     </ui-lib-tabs>
   </div>
 
   @if (activeTab() === 'demo') {
     <div class="doc-demo-group spacing-playground">
-      <ui-lib-stack spacing="lg" class="spacing-stack">
+      <ui-lib-stack class="spacing-stack" spacing="lg">
         <div class="control-panel">
           <ui-lib-stack spacing="md">
             <div class="panel-title">
@@ -31,50 +31,50 @@
             <div class="control-grid">
               <ui-lib-select
                 label="Container size"
-                [options]="sizeOptions"
                 [ngModel]="containerSize()"
+                [options]="sizeOptions"
                 (ngModelChange)="setContainerSize($event)"
               />
               <ui-lib-select
                 label="Container inset"
-                [options]="insetOptions"
                 [ngModel]="containerInset()"
+                [options]="insetOptions"
                 (ngModelChange)="setContainerInset($event)"
               />
               <ui-lib-select
                 label="Stack spacing"
-                [options]="spacingOptions"
                 [ngModel]="stackSpacing()"
+                [options]="spacingOptions"
                 (ngModelChange)="setStackSpacing($event)"
               />
               <ui-lib-select
                 label="Inline spacing"
-                [options]="inlineSpacingOptions"
                 [ngModel]="inlineSpacing()"
+                [options]="inlineSpacingOptions"
                 (ngModelChange)="setInlineSpacing($event)"
               />
               <ui-lib-select
                 label="Grid spacing"
-                [options]="spacingOptions"
                 [ngModel]="gridSpacing()"
+                [options]="spacingOptions"
                 (ngModelChange)="setGridSpacing($event)"
               />
               <ui-lib-select
                 label="Grid columns"
-                [options]="columnOptions"
                 [ngModel]="columns()"
+                [options]="columnOptions"
                 (ngModelChange)="setColumns($event)"
               />
               <ui-lib-select
                 label="Left theme"
-                [options]="themeOptions"
                 [ngModel]="leftTheme()"
+                [options]="themeOptions"
                 (ngModelChange)="setLeftTheme($event)"
               />
               <ui-lib-select
                 label="Right theme"
-                [options]="themeOptions"
                 [ngModel]="rightTheme()"
+                [options]="themeOptions"
                 (ngModelChange)="setRightTheme($event)"
               />
             </div>
@@ -95,9 +95,9 @@
               <div class="panel-header">{{ leftTheme() | titlecase }} Theme</div>
               <div class="panel-body">
                 <ui-lib-container
-                  [size]="containerSize()"
-                  [inset]="containerInset()"
                   style="background: var(--uilib-surface)"
+                  [inset]="containerInset()"
+                  [size]="containerSize()"
                 >
                   <ui-lib-stack [spacing]="stackSpacing()">
                     <h4>Stack + Inline</h4>
@@ -120,9 +120,9 @@
               <div class="panel-header">{{ rightTheme() | titlecase }} Theme</div>
               <div class="panel-body">
                 <ui-lib-container
-                  [size]="containerSize()"
-                  [inset]="containerInset()"
                   style="background: var(--uilib-surface)"
+                  [inset]="containerInset()"
+                  [size]="containerSize()"
                 >
                   <ui-lib-stack [spacing]="stackSpacing()">
                     <h4>Stack + Inline</h4>

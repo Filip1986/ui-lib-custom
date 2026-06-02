@@ -33,13 +33,13 @@
 
     // Nav disabled state
     --uilib-carousel-nav-disabled-opacity: 0.4;
+    animation: uilib-carousel-mount var(--uilib-transition-duration-fast, 0.15s)
+      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
 
     // ─── Root layout ────────────────────────────────────────────────────────────
     display: flex;
     flex-direction: column;
     width: 100%;
-    animation: uilib-carousel-mount var(--uilib-transition-duration-fast, 0.15s)
-      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
   }
 
   // ─── Content container ────────────────────────────────────────────────────────
@@ -51,18 +51,18 @@
   }
 
   .uilib-carousel-content {
+    align-items: center;
     display: flex;
     flex-direction: row;
-    align-items: center;
     gap: var(--uilib-carousel-content-gap);
   }
 
   // ─── Viewport ─────────────────────────────────────────────────────────────────
 
   .uilib-carousel-viewport {
+    flex: 1;
     overflow: hidden;
     width: 100%;
-    flex: 1;
   }
 
   .uilib-carousel-item-list {
@@ -72,9 +72,9 @@
   }
 
   .uilib-carousel-item {
+    box-sizing: border-box;
     // flex-basis is set dynamically via the injected <style> element
     flex-shrink: 0;
-    box-sizing: border-box;
     padding: 0 calc(var(--uilib-carousel-gap) / 2);
   }
 
@@ -115,25 +115,25 @@
 
   .uilib-carousel-prev-button,
   .uilib-carousel-next-button {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: var(--uilib-carousel-nav-button-size);
-    height: var(--uilib-carousel-nav-button-size);
     background: var(--uilib-carousel-nav-button-bg);
-    color: var(--uilib-carousel-nav-button-color);
     border: var(--uilib-carousel-nav-button-border);
     border-radius: var(--uilib-carousel-nav-button-radius);
     box-shadow: var(--uilib-carousel-nav-button-shadow);
+    color: var(--uilib-carousel-nav-button-color);
     cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    height: var(--uilib-carousel-nav-button-size);
+    justify-content: center;
+    outline: none;
+    padding: 0;
     transition:
       background var(--uilib-carousel-transition),
       color var(--uilib-carousel-transition),
       box-shadow var(--uilib-carousel-transition);
-    outline: none;
-    padding: 0;
     user-select: none;
+    width: var(--uilib-carousel-nav-button-size);
 
     &:hover:not(:disabled) {
       background: var(--uilib-carousel-nav-button-bg-hover);
@@ -145,16 +145,16 @@
 
     &:disabled,
     &.uilib-carousel-nav-disabled {
-      opacity: var(--uilib-carousel-nav-disabled-opacity);
       cursor: not-allowed;
+      opacity: var(--uilib-carousel-nav-disabled-opacity);
       pointer-events: none;
     }
   }
 
   .uilib-carousel-nav-icon {
-    width: var(--uilib-carousel-nav-icon-size);
-    height: var(--uilib-carousel-nav-icon-size);
     display: block;
+    height: var(--uilib-carousel-nav-icon-size);
+    width: var(--uilib-carousel-nav-icon-size);
   }
 
   // ─── Indicators ───────────────────────────────────────────────────────────────
@@ -162,28 +162,28 @@
   .uilib-carousel-indicator-list {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     flex-wrap: wrap;
     gap: var(--uilib-carousel-indicator-gap);
-    padding: var(--uilib-carousel-indicator-padding);
-    margin: 0;
+    justify-content: center;
     list-style: none;
+    margin: 0;
+    padding: var(--uilib-carousel-indicator-padding);
   }
 
   .uilib-carousel-indicator-button {
-    display: block;
-    width: var(--uilib-carousel-indicator-width);
-    height: var(--uilib-carousel-indicator-height);
+    background: var(--uilib-carousel-indicator-bg);
     border: none;
     border-radius: var(--uilib-carousel-indicator-radius);
-    background: var(--uilib-carousel-indicator-bg);
     cursor: pointer;
-    padding: 0;
+    display: block;
+    height: var(--uilib-carousel-indicator-height);
     margin: 0;
+    outline: none;
+    padding: 0;
     transition:
       background var(--uilib-carousel-transition),
       width var(--uilib-carousel-transition);
-    outline: none;
+    width: var(--uilib-carousel-indicator-width);
 
     &:hover {
       background: var(--uilib-carousel-indicator-bg-hover);
@@ -212,21 +212,21 @@
   // ─── Autoplay button ──────────────────────────────────────────────────────────
 
   .uilib-carousel-autoplay-button {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: var(--uilib-carousel-nav-button-size);
-    height: var(--uilib-carousel-nav-button-size);
+    align-self: center;
     background: var(--uilib-carousel-nav-button-bg);
-    color: var(--uilib-carousel-nav-button-color);
     border: var(--uilib-carousel-nav-button-border);
     border-radius: var(--uilib-carousel-nav-button-radius);
+    color: var(--uilib-carousel-nav-button-color);
     cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    height: var(--uilib-carousel-nav-button-size);
+    justify-content: center;
+    margin-bottom: var(--uilib-spacing-1, 0.25rem);
     outline: none;
     padding: 0;
-    align-self: center;
-    margin-bottom: var(--uilib-spacing-1, 0.25rem);
+    width: var(--uilib-carousel-nav-button-size);
 
     &:hover {
       background: var(--uilib-carousel-nav-button-bg-hover);

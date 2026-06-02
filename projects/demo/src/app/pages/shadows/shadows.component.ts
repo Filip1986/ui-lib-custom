@@ -1,18 +1,19 @@
-import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
-import type { WritableSignal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+
 import type { CardElevation } from 'ui-lib-custom/card';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { Panel } from 'ui-lib-custom/panel';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
 import { SHADOWS } from 'ui-lib-custom/tokens';
+
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-
-import { Panel } from 'ui-lib-custom/panel';
 interface ElevationExample {
   level: number;
   label: string;

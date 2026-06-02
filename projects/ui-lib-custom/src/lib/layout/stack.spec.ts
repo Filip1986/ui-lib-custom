@@ -1,12 +1,14 @@
+import { provideZonelessChangeDetection } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { provideZonelessChangeDetection } from '@angular/core';
-import { Stack } from './stack';
-import type { StackAlign, StackJustify, StackTag, StackWrap } from './stack';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import type { SpacingToken, StackToken } from 'ui-lib-custom/tokens';
-import { Grid } from './grid';
+
 import { Container } from './container';
+import { Grid } from './grid';
+import type { StackAlign, StackJustify, StackTag, StackWrap } from './stack';
+import { Stack } from './stack';
 
 @Component({
   standalone: true,

@@ -1,20 +1,22 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
+import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
+import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { OrderListComponent } from './order-list.component';
 import { OrderListItemDirective } from './order-list-templates.directive';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
-import { provideUiLibIcons } from 'ui-lib-custom/icon';
-import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 
 // ---------------------------------------------------------------------------
 // ThemeConfigService mock

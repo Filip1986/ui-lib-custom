@@ -1,12 +1,12 @@
 @layer uilib.components {
   .ui-lib-input-group {
-    display: flex;
     align-items: stretch;
+    display: flex;
     width: 100%;
 
     > * {
-      position: relative;
       margin: 0;
+      position: relative;
     }
 
     > ui-lib-input,
@@ -29,8 +29,8 @@
 
     > ui-lib-float-label,
     > .ui-lib-icon-field {
-      display: flex;
       align-items: stretch;
+      display: flex;
       width: 100%;
     }
   }
@@ -128,11 +128,11 @@
     > .ui-lib-icon-field:first-child
     > ui-lib-cascade-select
     .ui-lib-cascade-select__trigger {
-    border-start-start-radius: var(
+    border-end-start-radius: var(
       --uilib-input-group-addon-border-radius,
       var(--uilib-border-radius, 6px)
     );
-    border-end-start-radius: var(
+    border-start-start-radius: var(
       --uilib-input-group-addon-border-radius,
       var(--uilib-border-radius, 6px)
     );
@@ -191,11 +191,11 @@
     > .ui-lib-icon-field:last-child
     > ui-lib-cascade-select
     .ui-lib-cascade-select__trigger {
-    border-start-end-radius: var(
+    border-end-end-radius: var(
       --uilib-input-group-addon-border-radius,
       var(--uilib-border-radius, 6px)
     );
-    border-end-end-radius: var(
+    border-start-end-radius: var(
       --uilib-input-group-addon-border-radius,
       var(--uilib-border-radius, 6px)
     );

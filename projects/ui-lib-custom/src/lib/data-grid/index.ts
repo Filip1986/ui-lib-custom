@@ -1,11 +1,11 @@
 export { DataGridComponent } from './data-grid.component';
-export {
-  DataGridColumnComponent,
-  DataGridColumnHeaderDirective,
-  DataGridColumnBodyDirective,
-  DataGridColumnEditorDirective,
-  DataGridColumnFooterDirective,
-  DataGridColumnFilterDirective,
-} from './data-grid-column.component';
+export { DATA_GRID_CLASS, DATA_GRID_DEFAULTS } from './data-grid.constants';
 export type * from './data-grid.types';
-export { DATA_GRID_DEFAULTS, DATA_GRID_CLASS } from './data-grid.constants';
+export {
+  DataGridColumnBodyDirective,
+  DataGridColumnComponent,
+  DataGridColumnEditorDirective,
+  DataGridColumnFilterDirective,
+  DataGridColumnFooterDirective,
+  DataGridColumnHeaderDirective,
+} from './data-grid-column.component';

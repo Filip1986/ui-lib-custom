@@ -3,7 +3,7 @@
 // Do not edit manually.
 
 export const basicHtml = `<ui-lib-order-list [value]="products" [(selection)]="selection">
-  <ng-template uiOrderListItem let-item>
+  <ng-template let-item uiOrderListItem>
     <div class="demo-ol-row">
       <span class="demo-ol-name">{{ item.name }}</span>
       <span class="demo-ol-price">{{ formatPrice(item.price) }}</span>
@@ -38,12 +38,8 @@ export class MyComponent {
   }
 }`;
 
-export const dragDropHtml = `<ui-lib-order-list
-  [value]="dragProducts"
-  [dragDrop]="true"
-  (reordered)="onReorder($event)"
->
-  <ng-template uiOrderListItem let-item>
+export const dragDropHtml = `<ui-lib-order-list [dragDrop]="true" [value]="dragProducts" (reordered)="onReorder($event)">
+  <ng-template let-item uiOrderListItem>
     <span>{{ item.name }}</span>
   </ng-template>
 </ui-lib-order-list>`;
@@ -74,12 +70,8 @@ export class MyComponent {
   }
 }`;
 
-export const filterHtml = `<ui-lib-order-list
-  [value]="filterProducts"
-  filterBy="name"
-  filterPlaceholder="Search products…"
->
-  <ng-template uiOrderListItem let-item>
+export const filterHtml = `<ui-lib-order-list filterBy="name" filterPlaceholder="Search products…" [value]="filterProducts">
+  <ng-template let-item uiOrderListItem>
     <span>{{ item.name }}</span>
   </ng-template>
 </ui-lib-order-list>`;
@@ -109,7 +101,7 @@ export const templateHtml = `<ui-lib-order-list [value]="templateProducts" [(sel
   <ng-template uiOrderListHeader>
     <span>Products ({{ templateProducts().length }})</span>
   </ng-template>
-  <ng-template uiOrderListItem let-item>
+  <ng-template let-item uiOrderListItem>
     <div class="demo-ol-card-row">
       <span class="demo-ol-category-badge">{{ item.category }}</span>
       <strong class="demo-ol-name">{{ item.name }}</strong>

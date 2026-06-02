@@ -1,17 +1,18 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { PanelMenuSubComponent } from './panel-menu-sub';
-import { PANEL_MENU_CONTEXT } from './panel-menu-context';
-import type { PanelMenuContext } from './panel-menu-context';
+
 import type { PanelMenuItem } from './panel-menu.types';
+import type { PanelMenuContext } from './panel-menu-context';
+import { PANEL_MENU_CONTEXT } from './panel-menu-context';
+import { PanelMenuSubComponent } from './panel-menu-sub';
 
 /**
  * The recursive PanelMenuSubComponent owns the in-panel keyboard contract

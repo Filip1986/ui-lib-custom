@@ -1,36 +1,38 @@
 import {
+  type AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  ViewEncapsulation,
   computed,
+  ElementRef,
   forwardRef,
   inject,
-  isDevMode,
   input,
-  output,
-  signal,
-  type AfterViewInit,
   type InputSignal,
+  isDevMode,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
-  RadioButtonVariant,
-  RadioButtonSize,
   RadioButtonAppearance,
   RadioButtonChangeEvent,
+  RadioButtonSize,
+  RadioButtonVariant,
 } from './radio-button.types';
 
 export type {
-  RadioButtonVariant,
-  RadioButtonSize,
   RadioButtonAppearance,
   RadioButtonChangeEvent,
+  RadioButtonSize,
+  RadioButtonVariant,
 } from './radio-button.types';
 
 let nextRadioButtonId: number = 0;

@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Multi-line text input with optional auto-resize, character counter, floating-label support, three design variants, three sizes, and full Angular forms integration."
     docHeader
     title="Textarea"
     [importCode]="importCode"
-    description="Multi-line text input with optional auto-resize, character counter, floating-label support, three design variants, three sizes, and full Angular forms integration."
   />
 
   <app-doc-demo-viewport [autoHeight]="true">
@@ -17,8 +17,8 @@
             <ui-lib-textarea
               label="Description"
               placeholder="Enter a description..."
-              [rows]="3"
               [ngModelOptions]="{ standalone: true }"
+              [rows]="3"
               [(ngModel)]="basicValue"
             />
             <span class="value-text">Value: "{{ basicValue }}"</span>
@@ -39,8 +39,8 @@
             label="Notes"
             placeholder="Type here — the textarea will grow..."
             [autoResize]="true"
-            [rows]="3"
             [ngModelOptions]="{ standalone: true }"
+            [rows]="3"
             [(ngModel)]="autoResizeValue"
           />
         </ui-lib-panel>
@@ -55,8 +55,8 @@
           <ui-lib-textarea
             label="Bio"
             placeholder="Tell us about yourself..."
-            [showCounter]="true"
             [ngModelOptions]="{ standalone: true }"
+            [showCounter]="true"
             [(ngModel)]="counterValue"
           />
         </ui-lib-panel>
@@ -74,9 +74,9 @@
           <ui-lib-textarea
             label="Tweet"
             placeholder="What's happening?"
-            [showCounter]="true"
             [maxLength]="280"
             [ngModelOptions]="{ standalone: true }"
+            [showCounter]="true"
             [(ngModel)]="maxLengthValue"
           />
         </ui-lib-panel>
@@ -91,22 +91,22 @@
           <div class="stack-md">
             <ui-lib-textarea
               label="Small"
-              size="sm"
               placeholder="Small (sm)..."
+              size="sm"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="sizeSm"
             />
             <ui-lib-textarea
               label="Medium"
-              size="md"
               placeholder="Medium (md)..."
+              size="md"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="sizeMd"
             />
             <ui-lib-textarea
               label="Large"
-              size="lg"
               placeholder="Large (lg)..."
+              size="lg"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="sizeLg"
             />
@@ -123,22 +123,22 @@
           <div class="stack-md">
             <ui-lib-textarea
               label="Material"
-              variant="material"
               placeholder="Material variant..."
+              variant="material"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="variantMaterial"
             />
             <ui-lib-textarea
               label="Bootstrap"
-              variant="bootstrap"
               placeholder="Bootstrap variant..."
+              variant="bootstrap"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="variantBootstrap"
             />
             <ui-lib-textarea
               label="Minimal"
-              variant="minimal"
               placeholder="Minimal variant..."
+              variant="minimal"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="variantMinimal"
             />
@@ -169,8 +169,8 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-textarea
             label="Terms"
-            [readonly]="true"
             [ngModelOptions]="{ standalone: true }"
+            [readonly]="true"
             [(ngModel)]="readonlyValue"
           />
         </ui-lib-panel>
@@ -183,10 +183,10 @@
         <p class="section-text">Pass an <code>error</code> string to show a validation message.</p>
         <ui-lib-panel variant="minimal">
           <ui-lib-textarea
-            label="Address"
             error="This field is required"
-            [required]="true"
+            label="Address"
             [ngModelOptions]="{ standalone: true }"
+            [required]="true"
             [(ngModel)]="invalidValue"
           />
         </ui-lib-panel>
@@ -202,17 +202,17 @@
         <ui-lib-panel variant="minimal">
           <form class="stack-md" [formGroup]="form" (ngSubmit)="submitForm()">
             <ui-lib-textarea
+              formControlName="feedback"
               label="Feedback"
               placeholder="Share your thoughts..."
-              [showCounter]="true"
-              [maxLength]="500"
-              [required]="true"
               [error]="
                 form.controls.feedback.invalid && form.controls.feedback.touched
                   ? 'Feedback is required'
                   : null
               "
-              formControlName="feedback"
+              [maxLength]="500"
+              [required]="true"
+              [showCounter]="true"
             />
             <div class="form-actions">
               <ui-lib-button type="submit">Submit</ui-lib-button>
@@ -246,9 +246,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -256,8 +256,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

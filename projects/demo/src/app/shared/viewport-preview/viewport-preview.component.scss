@@ -1,20 +1,20 @@
 .viewport-toolbar {
+  background: var(--uilib-surface, #fff);
+  border-bottom: 1px solid var(--uilib-border, #e0e0e0);
+  display: flex;
+  gap: var(--uilib-inline-md, 0.75rem);
+  justify-content: space-between;
+  min-height: var(--uilib-toolbar-height, var(--uilib-touch-size-min, 44px));
+  padding: var(--uilib-toolbar-padding-y, 0.5rem) var(--uilib-toolbar-padding-x, 0.75rem);
   position: sticky;
   top: 0;
   z-index: 5;
-  background: var(--uilib-surface, #fff);
-  border-bottom: 1px solid var(--uilib-border, #e0e0e0);
-  padding: var(--uilib-toolbar-padding-y, 0.5rem) var(--uilib-toolbar-padding-x, 0.75rem);
-  min-height: var(--uilib-toolbar-height, var(--uilib-touch-size-min, 44px));
-  display: flex;
-  justify-content: space-between;
-  gap: var(--uilib-inline-md, 0.75rem);
 }
 
 :host(.mode-inline) .viewport-toolbar {
-  position: static;
   border: 1px solid var(--uilib-border, #e0e0e0);
   border-radius: 12px 12px 0 0;
+  position: static;
 }
 
 .preset-buttons {
@@ -23,63 +23,63 @@
   gap: 0.5rem;
 
   button {
-    padding: 0.35rem 0.6rem;
-    border: 1px solid var(--uilib-border, #e0e0e0);
     background: var(--uilib-surface, #fff);
+    border: 1px solid var(--uilib-border, #e0e0e0);
     border-radius: var(--uilib-radius-sm, 4px);
     cursor: pointer;
+    padding: 0.35rem 0.6rem;
   }
 
   .custom {
-    display: inline-flex;
     align-items: center;
+    display: inline-flex;
     gap: 0.25rem;
 
     input {
-      width: 5rem;
       padding: 0.25rem 0.35rem;
+      width: 5rem;
     }
   }
 }
 
 .controls {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 0.5rem;
 
   button {
-    padding: 0.35rem 0.6rem;
-    border: 1px solid var(--uilib-border, #e0e0e0);
     background: var(--uilib-surface, #fff);
+    border: 1px solid var(--uilib-border, #e0e0e0);
     border-radius: var(--uilib-radius-sm, 4px);
     cursor: pointer;
+    padding: 0.35rem 0.6rem;
   }
 }
 
 .viewport-frame {
+  background: transparent;
   border: 0;
   border-radius: 0;
   box-shadow: none;
-  background: transparent;
-  transform-origin: top left;
+  margin: 0;
   overflow: hidden;
   padding: 0;
-  margin: 0;
+  transform-origin: top left;
 }
 
 .viewport-launcher {
+  background: var(--uilib-button-secondary-bg, #3a3a3a);
+  border-radius: 50%;
+  bottom: 5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  color: var(--uilib-button-secondary-fg, #fff);
+  cursor: pointer;
+  display: grid;
+  height: 3rem;
+  place-items: center;
   position: fixed;
   right: 1rem;
-  bottom: 5rem;
   width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background: var(--uilib-button-secondary-bg, #3a3a3a);
-  color: var(--uilib-button-secondary-fg, #fff);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   z-index: 900;
 }
 

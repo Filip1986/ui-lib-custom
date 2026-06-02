@@ -29,33 +29,33 @@
     --uilib-colorpicker-label-font-size: 0.6875rem;
     --uilib-colorpicker-focus-ring-color: var(--uilib-color-primary-600, #1e88e5);
     --uilib-colorpicker-focus-ring-width: 3px;
-
-    position: relative;
     display: inline-flex;
     flex-direction: column;
     gap: 0.5rem;
+
+    position: relative;
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__trigger {
-    position: relative;
-    width: var(--uilib-colorpicker-trigger-width, 2rem);
-    height: var(--uilib-colorpicker-trigger-height, 2rem);
-    border-radius: var(--uilib-colorpicker-trigger-border-radius, 4px);
-    border: 1px solid var(--uilib-colorpicker-trigger-border-color, #d1d5db);
     background-clip: padding-box;
+    border: 1px solid var(--uilib-colorpicker-trigger-border-color, #d1d5db);
+    border-radius: var(--uilib-colorpicker-trigger-border-radius, 4px);
     cursor: pointer;
+    height: var(--uilib-colorpicker-trigger-height, 2rem);
     overflow: hidden;
+    position: relative;
     transition:
       box-shadow var(--uilib-colorpicker-transition-duration, 200ms) ease,
       border-color var(--uilib-colorpicker-transition-duration, 200ms) ease;
+    width: var(--uilib-colorpicker-trigger-width, 2rem);
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__trigger::after {
-    content: '';
-    position: absolute;
-    inset: 0;
     border-radius: inherit;
+    content: '';
+    inset: 0;
     opacity: 0;
+    position: absolute;
     transform: scale(0.2);
     transition:
       opacity var(--uilib-colorpicker-transition-duration, 200ms) ease,
@@ -63,9 +63,9 @@
   }
 
   ui-lib-color-picker.ui-lib-colorpicker--material .ui-lib-colorpicker__trigger:active::after {
+    background: radial-gradient(circle, rgb(255 255 255 / 60%) 0%, transparent 70%);
     opacity: 0.16;
     transform: scale(1);
-    background: radial-gradient(circle, rgb(255 255 255 / 60%) 0%, transparent 70%);
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__trigger:focus-visible,
@@ -75,15 +75,13 @@
   .ui-lib-colorpicker__color-area:focus-visible,
   ui-lib-color-picker .ui-lib-colorpicker__hue:focus-visible,
   .ui-lib-colorpicker__hue:focus-visible {
-    outline: none;
     box-shadow: 0 0 0 var(--uilib-colorpicker-focus-ring-width)
       color-mix(in srgb, var(--uilib-colorpicker-focus-ring-color) 25%, transparent);
+    outline: none;
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__panel,
   .ui-lib-colorpicker__panel {
-    width: var(--uilib-colorpicker-panel-width, 196px);
-    padding: var(--uilib-colorpicker-panel-padding, 0.75rem);
     background: var(--uilib-colorpicker-panel-bg, #fff);
     border: 1px solid var(--uilib-colorpicker-panel-border-color, #e5e7eb);
     border-radius: var(--uilib-colorpicker-panel-border-radius, 6px);
@@ -91,23 +89,25 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    padding: var(--uilib-colorpicker-panel-padding, 0.75rem);
     transition:
       opacity var(--uilib-colorpicker-transition-duration, 200ms) ease,
       box-shadow var(--uilib-colorpicker-transition-duration, 200ms) ease;
+    width: var(--uilib-colorpicker-panel-width, 196px);
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__controls,
   .ui-lib-colorpicker__controls {
-    display: flex;
     align-items: stretch;
+    display: flex;
     gap: 0.75rem;
   }
 
   ui-lib-color-picker.ui-lib-colorpicker:not(.ui-lib-colorpicker--inline)
     .ui-lib-colorpicker__panel {
+    inset-inline-start: 0;
     position: absolute;
     z-index: var(--uilib-colorpicker-panel-z-index);
-    inset-inline-start: 0;
   }
 
   .ui-lib-colorpicker__panel.ui-lib-colorpicker__panel--overlay {
@@ -126,49 +126,41 @@
 
   ui-lib-color-picker .ui-lib-colorpicker__color-area,
   .ui-lib-colorpicker__color-area {
-    width: 100%;
     aspect-ratio: 1;
-    min-height: 11rem;
-    position: relative;
-    border-radius: 4px;
     border: 1px solid
       color-mix(in srgb, var(--uilib-colorpicker-panel-border-color, #e5e7eb) 70%, transparent);
+    border-radius: 4px;
     cursor: crosshair;
+    min-height: 11rem;
     overflow: hidden;
+    position: relative;
+    width: 100%;
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__color-area-gradient,
   .ui-lib-colorpicker__color-area-gradient {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
     background:
       linear-gradient(to bottom, transparent 0%, #000 100%),
       linear-gradient(to right, #fff 0%, transparent 100%);
+    border-radius: inherit;
+    inset: 0;
+    position: absolute;
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__selector,
   .ui-lib-colorpicker__selector {
-    position: absolute;
-    width: var(--uilib-colorpicker-selector-size, 12px);
-    height: var(--uilib-colorpicker-selector-size, 12px);
     border: 2px solid var(--uilib-colorpicker-selector-border-color, #fff);
     border-radius: 50%;
     box-shadow: 0 0 2px rgb(0 0 0 / 60%);
-    transform: translate(-50%, -50%);
+    height: var(--uilib-colorpicker-selector-size, 12px);
     pointer-events: none;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: var(--uilib-colorpicker-selector-size, 12px);
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__hue,
   .ui-lib-colorpicker__hue {
-    width: var(--uilib-colorpicker-hue-slider-width, 18px);
-    height: var(--uilib-colorpicker-hue-slider-height, 100%);
-    min-height: 11rem;
-    position: relative;
-    border-radius: 4px;
-    border: 1px solid
-      color-mix(in srgb, var(--uilib-colorpicker-panel-border-color, #e5e7eb) 70%, transparent);
-    cursor: ns-resize;
     background: linear-gradient(
       to bottom,
       #f00 0%,
@@ -179,19 +171,27 @@
       #f0f 83%,
       #f00 100%
     );
+    border: 1px solid
+      color-mix(in srgb, var(--uilib-colorpicker-panel-border-color, #e5e7eb) 70%, transparent);
+    border-radius: 4px;
+    cursor: ns-resize;
+    height: var(--uilib-colorpicker-hue-slider-height, 100%);
+    min-height: 11rem;
+    position: relative;
+    width: var(--uilib-colorpicker-hue-slider-width, 18px);
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__hue-handle,
   .ui-lib-colorpicker__hue-handle {
-    width: calc(100% + 4px);
-    height: 6px;
     border: 2px solid var(--uilib-colorpicker-selector-border-color, #fff);
     border-radius: 3px;
     box-shadow: 0 0 2px rgb(0 0 0 / 60%);
-    position: absolute;
+    height: 6px;
     inset-inline-start: -2px;
-    transform: translateY(-50%);
     pointer-events: none;
+    position: absolute;
+    transform: translateY(-50%);
+    width: calc(100% + 4px);
   }
 
   ui-lib-color-picker.ui-lib-colorpicker--disabled {
@@ -210,13 +210,13 @@
   }
 
   ui-lib-color-picker.ui-lib-colorpicker--inline .ui-lib-colorpicker__panel {
-    position: static;
     border: none;
     box-shadow: none;
-    width: 100%;
     max-width: var(--uilib-colorpicker-panel-width, 196px);
-    padding-inline: 0;
     padding-block: 0;
+    padding-inline: 0;
+    position: static;
+    width: 100%;
   }
 
   ui-lib-color-picker.ui-lib-colorpicker--material .ui-lib-colorpicker__trigger {
@@ -257,22 +257,22 @@
   }
 
   ui-lib-color-picker.ui-lib-colorpicker--minimal .ui-lib-colorpicker__trigger {
-    border-width: 1px;
-    border-style: solid;
     border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
     box-shadow: none;
   }
 
   ui-lib-color-picker.ui-lib-colorpicker--minimal .ui-lib-colorpicker__panel {
-    box-shadow: none;
-    border-color: color-mix(in srgb, var(--uilib-border, #d1d5db) 70%, transparent);
     background: color-mix(in srgb, var(--uilib-surface, #fff) 96%, transparent);
+    border-color: color-mix(in srgb, var(--uilib-border, #d1d5db) 70%, transparent);
+    box-shadow: none;
   }
 
   .ui-lib-colorpicker__panel.ui-lib-colorpicker__panel--minimal {
-    box-shadow: none;
-    border-color: color-mix(in srgb, var(--uilib-border, #d1d5db) 70%, transparent);
     background: color-mix(in srgb, var(--uilib-surface, #fff) 96%, transparent);
+    border-color: color-mix(in srgb, var(--uilib-border, #d1d5db) 70%, transparent);
+    box-shadow: none;
   }
 
   /* ── Keyboard-accessible inputs ───────────────────────────────────────────── */
@@ -292,10 +292,10 @@
 
   ui-lib-color-picker .ui-lib-colorpicker__input-group,
   .ui-lib-colorpicker__input-group {
-    display: flex;
     align-items: center;
-    gap: 0.25rem;
+    display: flex;
     flex: 1;
+    gap: 0.25rem;
     min-width: 0;
   }
 
@@ -307,43 +307,43 @@
 
   ui-lib-color-picker .ui-lib-colorpicker__input-label,
   .ui-lib-colorpicker__input-label {
+    color: var(--uilib-text-secondary, #6b7280);
+    flex-shrink: 0;
     font-size: var(--uilib-colorpicker-label-font-size);
     font-weight: 500;
-    color: var(--uilib-text-secondary, #6b7280);
-    white-space: nowrap;
-    flex-shrink: 0;
     line-height: 1;
+    white-space: nowrap;
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__text-input,
   .ui-lib-colorpicker__text-input {
-    width: 100%;
-    min-width: 0;
-    padding: 0.1875rem 0.375rem;
-    font-size: var(--uilib-colorpicker-label-font-size);
-    font-family: var(--uilib-font-mono, monospace);
+    background: transparent;
     border: 1px solid var(--uilib-colorpicker-panel-border-color, #e5e7eb);
     border-radius: var(--uilib-radius-sm, 3px);
-    background: transparent;
     color: inherit;
-    text-transform: uppercase;
+    font-family: var(--uilib-font-mono, monospace);
+    font-size: var(--uilib-colorpicker-label-font-size);
     line-height: 1.4;
+    min-width: 0;
+    padding: 0.1875rem 0.375rem;
+    text-transform: uppercase;
+    width: 100%;
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__number-input,
   .ui-lib-colorpicker__number-input {
-    width: 100%;
-    min-width: 0;
-    padding: 0.1875rem 0.25rem;
-    font-size: var(--uilib-colorpicker-label-font-size);
-    border: 1px solid var(--uilib-colorpicker-panel-border-color, #e5e7eb);
-    border-radius: var(--uilib-radius-sm, 3px);
-    background: transparent;
-    color: inherit;
-    text-align: center;
-    line-height: 1.4;
     -moz-appearance: textfield;
     appearance: textfield;
+    background: transparent;
+    border: 1px solid var(--uilib-colorpicker-panel-border-color, #e5e7eb);
+    border-radius: var(--uilib-radius-sm, 3px);
+    color: inherit;
+    font-size: var(--uilib-colorpicker-label-font-size);
+    line-height: 1.4;
+    min-width: 0;
+    padding: 0.1875rem 0.25rem;
+    text-align: center;
+    width: 100%;
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__number-input::-webkit-inner-spin-button,
@@ -358,10 +358,10 @@
   .ui-lib-colorpicker__text-input:focus-visible,
   ui-lib-color-picker .ui-lib-colorpicker__number-input:focus-visible,
   .ui-lib-colorpicker__number-input:focus-visible {
-    outline: none;
+    border-color: var(--uilib-colorpicker-focus-ring-color);
     box-shadow: 0 0 0 2px
       color-mix(in srgb, var(--uilib-colorpicker-focus-ring-color) 30%, transparent);
-    border-color: var(--uilib-colorpicker-focus-ring-color);
+    outline: none;
   }
   /* ── Panel enter animation (popup mode only) ──────────────────────────────── */
 
@@ -378,10 +378,10 @@
   }
 
   ui-lib-color-picker:not(.ui-lib-colorpicker--inline) .ui-lib-colorpicker__panel {
-    transform-origin: top center;
     animation: uilib-colorpicker-panel-in
       var(--uilib-transition-duration-fast, var(--uilib-colorpicker-transition-duration, 200ms))
       var(--uilib-transition-easing-enter, ease-out) both;
+    transform-origin: top center;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -389,8 +389,8 @@
     ui-lib-color-picker .ui-lib-colorpicker__trigger::after,
     ui-lib-color-picker .ui-lib-colorpicker__panel {
       animation: none;
-      transition: none;
       transform: none;
+      transition: none;
     }
   }
 } // end @layer uilib.components

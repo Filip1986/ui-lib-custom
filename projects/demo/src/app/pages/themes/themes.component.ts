@@ -1,24 +1,26 @@
-import { Component, ChangeDetectionStrategy, inject, signal, viewChild } from '@angular/core';
-import type { WritableSignal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { Badge } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
-import { Inline } from 'ui-lib-custom/layout';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { UiLibInput } from 'ui-lib-custom/input';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import { Inline } from 'ui-lib-custom/layout';
+import { Panel } from 'ui-lib-custom/panel';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { Router } from '@angular/router';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-import { Panel } from 'ui-lib-custom/panel';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 type TabKey = 'playground' | 'api-reference' | 'usage';
 
 /**

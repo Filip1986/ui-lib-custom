@@ -1,3 +1,5 @@
+export { SpeedDialComponent } from './speed-dial.component';
+export { SPEED_DIAL_DEFAULTS, SPEED_DIAL_IDS } from './speed-dial.constants';
 export type {
   SpeedDialClickEvent,
   SpeedDialDirection,
@@ -10,9 +12,6 @@ export type {
   SpeedDialVariant,
   SpeedDialVisibleChangeEvent,
 } from './speed-dial.types';
-
-export { SPEED_DIAL_DEFAULTS, SPEED_DIAL_IDS } from './speed-dial.constants';
-export { SpeedDialComponent } from './speed-dial.component';
 export {
   SpeedDialButtonDirective,
   SpeedDialIconDirective,

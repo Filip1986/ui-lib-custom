@@ -1,19 +1,22 @@
 import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import { provideIcons } from '@ng-icons/core';
 import { lucideMinus, lucidePlus } from '@ng-icons/lucide';
+
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
+
 import { Accordion } from './accordion';
-import { AccordionPanel } from './accordion-panel';
+import { ACCORDION_PANEL_STATES } from './accordion.constants';
 import type {
   AccordionChangeEvent,
   AccordionExpandMode,
   AccordionSize,
   AccordionVariant,
 } from './accordion.types';
-import { ACCORDION_PANEL_STATES } from './accordion.constants';
+import { AccordionPanel } from './accordion-panel';
 
 interface AccordionConfig {
   variant: AccordionVariant;

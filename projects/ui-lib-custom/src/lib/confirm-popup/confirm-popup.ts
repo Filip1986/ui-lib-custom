@@ -1,3 +1,12 @@
+import { DOCUMENT } from '@angular/common';
+import type {
+  InputSignal,
+  ModelSignal,
+  OnDestroy,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -13,18 +22,11 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import type {
-  InputSignal,
-  ModelSignal,
-  OnDestroy,
-  OutputEmitterRef,
-  Signal,
-  WritableSignal,
-} from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+
 import { FocusTrap, KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { ConfirmPopupService } from './confirm-popup.service';
 import type {
   ConfirmPopupButtonSeverity,

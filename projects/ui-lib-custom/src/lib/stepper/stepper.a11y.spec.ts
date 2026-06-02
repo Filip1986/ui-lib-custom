@@ -5,7 +5,8 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { Stepper, STEPPER_DEFAULT_ARIA_LABEL } from './stepper';
 import { StepperPanel } from './stepper-panel';

@@ -2,7 +2,9 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
+
 import type { NavItem } from './sidebar.component';
 import { SidebarComponent } from './sidebar.component';
 

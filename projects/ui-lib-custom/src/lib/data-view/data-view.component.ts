@@ -1,18 +1,4 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  TemplateRef,
-  ViewEncapsulation,
-  computed,
-  contentChild,
-  effect,
-  inject,
-  input,
-  model,
-  output,
-  signal,
-} from '@angular/core';
 import type {
   InputSignal,
   ModelSignal,
@@ -21,15 +7,24 @@ import type {
   TrackByFunction,
   WritableSignal,
 } from '@angular/core';
-import type {
-  DataViewGridItemContext,
-  DataViewLayout,
-  DataViewListItemContext,
-  DataViewPageEvent,
-  DataViewSize,
-  DataViewSortEvent,
-  DataViewSortOrder,
-} from './data-view.types';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  contentChild,
+  effect,
+  inject,
+  input,
+  model,
+  output,
+  signal,
+  TemplateRef,
+  ViewEncapsulation,
+} from '@angular/core';
+
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+
+import { DATA_VIEW_DEFAULT_ROWS_PER_PAGE } from './data-view.constants';
 import {
   DataViewEmptyDirective,
   DataViewFooterDirective,
@@ -40,8 +35,15 @@ import {
   DataViewPaginatorLeftDirective,
   DataViewPaginatorRightDirective,
 } from './data-view.template-directives';
-import { DATA_VIEW_DEFAULT_ROWS_PER_PAGE } from './data-view.constants';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import type {
+  DataViewGridItemContext,
+  DataViewLayout,
+  DataViewListItemContext,
+  DataViewPageEvent,
+  DataViewSize,
+  DataViewSortEvent,
+  DataViewSortOrder,
+} from './data-view.types';
 
 type DataViewPaginatorPosition = 'top' | 'bottom' | 'both';
 type DataViewPageNavigationItem = number | 'ellipsis-left' | 'ellipsis-right';

@@ -1,8 +1,8 @@
 <ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
   optionLabel="name"
   optionValue="code"
-  [forceSelection]="true"
   [autoClear]="true"
+  [forceSelection]="true"
+  [suggestions]="countrySuggestions"
   (completeMethod)="onCountryComplete($event)"
 />

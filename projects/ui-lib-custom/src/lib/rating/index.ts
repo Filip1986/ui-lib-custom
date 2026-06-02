@@ -1,2 +1,2 @@
 export * from './rating';
-export type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } from './rating.types';
+export type { RatingChangeEvent, RatingRateEvent, RatingSize, RatingVariant } from './rating.types';

@@ -1,2 +1,2 @@
-export * from './live-announcer.service';
 export * from './announce.directive';
+export * from './live-announcer.service';

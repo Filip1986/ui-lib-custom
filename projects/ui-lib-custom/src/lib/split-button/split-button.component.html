@@ -1,28 +1,28 @@
 <div class="ui-lib-split-button__container">
   <button
-    type="button"
     class="ui-lib-split-button__default-button"
-    [disabled]="isMainButtonDisabled()"
-    [attr.tabindex]="tabindex()"
+    type="button"
     [attr.aria-label]="resolvedButtonAriaLabel()"
+    [attr.tabindex]="tabindex()"
+    [disabled]="isMainButtonDisabled()"
     (click)="onMainButtonClick($event)"
     (keydown)="onMainButtonKeydown($event)"
   >
     @if (loading()) {
       <ui-lib-icon
-        [name]="loadingIcon()"
+        aria-hidden="true"
         class="ui-lib-split-button__loading-icon"
         size="sm"
-        aria-hidden="true"
+        [name]="loadingIcon()"
       />
     }
 
     @if (!loading() && iconPosition() === 'left' && icon()) {
       <ui-lib-icon
-        [name]="icon()!"
+        aria-hidden="true"
         class="ui-lib-split-button__icon ui-lib-split-button__icon--start"
         size="sm"
-        aria-hidden="true"
+        [name]="icon()!"
       />
     }
 
@@ -34,68 +34,68 @@
 
     @if (!loading() && iconPosition() === 'right' && icon()) {
       <ui-lib-icon
-        [name]="icon()!"
+        aria-hidden="true"
         class="ui-lib-split-button__icon ui-lib-split-button__icon--end"
         size="sm"
-        aria-hidden="true"
+        [name]="icon()!"
       />
     }
   </button>
 
   <button
     #menuBtn
-    type="button"
-    class="ui-lib-split-button__menu-button"
-    [disabled]="isMenuButtonDisabled()"
-    [attr.tabindex]="tabindex()"
     aria-haspopup="menu"
-    [attr.aria-expanded]="isMenuOpen()"
+    class="ui-lib-split-button__menu-button"
+    type="button"
     [attr.aria-controls]="isMenuOpen() ? menuId() : null"
+    [attr.aria-expanded]="isMenuOpen()"
     [attr.aria-label]="menuButtonAriaLabel() || i18n.translate('split-button.more')"
+    [attr.tabindex]="tabindex()"
+    [disabled]="isMenuButtonDisabled()"
     (click)="onMenuButtonClick($event)"
     (keydown)="onMenuButtonKeydown($event)"
   >
     @if (dropdownIconTemplate()) {
       <ng-container [ngTemplateOutlet]="dropdownIconTemplate()!" />
     } @else {
-      <ui-lib-icon [name]="dropdownIcon()" size="sm" aria-hidden="true" />
+      <ui-lib-icon aria-hidden="true" size="sm" [name]="dropdownIcon()" />
     }
   </button>
 </div>
 
 @if (isMenuOpen()) {
   <ul
-    [id]="menuId()"
-    role="menu"
     class="ui-lib-split-button__menu"
+    role="menu"
     [attr.aria-label]="menuButtonAriaLabel() || i18n.translate('split-button.menu')"
+    [id]="menuId()"
   >
     @for (item of visibleItems(); track trackVisibleItem($index, item); let i = $index) {
       @if (item.separator) {
-        <li role="separator" class="ui-lib-split-button__separator"></li>
+        <li class="ui-lib-split-button__separator" role="separator"></li>
       } @else {
         <li role="none">
           <a
-            role="menuitem"
             class="ui-lib-split-button__menu-item"
-            [class.ui-lib-split-button__menu-item--disabled]="item.disabled"
+            role="menuitem"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
             [attr.aria-label]="item.label"
-            [attr.title]="item.tooltip ?? null"
-            [attr.tabindex]="item.disabled ? -1 : 0"
-            [attr.href]="item.url ?? null"
-            [attr.target]="item.url ? item.target || '_self' : null"
-            [id]="itemId(i, item)"
             [attr.data-menu-item-index]="i"
+            [attr.href]="item.url ?? null"
+            [attr.tabindex]="item.disabled ? -1 : 0"
+            [attr.target]="item.url ? item.target || '_self' : null"
+            [attr.title]="item.tooltip ?? null"
+            [class.ui-lib-split-button__menu-item--disabled]="item.disabled"
+            [id]="itemId(i, item)"
             (click)="onItemClick($event, item, i)"
             (keydown)="onItemKeydown($event, item, i)"
           >
             @if (item.icon) {
               <ui-lib-icon
-                [name]="item.icon"
-                size="sm"
-                class="ui-lib-split-button__menu-item-icon"
                 aria-hidden="true"
+                class="ui-lib-split-button__menu-item-icon"
+                size="sm"
+                [name]="item.icon"
               />
             }
             <span class="ui-lib-split-button__menu-item-label">{{ item.label }}</span>

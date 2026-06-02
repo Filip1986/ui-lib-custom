@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import type { Signal } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
+import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Icon } from 'ui-lib-custom/icon';
-import type { SemanticIcon } from 'ui-lib-custom/icon';
+
 import type { IconLibrary, IconSize } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { SemanticIcon } from 'ui-lib-custom/icon';
+import { Icon } from 'ui-lib-custom/icon';
 import type { ThemeIconConfig } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 /**
  * Theme editor panel for icon library and size configuration.

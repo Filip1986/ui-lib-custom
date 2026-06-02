@@ -1,8 +1,8 @@
 <ui-lib-icon
+  aria-hidden="true"
   class="ui-lib-message__icon"
   [name]="resolvedIcon()"
   [variant]="effectiveVariant()"
-  aria-hidden="true"
 />
 <span class="ui-lib-message__content">
   @if (text()) {
@@ -12,11 +12,11 @@
 </span>
 @if (closable()) {
   <button
-    type="button"
     class="ui-lib-message__close"
+    type="button"
     [attr.aria-label]="resolvedCloseAriaLabel()"
     (click)="onClose()"
   >
-    <ui-lib-icon name="close" [variant]="effectiveVariant()" size="sm" aria-hidden="true" />
+    <ui-lib-icon aria-hidden="true" name="close" size="sm" [variant]="effectiveVariant()" />
   </button>
 }

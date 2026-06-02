@@ -21,11 +21,7 @@ export class MyComponent {
   ];
 }`;
 
-export const usageHtml = `<ui-lib-select
-  label="Choose"
-  [options]="options"
-  [(ngModel)]="selectedValue"
-/>`;
+export const usageHtml = `<ui-lib-select label="Choose" [options]="options" [(ngModel)]="selectedValue" />`;
 
 export const usageTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';

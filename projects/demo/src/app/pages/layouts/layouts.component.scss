@@ -1,60 +1,60 @@
 @use '../../shared/styles/doc-page.scss';
 
 .demo-box {
-  padding: 1rem;
   background: var(--uilib-demo-box-bg, var(--uilib-color-primary-50, #e3f2fd));
   border: 2px solid var(--uilib-demo-box-border, var(--uilib-color-primary-600, #2196f3));
   border-radius: 4px;
-  text-align: center;
-  font-weight: 500;
   color: var(--uilib-page-fg, #1f2933);
+  font-weight: 500;
+  padding: 1rem;
+  text-align: center;
 }
 
 .demo-tag {
-  display: inline-block;
-  padding: 0.375rem 0.75rem;
   background: var(--uilib-demo-tag-bg, var(--uilib-color-info-50, #e1f5fe));
   border: 1px solid var(--uilib-demo-tag-border, var(--uilib-color-info-700, #0288d1));
   border-radius: 16px;
+  color: var(--uilib-demo-tag-fg, var(--uilib-color-info-700, #0288d1));
+  display: inline-block;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--uilib-demo-tag-fg, var(--uilib-color-info-700, #0288d1));
+  padding: 0.375rem 0.75rem;
 }
 
 .demo-grid-cell {
-  padding: 1rem;
+  align-items: center;
   background: var(--uilib-demo-grid-bg, var(--uilib-color-warning-50, #fff3e0));
   border: 2px solid var(--uilib-demo-grid-border, var(--uilib-color-warning-700, #f57c00));
   border-radius: 4px;
-  text-align: center;
-  font-weight: 500;
-  min-height: 60px;
   display: flex;
-  align-items: center;
+  font-weight: 500;
   justify-content: center;
+  min-height: 60px;
+  padding: 1rem;
+  text-align: center;
 
   &.large {
-    min-height: 120px;
     background: var(--uilib-demo-grid-bg-strong, var(--uilib-color-success-50, #e8f5e9));
     border-color: var(--uilib-demo-grid-border-strong, var(--uilib-color-success-700, #388e3c));
+    min-height: 120px;
   }
 }
 
 .demo-card {
-  padding: 1.5rem;
   background: var(--uilib-surface, #fff);
   border: 1px solid var(--uilib-border, #e0e0e0);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
 
   h4 {
-    margin: 0;
     font-size: 1.125rem;
+    margin: 0;
   }
 
   p {
-    margin: 0;
     color: var(--uilib-muted, #666);
+    margin: 0;
   }
 }
 
@@ -63,20 +63,20 @@
   overflow-x: auto;
 
   table {
-    width: 100%;
-    max-width: 600px;
     border-collapse: collapse;
+    max-width: 600px;
+    width: 100%;
 
     th,
     td {
+      border-bottom: 1px solid var(--uilib-border, #e0e0e0);
       padding: 0.75rem;
       text-align: left;
-      border-bottom: 1px solid var(--uilib-border, #e0e0e0);
     }
 
     th {
-      font-weight: 600;
       background: var(--uilib-surface-alt, #f5f5f5);
+      font-weight: 600;
     }
 
     tbody tr:hover {
@@ -87,31 +87,31 @@
 
 .theme-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
 .theme-panel {
+  background: var(--uilib-surface, #ffffff);
   border: 1px solid var(--uilib-border, #e0e0e0);
   border-radius: 12px;
-  background: var(--uilib-surface, #ffffff);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
 .panel-header {
-  padding: 0.75rem 1rem;
-  font-weight: 600;
   background: var(--uilib-surface-alt, #f1f3f5);
   border-bottom: 1px solid var(--uilib-border, #e0e0e0);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
 }
 
 .panel-body {
-  padding: 1rem;
+  color: var(--uilib-page-fg, #1f2933);
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  color: var(--uilib-page-fg, #1f2933);
+  padding: 1rem;
 }
 
 .no-margin {
@@ -126,17 +126,17 @@
   }
 
   .control-panel {
-    padding: 1rem;
+    background: var(--uilib-surface-alt, #f7f7f8);
     border: 1px solid var(--uilib-border, #e0e0e0);
     border-radius: 12px;
-    background: var(--uilib-surface-alt, #f7f7f8);
+    padding: 1rem;
   }
 
   .panel-title {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
+    display: flex;
     gap: 0.5rem;
+    justify-content: space-between;
 
     h4 {
       margin: 0;
@@ -144,17 +144,17 @@
   }
 
   .token-readouts {
+    color: var(--uilib-muted, #555);
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
     font-size: 0.875rem;
-    color: var(--uilib-muted, #555);
+    gap: 0.25rem;
   }
 
   .control-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 
   .spacing-preview {
@@ -166,10 +166,10 @@
   }
 
   .preview-block {
-    padding: 1rem;
+    background: var(--uilib-surface, #ffffff);
     border: 1px solid var(--uilib-border, #e0e0e0);
     border-radius: 12px;
-    background: var(--uilib-surface, #ffffff);
+    padding: 1rem;
   }
 }
 

@@ -1,10 +1,11 @@
+import type { DebugElement } from '@angular/core';
 import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import type { DebugElement } from '@angular/core';
-import { Grid } from './grid';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { Grid } from './grid';
 
 @Component({
   standalone: true,

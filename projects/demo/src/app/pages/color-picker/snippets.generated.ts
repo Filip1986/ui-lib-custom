@@ -2,7 +2,7 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const basicHtml = `<ui-lib-color-picker [(ngModel)]="basicHex" format="hex" />
+export const basicHtml = `<ui-lib-color-picker format="hex" [(ngModel)]="basicHex" />
 <p>Selected HEX #{{ basicHex }}</p>`;
 
 export const basicTs = `import { Component } from '@angular/core';
@@ -19,7 +19,7 @@ export class MyComponent {
 }`;
 
 export const clippingHtml = `<div class="clipping-card">
-  <ui-lib-color-picker [(ngModel)]="clippingValue" format="hex" />
+  <ui-lib-color-picker format="hex" [(ngModel)]="clippingValue" />
 </div>`;
 
 export const clippingTs = `import { Component } from '@angular/core';
@@ -35,7 +35,7 @@ export class MyComponent {
   public clippingValue: string = '6366f1';
 }`;
 
-export const disabledHtml = `<ui-lib-color-picker [disabled]="true" [(ngModel)]="disabledValue" format="hex" />`;
+export const disabledHtml = `<ui-lib-color-picker format="hex" [disabled]="true" [(ngModel)]="disabledValue" />`;
 
 export const disabledTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -50,9 +50,9 @@ export class MyComponent {
   public disabledValue: string = 'ef4444';
 }`;
 
-export const formatsHtml = `<ui-lib-color-picker [(ngModel)]="hexValue" format="hex" />
-<ui-lib-color-picker [(ngModel)]="rgbValue" format="rgb" />
-<ui-lib-color-picker [(ngModel)]="hsbValue" format="hsb" />`;
+export const formatsHtml = `<ui-lib-color-picker format="hex" [(ngModel)]="hexValue" />
+<ui-lib-color-picker format="rgb" [(ngModel)]="rgbValue" />
+<ui-lib-color-picker format="hsb" [(ngModel)]="hsbValue" />`;
 
 export const formatsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -70,7 +70,7 @@ export class MyComponent {
   public hsbValue: HsbColor = { h: 239, s: 59, b: 95 };
 }`;
 
-export const inlineHtml = `<ui-lib-color-picker [inline]="true" [(ngModel)]="inlineHex" format="hex" />`;
+export const inlineHtml = `<ui-lib-color-picker format="hex" [inline]="true" [(ngModel)]="inlineHex" />`;
 
 export const inlineTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -87,7 +87,7 @@ export class MyComponent {
 
 export const reactiveHtml = `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
   <ui-lib-color-picker formControlName="color" format="hex" />
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+  <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
 </form>`;
 
 export const reactiveTs = `import { Component } from '@angular/core';
@@ -111,8 +111,8 @@ export class MyComponent {
 }`;
 
 export const templateDrivenHtml = `<form #f="ngForm" (ngSubmit)="submitTemplateDriven()">
-  <ui-lib-color-picker name="templateColor" [(ngModel)]="templateDrivenValue" format="hex" />
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+  <ui-lib-color-picker format="hex" name="templateColor" [(ngModel)]="templateDrivenValue" />
+  <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
 </form>`;
 
 export const templateDrivenTs = `import { Component } from '@angular/core';

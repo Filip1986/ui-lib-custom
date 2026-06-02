@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideZonelessChangeDetection } from '@angular/core';
-import type { InputVariant } from './input';
-import { SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
-import { UiLibInput } from './input';
+
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import { SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
+import type { InputVariant } from './input';
+import { UiLibInput } from './input';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Coming soon — the Splitter component is under active development."
     docHeader
     title="Splitter"
     [importCode]="importCode"
-    description="Coming soon — the Splitter component is under active development."
   />
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
@@ -33,8 +33,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

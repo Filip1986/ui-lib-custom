@@ -200,7 +200,7 @@ npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 
 **Git hooks (via Husky):**
 
-- **pre-commit** — runs `lint-staged` (Prettier then ESLint on staged `.ts`; Prettier on staged `.html`/`.json`/`.md` and all `.scss`/`.css`; Stylelint only on staged library `.scss`)
+- **pre-commit** — runs `lint-staged` (Prettier then ESLint on staged `.ts`/`.html`; Prettier on `.json`/`.md` and all `.scss`; Stylelint on library `.scss` — see `docs/standards/CODE-ORGANIZATION.md`)
 - **pre-push** — runs `npm run format:check` then `npm run typecheck`
 - **CI** — `npm run format:check` in the `lint` job (every PR and push to `main`)
 

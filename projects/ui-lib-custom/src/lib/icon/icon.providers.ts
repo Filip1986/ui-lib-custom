@@ -1,10 +1,12 @@
+import type { Provider } from '@angular/core';
+
 import { provideIcons } from '@ng-icons/core';
+
 import { ICON_CONFIG } from './icon.tokens';
 import type { IconConfig, IconLibrary } from './icon.types';
 import { LUCIDE_ICONS } from './presets';
 import { MATERIAL_ICONS } from './presets';
 import { BOOTSTRAP_ICONS } from './presets';
-import type { Provider } from '@angular/core';
 
 export function provideUiLibIcons(options?: {
   defaultLibrary?: IconLibrary;

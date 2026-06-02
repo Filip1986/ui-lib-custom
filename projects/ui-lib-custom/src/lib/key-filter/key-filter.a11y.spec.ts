@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import { TestBed } from '@angular/core/testing';
+
 import type { AriaLivePoliteness } from 'ui-lib-custom/a11y';
+import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { KeyFilterDirective } from './key-filter.directive';
 import { makeKeydownEvent, makePasteEvent } from './key-filter.test-utils';

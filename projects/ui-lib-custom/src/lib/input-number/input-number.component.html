@@ -1,14 +1,14 @@
 @if (showButtons() && buttonLayout() === 'vertical') {
   <button
-    type="button"
     class="ui-lib-input-number-button ui-lib-input-number-button-up"
-    [attr.aria-label]="incrementAriaLabel()"
+    type="button"
     [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
-    (mousedown)="onSpinMouseDown($event, 1)"
-    (mouseup)="stopSpinRepeat()"
-    (mouseleave)="stopSpinRepeat()"
+    [attr.aria-label]="incrementAriaLabel()"
     (keydown)="onSpinKeyDown($event, 1)"
     (keyup)="stopSpinRepeat()"
+    (mousedown)="onSpinMouseDown($event, 1)"
+    (mouseleave)="stopSpinRepeat()"
+    (mouseup)="stopSpinRepeat()"
   >
     ▲
   </button>
@@ -16,15 +16,15 @@
 
 @if (showButtons() && buttonLayout() === 'horizontal') {
   <button
-    type="button"
     class="ui-lib-input-number-button ui-lib-input-number-button-down"
-    [attr.aria-label]="decrementAriaLabel()"
+    type="button"
     [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
-    (mousedown)="onSpinMouseDown($event, -1)"
-    (mouseup)="stopSpinRepeat()"
-    (mouseleave)="stopSpinRepeat()"
+    [attr.aria-label]="decrementAriaLabel()"
     (keydown)="onSpinKeyDown($event, -1)"
     (keyup)="stopSpinRepeat()"
+    (mousedown)="onSpinMouseDown($event, -1)"
+    (mouseleave)="stopSpinRepeat()"
+    (mouseup)="stopSpinRepeat()"
   >
     −
   </button>
@@ -37,31 +37,31 @@
 
   <input
     #inputElement
-    type="text"
     inputmode="decimal"
     role="spinbutton"
-    [value]="displayValue()"
-    [disabled]="isControlDisabled()"
-    [readOnly]="readonly()"
-    [placeholder]="placeholder()"
-    [id]="inputId()"
-    [attr.aria-valuemin]="min()"
-    [attr.aria-valuemax]="max()"
-    [attr.aria-valuenow]="value()"
-    [attr.aria-valuetext]="formattedValue()"
+    type="text"
+    [attr.aria-describedby]="ariaDescribedBy() || null"
+    [attr.aria-invalid]="invalid() ? 'true' : null"
     [attr.aria-label]="
       ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('input-number.input.label'))
     "
     [attr.aria-labelledby]="ariaLabelledBy() || null"
-    [attr.aria-describedby]="ariaDescribedBy() || null"
     [attr.aria-required]="required() ? 'true' : null"
-    [attr.aria-invalid]="invalid() ? 'true' : null"
-    [attr.tabindex]="tabindex()"
+    [attr.aria-valuemax]="max()"
+    [attr.aria-valuemin]="min()"
+    [attr.aria-valuenow]="value()"
+    [attr.aria-valuetext]="formattedValue()"
     [attr.autocomplete]="autocomplete()"
+    [attr.tabindex]="tabindex()"
     [class.ui-lib-input-number-input]="true"
-    (input)="onNativeInput($event)"
-    (focus)="onNativeFocus($event)"
+    [disabled]="isControlDisabled()"
+    [id]="inputId()"
+    [placeholder]="placeholder()"
+    [readOnly]="readonly()"
+    [value]="displayValue()"
     (blur)="onNativeBlur($event)"
+    (focus)="onNativeFocus($event)"
+    (input)="onNativeInput($event)"
     (keydown)="onNativeKeyDown($event)"
   />
 
@@ -70,35 +70,35 @@
   }
 
   @if (showClear() && value() !== null && !isControlDisabled()) {
-    <button type="button" class="ui-lib-input-number-clear" (click)="clearValue()">×</button>
+    <button class="ui-lib-input-number-clear" type="button" (click)="clearValue()">×</button>
   }
 </span>
 
 @if (showButtons() && buttonLayout() === 'stacked') {
   <span class="ui-lib-input-number-button-group">
     <button
-      type="button"
       class="ui-lib-input-number-button ui-lib-input-number-button-up"
-      [attr.aria-label]="incrementAriaLabel()"
+      type="button"
       [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
-      (mousedown)="onSpinMouseDown($event, 1)"
-      (mouseup)="stopSpinRepeat()"
-      (mouseleave)="stopSpinRepeat()"
+      [attr.aria-label]="incrementAriaLabel()"
       (keydown)="onSpinKeyDown($event, 1)"
       (keyup)="stopSpinRepeat()"
+      (mousedown)="onSpinMouseDown($event, 1)"
+      (mouseleave)="stopSpinRepeat()"
+      (mouseup)="stopSpinRepeat()"
     >
       ▲
     </button>
     <button
-      type="button"
       class="ui-lib-input-number-button ui-lib-input-number-button-down"
-      [attr.aria-label]="decrementAriaLabel()"
+      type="button"
       [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
-      (mousedown)="onSpinMouseDown($event, -1)"
-      (mouseup)="stopSpinRepeat()"
-      (mouseleave)="stopSpinRepeat()"
+      [attr.aria-label]="decrementAriaLabel()"
       (keydown)="onSpinKeyDown($event, -1)"
       (keyup)="stopSpinRepeat()"
+      (mousedown)="onSpinMouseDown($event, -1)"
+      (mouseleave)="stopSpinRepeat()"
+      (mouseup)="stopSpinRepeat()"
     >
       ▼
     </button>
@@ -107,15 +107,15 @@
 
 @if (showButtons() && buttonLayout() === 'horizontal') {
   <button
-    type="button"
     class="ui-lib-input-number-button ui-lib-input-number-button-up"
-    [attr.aria-label]="incrementAriaLabel()"
+    type="button"
     [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
-    (mousedown)="onSpinMouseDown($event, 1)"
-    (mouseup)="stopSpinRepeat()"
-    (mouseleave)="stopSpinRepeat()"
+    [attr.aria-label]="incrementAriaLabel()"
     (keydown)="onSpinKeyDown($event, 1)"
     (keyup)="stopSpinRepeat()"
+    (mousedown)="onSpinMouseDown($event, 1)"
+    (mouseleave)="stopSpinRepeat()"
+    (mouseup)="stopSpinRepeat()"
   >
     +
   </button>
@@ -123,15 +123,15 @@
 
 @if (showButtons() && buttonLayout() === 'vertical') {
   <button
-    type="button"
     class="ui-lib-input-number-button ui-lib-input-number-button-down"
-    [attr.aria-label]="decrementAriaLabel()"
+    type="button"
     [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
-    (mousedown)="onSpinMouseDown($event, -1)"
-    (mouseup)="stopSpinRepeat()"
-    (mouseleave)="stopSpinRepeat()"
+    [attr.aria-label]="decrementAriaLabel()"
     (keydown)="onSpinKeyDown($event, -1)"
     (keyup)="stopSpinRepeat()"
+    (mousedown)="onSpinMouseDown($event, -1)"
+    (mouseleave)="stopSpinRepeat()"
+    (mouseup)="stopSpinRepeat()"
   >
     ▼
   </button>

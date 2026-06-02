@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import type { InputSignal, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export interface KeyboardNavRow {
   readonly key: string; // 'Enter / Space', '↓ / ↑', 'Ctrl+S'

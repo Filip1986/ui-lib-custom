@@ -2,29 +2,29 @@
   margin-bottom: 2.5rem;
 
   &__title {
+    color: var(--uilib-page-fg);
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0 0 1.25rem;
-    color: var(--uilib-page-fg);
   }
 }
 
 // ── Banner ────────────────────────────────────────────────────────────────
 .coming-soon-banner {
-  display: flex;
-  gap: 1rem;
   align-items: flex-start;
-  padding: 1.25rem 1.5rem;
-  border-radius: var(--uilib-radius-lg, 0.75rem);
   background: color-mix(in srgb, var(--uilib-color-primary-600) 8%, transparent);
   border: 1px solid color-mix(in srgb, var(--uilib-color-primary-600) 25%, transparent);
+  border-radius: var(--uilib-radius-lg, 0.75rem);
+  display: flex;
+  gap: 1rem;
   margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
 
   &__icon {
-    flex-shrink: 0;
+    align-items: center;
     color: var(--uilib-color-primary-600);
     display: flex;
-    align-items: center;
+    flex-shrink: 0;
     margin-top: 0.125rem;
   }
 
@@ -34,18 +34,18 @@
   }
 
   &__heading {
-    margin: 0 0 0.375rem;
+    color: var(--uilib-color-primary-700);
     font-size: 0.9375rem;
     font-weight: 700;
-    color: var(--uilib-color-primary-700);
     letter-spacing: -0.01em;
+    margin: 0 0 0.375rem;
   }
 
   &__body {
-    margin: 0;
-    font-size: 0.875rem;
     color: var(--uilib-page-fg);
+    font-size: 0.875rem;
     line-height: 1.6;
+    margin: 0;
 
     strong {
       font-weight: 600;
@@ -65,42 +65,42 @@
 
 // ── Rationale ─────────────────────────────────────────────────────────────
 .coming-soon-rationale {
-  padding: 1.25rem 1.5rem;
-  border-radius: var(--uilib-radius-md, 0.5rem);
   background: var(--uilib-surface-alt);
   border: 1px solid var(--uilib-border);
+  border-radius: var(--uilib-radius-md, 0.5rem);
+  padding: 1.25rem 1.5rem;
 
   &__heading {
-    margin: 0 0 0.5rem;
+    color: var(--uilib-muted);
     font-size: 0.8125rem;
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--uilib-muted);
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
   }
 
   &__body {
-    margin: 0;
-    font-size: 0.9375rem;
     color: var(--uilib-page-fg);
+    font-size: 0.9375rem;
     line-height: 1.65;
+    margin: 0;
   }
 }
 
 // ── Details table ─────────────────────────────────────────────────────────
 .coming-soon-details {
-  display: grid;
-  gap: 0;
   border: 1px solid var(--uilib-border);
   border-radius: var(--uilib-radius-md, 0.5rem);
-  overflow: hidden;
+  display: grid;
+  gap: 0;
   margin-bottom: 1.5rem;
+  overflow: hidden;
 
   &__row {
-    display: grid;
-    grid-template-columns: 11rem 1fr;
     align-items: center;
     border-bottom: 1px solid var(--uilib-border);
+    display: grid;
+    grid-template-columns: 11rem 1fr;
 
     &:last-child {
       border-bottom: none;
@@ -108,19 +108,19 @@
   }
 
   &__label {
-    padding: 0.75rem 1rem;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--uilib-muted);
     background: var(--uilib-surface-alt);
     border-right: 1px solid var(--uilib-border);
+    color: var(--uilib-muted);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
   }
 
   &__value {
-    padding: 0.75rem 1rem;
-    font-size: 0.875rem;
     color: var(--uilib-page-fg);
+    font-size: 0.875rem;
     margin: 0;
+    padding: 0.75rem 1rem;
 
     &--muted {
       color: var(--uilib-muted);
@@ -131,40 +131,40 @@
 
 // ── Badges ────────────────────────────────────────────────────────────────
 .coming-soon-badge {
-  display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0.6rem;
   border-radius: 999px;
+  display: inline-flex;
   font-size: 0.75rem;
   font-weight: 700;
+  padding: 0.2rem 0.6rem;
 
   &--priority {
     background: color-mix(in srgb, var(--uilib-color-primary-600) 12%, transparent);
-    color: var(--uilib-color-primary-700);
     border: 1px solid color-mix(in srgb, var(--uilib-color-primary-600) 25%, transparent);
+    color: var(--uilib-color-primary-700);
   }
 
   &--complexity {
     background: var(--uilib-surface-alt);
-    color: var(--uilib-page-fg);
     border: 1px solid var(--uilib-border);
+    color: var(--uilib-page-fg);
   }
 }
 
 // ── CTA ───────────────────────────────────────────────────────────────────
 .coming-soon-cta {
   &__link {
-    display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    background: color-mix(in srgb, var(--uilib-color-primary-600) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--uilib-color-primary-600) 30%, transparent);
+    border-radius: var(--uilib-radius-md, 0.5rem);
     color: var(--uilib-color-primary-600);
-    text-decoration: none;
+    display: inline-flex;
     font-size: 0.875rem;
     font-weight: 600;
+    gap: 0.5rem;
     padding: 0.625rem 1rem;
-    border-radius: var(--uilib-radius-md, 0.5rem);
-    border: 1px solid color-mix(in srgb, var(--uilib-color-primary-600) 30%, transparent);
-    background: color-mix(in srgb, var(--uilib-color-primary-600) 6%, transparent);
+    text-decoration: none;
     transition:
       background 0.15s,
       border-color 0.15s,
@@ -175,5 +175,11 @@
       border-color: color-mix(in srgb, var(--uilib-color-primary-600) 50%, transparent);
       color: var(--uilib-color-primary-700);
     }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coming-soon-cta__link {
+    animation: none;
+    transition: none;
   }
 }
