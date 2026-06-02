@@ -100,6 +100,7 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'paginator.rows.label': 'Filas por página',
   'paginator.page.report': 'Página {currentPage} de {totalPages}',
   'paginator.jump': 'Ir a la página, presionar Enter para navegar',
+  'paginator.jump.placeholder': 'Página',
   'paginator.nav': 'Paginación',
 
   // ── Upload ────────────────────────────────────────────────────────────────

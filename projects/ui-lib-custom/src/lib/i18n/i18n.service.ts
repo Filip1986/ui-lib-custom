@@ -1,6 +1,11 @@
 import type { Signal } from '@angular/core';
 import { Injectable, signal, computed, inject, LOCALE_ID } from '@angular/core';
-import type { UiLibTranslationBundle, UiLibLocale, UiLibTranslateParams } from './i18n.types';
+import type {
+  UiLibTranslationKey,
+  UiLibPartialBundle,
+  UiLibLocale,
+  UiLibTranslateParams,
+} from './i18n.types';
 import { UI_LIB_EN } from './en';
 
 /**
@@ -10,8 +15,12 @@ import { UI_LIB_EN } from './en';
  *   const i18n = inject(UiLibI18nService);
  *   const label = i18n.translate('select.clear');
  *
- * Provide a custom bundle at the app root to localise the library:
- *   providers: [{ provide: UI_LIB_TRANSLATIONS, useValue: myFrenchBundle }]
+ * Localise the library at app startup by swapping the active bundle:
+ *   inject(UiLibI18nService).setBundle(UI_LIB_FR, 'fr');
+ * or override individual keys without replacing the whole bundle:
+ *   inject(UiLibI18nService).extend({ 'select.clear': 'Vider' });
+ *
+ * See `docs/guides/I18N_GUIDE.md` for the full key catalogue and recipes.
  */
 @Injectable({ providedIn: 'root' })
 export class UiLibI18nService {
@@ -22,9 +31,14 @@ export class UiLibI18nService {
     this._angularLocale || 'en',
   );
 
-  /** Active translation bundle. Defaults to the built-in English bundle. */
-  public readonly bundle: ReturnType<typeof signal<UiLibTranslationBundle>> =
-    signal<UiLibTranslationBundle>({ ...UI_LIB_EN });
+  /**
+   * Active translation bundle. Defaults to the built-in English bundle. Typed as
+   * a loose string map because at runtime it may hold consumer-registered keys
+   * beyond the built-in `UiLibTranslationKey` set (see {@link extend}).
+   */
+  public readonly bundle: ReturnType<typeof signal<Record<string, string>>> = signal<
+    Record<string, string>
+  >({ ...UI_LIB_EN });
 
   /** Direction of the current locale ('ltr' | 'rtl'). */
   public readonly dir: Signal<'ltr' | 'rtl'> = computed<'ltr' | 'rtl'>((): 'ltr' | 'rtl' =>
@@ -34,8 +48,15 @@ export class UiLibI18nService {
   /**
    * Translate a key, interpolating `{placeholder}` tokens with `params`.
    * Falls back to the key itself if no translation is found.
+   *
+   * Known library keys (`UiLibTranslationKey`) are autocompleted and type-checked;
+   * any other string is still accepted so consumers can resolve custom keys they
+   * registered via {@link extend}.
    */
-  public translate(key: string, params?: UiLibTranslateParams): string {
+  public translate(
+    key: UiLibTranslationKey | (string & {}),
+    params?: UiLibTranslateParams,
+  ): string {
     const raw: string = this.bundle()[key] ?? key;
     if (!params) return raw;
     return raw.replace(/\{(\w+)\}/g, (_match: string, name: string): string =>
@@ -47,7 +68,7 @@ export class UiLibI18nService {
    * Override the entire translation bundle (e.g. when lazy-loading a language pack).
    * Merges with the English base so untranslated keys still render.
    */
-  public setBundle(bundle: UiLibTranslationBundle, locale: UiLibLocale): void {
+  public setBundle(bundle: UiLibPartialBundle, locale: UiLibLocale): void {
     this.locale.set(locale);
     this.bundle.set({ ...UI_LIB_EN, ...bundle });
   }
@@ -56,7 +77,7 @@ export class UiLibI18nService {
    * Merge additional keys into the current bundle without replacing it.
    * Useful for component-library-level extensions.
    */
-  public extend(extra: UiLibTranslationBundle): void {
+  public extend(extra: UiLibPartialBundle): void {
     this.bundle.set({ ...this.bundle(), ...extra });
   }
 }

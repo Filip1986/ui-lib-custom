@@ -111,7 +111,7 @@
         [max]="pageCount()"
         [disabled]="isEmpty()"
         [attr.aria-label]="i18n.translate('paginator.jump')"
-        placeholder="Page"
+        [attr.placeholder]="i18n.translate('paginator.jump.placeholder')"
         (keydown)="onJumpToPageKeydown($event)"
       />
     }

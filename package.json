@@ -49,6 +49,8 @@
     "check": "npm run lint:ci && npm run lint:css && npm run typecheck && npm test",
     "health": "node scripts/health-check.mjs",
     "docs:reference": "node scripts/generate-reference-doc.mjs --all",
+    "docs:i18n": "node scripts/generate-i18n-catalogue.mjs",
+    "docs:i18n:check": "node scripts/generate-i18n-catalogue.mjs --check",
     "check:i18n": "node scripts/check-i18n.mjs"
   },
   "engines": {
