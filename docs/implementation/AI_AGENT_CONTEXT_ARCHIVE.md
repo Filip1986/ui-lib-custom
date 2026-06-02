@@ -2842,3 +2842,23 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
 Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
+
+---
+
+Date: 2026-05-30
+Changed (ground-truth audit — no source changes; docs only):
+  docs/reference/project/GROUND_TRUTH_AUDIT_2026-05-30.md: NEW — full verification run of every
+    automated quality gate vs. the self-reported 9.03 average.
+State: COMPLETE. Foundation verified REAL — all objective gates green (228 suites / 6,148 tests;
+  a11y-unit 100 suites / 2,423 tests; bundlesize within budget). a11y e2e default run was a FALSE
+  NEGATIVE — reuseExistingServer:!isCI reused a stale "Vision HQ" app on :4200; clean re-run on a
+  dedicated port passed.
+Findings: (1) a11y e2e gate unreliable + not CI-enforced. (2) check:i18n prints ❌ for paginator
+  but exits 0. (3) scorecard no longer discriminates. (4) demo front-door is the private dashboard.
+Next step: Make a11y e2e authoritative (dedicated port + CI gate + refresh selectors).
+
+Date: 2026-05-30
+Changed (batch 9 — Drawer/ConfirmDialog/Galleria→9.0):
+  drawer/confirm-dialog/galleria .scss: will-change for GPU compositing; Perf 8→9.
+State: COMPLETE — build verified (0 errors 0 warnings).
+Next step: (superseded — see 2026-06-01 handoffs)

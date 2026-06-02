@@ -2,7 +2,7 @@
 
 **Selector:** `ui-lib-button`
 **Package:** `ui-lib-custom/button`
-**Content projection:** yes — button label text is projected as `<ng-content>`. There is no `label` input and no `clicked` output; use native `(click)` on the host.
+**Content projection:** yes — button label text is normally projected as `<ng-content>` (`<ui-lib-button>Save</ui-lib-button>`). A `label` input is also accepted as a convenience for self-closing usage (`<ui-lib-button label="Save" />`); projected content takes precedence when both are present. There is no `clicked` output; use native `(click)` on the host.
 
 ## Architecture
 
@@ -16,6 +16,12 @@ The Button uses a **two-axis model**:
 Every appearance composes with every severity, giving you 12 × 9 = 108 combinations from a single component. Two orthogonal modifiers (`pill`, `raised`) overlay on top without conflicting with either axis.
 
 ## Inputs
+
+### Content
+
+| Name | Type | Default | Notes |
+|------|------|---------|-------|
+| `label` | `string \| null` | `null` | Convenience text rendered inside the button when no content is projected. Prefer projected content (`<ui-lib-button>Save</ui-lib-button>`); projected content wins if both are set. |
 
 ### Primary axes
 

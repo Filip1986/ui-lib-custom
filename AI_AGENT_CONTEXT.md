@@ -126,6 +126,33 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-06-02
+Changed (a11y full-route sweep remediation — PRs #285/#286/#295, branch `a11y-sweep-completion`):
+  Took the Playwright `a11y-full-sweep` from 50 failing routes → 0 (111/111) and RE-GATED it:
+    accessibility.yml now runs the sweep in the gating step (alongside a11y.spec + a11y-interactions);
+    only overlay-mounting stays non-blocking (headless-layout clipping).
+  Library a11y fixes: code-snippet (scrollable tabindex — cleared ~27 routes), dock (role=img),
+    drawer/bottom-sheet/panel-menu (inert when hidden — aria-hidden-focus), progress-bar (determinate
+    default name), chip (role=option only when selectable; host aria-label gated on role),
+    input-mask (dropped invalid aria-valuetext, fixed placeholder=undefined), BUTTON (NEW `label`
+    input — 52 demo buttons rendered EMPTY without it), style-class (adds inert when hiding a panel +
+    skips targets that wrap their trigger), focus-trap (sentinels no longer aria-hidden), listbox
+    (disabled list stays keyboard-scrollable, tabindex=0).
+  Component default accessible names: date-picker/input-number/editor/order-list/autocomplete/
+    cascade-select/tree-select/input-mask now use `ariaLabel() || (ariaLabelledBy() ? null :
+    i18n.translate('<comp>.input.label'))` — 8 new i18n keys × en/de/es/fr.
+  Demo markup: labelled example inputs/buttons/selects across ~14 routes.
+  Docs: DISCOVERIES.md +15 entries incl. the dialog NG0203 root-cause correction (1-E) that
+    supersedes the earlier "zoneless model() CD" misdiagnosis (1-A/5-A now carry correction banners);
+    CHANGELOG.md [Unreleased] updated; button README + reference doc regenerated for the `label` input.
+State: COMPLETE — sweep green + re-gated.
+Verification:
+  npx jest → 233 suites / 6216 tests ✅ ; npm run build (AOT) ✅
+  a11y-full-sweep 111/111 routes pass locally ✅ ; pre-push typecheck + bundlesize ✅ (pushed)
+Next step: CI on PR #295 validates the gated sweep in the CI env (e2e job ~25 min). Remaining
+  backlog: Step 4 (shared mock-theme consolidation + a11y spec backfill) and the deferred big-ticket
+  coverage (theme-config 1004 lines, theme-editor, virtual-scroller scroll math).
+
 Date: 2026-06-01
 Changed (test-hardening pass — branch `test-hardening-suite`, PR #284):
   CRITICAL BUGFIX dialog.component.ts: modal dialogs never opened in real apps. The
@@ -186,36 +213,6 @@ Known issue / next step:
   (b) check whether dialog uses afterNextRender anywhere that might block @if evaluation;
   (c) check Angular 21 changelog for known model()+OnPush+zoneless edge cases.
   Until resolved: static axe coverage for dialog is provided by a11y-full-sweep.spec.ts.
-
-Date: 2026-05-30
-Changed (ground-truth audit — no source changes; docs only):
-  docs/reference/project/GROUND_TRUTH_AUDIT_2026-05-30.md: NEW — full verification run of every
-    automated quality gate vs. the self-reported 9.03 average.
-State: COMPLETE. Foundation verified REAL — all objective gates green:
-  - build (0 warnings), typecheck (5 tsconfigs), eslint (--max-warnings 0): ✅
-  - unit 228 suites / 6,148 tests ✅ ; a11y-unit 100 suites / 2,423 tests ✅ (8,571 total)
-  - bundlesize: all 105 entry points within budget ✅ ; demo build ✅ (3 non-blocking budget warns)
-  - a11y e2e: default run 2 failed BUT it's a FALSE NEGATIVE — playwright reuseExistingServer:!isCI
-    reused a stale "Vision HQ" app on :4200 instead of serve:demo, so /select and /tabs rendered the
-    dashboard. VERIFIED: clean re-run on dedicated port (ng serve demo --port 4321,
-    reuseExistingServer:false) passed 5/6 (tabs kbd-nav + select-open both green); modal focus-trap
-    skipped due to drifted [data-open-modal] selector. Component a11y is genuinely clean.
-Findings (see audit doc): (1) a11y e2e gate is unreliable + not CI-enforced — the proof behind the
-  Elite Accessibility wow factor is currently NOT backed by a trustworthy green e2e. (2) check:i18n
-  prints ❌ for paginator placeholder="Page" but exits 0 (non-gating); Paginator scored I18n 9.
-  (3) scorecard no longer discriminates (real gaps live inside 9.0 components). (4) demo front-door
-  is the private Vision HQ dashboard, not a component showcase — blocks portfolio deploy.
-Verification: npm run build / test / test:a11y / typecheck / lint:ci / bundlesize:check all ✅
-Next step: Make a11y e2e authoritative (reuseExistingServer:false + dedicated port + CI gate +
-  refresh selectors); separate public showcase demo from Vision HQ; fix i18n gate exit code.
-
-Date: 2026-05-30
-Changed (batch 9 — Drawer/ConfirmDialog/Galleria→9.0):
-  drawer/drawer.scss, confirm-dialog/confirm-dialog.scss, galleria/galleria.scss: will-change
-    added for GPU compositing; all three components raised Perf 8→9
-State: COMPLETE — build verified (0 errors 0 warnings); awaiting commit
-Verification: ng build ui-lib-custom (0 errors, 0 warnings) ✅
-Next step: (superseded — see 2026-06-01 handoff above)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
