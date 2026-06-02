@@ -7,9 +7,13 @@
   <div class="css-vars-table__row css-vars-table__row--header" role="row">
     <span class="css-vars-table__cell" role="columnheader">Variable</span>
     @if (showDefault()) {
-      <span class="css-vars-table__cell css-vars-table__cell--default" role="columnheader">Default</span>
+      <span class="css-vars-table__cell css-vars-table__cell--default" role="columnheader"
+        >Default</span
+      >
     }
-    <span class="css-vars-table__cell css-vars-table__cell--description" role="columnheader">Description</span>
+    <span class="css-vars-table__cell css-vars-table__cell--description" role="columnheader"
+      >Description</span
+    >
   </div>
 
   @for (row of rows(); track row.variable) {
@@ -18,7 +22,9 @@
       @if (showDefault()) {
         <span class="css-vars-table__cell css-vars-table__cell--default" role="cell">
           @if (extractColor(row.default); as color) {
-            <span class="css-vars-table__swatch" [style.--swatch]="color">{{ row.default ?? '' }}</span>
+            <span class="css-vars-table__swatch" [style.--swatch]="color">{{
+              row.default ?? ''
+            }}</span>
           } @else {
             <code class="css-vars-table__default">{{ row.default ?? '' }}</code>
           }

@@ -13,27 +13,27 @@ TreeTable renders hierarchical data as an expandable table. Each `TreeTableNode`
 
 ### Inputs
 
-| Name                      | Type                      | Default                                     | Description                                                                                                     |
-| ------------------------- | ------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`               | `string`                  | `''`                                        | Accessible name for the treegrid. Falls back to `caption` text, then to `'Tree table'` when both are empty.     |
-| `caption`                 | `string`                  | `''`                                        | Caption text rendered above the table.                                                                          |
-| `globalFilter`            | `boolean`                 | `false`                                     | When `true`, renders a global filter input above the table.                                                     |
-| `globalFilterPlaceholder` | `string`                  | `'Search...'`                               | Placeholder for the global filter input.                                                                        |
-| `scrollable`              | `boolean`                 | `false`                                     | When `true`, the table body is scrollable and `scrollHeight` constrains it.                                     |
-| `scrollHeight`            | `string | null`           | `null`                                      | CSS height value for the scrollable body, e.g. `'400px'` or `'60vh'`. Only applied when `scrollable` is `true`. |
-| `selectionMode`           | `TreeTableSelectionMode`  | `null`                                      | How rows respond to click interactions.                                                                         |
-| `size`                    | `TreeTableSize`           | `TREE_TABLE_DEFAULTS.SIZE as TreeTableSize` | Row height / density.                                                                                           |
-| `styleClass`              | `string`                  | `''`                                        | Extra CSS class applied to the host element.                                                                    |
-| `value`                   | `TreeTableNode[]`         | `[]`                                        | Root-level nodes to display.                                                                                    |
-| `variant`                 | `TreeTableVariant | null` | `null`                                      | Design variant. Falls back to `ThemeConfigService.variant()` when `null`.                                       |
+| Name                      | Type                     | Default                                     | Description                                                                                                 |
+| ------------------------- | ------------------------ | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`               | `string`                 | `''`                                        | Accessible name for the treegrid. Falls back to `caption` text, then to `'Tree table'` when both are empty. |
+| `caption`                 | `string`                 | `''`                                        | Caption text rendered above the table.                                                                      |
+| `globalFilter`            | `boolean`                | `false`                                     | When `true`, renders a global filter input above the table.                                                 |
+| `globalFilterPlaceholder` | `string`                 | `'Search...'`                               | Placeholder for the global filter input.                                                                    |
+| `scrollable`              | `boolean`                | `false`                                     | When `true`, the table body is scrollable and `scrollHeight` constrains it.                                 |
+| `scrollHeight`            | `string                  | null`                                       | `null`                                                                                                      | CSS height value for the scrollable body, e.g. `'400px'` or `'60vh'`. Only applied when `scrollable` is `true`. |
+| `selectionMode`           | `TreeTableSelectionMode` | `null`                                      | How rows respond to click interactions.                                                                     |
+| `size`                    | `TreeTableSize`          | `TREE_TABLE_DEFAULTS.SIZE as TreeTableSize` | Row height / density.                                                                                       |
+| `styleClass`              | `string`                 | `''`                                        | Extra CSS class applied to the host element.                                                                |
+| `value`                   | `TreeTableNode[]`        | `[]`                                        | Root-level nodes to display.                                                                                |
+| `variant`                 | `TreeTableVariant        | null`                                       | `null`                                                                                                      | Design variant. Falls back to `ThemeConfigService.variant()` when `null`.                                       |
 
 ### Models (two-way bindable)
 
-| Name        | Type                                     | Default                                                | Description                                                                |
-| ----------- | ---------------------------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------- |
-| `selection` | `TreeTableNode | TreeTableNode[] | null` | `null`                                                 | Currently selected node(s). Use `[(selection)]` for two-way binding.       |
-| `sortField` | `string | null`                          | `null`                                                 | Field currently used for sorting. Use `[(sortField)]` for two-way binding. |
-| `sortOrder` | `TreeTableSortOrder`                     | `TREE_TABLE_DEFAULTS.SORT_ORDER as TreeTableSortOrder` | Current sort direction. Use `[(sortOrder)]` for two-way binding.           |
+| Name        | Type                 | Default                                                | Description                                                      |
+| ----------- | -------------------- | ------------------------------------------------------ | ---------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `selection` | `TreeTableNode       | TreeTableNode[]                                        | null`                                                            | `null`                                                                     | Currently selected node(s). Use `[(selection)]` for two-way binding. |
+| `sortField` | `string              | null`                                                  | `null`                                                           | Field currently used for sorting. Use `[(sortField)]` for two-way binding. |
+| `sortOrder` | `TreeTableSortOrder` | `TREE_TABLE_DEFAULTS.SORT_ORDER as TreeTableSortOrder` | Current sort direction. Use `[(sortOrder)]` for two-way binding. |
 
 ### Outputs
 
@@ -165,7 +165,12 @@ _none_
 </ui-lib-tree-table>
 
 <!-- sortable with checkbox selection -->
-<ui-lib-tree-table [value]="nodes" selectionMode="checkbox" [(selection)]="selected" ariaLabel="File system">
+<ui-lib-tree-table
+  [value]="nodes"
+  selectionMode="checkbox"
+  [(selection)]="selected"
+  ariaLabel="File system"
+>
   <ui-lib-tree-table-column field="name" header="Name" [expander]="true" [sortable]="true" />
   <ui-lib-tree-table-column field="type" header="Type" [sortable]="true" />
 </ui-lib-tree-table>
@@ -177,4 +182,3 @@ _none_
 - [Demo page](/components/tree-table)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/tree-table/README.md)
-

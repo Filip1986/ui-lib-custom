@@ -30,31 +30,31 @@ This design follows:
 
 All inputs use `input()` or `model()` from `@angular/core`.
 
-| Name | Type | Default | Purpose |
-|---|---|---|---|
-| `visible` | `ModelSignal<boolean>` | `false` | Controlled/uncontrolled visibility with two-way binding contract. |
-| `header` | `InputSignal<string>` | `''` | Optional plain header text when no projected header slot is provided. |
-| `modal` | `InputSignal<boolean>` | `false` | Enables backdrop semantics and modal ARIA behavior. |
-| `closable` | `InputSignal<boolean>` | `true` | Shows close affordance in default chrome. |
-| `closeOnEscape` | `InputSignal<boolean>` | `true` | Closes on `Escape` when open. |
-| `dismissableMask` | `InputSignal<boolean>` | `false` | Allows backdrop click-to-close (modal only). |
-| `draggable` | `InputSignal<boolean>` | `false` | Enables header drag behavior when default chrome is active. |
-| `maximizable` | `InputSignal<boolean>` | `false` | Shows maximize toggle control. |
-| `blockScroll` | `InputSignal<boolean>` | `true` | Locks body/root scroll when modal dialog is open. |
-| `position` | `InputSignal<DialogPosition>` | `'center'` | Controls one of 9 placement positions. |
-| `breakpoints` | `InputSignal<Record<string, string>>` | `{}` | Responsive width map, e.g. `{ '960px': '75vw', '640px': '90vw' }`. |
-| `variant` | `InputSignal<DialogVariant \| undefined>` | `undefined` | Optional variant override; falls back to global variant from theme config. |
-| `ariaLabelledBy` | `InputSignal<string \| undefined>` | `undefined` | Explicit labeling id override for accessibility. |
-| `headless` | `InputSignal<boolean>` | `false` | Disables default chrome and uses fully projected headless content. |
+| Name              | Type                                      | Default     | Purpose                                                                    |
+| ----------------- | ----------------------------------------- | ----------- | -------------------------------------------------------------------------- |
+| `visible`         | `ModelSignal<boolean>`                    | `false`     | Controlled/uncontrolled visibility with two-way binding contract.          |
+| `header`          | `InputSignal<string>`                     | `''`        | Optional plain header text when no projected header slot is provided.      |
+| `modal`           | `InputSignal<boolean>`                    | `false`     | Enables backdrop semantics and modal ARIA behavior.                        |
+| `closable`        | `InputSignal<boolean>`                    | `true`      | Shows close affordance in default chrome.                                  |
+| `closeOnEscape`   | `InputSignal<boolean>`                    | `true`      | Closes on `Escape` when open.                                              |
+| `dismissableMask` | `InputSignal<boolean>`                    | `false`     | Allows backdrop click-to-close (modal only).                               |
+| `draggable`       | `InputSignal<boolean>`                    | `false`     | Enables header drag behavior when default chrome is active.                |
+| `maximizable`     | `InputSignal<boolean>`                    | `false`     | Shows maximize toggle control.                                             |
+| `blockScroll`     | `InputSignal<boolean>`                    | `true`      | Locks body/root scroll when modal dialog is open.                          |
+| `position`        | `InputSignal<DialogPosition>`             | `'center'`  | Controls one of 9 placement positions.                                     |
+| `breakpoints`     | `InputSignal<Record<string, string>>`     | `{}`        | Responsive width map, e.g. `{ '960px': '75vw', '640px': '90vw' }`.         |
+| `variant`         | `InputSignal<DialogVariant \| undefined>` | `undefined` | Optional variant override; falls back to global variant from theme config. |
+| `ariaLabelledBy`  | `InputSignal<string \| undefined>`        | `undefined` | Explicit labeling id override for accessibility.                           |
+| `headless`        | `InputSignal<boolean>`                    | `false`     | Disables default chrome and uses fully projected headless content.         |
 
 ### Outputs
 
-| Name | Type | Emitted when |
-|---|---|---|
-| `visibleChange` | `OutputEmitterRef<boolean>` | Visibility state changes (for `[(visible)]`). |
-| `onShow` | `OutputEmitterRef<void>` | Dialog open transition completes. |
-| `onHide` | `OutputEmitterRef<void>` | Dialog close transition completes. |
-| `onMaximize` | `OutputEmitterRef<{ maximized: boolean }>` | Maximize state toggles. |
+| Name            | Type                                       | Emitted when                                  |
+| --------------- | ------------------------------------------ | --------------------------------------------- |
+| `visibleChange` | `OutputEmitterRef<boolean>`                | Visibility state changes (for `[(visible)]`). |
+| `onShow`        | `OutputEmitterRef<void>`                   | Dialog open transition completes.             |
+| `onHide`        | `OutputEmitterRef<void>`                   | Dialog close transition completes.            |
+| `onMaximize`    | `OutputEmitterRef<{ maximized: boolean }>` | Maximize state toggles.                       |
 
 ## Content Projection API
 
@@ -146,17 +146,17 @@ DialogComponent
 
 ## CSS Class Mapping (Position -> Host Class)
 
-| `position` value | Host class |
-|---|---|
-| `center` | `ui-lib-dialog--position-center` |
-| `top` | `ui-lib-dialog--position-top` |
-| `bottom` | `ui-lib-dialog--position-bottom` |
-| `left` | `ui-lib-dialog--position-left` |
-| `right` | `ui-lib-dialog--position-right` |
-| `top-left` | `ui-lib-dialog--position-top-left` |
-| `top-right` | `ui-lib-dialog--position-top-right` |
-| `bottom-left` | `ui-lib-dialog--position-bottom-left` |
-| `bottom-right` | `ui-lib-dialog--position-bottom-right` |
+| `position` value | Host class                             |
+| ---------------- | -------------------------------------- |
+| `center`         | `ui-lib-dialog--position-center`       |
+| `top`            | `ui-lib-dialog--position-top`          |
+| `bottom`         | `ui-lib-dialog--position-bottom`       |
+| `left`           | `ui-lib-dialog--position-left`         |
+| `right`          | `ui-lib-dialog--position-right`        |
+| `top-left`       | `ui-lib-dialog--position-top-left`     |
+| `top-right`      | `ui-lib-dialog--position-top-right`    |
+| `bottom-left`    | `ui-lib-dialog--position-bottom-left`  |
+| `bottom-right`   | `ui-lib-dialog--position-bottom-right` |
 
 Additional state classes (internal convention):
 
@@ -168,14 +168,14 @@ Additional state classes (internal convention):
 
 ## PrimeNG Divergence and Rationale
 
-| API/Behavior | PrimeNG baseline | `ui-lib-dialog` v1 decision | Rationale |
-|---|---|---|---|
-| `draggable` default | Commonly enabled by default | Default `false` | Better default for fixed SaaS workflows; avoids accidental panel movement. |
-| `blockScroll` default | Commonly `false` | Default `true` when modal usage is expected | Aligns with modal UX/accessibility expectations and prevents background scroll bleed. |
-| Resizable | Available | Deferred to v2 | Lower demand and high complexity/testing surface. |
-| `appendTo` | Available | Deferred to v2 | Avoids SSR/portal complexity in first overlay release. |
-| Dynamic dialog service | `DialogService` pattern available | Not in v1 | Prefer template-driven declarative API first; service can build on stabilized primitives later. |
-| Z-index management | Runtime auto z-index options | CSS token-driven layering in v1 | Simpler initial architecture, aligned with token-first theming model. |
+| API/Behavior           | PrimeNG baseline                  | `ui-lib-dialog` v1 decision                 | Rationale                                                                                       |
+| ---------------------- | --------------------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `draggable` default    | Commonly enabled by default       | Default `false`                             | Better default for fixed SaaS workflows; avoids accidental panel movement.                      |
+| `blockScroll` default  | Commonly `false`                  | Default `true` when modal usage is expected | Aligns with modal UX/accessibility expectations and prevents background scroll bleed.           |
+| Resizable              | Available                         | Deferred to v2                              | Lower demand and high complexity/testing surface.                                               |
+| `appendTo`             | Available                         | Deferred to v2                              | Avoids SSR/portal complexity in first overlay release.                                          |
+| Dynamic dialog service | `DialogService` pattern available | Not in v1                                   | Prefer template-driven declarative API first; service can build on stabilized primitives later. |
+| Z-index management     | Runtime auto z-index options      | CSS token-driven layering in v1             | Simpler initial architecture, aligned with token-first theming model.                           |
 
 ## Final API Signature Snapshot
 

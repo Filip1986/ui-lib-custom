@@ -56,7 +56,7 @@ describe('DoughnutChartComponent', (): void => {
 
   it('renders host component', (): void => {
     const fixture: ComponentFixture<DoughnutChartHostComponent> = TestBed.createComponent(
-      DoughnutChartHostComponent
+      DoughnutChartHostComponent,
     );
     refreshFixture(fixture);
 
@@ -83,11 +83,11 @@ describe('DoughnutChartComponent', (): void => {
           destroy: jest.fn<void, []>(),
           resize: jest.fn<void, []>(),
         };
-      }
+      },
     );
 
     const fixture: ComponentFixture<DoughnutChartHostComponent> = TestBed.createComponent(
-      DoughnutChartHostComponent
+      DoughnutChartHostComponent,
     );
     fixture.componentInstance.data.set(createDoughnutData());
     refreshFixture(fixture);

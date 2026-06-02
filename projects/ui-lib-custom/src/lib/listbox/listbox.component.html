@@ -12,7 +12,11 @@
           aria-hidden="true"
           focusable="false"
         >
-          <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
+          <path
+            fill-rule="evenodd"
+            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+            clip-rule="evenodd"
+          />
         </svg>
       </span>
       <input
@@ -42,13 +46,17 @@
           (change)="toggleAll($event)"
           [attr.aria-label]="i18n.translate('listbox.select-all')"
         />
-        <span class="ui-lib-listbox__toggle-all-label">{{ i18n.translate('listbox.select-all') }}</span>
+        <span class="ui-lib-listbox__toggle-all-label">{{
+          i18n.translate('listbox.select-all')
+        }}</span>
       </label>
     </div>
   }
 
   <!-- Scrollable list -->
-  <div class="ui-lib-listbox__sr-live" aria-live="polite" aria-atomic="true">{{ liveRegionMessage() }}</div>
+  <div class="ui-lib-listbox__sr-live" aria-live="polite" aria-atomic="true">
+    {{ liveRegionMessage() }}
+  </div>
 
   <div
     #listElement
@@ -132,7 +140,11 @@
                         aria-hidden="true"
                         focusable="false"
                       >
-                        <path fill-rule="evenodd" d="M10.28 1.78a.75.75 0 0 0-1.06 0L5.25 5.72 2.78 3.25a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l4.5-4.5a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd"/>
+                        <path
+                          fill-rule="evenodd"
+                          d="M10.28 1.78a.75.75 0 0 0-1.06 0L5.25 5.72 2.78 3.25a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l4.5-4.5a.75.75 0 0 0 0-1.06Z"
+                          clip-rule="evenodd"
+                        />
                       </svg>
                     }
                   </span>
@@ -142,7 +154,11 @@
               @if (itemTemplate) {
                 <ng-container
                   [ngTemplateOutlet]="itemTemplate"
-                  [ngTemplateOutletContext]="{ $implicit: item, selected: isSelected(item.value), option: item.option }"
+                  [ngTemplateOutletContext]="{
+                    $implicit: item,
+                    selected: isSelected(item.value),
+                    option: item.option,
+                  }"
                 />
               } @else {
                 <span class="ui-lib-listbox__item-label">{{ item.label }}</span>

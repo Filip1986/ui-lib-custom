@@ -63,37 +63,37 @@ Override the global defaults in your stylesheet:
 
 ## Inputs
 
-| Input            | Type      | Default | Description                                                                                 |
-| ---------------- | --------- | ------- | ------------------------------------------------------------------------------------------- |
-| `disabled`       | `boolean` | `false` | When `true`, no ripple wave is produced on click.                                           |
-| `rippleColor`    | `string`  | `''`    | Inline override for `--uilib-ripple-color`. Any valid CSS colour (e.g. `rgba(...)`).        |
-| `rippleDuration` | `string`  | `''`    | Inline override for `--uilib-ripple-duration` (e.g. `'400ms'`).                             |
+| Input            | Type      | Default | Description                                                                                     |
+| ---------------- | --------- | ------- | ----------------------------------------------------------------------------------------------- |
+| `disabled`       | `boolean` | `false` | When `true`, no ripple wave is produced on click.                                               |
+| `rippleColor`    | `string`  | `''`    | Inline override for `--uilib-ripple-color`. Any valid CSS colour (e.g. `rgba(...)`).            |
+| `rippleDuration` | `string`  | `''`    | Inline override for `--uilib-ripple-duration` (e.g. `'400ms'`).                                 |
 | `rippleEasing`   | `string`  | `''`    | Inline override for `--uilib-ripple-easing`. Any valid CSS timing function (e.g. `'ease-out'`). |
 
 ## CSS custom properties
 
-| Variable                  | Default                         | Description                         |
-| ------------------------- | ------------------------------- | ------------------------------------ |
-| `--uilib-ripple-color`    | `rgba(255, 255, 255, 0.35)`     | Wave background colour.             |
-| `--uilib-ripple-duration` | `600ms`                         | Animation duration.                 |
-| `--uilib-ripple-easing`   | `cubic-bezier(0.4, 0, 0.2, 1)` | Animation timing function.          |
+| Variable                  | Default                        | Description                |
+| ------------------------- | ------------------------------ | -------------------------- |
+| `--uilib-ripple-color`    | `rgba(255, 255, 255, 0.35)`    | Wave background colour.    |
+| `--uilib-ripple-duration` | `600ms`                        | Animation duration.        |
+| `--uilib-ripple-easing`   | `cubic-bezier(0.4, 0, 0.2, 1)` | Animation timing function. |
 
 ## ARIA attributes
 
 The Ripple directive is **purely decorative** — it does not alter the host element's ARIA semantics in any way.
 
-| Attribute | Where applied | Value | Notes |
-| --------- | ------------- | ----- | ----- |
-| *(none)*  | —             | —     | No ARIA attributes are added or modified. |
+| Attribute | Where applied | Value | Notes                                     |
+| --------- | ------------- | ----- | ----------------------------------------- |
+| _(none)_  | —             | —     | No ARIA attributes are added or modified. |
 
 The wave `<span>` element contains no text and has `pointer-events: none`, so it is transparent to assistive technologies.
 
 ## Keyboard interaction
 
-| Key       | Behaviour                                                                 |
-| --------- | ------------------------------------------------------------------------- |
-| `Enter`   | Fires the native `click` event on `<button>` / `<a>` — ripple responds.  |
-| `Space`   | Same as above for `<button>` elements.                                    |
+| Key     | Behaviour                                                               |
+| ------- | ----------------------------------------------------------------------- |
+| `Enter` | Fires the native `click` event on `<button>` / `<a>` — ripple responds. |
+| `Space` | Same as above for `<button>` elements.                                  |
 
 No extra key wiring is needed. The directive listens to `click` events, and browsers naturally fire `click` on `Enter`/`Space` for interactive elements.
 
@@ -127,4 +127,3 @@ When the user has enabled the **Reduce Motion** accessibility setting, the rippl
 ### SSR safety
 
 The click listener is only registered in browser environments (`isPlatformBrowser` check in `ngOnInit`). Server-side rendering is fully supported.
-

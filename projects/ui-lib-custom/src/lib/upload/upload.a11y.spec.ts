@@ -9,14 +9,14 @@ import { UploadComponent } from './upload.component';
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }

@@ -132,7 +132,7 @@ describe('Timeline Accessibility', (): void => {
 
   it('should expose role="list" and the configured aria-label on the host', async (): Promise<void> => {
     const fixture: ComponentFixture<BasicTimelineA11yHostComponent> = await createFixture(
-      BasicTimelineA11yHostComponent
+      BasicTimelineA11yHostComponent,
     );
     const timeline: HTMLElement = getTimeline(fixture);
 
@@ -142,7 +142,7 @@ describe('Timeline Accessibility', (): void => {
 
   it('should generate a unique host id for the timeline instance', async (): Promise<void> => {
     const fixture: ComponentFixture<BasicTimelineA11yHostComponent> = await createFixture(
-      BasicTimelineA11yHostComponent
+      BasicTimelineA11yHostComponent,
     );
     const timeline: HTMLElement = getTimeline(fixture);
 
@@ -151,7 +151,7 @@ describe('Timeline Accessibility', (): void => {
 
   it('should expose role="listitem" on every rendered event', async (): Promise<void> => {
     const fixture: ComponentFixture<BasicTimelineA11yHostComponent> = await createFixture(
-      BasicTimelineA11yHostComponent
+      BasicTimelineA11yHostComponent,
     );
     const events: NodeListOf<HTMLElement> =
       getHostElement(fixture).querySelectorAll('.ui-lib-timeline__event');
@@ -163,13 +163,13 @@ describe('Timeline Accessibility', (): void => {
 
   it('should label default events from their generated content containers', async (): Promise<void> => {
     const fixture: ComponentFixture<BasicTimelineA11yHostComponent> = await createFixture(
-      BasicTimelineA11yHostComponent
+      BasicTimelineA11yHostComponent,
     );
     const timeline: HTMLElement = getTimeline(fixture);
     const firstEvent: HTMLElement | null =
       getHostElement(fixture).querySelector('.ui-lib-timeline__event');
     const firstContent: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-timeline__default-content'
+      '.ui-lib-timeline__default-content',
     );
 
     expect(firstEvent?.getAttribute('aria-labelledby')).toBe(`${timeline.id}-content-0`);
@@ -178,24 +178,24 @@ describe('Timeline Accessibility', (): void => {
 
   it('should include opposite content in aria-labelledby when an opposite template is present', async (): Promise<void> => {
     const fixture: ComponentFixture<TemplatedTimelineA11yHostComponent> = await createFixture(
-      TemplatedTimelineA11yHostComponent
+      TemplatedTimelineA11yHostComponent,
     );
     const timeline: HTMLElement = getTimeline(fixture);
     const firstEvent: HTMLElement | null =
       getHostElement(fixture).querySelector('.ui-lib-timeline__event');
 
     expect(firstEvent?.getAttribute('aria-labelledby')).toBe(
-      `${timeline.id}-content-0 ${timeline.id}-opposite-0`
+      `${timeline.id}-content-0 ${timeline.id}-opposite-0`,
     );
   });
 
   it('should apply ids to opposite-side content when an opposite template is present', async (): Promise<void> => {
     const fixture: ComponentFixture<TemplatedTimelineA11yHostComponent> = await createFixture(
-      TemplatedTimelineA11yHostComponent
+      TemplatedTimelineA11yHostComponent,
     );
     const timeline: HTMLElement = getTimeline(fixture);
     const opposite: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-timeline__opposite'
+      '.ui-lib-timeline__opposite',
     );
 
     expect(opposite?.getAttribute('id')).toBe(`${timeline.id}-opposite-0`);
@@ -203,10 +203,10 @@ describe('Timeline Accessibility', (): void => {
 
   it('should keep decorative connectors hidden from assistive technologies', async (): Promise<void> => {
     const fixture: ComponentFixture<BasicTimelineA11yHostComponent> = await createFixture(
-      BasicTimelineA11yHostComponent
+      BasicTimelineA11yHostComponent,
     );
     const connectors: NodeListOf<HTMLElement> = getHostElement(fixture).querySelectorAll(
-      '.ui-lib-timeline__connector'
+      '.ui-lib-timeline__connector',
     );
 
     connectors.forEach((connector: HTMLElement): void => {
@@ -216,10 +216,10 @@ describe('Timeline Accessibility', (): void => {
 
   it('should keep the default marker and marker wrapper hidden from assistive technologies', async (): Promise<void> => {
     const fixture: ComponentFixture<BasicTimelineA11yHostComponent> = await createFixture(
-      BasicTimelineA11yHostComponent
+      BasicTimelineA11yHostComponent,
     );
     const marker: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-timeline__marker'
+      '.ui-lib-timeline__marker',
     );
     const dot: HTMLElement | null = getHostElement(fixture).querySelector('.ui-lib-timeline__dot');
 
@@ -229,10 +229,10 @@ describe('Timeline Accessibility', (): void => {
 
   it('should keep custom marker content inside the decorative marker wrapper', async (): Promise<void> => {
     const fixture: ComponentFixture<TemplatedTimelineA11yHostComponent> = await createFixture(
-      TemplatedTimelineA11yHostComponent
+      TemplatedTimelineA11yHostComponent,
     );
     const marker: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-timeline__marker'
+      '.ui-lib-timeline__marker',
     );
     const customMarker: HTMLElement | null =
       getHostElement(fixture).querySelector('.custom-marker');
@@ -243,7 +243,7 @@ describe('Timeline Accessibility', (): void => {
 
   it('should keep the host and event rows out of the tab order by default', async (): Promise<void> => {
     const fixture: ComponentFixture<BasicTimelineA11yHostComponent> = await createFixture(
-      BasicTimelineA11yHostComponent
+      BasicTimelineA11yHostComponent,
     );
     const timeline: HTMLElement = getTimeline(fixture);
     const events: NodeListOf<HTMLElement> =
@@ -257,7 +257,7 @@ describe('Timeline Accessibility', (): void => {
 
   it('should preserve native keyboard access for projected interactive content', async (): Promise<void> => {
     const fixture: ComponentFixture<TemplatedTimelineA11yHostComponent> = await createFixture(
-      TemplatedTimelineA11yHostComponent
+      TemplatedTimelineA11yHostComponent,
     );
     const button: HTMLButtonElement | null = getHostElement(fixture).querySelector('.event-action');
 
@@ -267,7 +267,7 @@ describe('Timeline Accessibility', (): void => {
 
   it('should generate unique ids for multiple timeline instances on the same page', async (): Promise<void> => {
     const fixture: ComponentFixture<DualTimelineA11yHostComponent> = await createFixture(
-      DualTimelineA11yHostComponent
+      DualTimelineA11yHostComponent,
     );
     const timelines: NodeListOf<HTMLElement> =
       getHostElement(fixture).querySelectorAll('ui-lib-timeline');
@@ -280,7 +280,7 @@ describe('Timeline Accessibility', (): void => {
 
   it('should pass axe in the default state', async (): Promise<void> => {
     const fixture: ComponentFixture<BasicTimelineA11yHostComponent> = await createFixture(
-      BasicTimelineA11yHostComponent
+      BasicTimelineA11yHostComponent,
     );
 
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
@@ -288,7 +288,7 @@ describe('Timeline Accessibility', (): void => {
 
   it('should pass axe with templated horizontal content', async (): Promise<void> => {
     const fixture: ComponentFixture<TemplatedTimelineA11yHostComponent> = await createFixture(
-      TemplatedTimelineA11yHostComponent
+      TemplatedTimelineA11yHostComponent,
     );
 
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
@@ -296,7 +296,7 @@ describe('Timeline Accessibility', (): void => {
 
   it('should pass axe after reactive layout changes', async (): Promise<void> => {
     const fixture: ComponentFixture<BasicTimelineA11yHostComponent> = await createFixture(
-      BasicTimelineA11yHostComponent
+      BasicTimelineA11yHostComponent,
     );
 
     fixture.componentInstance.layout.set('horizontal');

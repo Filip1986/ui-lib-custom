@@ -80,6 +80,7 @@ ui-lib-custom/
 ### User Journeys
 
 #### 👨‍💻 Developer Using the Library
+
 ```
 README.md (API reference)
     ↓
@@ -91,6 +92,7 @@ Building apps! 🎉
 ```
 
 #### 🔧 Contributor Adding Features
+
 ```
 CONTRIBUTING.md
     ↓
@@ -102,6 +104,7 @@ Making changes! 💪
 ```
 
 #### 📦 Publisher Distributing the Library
+
 ```
 docs/guides/PUBLISHING_GUIDE.md
     ↓
@@ -139,6 +142,7 @@ New documentation to add?
 ## 🎨 Documentation Categories Explained
 
 ### 1. **README.md** (Root)
+
 - **Purpose**: Quick project overview and API reference
 - **Audience**: Everyone (first impression)
 - **Content**:
@@ -150,6 +154,7 @@ New documentation to add?
   - Link to full documentation
 
 ### 2. **docs/getting-started/**
+
 - **Purpose**: Help new users start quickly
 - **Audience**: First-time users
 - **Content**:
@@ -159,6 +164,7 @@ New documentation to add?
   - Testing guides
 
 ### 3. **docs/guides/**
+
 - **Purpose**: Teach how to accomplish specific tasks
 - **Audience**: Active users
 - **Content**:
@@ -168,6 +174,7 @@ New documentation to add?
   - Advanced usage patterns
 
 ### 4. **docs/reference/**
+
 - **Purpose**: Technical specifications and summaries
 - **Audience**: All users (reference material)
 - **Content**:
@@ -177,6 +184,7 @@ New documentation to add?
   - Technical details
 
 ### 5. **docs/research/**
+
 - **Purpose**: Capture implementation research and parity analysis
 - **Audience**: Contributors and maintainers
 - **Content**:
@@ -185,6 +193,7 @@ New documentation to add?
   - API/behavior discovery before implementation
 
 ### 6. **docs/architecture/**
+
 - **Purpose**: Explain system design and structure
 - **Audience**: Contributors and maintainers
 - **Content**:
@@ -196,21 +205,25 @@ New documentation to add?
 ## ✅ Benefits of This Structure
 
 ### Scalability
+
 ✅ Easy to add new documentation without cluttering root
 ✅ Clear categories prevent confusion
 ✅ Can grow to hundreds of docs without getting messy
 
 ### Discoverability
+
 ✅ Single entry point (`docs/README.md`)
 ✅ Clear navigation paths
 ✅ Role-based organization
 
 ### Maintainability
+
 ✅ Related docs grouped together
 ✅ Clear ownership per category
 ✅ Easy to update and refactor
 
 ### User Experience
+
 ✅ New users find quick starts easily
 ✅ Advanced users find detailed guides
 ✅ Contributors find architecture docs
@@ -220,16 +233,16 @@ New documentation to add?
 
 ### Files Moved
 
-| Old Location | New Location | Category |
-|-------------|--------------|----------|
-| `QUICK_START.md` | `docs/getting-started/QUICK_START.md` | Getting Started |
-| `TEST_GUIDE.md` | `docs/getting-started/TEST_GUIDE.md` | Getting Started |
-| `INTEGRATION_EXAMPLE.md` | `docs/guides/INTEGRATION_EXAMPLE.md` | Guides |
-| `PUBLISHING_GUIDE.md` | `docs/guides/PUBLISHING_GUIDE.md` | Guides |
-| `PROJECT_SUMMARY.md` | `docs/reference/project/PROJECT_SUMMARY.md` | Reference |
-| `VERIFICATION_CHECKLIST.md` | `docs/reference/project/VERIFICATION_CHECKLIST.md` | Reference |
-| `ARCHITECTURE.md` | `docs/architecture/ARCHITECTURE.md` | Architecture |
-| `DOCUMENTATION_INDEX.md` | ~~Removed~~ | Replaced by `docs/README.md` |
+| Old Location                | New Location                                       | Category                     |
+| --------------------------- | -------------------------------------------------- | ---------------------------- |
+| `QUICK_START.md`            | `docs/getting-started/QUICK_START.md`              | Getting Started              |
+| `TEST_GUIDE.md`             | `docs/getting-started/TEST_GUIDE.md`               | Getting Started              |
+| `INTEGRATION_EXAMPLE.md`    | `docs/guides/INTEGRATION_EXAMPLE.md`               | Guides                       |
+| `PUBLISHING_GUIDE.md`       | `docs/guides/PUBLISHING_GUIDE.md`                  | Guides                       |
+| `PROJECT_SUMMARY.md`        | `docs/reference/project/PROJECT_SUMMARY.md`        | Reference                    |
+| `VERIFICATION_CHECKLIST.md` | `docs/reference/project/VERIFICATION_CHECKLIST.md` | Reference                    |
+| `ARCHITECTURE.md`           | `docs/architecture/ARCHITECTURE.md`                | Architecture                 |
+| `DOCUMENTATION_INDEX.md`    | ~~Removed~~                                        | Replaced by `docs/README.md` |
 
 ### Files Created
 

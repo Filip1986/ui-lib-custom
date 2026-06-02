@@ -1,8 +1,4 @@
-<ui-lib-order-list
-  [value]="dragProducts"
-  [dragDrop]="true"
-  (reordered)="onReorder($event)"
->
+<ui-lib-order-list [value]="dragProducts" [dragDrop]="true" (reordered)="onReorder($event)">
   <ng-template uiOrderListItem let-item>
     <span>{{ item.name }}</span>
   </ng-template>

@@ -304,7 +304,7 @@ function mockComputedStyle(values: CssMap): void {
   jest
     .spyOn(globalThis, 'getComputedStyle')
     .mockImplementation(
-      ((): CSSStyleDeclaration => createMockStyleDeclaration(values)) as typeof getComputedStyle
+      ((): CSSStyleDeclaration => createMockStyleDeclaration(values)) as typeof getComputedStyle,
     );
 }
 

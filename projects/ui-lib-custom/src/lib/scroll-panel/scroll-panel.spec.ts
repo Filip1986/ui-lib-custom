@@ -45,7 +45,7 @@ describe('ScrollPanel', (): void => {
 
   function getPanel(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-scroll-panel'
+      'ui-lib-scroll-panel',
     ) as HTMLElement;
   }
 
@@ -167,10 +167,10 @@ describe('ScrollPanel', (): void => {
       projectionFixture.detectChanges();
 
       const panel: HTMLElement = (projectionFixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-scroll-panel'
+        'ui-lib-scroll-panel',
       ) as HTMLElement;
       const content: HTMLElement = panel.querySelector(
-        '.ui-lib-scroll-panel__content'
+        '.ui-lib-scroll-panel__content',
       ) as HTMLElement;
 
       expect(content.querySelector('.projected-a')).toBeTruthy();

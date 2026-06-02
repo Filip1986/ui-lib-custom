@@ -38,7 +38,7 @@ const renderAccordion: (args: AccordionStoryArgs) => {
   template: string;
   moduleMetadata: { imports: unknown[] };
 } = (
-  args: AccordionStoryArgs
+  args: AccordionStoryArgs,
 ): { props: AccordionStoryArgs; template: string; moduleMetadata: { imports: unknown[] } } => ({
   props: args,
   moduleMetadata: { imports: [Accordion, AccordionPanel] },

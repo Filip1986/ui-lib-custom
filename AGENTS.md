@@ -4,6 +4,7 @@
 > `operator-hq:AI_AGENT_CONTEXT.md` for live handoff. **Legacy — migrating to `platform/libs/ui`.**
 
 ## Document Ownership
+
 - `AGENTS.md` is the stable source of truth for architecture, conventions, and workflows.
 - `AI_AGENT_CONTEXT.md` is the session-state document (active focus, inventory status, and recent handoffs).
 - Keep policy/rule changes in `AGENTS.md`; keep per-session execution notes in `AI_AGENT_CONTEXT.md`.
@@ -11,6 +12,7 @@
 - Historical handoffs should be moved to `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md` to keep active context concise.
 
 ## Big Picture
+
 - **Project vision and long-term direction:** see `docs/VISION.md` — this is the emotional and strategic north star for every decision.
 - **Current committed "wow factor": Elite Accessibility** — every component must meet the accessibility standard described in `docs/VISION.md#-committed--elite-accessibility`. When in doubt on any a11y trade-off, the answer is always: go further, not less.
 - Monorepo-style Angular workspace with 3 projects in `angular.json`: library (`projects/ui-lib-custom`), demo app (`projects/demo`), and minimal app (`projects/minimal`).
@@ -19,6 +21,7 @@
 - Theme flow: components read global variant/mode via `ThemeConfigService` signals; service maps presets to CSS vars and applies them to `documentElement` (or a scoped host) (`projects/ui-lib-custom/src/lib/theming/theme-config.service.ts`, `projects/ui-lib-custom/src/lib/theming/theme-scope.directive.ts`).
 
 ## Non-Negotiable Conventions (project-specific)
+
 - Every library component uses `ViewEncapsulation.None` + standalone + `OnPush` (see `projects/ui-lib-custom/src/lib/button/button.ts`).
 - Use explicit types everywhere, including `computed<...>((): ... => ...)`; lint is strict about inferred function expressions.
 - Do not use relative imports across entry-point boundaries; use package paths like `ui-lib-custom/theme`.
@@ -33,12 +36,14 @@
   - Full rationale and examples: `LIBRARY_CONVENTIONS.md → Output Naming Rules`.
 
 ## How Code Is Organized
+
 - Components: `projects/ui-lib-custom/src/lib/<component>/` with `<component>.ts/.html/.scss/.spec.ts` + `index.ts`.
 - Packaging and exports: `projects/ui-lib-custom/*/ng-package.json` + `projects/ui-lib-custom/package.json` (`exports`, `typesVersions`).
 - Import stability is regression-tested in `projects/ui-lib-custom/test/entry-points.spec.ts`.
 - Demo pages/examples/shared code use `@demo/pages/*`, `@demo/examples/*`, and `@demo/shared/*` aliases (`tsconfig.json`, `jest.config.ts`).
 
 ## Critical Workflows
+
 - Install deps: `npm install`
 - Build library: `npm run build` (or `ng build ui-lib-custom`)
 - Build demo app: `npm run build:demo`
@@ -53,11 +58,14 @@
 - **TypeScript type-check all projects**: `npm run typecheck` (checks lib source, lib tests, demo app, demo tests, and stories — no emit)
 
 ## Git Hooks (Husky)
-- **pre-commit** — runs `lint-staged`: ESLint (`.ts` + `.html`) + Prettier (`.ts`) + Stylelint (`.scss`) on staged files only (fast).
-- **pre-push** — runs `npm run typecheck`: full TS type-check across all five tsconfigs before any push. Blocks push if there are TS errors.
+
+- **pre-commit** — runs `lint-staged`: Prettier then ESLint on staged `.ts`; Prettier on staged `.html`, `.json`, `.md`, and all `.scss`/`.css`; Stylelint only on staged `projects/ui-lib-custom/**/*.scss` (demo SCSS is Prettier-only).
+- **pre-push** — runs `npm run format:check` then `npm run typecheck` (full repo Prettier check + TS across all five tsconfigs). Blocks push on formatting or type errors.
+- **CI** (`lint` job) — runs `npm run lint`, `npm run format:check`, and i18n checks on every PR and push to `main`.
 - To bypass hooks in an emergency: `git push --no-verify` (use sparingly; always fix errors before merging).
 
 ## Debugging + Integration Notes
+
 - Jest is zoneless (`setup-jest.ts`) and includes `matchMedia` polyfill; failures around media queries usually indicate missing test setup.
 - `jest.config.ts` aliases `ui-lib-custom/*` directly to source, so entry-point import failures usually mean export-map/index drift.
 - Playwright config runs against `http://localhost:4200` and stores results in `playwright-report/` + `test-results/a11y-results.json`.
@@ -66,6 +74,7 @@
 - Windows shell note: if PowerShell blocks `npm.ps1`/`npx.ps1` (execution policy), run the `.cmd` shims (`npm.cmd`, `npx.cmd`) from `bash.exe` and record the outcome/workaround in the session handoff.
 
 ## When Adding/Changing Components
+
 - Start with `COMPONENT_CREATION_GUIDE.md` for the component creation workflow and prompt sequencing.
 - When **improving or hardening** an existing component, use the 6-phase prompts in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`. Score the component on the quality scorecard before marking it complete — every category must be ≥ 8. Record the scores in `docs/COMPONENT_SCORES.md` (the single source of truth for all component scores and the hardening backlog).
 - Update `projects/ui-lib-custom/src/public-api.ts` only when primary-barrel compatibility is intended.

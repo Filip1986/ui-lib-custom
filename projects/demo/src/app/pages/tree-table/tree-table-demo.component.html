@@ -1,9 +1,8 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header docHeader title="TreeTable" [importCode]="importCode">
     <p class="doc-description">
-      Hierarchical data displayed as an expandable table. Supports sorting, global filter,
-      single / multiple / checkbox selection, custom cell templates, and all three design variants.
+      Hierarchical data displayed as an expandable table. Supports sorting, global filter, single /
+      multiple / checkbox selection, custom cell templates, and all three design variants.
     </p>
   </app-doc-page-header>
 
@@ -12,15 +11,15 @@
        ═══════════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="basic" title="Basic — File System">
     <p class="demo-section__description">
-      A three-level file-system tree. The <code>name</code> column is the expander column.
-      Click the toggle arrows to expand or collapse folders.
+      A three-level file-system tree. The <code>name</code> column is the expander column. Click the
+      toggle arrows to expand or collapse folders.
     </p>
 
     <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()">
-      <ui-lib-tree-table-column field="name"  header="Name"  [expander]="true" width="40%" />
-      <ui-lib-tree-table-column field="size"  header="Size"  width="15%" />
-      <ui-lib-tree-table-column field="type"  header="Type"  width="20%" />
-      <ui-lib-tree-table-column field="date"  header="Modified" />
+      <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+      <ui-lib-tree-table-column field="size" header="Size" width="15%" />
+      <ui-lib-tree-table-column field="type" header="Type" width="20%" />
+      <ui-lib-tree-table-column field="date" header="Modified" />
     </ui-lib-tree-table>
   </app-doc-section>
 
@@ -34,7 +33,13 @@
     </p>
 
     <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()">
-      <ui-lib-tree-table-column field="name" header="Name" [expander]="true" [sortable]="true" width="40%" />
+      <ui-lib-tree-table-column
+        field="name"
+        header="Name"
+        [expander]="true"
+        [sortable]="true"
+        width="40%"
+      />
       <ui-lib-tree-table-column field="size" header="Size" [sortable]="true" width="15%" />
       <ui-lib-tree-table-column field="type" header="Type" [sortable]="true" width="20%" />
       <ui-lib-tree-table-column field="date" header="Modified" [sortable]="true" />
@@ -46,8 +51,8 @@
        ═══════════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="global-filter" title="Global Filter">
     <p class="demo-section__description">
-      Type in the search box to filter rows. Parent nodes remain visible when any of
-      their descendants match the search text.
+      Type in the search box to filter rows. Parent nodes remain visible when any of their
+      descendants match the search text.
     </p>
 
     <ui-lib-tree-table
@@ -56,10 +61,10 @@
       [globalFilter]="true"
       globalFilterPlaceholder="Search files and folders..."
     >
-      <ui-lib-tree-table-column field="name"  header="Name"  [expander]="true" width="40%" />
-      <ui-lib-tree-table-column field="size"  header="Size"  width="15%" />
-      <ui-lib-tree-table-column field="type"  header="Type"  width="20%" />
-      <ui-lib-tree-table-column field="date"  header="Modified" />
+      <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+      <ui-lib-tree-table-column field="size" header="Size" width="15%" />
+      <ui-lib-tree-table-column field="type" header="Type" width="20%" />
+      <ui-lib-tree-table-column field="date" header="Modified" />
     </ui-lib-tree-table>
   </app-doc-section>
 
@@ -68,8 +73,8 @@
        ═══════════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="selection-modes" title="Selection Modes">
     <p class="demo-section__description">
-      Switch between single, multiple, and checkbox selection. Checkbox mode cascades
-      selection to all descendant rows and shows a "partial" state on parents.
+      Switch between single, multiple, and checkbox selection. Checkbox mode cascades selection to
+      all descendant rows and shows a "partial" state on parents.
     </p>
 
     <div class="demo-controls demo-controls--inline">
@@ -83,7 +88,8 @@
               [appearance]="selectionMode() === m ? 'solid' : 'outline'"
               severity="primary"
               (click)="setSelectionMode($any(m))"
-            >{{ m ?? 'none' }}</ui-lib-button>
+              >{{ m ?? 'none' }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -146,8 +152,8 @@
        ═══════════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="custom-cell-templates" title="Custom Cell Templates">
     <p class="demo-section__description">
-      Use <code>[uiTreeTableColumnBody]</code> to inject custom HTML into any cell.
-      The template receives the full <code>TreeTableNode</code> as <code>$implicit</code>.
+      Use <code>[uiTreeTableColumnBody]</code> to inject custom HTML into any cell. The template
+      receives the full <code>TreeTableNode</code> as <code>$implicit</code>.
     </p>
 
     <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()">
@@ -178,7 +184,8 @@
           <span
             class="demo-type-tag"
             [class]="'demo-type-tag--' + (node.data?.['type'] === 'Folder' ? 'folder' : 'file')"
-          >{{ node.data?.['type'] }}</span>
+            >{{ node.data?.['type'] }}</span
+          >
         </ng-template>
       </ui-lib-tree-table-column>
 
@@ -191,8 +198,8 @@
        ═══════════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="organisation-data" title="Organisation Data — All Features">
     <p class="demo-section__description">
-      Sorting, global filter, and checkbox selection combined. Uses a different
-      data shape to demonstrate field flexibility.
+      Sorting, global filter, and checkbox selection combined. Uses a different data shape to
+      demonstrate field flexibility.
     </p>
 
     <ui-lib-tree-table
@@ -215,12 +222,7 @@
         [sortable]="true"
         width="15%"
       />
-      <ui-lib-tree-table-column
-        field="budget"
-        header="Budget"
-        [sortable]="true"
-        width="20%"
-      />
+      <ui-lib-tree-table-column field="budget" header="Budget" [sortable]="true" width="20%" />
       <ui-lib-tree-table-column field="location" header="Location" />
     </ui-lib-tree-table>
   </app-doc-section>
@@ -233,11 +235,7 @@
 
     @for (size of ['sm', 'md', 'lg']; track size) {
       <h3 class="demo-subsection-title">{{ size }}</h3>
-      <ui-lib-tree-table
-        [value]="fileSystemNodes"
-        [variant]="activeVariant()"
-        [size]="$any(size)"
-      >
+      <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()" [size]="$any(size)">
         <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
         <ui-lib-tree-table-column field="size" header="Size" width="15%" />
         <ui-lib-tree-table-column field="type" header="Type" />
@@ -253,7 +251,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -262,7 +259,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -271,7 +268,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -281,5 +278,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

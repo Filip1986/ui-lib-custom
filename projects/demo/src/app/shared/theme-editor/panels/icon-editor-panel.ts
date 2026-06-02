@@ -53,7 +53,7 @@ export class IconEditorPanel {
         defaultLibrary: 'lucide',
         defaultSize: 'md',
         sizes: { ...this.defaultSizes },
-      }
+      },
   );
 
   private pushPatch(patch: Partial<ThemeIconConfig>): void {

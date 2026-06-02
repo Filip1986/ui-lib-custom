@@ -44,7 +44,7 @@ const renderDrawer: (args: Partial<DrawerStoryArgs>) => {
   moduleMetadata: { imports: unknown[] };
   template: string;
 } = (
-  args: Partial<DrawerStoryArgs>
+  args: Partial<DrawerStoryArgs>,
 ): {
   props: Partial<DrawerStoryArgs> & { visible: WritableSignal<boolean> };
   moduleMetadata: { imports: unknown[] };

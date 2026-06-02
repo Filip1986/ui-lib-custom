@@ -45,7 +45,7 @@ export class PanelMenuSubComponent {
   /** Items with `visible !== false`. */
   public readonly visibleItems: Signal<PanelMenuItem[]> = computed<PanelMenuItem[]>(
     (): PanelMenuItem[] =>
-      this.items().filter((item: PanelMenuItem): boolean => item.visible !== false)
+      this.items().filter((item: PanelMenuItem): boolean => item.visible !== false),
   );
 
   /** Builds a unique path key for the item at `index` within this sub-list. */
@@ -83,7 +83,7 @@ export class PanelMenuSubComponent {
     event: KeyboardEvent,
     item: PanelMenuItem,
     index: number,
-    isGroup: boolean
+    isGroup: boolean,
   ): void {
     switch (event.key) {
       case KEYBOARD_KEYS.Enter:
@@ -131,8 +131,8 @@ export class PanelMenuSubComponent {
     const focusables: HTMLElement[] = Array.from(
       list.querySelectorAll<HTMLElement>(
         ':scope > li > .ui-lib-panel-menu__sub-header:not([disabled]),' +
-          ':scope > li > .ui-lib-panel-menu__sub-link:not([aria-disabled="true"])'
-      )
+          ':scope > li > .ui-lib-panel-menu__sub-link:not([aria-disabled="true"])',
+      ),
     );
     const currentIndex: number = focusables.indexOf(current);
     if (currentIndex === -1) {
@@ -144,7 +144,7 @@ export class PanelMenuSubComponent {
 
   private focusParentPanelHeader(current: HTMLElement): void {
     const panelRegion: HTMLElement | null = current.closest(
-      '.ui-lib-panel-menu__content[role="region"]'
+      '.ui-lib-panel-menu__content[role="region"]',
     );
     const labelledBy: string | null = panelRegion?.getAttribute('aria-labelledby') ?? null;
     if (!labelledBy) {

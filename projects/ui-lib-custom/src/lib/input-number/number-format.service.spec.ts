@@ -2,7 +2,7 @@ import { NumberFormatService, type NumberFormatConfig } from './number-format.se
 
 describe('NumberFormatService', (): void => {
   const createService: (config: NumberFormatConfig) => NumberFormatService = (
-    config: NumberFormatConfig
+    config: NumberFormatConfig,
   ): NumberFormatService => {
     const service: NumberFormatService = new NumberFormatService();
     service.configure(config);
@@ -65,7 +65,7 @@ describe('NumberFormatService', (): void => {
         const formattedValue: string = service.formatValue(value);
         expect(formattedValue).toMatch(symbolPattern);
         expect(service.parseValue(formattedValue)).toBeCloseTo(value, 2);
-      }
+      },
     );
 
     it('supports currencyDisplay code', (): void => {
@@ -121,14 +121,14 @@ describe('NumberFormatService', (): void => {
         expectedDecimalSeparator: string,
         expectedGroupSeparator: string,
         sample: string,
-        expectedValue: number
+        expectedValue: number,
       ): void => {
         const service: NumberFormatService = createService({ mode: 'decimal', locale });
 
         expect(service.getDecimalSeparator()).toBe(expectedDecimalSeparator);
         expect(service.getGroupSeparator()).toBe(expectedGroupSeparator);
         expect(service.parseValue(sample)).toBeCloseTo(expectedValue, 4);
-      }
+      },
     );
 
     it('parses fr-FR values with locale-generated space grouping', (): void => {
@@ -365,7 +365,7 @@ describe('NumberFormatService', (): void => {
         expect(parsedValue).not.toBeNull();
         expect(parsedValue as number).toBeCloseTo(scenario.value, 2);
         expect(reFormattedValue).toBe(formattedValue);
-      }
+      },
     );
   });
 });

@@ -58,7 +58,7 @@ function createContainer(config: DynamicDialogConfig = {}): {
 function getPanel(fixture: ComponentFixture<DynamicDialog>): HTMLElement {
   const host: HTMLElement = fixture.nativeElement as HTMLElement;
   const panel: HTMLElement | null = host.querySelector<HTMLElement>(
-    '.ui-lib-dynamic-dialog__panel'
+    '.ui-lib-dynamic-dialog__panel',
   );
   if (!panel) {
     throw new Error('Expected dialog panel to exist.');
@@ -68,7 +68,7 @@ function getPanel(fixture: ComponentFixture<DynamicDialog>): HTMLElement {
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<DynamicDialog>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
@@ -145,7 +145,7 @@ describe('DynamicDialog Accessibility', (): void => {
       expect(labelledById).toBeTruthy();
 
       const titleEl: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
-        `#${labelledById}`
+        `#${labelledById}`,
       );
       expect(titleEl).not.toBeNull();
       expect(titleEl!.textContent!.trim()).toBe('My Dialog');

@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <!-- ── Header ──────────────────────────────────────────────────────────── -->
   <app-doc-page-header
     docHeader
@@ -10,7 +9,9 @@
   <!-- ── Dashboard ──────────────────────────────────────────────────────── -->
   <section id="dashboard" data-doc-anchor class="roadmap-section">
     <h2 class="section-title">At a Glance</h2>
-    <p class="section-subtitle">Current state of the library as of May 2026 — component hardening milestone complete.</p>
+    <p class="section-subtitle">
+      Current state of the library as of May 2026 — component hardening milestone complete.
+    </p>
 
     <div class="stats-grid">
       <div class="stat-card stat-card--primary">
@@ -74,7 +75,8 @@
   <section id="milestone-progress" data-doc-anchor class="roadmap-section">
     <h2 class="section-title">Milestone Progress</h2>
     <p class="section-subtitle">
-      6 phases from foundation cleanup to v1.0 GA. Phases 0–3 are complete — all 100 components hardened.
+      6 phases from foundation cleanup to v1.0 GA. Phases 0–3 are complete — all 100 components
+      hardened.
     </p>
 
     <div class="phases-timeline">
@@ -114,10 +116,16 @@
               <div class="phase-progress__bar">
                 <div
                   class="phase-progress__fill"
-                  [style.width.%]="phase.completedCount !== null ? (phase.completedCount / phase.componentCount) * 100 : 0"
+                  [style.width.%]="
+                    phase.completedCount !== null
+                      ? (phase.completedCount / phase.componentCount) * 100
+                      : 0
+                  "
                 ></div>
               </div>
-              <span class="phase-progress__label">{{ phase.completedCount }} / {{ phase.componentCount }} components</span>
+              <span class="phase-progress__label"
+                >{{ phase.completedCount }} / {{ phase.componentCount }} components</span
+              >
             </div>
           }
 
@@ -145,23 +153,28 @@
   <section id="component-scoreboard" data-doc-anchor class="roadmap-section">
     <h2 class="section-title">Component Quality Scoreboard</h2>
     <p class="section-subtitle">
-      Every component scored across 10 quality dimensions. Gate: all scores ≥ 8 = production-quality.
-      Columns: API · A11y · Perf · Comp · Theme · DX · Docs · Polish · Angular · Feel
+      Every component scored across 10 quality dimensions. Gate: all scores ≥ 8 =
+      production-quality. Columns: API · A11y · Perf · Comp · Theme · DX · Docs · Polish · Angular ·
+      Feel
     </p>
 
     <!-- Scoring methodology notice -->
     <div class="scoring-method-notice" role="note" aria-label="Scoring methodology notice">
       <div class="scoring-method-notice__icon">⚠️</div>
       <div class="scoring-method-notice__body">
-        <strong class="scoring-method-notice__title">Current scores are hardening-session estimates, not full checkpoint audits</strong>
+        <strong class="scoring-method-notice__title"
+          >Current scores are hardening-session estimates, not full checkpoint audits</strong
+        >
         <p class="scoring-method-notice__detail">
-          These scores were assigned during 6-phase hardening sessions — a qualitative, holistic evaluation.
-          <strong>SCORING_CRITERIA.md</strong> defines a more rigorous standard: each category has a fixed checklist of
-          externally-anchored, verifiable items and <em>score = checked / total × 10</em>.
-          A "hardening 8" and a "checkpoint 8" are not the same thing.
-          A full re-audit of all 100 components against all 182 checkboxes across 11 categories is required
-          before these scores are externally credible — especially before publishing the benchmark article.
-          See <strong>Next Steps → SCORING_CRITERIA.md Full Checkpoint Audit</strong>.
+          These scores were assigned during 6-phase hardening sessions — a qualitative, holistic
+          evaluation.
+          <strong>SCORING_CRITERIA.md</strong> defines a more rigorous standard: each category has a
+          fixed checklist of externally-anchored, verifiable items and
+          <em>score = checked / total × 10</em>. A "hardening 8" and a "checkpoint 8" are not the
+          same thing. A full re-audit of all 100 components against all 182 checkboxes across 11
+          categories is required before these scores are externally credible — especially before
+          publishing the benchmark article. See
+          <strong>Next Steps → SCORING_CRITERIA.md Full Checkpoint Audit</strong>.
         </p>
       </div>
     </div>
@@ -184,7 +197,9 @@
             (click)="setCategory(cat)"
             [attr.aria-pressed]="activeCategory() === cat"
             type="button"
-          >{{ cat }}</button>
+          >
+            {{ cat }}
+          </button>
         }
       </div>
     </div>
@@ -226,11 +241,17 @@
               <td class="col-score" [class]="getCellClass(component.a11y)">{{ component.a11y }}</td>
               <td class="col-score" [class]="getCellClass(component.perf)">{{ component.perf }}</td>
               <td class="col-score" [class]="getCellClass(component.comp)">{{ component.comp }}</td>
-              <td class="col-score" [class]="getCellClass(component.theme)">{{ component.theme }}</td>
+              <td class="col-score" [class]="getCellClass(component.theme)">
+                {{ component.theme }}
+              </td>
               <td class="col-score" [class]="getCellClass(component.dx)">{{ component.dx }}</td>
               <td class="col-score" [class]="getCellClass(component.docs)">{{ component.docs }}</td>
-              <td class="col-score" [class]="getCellClass(component.polish)">{{ component.polish }}</td>
-              <td class="col-score" [class]="getCellClass(component.angular)">{{ component.angular }}</td>
+              <td class="col-score" [class]="getCellClass(component.polish)">
+                {{ component.polish }}
+              </td>
+              <td class="col-score" [class]="getCellClass(component.angular)">
+                {{ component.angular }}
+              </td>
               <td class="col-score" [class]="getCellClass(component.feel)">{{ component.feel }}</td>
               <td class="col-avg" [class]="getScoreClass(component.avg)">
                 <strong>{{ component.avg }}</strong>
@@ -256,16 +277,19 @@
     <details class="scoring-criteria-panel">
       <summary class="scoring-criteria-summary">
         📐 Scoring Criteria — what each column measures (SCORING_CRITERIA.md)
-        <span class="scoring-criteria-hint">Tier 1: hardening estimate · Tier 2: full checkpoint audit (pending)</span>
+        <span class="scoring-criteria-hint"
+          >Tier 1: hardening estimate · Tier 2: full checkpoint audit (pending)</span
+        >
       </summary>
       <div class="scoring-method-tiers">
         <div class="scoring-tier scoring-tier--done">
           <div class="scoring-tier__label">Tier 1 — Completed ✅</div>
           <div class="scoring-tier__name">6-Phase Hardening Session</div>
           <p class="scoring-tier__desc">
-            Each component went through a 6-phase evolution workflow: Architecture → DX &amp; API → Accessibility →
-            Performance → Composability → Emotional Polish. A holistic score was assigned at the end of each phase
-            based on qualitative assessment. All 100 components passed the ≥ 8 gate under this method.
+            Each component went through a 6-phase evolution workflow: Architecture → DX &amp; API →
+            Accessibility → Performance → Composability → Emotional Polish. A holistic score was
+            assigned at the end of each phase based on qualitative assessment. All 100 components
+            passed the ≥ 8 gate under this method.
             <strong>These are the scores currently shown in this table.</strong>
           </p>
         </div>
@@ -273,17 +297,22 @@
           <div class="scoring-tier__label">Tier 2 — Pending ⬜</div>
           <div class="scoring-tier__name">SCORING_CRITERIA.md Full Checkpoint Audit</div>
           <p class="scoring-tier__desc">
-            Each category has a fixed checklist of externally-anchored, verifiable items (e.g. A11y has 28 checkpoints
-            against the WAI-ARIA APG, axe-core ruleset, and WCAG 2.1). <em>Score = verified checkboxes / total × 10.</em>
-            An unverified item is an explicit, visible backlog entry — not an unknown gap.
-            This audit is <strong>required before scores are externally credible</strong> and must be completed
+            Each category has a fixed checklist of externally-anchored, verifiable items (e.g. A11y
+            has 28 checkpoints against the WAI-ARIA APG, axe-core ruleset, and WCAG 2.1).
+            <em>Score = verified checkboxes / total × 10.</em> An unverified item is an explicit,
+            visible backlog entry — not an unknown gap. This audit is
+            <strong>required before scores are externally credible</strong> and must be completed
             before the benchmark article is written or the library is launched publicly.
           </p>
         </div>
       </div>
       <div class="scoring-criteria-grid" role="list">
         @for (dim of scoringDimensions; track trackByDimension($index, dim)) {
-          <div class="scoring-dim-card" [class.scoring-dim-card--gate]="dim.column === 'Cat. 11'" role="listitem">
+          <div
+            class="scoring-dim-card"
+            [class.scoring-dim-card--gate]="dim.column === 'Cat. 11'"
+            role="listitem"
+          >
             <div class="scoring-dim-header">
               <span class="scoring-dim-column">{{ dim.column }}</span>
               <span class="scoring-dim-checkpoints">{{ dim.checkpoints }} checkpoints</span>
@@ -305,8 +334,8 @@
   <section id="build-queue" data-doc-anchor class="roadmap-section">
     <h2 class="section-title">Build Queue</h2>
     <p class="section-subtitle">
-      Prioritised list of components to build next. Ordered by developer impact and competitive
-      gap. Low-complexity items first — maximum value before Public Beta.
+      Prioritised list of components to build next. Ordered by developer impact and competitive gap.
+      Low-complexity items first — maximum value before Public Beta.
     </p>
 
     <h3 class="queue-group-title">🚧 Active Queue — Pre-Public Beta</h3>
@@ -317,7 +346,10 @@
           <div class="queue-item__body">
             <div class="queue-item__header">
               <span class="queue-item__name">{{ item.name }}</span>
-              <span class="queue-item__complexity" [class]="'complexity-badge--' + getComplexityClass(item.complexity)">
+              <span
+                class="queue-item__complexity"
+                [class]="'complexity-badge--' + getComplexityClass(item.complexity)"
+              >
                 {{ item.complexity }}
               </span>
             </div>
@@ -336,7 +368,10 @@
           <div class="queue-item__body">
             <div class="queue-item__header">
               <span class="queue-item__name">{{ item.name }}</span>
-              <span class="queue-item__complexity" [class]="'complexity-badge--' + getComplexityClass(item.complexity)">
+              <span
+                class="queue-item__complexity"
+                [class]="'complexity-badge--' + getComplexityClass(item.complexity)"
+              >
                 {{ item.complexity }}
               </span>
             </div>
@@ -353,7 +388,8 @@
     <h2 class="section-title">Documentation Status</h2>
     <p class="section-subtitle">
       Tracking formal reference docs, implementation docs, and demo pages per component.
-      {{ docCompleteCount() }} of {{ docStatusItems.length - 1 }} tracked components have complete formal documentation.
+      {{ docCompleteCount() }} of {{ docStatusItems.length - 1 }} tracked components have complete
+      formal documentation.
     </p>
 
     <div class="doc-status-table-wrapper" role="region" aria-label="Documentation status table">
@@ -373,16 +409,25 @@
             <tr class="doc-row" [class]="'doc-row--' + item.status">
               <td class="doc-col-name">{{ item.component }}</td>
               <td class="doc-col-check doc-check--center">
-                @if (item.hasApiDoc) { <span class="doc-check doc-check--yes" aria-label="Yes">✓</span> }
-                @else { <span class="doc-check doc-check--no" aria-label="No">✗</span> }
+                @if (item.hasApiDoc) {
+                  <span class="doc-check doc-check--yes" aria-label="Yes">✓</span>
+                } @else {
+                  <span class="doc-check doc-check--no" aria-label="No">✗</span>
+                }
               </td>
               <td class="doc-col-check doc-check--center">
-                @if (item.hasImplDoc) { <span class="doc-check doc-check--yes" aria-label="Yes">✓</span> }
-                @else { <span class="doc-check doc-check--no" aria-label="No">✗</span> }
+                @if (item.hasImplDoc) {
+                  <span class="doc-check doc-check--yes" aria-label="Yes">✓</span>
+                } @else {
+                  <span class="doc-check doc-check--no" aria-label="No">✗</span>
+                }
               </td>
               <td class="doc-col-check doc-check--center">
-                @if (item.hasDemoPage) { <span class="doc-check doc-check--yes" aria-label="Yes">✓</span> }
-                @else { <span class="doc-check doc-check--no" aria-label="No">✗</span> }
+                @if (item.hasDemoPage) {
+                  <span class="doc-check doc-check--yes" aria-label="Yes">✓</span>
+                } @else {
+                  <span class="doc-check doc-check--no" aria-label="No">✗</span>
+                }
               </td>
               <td class="doc-col-status">
                 @if (item.status === 'complete') {
@@ -434,7 +479,10 @@
               <td class="mod-col-lib" [class]="getModernityClass(row.ngZorro)">
                 {{ getModernityLabel(row.ngZorro) }}
               </td>
-              <td class="mod-col-lib mod-col-lib--this" [class]="getModernityClass(row.thisLibrary)">
+              <td
+                class="mod-col-lib mod-col-lib--this"
+                [class]="getModernityClass(row.thisLibrary)"
+              >
                 {{ getModernityLabel(row.thisLibrary) }}
               </td>
             </tr>
@@ -446,7 +494,11 @@
     <h3 class="competitive-group-title">Library-Wide Differentiators</h3>
     <div class="differentiators-list" role="list">
       @for (diff of differentiators; track trackByFeature($index, diff)) {
-        <div class="differentiator-card" [class.differentiator-card--unique]="diff.isUnique" role="listitem">
+        <div
+          class="differentiator-card"
+          [class.differentiator-card--unique]="diff.isUnique"
+          role="listitem"
+        >
           @if (diff.isUnique) {
             <span class="unique-badge">🚀 Unique in Angular ecosystem</span>
           }
@@ -476,7 +528,10 @@
     </div>
 
     <div class="modernity-table-wrapper" role="region" aria-label="CSS architecture comparison">
-      <table class="modernity-table css-arch-table" aria-label="CSS architecture feature comparison">
+      <table
+        class="modernity-table css-arch-table"
+        aria-label="CSS architecture feature comparison"
+      >
         <thead>
           <tr>
             <th scope="col" class="mod-col-check">Feature</th>
@@ -490,9 +545,11 @@
           @for (row of cssArchRows; track row.check) {
             <tr class="mod-row css-arch-row" [attr.data-category]="row.category">
               <td class="mod-col-check css-arch-check-cell">
-                <span class="css-arch-category-dot"
+                <span
+                  class="css-arch-category-dot"
                   [style.background]="getCssArchCategoryColor(row.category)"
-                  [attr.title]="getCssArchCategoryLabel(row.category)">
+                  [attr.title]="getCssArchCategoryLabel(row.category)"
+                >
                 </span>
                 <span class="css-arch-check-text">{{ row.check }}</span>
                 @if (row.notes) {
@@ -508,7 +565,10 @@
               <td class="mod-col-lib" [class]="getModernityClass(row.ngZorro)">
                 {{ getModernityLabel(row.ngZorro) }}
               </td>
-              <td class="mod-col-lib mod-col-lib--this" [class]="getModernityClass(row.thisLibrary)">
+              <td
+                class="mod-col-lib mod-col-lib--this"
+                [class]="getModernityClass(row.thisLibrary)"
+              >
                 {{ getModernityLabel(row.thisLibrary) }}
               </td>
             </tr>
@@ -522,17 +582,21 @@
       <div class="css-arch-explainer-grid">
         <div class="css-arch-explainer-card">
           <h4>Before @layer</h4>
-          <pre class="css-arch-code">/* Consumer must match or beat library specificity */
+          <pre class="css-arch-code">
+/* Consumer must match or beat library specificity */
 .my-app .some-context .ui-lib-button.ui-lib-button--primary &#123;
   background: #0052cc !important; /* 😩 */
-&#125;</pre>
+&#125;</pre
+          >
         </div>
         <div class="css-arch-explainer-card css-arch-explainer-card--after">
           <h4>After @layer (now)</h4>
-          <pre class="css-arch-code">/* Any unlayered consumer CSS wins automatically */
+          <pre class="css-arch-code">
+/* Any unlayered consumer CSS wins automatically */
 .my-cta &#123;
   --uilib-button-bg: #0052cc; /* ✅ no !important needed */
-&#125;</pre>
+&#125;</pre
+          >
         </div>
       </div>
     </div>
@@ -543,8 +607,8 @@
     <h2 class="section-title">Pro &amp; Enterprise Strategy</h2>
     <p class="section-subtitle">
       Beyond commodity components, these are the categories enterprise Angular teams need most and
-      are willing to pay for. Angular-native, signals-first, and deeply accessible — that combination
-      is the competitive differentiator.
+      are willing to pay for. Angular-native, signals-first, and deeply accessible — that
+      combination is the competitive differentiator.
     </p>
 
     <div class="pro-categories-grid">
@@ -576,10 +640,9 @@
       <h3 class="competitive-group-title">Business Model</h3>
       <p class="section-subtitle">
         Freemium open-source core (MIT) + team / org licence for pro features. Industry-specific
-        components justify higher per-component pricing due to encoded domain knowledge.
-        The Angular ecosystem gap is the opportunity: premium React tooling either never reaches
-        Angular or arrives as a mediocre wrapper — "Angular-native and deeply polished" is
-        itself the product.
+        components justify higher per-component pricing due to encoded domain knowledge. The Angular
+        ecosystem gap is the opportunity: premium React tooling either never reaches Angular or
+        arrives as a mediocre wrapper — "Angular-native and deeply polished" is itself the product.
       </p>
     </div>
   </section>
@@ -598,9 +661,13 @@
         @for (gate of launchReadiness; track trackByReadinessLabel($index, gate)) {
           <div class="readiness-item" [class]="'readiness-item--' + gate.status" role="listitem">
             <div class="readiness-icon">
-              @if (gate.status === 'done') { <span aria-label="Done">✅</span> }
-              @else if (gate.status === 'active') { <span aria-label="In progress">🔄</span> }
-              @else { <span aria-label="Queued">⬜</span> }
+              @if (gate.status === 'done') {
+                <span aria-label="Done">✅</span>
+              } @else if (gate.status === 'active') {
+                <span aria-label="In progress">🔄</span>
+              } @else {
+                <span aria-label="Queued">⬜</span>
+              }
             </div>
             <div class="readiness-body">
               <span class="readiness-label">{{ gate.label }}</span>
@@ -652,9 +719,13 @@
         <div class="next-step-card" [class]="'next-step-card--' + step.priority">
           <div class="next-step-header">
             <div class="priority-tag" [class]="'priority-tag--' + step.priority">
-              @if (step.priority === 'critical') { 🔥 CRITICAL }
-              @else if (step.priority === 'high') { ⚡ HIGH }
-              @else { 📌 MEDIUM }
+              @if (step.priority === 'critical') {
+                🔥 CRITICAL
+              } @else if (step.priority === 'high') {
+                ⚡ HIGH
+              } @else {
+                📌 MEDIUM
+              }
             </div>
             <div class="category-tag">{{ step.category }}</div>
           </div>
@@ -669,8 +740,8 @@
   <section id="wow-factors" data-doc-anchor class="roadmap-section">
     <h2 class="section-title">The Wow Factors Roadmap</h2>
     <p class="section-subtitle">
-      Each "Wow Factor" is a committed narrative strength — something no other Angular library
-      comes close to. They are earned sequentially and permanently.
+      Each "Wow Factor" is a committed narrative strength — something no other Angular library comes
+      close to. They are earned sequentially and permanently.
     </p>
 
     <div class="wow-factors-list">
@@ -708,6 +779,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>
-

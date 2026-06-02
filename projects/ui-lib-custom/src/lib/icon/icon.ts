@@ -81,7 +81,7 @@ export class Icon {
       if (isDevMode() && this.clickable() && !this.ariaLabel()) {
         console.warn(
           '[ui-lib-icon] clickable=true should only be used inside a button or link. ' +
-            'The icon itself is not interactive. Provide an ariaLabel if the icon is truly standalone informative.'
+            'The icon itself is not interactive. Provide an ariaLabel if the icon is truly standalone informative.',
         );
       }
     });
@@ -96,7 +96,7 @@ export class Icon {
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   public readonly library: InputSignal<IconLibrary | null> = input<IconLibrary | null>(null);
   public readonly variant: InputSignal<ComponentVariant | null> = input<ComponentVariant | null>(
-    null
+    null,
   );
   public readonly semantic: InputSignal<boolean> = input<boolean>(false);
 
@@ -117,7 +117,7 @@ export class Icon {
   });
 
   public readonly resolvedSize: Signal<string> = computed<string>((): string =>
-    this.iconService.getIconSize(this.size())
+    this.iconService.getIconSize(this.size()),
   );
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
     (): string | null => {
@@ -128,13 +128,13 @@ export class Icon {
 
       const trimmedAriaLabel: string = ariaLabel.trim();
       return trimmedAriaLabel.length > 0 ? trimmedAriaLabel : null;
-    }
+    },
   );
   public readonly ariaRole: Signal<string | null> = computed<string | null>((): string | null =>
-    this.ariaLabelResolved() ? 'img' : null
+    this.ariaLabelResolved() ? 'img' : null,
   );
   public readonly ariaHidden: Signal<string | null> = computed<string | null>((): string | null =>
-    this.ariaLabelResolved() ? null : 'true'
+    this.ariaLabelResolved() ? null : 'true',
   );
 
   private isSemanticIcon(value: string | SemanticIcon): value is SemanticIcon {

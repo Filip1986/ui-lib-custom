@@ -89,8 +89,8 @@
     --uilib-font-heading: 'Inter', 'Segoe UI', sans-serif;
     --uilib-font-body: 'Inter', 'Segoe UI', sans-serif;
     --uilib-font-ui: 'Inter', 'Segoe UI', sans-serif;
-    --uilib-font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-      monospace;
+    --uilib-font-mono:
+      SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
     --uilib-font-heading-weight: 600;
     --uilib-font-body-weight: 400;
 
@@ -185,9 +185,7 @@
     --uilib-card-radius: var(--uilib-radius-lg);
     --uilib-card-border-width: 0;
 
-    --uilib-input-padding-y: calc(
-      var(--uilib-input-padding-y-base) * var(--uilib-density-scale-y)
-    );
+    --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density-scale-y));
     --uilib-input-padding-x: var(--uilib-input-padding-x-base);
 
     --uilib-badge-padding-y: var(--uilib-badge-padding-y-base);
@@ -318,8 +316,9 @@
     --uilib-card-shadow-hover: var(--uilib-card-shadow-high);
 
     /* ---- Dialog ---- */
-    --uilib-dialog-shadow-material: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
-      0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+    --uilib-dialog-shadow-material:
+      0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+      0 9px 46px 8px rgba(0, 0, 0, 0.12);
     --uilib-dialog-shadow-bootstrap: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     --uilib-dialog-shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.08);
     --uilib-dialog-border-bootstrap: rgba(0, 0, 0, 0.175);
@@ -466,8 +465,9 @@
     --uilib-card-shadow-high: 0 4px 16px rgba(0, 0, 0, 0.45);
 
     /* ---- Dialog overrides ---- */
-    --uilib-dialog-shadow-material: 0 11px 15px -7px rgba(0, 0, 0, 0.55),
-      0 24px 38px 3px rgba(0, 0, 0, 0.4), 0 9px 46px 8px rgba(0, 0, 0, 0.35);
+    --uilib-dialog-shadow-material:
+      0 11px 15px -7px rgba(0, 0, 0, 0.55), 0 24px 38px 3px rgba(0, 0, 0, 0.4),
+      0 9px 46px 8px rgba(0, 0, 0, 0.35);
     --uilib-dialog-shadow-bootstrap: 0 0.5rem 1rem rgba(0, 0, 0, 0.45);
     --uilib-dialog-shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.35);
     --uilib-dialog-border-bootstrap: rgba(255, 255, 255, 0.12);
@@ -609,8 +609,9 @@
       --uilib-card-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.35);
       --uilib-card-shadow-high: 0 4px 16px rgba(0, 0, 0, 0.45);
 
-      --uilib-dialog-shadow-material: 0 11px 15px -7px rgba(0, 0, 0, 0.55),
-        0 24px 38px 3px rgba(0, 0, 0, 0.4), 0 9px 46px 8px rgba(0, 0, 0, 0.35);
+      --uilib-dialog-shadow-material:
+        0 11px 15px -7px rgba(0, 0, 0, 0.55), 0 24px 38px 3px rgba(0, 0, 0, 0.4),
+        0 9px 46px 8px rgba(0, 0, 0, 0.35);
       --uilib-dialog-shadow-bootstrap: 0 0.5rem 1rem rgba(0, 0, 0, 0.45);
       --uilib-dialog-shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.35);
       --uilib-dialog-border-bootstrap: rgba(255, 255, 255, 0.12);
@@ -702,7 +703,8 @@
   code,
   pre,
   .monospace {
-    font-family: var(
+    font-family:
+      var(
         --uilib-font-mono,
         SFMono-Regular,
         Menlo,

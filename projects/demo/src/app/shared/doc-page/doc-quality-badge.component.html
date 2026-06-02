@@ -1,5 +1,4 @@
 <section class="doc-quality-badge" [class.doc-quality-badge--expanded]="isExpanded()">
-
   <button
     type="button"
     class="doc-quality-badge__header"
@@ -8,8 +7,17 @@
     (click)="toggle()"
   >
     <span class="doc-quality-badge__shield" aria-hidden="true">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
     </span>
 
@@ -19,7 +27,9 @@
       class="doc-quality-badge__tier"
       [class.doc-quality-badge__tier--t1]="audit().tier === 1"
       [class.doc-quality-badge__tier--t2]="audit().tier === 2"
-      [attr.aria-label]="audit().tier === 1 ? 'Tier 1 qualitative estimate' : 'Tier 2 checkpoint-verified'"
+      [attr.aria-label]="
+        audit().tier === 1 ? 'Tier 1 qualitative estimate' : 'Tier 2 checkpoint-verified'
+      "
     >
       @if (audit().tier === 1) {
         T1 Est.
@@ -42,10 +52,35 @@
         [class.doc-quality-badge__gate--fail]="!gate()"
       >
         @if (gate()) {
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
           All ≥&nbsp;8.0
         } @else {
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <svg
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
           Below gate
         }
       </span>
@@ -63,10 +98,35 @@
         [class.doc-quality-badge__gate--est-fail]="!gate()"
       >
         @if (gate()) {
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
           Est. ≥&nbsp;8.0
         } @else {
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <svg
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
           Est. below gate
         }
       </span>
@@ -97,14 +157,27 @@
     role="region"
     aria-label="Quality report detail"
   >
-
     @if (audit().tier === 1) {
       <div class="doc-quality-badge__estimate-notice" role="note">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <svg
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
         <span>
           <strong>Tier 1 — qualitative estimates.</strong>
-          Scores reflect the 6-phase hardening workflow but individual checkpoints have not been verified.
-          Run a Tier 2 audit to get checkpoint-counted scores.
+          Scores reflect the 6-phase hardening workflow but individual checkpoints have not been
+          verified. Run a Tier 2 audit to get checkpoint-counted scores.
         </span>
       </div>
     }
@@ -113,16 +186,30 @@
       @for (cat of categories(); track cat.key) {
         <div
           class="doc-quality-badge__score-chip"
-          [class]="audit().tier === 2 ? 'doc-quality-badge__score-chip--' + scoreGrade(cat.score) : 'doc-quality-badge__score-chip--estimate'"
+          [class]="
+            audit().tier === 2
+              ? 'doc-quality-badge__score-chip--' + scoreGrade(cat.score)
+              : 'doc-quality-badge__score-chip--estimate'
+          "
           role="listitem"
-          [attr.aria-label]="cat.label + ': ' + (audit().tier === 1 ? 'estimated ' : '') + cat.score + ' out of 10'"
-          [title]="cat.label + ' · ' + cat.description + (cat.checkpointCount ? ' · ' + cat.checkpointCount.checked + '/' + cat.checkpointCount.total + ' checks' : '')"
+          [attr.aria-label]="
+            cat.label + ': ' + (audit().tier === 1 ? 'estimated ' : '') + cat.score + ' out of 10'
+          "
+          [title]="
+            cat.label +
+            ' · ' +
+            cat.description +
+            (cat.checkpointCount
+              ? ' · ' + cat.checkpointCount.checked + '/' + cat.checkpointCount.total + ' checks'
+              : '')
+          "
         >
           <span class="doc-quality-badge__score-abbr">{{ cat.abbr }}</span>
           <span class="doc-quality-badge__score-value">
             @if (audit().tier === 1) {
               <span class="doc-quality-badge__score-tilde">~</span>
-            }{{ cat.score }}
+            }
+            {{ cat.score }}
           </span>
           @if (cat.checkpointCount) {
             <span class="doc-quality-badge__score-checkpoints">
@@ -138,7 +225,11 @@
         <div class="doc-quality-badge__cat-row">
           <span
             class="doc-quality-badge__cat-dot"
-            [class]="audit().tier === 2 ? 'doc-quality-badge__cat-dot--' + scoreGrade(cat.score) : 'doc-quality-badge__cat-dot--estimate'"
+            [class]="
+              audit().tier === 2
+                ? 'doc-quality-badge__cat-dot--' + scoreGrade(cat.score)
+                : 'doc-quality-badge__cat-dot--estimate'
+            "
             aria-hidden="true"
           ></span>
           <span class="doc-quality-badge__cat-name">{{ cat.label }}</span>
@@ -153,7 +244,6 @@
     </div>
 
     <div class="doc-quality-badge__meta">
-
       @if (audit().apgPattern) {
         <div class="doc-quality-badge__meta-row">
           <span class="doc-quality-badge__meta-label">APG Pattern</span>
@@ -164,7 +254,21 @@
             rel="noopener noreferrer"
           >
             {{ audit().apgPattern!.name }}
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
           </a>
         </div>
       }
@@ -177,10 +281,15 @@
           [class.doc-quality-badge__parity--fail]="audit().competitiveParity === 'fail'"
           [class.doc-quality-badge__parity--pending]="audit().competitiveParity === 'pending'"
         >
-          {{ audit().competitiveParity === 'pass' ? 'Pass' : audit().competitiveParity === 'fail' ? 'Fail' : 'Not audited' }}
+          {{
+            audit().competitiveParity === 'pass'
+              ? 'Pass'
+              : audit().competitiveParity === 'fail'
+                ? 'Fail'
+                : 'Not audited'
+          }}
         </span>
       </div>
-
     </div>
 
     @if (audit().humanPending && audit().humanPending!.length > 0) {
@@ -193,6 +302,5 @@
         </ul>
       </div>
     }
-
   </div>
 </section>

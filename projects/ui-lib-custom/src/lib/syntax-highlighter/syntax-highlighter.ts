@@ -18,7 +18,7 @@ function escapeHtml(text: string): string {
 function runTokenizer(code: string, patterns: readonly PatternDef[]): readonly SyntaxToken[] {
   const combined: RegExp = new RegExp(
     patterns.map((definition: PatternDef): string => `(${definition.pattern.source})`).join('|'),
-    'g'
+    'g',
   );
 
   const tokens: SyntaxToken[] = [];

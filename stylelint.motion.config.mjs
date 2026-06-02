@@ -14,9 +14,7 @@
 export default {
   customSyntax: 'postcss-scss',
 
-  plugins: [
-    './stylelint-plugin/no-unprefixed-motion.mjs',
-  ],
+  plugins: ['./stylelint-plugin/no-unprefixed-motion.mjs'],
 
   rules: {
     'uilib/no-unprefixed-motion': [true, { severity: 'error' }],

@@ -68,10 +68,7 @@ _No component-level CSS variables detected._
 
 ```html
 <!-- Toggle a CSS class on a target element -->
-<ui-lib-button
-  uiLibStyleClass="sidebar--open"
-  [styleClassTarget]="sidebar"
->
+<ui-lib-button uiLibStyleClass="sidebar--open" [styleClassTarget]="sidebar">
   Toggle Sidebar
 </ui-lib-button>
 
@@ -84,4 +81,3 @@ _No component-level CSS variables detected._
 - [Demo page](/components/style-class)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/style-class/README.md)
-

@@ -69,7 +69,7 @@ class SplitButtonHostComponent {
   ]);
   public severity: WritableSignal<SplitButtonSeverity> = signal<SplitButtonSeverity>('primary');
   public variant: WritableSignal<SplitButtonVariant | null> = signal<SplitButtonVariant | null>(
-    'material'
+    'material',
   );
   public size: WritableSignal<SplitButtonSize> = signal<SplitButtonSize>('md');
   public disabled: WritableSignal<boolean> = signal<boolean>(false);
@@ -154,7 +154,7 @@ describe('SplitButtonComponent', (): void => {
 
   function splitHostElement(): HTMLElement {
     const element: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-split-button'
+      'ui-lib-split-button',
     );
     if (!element) {
       throw new Error('Expected split button host element.');
@@ -172,7 +172,7 @@ describe('SplitButtonComponent', (): void => {
 
   function mainButton(): HTMLButtonElement {
     const element: HTMLButtonElement | null = splitHostElement().querySelector(
-      '.ui-lib-split-button__default-button'
+      '.ui-lib-split-button__default-button',
     );
     if (!element) {
       throw new Error('Expected main split button.');
@@ -182,7 +182,7 @@ describe('SplitButtonComponent', (): void => {
 
   function menuButton(): HTMLButtonElement {
     const element: HTMLButtonElement | null = splitHostElement().querySelector(
-      '.ui-lib-split-button__menu-button'
+      '.ui-lib-split-button__menu-button',
     );
     if (!element) {
       throw new Error('Expected menu split button.');
@@ -222,7 +222,7 @@ describe('SplitButtonComponent', (): void => {
     it('renders icon in main button', (): void => {
       setSplitInput('icon', 'check');
       const iconEl: HTMLElement | null = splitHostElement().querySelector(
-        '.ui-lib-split-button__icon--start'
+        '.ui-lib-split-button__icon--start',
       );
       expect(iconEl).toBeTruthy();
     });
@@ -232,7 +232,7 @@ describe('SplitButtonComponent', (): void => {
       for (const variant of variants) {
         setSplitInput('variant', variant);
         expect(
-          splitHostElement().classList.contains(`ui-lib-split-button--${variant}`)
+          splitHostElement().classList.contains(`ui-lib-split-button--${variant}`),
         ).toBeTruthy();
       }
     });
@@ -260,7 +260,7 @@ describe('SplitButtonComponent', (): void => {
       for (const severity of severities) {
         setSplitInput('severity', severity);
         expect(
-          splitHostElement().classList.contains(`ui-lib-split-button--${severity}`)
+          splitHostElement().classList.contains(`ui-lib-split-button--${severity}`),
         ).toBeTruthy();
       }
     });
@@ -312,7 +312,7 @@ describe('SplitButtonComponent', (): void => {
       setSplitInput('loading', true);
       expect(mainButton().disabled).toBeTruthy();
       const loadingIcon: HTMLElement | null = splitHostElement().querySelector(
-        '.ui-lib-split-button__loading-icon'
+        '.ui-lib-split-button__loading-icon',
       );
       expect(loadingIcon).toBeTruthy();
     });
@@ -356,7 +356,7 @@ describe('SplitButtonComponent', (): void => {
       await openMenuByClick();
 
       const labels: string[] = menuItems().map((item: HTMLAnchorElement): string =>
-        item.textContent.trim()
+        item.textContent.trim(),
       );
       expect(labels).toEqual(['Visible A', 'Visible B']);
     });
@@ -383,7 +383,7 @@ describe('SplitButtonComponent', (): void => {
       await openMenuByClick();
 
       const separators: Element[] = Array.from(
-        splitHostElement().querySelectorAll('[role="separator"]')
+        splitHostElement().querySelectorAll('[role="separator"]'),
       );
       expect(separators.length).toBeGreaterThan(0);
     });
@@ -632,7 +632,7 @@ describe('SplitButtonComponent', (): void => {
       expect(menuItems()[0]?.getAttribute('role')).toBe('menuitem');
       expect(menuItems()[1]?.getAttribute('aria-disabled')).toBe('true');
       const separator: Element | null = splitHostElement().querySelector(
-        '.ui-lib-split-button__separator'
+        '.ui-lib-split-button__separator',
       );
       expect(separator?.getAttribute('role')).toBe('separator');
     });

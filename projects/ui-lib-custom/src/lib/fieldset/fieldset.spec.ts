@@ -32,7 +32,7 @@ class TestHostComponent {
   public readonly toggleableState: WritableSignal<boolean> = signal<boolean>(false);
   public readonly collapsedState: WritableSignal<boolean> = signal<boolean>(false);
   public readonly variant: WritableSignal<FieldsetVariant | null> = signal<FieldsetVariant | null>(
-    null
+    null,
   );
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
   public lastToggleEvent: { collapsed: boolean } | null = null;
@@ -185,7 +185,7 @@ describe('Fieldset', (): void => {
     host.collapsedState.set(true);
     fixture.detectChanges();
     expect(getContentWrapper().classList).not.toContain(
-      'ui-lib-fieldset__content-wrapper--collapsed'
+      'ui-lib-fieldset__content-wrapper--collapsed',
     );
   });
 
@@ -311,7 +311,7 @@ describe('Fieldset — content projection', (): void => {
     projFixture.detectChanges();
 
     const legend: Element | null = (projFixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-fieldset__legend'
+      '.ui-lib-fieldset__legend',
     );
     expect(legend?.querySelector('.custom-legend')).toBeTruthy();
   });

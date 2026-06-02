@@ -13,18 +13,18 @@ Avatar - Represents a person or object with an image, initials, or icon. Support
 
 ### Inputs
 
-| Name         | Type                   | Default    | Description                                                                        |
-| ------------ | ---------------------- | ---------- | ---------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string | null`        | `null`     | Accessible label override for the avatar                                           |
-| `icon`       | `string | null`        | `null`     | CSS class string for an icon (e.g. "pi pi-user") to display when no image or label |
-| `image`      | `string | null`        | `null`     | URL of the image to display                                                        |
-| `imageAlt`   | `string`               | `''`       | Alternative text for the image                                                     |
-| `label`      | `string | null`        | `null`     | Text label (typically initials) to display when no image is provided               |
-| `name`       | `string | null`        | `null`     | Full name announced by assistive technologies                                      |
-| `shape`      | `AvatarShape`          | `'circle'` | Shape of the avatar                                                                |
-| `size`       | `AvatarSize`           | `'md'`     | Size of the avatar                                                                 |
-| `styleClass` | `string | null`        | `null`     | Additional CSS classes to apply                                                    |
-| `variant`    | `AvatarVariant | null` | `null`     | Visual variant - inherits from ThemeConfigService when not set                     |
+| Name         | Type           | Default    | Description                    |
+| ------------ | -------------- | ---------- | ------------------------------ | ---------------------------------------------------------------------------------- |
+| `ariaLabel`  | `string        | null`      | `null`                         | Accessible label override for the avatar                                           |
+| `icon`       | `string        | null`      | `null`                         | CSS class string for an icon (e.g. "pi pi-user") to display when no image or label |
+| `image`      | `string        | null`      | `null`                         | URL of the image to display                                                        |
+| `imageAlt`   | `string`       | `''`       | Alternative text for the image |
+| `label`      | `string        | null`      | `null`                         | Text label (typically initials) to display when no image is provided               |
+| `name`       | `string        | null`      | `null`                         | Full name announced by assistive technologies                                      |
+| `shape`      | `AvatarShape`  | `'circle'` | Shape of the avatar            |
+| `size`       | `AvatarSize`   | `'md'`     | Size of the avatar             |
+| `styleClass` | `string        | null`      | `null`                         | Additional CSS classes to apply                                                    |
+| `variant`    | `AvatarVariant | null`      | `null`                         | Visual variant - inherits from ThemeConfigService when not set                     |
 
 ### Outputs
 
@@ -107,4 +107,3 @@ _none_
 - [Demo page](/components/avatar)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/avatar/README.md)
-

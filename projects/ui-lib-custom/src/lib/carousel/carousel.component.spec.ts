@@ -21,14 +21,14 @@ import type {
 
 function queryElement<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllElements<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -164,7 +164,7 @@ describe('CarouselComponent', (): void => {
     it('should create the component', async (): Promise<void> => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       expect(carousel).toBeTruthy();
     });
@@ -186,11 +186,11 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const prevBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-prev-button'
+        '.uilib-carousel-prev-button',
       );
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       expect(prevBtn).not.toBeNull();
       expect(nextBtn).not.toBeNull();
@@ -200,7 +200,7 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const indicators: HTMLElement[] = queryAllElements<HTMLElement>(
         fixture,
-        '.uilib-carousel-indicator'
+        '.uilib-carousel-indicator',
       );
       expect(indicators.length).toBeGreaterThan(0);
     });
@@ -209,7 +209,7 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const items: HTMLElement[] = queryAllElements<HTMLElement>(
         fixture,
-        '.uilib-carousel-item:not(.uilib-carousel-item-clone)'
+        '.uilib-carousel-item:not(.uilib-carousel-item-clone)',
       );
       expect(items.length).toBe(5);
     });
@@ -285,7 +285,7 @@ describe('CarouselComponent', (): void => {
         await createConfigurableFixture();
       const prevBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-prev-button'
+        '.uilib-carousel-prev-button',
       );
       expect(prevBtn?.disabled).toBe(true);
     });
@@ -294,7 +294,7 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<ConfigurableHostComponent> =
         await createConfigurableFixture();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       // Navigate to last page
       const lastPage: number = carousel.totalDots() - 1;
@@ -302,7 +302,7 @@ describe('CarouselComponent', (): void => {
       fixture.detectChanges();
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       expect(nextBtn?.disabled).toBe(true);
     });
@@ -311,12 +311,12 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<ConfigurableHostComponent> =
         await createConfigurableFixture();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       expect(carousel.currentPage()).toBe(0);
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       nextBtn?.click();
       fixture.detectChanges();
@@ -327,18 +327,18 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<ConfigurableHostComponent> =
         await createConfigurableFixture();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       nextBtn?.click();
       fixture.detectChanges();
       expect(carousel.currentPage()).toBe(1);
       const prevBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-prev-button'
+        '.uilib-carousel-prev-button',
       );
       prevBtn?.click();
       fixture.detectChanges();
@@ -350,7 +350,7 @@ describe('CarouselComponent', (): void => {
         await createConfigurableFixture();
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       nextBtn?.click();
       fixture.detectChanges();
@@ -361,11 +361,11 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<ConfigurableHostComponent> =
         await createConfigurableFixture();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       const dotButtons: HTMLButtonElement[] = queryAllElements<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-indicator-button'
+        '.uilib-carousel-indicator-button',
       );
       expect(dotButtons.length).toBeGreaterThan(2);
       dotButtons[2]!.click();
@@ -384,11 +384,11 @@ describe('CarouselComponent', (): void => {
       fixture.detectChanges();
       const prevBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-prev-button'
+        '.uilib-carousel-prev-button',
       );
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       expect(prevBtn).toBeNull();
       expect(nextBtn).toBeNull();
@@ -401,7 +401,7 @@ describe('CarouselComponent', (): void => {
       fixture.detectChanges();
       const indicatorList: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.uilib-carousel-indicator-list'
+        '.uilib-carousel-indicator-list',
       );
       expect(indicatorList).toBeNull();
     });
@@ -414,7 +414,7 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<ConfigurableHostComponent> =
         await createConfigurableFixture();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       // 5 items, numVisible=1, numScroll=1 → ceil((5-1)/1)+1 = 5
       expect(carousel.totalDots()).toBe(5);
@@ -426,7 +426,7 @@ describe('CarouselComponent', (): void => {
       fixture.componentInstance.numVisible.set(3);
       fixture.detectChanges();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       // ceil((5-3)/1)+1 = 3
       expect(carousel.totalDots()).toBe(3);
@@ -439,7 +439,7 @@ describe('CarouselComponent', (): void => {
       fixture.detectChanges();
       const indicatorList: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.uilib-carousel-indicator-list'
+        '.uilib-carousel-indicator-list',
       );
       expect(indicatorList).toBeNull();
     });
@@ -464,7 +464,7 @@ describe('CarouselComponent', (): void => {
       fixture.componentInstance.orientation.set('vertical');
       fixture.detectChanges();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       expect(carousel.isVertical()).toBe(true);
     });
@@ -505,7 +505,7 @@ describe('CarouselComponent', (): void => {
       fixture.detectChanges();
       const items: HTMLElement[] = queryAllElements<HTMLElement>(
         fixture,
-        '.uilib-carousel-item:not(.uilib-carousel-item-clone)'
+        '.uilib-carousel-item:not(.uilib-carousel-item-clone)',
       );
       expect(items.length).toBe(0);
     });
@@ -517,11 +517,11 @@ describe('CarouselComponent', (): void => {
       fixture.detectChanges();
       const prevBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-prev-button'
+        '.uilib-carousel-prev-button',
       );
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       expect(prevBtn?.disabled).toBe(true);
       expect(nextBtn?.disabled).toBe(true);
@@ -539,7 +539,7 @@ describe('CarouselComponent', (): void => {
       await fixture.whenStable();
       fixture.detectChanges();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       expect(carousel.clonedItemsForStarting.length).toBeGreaterThan(0);
       expect(carousel.clonedItemsForFinishing.length).toBeGreaterThan(0);
@@ -554,7 +554,7 @@ describe('CarouselComponent', (): void => {
       fixture.detectChanges();
       const prevBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-prev-button'
+        '.uilib-carousel-prev-button',
       );
       expect(prevBtn?.disabled).toBe(false);
     });
@@ -568,10 +568,10 @@ describe('CarouselComponent', (): void => {
         await createConfigurableFixture();
       const items: HTMLElement[] = queryAllElements<HTMLElement>(
         fixture,
-        '.uilib-carousel-item:not(.uilib-carousel-item-clone)'
+        '.uilib-carousel-item:not(.uilib-carousel-item-clone)',
       );
       const hiddenItems: HTMLElement[] = items.filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-hidden') === 'true'
+        (item: HTMLElement): boolean => item.getAttribute('aria-hidden') === 'true',
       );
       // With 5 items and numVisible=1, only 1 is active so 4 should be hidden
       expect(hiddenItems.length).toBe(4);
@@ -581,11 +581,11 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const prevBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-prev-button'
+        '.uilib-carousel-prev-button',
       );
       const nextBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-next-button'
+        '.uilib-carousel-next-button',
       );
       expect(prevBtn?.getAttribute('aria-label')).toBeTruthy();
       expect(nextBtn?.getAttribute('aria-label')).toBeTruthy();
@@ -595,7 +595,7 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const indicatorList: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
-        '.uilib-carousel-indicator-list'
+        '.uilib-carousel-indicator-list',
       );
       expect(indicatorList?.getAttribute('role')).toBeNull();
     });
@@ -604,7 +604,7 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const dotButtons: HTMLButtonElement[] = queryAllElements<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-indicator-button'
+        '.uilib-carousel-indicator-button',
       );
       for (const button of dotButtons) {
         expect(button.getAttribute('role')).toBeNull();
@@ -615,7 +615,7 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const dotButtons: HTMLButtonElement[] = queryAllElements<HTMLButtonElement>(
         fixture,
-        '.uilib-carousel-indicator-button'
+        '.uilib-carousel-indicator-button',
       );
       expect(dotButtons[0]!.getAttribute('aria-current')).toBe('true');
       expect(dotButtons[1]!.getAttribute('aria-current')).toBeNull();
@@ -625,7 +625,7 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const items: HTMLElement[] = queryAllElements<HTMLElement>(
         fixture,
-        '.uilib-carousel-item:not(.uilib-carousel-item-clone)'
+        '.uilib-carousel-item:not(.uilib-carousel-item-clone)',
       );
       for (const item of items) {
         expect(item.getAttribute('aria-roledescription')).toBe('slide');
@@ -658,7 +658,7 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<ConfigurableHostComponent> =
         await createConfigurableFixture();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       expect(carousel.isItemActive(0)).toBe(true);
       expect(carousel.isItemFirst(0)).toBe(true);
@@ -668,7 +668,7 @@ describe('CarouselComponent', (): void => {
       const fixture: ComponentFixture<ConfigurableHostComponent> =
         await createConfigurableFixture();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       expect(carousel.isItemActive(1)).toBe(false);
       expect(carousel.isItemActive(4)).toBe(false);
@@ -677,7 +677,7 @@ describe('CarouselComponent', (): void => {
     it('should produce correct ariaSlideNumber', async (): Promise<void> => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       expect(carousel.ariaSlideNumber(0)).toBe('Slide 1 of 5');
       expect(carousel.ariaSlideNumber(4)).toBe('Slide 5 of 5');
@@ -686,7 +686,7 @@ describe('CarouselComponent', (): void => {
     it('should produce correct ariaPageLabel', async (): Promise<void> => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const carousel: CarouselComponent = fixture.debugElement.query(
-        By.directive(CarouselComponent)
+        By.directive(CarouselComponent),
       ).componentInstance as CarouselComponent;
       expect(carousel.ariaPageLabel(0)).toBe('Go to slide 1');
       expect(carousel.ariaPageLabel(3)).toBe('Go to slide 4');

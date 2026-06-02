@@ -45,7 +45,7 @@ class ImageCompareA11yHostComponent {
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 async function createFixture(
-  initialValue: number = 50
+  initialValue: number = 50,
 ): Promise<ComponentFixture<ImageCompareA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [ImageCompareA11yHostComponent],
@@ -53,7 +53,7 @@ async function createFixture(
   }).compileComponents();
 
   const fixture: ComponentFixture<ImageCompareA11yHostComponent> = TestBed.createComponent(
-    ImageCompareA11yHostComponent
+    ImageCompareA11yHostComponent,
   );
   fixture.componentInstance.value = initialValue;
   document.body.appendChild(fixture.nativeElement);
@@ -65,7 +65,7 @@ async function createFixture(
 
 function getHandle(fixture: ComponentFixture<ImageCompareA11yHostComponent>): HTMLElement {
   const handle: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '.uilib-image-compare__handle'
+    '.uilib-image-compare__handle',
   );
   if (!handle) {
     throw new Error('Expected image-compare handle element');
@@ -75,7 +75,7 @@ function getHandle(fixture: ComponentFixture<ImageCompareA11yHostComponent>): HT
 
 function getLeftImage(fixture: ComponentFixture<ImageCompareA11yHostComponent>): HTMLImageElement {
   const img: HTMLImageElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '.uilib-image-compare__img--left'
+    '.uilib-image-compare__img--left',
   );
   if (!img) {
     throw new Error('Expected left image element');
@@ -85,7 +85,7 @@ function getLeftImage(fixture: ComponentFixture<ImageCompareA11yHostComponent>):
 
 function getRightImage(fixture: ComponentFixture<ImageCompareA11yHostComponent>): HTMLImageElement {
   const img: HTMLImageElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '.uilib-image-compare__img--right'
+    '.uilib-image-compare__img--right',
   );
   if (!img) {
     throw new Error('Expected right image element');
@@ -174,7 +174,7 @@ describe('ImageCompare Accessibility', (): void => {
   it('divider line has aria-hidden="true"', async (): Promise<void> => {
     const fixture: ComponentFixture<ImageCompareA11yHostComponent> = await createFixture();
     const divider: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.uilib-image-compare__divider'
+      '.uilib-image-compare__divider',
     );
     expect(divider?.getAttribute('aria-hidden')).toBe('true');
   });
@@ -182,7 +182,7 @@ describe('ImageCompare Accessibility', (): void => {
   it('handle SVG icon has aria-hidden="true"', async (): Promise<void> => {
     const fixture: ComponentFixture<ImageCompareA11yHostComponent> = await createFixture();
     const svg: SVGElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.uilib-image-compare__handle-icon'
+      '.uilib-image-compare__handle-icon',
     );
     expect(svg?.getAttribute('aria-hidden')).toBe('true');
   });
@@ -240,7 +240,7 @@ describe('ImageCompare Accessibility', (): void => {
   it('host element has a unique id attribute', async (): Promise<void> => {
     const fixture: ComponentFixture<ImageCompareA11yHostComponent> = await createFixture();
     const host: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-image-compare'
+      'ui-lib-image-compare',
     );
     expect(host?.id).toMatch(/^ui-lib-image-compare-\d+$/);
   });

@@ -9,6 +9,7 @@ This is a complete example showing how to integrate the ui-lib-custom library in
 Use secondary entry points when importing components to keep bundles lean.
 
 #### Option A: Using npm link (Best for local development)
+
 ```bash
 # In the library directory (one-time setup)
 cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-lib-custom
@@ -20,7 +21,9 @@ npm link ui-lib-custom
 ```
 
 #### Option B: Using local file path
+
 In your project's `package.json`:
+
 ```json
 {
   "dependencies": {
@@ -32,6 +35,7 @@ In your project's `package.json`:
 ```
 
 Then run:
+
 ```bash
 npm install
 ```
@@ -45,6 +49,7 @@ ng generate component pages/dashboard
 ### 3. Component Implementation
 
 **dashboard.component.ts:**
+
 ```typescript
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -64,13 +69,13 @@ interface User {
   standalone: true,
   imports: [CommonModule, Button, Card],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
   users: User[] = [
     { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'active' },
     { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'Developer', status: 'active' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Designer', status: 'inactive' }
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Designer', status: 'inactive' },
   ];
 
   selectedUser: User | null = null;
@@ -82,7 +87,7 @@ export class DashboardComponent {
 
   deleteUser(user: User) {
     if (confirm(`Are you sure you want to delete ${user.name}?`)) {
-      this.users = this.users.filter(u => u.id !== user.id);
+      this.users = this.users.filter((u) => u.id !== user.id);
       if (this.selectedUser?.id === user.id) {
         this.selectedUser = null;
       }
@@ -98,7 +103,7 @@ export class DashboardComponent {
         name: 'New User',
         email: 'newuser@example.com',
         role: 'User',
-        status: 'active'
+        status: 'active',
       });
       this.isLoading = false;
     }, 1000);
@@ -120,6 +125,7 @@ export class DashboardComponent {
 ```
 
 **dashboard.component.html:**
+
 ```html
 <div class="dashboard">
   <header class="dashboard-header">
@@ -131,25 +137,20 @@ export class DashboardComponent {
   <ui-lib-card variant="material" elevation="low">
     <div class="action-bar">
       <div class="button-group">
-        <ui-lib-button 
-          variant="material" 
+        <ui-lib-button
+          variant="material"
           color="primary"
           [disabled]="isLoading"
-          (click)="addNewUser()">
+          (click)="addNewUser()"
+        >
           {{ isLoading ? 'Adding...' : 'Add User' }}
         </ui-lib-button>
-        
-        <ui-lib-button 
-          variant="bootstrap" 
-          color="success"
-          (click)="exportData()">
+
+        <ui-lib-button variant="bootstrap" color="success" (click)="exportData()">
           Export
         </ui-lib-button>
-        
-        <ui-lib-button 
-          variant="minimal" 
-          color="secondary"
-          (click)="refreshData()">
+
+        <ui-lib-button variant="minimal" color="secondary" (click)="refreshData()">
           Refresh
         </ui-lib-button>
       </div>
@@ -163,47 +164,50 @@ export class DashboardComponent {
       <h2>Users</h2>
       <div class="cards-container">
         @for (user of users; track user.id) {
-          <ui-lib-card 
-            variant="bootstrap"
-            elevation="medium"
-            [hoverable]="true"
-            [class.selected]="selectedUser?.id === user.id"
-            (click)="selectUser(user)">
-            
-            <div card-header>
-              <div class="user-header">
-                <span class="user-name">{{ user.name }}</span>
-                <span 
-                  class="status-badge" 
-                  [class.active]="user.status === 'active'"
-                  [class.inactive]="user.status === 'inactive'">
-                  {{ user.status }}
-                </span>
-              </div>
+        <ui-lib-card
+          variant="bootstrap"
+          elevation="medium"
+          [hoverable]="true"
+          [class.selected]="selectedUser?.id === user.id"
+          (click)="selectUser(user)"
+        >
+          <div card-header>
+            <div class="user-header">
+              <span class="user-name">{{ user.name }}</span>
+              <span
+                class="status-badge"
+                [class.active]="user.status === 'active'"
+                [class.inactive]="user.status === 'inactive'"
+              >
+                {{ user.status }}
+              </span>
             </div>
+          </div>
 
-            <div class="user-info">
-              <p><strong>Email:</strong> {{ user.email }}</p>
-              <p><strong>Role:</strong> {{ user.role }}</p>
-            </div>
+          <div class="user-info">
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Role:</strong> {{ user.role }}</p>
+          </div>
 
-            <div card-footer>
-              <ui-lib-button 
-                variant="bootstrap" 
-                color="primary" 
-                size="small"
-                (click)="selectUser(user); $event.stopPropagation()">
-                View
-              </ui-lib-button>
-              <ui-lib-button 
-                variant="minimal" 
-                color="danger" 
-                size="small"
-                (click)="deleteUser(user); $event.stopPropagation()">
-                Delete
-              </ui-lib-button>
-            </div>
-          </ui-lib-card>
+          <div card-footer>
+            <ui-lib-button
+              variant="bootstrap"
+              color="primary"
+              size="small"
+              (click)="selectUser(user); $event.stopPropagation()"
+            >
+              View
+            </ui-lib-button>
+            <ui-lib-button
+              variant="minimal"
+              color="danger"
+              size="small"
+              (click)="deleteUser(user); $event.stopPropagation()"
+            >
+              Delete
+            </ui-lib-button>
+          </div>
+        </ui-lib-card>
         }
       </div>
     </div>
@@ -211,66 +215,62 @@ export class DashboardComponent {
     <!-- User Details -->
     <div class="details-section">
       <h2>Details</h2>
-      
+
       @if (selectedUser) {
-        <ui-lib-card 
-          variant="material"
-          elevation="high">
-          
-          <div card-header>
-            <h3>{{ selectedUser.name }}</h3>
-          </div>
-
-          <div class="detail-content">
-            <div class="detail-row">
-              <span class="label">User ID:</span>
-              <span class="value">{{ selectedUser.id }}</span>
-            </div>
-            <div class="detail-row">
-              <span class="label">Name:</span>
-              <span class="value">{{ selectedUser.name }}</span>
-            </div>
-            <div class="detail-row">
-              <span class="label">Email:</span>
-              <span class="value">{{ selectedUser.email }}</span>
-            </div>
-            <div class="detail-row">
-              <span class="label">Role:</span>
-              <span class="value">{{ selectedUser.role }}</span>
-            </div>
-            <div class="detail-row">
-              <span class="label">Status:</span>
-              <span class="value">
-                <span 
-                  class="status-badge" 
-                  [class.active]="selectedUser.status === 'active'"
-                  [class.inactive]="selectedUser.status === 'inactive'">
-                  {{ selectedUser.status }}
-                </span>
-              </span>
-            </div>
-          </div>
-
-          <div card-footer>
-            <ui-lib-button 
-              variant="material" 
-              color="primary"
-              [fullWidth]="true">
-              Edit User
-            </ui-lib-button>
-            <ui-lib-button 
-              variant="material" 
-              color="danger"
-              [fullWidth]="true"
-              (click)="deleteUser(selectedUser)">
-              Delete User
-            </ui-lib-button>
-          </div>
-        </ui-lib-card>
-      } @else {
-        <div class="no-selection">
-          <p>Select a user to see details.</p>
+      <ui-lib-card variant="material" elevation="high">
+        <div card-header>
+          <h3>{{ selectedUser.name }}</h3>
         </div>
+
+        <div class="detail-content">
+          <div class="detail-row">
+            <span class="label">User ID:</span>
+            <span class="value">{{ selectedUser.id }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Name:</span>
+            <span class="value">{{ selectedUser.name }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Email:</span>
+            <span class="value">{{ selectedUser.email }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Role:</span>
+            <span class="value">{{ selectedUser.role }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Status:</span>
+            <span class="value">
+              <span
+                class="status-badge"
+                [class.active]="selectedUser.status === 'active'"
+                [class.inactive]="selectedUser.status === 'inactive'"
+              >
+                {{ selectedUser.status }}
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div card-footer>
+          <ui-lib-button variant="material" color="primary" [fullWidth]="true">
+            Edit User
+          </ui-lib-button>
+          <ui-lib-button
+            variant="material"
+            color="danger"
+            [fullWidth]="true"
+            (click)="deleteUser(selectedUser)"
+          >
+            Delete User
+          </ui-lib-button>
+        </div>
+      </ui-lib-card>
+      } @else {
+      <div class="no-selection">
+        <p>Select a user to see details.</p>
+      </div>
       }
     </div>
   </div>
@@ -284,22 +284,19 @@ export class DashboardComponent {
 
     <ui-lib-card variant="material" elevation="medium">
       <div card-header>Active Users</div>
-      <div class="stat-value">
-        {{ (users | filter:'status':'active').length }}
-      </div>
+      <div class="stat-value">{{ (users | filter:'status':'active').length }}</div>
     </ui-lib-card>
 
     <ui-lib-card variant="material" elevation="medium">
       <div card-header>Inactive Users</div>
-      <div class="stat-value">
-        {{ (users | filter:'status':'inactive').length }}
-      </div>
+      <div class="stat-value">{{ (users | filter:'status':'inactive').length }}</div>
     </ui-lib-card>
   </div>
 </div>
 ```
 
 **dashboard.component.css:**
+
 ```css
 .dashboard {
   padding: 2rem;
@@ -459,13 +456,14 @@ export class DashboardComponent {
 ### 4. Add Route (if using routing)
 
 **app.routes.ts:**
+
 ```typescript
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
 ];
 ```
 

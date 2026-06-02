@@ -22,15 +22,14 @@
       <button
         type="button"
         class="ui-lib-toast__close"
-        [attr.aria-label]="(message.summary || message.detail) ? i18n.translate('toast.dismiss', { title: message.summary || message.detail || '' }) : i18n.translate('toast.close')"
+        [attr.aria-label]="
+          message.summary || message.detail
+            ? i18n.translate('toast.dismiss', { title: message.summary || message.detail || '' })
+            : i18n.translate('toast.close')
+        "
         (click)="dismiss(message.id ?? '')"
       >
-        <ui-lib-icon
-          name="close"
-          [variant]="effectiveVariant()"
-          size="sm"
-          aria-hidden="true"
-        />
+        <ui-lib-icon name="close" [variant]="effectiveVariant()" size="sm" aria-hidden="true" />
       </button>
     }
   </div>

@@ -16,7 +16,7 @@ export const SKIP_COLOR_CONTRAST_RULES: Record<string, { enabled: boolean }> = {
  */
 export async function checkA11y(
   fixture: ComponentFixture<unknown>,
-  options: A11yTestOptions = {}
+  options: A11yTestOptions = {},
 ): Promise<void> {
   fixture.detectChanges();
   await fixture.whenStable();

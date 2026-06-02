@@ -55,7 +55,7 @@ class SliderA11yHostComponent {
 // ---------------------------------------------------------------------------
 
 async function createFixture(
-  initialValue: number | [number, number] = 50
+  initialValue: number | [number, number] = 50,
 ): Promise<ComponentFixture<SliderA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [SliderA11yHostComponent],
@@ -74,7 +74,7 @@ async function createFixture(
 
 function getHandle(fixture: ComponentFixture<SliderA11yHostComponent>): HTMLElement {
   const handle: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-slider__handle'
+    '.ui-lib-slider__handle',
   );
   if (!handle) {
     throw new Error('Expected slider handle element');
@@ -84,7 +84,7 @@ function getHandle(fixture: ComponentFixture<SliderA11yHostComponent>): HTMLElem
 
 function getStartHandle(fixture: ComponentFixture<SliderA11yHostComponent>): HTMLElement {
   const handle: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-slider__handle--start'
+    '.ui-lib-slider__handle--start',
   );
   if (!handle) {
     throw new Error('Expected slider start handle element');
@@ -94,7 +94,7 @@ function getStartHandle(fixture: ComponentFixture<SliderA11yHostComponent>): HTM
 
 function getEndHandle(fixture: ComponentFixture<SliderA11yHostComponent>): HTMLElement {
   const handle: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-slider__handle--end'
+    '.ui-lib-slider__handle--end',
   );
   if (!handle) {
     throw new Error('Expected slider end handle element');
@@ -250,7 +250,7 @@ describe('Slider Accessibility', (): void => {
   it('fill element has aria-hidden="true"', async (): Promise<void> => {
     const fixture: ComponentFixture<SliderA11yHostComponent> = await createFixture();
     const fill: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-slider__fill'
+      '.ui-lib-slider__fill',
     );
     expect(fill?.getAttribute('aria-hidden')).toBe('true');
   });

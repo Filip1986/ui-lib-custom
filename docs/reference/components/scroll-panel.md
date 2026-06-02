@@ -13,11 +13,11 @@ ScrollPanel — a styled scrollable container with custom CSS scrollbar theming.
 
 ### Inputs
 
-| Name         | Type                        | Default | Description                                                                                                                                                                                    |
-| ------------ | --------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string | null`             | `null`  | Accessible label for the scrollable region (`aria-label` on the inner content wrapper). Recommended whenever the panel is a meaningful landmark. Falls back to `null` (no label) when omitted. |
-| `styleClass` | `string | null`             | `null`  | Additional CSS classes to attach to the host element.                                                                                                                                          |
-| `variant`    | `ScrollPanelVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.                                                                                                                                |
+| Name         | Type                | Default | Description |
+| ------------ | ------------------- | ------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`  | `string             | null`   | `null`      | Accessible label for the scrollable region (`aria-label` on the inner content wrapper). Recommended whenever the panel is a meaningful landmark. Falls back to `null` (no label) when omitted. |
+| `styleClass` | `string             | null`   | `null`      | Additional CSS classes to attach to the host element.                                                                                                                                          |
+| `variant`    | `ScrollPanelVariant | null`   | `null`      | Visual variant — inherits from ThemeConfigService when not set.                                                                                                                                |
 
 ### Outputs
 
@@ -86,7 +86,7 @@ _none_
 <!-- Explicit variant -->
 <ui-lib-scroll-panel [variant]="'bootstrap'" ariaLabel="News feed" style="height: 300px;">
   @for (item of items; track item.id) {
-    <p>{{ item.text }}</p>
+  <p>{{ item.text }}</p>
   }
 </ui-lib-scroll-panel>
 
@@ -102,4 +102,3 @@ _none_
 - [Demo page](/components/scroll-panel)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/scroll-panel/README.md)
-

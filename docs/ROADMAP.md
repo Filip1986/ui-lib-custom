@@ -10,14 +10,14 @@
 
 ## Progress Summary
 
-| Phase | Name                          | Status       | Components         |
-|-------|-------------------------------|--------------|--------------------|
-| 0     | Foundation Cleanup            | ✅ Complete  | —                  |
-| 1     | A11y: Overlays & Navigation   | ✅ Complete  | 17 / 17            |
-| 2     | A11y: Forms & Data            | ✅ Complete  | 20 / 20            |
-| 3     | Full Coverage + Ecosystem     | ✅ Complete  | 76+ / 76           |
-| 4     | Public Beta                   | 🔄 Active    | —                  |
-| 5     | v1.0 General Availability     | ⏳ Queued    | —                  |
+| Phase | Name                        | Status      | Components |
+| ----- | --------------------------- | ----------- | ---------- |
+| 0     | Foundation Cleanup          | ✅ Complete | —          |
+| 1     | A11y: Overlays & Navigation | ✅ Complete | 17 / 17    |
+| 2     | A11y: Forms & Data          | ✅ Complete | 20 / 20    |
+| 3     | Full Coverage + Ecosystem   | ✅ Complete | 76+ / 76   |
+| 4     | Public Beta                 | 🔄 Active   | —          |
+| 5     | v1.0 General Availability   | ⏳ Queued   | —          |
 
 **Hardening scorecard:** 76+ / 76 components green — all scores ≥ 8.0. Library hardening milestone achieved 2026-05-15.
 
@@ -59,30 +59,30 @@ All boxes above checked. No open infrastructure blockers.
 
 ### Tier 1 — Overlays & Dialogs (7 remaining)
 
-| #  | Component     | Key concern                                               | Done |
-|----|---------------|-----------------------------------------------------------|------|
-| 2  | Select        | Combobox/listbox ARIA — hardest form control              | ⬜   |
-| 3  | AutoComplete  | Combobox + live region + `aria-activedescendant`          | ⬜   |
-| 6  | ConfirmDialog | `role=alertdialog`, default focus on confirm action       | ⬜   |
-| 7  | ConfirmPopup  | `role=alertdialog` anchored, click-away without a11y loss | ⬜   |
-| 8  | Popover       | `aria-expanded`, `aria-controls`, dismiss without losing focus | ⬜ |
-| 9  | Tooltip       | `aria-describedby` lifecycle — attached and cleaned up    | ⬜   |
-| 10 | Toast         | `aria-live=assertive`, dismiss keyboard access            | ⬜   |
+| #   | Component     | Key concern                                                    | Done |
+| --- | ------------- | -------------------------------------------------------------- | ---- |
+| 2   | Select        | Combobox/listbox ARIA — hardest form control                   | ⬜   |
+| 3   | AutoComplete  | Combobox + live region + `aria-activedescendant`               | ⬜   |
+| 6   | ConfirmDialog | `role=alertdialog`, default focus on confirm action            | ⬜   |
+| 7   | ConfirmPopup  | `role=alertdialog` anchored, click-away without a11y loss      | ⬜   |
+| 8   | Popover       | `aria-expanded`, `aria-controls`, dismiss without losing focus | ⬜   |
+| 9   | Tooltip       | `aria-describedby` lifecycle — attached and cleaned up         | ⬜   |
+| 10  | Toast         | `aria-live=assertive`, dismiss keyboard access                 | ⬜   |
 
 ### Tier 2 — Navigation & Menus (10 components)
 
-| #  | Component   | Key concern                                                 | Done |
-|----|-------------|-------------------------------------------------------------|------|
-| 11 | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`         | ⬜   |
-| 12 | Menu        | `role=menu`, keyboard nav, separator roles                  | ⬜   |
-| 13 | TieredMenu  | Nested `role=menu`, left-arrow closes submenu               | ⬜   |
-| 14 | ContextMenu | Same as TieredMenu + trigger `aria-haspopup=menu`           | ⬜   |
-| 15 | PanelMenu   | Mixed menubar + tree, `aria-expanded` on panels             | ⬜   |
-| 16 | MegaMenu    | Wide layout, keyboard trapping within columns               | ⬜   |
-| 17 | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`     | ⬜   |
-| 18 | Accordion   | `role=button` on headers, `aria-expanded`, `aria-controls`  | ⬜   |
-| 19 | Stepper     | `role=tablist` variant, `aria-current=step`                 | ⬜   |
-| 20 | Breadcrumb  | `role=navigation`, `aria-label`, `aria-current=page`        | ⬜   |
+| #   | Component   | Key concern                                                | Done |
+| --- | ----------- | ---------------------------------------------------------- | ---- |
+| 11  | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`        | ⬜   |
+| 12  | Menu        | `role=menu`, keyboard nav, separator roles                 | ⬜   |
+| 13  | TieredMenu  | Nested `role=menu`, left-arrow closes submenu              | ⬜   |
+| 14  | ContextMenu | Same as TieredMenu + trigger `aria-haspopup=menu`          | ⬜   |
+| 15  | PanelMenu   | Mixed menubar + tree, `aria-expanded` on panels            | ⬜   |
+| 16  | MegaMenu    | Wide layout, keyboard trapping within columns              | ⬜   |
+| 17  | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`    | ⬜   |
+| 18  | Accordion   | `role=button` on headers, `aria-expanded`, `aria-controls` | ⬜   |
+| 19  | Stepper     | `role=tablist` variant, `aria-current=step`                | ⬜   |
+| 20  | Breadcrumb  | `role=navigation`, `aria-label`, `aria-current=page`       | ⬜   |
 
 ### Milestone: Internal Axe-Core Audit
 
@@ -106,33 +106,33 @@ This is the internal quality gate — not public yet, but you need to know where
 
 ### Tier 3 — Form Controls (11 components)
 
-| #  | Component     | Key concern                                                   | Done |
-|----|---------------|---------------------------------------------------------------|------|
-| 21 | Input         | Label association, `aria-invalid`, `aria-describedby` errors  | ⬜   |
-| 22 | Checkbox      | `aria-checked=mixed` for indeterminate, `role=group`          | ⬜   |
-| 23 | RadioButton   | `role=radiogroup`, `aria-required`, keyboard between siblings | ⬜   |
-| 24 | DatePicker    | Calendar grid, month/year nav, live region — most complex     | ⬜   |
-| 25 | CascadeSelect | Multi-level combobox, `aria-activedescendant` through levels  | ⬜   |
-| 26 | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`   | ⬜   |
-| 27 | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow step  | ⬜   |
-| 28 | ColorPicker   | Keyboard access to hue/saturation/hex input                   | ⬜   |
-| 29 | Password      | Strength meter live region, toggle visibility label           | ⬜   |
-| 30 | Rating        | `role=radiogroup` or `role=slider`, keyboard interaction      | ⬜   |
-| 31 | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence | ⬜   |
+| #   | Component     | Key concern                                                   | Done |
+| --- | ------------- | ------------------------------------------------------------- | ---- |
+| 21  | Input         | Label association, `aria-invalid`, `aria-describedby` errors  | ⬜   |
+| 22  | Checkbox      | `aria-checked=mixed` for indeterminate, `role=group`          | ⬜   |
+| 23  | RadioButton   | `role=radiogroup`, `aria-required`, keyboard between siblings | ⬜   |
+| 24  | DatePicker    | Calendar grid, month/year nav, live region — most complex     | ⬜   |
+| 25  | CascadeSelect | Multi-level combobox, `aria-activedescendant` through levels  | ⬜   |
+| 26  | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`   | ⬜   |
+| 27  | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow step  | ⬜   |
+| 28  | ColorPicker   | Keyboard access to hue/saturation/hex input                   | ⬜   |
+| 29  | Password      | Strength meter live region, toggle visibility label           | ⬜   |
+| 30  | Rating        | `role=radiogroup` or `role=slider`, keyboard interaction      | ⬜   |
+| 31  | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence | ⬜   |
 
 ### Tier 4 — Data Display (9 components)
 
-| #  | Component  | Key concern                                                          | Done |
-|----|------------|----------------------------------------------------------------------|------|
-| 32 | Table      | `role=grid`, sort `aria-sort`, selection `aria-selected`, paginator  | ⬜   |
-| 33 | TreeTable  | `role=treegrid`, `aria-level/expanded/setsize/posinset`              | ⬜   |
-| 34 | Tree       | `role=tree/treeitem`, full keyboard nav (arrows, Home/End, typeahead)| ⬜   |
-| 35 | TreeSelect | Tree inside popup — combobox + tree patterns combined                | ⬜   |
-| 36 | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection           | ⬜   |
-| 37 | Paginator  | Live region announcing page change, button labels                    | ⬜   |
-| 38 | DataView   | Sort/filter labels, list/grid toggle announcement                    | ⬜   |
-| 39 | OrderList  | Keyboard reorder alternative, drag-and-drop a11y                     | ⬜   |
-| 40 | PickList   | Dual-list pattern, transfer action announcements                     | ⬜   |
+| #   | Component  | Key concern                                                           | Done |
+| --- | ---------- | --------------------------------------------------------------------- | ---- |
+| 32  | Table      | `role=grid`, sort `aria-sort`, selection `aria-selected`, paginator   | ⬜   |
+| 33  | TreeTable  | `role=treegrid`, `aria-level/expanded/setsize/posinset`               | ⬜   |
+| 34  | Tree       | `role=tree/treeitem`, full keyboard nav (arrows, Home/End, typeahead) | ⬜   |
+| 35  | TreeSelect | Tree inside popup — combobox + tree patterns combined                 | ⬜   |
+| 36  | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection            | ⬜   |
+| 37  | Paginator  | Live region announcing page change, button labels                     | ⬜   |
+| 38  | DataView   | Sort/filter labels, list/grid toggle announcement                     | ⬜   |
+| 39  | OrderList  | Keyboard reorder alternative, drag-and-drop a11y                      | ⬜   |
+| 40  | PickList   | Dual-list pattern, transfer action announcements                      | ⬜   |
 
 ### Exit criteria
 
@@ -151,49 +151,49 @@ This is the internal quality gate — not public yet, but you need to know where
 
 ### Tier 5 — Feedback, Status & Foundational (10 components)
 
-| #  | Component       | Key concern                                               | Done |
-|----|-----------------|-----------------------------------------------------------|------|
-| 41 | Button          | `aria-disabled`, icon-only `aria-label`, loading state    | ⬜   |
-| 42 | Alert           | `role=alert` vs `role=status`, dismiss button label       | ⬜   |
-| 43 | Message         | Live region role correctness                              | ⬜   |
-| 44 | ProgressBar     | `role=progressbar`, `aria-valuenow`, indeterminate label  | ⬜   |
-| 45 | Carousel        | `role=region`, slide announcement, prev/next labels       | ⬜   |
-| 46 | Galleria        | Lightbox keyboard trap, image alt propagation             | ⬜   |
-| 47 | SpeedDial       | `aria-expanded`, icon-only action button labels           | ⬜   |
-| 48 | SelectButton    | `role=group` of toggle buttons, `aria-pressed`            | ⬜   |
-| 49 | InputOtp        | Sequential focus management, paste handling               | ⬜   |
-| 50 | VirtualScroller | Accessible scroll region, keyboard scrolling              | ⬜   |
+| #   | Component       | Key concern                                              | Done |
+| --- | --------------- | -------------------------------------------------------- | ---- |
+| 41  | Button          | `aria-disabled`, icon-only `aria-label`, loading state   | ⬜   |
+| 42  | Alert           | `role=alert` vs `role=status`, dismiss button label      | ⬜   |
+| 43  | Message         | Live region role correctness                             | ⬜   |
+| 44  | ProgressBar     | `role=progressbar`, `aria-valuenow`, indeterminate label | ⬜   |
+| 45  | Carousel        | `role=region`, slide announcement, prev/next labels      | ⬜   |
+| 46  | Galleria        | Lightbox keyboard trap, image alt propagation            | ⬜   |
+| 47  | SpeedDial       | `aria-expanded`, icon-only action button labels          | ⬜   |
+| 48  | SelectButton    | `role=group` of toggle buttons, `aria-pressed`           | ⬜   |
+| 49  | InputOtp        | Sequential focus management, paste handling              | ⬜   |
+| 50  | VirtualScroller | Accessible scroll region, keyboard scrolling             | ⬜   |
 
 ### Tier 6 — Layout, Utility & Polish (26 components)
 
-| #  | Component       | Primary focus                                             | Done |
-|----|-----------------|-----------------------------------------------------------|------|
-| 51 | Card            | API composability, slot flexibility, hover/focus polish   | ⬜   |
-| 52 | Badge           | Positioning variants, `aria-label` passthrough            | ⬜   |
-| 53 | Tag             | Dismissible variant `aria-label`                          | ⬜   |
-| 54 | Chip            | Remove button label, image alt passthrough                | ⬜   |
-| 55 | Skeleton        | `aria-busy` on container, `aria-hidden` on placeholder    | ⬜   |
-| 56 | ProgressSpinner | `role=status`, `aria-label`                               | ⬜   |
-| 57 | MeterGroup      | Segment `aria-label` values, totals announced             | ⬜   |
-| 58 | Divider         | `role=separator`, `aria-orientation`                      | ⬜   |
-| 59 | Toolbar         | `role=toolbar`, `aria-label`                              | ⬜   |
-| 60 | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded`  | ⬜   |
-| 61 | Fieldset        | `role=group`, native fieldset/legend semantics            | ⬜   |
-| 62 | ScrollPanel     | Keyboard-scrollable region label                          | ⬜   |
-| 63 | Inplace         | Display/edit toggle `aria-expanded`                       | ⬜   |
-| 64 | BlockUI         | `aria-busy` on blocked container                          | ⬜   |
-| 65 | Avatar          | Alt propagation, group context                            | ⬜   |
-| 66 | Image           | Alt text, preview dialog a11y                             | ⬜   |
-| 67 | ImageCompare    | `role=slider`, `aria-valuetext`                           | ⬜   |
-| 68 | SplitButton     | Dropdown trigger `aria-haspopup`, menu keyboard nav       | ⬜   |
-| 69 | Upload          | Drop zone announcement, file list management              | ⬜   |
-| 70 | Terminal        | `role=log`, command input labeling                        | ⬜   |
-| 71 | Timeline        | Semantic list structure, orientation                      | ⬜   |
-| 72 | Chart           | Accessible data table alternative, `aria-label`           | ⬜   |
-| 73 | FocusTrap       | Correct sentinel node strategy                            | ⬜   |
-| 74 | Ripple          | `prefers-reduced-motion` compliance                       | ⬜   |
-| 75 | ScrollTop       | `aria-label` on button                                    | ⬜   |
-| 76 | BottomSheet     | `role=dialog`, focus management                           | ⬜   |
+| #   | Component       | Primary focus                                            | Done |
+| --- | --------------- | -------------------------------------------------------- | ---- |
+| 51  | Card            | API composability, slot flexibility, hover/focus polish  | ⬜   |
+| 52  | Badge           | Positioning variants, `aria-label` passthrough           | ⬜   |
+| 53  | Tag             | Dismissible variant `aria-label`                         | ⬜   |
+| 54  | Chip            | Remove button label, image alt passthrough               | ⬜   |
+| 55  | Skeleton        | `aria-busy` on container, `aria-hidden` on placeholder   | ⬜   |
+| 56  | ProgressSpinner | `role=status`, `aria-label`                              | ⬜   |
+| 57  | MeterGroup      | Segment `aria-label` values, totals announced            | ⬜   |
+| 58  | Divider         | `role=separator`, `aria-orientation`                     | ⬜   |
+| 59  | Toolbar         | `role=toolbar`, `aria-label`                             | ⬜   |
+| 60  | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded` | ⬜   |
+| 61  | Fieldset        | `role=group`, native fieldset/legend semantics           | ⬜   |
+| 62  | ScrollPanel     | Keyboard-scrollable region label                         | ⬜   |
+| 63  | Inplace         | Display/edit toggle `aria-expanded`                      | ⬜   |
+| 64  | BlockUI         | `aria-busy` on blocked container                         | ⬜   |
+| 65  | Avatar          | Alt propagation, group context                           | ⬜   |
+| 66  | Image           | Alt text, preview dialog a11y                            | ⬜   |
+| 67  | ImageCompare    | `role=slider`, `aria-valuetext`                          | ⬜   |
+| 68  | SplitButton     | Dropdown trigger `aria-haspopup`, menu keyboard nav      | ⬜   |
+| 69  | Upload          | Drop zone announcement, file list management             | ⬜   |
+| 70  | Terminal        | `role=log`, command input labeling                       | ⬜   |
+| 71  | Timeline        | Semantic list structure, orientation                     | ⬜   |
+| 72  | Chart           | Accessible data table alternative, `aria-label`          | ⬜   |
+| 73  | FocusTrap       | Correct sentinel node strategy                           | ⬜   |
+| 74  | Ripple          | `prefers-reduced-motion` compliance                      | ⬜   |
+| 75  | ScrollTop       | `aria-label` on button                                   | ⬜   |
+| 76  | BottomSheet     | `role=dialog`, focus management                          | ⬜   |
 
 ### Ecosystem
 
@@ -266,12 +266,12 @@ This is the internal quality gate — not public yet, but you need to know where
 
 Once v1.0 ships, the next committed strengths follow in order. Each gets its own phase.
 
-| # | Wow Factor                      | What "nothing else comes close" means                               |
-|---|---------------------------------|---------------------------------------------------------------------|
-| 3 | Unmatched forms experience      | Best typed, reactive, signal-native forms DX in Angular — ever      |
-| 4 | Exceptional DX                  | APIs so predictable developers never reach for docs for basic usage |
-| 5 | Unbelievably polished animations | Motion that makes developers say "how did they do that"            |
-| 6 | The best Angular table/grid     | Performance + composability that makes every other grid feel old    |
+| #   | Wow Factor                       | What "nothing else comes close" means                               |
+| --- | -------------------------------- | ------------------------------------------------------------------- |
+| 3   | Unmatched forms experience       | Best typed, reactive, signal-native forms DX in Angular — ever      |
+| 4   | Exceptional DX                   | APIs so predictable developers never reach for docs for basic usage |
+| 5   | Unbelievably polished animations | Motion that makes developers say "how did they do that"             |
+| 6   | The best Angular table/grid      | Performance + composability that makes every other grid feel old    |
 
 ---
 
@@ -289,11 +289,11 @@ Once v1.0 ships, the next committed strengths follow in order. Each gets its own
 
 ## Related Documents
 
-| Document | How it connects |
-|---|---|
-| [`SCORING_CRITERIA.md`](SCORING_CRITERIA.md) | Defines what "scored ≥ 8" actually means — the 149-checkpoint quality gate used throughout this roadmap |
-| [`COMPONENT_SCORES.md`](COMPONENT_SCORES.md) | Live scoreboard — the per-component record of which checkboxes are ticked |
-| [`COMPETITIVE_BENCHMARKS.md`](COMPETITIVE_BENCHMARKS.md) | Per-component parity tables (Category 11) — filled in during Phase 2 of each component's hardening |
-| [`COMPETITIVE_STRATEGY.md`](COMPETITIVE_STRATEGY.md) | What happens in Phase 4 — the benchmark repo, "Built Different" content, and public claims |
-| [`LAUNCH_STRATEGY.md`](LAUNCH_STRATEGY.md) | The full sequenced launch path that Phase 4 and Phase 5 unlock |
-| [`VISION.md`](VISION.md) | The north star — re-read when making trade-off decisions at any phase boundary |
+| Document                                                 | How it connects                                                                                         |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| [`SCORING_CRITERIA.md`](SCORING_CRITERIA.md)             | Defines what "scored ≥ 8" actually means — the 149-checkpoint quality gate used throughout this roadmap |
+| [`COMPONENT_SCORES.md`](COMPONENT_SCORES.md)             | Live scoreboard — the per-component record of which checkboxes are ticked                               |
+| [`COMPETITIVE_BENCHMARKS.md`](COMPETITIVE_BENCHMARKS.md) | Per-component parity tables (Category 11) — filled in during Phase 2 of each component's hardening      |
+| [`COMPETITIVE_STRATEGY.md`](COMPETITIVE_STRATEGY.md)     | What happens in Phase 4 — the benchmark repo, "Built Different" content, and public claims              |
+| [`LAUNCH_STRATEGY.md`](LAUNCH_STRATEGY.md)               | The full sequenced launch path that Phase 4 and Phase 5 unlock                                          |
+| [`VISION.md`](VISION.md)                                 | The north star — re-read when making trade-off decisions at any phase boundary                          |

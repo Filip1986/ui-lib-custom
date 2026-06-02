@@ -1,6 +1,6 @@
 export function makeKeydownEvent(
   key: string,
-  options: Partial<KeyboardEventInit> = {}
+  options: Partial<KeyboardEventInit> = {},
 ): KeyboardEvent {
   return new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true, ...options });
 }

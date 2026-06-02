@@ -76,7 +76,7 @@ export class Fieldset {
 
   /** Visual variant — inherits from ThemeConfigService when not set. */
   public readonly variant: InputSignal<FieldsetVariant | null> = input<FieldsetVariant | null>(
-    null
+    null,
   );
 
   /** Additional CSS classes to attach to the host element. */
@@ -86,7 +86,7 @@ export class Fieldset {
   public readonly toggled: OutputEmitterRef<FieldsetToggleEvent> = output<FieldsetToggleEvent>();
 
   private readonly effectiveVariant: Signal<FieldsetVariant> = computed<FieldsetVariant>(
-    (): FieldsetVariant => this.variant() ?? this.themeConfig.variant()
+    (): FieldsetVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Computed CSS classes applied to the host element. */

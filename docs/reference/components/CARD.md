@@ -13,22 +13,22 @@ Card container component with optional header, footer, and theme scope.
 
 ### Inputs
 
-| Name         | Type                           | Default    | Description                    |
-| ------------ | ------------------------------ | ---------- | ------------------------------ |
-| `ariaLabel`  | `string | null`                | `null`     | —                              |
-| `bordered`   | `boolean`                      | `false`    | —                              |
-| `closable`   | `boolean`                      | `false`    | —                              |
-| `elevation`  | `CardElevation`                | `'medium'` | —                              |
-| `footerBg`   | `string | null`                | `null`     | —                              |
-| `headerBg`   | `string | null`                | `null`     | —                              |
-| `headerIcon` | `SemanticIcon | string | null` | `null`     | —                              |
-| `hoverable`  | `boolean`                      | `false`    | —                              |
-| `shadow`     | `string | null`                | `null`     | —                              |
-| `showFooter` | `boolean | null`               | `null`     | —                              |
-| `showHeader` | `boolean | null`               | `null`     | —                              |
-| `subtitle`   | `string | null`                | `null`     | —                              |
-| `theme`      | `ThemeScopeInput | null`       | `null`     | Optional scoped theme override |
-| `variant`    | `CardVariant | null`           | `null`     | —                              |
+| Name         | Type             | Default    | Description |
+| ------------ | ---------------- | ---------- | ----------- | ------------------------------ | --- |
+| `ariaLabel`  | `string          | null`      | `null`      | —                              |
+| `bordered`   | `boolean`        | `false`    | —           |
+| `closable`   | `boolean`        | `false`    | —           |
+| `elevation`  | `CardElevation`  | `'medium'` | —           |
+| `footerBg`   | `string          | null`      | `null`      | —                              |
+| `headerBg`   | `string          | null`      | `null`      | —                              |
+| `headerIcon` | `SemanticIcon    | string     | null`       | `null`                         | —   |
+| `hoverable`  | `boolean`        | `false`    | —           |
+| `shadow`     | `string          | null`      | `null`      | —                              |
+| `showFooter` | `boolean         | null`      | `null`      | —                              |
+| `showHeader` | `boolean         | null`      | `null`      | —                              |
+| `subtitle`   | `string          | null`      | `null`      | —                              |
+| `theme`      | `ThemeScopeInput | null`      | `null`      | Optional scoped theme override |
+| `variant`    | `CardVariant     | null`      | `null`      | —                              |
 
 ### Outputs
 
@@ -121,7 +121,8 @@ Card container component with optional header, footer, and theme scope.
 <ui-lib-card>
   <span card-header>Appearances</span>
   <span card-subtitle>
-    Use <code>appearance</code> to switch between <code>solid</code>, <code>outline</code>, and <code>ghost</code>.
+    Use <code>appearance</code> to switch between <code>solid</code>, <code>outline</code>, and
+    <code>ghost</code>.
   </span>
   <p>Body content.</p>
 </ui-lib-card>
@@ -146,4 +147,3 @@ Card container component with optional header, footer, and theme scope.
 - [Demo page](/components/card)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/card/README.md)
-

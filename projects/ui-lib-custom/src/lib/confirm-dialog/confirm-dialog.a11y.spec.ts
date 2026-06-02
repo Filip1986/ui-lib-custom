@@ -53,7 +53,7 @@ function openDialog(fixture: ComponentFixture<ConfirmDialogA11yHostComponent>): 
 
 function getPanel(host: HTMLElement): HTMLElement {
   const panel: HTMLElement | null = host.querySelector<HTMLElement>(
-    '.ui-lib-confirm-dialog__panel'
+    '.ui-lib-confirm-dialog__panel',
   );
   if (!panel) throw new Error('Expected panel to exist');
   return panel;
@@ -78,7 +78,7 @@ describe('ConfirmDialog Accessibility', (): void => {
   describe('closed state', (): void => {
     it('panel is not in DOM when visible=false', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
@@ -87,7 +87,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('no role="alertdialog" element present when closed', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
@@ -96,7 +96,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('axe passes in closed state', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
@@ -108,7 +108,7 @@ describe('ConfirmDialog Accessibility', (): void => {
   describe('open-state ARIA structure', (): void => {
     it('panel has role="alertdialog"', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
@@ -118,7 +118,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('panel has aria-modal="true"', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
@@ -128,7 +128,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('panel aria-labelledby resolves to header text element', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
@@ -143,7 +143,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('panel aria-describedby resolves to message element', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
@@ -158,7 +158,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('header text matches the header input', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
@@ -169,7 +169,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('message text matches the message input', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
@@ -180,7 +180,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('close button (closable=true) has aria-label="Close"', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
@@ -192,13 +192,13 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('close button icon has aria-hidden="true"', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const closeIcon: SVGElement | null = host.querySelector<SVGElement>(
-        '.ui-lib-confirm-dialog__close-btn svg'
+        '.ui-lib-confirm-dialog__close-btn svg',
       );
       expect(closeIcon).not.toBeNull();
       expect(closeIcon?.getAttribute('aria-hidden')).toBe('true');
@@ -210,7 +210,7 @@ describe('ConfirmDialog Accessibility', (): void => {
   describe('focus management', (): void => {
     it('defaultFocus="accept" focuses the accept button after open (direct call)', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.componentInstance.defaultFocusState.set('accept');
       fixture.detectChanges();
@@ -219,7 +219,7 @@ describe('ConfirmDialog Accessibility', (): void => {
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       // afterNextRender does not fire in Jest; call focusDefaultButton directly via DOM.
       const acceptBtn: HTMLElement | null = host.querySelector(
-        '.ui-lib-confirm-dialog__accept-btn'
+        '.ui-lib-confirm-dialog__accept-btn',
       );
       expect(acceptBtn).not.toBeNull();
       // Verify button is focusable (has no disabled attribute).
@@ -228,7 +228,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('defaultFocus="reject" — reject button is present and focusable', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.componentInstance.defaultFocusState.set('reject');
       fixture.detectChanges();
@@ -236,7 +236,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const rejectBtn: HTMLElement | null = host.querySelector(
-        '.ui-lib-confirm-dialog__reject-btn'
+        '.ui-lib-confirm-dialog__reject-btn',
       );
       expect(rejectBtn).not.toBeNull();
       expect(rejectBtn?.hasAttribute('disabled')).toBe(false);
@@ -244,7 +244,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('defaultFocus="none" — no button is forcibly focused (panel has tabindex="-1" as fallback)', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.componentInstance.defaultFocusState.set('none');
       fixture.detectChanges();
@@ -257,13 +257,13 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('focus is restored to trigger element when dialog closes via accept', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
 
       // Put focus on the trigger button before opening the dialog.
       const trigger: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.trigger-btn'
+        '.trigger-btn',
       );
       if (!trigger) throw new Error('Expected trigger button to exist');
       trigger.focus();
@@ -274,7 +274,7 @@ describe('ConfirmDialog Accessibility', (): void => {
       // Click accept — closes dialog and should restore focus to trigger.
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const acceptBtn: HTMLElement | null = host.querySelector(
-        '.ui-lib-confirm-dialog__accept-btn'
+        '.ui-lib-confirm-dialog__accept-btn',
       );
       acceptBtn?.click();
       fixture.detectChanges();
@@ -286,12 +286,12 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('focus is restored to trigger element when dialog closes via Escape', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
 
       const trigger: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.trigger-btn'
+        '.trigger-btn',
       );
       if (!trigger) throw new Error('Expected trigger button to exist');
       trigger.focus();
@@ -314,7 +314,7 @@ describe('ConfirmDialog Accessibility', (): void => {
   describe('keyboard behaviour', (): void => {
     it('Escape closes the dialog', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
@@ -331,14 +331,14 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('accept button click closes the dialog', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
 
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const acceptBtn: HTMLElement | null = host.querySelector(
-        '.ui-lib-confirm-dialog__accept-btn'
+        '.ui-lib-confirm-dialog__accept-btn',
       );
       acceptBtn?.click();
       fixture.detectChanges();
@@ -350,14 +350,14 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('reject button click closes the dialog', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
 
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const rejectBtn: HTMLElement | null = host.querySelector(
-        '.ui-lib-confirm-dialog__reject-btn'
+        '.ui-lib-confirm-dialog__reject-btn',
       );
       rejectBtn?.click();
       fixture.detectChanges();
@@ -373,7 +373,7 @@ describe('ConfirmDialog Accessibility', (): void => {
   describe('backdrop', (): void => {
     it('backdrop has aria-hidden="true"', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       openDialog(fixture);
@@ -386,7 +386,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('backdrop click closes the dialog when dismissableMask=true', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.componentInstance.dismissableMaskState.set(true);
       fixture.detectChanges();
@@ -408,7 +408,7 @@ describe('ConfirmDialog Accessibility', (): void => {
   describe('ConfirmationService-driven', (): void => {
     it('service.confirm({ header, message }) opens dialog with correct ARIA text', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
 
@@ -427,12 +427,12 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('service.close() closes the dialog and restores focus to trigger', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
 
       const trigger: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.trigger-btn'
+        '.trigger-btn',
       );
       if (!trigger) throw new Error('Expected trigger button to exist');
       trigger.focus();
@@ -455,7 +455,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('defaultFocus in service config takes precedence over component default', (): void => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       // Component default is 'accept'
       fixture.componentInstance.defaultFocusState.set('accept');
@@ -471,7 +471,7 @@ describe('ConfirmDialog Accessibility', (): void => {
       // Verify the reject button exists and the panel is open.
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const rejectBtn: HTMLElement | null = host.querySelector(
-        '.ui-lib-confirm-dialog__reject-btn'
+        '.ui-lib-confirm-dialog__reject-btn',
       );
       expect(rejectBtn).not.toBeNull();
       // The panel should be visible.
@@ -484,7 +484,7 @@ describe('ConfirmDialog Accessibility', (): void => {
   describe('axe-core automated checks', (): void => {
     it('closed state passes axe', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
@@ -492,7 +492,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('open state passes axe (defaultFocus="accept")', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.componentInstance.defaultFocusState.set('accept');
       fixture.detectChanges();
@@ -502,7 +502,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('open state passes axe (defaultFocus="reject")', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.componentInstance.defaultFocusState.set('reject');
       fixture.detectChanges();
@@ -512,7 +512,7 @@ describe('ConfirmDialog Accessibility', (): void => {
 
     it('open state with service-driven config passes axe', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfirmDialogA11yHostComponent> = TestBed.createComponent(
-        ConfirmDialogA11yHostComponent
+        ConfirmDialogA11yHostComponent,
       );
       fixture.detectChanges();
 

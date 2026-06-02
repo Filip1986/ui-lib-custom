@@ -7,5 +7,5 @@ export const ICON_CONFIG: InjectionToken<IconConfig> = new InjectionToken<IconCo
   {
     providedIn: 'root',
     factory: (): IconConfig => ({ ...DEFAULT_ICON_CONFIG }),
-  }
+  },
 );

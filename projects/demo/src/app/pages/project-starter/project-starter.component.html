@@ -34,7 +34,9 @@
             [ngModel]="themeName()"
             (ngModelChange)="themeName.set($event)"
           />
-          <ui-lib-button type="button" severity="primary" size="sm" (click)="saveTheme()">Save Theme</ui-lib-button>
+          <ui-lib-button type="button" severity="primary" size="sm" (click)="saveTheme()"
+            >Save Theme</ui-lib-button
+          >
         </div>
         <div class="control-group">
           <label>Saved themes</label>
@@ -149,10 +151,14 @@
       </section>
 
       <section class="local-install-section">
-        <h3>Method 1 — <code>npm link</code> <span class="badge-recommended">recommended for active dev</span></h3>
+        <h3>
+          Method 1 — <code>npm link</code>
+          <span class="badge-recommended">recommended for active dev</span>
+        </h3>
         <p>
-          Creates a global symlink so your consumer project always sees the latest build.
-          Re-run <code>npm run build</code> in this workspace and the consumer picks up changes immediately.
+          Creates a global symlink so your consumer project always sees the latest build. Re-run
+          <code>npm run build</code> in this workspace and the consumer picks up changes
+          immediately.
         </p>
         <ui-lib-code-snippet
           title="1. Register the link (run from dist/ui-lib-custom, not the repo root)"
@@ -189,8 +195,8 @@
       <section class="local-install-section">
         <h3>Method 2 — local file path</h3>
         <p>
-          Point your <code>package.json</code> directly at the <code>dist/</code> folder.
-          No global symlink needed — good for one-off integration tests.
+          Point your <code>package.json</code> directly at the <code>dist/</code> folder. No global
+          symlink needed — good for one-off integration tests.
         </p>
         <ui-lib-code-snippet
           title="package.json + install"
@@ -230,5 +236,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

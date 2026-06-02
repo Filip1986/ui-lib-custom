@@ -70,7 +70,7 @@ describe('MaskEngine', (): void => {
     const valid: { lastMatch: number; bufferValue: string; shouldClear: boolean } = engine.checkVal(
       '1234567890',
       true,
-      false
+      false,
     );
     expect(valid.shouldClear).toBeFalsy();
     expect(valid.bufferValue).toBe('(123) 456-7890');
@@ -136,7 +136,7 @@ describe('MaskEngine', (): void => {
 
     const literalsOnlyEngine: MaskEngine = new MaskEngine('() -', '_', '[A-Za-z]');
     expect(
-      literalsOnlyEngine.tests.every((entry: MaskTestEntry): boolean => entry.literal)
+      literalsOnlyEngine.tests.every((entry: MaskTestEntry): boolean => entry.literal),
     ).toBeTruthy();
     expect(literalsOnlyEngine.getUnmaskedValue()).toBe('');
     expect(literalsOnlyEngine.isCompleted()).toBeTruthy();

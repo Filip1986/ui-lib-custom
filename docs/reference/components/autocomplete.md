@@ -13,46 +13,46 @@ PrimeNG-inspired autocomplete with single and multiple selection modes.
 
 ### Inputs
 
-| Name                    | Type                               | Default     | Description                                                                                                             |
-| ----------------------- | ---------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `addOnBlur`             | `boolean`                          | `false`     | Commit free-text as a chip on blur (multiple mode). Default: `false`.                                                   |
-| `addOnTab`              | `boolean`                          | `false`     | Commit free-text as a chip on Tab key (multiple mode). Default: `false`.                                                |
-| `appendTo`              | `string | HTMLElement | undefined` | `'body'`    | Where to mount the detached dropdown panel; `'body'` appends to `document.body`. Default: `'body'`.                     |
-| `ariaLabel`             | `string | null`                    | `null`      | Sets `aria-label` on the inner `<input>`. Default: `null`.                                                              |
-| `ariaLabelledBy`        | `string | null`                    | `null`      | Sets `aria-labelledby` on the inner `<input>` to reference an external label element. Default: `null`.                  |
-| `autoClear`             | `boolean`                          | `true`      | When `forceSelection` finds no match on blur, clear the input instead of restoring the previous value. Default: `true`. |
-| `completeOnFocus`       | `boolean`                          | `false`     | Fire `completeMethod` when the input receives focus. Default: `false`.                                                  |
-| `delay`                 | `number`                           | `300`       | Debounce delay in ms before `completeMethod` fires. Default: `300`.                                                     |
-| `disabled`              | `boolean`                          | `false`     | Disables the control; sets `aria-disabled` on the input. Default: `false`.                                              |
-| `dropdown`              | `boolean`                          | `false`     | Show a dropdown toggle button alongside the input. Default: `false`.                                                    |
-| `dropdownMode`          | `AutoCompleteDropdownMode`         | `'blank'`   | `'blank'` clears the query when the dropdown opens; `'current'` keeps existing text. Default: `'blank'`.                |
-| `filled`                | `boolean`                          | `false`     | Apply a filled background appearance. Default: `false`.                                                                 |
-| `fluid`                 | `boolean`                          | `false`     | Stretch the component to fill its container width. Default: `false`.                                                    |
-| `forceSelection`        | `boolean`                          | `false`     | Restrict value to items from `suggestions` only; rejects free-text on blur. Default: `false`.                           |
-| `group`                 | `boolean`                          | `false`     | Treat `suggestions` as an array of grouped data objects. Default: `false`.                                              |
-| `inputId`               | `string`                           | `''`        | Custom `id` for the inner `<input>` (for external `<label for="">` association). Default: `''`.                         |
-| `invalid`               | `boolean`                          | `false`     | Applies error border styling and sets `aria-invalid="true"` on the input. Default: `false`.                             |
-| `loading`               | `boolean`                          | `false`     | Shows a loading state in the panel while suggestions are being fetched. Default: `false`.                               |
-| `maxlength`             | `number | null`                    | `null`      | Native `maxlength` attribute on the inner `<input>`. Default: `null`.                                                   |
-| `minLength`             | `number`                           | `1`         | Minimum query length before `completeMethod` fires. Default: `1`.                                                       |
-| `multiple`              | `boolean`                          | `false`     | Enable chip (multi-value) mode; `ngModel` receives an array. Default: `false`.                                          |
-| `optionDisabled`        | `string | undefined`               | `undefined` | Field name that, when truthy, marks the option as non-selectable. Default: `undefined`.                                 |
-| `optionGroupChildren`   | `string`                           | `'items'`   | Field name for the children array inside each group object. Default: `'items'`.                                         |
-| `optionGroupLabel`      | `string`                           | `'label'`   | Field name for group header labels when `group=true`. Default: `'label'`.                                               |
-| `optionLabel`           | `string | undefined`               | `undefined` | Field name used as the display label for object options. Default: `undefined` (uses `String(option)`).                  |
-| `optionValue`           | `string | undefined`               | `undefined` | Field name whose value is emitted when an option is selected. Default: `undefined` (emits whole object).                |
-| `placeholder`           | `string`                           | `''`        | Placeholder text shown in the input when empty. Default: `''`.                                                          |
-| `readonly`              | `boolean`                          | `false`     | Makes the input read-only (query text not editable). Default: `false`.                                                  |
-| `scrollHeight`          | `string`                           | `'200px'`   | Max-height of the dropdown panel. Default: `'200px'`.                                                                   |
-| `separator`             | `string | RegExp | undefined`      | `undefined` | Character(s) that auto-tokenize free text into chips (multiple mode). Default: `undefined`.                             |
-| `showClear`             | `boolean`                          | `false`     | Show a clear (×) button when the field has a value. Default: `false`.                                                   |
-| `size`                  | `AutoCompleteSize`                 | `'md'`      | Control height: `'sm'` (36px) · `'md'` (44px) · `'lg'` (52px). Default: `'md'`.                                         |
-| `suggestions`           | `unknown[]`                        | `[]`        | Options shown in the dropdown panel. Never filtered internally — update on every `completeMethod` event. Default: `[]`. |
-| `tabindex`              | `number`                           | `0`         | Tab index of the inner `<input>`. Default: `0`.                                                                         |
-| `unique`                | `boolean`                          | `false`     | Prevent duplicate chips in multiple mode. Default: `false`.                                                             |
-| `variant`               | `AutoCompleteVariant | null`       | `null`      | Visual style variant. Falls back to the global ThemeConfigService variant when `null`. Default: `null`.                 |
-| `virtualScroll`         | `boolean`                          | `false`     | Enable virtual scrolling for large suggestion lists. Requires `virtualScrollItemSize`. Default: `false`.                |
-| `virtualScrollItemSize` | `number`                           | `0`         | Item height in px; required when `virtualScroll=true`. Default: `0`.                                                    |
+| Name                    | Type                       | Default     | Description                                                                                                             |
+| ----------------------- | -------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `addOnBlur`             | `boolean`                  | `false`     | Commit free-text as a chip on blur (multiple mode). Default: `false`.                                                   |
+| `addOnTab`              | `boolean`                  | `false`     | Commit free-text as a chip on Tab key (multiple mode). Default: `false`.                                                |
+| `appendTo`              | `string                    | HTMLElement | undefined`                                                                                                              | `'body'`                                                                                                 | Where to mount the detached dropdown panel; `'body'` appends to `document.body`. Default: `'body'`. |
+| `ariaLabel`             | `string                    | null`       | `null`                                                                                                                  | Sets `aria-label` on the inner `<input>`. Default: `null`.                                               |
+| `ariaLabelledBy`        | `string                    | null`       | `null`                                                                                                                  | Sets `aria-labelledby` on the inner `<input>` to reference an external label element. Default: `null`.   |
+| `autoClear`             | `boolean`                  | `true`      | When `forceSelection` finds no match on blur, clear the input instead of restoring the previous value. Default: `true`. |
+| `completeOnFocus`       | `boolean`                  | `false`     | Fire `completeMethod` when the input receives focus. Default: `false`.                                                  |
+| `delay`                 | `number`                   | `300`       | Debounce delay in ms before `completeMethod` fires. Default: `300`.                                                     |
+| `disabled`              | `boolean`                  | `false`     | Disables the control; sets `aria-disabled` on the input. Default: `false`.                                              |
+| `dropdown`              | `boolean`                  | `false`     | Show a dropdown toggle button alongside the input. Default: `false`.                                                    |
+| `dropdownMode`          | `AutoCompleteDropdownMode` | `'blank'`   | `'blank'` clears the query when the dropdown opens; `'current'` keeps existing text. Default: `'blank'`.                |
+| `filled`                | `boolean`                  | `false`     | Apply a filled background appearance. Default: `false`.                                                                 |
+| `fluid`                 | `boolean`                  | `false`     | Stretch the component to fill its container width. Default: `false`.                                                    |
+| `forceSelection`        | `boolean`                  | `false`     | Restrict value to items from `suggestions` only; rejects free-text on blur. Default: `false`.                           |
+| `group`                 | `boolean`                  | `false`     | Treat `suggestions` as an array of grouped data objects. Default: `false`.                                              |
+| `inputId`               | `string`                   | `''`        | Custom `id` for the inner `<input>` (for external `<label for="">` association). Default: `''`.                         |
+| `invalid`               | `boolean`                  | `false`     | Applies error border styling and sets `aria-invalid="true"` on the input. Default: `false`.                             |
+| `loading`               | `boolean`                  | `false`     | Shows a loading state in the panel while suggestions are being fetched. Default: `false`.                               |
+| `maxlength`             | `number                    | null`       | `null`                                                                                                                  | Native `maxlength` attribute on the inner `<input>`. Default: `null`.                                    |
+| `minLength`             | `number`                   | `1`         | Minimum query length before `completeMethod` fires. Default: `1`.                                                       |
+| `multiple`              | `boolean`                  | `false`     | Enable chip (multi-value) mode; `ngModel` receives an array. Default: `false`.                                          |
+| `optionDisabled`        | `string                    | undefined`  | `undefined`                                                                                                             | Field name that, when truthy, marks the option as non-selectable. Default: `undefined`.                  |
+| `optionGroupChildren`   | `string`                   | `'items'`   | Field name for the children array inside each group object. Default: `'items'`.                                         |
+| `optionGroupLabel`      | `string`                   | `'label'`   | Field name for group header labels when `group=true`. Default: `'label'`.                                               |
+| `optionLabel`           | `string                    | undefined`  | `undefined`                                                                                                             | Field name used as the display label for object options. Default: `undefined` (uses `String(option)`).   |
+| `optionValue`           | `string                    | undefined`  | `undefined`                                                                                                             | Field name whose value is emitted when an option is selected. Default: `undefined` (emits whole object). |
+| `placeholder`           | `string`                   | `''`        | Placeholder text shown in the input when empty. Default: `''`.                                                          |
+| `readonly`              | `boolean`                  | `false`     | Makes the input read-only (query text not editable). Default: `false`.                                                  |
+| `scrollHeight`          | `string`                   | `'200px'`   | Max-height of the dropdown panel. Default: `'200px'`.                                                                   |
+| `separator`             | `string                    | RegExp      | undefined`                                                                                                              | `undefined`                                                                                              | Character(s) that auto-tokenize free text into chips (multiple mode). Default: `undefined`.         |
+| `showClear`             | `boolean`                  | `false`     | Show a clear (×) button when the field has a value. Default: `false`.                                                   |
+| `size`                  | `AutoCompleteSize`         | `'md'`      | Control height: `'sm'` (36px) · `'md'` (44px) · `'lg'` (52px). Default: `'md'`.                                         |
+| `suggestions`           | `unknown[]`                | `[]`        | Options shown in the dropdown panel. Never filtered internally — update on every `completeMethod` event. Default: `[]`. |
+| `tabindex`              | `number`                   | `0`         | Tab index of the inner `<input>`. Default: `0`.                                                                         |
+| `unique`                | `boolean`                  | `false`     | Prevent duplicate chips in multiple mode. Default: `false`.                                                             |
+| `variant`               | `AutoCompleteVariant       | null`       | `null`                                                                                                                  | Visual style variant. Falls back to the global ThemeConfigService variant when `null`. Default: `null`.  |
+| `virtualScroll`         | `boolean`                  | `false`     | Enable virtual scrolling for large suggestion lists. Requires `virtualScrollItemSize`. Default: `false`.                |
+| `virtualScrollItemSize` | `number`                   | `0`         | Item height in px; required when `virtualScroll=true`. Default: `0`.                                                    |
 
 ### Outputs
 
@@ -226,4 +226,3 @@ _none_
 - [Demo page](/components/autocomplete)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/autocomplete/README.md)
-

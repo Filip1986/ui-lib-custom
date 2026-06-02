@@ -85,7 +85,7 @@ export class ShadowsComponent {
   public readonly shadowValues: Record<ShadowKey, string> = SHADOWS as Record<ShadowKey, string>;
 
   private readonly shadowEntries: Array<[ShadowKey, string]> = Object.entries(
-    this.shadowValues
+    this.shadowValues,
   ) as Array<[ShadowKey, string]>;
 
   public readonly examples: ElevationExample[] = this.shadowEntries

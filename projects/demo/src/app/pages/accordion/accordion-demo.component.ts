@@ -262,7 +262,7 @@ export class AccordionDemoComponent {
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
   public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
-    (): Record<string, string> => this.themeService.getCssVars(this.themeService.preset())
+    (): Record<string, string> => this.themeService.getCssVars(this.themeService.preset()),
   );
 
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;

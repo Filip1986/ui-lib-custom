@@ -46,7 +46,7 @@ onDeleteClick(event: MouseEvent): void {
 ## Inputs
 
 | Input            | Type                          | Default                               | Description                                                          |
-|------------------|-------------------------------|---------------------------------------|----------------------------------------------------------------------|
+| ---------------- | ----------------------------- | ------------------------------------- | -------------------------------------------------------------------- |
 | `visible`        | `model<boolean>`              | `false`                               | Two-way visibility binding                                           |
 | `key`            | `string`                      | `''`                                  | Key for targeting when multiple instances exist                      |
 | `message`        | `string`                      | `'Are you sure you want to proceed?'` | Confirmation message text                                            |
@@ -63,23 +63,23 @@ onDeleteClick(event: MouseEvent): void {
 
 ## Outputs
 
-| Output       | Payload  | Description                                                                |
-|--------------|----------|----------------------------------------------------------------------------|
-| `accepted`   | `void`   | Emitted when the accept button is clicked                                  |
-| `rejected`   | `void`   | Emitted when the reject button or overlay is clicked, or Escape is pressed |
+| Output     | Payload | Description                                                                |
+| ---------- | ------- | -------------------------------------------------------------------------- |
+| `accepted` | `void`  | Emitted when the accept button is clicked                                  |
+| `rejected` | `void`  | Emitted when the reject button or overlay is clicked, or Escape is pressed |
 
 ## ConfirmPopupService
 
-| Method           | Signature                              | Description                             |
-|------------------|----------------------------------------|-----------------------------------------|
-| `confirm`        | `(config: ConfirmPopupConfig) => void` | Show a popup with the given config      |
-| `close`          | `(key?: string) => void`               | Programmatically close the popup        |
-| `confirmation`   | `Signal<ConfirmPopupConfig \| null>`   | Readable signal of the current config   |
+| Method         | Signature                              | Description                           |
+| -------------- | -------------------------------------- | ------------------------------------- |
+| `confirm`      | `(config: ConfirmPopupConfig) => void` | Show a popup with the given config    |
+| `close`        | `(key?: string) => void`               | Programmatically close the popup      |
+| `confirmation` | `Signal<ConfirmPopupConfig \| null>`   | Readable signal of the current config |
 
 ## ConfirmPopupConfig
 
 | Property         | Type                                  | Description                     |
-|------------------|---------------------------------------|---------------------------------|
+| ---------------- | ------------------------------------- | ------------------------------- |
 | `key`            | `string?`                             | Match a specific popup instance |
 | `target`         | `HTMLElement \| EventTarget \| null?` | Element to anchor the popup to  |
 | `message`        | `string?`                             | Confirmation message            |
@@ -98,7 +98,13 @@ onDeleteClick(event: MouseEvent): void {
 
 ```ts
 type ConfirmPopupVariant = 'material' | 'bootstrap' | 'minimal';
-type ConfirmPopupButtonSeverity = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';
+type ConfirmPopupButtonSeverity =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'warning'
+  | 'info';
 type ConfirmPopupDefaultFocus = 'accept' | 'reject' | 'none';
 type ConfirmPopupPlacement = 'above' | 'below';
 ```
@@ -112,7 +118,9 @@ type ConfirmPopupPlacement = 'above' | 'below';
 import { Component, inject } from '@angular/core';
 import { ConfirmPopupService } from 'ui-lib-custom/confirm-popup';
 
-@Component({ /* … */ })
+@Component({
+  /* … */
+})
 export class MyComponent {
   private readonly confirmPopupService = inject(ConfirmPopupService);
 
@@ -169,7 +177,7 @@ this.confirmPopupService.confirm({
   acceptLabel: 'Delete',
   acceptSeverity: 'danger',
   rejectLabel: 'Cancel',
-  defaultFocus: 'reject',           // safer default for destructive actions
+  defaultFocus: 'reject', // safer default for destructive actions
   accept: () => this.delete(),
 });
 ```
@@ -215,16 +223,16 @@ Override visual styling at any scope without modifying component source.
 }
 ```
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `--uilib-confirm-popup-radius` | `var(--uilib-shape-base, 6px)` | Panel border radius |
-| `--uilib-confirm-popup-min-width` | `240px` | Minimum popup width |
-| `--uilib-confirm-popup-shadow` | `var(--uilib-shadow-lg, …)` | Panel drop shadow |
-| `--uilib-confirm-popup-bg` | `var(--uilib-surface)` | Panel background |
-| `--uilib-confirm-popup-border` | `var(--uilib-border)` | Panel border colour |
-| `--uilib-confirm-popup-arrow-size` | `8px` | Pointer arrow size |
-| `--uilib-confirm-popup-enter-duration` | `0.15s` | Open animation duration; `0ms` when `prefers-reduced-motion: reduce` |
-| `--uilib-confirm-popup-leave-duration` | `0.1s` | Close animation duration |
+| Variable                               | Default                        | Description                                                          |
+| -------------------------------------- | ------------------------------ | -------------------------------------------------------------------- |
+| `--uilib-confirm-popup-radius`         | `var(--uilib-shape-base, 6px)` | Panel border radius                                                  |
+| `--uilib-confirm-popup-min-width`      | `240px`                        | Minimum popup width                                                  |
+| `--uilib-confirm-popup-shadow`         | `var(--uilib-shadow-lg, …)`    | Panel drop shadow                                                    |
+| `--uilib-confirm-popup-bg`             | `var(--uilib-surface)`         | Panel background                                                     |
+| `--uilib-confirm-popup-border`         | `var(--uilib-border)`          | Panel border colour                                                  |
+| `--uilib-confirm-popup-arrow-size`     | `8px`                          | Pointer arrow size                                                   |
+| `--uilib-confirm-popup-enter-duration` | `0.15s`                        | Open animation duration; `0ms` when `prefers-reduced-motion: reduce` |
+| `--uilib-confirm-popup-leave-duration` | `0.1s`                         | Close animation duration                                             |
 
 ## Positioning
 
@@ -235,7 +243,7 @@ The popup auto-positions above the target element by default. If there is insuff
 ### ARIA features
 
 | Feature              | Detail                                                                                                                    |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------|
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `role="alertdialog"` | Applied to the panel element                                                                                              |
 | `aria-modal="true"`  | Panel is marked as a modal region                                                                                         |
 | `aria-label`         | Computed from the resolved message text — gives the `alertdialog` its required accessible name (no visible header exists) |
@@ -252,7 +260,7 @@ The popup auto-positions above the target element by default. If there is insuff
 ### Keyboard navigation
 
 | Key           | Behaviour                                                       |
-|---------------|-----------------------------------------------------------------|
+| ------------- | --------------------------------------------------------------- |
 | Tab           | Move focus to next focusable element within the popup           |
 | Shift+Tab     | Move focus to previous focusable element within the popup       |
 | Enter / Space | Activate the focused button (accept or reject)                  |

@@ -40,7 +40,6 @@
 
 <!-- List container -->
 <div class="ui-lib-order-list__list-container">
-
   <!-- Header -->
   @if (headerTemplate()) {
     <div class="ui-lib-order-list__header">
@@ -90,8 +89,12 @@
         class="ui-lib-order-list__item"
         [class.ui-lib-order-list__item--selected]="isSelected(item)"
         [class.ui-lib-order-list__item--dragging]="draggedIndex() === getValueIndex($index)"
-        [class.ui-lib-order-list__item--drop-before]="dragOverIndex() === $index && dragPosition() === 'before'"
-        [class.ui-lib-order-list__item--drop-after]="dragOverIndex() === $index && dragPosition() === 'after'"
+        [class.ui-lib-order-list__item--drop-before]="
+          dragOverIndex() === $index && dragPosition() === 'before'
+        "
+        [class.ui-lib-order-list__item--drop-after]="
+          dragOverIndex() === $index && dragPosition() === 'after'
+        "
         [attr.aria-selected]="isSelected(item)"
         [attr.id]="itemId($index)"
         [tabindex]="focusedIndex() === $index ? 0 : -1"
@@ -106,7 +109,11 @@
         @if (itemTemplate()) {
           <ng-container
             [ngTemplateOutlet]="itemTemplate()!"
-            [ngTemplateOutletContext]="{ $implicit: item, index: $index, selected: isSelected(item) }"
+            [ngTemplateOutletContext]="{
+              $implicit: item,
+              index: $index,
+              selected: isSelected(item),
+            }"
           />
         } @else {
           {{ resolveItemLabel(item) }}
@@ -135,4 +142,3 @@
     }
   }
 </div>
-

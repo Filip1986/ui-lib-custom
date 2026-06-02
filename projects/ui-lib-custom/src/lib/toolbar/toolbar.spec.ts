@@ -29,7 +29,7 @@ import type { ToolbarSize, ToolbarVariant } from './toolbar.types';
 })
 class TestHostComponent {
   public readonly variant: WritableSignal<ToolbarVariant | null> = signal<ToolbarVariant | null>(
-    null
+    null,
   );
   public readonly size: WritableSignal<ToolbarSize> = signal<ToolbarSize>('md');
   public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
@@ -142,28 +142,28 @@ describe('Toolbar', (): void => {
 
   it('should render start group wrapper', (): void => {
     const startGroup: Element | null = getToolbarElement().querySelector(
-      '.ui-lib-toolbar__group--start'
+      '.ui-lib-toolbar__group--start',
     );
     expect(startGroup).toBeTruthy();
   });
 
   it('should render center group wrapper', (): void => {
     const centerGroup: Element | null = getToolbarElement().querySelector(
-      '.ui-lib-toolbar__group--center'
+      '.ui-lib-toolbar__group--center',
     );
     expect(centerGroup).toBeTruthy();
   });
 
   it('should render end group wrapper', (): void => {
     const endGroup: Element | null = getToolbarElement().querySelector(
-      '.ui-lib-toolbar__group--end'
+      '.ui-lib-toolbar__group--end',
     );
     expect(endGroup).toBeTruthy();
   });
 
   it('should project start content into start group', (): void => {
     const startGroup: Element = getToolbarElement().querySelector(
-      '.ui-lib-toolbar__group--start'
+      '.ui-lib-toolbar__group--start',
     ) as Element;
     const startContent: Element | null = startGroup.querySelector('[data-testid="start-content"]');
     expect(startContent).toBeTruthy();
@@ -172,10 +172,10 @@ describe('Toolbar', (): void => {
 
   it('should project center content into center group', (): void => {
     const centerGroup: Element = getToolbarElement().querySelector(
-      '.ui-lib-toolbar__group--center'
+      '.ui-lib-toolbar__group--center',
     ) as Element;
     const centerContent: Element | null = centerGroup.querySelector(
-      '[data-testid="center-content"]'
+      '[data-testid="center-content"]',
     );
     expect(centerContent).toBeTruthy();
     expect(centerContent!.textContent!.trim()).toBe('Center');
@@ -183,7 +183,7 @@ describe('Toolbar', (): void => {
 
   it('should project end content into end group', (): void => {
     const endGroup: Element = getToolbarElement().querySelector(
-      '.ui-lib-toolbar__group--end'
+      '.ui-lib-toolbar__group--end',
     ) as Element;
     const endContent: Element | null = endGroup.querySelector('[data-testid="end-content"]');
     expect(endContent).toBeTruthy();
@@ -232,7 +232,7 @@ describe('Toolbar keyboard navigation', (): void => {
 
   function getButtons(): HTMLElement[] {
     return Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('button')
+      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('button'),
     );
   }
 

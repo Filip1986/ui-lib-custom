@@ -111,7 +111,7 @@ describe('TableComponent', (): void => {
     it('should render the correct number of column headers', (): void => {
       const headers: NodeListOf<HTMLElement> = queryAll(
         fixture,
-        '.ui-lib-table__th:not(.ui-lib-table__th--expander):not(.ui-lib-table__th--checkbox)'
+        '.ui-lib-table__th:not(.ui-lib-table__th--expander):not(.ui-lib-table__th--checkbox)',
       );
       expect(headers.length).toBe(3);
     });
@@ -119,7 +119,7 @@ describe('TableComponent', (): void => {
     it('should render the correct header labels', (): void => {
       const headers: NodeListOf<HTMLElement> = queryAll(fixture, '.ui-lib-table__th-label');
       const labels: string[] = Array.from(headers).map((header: HTMLElement): string =>
-        header.textContent.trim()
+        header.textContent.trim(),
       );
       expect(labels).toContain('Name');
       expect(labels).toContain('Category');
@@ -134,10 +134,10 @@ describe('TableComponent', (): void => {
     it('should render cell values using the column field', (): void => {
       const firstRowCells: NodeListOf<HTMLElement> = queryAll(
         fixture,
-        '.ui-lib-table__row:first-child .ui-lib-table__td'
+        '.ui-lib-table__row:first-child .ui-lib-table__td',
       );
       const cellTexts: string[] = Array.from(firstRowCells).map((cell: HTMLElement): string =>
-        cell.textContent.trim()
+        cell.textContent.trim(),
       );
       expect(cellTexts).toContain('Laptop');
     });
@@ -335,7 +335,7 @@ describe('TableComponent', (): void => {
       detectChanges(fixture);
       const cells: NodeListOf<HTMLElement> = queryAll(
         fixture,
-        '.ui-lib-table__row:first-child .ui-lib-table__td'
+        '.ui-lib-table__row:first-child .ui-lib-table__td',
       );
       expect(cells[0]?.textContent.trim()).toBe('Chair');
     });
@@ -346,7 +346,7 @@ describe('TableComponent', (): void => {
       detectChanges(fixture);
       const cells: NodeListOf<HTMLElement> = queryAll(
         fixture,
-        '.ui-lib-table__row:first-child .ui-lib-table__td'
+        '.ui-lib-table__row:first-child .ui-lib-table__td',
       );
       expect(cells[0]?.textContent.trim()).toBe('Laptop');
     });
@@ -501,7 +501,7 @@ describe('TableComponent', (): void => {
     it('should render a checkbox in the header', (): void => {
       const headerCheckbox: HTMLElement | null = queryOne(
         fixture,
-        '.ui-lib-table__th--checkbox .ui-lib-table__checkbox'
+        '.ui-lib-table__th--checkbox .ui-lib-table__checkbox',
       );
       expect(headerCheckbox).not.toBeNull();
     });
@@ -509,14 +509,14 @@ describe('TableComponent', (): void => {
     it('should render a checkbox in each row', (): void => {
       const rowCheckboxes: NodeListOf<HTMLElement> = queryAll(
         fixture,
-        '.ui-lib-table__td--checkbox .ui-lib-table__checkbox'
+        '.ui-lib-table__td--checkbox .ui-lib-table__checkbox',
       );
       expect(rowCheckboxes.length).toBe(PRODUCTS.length);
     });
 
     it('should select a row when its checkbox is checked', (): void => {
       const firstCheckbox: HTMLInputElement | null = getNativeEl(
-        fixture
+        fixture,
       ).querySelector<HTMLInputElement>('.ui-lib-table__td--checkbox .ui-lib-table__checkbox');
       if (firstCheckbox) {
         firstCheckbox.checked = true;
@@ -762,7 +762,7 @@ describe('TableComponent', (): void => {
     it('should resolve a nested property via dot notation', (): void => {
       const result: string = component.resolveField(
         { address: { city: 'London' } },
-        'address.city'
+        'address.city',
       );
       expect(result).toBe('London');
     });
@@ -878,7 +878,7 @@ describe('TableComponent', (): void => {
     it('should have scope="col" on column header cells', (): void => {
       const headers: NodeListOf<HTMLElement> = queryAll(
         fixture,
-        '.ui-lib-table__th:not(.ui-lib-table__th--expander)'
+        '.ui-lib-table__th:not(.ui-lib-table__th--expander)',
       );
       headers.forEach((header: HTMLElement): void => {
         expect(header.getAttribute('scope')).toBe('col');
@@ -888,7 +888,7 @@ describe('TableComponent', (): void => {
     it('should have aria-sort on sortable column headers', (): void => {
       const sortableHeaders: NodeListOf<HTMLElement> = queryAll(
         fixture,
-        '.ui-lib-table__th--sortable'
+        '.ui-lib-table__th--sortable',
       );
       sortableHeaders.forEach((header: HTMLElement): void => {
         expect(header.hasAttribute('aria-sort')).toBe(true);
@@ -898,7 +898,7 @@ describe('TableComponent', (): void => {
     it('should use roving tabindex on sortable headers', (): void => {
       const sortableHeaders: NodeListOf<HTMLElement> = queryAll(
         fixture,
-        '.ui-lib-table__th--sortable'
+        '.ui-lib-table__th--sortable',
       );
       expect(sortableHeaders[0]?.getAttribute('tabindex')).toBe('0');
       expect(sortableHeaders[1]?.getAttribute('tabindex')).toBe('-1');

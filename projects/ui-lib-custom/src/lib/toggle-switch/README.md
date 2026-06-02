@@ -22,12 +22,14 @@ Choose **one** of the following strategies per instance:
 
 1. **`label` input** _(preferred for visible labels)_
    Renders a `<label>` element linked via `for`/`id` and sets `aria-labelledby` on the native input.
+
    ```html
    <ui-lib-toggle-switch label="Dark mode" [(checked)]="darkMode" />
    ```
 
 2. **`ariaLabel` input** _(use when no visible label is desired)_
    Sets `aria-label` directly on the native `<input>`. Overrides `aria-labelledby` when both would otherwise apply.
+
    ```html
    <ui-lib-toggle-switch ariaLabel="Toggle dark mode" [(checked)]="darkMode" />
    ```
@@ -44,10 +46,10 @@ Choose **one** of the following strategies per instance:
 
 ### readonly vs disabled
 
-| Attribute  | Focusable | State changeable | ARIA attribute |
-|------------|-----------|------------------|----------------|
-| `disabled` | No (`tabindex="-1"`) | No | `disabled` on native input |
-| `readonly` | Yes | No | `aria-readonly="true"` |
+| Attribute  | Focusable            | State changeable | ARIA attribute             |
+| ---------- | -------------------- | ---------------- | -------------------------- |
+| `disabled` | No (`tabindex="-1"`) | No               | `disabled` on native input |
+| `readonly` | Yes                  | No               | `aria-readonly="true"`     |
 
 Use `disabled` when the control is not applicable in the current context.
 Use `readonly` when the user should be able to read the current value but not change it.
@@ -58,28 +60,28 @@ On each toggle, `LiveAnnouncerService` announces `"${label} on"` or `"${label} o
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `label` | `string \| null` | `null` | Text label beside the switch; when null, `<ng-content>` is rendered instead |
-| `ariaLabel` | `string \| null` | `null` | Applied directly to the native `<input>`; overrides auto aria-labelledby |
-| `inputId` | `string \| null` | `null` | Forwarded to the native `<input>` id |
-| `name` | `string \| null` | `null` | |
-| `disabled` | `boolean` | `false` | Removes focusability; native `disabled` attribute |
-| `readonly` | `boolean` | `false` | Focusable but state cannot change; sets `aria-readonly="true"` |
-| `tabindex` | `number` | `0` | |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme variant when null |
-| `autofocus` | `boolean` | `false` | |
-| `styleClass` | `string \| null` | `null` | Extra CSS classes on the host element |
-| `checked` | `boolean` | `false` | Two-way bindable via `[(checked)]` |
+| Name         | Type                                             | Default | Notes                                                                       |
+| ------------ | ------------------------------------------------ | ------- | --------------------------------------------------------------------------- |
+| `label`      | `string \| null`                                 | `null`  | Text label beside the switch; when null, `<ng-content>` is rendered instead |
+| `ariaLabel`  | `string \| null`                                 | `null`  | Applied directly to the native `<input>`; overrides auto aria-labelledby    |
+| `inputId`    | `string \| null`                                 | `null`  | Forwarded to the native `<input>` id                                        |
+| `name`       | `string \| null`                                 | `null`  |                                                                             |
+| `disabled`   | `boolean`                                        | `false` | Removes focusability; native `disabled` attribute                           |
+| `readonly`   | `boolean`                                        | `false` | Focusable but state cannot change; sets `aria-readonly="true"`              |
+| `tabindex`   | `number`                                         | `0`     |                                                                             |
+| `size`       | `'sm' \| 'md' \| 'lg'`                           | `'md'`  |                                                                             |
+| `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`  | Falls back to global theme variant when null                                |
+| `autofocus`  | `boolean`                                        | `false` |                                                                             |
+| `styleClass` | `string \| null`                                 | `null`  | Extra CSS classes on the host element                                       |
+| `checked`    | `boolean`                                        | `false` | Two-way bindable via `[(checked)]`                                          |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
+| Name     | Payload                   | Notes                                        |
+| -------- | ------------------------- | -------------------------------------------- |
 | `change` | `ToggleSwitchChangeEvent` | `{ checked: boolean, originalEvent: Event }` |
-| `focus` | `FocusEvent` | |
-| `blur` | `FocusEvent` | |
+| `focus`  | `FocusEvent`              |                                              |
+| `blur`   | `FocusEvent`              |                                              |
 
 ## Usage
 

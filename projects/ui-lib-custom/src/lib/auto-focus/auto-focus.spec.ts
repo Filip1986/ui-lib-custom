@@ -139,12 +139,12 @@ describe('AutoFocus', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<AutoFocusDefaultHostComponent> = TestBed.createComponent(
-        AutoFocusDefaultHostComponent
+        AutoFocusDefaultHostComponent,
       );
 
       const focusSpy: jest.SpyInstance = jest.spyOn(
         fixture.debugElement.query(By.directive(AutoFocus)).nativeElement as HTMLElement,
-        'focus'
+        'focus',
       );
 
       await detectAndWaitForFocus(fixture);
@@ -163,7 +163,7 @@ describe('AutoFocus', (): void => {
 
       const focusSpy: jest.SpyInstance = jest.spyOn(
         fixture.debugElement.query(By.directive(AutoFocus)).nativeElement as HTMLElement,
-        'focus'
+        'focus',
       );
 
       await detectAndWaitForFocus(fixture);
@@ -179,12 +179,12 @@ describe('AutoFocus', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<AutoFocusDisabledHostComponent> = TestBed.createComponent(
-        AutoFocusDisabledHostComponent
+        AutoFocusDisabledHostComponent,
       );
 
       const focusSpy: jest.SpyInstance = jest.spyOn(
         fixture.debugElement.query(By.directive(AutoFocus)).nativeElement as HTMLElement,
-        'focus'
+        'focus',
       );
 
       await detectAndWaitForFocus(fixture);
@@ -204,7 +204,7 @@ describe('AutoFocus', (): void => {
 
       const focusSpy: jest.SpyInstance = jest.spyOn(
         fixture.debugElement.query(By.directive(AutoFocus)).nativeElement as HTMLElement,
-        'focus'
+        'focus',
       );
 
       await detectAndWaitForFocus(fixture);
@@ -220,10 +220,10 @@ describe('AutoFocus', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<AutoFocusSelectorHostComponent> = TestBed.createComponent(
-        AutoFocusSelectorHostComponent
+        AutoFocusSelectorHostComponent,
       );
       const childButton: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        '[data-autofocus-target]'
+        '[data-autofocus-target]',
       ) as HTMLElement;
       const focusSpy: jest.SpyInstance = jest.spyOn(childButton, 'focus');
 
@@ -240,10 +240,10 @@ describe('AutoFocus', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<AutoFocusRerenderHostComponent> = TestBed.createComponent(
-        AutoFocusRerenderHostComponent
+        AutoFocusRerenderHostComponent,
       );
       const input: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        'input'
+        'input',
       ) as HTMLElement;
       const focusSpy: jest.SpyInstance = jest.spyOn(input, 'focus');
 
@@ -266,7 +266,7 @@ describe('AutoFocus', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<AutoFocusNonFocusableHostComponent> = TestBed.createComponent(
-        AutoFocusNonFocusableHostComponent
+        AutoFocusNonFocusableHostComponent,
       );
       const warnSpy: jest.SpyInstance = jest.spyOn(console, 'warn').mockImplementation((): void => {
         return;

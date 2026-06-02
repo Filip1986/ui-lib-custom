@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="App Shell Template"
@@ -55,7 +54,6 @@
     <p>An interactive mockup of the App Shell rendered entirely with library components.</p>
 
     <div class="shell-demo">
-
       <!-- ── Topbar ─────────────────────────────────────────────── -->
       <header class="shell-topbar">
         <div class="shell-topbar-left">
@@ -79,7 +77,6 @@
 
       <!-- ── Body ───────────────────────────────────────────────── -->
       <div class="shell-body">
-
         <!-- Sidebar -->
         <nav class="shell-sidebar" aria-label="Main navigation">
           <ul class="shell-nav" role="list">
@@ -87,26 +84,19 @@
             <li class="shell-nav-item shell-nav-item--active">
               <i class="pi pi-home"></i><span>Dashboard</span>
             </li>
-            <li class="shell-nav-item">
-              <i class="pi pi-chart-bar"></i><span>Analytics</span>
-            </li>
+            <li class="shell-nav-item"><i class="pi pi-chart-bar"></i><span>Analytics</span></li>
             <li class="shell-nav-item">
               <i class="pi pi-users"></i><span>Team</span>
               <span class="shell-nav-badge">3</span>
             </li>
             <li class="shell-nav-group-label">Settings</li>
-            <li class="shell-nav-item">
-              <i class="pi pi-cog"></i><span>Preferences</span>
-            </li>
-            <li class="shell-nav-item">
-              <i class="pi pi-shield"></i><span>Security</span>
-            </li>
+            <li class="shell-nav-item"><i class="pi pi-cog"></i><span>Preferences</span></li>
+            <li class="shell-nav-item"><i class="pi pi-shield"></i><span>Security</span></li>
           </ul>
         </nav>
 
         <!-- Main content -->
         <main class="shell-main">
-
           <!-- Stat cards -->
           <div class="shell-stats">
             <ui-lib-panel class="shell-stat-card">
@@ -207,7 +197,6 @@
               </ul>
             </ui-lib-panel>
           </div>
-
         </main>
       </div>
     </div>
@@ -217,8 +206,8 @@
   <section id="usage" data-doc-anchor>
     <h2>Usage</h2>
     <p>
-      Copy the snippet below into your project. Replace the mock nav items with your real routes
-      and swap the stat values for data from your services.
+      Copy the snippet below into your project. Replace the mock nav items with your real routes and
+      swap the stat values for data from your services.
     </p>
     <ui-lib-code-snippet [code]="codeSnippet" language="typescript" />
     <div class="template-download-cta">
@@ -226,5 +215,4 @@
       <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
     </div>
   </section>
-
 </app-doc-page-layout>

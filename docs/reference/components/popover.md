@@ -13,14 +13,14 @@ Popover — a lightweight floating panel anchored to a trigger element. Accepts 
 
 ### Inputs
 
-| Name              | Type                    | Default | Description                                                             |
-| ----------------- | ----------------------- | ------- | ----------------------------------------------------------------------- |
-| `closeOnEscape`   | `boolean`               | `true`  | When true (default), pressing Escape closes the popover.                |
-| `dismissable`     | `boolean`               | `true`  | When true (default), clicking outside the panel closes the popover.     |
-| `header`          | `string | null`         | `null`  | Optional header text displayed at the top of the panel.                 |
-| `showCloseButton` | `boolean`               | `false` | When true, a close button (×) is rendered in the header area.           |
-| `styleClass`      | `string | null`         | `null`  | Additional CSS classes applied to the host element.                     |
-| `variant`         | `PopoverVariant | null` | `null`  | Design variant override; inherits from ThemeConfigService when not set. |
+| Name              | Type            | Default | Description                                                         |
+| ----------------- | --------------- | ------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `closeOnEscape`   | `boolean`       | `true`  | When true (default), pressing Escape closes the popover.            |
+| `dismissable`     | `boolean`       | `true`  | When true (default), clicking outside the panel closes the popover. |
+| `header`          | `string         | null`   | `null`                                                              | Optional header text displayed at the top of the panel.                 |
+| `showCloseButton` | `boolean`       | `false` | When true, a close button (×) is rendered in the header area.       |
+| `styleClass`      | `string         | null`   | `null`                                                              | Additional CSS classes applied to the host element.                     |
+| `variant`         | `PopoverVariant | null`   | `null`                                                              | Design variant override; inherits from ThemeConfigService when not set. |
 
 ### Models (two-way bindable)
 
@@ -125,4 +125,3 @@ Popover — a lightweight floating panel anchored to a trigger element. Accepts 
 - [Demo page](/components/popover)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/popover/README.md)
-

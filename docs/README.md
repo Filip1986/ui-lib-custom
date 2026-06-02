@@ -90,6 +90,7 @@ npm run build-storybook
 - **[Documentation Status Tracker](DOC_STATUS.md)** - Authoritative status of component docs
 
 #### 🎨 Design Systems
+
 - **[Design Token System](reference/systems/DESIGN_TOKENS.md)** - Complete design token reference
   - Color palettes and semantic colors
   - Spacing and sizing tokens
@@ -109,6 +110,7 @@ npm run build-storybook
 - **[Performance Guide](reference/systems/PERFORMANCE.md)** - Bundle size and runtime guidance
 
 #### 📦 Component Reference
+
 - **[Badge Component](reference/components/BADGE.md)** - Badge/Tag component reference
   - Complete API documentation
   - Variants, colors, and sizes
@@ -140,6 +142,7 @@ npm run build-storybook
   - Implementation: [DIALOG_IMPLEMENTATION.md](implementation/DIALOG_IMPLEMENTATION.md)
 
 #### 📋 Project Documentation
+
 - **[Project Summary](reference/project/PROJECT_SUMMARY.md)** - Complete project overview
   - What was built
   - Component features
@@ -207,30 +210,32 @@ Ready-to-use prompts and the scoring infrastructure for working with AI on this 
 
 ### By Task
 
-| I want to...                    | Go to...                                                              |
-|---------------------------------|-----------------------------------------------------------------------|
-| **Understand the why**          | [Vision](VISION.md)                                                   |
-| **Get started quickly**         | [Quick Start Guide](getting-started/QUICK_START.md)                   |
-| **Test in a new project**       | [Testing Guide](getting-started/TEST_GUIDE.md)                        |
-| **See real-world examples**     | [Integration Examples](guides/INTEGRATION_EXAMPLE.md)                 |
-| **Publish the library**         | [Publishing Guide](guides/PUBLISHING_GUIDE.md)                        |
-| **Learn the component APIs**    | [API Reference](../README.md)                                         |
-| **Understand the architecture** | [Architecture Docs](architecture/ARCHITECTURE.md)                     |
-| **Get a project overview**      | [Project Summary](reference/project/PROJECT_SUMMARY.md)               |
-| **See version upgrade history** | [Update Log](reference/project/UPDATE_LOG.md)                         |
-| **Verify everything works**     | [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) |
+| I want to...                        | Go to...                                                                                                |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Understand the why**              | [Vision](VISION.md)                                                                                     |
+| **Get started quickly**             | [Quick Start Guide](getting-started/QUICK_START.md)                                                     |
+| **Test in a new project**           | [Testing Guide](getting-started/TEST_GUIDE.md)                                                          |
+| **See real-world examples**         | [Integration Examples](guides/INTEGRATION_EXAMPLE.md)                                                   |
+| **Publish the library**             | [Publishing Guide](guides/PUBLISHING_GUIDE.md)                                                          |
+| **Learn the component APIs**        | [API Reference](../README.md)                                                                           |
+| **Understand the architecture**     | [Architecture Docs](architecture/ARCHITECTURE.md)                                                       |
+| **Get a project overview**          | [Project Summary](reference/project/PROJECT_SUMMARY.md)                                                 |
+| **See version upgrade history**     | [Update Log](reference/project/UPDATE_LOG.md)                                                           |
+| **Verify everything works**         | [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md)                                   |
 | **Ship a component (quality gate)** | [platform: component-definition-of-done.md](../../platform/docs/guides/component-definition-of-done.md) |
-| **Understand Dialog internals** | [Dialog Implementation](implementation/DIALOG_IMPLEMENTATION.md)      |
+| **Understand Dialog internals**     | [Dialog Implementation](implementation/DIALOG_IMPLEMENTATION.md)                                        |
 
 ### By Role
 
 **👨‍💻 Developer (Using the Library)**
+
 1. [Quick Start Guide](getting-started/QUICK_START.md) - How to use in your projects
 2. [Theming Guide](guides/THEMING_GUIDE.md) - Customize variant, colors, shape, density
 3. [API Reference](../README.md) - Component APIs and props
 4. [Integration Examples](guides/INTEGRATION_EXAMPLE.md) - Real-world examples
 
 **🚀 Contributor (Developing the Library)**
+
 1. [Vision](VISION.md) - Understand the goals and philosophy
 2. [Component Definition of Done (platform)](../../platform/docs/guides/component-definition-of-done.md) - Ship gate before marking any component complete
 3. [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) - End-to-end workflow for new components
@@ -240,6 +245,7 @@ Ready-to-use prompts and the scoring infrastructure for working with AI on this 
 7. [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) - Testing checklist
 
 **📦 Publisher (Distributing the Library)**
+
 1. [Publishing Guide](guides/PUBLISHING_GUIDE.md) - How to publish
 2. [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) - Pre-publish checks
 

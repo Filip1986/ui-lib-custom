@@ -90,7 +90,7 @@ export class WithThemeScopeMixin {
 
   private mergePreset(
     base: ThemePreset,
-    config: { colors?: Partial<ThemePresetColors>; variant?: ThemeVariant }
+    config: { colors?: Partial<ThemePresetColors>; variant?: ThemeVariant },
   ): ThemePreset {
     if (!config.colors && !config.variant) {
       return base;

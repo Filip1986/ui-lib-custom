@@ -13,28 +13,28 @@ CascadeSelect component with hierarchical single-value selection.
 
 ### Inputs
 
-| Name                  | Type                               | Default                               | Description                                                                                                         |
-| --------------------- | ---------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `appendTo`            | `string | HTMLElement | undefined` | `'body'`                              | Where to mount the detached dropdown panel; `'body'` appends to `document.body`. Default: `'body'`.                 |
-| `ariaLabel`           | `string | null`                    | `null`                                | Sets `aria-label` on the host combobox. Default: `null`.                                                            |
-| `ariaLabelledBy`      | `string | null`                    | `null`                                | Sets `aria-labelledby` on the host combobox to reference an external label. Default: `null`.                        |
-| `disabled`            | `boolean`                          | `false`                               | Disables the control; sets `aria-disabled` on the host. Default: `false`.                                           |
-| `filled`              | `boolean`                          | `false`                               | Apply a filled background appearance. Default: `false`.                                                             |
-| `fluid`               | `boolean`                          | `false`                               | Stretch the component to fill its container width. Default: `false`.                                                |
-| `inputId`             | `string`                           | `''`                                  | Custom `id` for the trigger control (for external `<label for="">` association). Default: `''`.                     |
-| `invalid`             | `boolean`                          | `false`                               | Applies error border styling and sets `aria-invalid="true"` on the host. Default: `false`.                          |
-| `loading`             | `boolean`                          | `false`                               | Shows a loading spinner and disables all interaction. Default: `false`.                                             |
-| `optionDisabled`      | `string | undefined`               | `undefined`                           | Field name that, when truthy on an option, marks it as non-selectable. Default: `undefined`.                        |
-| `optionGroupChildren` | `string[]`                         | `[]`                                  | Array of field names for children at each nesting level (e.g. `['states', 'cities']`). Default: `[]`.               |
-| `optionGroupLabel`    | `string`                           | `'label'`                             | Field name used as the display label for group-level options. Default: `'label'`.                                   |
-| `optionLabel`         | `string`                           | `'label'`                             | Field name used as the display label for leaf options. Default: `'label'`.                                          |
-| `options`             | `unknown[]`                        | `[]`                                  | Root-level option objects for the first column. Default: `[]`.                                                      |
-| `optionValue`         | `string | undefined`               | `undefined`                           | Field name whose value is emitted on selection. `undefined` emits the whole option object. Default: `undefined`.    |
-| `placeholder`         | `string`                           | `CASCADE_SELECT_DEFAULTS.Placeholder` | Placeholder text shown when no value is selected. Default: `'Select'`.                                              |
-| `showClear`           | `boolean`                          | `false`                               | Show a clear (×) button when the field has a value. Default: `false`.                                               |
-| `size`                | `CascadeSelectSize`                | `CASCADE_SELECT_DEFAULTS.Size`        | Control height: `'sm'` (36 px) · `'md'` (44 px) · `'lg'` (52 px). Default: `'md'`.                                  |
-| `tabindex`            | `number`                           | `0`                                   | Tab index of the host element. Default: `0`.                                                                        |
-| `variant`             | `CascadeSelectVariant | undefined` | `undefined`                           | Visual style variant. Falls back to the global `ThemeConfigService` variant when `undefined`. Default: `undefined`. |
+| Name                  | Type                  | Default                               | Description                                                                                           |
+| --------------------- | --------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `appendTo`            | `string               | HTMLElement                           | undefined`                                                                                            | `'body'`                                                                                                            | Where to mount the detached dropdown panel; `'body'` appends to `document.body`. Default: `'body'`. |
+| `ariaLabel`           | `string               | null`                                 | `null`                                                                                                | Sets `aria-label` on the host combobox. Default: `null`.                                                            |
+| `ariaLabelledBy`      | `string               | null`                                 | `null`                                                                                                | Sets `aria-labelledby` on the host combobox to reference an external label. Default: `null`.                        |
+| `disabled`            | `boolean`             | `false`                               | Disables the control; sets `aria-disabled` on the host. Default: `false`.                             |
+| `filled`              | `boolean`             | `false`                               | Apply a filled background appearance. Default: `false`.                                               |
+| `fluid`               | `boolean`             | `false`                               | Stretch the component to fill its container width. Default: `false`.                                  |
+| `inputId`             | `string`              | `''`                                  | Custom `id` for the trigger control (for external `<label for="">` association). Default: `''`.       |
+| `invalid`             | `boolean`             | `false`                               | Applies error border styling and sets `aria-invalid="true"` on the host. Default: `false`.            |
+| `loading`             | `boolean`             | `false`                               | Shows a loading spinner and disables all interaction. Default: `false`.                               |
+| `optionDisabled`      | `string               | undefined`                            | `undefined`                                                                                           | Field name that, when truthy on an option, marks it as non-selectable. Default: `undefined`.                        |
+| `optionGroupChildren` | `string[]`            | `[]`                                  | Array of field names for children at each nesting level (e.g. `['states', 'cities']`). Default: `[]`. |
+| `optionGroupLabel`    | `string`              | `'label'`                             | Field name used as the display label for group-level options. Default: `'label'`.                     |
+| `optionLabel`         | `string`              | `'label'`                             | Field name used as the display label for leaf options. Default: `'label'`.                            |
+| `options`             | `unknown[]`           | `[]`                                  | Root-level option objects for the first column. Default: `[]`.                                        |
+| `optionValue`         | `string               | undefined`                            | `undefined`                                                                                           | Field name whose value is emitted on selection. `undefined` emits the whole option object. Default: `undefined`.    |
+| `placeholder`         | `string`              | `CASCADE_SELECT_DEFAULTS.Placeholder` | Placeholder text shown when no value is selected. Default: `'Select'`.                                |
+| `showClear`           | `boolean`             | `false`                               | Show a clear (×) button when the field has a value. Default: `false`.                                 |
+| `size`                | `CascadeSelectSize`   | `CASCADE_SELECT_DEFAULTS.Size`        | Control height: `'sm'` (36 px) · `'md'` (44 px) · `'lg'` (52 px). Default: `'md'`.                    |
+| `tabindex`            | `number`              | `0`                                   | Tab index of the host element. Default: `0`.                                                          |
+| `variant`             | `CascadeSelectVariant | undefined`                            | `undefined`                                                                                           | Visual style variant. Falls back to the global `ThemeConfigService` variant when `undefined`. Default: `undefined`. |
 
 ### Outputs
 
@@ -167,4 +167,3 @@ _none_
 - [Demo page](/components/cascade-select)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/cascade-select/README.md)
-

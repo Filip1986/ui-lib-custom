@@ -6,151 +6,145 @@
     description="A reorderable list component with button controls, optional inline filtering, drag-and-drop, custom item templates, and full keyboard accessibility."
   />
 
-    <!-- 1. Basic -->
-    <app-doc-section id="basic" title="Basic">
-      <p class="demo-section__description">
-        Click items to select them, then use the control buttons (or keyboard shortcuts) to reorder.
-      </p>
-      <ui-lib-panel variant="minimal">
+  <!-- 1. Basic -->
+  <app-doc-section id="basic" title="Basic">
+    <p class="demo-section__description">
+      Click items to select them, then use the control buttons (or keyboard shortcuts) to reorder.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-order-list
+        [value]="products()"
+        (valueChange)="products.set($any($event))"
+        [selection]="selection()"
+        (selectionChange)="selection.set($any($event))"
+        header="Products"
+      >
+        <ng-template uiOrderListItem let-item>
+          <div class="demo-ol-row">
+            <span class="demo-ol-name">{{ item.name }}</span>
+            <span class="demo-ol-price">{{ formatPrice(item.price) }}</span>
+          </div>
+        </ng-template>
+      </ui-lib-order-list>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" [showLineNumbers]="true" />
+  </app-doc-section>
+
+  <!-- 2. Filter -->
+  <app-doc-section id="filter" title="Filter">
+    <p class="demo-section__description">
+      Set <code>filterBy="name"</code> to render an inline search field. The visible list updates as
+      you type; the underlying array is never mutated.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-order-list
+        [value]="filterProducts()"
+        (valueChange)="filterProducts.set($any($event))"
+        filterBy="name"
+        filterPlaceholder="Search products…"
+      >
+        <ng-template uiOrderListItem let-item>
+          <div class="demo-ol-row">
+            <span class="demo-ol-name">{{ item.name }}</span>
+            <span class="demo-ol-category">{{ item.category }}</span>
+          </div>
+        </ng-template>
+      </ui-lib-order-list>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="filterHtml" [typescript]="filterTs" [showLineNumbers]="true" />
+  </app-doc-section>
+
+  <!-- 3. Custom Templates -->
+  <app-doc-section id="templates" title="Custom Templates">
+    <p class="demo-section__description">
+      Use <code>uiOrderListHeader</code>, <code>uiOrderListItem</code>, and
+      <code>uiOrderListEmpty</code> directives for fully custom rendering.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-order-list
+        [value]="templateProducts()"
+        (valueChange)="templateProducts.set($any($event))"
+        [selection]="templateSelection()"
+        (selectionChange)="templateSelection.set($any($event))"
+        filterBy="name"
+        filterPlaceholder="Search…"
+      >
+        <ng-template uiOrderListHeader>
+          <span>Products ({{ templateProducts().length }})</span>
+        </ng-template>
+        <ng-template uiOrderListItem let-item>
+          <div class="demo-ol-card-row">
+            <span class="demo-ol-category-badge">{{ item.category }}</span>
+            <strong class="demo-ol-name">{{ item.name }}</strong>
+            <span class="demo-ol-stars">{{ starsLabel(item.rating) }}</span>
+            <span class="demo-ol-price">{{ formatPrice(item.price) }}</span>
+          </div>
+        </ng-template>
+        <ng-template uiOrderListEmpty>
+          <span>No products match the current filter.</span>
+        </ng-template>
+      </ui-lib-order-list>
+    </ui-lib-panel>
+    <app-doc-code-example
+      [html]="templateHtml"
+      [typescript]="templateTs"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
+
+  <!-- 4. Drag & Drop -->
+  <app-doc-section id="drag-drop" title="Drag & Drop">
+    <p class="demo-section__description">
+      Enable <code>[dragDrop]="true"</code> to let users reorder by dragging. A drop indicator line
+      shows the insertion point.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-stack [gap]="3">
         <ui-lib-order-list
-          [value]="products()"
-          (valueChange)="products.set($any($event))"
-          [selection]="selection()"
-          (selectionChange)="selection.set($any($event))"
-          header="Products"
+          [value]="dragProducts()"
+          (valueChange)="dragProducts.set($any($event))"
+          [dragDrop]="true"
+          (reordered)="onReorder($event)"
         >
           <ng-template uiOrderListItem let-item>
             <div class="demo-ol-row">
+              <span class="demo-ol-drag-hint">⠿</span>
               <span class="demo-ol-name">{{ item.name }}</span>
-              <span class="demo-ol-price">{{ formatPrice(item.price) }}</span>
             </div>
           </ng-template>
         </ui-lib-order-list>
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="basicHtml"
-        [typescript]="basicTs"
-        [showLineNumbers]="true"
-      />
-    </app-doc-section>
+        <p class="demo-event-log">
+          Last reorder: <code>{{ lastReorderEvent() }}</code>
+        </p>
+      </ui-lib-stack>
+    </ui-lib-panel>
+    <app-doc-code-example
+      [html]="dragDropHtml"
+      [typescript]="dragDropTs"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
-    <!-- 2. Filter -->
-    <app-doc-section id="filter" title="Filter">
-      <p class="demo-section__description">
-        Set <code>filterBy="name"</code> to render an inline search field. The visible list updates
-        as you type; the underlying array is never mutated.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-order-list
-          [value]="filterProducts()"
-          (valueChange)="filterProducts.set($any($event))"
-          filterBy="name"
-          filterPlaceholder="Search products…"
-        >
-          <ng-template uiOrderListItem let-item>
-            <div class="demo-ol-row">
-              <span class="demo-ol-name">{{ item.name }}</span>
-              <span class="demo-ol-category">{{ item.category }}</span>
-            </div>
-          </ng-template>
-        </ui-lib-order-list>
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="filterHtml"
-        [typescript]="filterTs"
-        [showLineNumbers]="true"
-      />
-    </app-doc-section>
+  <!-- 5. Accessibility -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle">Keyboard Navigation</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
 
-    <!-- 3. Custom Templates -->
-    <app-doc-section id="templates" title="Custom Templates">
-      <p class="demo-section__description">
-        Use <code>uiOrderListHeader</code>, <code>uiOrderListItem</code>, and
-        <code>uiOrderListEmpty</code> directives for fully custom rendering.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-order-list
-          [value]="templateProducts()"
-          (valueChange)="templateProducts.set($any($event))"
-          [selection]="templateSelection()"
-          (selectionChange)="templateSelection.set($any($event))"
-          filterBy="name"
-          filterPlaceholder="Search…"
-        >
-          <ng-template uiOrderListHeader>
-            <span>Products ({{ templateProducts().length }})</span>
-          </ng-template>
-          <ng-template uiOrderListItem let-item>
-            <div class="demo-ol-card-row">
-              <span class="demo-ol-category-badge">{{ item.category }}</span>
-              <strong class="demo-ol-name">{{ item.name }}</strong>
-              <span class="demo-ol-stars">{{ starsLabel(item.rating) }}</span>
-              <span class="demo-ol-price">{{ formatPrice(item.price) }}</span>
-            </div>
-          </ng-template>
-          <ng-template uiOrderListEmpty>
-            <span>No products match the current filter.</span>
-          </ng-template>
-        </ui-lib-order-list>
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="templateHtml"
-        [typescript]="templateTs"
-        [showLineNumbers]="true"
-      />
-    </app-doc-section>
+  <!-- 6. API Reference -->
+  <app-doc-section id="api" title="API Reference">
+    <app-doc-api-reference [rows]="apiInputRows" />
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+    <app-doc-api-reference
+      title="Template Slots"
+      kind="name"
+      [rows]="apiSlotRows"
+      [showDefault]="false"
+    />
+  </app-doc-section>
 
-    <!-- 4. Drag & Drop -->
-    <app-doc-section id="drag-drop" title="Drag & Drop">
-      <p class="demo-section__description">
-        Enable <code>[dragDrop]="true"</code> to let users reorder by dragging. A drop indicator
-        line shows the insertion point.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-stack [gap]="3">
-          <ui-lib-order-list
-            [value]="dragProducts()"
-            (valueChange)="dragProducts.set($any($event))"
-            [dragDrop]="true"
-            (reordered)="onReorder($event)"
-          >
-            <ng-template uiOrderListItem let-item>
-              <div class="demo-ol-row">
-                <span class="demo-ol-drag-hint">⠿</span>
-                <span class="demo-ol-name">{{ item.name }}</span>
-              </div>
-            </ng-template>
-          </ui-lib-order-list>
-          <p class="demo-event-log">
-            Last reorder: <code>{{ lastReorderEvent() }}</code>
-          </p>
-        </ui-lib-stack>
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="dragDropHtml"
-        [typescript]="dragDropTs"
-        [showLineNumbers]="true"
-      />
-    </app-doc-section>
-
-    <!-- 5. Accessibility -->
-    <app-doc-section id="accessibility" title="Accessibility">
-      <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
-      <app-doc-aria-table [rows]="ariaRows" />
-      <h3 class="demo-section__subtitle">Keyboard Navigation</h3>
-      <app-doc-keyboard-nav [rows]="keyboardRows" />
-    </app-doc-section>
-
-    <!-- 6. API Reference -->
-    <app-doc-section id="api" title="API Reference">
-      <app-doc-api-reference [rows]="apiInputRows" />
-      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
-      <app-doc-api-reference title="Template Slots" kind="name" [rows]="apiSlotRows" [showDefault]="false" />
-
-    </app-doc-section>
-
-
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -159,7 +153,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

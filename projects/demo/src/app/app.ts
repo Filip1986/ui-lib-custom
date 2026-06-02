@@ -33,13 +33,13 @@ export class App {
     'light' | 'dark' | 'brand-example'
   >(
     (): 'light' | 'dark' | 'brand-example' =>
-      this.themeService.preset().name as 'light' | 'dark' | 'brand-example'
+      this.themeService.preset().name as 'light' | 'dark' | 'brand-example',
   );
   public readonly themeName: Signal<string> = computed<string>(
-    (): string => this.themeService.preset().name
+    (): string => this.themeService.preset().name,
   );
   public readonly themeVariant: Signal<ThemeVariant> = computed<ThemeVariant>(
-    (): ThemeVariant => this.themeService.variant()
+    (): ThemeVariant => this.themeService.variant(),
   );
   public readonly savedThemes: Signal<string[]> = this.themeService.savedThemes;
 

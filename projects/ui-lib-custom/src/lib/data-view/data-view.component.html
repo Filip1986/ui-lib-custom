@@ -1,5 +1,8 @@
 <ng-template #paginatorTemplate>
-  <nav class="ui-lib-data-view__paginator" [attr.aria-label]="i18n.translate('data-view.pagination')">
+  <nav
+    class="ui-lib-data-view__paginator"
+    [attr.aria-label]="i18n.translate('data-view.pagination')"
+  >
     <div class="ui-lib-data-view__paginator-start">
       @if (paginatorLeftTemplate()) {
         <ng-container [ngTemplateOutlet]="paginatorLeftTemplate()!" />
@@ -103,7 +106,11 @@
   <ng-container [ngTemplateOutlet]="paginatorTemplate" />
 }
 
-<div class="ui-lib-data-view__controls" role="group" [attr.aria-label]="resolvedControlsAriaLabel()">
+<div
+  class="ui-lib-data-view__controls"
+  role="group"
+  [attr.aria-label]="resolvedControlsAriaLabel()"
+>
   <label class="ui-lib-data-view__control-field" [attr.for]="filterInputId">
     <span class="ui-lib-data-view__control-label">Filter</span>
     <input
@@ -130,7 +137,11 @@
     </select>
   </label>
 
-  <div class="ui-lib-data-view__layout-toggle" role="group" [attr.aria-label]="i18n.translate('data-view.view-mode')">
+  <div
+    class="ui-lib-data-view__layout-toggle"
+    role="group"
+    [attr.aria-label]="i18n.translate('data-view.view-mode')"
+  >
     <button
       class="ui-lib-data-view__layout-button"
       type="button"

@@ -28,12 +28,12 @@ Reviewed sources:
 
 ## State class matrix (current)
 
-| Component | Filled state class today | Focus/Open state class today | Notes for FloatLabel |
-|---|---|---|---|
-| `ui-lib-input` | No generic host `filled` class; internal `.ui-input-floating-active` exists on inner wrapper (`input.ts`/`input.html`) | No generic host focus class; focus tracked by signal and `:focus-within` on `.ui-input-field` | Not directly compatible with PrimeNG-style wrapper hooks; needs standard hooks if used inside `ui-lib-float-label`. |
-| `ui-lib-select` | No `--filled`/`--has-value` class; empty state represented in template via `.ui-lib-select__placeholder` | No open/focus class in `hostClasses()`; `open()` controls panel rendering only | Missing both wrapper hooks required for robust `:has(...)` detection. |
-| `ui-lib-autocomplete` | Yes: `ui-lib-autocomplete--filled` (style mode) and `ui-lib-autocomplete--has-value` (actual value state) | Yes: `ui-lib-autocomplete--open` (panel visible) | Closest to FloatLabel requirements; still lacks generic cross-control alias class names. |
-| `ui-lib-cascade-select` | Yes: `ui-lib-cascade-select--filled` (style mode), but no class tied to actual selected value (`hasValue()`) | Yes: `ui-lib-cascade-select--open` | Needs separate value-state class (`--has-value`) for reliable label float on selection. |
+| Component               | Filled state class today                                                                                               | Focus/Open state class today                                                                  | Notes for FloatLabel                                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `ui-lib-input`          | No generic host `filled` class; internal `.ui-input-floating-active` exists on inner wrapper (`input.ts`/`input.html`) | No generic host focus class; focus tracked by signal and `:focus-within` on `.ui-input-field` | Not directly compatible with PrimeNG-style wrapper hooks; needs standard hooks if used inside `ui-lib-float-label`. |
+| `ui-lib-select`         | No `--filled`/`--has-value` class; empty state represented in template via `.ui-lib-select__placeholder`               | No open/focus class in `hostClasses()`; `open()` controls panel rendering only                | Missing both wrapper hooks required for robust `:has(...)` detection.                                               |
+| `ui-lib-autocomplete`   | Yes: `ui-lib-autocomplete--filled` (style mode) and `ui-lib-autocomplete--has-value` (actual value state)              | Yes: `ui-lib-autocomplete--open` (panel visible)                                              | Closest to FloatLabel requirements; still lacks generic cross-control alias class names.                            |
+| `ui-lib-cascade-select` | Yes: `ui-lib-cascade-select--filled` (style mode), but no class tied to actual selected value (`hasValue()`)           | Yes: `ui-lib-cascade-select--open`                                                            | Needs separate value-state class (`--has-value`) for reliable label float on selection.                             |
 
 ## Audit conclusion
 
@@ -225,12 +225,12 @@ All variables use `--uilib-float-label-*`.
 
 ## PrimeNG Divergences (Explicit)
 
-| Area | PrimeNG `floatlabel` | `ui-lib-float-label` design |
-|---|---|---|
-| State hooks | Leans on Prime classes like `p-filled` | Uses hybrid strategy: native selectors + standardized wrapper classes (`uilib-inputwrapper-*`) plus existing `ui-lib-*` state classes. |
-| Wrapper ecosystem | Prime controls already emit expected classes | Current `ui-lib` controls are mixed; this design introduces a normalization prerequisite. |
-| IftaLabel relationship | Separate `ifta-label` component exists | No separate component planned; `variant='in'` is the canonical equivalent. |
-| Placeholder handling | Prime theme-driven behavior | Explicit placeholder-collision strategy is included in FloatLabel contract. |
+| Area                   | PrimeNG `floatlabel`                         | `ui-lib-float-label` design                                                                                                            |
+| ---------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| State hooks            | Leans on Prime classes like `p-filled`       | Uses hybrid strategy: native selectors + standardized wrapper classes (`uilib-inputwrapper-*`) plus existing `ui-lib-*` state classes. |
+| Wrapper ecosystem      | Prime controls already emit expected classes | Current `ui-lib` controls are mixed; this design introduces a normalization prerequisite.                                              |
+| IftaLabel relationship | Separate `ifta-label` component exists       | No separate component planned; `variant='in'` is the canonical equivalent.                                                             |
+| Placeholder handling   | Prime theme-driven behavior                  | Explicit placeholder-collision strategy is included in FloatLabel contract.                                                            |
 
 ## Prerequisites Before Prompt 3 Implementation
 
@@ -281,4 +281,3 @@ Design is approved when:
 - Cross-control wrapper state prerequisites are accepted.
 - Token contract is accepted as the source of visual values.
 - PrimeNG divergences are acknowledged and intentional.
-

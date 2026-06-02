@@ -5,16 +5,18 @@
 Before running the demo application, you need to:
 
 1. **Install dependencies** (if not already done):
+
    ```bash
    cd D:\Work\Personal\Github\ui-lib-custom
    npm install
    ```
 
 2. **Build the UI components library first** (REQUIRED):
+
    ```bash
    ng build ui-lib-custom
    ```
-   
+
    ⚠️ **Important**: You must build the library before running the demo app. The demo imports components from the built library in `dist/ui-lib-custom/`. Without building first, you'll get module import errors.
 
 3. **Start the demo application**:
@@ -29,12 +31,14 @@ Before running the demo application, you need to:
 ## What You Have Now
 
 ✅ **Angular UI Components Library** with:
+
 - Button component (3 design variants: Material, Bootstrap, Minimal)
 - Card component (3 design variants: Material, Bootstrap, Minimal)
 - Built library in `dist/ui-lib-custom/`
 - Demo application ready to run
 
 ✅ **Demo Application** showcasing all components:
+
 - Access at: http://localhost:4200 (when running)
 - Shows all variants, sizes, colors, and configurations
 
@@ -45,6 +49,7 @@ After building the library and starting the server, open your browser and naviga
 **http://localhost:4200**
 
 You'll see:
+
 - All button variants (Material, Bootstrap, Minimal)
 - All button sizes (Small, Medium, Large)
 - All color options (Primary, Secondary, Success, Danger, Warning)
@@ -85,18 +90,21 @@ ui-lib-custom/
 ### Method 1: npm link (Recommended for Development)
 
 **One-time setup in the library:**
+
 ```bash
 cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-lib-custom
 npm link
 ```
 
 **In any Angular project where you want to use it:**
+
 ```bash
 cd /path/to/your/angular/project
 npm link ui-lib-custom
 ```
 
 **Use in your components:**
+
 ```typescript
 import { Component } from '@angular/core';
 import { Button, Card } from 'ui-lib-custom';
@@ -105,15 +113,13 @@ import { Button, Card } from 'ui-lib-custom';
   selector: 'app-example',
   imports: [Button, Card],
   template: `
-    <ui-lib-button variant="material" color="primary">
-      Hello from my project!
-    </ui-lib-button>
-    
+    <ui-lib-button variant="material" color="primary"> Hello from my project! </ui-lib-button>
+
     <ui-lib-card variant="material">
       <div card-header>My Card</div>
       <p>This is working!</p>
     </ui-lib-card>
-  `
+  `,
 })
 export class ExampleComponent {}
 ```
@@ -121,6 +127,7 @@ export class ExampleComponent {}
 ### Method 2: Local File Path
 
 In your project's `package.json`:
+
 ```json
 {
   "dependencies": {
@@ -130,6 +137,7 @@ In your project's `package.json`:
 ```
 
 Then run:
+
 ```bash
 npm install
 ```
@@ -137,12 +145,14 @@ npm install
 ### Method 3: Publish to npm
 
 1. **Build the library:**
+
    ```bash
    cd D:\Work\Personal\Github\ui-lib-custom
    ng build ui-lib-custom --configuration production
    ```
 
 2. **Update package name in** `projects/ui-lib-custom/package.json`:
+
    ```json
    {
      "name": "@your-username/ui-lib-custom",
@@ -151,6 +161,7 @@ npm install
    ```
 
 3. **Publish:**
+
    ```bash
    cd dist/ui-lib-custom
    npm login
@@ -182,12 +193,7 @@ npm install
 <ui-lib-button [fullWidth]="true">Full Width</ui-lib-button>
 
 <!-- With Click Handler -->
-<ui-lib-button 
-  variant="material" 
-  color="primary"
-  (click)="handleClick()">
-  Click Me
-</ui-lib-button>
+<ui-lib-button variant="material" color="primary" (click)="handleClick()"> Click Me </ui-lib-button>
 ```
 
 ### Card Component
@@ -196,10 +202,10 @@ npm install
 <!-- Full Card with Header and Footer -->
 <ui-lib-card variant="material" elevation="medium">
   <div card-header>Card Title</div>
-  
+
   <p>Card content goes here...</p>
   <p>You can put any HTML content inside.</p>
-  
+
   <div card-footer>
     <ui-lib-button variant="material" size="small">Action</ui-lib-button>
   </div>
@@ -211,10 +217,7 @@ npm install
 </ui-lib-card>
 
 <!-- Hoverable Card -->
-<ui-lib-card 
-  variant="minimal" 
-  [hoverable]="true"
-  [bordered]="true">
+<ui-lib-card variant="minimal" [hoverable]="true" [bordered]="true">
   <p>Hover over me!</p>
 </ui-lib-card>
 ```
@@ -222,22 +225,26 @@ npm install
 ## Common Commands
 
 ### Rebuild the Library
+
 ```bash
 cd D:\Work\Personal\Github\ui-lib-custom
 ng build ui-lib-custom
 ```
 
 ### Watch Mode (Auto-rebuild on changes)
+
 ```bash
 ng build ui-lib-custom --watch
 ```
 
 ### Run Demo Application
+
 ```bash
 ng serve demo
 ```
 
 ### Stop Demo Server
+
 Press `Ctrl+C` in the terminal where it's running
 
 ## Making Changes to Components
@@ -253,17 +260,21 @@ Press `Ctrl+C` in the terminal where it's running
 ## Adding New Components
 
 ### Generate a new component:
+
 ```bash
 ng generate component your-component --project=ui-lib-custom --export
 ```
 
 ### Add it to the public API:
+
 Edit `projects/ui-lib-custom/src/public-api.ts`:
+
 ```typescript
 export * from './lib/your-component/your-component';
 ```
 
 ### Rebuild:
+
 ```bash
 ng build ui-components
 ```
@@ -271,18 +282,21 @@ ng build ui-components
 ## Design Variants Explained
 
 ### Material Design
+
 - Clean shadows with elevation
 - Smooth animations
 - Modern, flat appearance
 - Perfect for: Modern web apps, dashboards
 
 ### Bootstrap
+
 - Traditional button/card styling
 - Subtle borders and gradients
 - Familiar look and feel
 - Perfect for: Business apps, admin panels
 
 ### Minimal
+
 - Clean lines, minimal shadows
 - Border-based design
 - Content-focused
@@ -318,6 +332,7 @@ ng build ui-components
 ## Success! 🎉
 
 Your UI component library is ready to use! You can now:
+
 - ✅ View all components in the demo at http://localhost:4200
 - ✅ Use the components in your other Angular projects
 - ✅ Extend with more components

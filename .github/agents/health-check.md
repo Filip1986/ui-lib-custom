@@ -19,6 +19,7 @@ npm outdated
 ```
 
 **Interpret:**
+
 - Patch/minor updates → `⚠️ WARN` (schedule for next sprint)
 - Major updates (especially Angular, TypeScript) → `❌ FAIL` if >1 major behind
 - Security advisories → `❌ FAIL` (see Check 2)
@@ -34,6 +35,7 @@ npm audit
 ```
 
 **Interpret:**
+
 - Critical/high severity in production deps → `❌ FAIL`
 - Critical/high in devDeps → `⚠️ WARN`
 - Moderate/low → `⚠️ WARN`
@@ -49,6 +51,7 @@ npm run knip
 ```
 
 **Interpret:**
+
 - Unused exports in `public-api.ts` → `❌ FAIL` (dead API surface — clean up)
 - Unused internal files → `⚠️ WARN` (review before next major)
 - Unlisted dependencies → `⚠️ WARN`
@@ -74,6 +77,7 @@ Check `coverage/lcov-report/index.html` or the console summary.
 | Lines | 90% |
 
 **Interpret:**
+
 - Below threshold → `❌ FAIL`
 - Within 2% of threshold → `⚠️ WARN`
 
@@ -89,6 +93,7 @@ npm run test:a11y:e2e
 ```
 
 **Interpret:**
+
 - Any `critical` or `serious` violations → `❌ FAIL`
 - `moderate` violations → `⚠️ WARN`
 - `minor` violations → note for next sprint
@@ -104,10 +109,12 @@ npm run build && npm run bundlesize
 ```
 
 **Interpret:**
+
 - Size exceeds any budget in `bundlesize` config → `❌ FAIL`
 - Within 10% of budget → `⚠️ WARN`
 
 **Action on FAIL:**
+
 1. Run `npm run verify:tree-shaking` to confirm no unwanted imports
 2. Use `source-map-explorer` on the demo build: `npx source-map-explorer dist/demo/*.js`
 3. Check for accidental cross-entry-point imports
@@ -122,6 +129,7 @@ npm run verify:tree-shaking
 ```
 
 **Interpret:**
+
 - Any entry point that imports more than intended → `❌ FAIL`
 
 **Action on FAIL:** Check for barrel imports that pull in too much. Fix the entry point's `index.ts`.
@@ -131,11 +139,13 @@ npm run verify:tree-shaking
 ### Check 8 — Stale ADRs / Documentation
 
 Manually check `docs/decisions/` for ADRs older than 6 months:
+
 - Is the decision still valid?
 - Has the Angular ecosystem moved on?
 - Does the ADR mention deprecated APIs?
 
 **Interpret:**
+
 - Stale ADR → `⚠️ WARN` (update or supersede)
 
 ---
@@ -149,6 +159,7 @@ git tag -l | sort -V | tail -10
 Compare to `CHANGELOG.md` entries. Every tag should have a CHANGELOG entry.
 
 **Interpret:**
+
 - Missing CHANGELOG entries → `⚠️ WARN`
 - Tag points to a different commit than what was released → `❌ FAIL`
 
@@ -161,6 +172,7 @@ npm run lint:ci
 ```
 
 **Interpret:**
+
 - Any warnings → `⚠️ WARN` (configure as errors for next sprint)
 - Any errors → `❌ FAIL` (block release)
 
@@ -168,12 +180,12 @@ npm run lint:ci
 
 ## Monthly Maintenance Cadence
 
-| Week | Activity |
-|------|----------|
+| Week   | Activity                                                      |
+| ------ | ------------------------------------------------------------- |
 | Week 1 | Run full health check; create issues for everything `❌ FAIL` |
-| Week 2 | Address `❌ FAIL` items; update dependencies |
-| Week 3 | Address `⚠️ WARN` items; review ADRs |
-| Week 4 | Pre-release verification if a release is planned |
+| Week 2 | Address `❌ FAIL` items; update dependencies                  |
+| Week 3 | Address `⚠️ WARN` items; review ADRs                          |
+| Week 4 | Pre-release verification if a release is planned              |
 
 ---
 
@@ -203,4 +215,3 @@ Priority actions:
 1. ...
 2. ...
 ```
-

@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Timeline"
@@ -30,8 +29,8 @@
   <!-- =========================================================== -->
   <app-doc-section id="opposite-content" title="Opposite Content">
     <p class="demo-section__description">
-      Use <code>[uiTimelineOpposite]</code> to show a timestamp on the left and the event
-      body on the right.
+      Use <code>[uiTimelineOpposite]</code> to show a timestamp on the left and the event body on
+      the right.
     </p>
     <ui-lib-timeline [value]="basicEvents" layout="vertical" align="left" variant="bootstrap">
       <ng-template uiTimelineOpposite let-event>
@@ -144,7 +143,13 @@
       @for (size of sizeOptions; track size) {
         <div class="timeline-demo__size-col">
           <h3 class="timeline-demo__variant-label">{{ size }}</h3>
-          <ui-lib-timeline [value]="basicEvents" layout="vertical" align="left" variant="material" [size]="size">
+          <ui-lib-timeline
+            [value]="basicEvents"
+            layout="vertical"
+            align="left"
+            variant="material"
+            [size]="size"
+          >
             <ng-template uiTimelineContent let-event>
               <p class="timeline-demo__mini-event">{{ event.status }}</p>
             </ng-template>
@@ -173,7 +178,6 @@
     </ui-lib-timeline>
   </app-doc-section>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -182,7 +186,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -199,7 +203,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -209,5 +213,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

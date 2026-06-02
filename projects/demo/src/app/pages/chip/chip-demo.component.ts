@@ -272,7 +272,7 @@ export class MyComponent {}`,
 
   public removeChip(label: string): void {
     this.activeChips.update((chips: string[]): string[] =>
-      chips.filter((chip: string): boolean => chip !== label)
+      chips.filter((chip: string): boolean => chip !== label),
     );
     this.removedChips.update((removed: string[]): string[] => [...removed, label]);
   }

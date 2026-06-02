@@ -91,10 +91,7 @@
             <pre class="value-pre">{{ customToolbarHtml }}</pre>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example
-          [html]="customToolbarHtml"
-          [typescript]="customToolbarTs"
-        />
+        <app-doc-code-example [html]="customToolbarHtml" [typescript]="customToolbarTs" />
       </app-doc-section>
 
       <app-doc-section id="template-driven" title="Template-Driven Form">
@@ -120,10 +117,7 @@
             <pre class="value-pre">{{ templateDrivenSubmittedHtml ?? 'No submission yet' }}</pre>
           </form>
         </ui-lib-panel>
-        <app-doc-code-example
-          [html]="templateDrivenHtml"
-          [typescript]="templateDrivenTs"
-        />
+        <app-doc-code-example [html]="templateDrivenHtml" [typescript]="templateDrivenTs" />
       </app-doc-section>
 
       <app-doc-section id="reactive" title="Reactive Form">
@@ -244,7 +238,6 @@
     </div>
   </app-doc-demo-viewport>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -253,7 +246,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"

@@ -57,4 +57,3 @@ _No component-level CSS variables detected._
 - [Demo page](/components/key-filter)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/key-filter/README.md)
-

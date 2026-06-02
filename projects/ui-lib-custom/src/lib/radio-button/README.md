@@ -8,44 +8,44 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `label` | `string \| null` | `null` | Visible label text; projected content is an alternative |
-| `inputId` | `string \| null` | `null` | Forwarded to the native `<input>` id |
-| `name` | `string \| null` | `null` | **Required for grouped behavior**. Must be identical across all buttons in a group |
-| `value` | `unknown` | `null` | The value this radio button represents in the group |
-| `required` | `boolean` | `false` | Sets `aria-required` on the native input |
-| `invalid` | `boolean` | `false` | Sets `aria-invalid` and invalid visual styling |
-| `readonly` | `boolean` | `false` | |
-| `disabled` | `boolean` | `false` | Sets `aria-disabled` on the native input |
-| `tabindex` | `number` | `0` | Applied when the radio is checked (roving tabindex) |
-| `autofocus` | `boolean` | `false` | |
-| `ariaLabel` | `string \| null` | `null` | Used when no visible label is provided |
-| `ariaLabelledby` | `string \| null` | `null` | Explicit override; takes precedence over the auto-generated label id |
-| `ariaDescribedby` | `string \| null` | `null` | Forwards helper/error ids to `aria-describedby` on the native input |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme variant when null |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
-| `appearance` | `'outlined' \| 'filled'` | `'outlined'` | |
+| Name              | Type                                             | Default      | Notes                                                                              |
+| ----------------- | ------------------------------------------------ | ------------ | ---------------------------------------------------------------------------------- |
+| `label`           | `string \| null`                                 | `null`       | Visible label text; projected content is an alternative                            |
+| `inputId`         | `string \| null`                                 | `null`       | Forwarded to the native `<input>` id                                               |
+| `name`            | `string \| null`                                 | `null`       | **Required for grouped behavior**. Must be identical across all buttons in a group |
+| `value`           | `unknown`                                        | `null`       | The value this radio button represents in the group                                |
+| `required`        | `boolean`                                        | `false`      | Sets `aria-required` on the native input                                           |
+| `invalid`         | `boolean`                                        | `false`      | Sets `aria-invalid` and invalid visual styling                                     |
+| `readonly`        | `boolean`                                        | `false`      |                                                                                    |
+| `disabled`        | `boolean`                                        | `false`      | Sets `aria-disabled` on the native input                                           |
+| `tabindex`        | `number`                                         | `0`          | Applied when the radio is checked (roving tabindex)                                |
+| `autofocus`       | `boolean`                                        | `false`      |                                                                                    |
+| `ariaLabel`       | `string \| null`                                 | `null`       | Used when no visible label is provided                                             |
+| `ariaLabelledby`  | `string \| null`                                 | `null`       | Explicit override; takes precedence over the auto-generated label id               |
+| `ariaDescribedby` | `string \| null`                                 | `null`       | Forwards helper/error ids to `aria-describedby` on the native input                |
+| `variant`         | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`       | Falls back to global theme variant when null                                       |
+| `size`            | `'sm' \| 'md' \| 'lg'`                           | `'md'`       |                                                                                    |
+| `appearance`      | `'outlined' \| 'filled'`                         | `'outlined'` |                                                                                    |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
+| Name     | Payload                  | Notes                                                                                |
+| -------- | ------------------------ | ------------------------------------------------------------------------------------ |
 | `change` | `RadioButtonChangeEvent` | `{ value: unknown, originalEvent: Event }` — fires only when this button is selected |
-| `focus` | `FocusEvent` | |
-| `blur` | `FocusEvent` | |
+| `focus`  | `FocusEvent`             |                                                                                      |
+| `blur`   | `FocusEvent`             |                                                                                      |
 
 ## Keyboard Navigation
 
 The component adds explicit arrow-key navigation on top of native browser radio group behaviour.
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Enters the group; browsers natively focus the selected radio (or the first if none selected) |
-| `Shift+Tab` | Leaves the group |
-| `ArrowDown` / `ArrowRight` | Moves focus to the next non-disabled radio, wrapping around; selects it |
-| `ArrowUp` / `ArrowLeft` | Moves focus to the previous non-disabled radio, wrapping around; selects it |
-| `Space` | Selects the currently focused radio (native browser behaviour) |
+| Key                        | Action                                                                                       |
+| -------------------------- | -------------------------------------------------------------------------------------------- |
+| `Tab`                      | Enters the group; browsers natively focus the selected radio (or the first if none selected) |
+| `Shift+Tab`                | Leaves the group                                                                             |
+| `ArrowDown` / `ArrowRight` | Moves focus to the next non-disabled radio, wrapping around; selects it                      |
+| `ArrowUp` / `ArrowLeft`    | Moves focus to the previous non-disabled radio, wrapping around; selects it                  |
+| `Space`                    | Selects the currently focused radio (native browser behaviour)                               |
 
 Disabled radios are automatically skipped during arrow-key navigation.
 
@@ -116,8 +116,18 @@ Wrap radio buttons in a `<fieldset>`/`<legend>` or a `role="radiogroup"` element
 ```html
 <fieldset>
   <legend>Delivery</legend>
-  <ui-lib-radio-button name="delivery" value="standard" label="Standard" [formControl]="deliveryCtrl" />
-  <ui-lib-radio-button name="delivery" value="express" label="Express" [formControl]="deliveryCtrl" />
+  <ui-lib-radio-button
+    name="delivery"
+    value="standard"
+    label="Standard"
+    [formControl]="deliveryCtrl"
+  />
+  <ui-lib-radio-button
+    name="delivery"
+    value="express"
+    label="Express"
+    [formControl]="deliveryCtrl"
+  />
 </fieldset>
 ```
 
@@ -132,23 +142,29 @@ public readonly deliveryCtrl = new FormControl('standard');
   <legend>Plan</legend>
   <ui-lib-radio-button name="plan" value="free" label="Free" [(ngModel)]="plan" />
   <ui-lib-radio-button name="plan" value="pro" label="Pro" [(ngModel)]="plan" />
-  <ui-lib-radio-button name="plan" value="enterprise" label="Enterprise" [disabled]="true" [(ngModel)]="plan" />
+  <ui-lib-radio-button
+    name="plan"
+    value="enterprise"
+    label="Enterprise"
+    [disabled]="true"
+    [(ngModel)]="plan"
+  />
 </fieldset>
 ```
 
 ## CSS Custom Properties
 
-| Variable | Purpose |
-|---|---|
-| `--uilib-radio-button-gap` | Spacing between circle and label |
+| Variable                             | Purpose                           |
+| ------------------------------------ | --------------------------------- |
+| `--uilib-radio-button-gap`           | Spacing between circle and label  |
 | `--uilib-radio-button-size-sm/md/lg` | Size tokens for the visual circle |
-| `--uilib-radio-button-border-color` | Default border color |
-| `--uilib-radio-button-border-hover` | Hover border color |
-| `--uilib-radio-button-border-active` | Active border color |
-| `--uilib-radio-button-bg` | Background for unselected state |
-| `--uilib-radio-button-bg-checked` | Background/border when selected |
-| `--uilib-radio-button-dot-color` | Inner dot color |
-| `--uilib-radio-button-focus-ring` | Focus-visible ring shadow |
+| `--uilib-radio-button-border-color`  | Default border color              |
+| `--uilib-radio-button-border-hover`  | Hover border color                |
+| `--uilib-radio-button-border-active` | Active border color               |
+| `--uilib-radio-button-bg`            | Background for unselected state   |
+| `--uilib-radio-button-bg-checked`    | Background/border when selected   |
+| `--uilib-radio-button-dot-color`     | Inner dot color                   |
+| `--uilib-radio-button-focus-ring`    | Focus-visible ring shadow         |
 
 ## Internationalisation
 

@@ -41,10 +41,7 @@
     </div>
     <div class="ui-lib-timeline__content" [attr.id]="eventContentId(context.index)">
       @if (contentTemplate()) {
-        <ng-container
-          [ngTemplateOutlet]="contentTemplate()!"
-          [ngTemplateOutletContext]="context"
-        />
+        <ng-container [ngTemplateOutlet]="contentTemplate()!" [ngTemplateOutletContext]="context" />
       } @else {
         <span class="ui-lib-timeline__default-content">
           {{ defaultEventContent(context.$implicit, context.index) }}

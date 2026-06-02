@@ -56,6 +56,7 @@ this.theme.setShape('soft');
 ```
 
 Available values:
+
 - `sharp`
 - `rounded`
 - `soft`
@@ -72,6 +73,7 @@ this.theme.setDensity('compact');
 ```
 
 Available values:
+
 - `compact`
 - `default`
 - `comfortable`
@@ -171,4 +173,3 @@ The demo app includes a Theme Editor sidebar for real-time customization. It upd
 - If a component ignores theme changes, verify it is using CSS variables (not hardcoded colors).
 - Ensure `ViewEncapsulation.None` is used in library components (required for CSS vars).
 - For scoped themes, check that the `data-theme` attribute is on the intended container.
-

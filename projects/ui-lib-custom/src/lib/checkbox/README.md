@@ -8,37 +8,37 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `label` | `string \| null` | `null` | Visible label text; can be replaced by projected content |
-| `description` | `string \| null` | `null` | Secondary description text rendered below the label |
-| `ariaLabel` | `string \| null` | `null` | Used when no visible label is provided |
-| `inputId` | `string \| null` | `null` | Forwarded to the native `<input>` id |
-| `name` | `string \| null` | `null` | |
-| `required` | `boolean` | `false` | |
-| `readonly` | `boolean` | `false` | |
-| `tabindex` | `number` | `0` | |
-| `value` | `unknown \| null` | `null` | The value this checkbox contributes to a group array |
-| `binary` | `boolean` | `false` | When true, the control emits a simple boolean instead of managing a group array |
-| `trueValue` | `unknown` | `true` | Value emitted when checked in binary mode |
-| `falseValue` | `unknown` | `false` | Value emitted when unchecked in binary mode |
-| `checkboxIcon` | `string \| null` | `null` | Extra CSS class applied to the check icon element |
-| `autofocus` | `boolean` | `false` | |
-| `inputClass` | `string \| null` | `null` | Extra CSS class on the native `<input>` |
-| `appearance` | `'outlined' \| 'filled'` | `'outlined'` | |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme variant when null |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
-| `disabled` | `boolean` | `false` | |
-| `indeterminate` | `boolean` | `false` | |
-| `checked` | `boolean` | `false` | Two-way bindable via `[(checked)]` |
+| Name            | Type                                             | Default      | Notes                                                                           |
+| --------------- | ------------------------------------------------ | ------------ | ------------------------------------------------------------------------------- |
+| `label`         | `string \| null`                                 | `null`       | Visible label text; can be replaced by projected content                        |
+| `description`   | `string \| null`                                 | `null`       | Secondary description text rendered below the label                             |
+| `ariaLabel`     | `string \| null`                                 | `null`       | Used when no visible label is provided                                          |
+| `inputId`       | `string \| null`                                 | `null`       | Forwarded to the native `<input>` id                                            |
+| `name`          | `string \| null`                                 | `null`       |                                                                                 |
+| `required`      | `boolean`                                        | `false`      |                                                                                 |
+| `readonly`      | `boolean`                                        | `false`      |                                                                                 |
+| `tabindex`      | `number`                                         | `0`          |                                                                                 |
+| `value`         | `unknown \| null`                                | `null`       | The value this checkbox contributes to a group array                            |
+| `binary`        | `boolean`                                        | `false`      | When true, the control emits a simple boolean instead of managing a group array |
+| `trueValue`     | `unknown`                                        | `true`       | Value emitted when checked in binary mode                                       |
+| `falseValue`    | `unknown`                                        | `false`      | Value emitted when unchecked in binary mode                                     |
+| `checkboxIcon`  | `string \| null`                                 | `null`       | Extra CSS class applied to the check icon element                               |
+| `autofocus`     | `boolean`                                        | `false`      |                                                                                 |
+| `inputClass`    | `string \| null`                                 | `null`       | Extra CSS class on the native `<input>`                                         |
+| `appearance`    | `'outlined' \| 'filled'`                         | `'outlined'` |                                                                                 |
+| `variant`       | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`       | Falls back to global theme variant when null                                    |
+| `size`          | `'sm' \| 'md' \| 'lg'`                           | `'md'`       |                                                                                 |
+| `disabled`      | `boolean`                                        | `false`      |                                                                                 |
+| `indeterminate` | `boolean`                                        | `false`      |                                                                                 |
+| `checked`       | `boolean`                                        | `false`      | Two-way bindable via `[(checked)]`                                              |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
+| Name             | Payload               | Notes                                                                                                                                              |
+| ---------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `checkboxChange` | `CheckboxChangeEvent` | `{ checked: boolean \| unknown[], originalEvent: Event }`. Named `checkboxChange` (not `change`) to avoid shadowing the native DOM `change` event. |
-| `checkboxFocus` | `FocusEvent` | Named `checkboxFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. |
-| `checkboxBlur` | `FocusEvent` | Named `checkboxBlur` (not `blur`) to avoid shadowing the native DOM `blur` event. |
+| `checkboxFocus`  | `FocusEvent`          | Named `checkboxFocus` (not `focus`) to avoid shadowing the native DOM `focus` event.                                                               |
+| `checkboxBlur`   | `FocusEvent`          | Named `checkboxBlur` (not `blur`) to avoid shadowing the native DOM `blur` event.                                                                  |
 
 ## Usage
 

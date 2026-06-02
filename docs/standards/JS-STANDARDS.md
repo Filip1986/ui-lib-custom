@@ -75,16 +75,16 @@ Library components must not instantiate `Worker` or `SharedWorker`. Web Workers 
 
 The following platform standard sections apply without project-specific modification:
 
-| Section | Topic |
-|---------|-------|
-| §2 | The cost of JavaScript — bundle phases and tree-shaking discipline |
-| §3 | Data structures — `Map`, `Set`, `WeakMap` over plain objects |
-| §4 | `structuredClone()` over JSON round-trip |
-| §6 | Event loop and scheduling — microtasks, yielding for long tasks |
-| §8 | CSS over JS for animation — `transform`/`opacity` (enforced by Stylelint) |
-| §11 | Native browser API preference over packages |
-| §12 | Dependency hygiene — library bundles ship to consumers; every byte counts twice |
-| §13 | Code predictability — stable shapes, `const`, composition |
+| Section | Topic                                                                           |
+| ------- | ------------------------------------------------------------------------------- |
+| §2      | The cost of JavaScript — bundle phases and tree-shaking discipline              |
+| §3      | Data structures — `Map`, `Set`, `WeakMap` over plain objects                    |
+| §4      | `structuredClone()` over JSON round-trip                                        |
+| §6      | Event loop and scheduling — microtasks, yielding for long tasks                 |
+| §8      | CSS over JS for animation — `transform`/`opacity` (enforced by Stylelint)       |
+| §11     | Native browser API preference over packages                                     |
+| §12     | Dependency hygiene — library bundles ship to consumers; every byte counts twice |
+| §13     | Code predictability — stable shapes, `const`, composition                       |
 
 ---
 
@@ -102,12 +102,11 @@ Extend the platform review checklist with:
 
 ## See also
 
-| Document | Why it relates |
-|----------|----------------|
-| [`platform/docs/standards/JS-STANDARDS.md`](../../../platform/docs/standards/JS-STANDARDS.md) | Full reference — all sections, rationale, and code examples |
-| [`CSS-STANDARDS.md`](CSS-STANDARDS.md) | Animation rules and ViewEncapsulation.None CSS discipline |
-| [`HTML-STANDARDS.md`](HTML-STANDARDS.md) | Template rules that interact with the DOM manipulation patterns here |
-| [`LIBRARY_CONVENTIONS.md`](../../LIBRARY_CONVENTIONS.md) | Cross-entry-point, token, and cascade layer rules for this library |
+| Document                                                                                      | Why it relates                                                       |
+| --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| [`platform/docs/standards/JS-STANDARDS.md`](../../../platform/docs/standards/JS-STANDARDS.md) | Full reference — all sections, rationale, and code examples          |
+| [`CSS-STANDARDS.md`](CSS-STANDARDS.md)                                                        | Animation rules and ViewEncapsulation.None CSS discipline            |
+| [`HTML-STANDARDS.md`](HTML-STANDARDS.md)                                                      | Template rules that interact with the DOM manipulation patterns here |
+| [`LIBRARY_CONVENTIONS.md`](../../LIBRARY_CONVENTIONS.md)                                      | Cross-entry-point, token, and cascade layer rules for this library   |
 
-*Last reviewed: 2026-05-24 — Document created.*
-
+_Last reviewed: 2026-05-24 — Document created._

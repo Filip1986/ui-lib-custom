@@ -8,23 +8,23 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `value` | `OrganizationChartNode[]` | `[]` | Root-level nodes of the tree. |
-| `selectionMode` | `'single' \| 'multiple' \| null` | `null` | How nodes respond to click interactions. |
-| `collapsible` | `boolean` | `false` | When true, nodes with children render an expand/collapse toggle. |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme when null. |
-| `styleClass` | `string` | `''` | Extra CSS class applied to the host element. |
-| `ariaLabel` | `string` | `'Organization'` | Accessible name applied to the root tree element. |
-| `selection` | `OrganizationChartNode \| OrganizationChartNode[] \| null` | `null` | Selected node(s). Two-way bindable via `[(selection)]`. |
+| Name            | Type                                                       | Default          | Notes                                                            |
+| --------------- | ---------------------------------------------------------- | ---------------- | ---------------------------------------------------------------- |
+| `value`         | `OrganizationChartNode[]`                                  | `[]`             | Root-level nodes of the tree.                                    |
+| `selectionMode` | `'single' \| 'multiple' \| null`                           | `null`           | How nodes respond to click interactions.                         |
+| `collapsible`   | `boolean`                                                  | `false`          | When true, nodes with children render an expand/collapse toggle. |
+| `variant`       | `'material' \| 'bootstrap' \| 'minimal' \| null`           | `null`           | Falls back to global theme when null.                            |
+| `styleClass`    | `string`                                                   | `''`             | Extra CSS class applied to the host element.                     |
+| `ariaLabel`     | `string`                                                   | `'Organization'` | Accessible name applied to the root tree element.                |
+| `selection`     | `OrganizationChartNode \| OrganizationChartNode[] \| null` | `null`           | Selected node(s). Two-way bindable via `[(selection)]`.          |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `nodeSelect` | `OrganizationChartNodeSelectEvent` | Emitted when a node is selected. |
-| `nodeUnselect` | `OrganizationChartNodeSelectEvent` | Emitted when a node is unselected. |
-| `nodeExpand` | `OrganizationChartNodeExpandEvent` | Emitted when a node's subtree is expanded. |
+| Name           | Payload                            | Notes                                       |
+| -------------- | ---------------------------------- | ------------------------------------------- |
+| `nodeSelect`   | `OrganizationChartNodeSelectEvent` | Emitted when a node is selected.            |
+| `nodeUnselect` | `OrganizationChartNodeSelectEvent` | Emitted when a node is unselected.          |
+| `nodeExpand`   | `OrganizationChartNodeExpandEvent` | Emitted when a node's subtree is expanded.  |
 | `nodeCollapse` | `OrganizationChartNodeExpandEvent` | Emitted when a node's subtree is collapsed. |
 
 ## Usage
@@ -38,7 +38,12 @@
 </ui-lib-organization-chart>
 
 <!-- selectable with type-specific templates -->
-<ui-lib-organization-chart [value]="nodes" selectionMode="single" [(selection)]="selected" [collapsible]="true">
+<ui-lib-organization-chart
+  [value]="nodes"
+  selectionMode="single"
+  [(selection)]="selected"
+  [collapsible]="true"
+>
   <ng-template uiOrgChartNode type="manager" let-node>{{ node.label }} (Mgr)</ng-template>
   <ng-template uiOrgChartNode let-node>{{ node.label }}</ng-template>
 </ui-lib-organization-chart>

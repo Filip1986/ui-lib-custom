@@ -262,21 +262,21 @@ docs/
 > For the authoritative, up-to-date component documentation status see [`docs/DOC_STATUS.md`](docs/DOC_STATUS.md).
 > For component quality scores (hardening progress) see [`docs/COMPONENT_SCORES.md`](docs/COMPONENT_SCORES.md).
 
-| Component | API Docs | Implementation | Status |
-| --- | --- | --- | --- |
-| Badge | ✅ | ✅ | Complete |
-| Button | ✅ | ✅ | Complete |
-| Card | ✅ | ✅ | Complete |
-| Accordion | ✅ | ✅ | Complete |
-| Tabs | ✅ | ✅ | Complete |
-| Input | ✅ | ✅ | Complete |
-| Select | ✅ | — | API doc exists |
-| SelectButton | ✅ | ✅ | Complete |
-| Checkbox | ✅ | ❌ | API only |
-| Icon | ✅ | ❌ | API only |
-| Icon Button | ✅ | ❌ | API only |
-| Layout | ✅ | — | API doc exists |
-| Dialog | ✅ | ✅ | Complete |
+| Component    | API Docs | Implementation | Status         |
+| ------------ | -------- | -------------- | -------------- |
+| Badge        | ✅       | ✅             | Complete       |
+| Button       | ✅       | ✅             | Complete       |
+| Card         | ✅       | ✅             | Complete       |
+| Accordion    | ✅       | ✅             | Complete       |
+| Tabs         | ✅       | ✅             | Complete       |
+| Input        | ✅       | ✅             | Complete       |
+| Select       | ✅       | —              | API doc exists |
+| SelectButton | ✅       | ✅             | Complete       |
+| Checkbox     | ✅       | ❌             | API only       |
+| Icon         | ✅       | ❌             | API only       |
+| Icon Button  | ✅       | ❌             | API only       |
+| Layout       | ✅       | —              | API doc exists |
+| Dialog       | ✅       | ✅             | Complete       |
 
 ---
 

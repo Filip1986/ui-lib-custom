@@ -1,10 +1,13 @@
 ## What
+
 <!-- A concise description of the change -->
 
 ## Why
+
 <!-- The motivation / problem being solved -->
 
 ## Type of Change
+
 - [ ] feat: new component or feature
 - [ ] fix: bug fix
 - [ ] docs: documentation only
@@ -16,7 +19,8 @@
 - [ ] release: version bump
 
 ## Pre-Merge Checklist
-- [ ] `npm run format:check` passes
+
+- [ ] `npm run format:check` passes (also enforced in CI `lint` job)
 - [ ] `npm run lint:ci` passes (0 warnings)
 - [ ] `npm run typecheck` passes
 - [ ] `npm test` passes with coverage ≥ 90%
@@ -31,8 +35,9 @@
 - [ ] Commits follow conventional commit format
 
 ## Screenshots / Evidence
+
 <!-- If UI change, include before/after screenshots or Storybook link -->
 
 ## A11y Notes
-<!-- Describe ARIA roles, keyboard interactions, screen-reader behaviour -->
 
+<!-- Describe ARIA roles, keyboard interactions, screen-reader behaviour -->

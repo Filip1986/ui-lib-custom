@@ -22,7 +22,7 @@ const defaultOptions: SelectButtonOption[] = [
 function getRequiredButton(
   elements: HTMLButtonElement[],
   index: number,
-  label: string
+  label: string,
 ): HTMLButtonElement {
   const button: HTMLButtonElement | undefined = elements[index];
   if (!button) {
@@ -60,7 +60,7 @@ class HostComponent {
   public readonly variant: WritableSignal<SelectButtonVariant> =
     signal<SelectButtonVariant>('material');
   public readonly size: WritableSignal<SelectButtonSize> = signal<SelectButtonSize>(
-    'md' as SelectButtonSize
+    'md' as SelectButtonSize,
   );
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
@@ -173,7 +173,7 @@ describe('SelectButton', (): void => {
 
   function hostEl(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-select-button'
+      'ui-lib-select-button',
     ) as HTMLElement;
   }
 
@@ -356,7 +356,7 @@ describe('SelectButton', (): void => {
       primitiveFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        (primitiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (primitiveFixture.nativeElement as HTMLElement).querySelectorAll('button'),
       );
       getRequiredButton(btns, 1, 'primitive').click();
       primitiveFixture.detectChanges();
@@ -372,7 +372,7 @@ describe('SelectButton', (): void => {
       objectFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        (objectFixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (objectFixture.nativeElement as HTMLElement).querySelectorAll('button'),
       );
       getRequiredButton(btns, 0, 'object').click();
       objectFixture.detectChanges();
@@ -388,7 +388,7 @@ describe('SelectButton', (): void => {
       ngModelFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        (ngModelFixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (ngModelFixture.nativeElement as HTMLElement).querySelectorAll('button'),
       );
       getRequiredButton(btns, 0, 'ngModel').click();
       ngModelFixture.detectChanges();
@@ -402,7 +402,7 @@ describe('SelectButton', (): void => {
       reactiveFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button'),
       );
       expect(getRequiredButton(btns, 1, 'reactive').getAttribute('aria-checked')).toBe('true');
 
@@ -417,7 +417,7 @@ describe('SelectButton', (): void => {
       reactiveFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button'),
       );
       expect(getRequiredButton(btns, 1, 'reactive').getAttribute('aria-checked')).toBe('true');
 
@@ -438,10 +438,10 @@ describe('SelectButton', (): void => {
         reactiveFixture.componentInstance.form.controls.choice;
 
       const btns: HTMLButtonElement[] = Array.from(
-        (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button'),
       );
       getRequiredButton(btns, 0, 'reactive').dispatchEvent(
-        new FocusEvent('focusout', { bubbles: true, relatedTarget: null })
+        new FocusEvent('focusout', { bubbles: true, relatedTarget: null }),
       );
 
       expect(control.touched).toBeTruthy();
@@ -458,7 +458,7 @@ describe('SelectButton', (): void => {
       reactiveFixture.detectChanges();
 
       const host: HTMLElement = (reactiveFixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-select-button'
+        'ui-lib-select-button',
       ) as HTMLElement;
       expect(host.className).toContain('ui-lib-select-button--disabled');
     });
@@ -473,7 +473,7 @@ describe('SelectButton', (): void => {
       component.registerOnChange(onChangeSpy);
 
       const btns: HTMLButtonElement[] = Array.from(
-        (selectFixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (selectFixture.nativeElement as HTMLElement).querySelectorAll('button'),
       );
       getRequiredButton(btns, 0, 'select').click();
       selectFixture.detectChanges();
@@ -517,7 +517,7 @@ describe('SelectButton', (): void => {
       selectFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        (selectFixture.nativeElement as HTMLElement).querySelectorAll('button')
+        (selectFixture.nativeElement as HTMLElement).querySelectorAll('button'),
       );
       expect(getRequiredButton(btns, 0, 'select').getAttribute('aria-checked')).toBe('true');
     });

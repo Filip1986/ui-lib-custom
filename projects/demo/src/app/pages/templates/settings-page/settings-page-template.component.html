@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Settings Page Template"
@@ -21,8 +20,8 @@
     <h2>Overview</h2>
     <p>
       The Settings Page template organises user preferences into four logical tabs — Profile,
-      Notifications, Security, and Billing. Each tab is an isolated panel, making it easy to
-      replace mock content with your real services.
+      Notifications, Security, and Billing. Each tab is an isolated panel, making it easy to replace
+      mock content with your real services.
     </p>
   </section>
 
@@ -31,7 +30,6 @@
     <h2>Live Preview</h2>
 
     <div class="settings-demo">
-
       <!-- Left nav -->
       <nav class="settings-nav" aria-label="Settings sections">
         <p class="settings-nav-title">Account</p>
@@ -67,7 +65,6 @@
 
       <!-- Content -->
       <div class="settings-content">
-
         <!-- Profile tab -->
         @if (activeTab() === 'profile') {
           <ui-lib-panel class="settings-panel">
@@ -80,8 +77,18 @@
               <div>
                 <p class="settings-avatar-hint">JPG, GIF or PNG. Max 2 MB.</p>
                 <div class="settings-avatar-btns">
-                  <ui-lib-button variant="minimal" size="sm" label="Change photo" leftIcon="pi pi-upload" />
-                  <ui-lib-button variant="minimal" size="sm" label="Remove" leftIcon="pi pi-trash" />
+                  <ui-lib-button
+                    variant="minimal"
+                    size="sm"
+                    label="Change photo"
+                    leftIcon="pi pi-upload"
+                  />
+                  <ui-lib-button
+                    variant="minimal"
+                    size="sm"
+                    label="Remove"
+                    leftIcon="pi pi-trash"
+                  />
                 </div>
               </div>
             </div>
@@ -99,11 +106,18 @@
               </div>
               <div class="settings-field">
                 <label class="settings-label" for="s-email">Email address</label>
-                <input id="s-email" class="settings-input" type="email" value="jane.doe@example.com" />
+                <input
+                  id="s-email"
+                  class="settings-input"
+                  type="email"
+                  value="jane.doe@example.com"
+                />
               </div>
               <div class="settings-field">
                 <label class="settings-label" for="s-bio">Bio</label>
-                <textarea id="s-bio" class="settings-input settings-textarea" rows="3">Product designer & developer</textarea>
+                <textarea id="s-bio" class="settings-input settings-textarea" rows="3">
+Product designer & developer</textarea
+                >
               </div>
             </div>
 
@@ -183,11 +197,21 @@
               <div class="settings-fields">
                 <div class="settings-field">
                   <label class="settings-label" for="s-current-pw">Current password</label>
-                  <input id="s-current-pw" class="settings-input" type="password" placeholder="••••••••" />
+                  <input
+                    id="s-current-pw"
+                    class="settings-input"
+                    type="password"
+                    placeholder="••••••••"
+                  />
                 </div>
                 <div class="settings-field">
                   <label class="settings-label" for="s-new-pw">New password</label>
-                  <input id="s-new-pw" class="settings-input" type="password" placeholder="Min 8 characters" />
+                  <input
+                    id="s-new-pw"
+                    class="settings-input"
+                    type="password"
+                    placeholder="Min 8 characters"
+                  />
                 </div>
               </div>
             </div>
@@ -237,7 +261,6 @@
             </div>
           </ui-lib-panel>
         }
-
       </div>
     </div>
   </section>
@@ -246,8 +269,8 @@
   <section id="usage" data-doc-anchor>
     <h2>Usage</h2>
     <p>
-      Copy the snippet below as a starting point. Each tab section is self-contained — remove
-      tabs you don't need or add your own.
+      Copy the snippet below as a starting point. Each tab section is self-contained — remove tabs
+      you don't need or add your own.
     </p>
     <ui-lib-code-snippet [code]="codeSnippet" language="typescript" />
     <div class="settings-download-cta">
@@ -255,5 +278,4 @@
       <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
     </div>
   </section>
-
 </app-doc-page-layout>

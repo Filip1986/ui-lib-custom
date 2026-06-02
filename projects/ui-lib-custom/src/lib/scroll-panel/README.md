@@ -14,17 +14,17 @@ import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
 
 ## Inputs
 
-| Name         | Type                                      | Default  | Description                                        |
-|--------------|-------------------------------------------|----------|----------------------------------------------------|
-| `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`   | Visual variant. Falls back to `ThemeConfigService` |
-| `styleClass` | `string \| null`                           | `null`   | Extra CSS classes applied to the host element      |
-| `ariaLabel`  | `string \| null`                           | `null`   | Accessible label for the scrollable region (`aria-label` on the inner content wrapper). Recommended whenever the panel conveys a meaningful landmark. |
+| Name         | Type                                             | Default | Description                                                                                                                                           |
+| ------------ | ------------------------------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`  | Visual variant. Falls back to `ThemeConfigService`                                                                                                    |
+| `styleClass` | `string \| null`                                 | `null`  | Extra CSS classes applied to the host element                                                                                                         |
+| `ariaLabel`  | `string \| null`                                 | `null`  | Accessible label for the scrollable region (`aria-label` on the inner content wrapper). Recommended whenever the panel conveys a meaningful landmark. |
 
 ## Content projection
 
-| Slot           | Description                    |
-|----------------|--------------------------------|
-| *(default)*    | Scrollable content             |
+| Slot        | Description        |
+| ----------- | ------------------ |
+| _(default)_ | Scrollable content |
 
 ## Usage
 
@@ -42,7 +42,7 @@ import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
 <!-- Explicit variant -->
 <ui-lib-scroll-panel [variant]="'bootstrap'" ariaLabel="News feed" style="height: 300px;">
   @for (item of items; track item.id) {
-    <p>{{ item.text }}</p>
+  <p>{{ item.text }}</p>
   }
 </ui-lib-scroll-panel>
 
@@ -54,35 +54,35 @@ import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
 
 ## CSS custom properties
 
-| Property                                         | Description                              |
-|--------------------------------------------------|------------------------------------------|
-| `--uilib-scroll-panel-bg`                        | Background colour of the container       |
-| `--uilib-scroll-panel-border-color`              | Border colour                            |
-| `--uilib-scroll-panel-border-radius`             | Border radius                            |
-| `--uilib-scroll-panel-scrollbar-width`           | Width (and height) of the scrollbar      |
-| `--uilib-scroll-panel-scrollbar-track-bg`        | Track background colour                  |
-| `--uilib-scroll-panel-scrollbar-thumb-bg`        | Thumb colour (default state)             |
-| `--uilib-scroll-panel-scrollbar-thumb-bg-hover`  | Thumb colour on hover                    |
-| `--uilib-scroll-panel-scrollbar-radius`          | Thumb / track border radius              |
-| `--uilib-scroll-panel-transition`                | Transition duration for colour changes   |
+| Property                                        | Description                            |
+| ----------------------------------------------- | -------------------------------------- |
+| `--uilib-scroll-panel-bg`                       | Background colour of the container     |
+| `--uilib-scroll-panel-border-color`             | Border colour                          |
+| `--uilib-scroll-panel-border-radius`            | Border radius                          |
+| `--uilib-scroll-panel-scrollbar-width`          | Width (and height) of the scrollbar    |
+| `--uilib-scroll-panel-scrollbar-track-bg`       | Track background colour                |
+| `--uilib-scroll-panel-scrollbar-thumb-bg`       | Thumb colour (default state)           |
+| `--uilib-scroll-panel-scrollbar-thumb-bg-hover` | Thumb colour on hover                  |
+| `--uilib-scroll-panel-scrollbar-radius`         | Thumb / track border radius            |
+| `--uilib-scroll-panel-transition`               | Transition duration for colour changes |
 
 ## ARIA attributes
 
-| Element                    | Attribute       | Value / notes                                          |
-|----------------------------|-----------------|--------------------------------------------------------|
-| `.ui-lib-scroll-panel__content` | `role`     | `"region"` — landmark for the scrollable area         |
-| `.ui-lib-scroll-panel__content` | `tabindex` | `"0"` — makes the region keyboard-focusable           |
-| `.ui-lib-scroll-panel__content` | `id`       | `ui-lib-scroll-panel-{n}-content` (unique per instance)|
-| `.ui-lib-scroll-panel__content` | `aria-label` | Value of the `ariaLabel` input (omitted when `null`) |
+| Element                         | Attribute    | Value / notes                                           |
+| ------------------------------- | ------------ | ------------------------------------------------------- |
+| `.ui-lib-scroll-panel__content` | `role`       | `"region"` — landmark for the scrollable area           |
+| `.ui-lib-scroll-panel__content` | `tabindex`   | `"0"` — makes the region keyboard-focusable             |
+| `.ui-lib-scroll-panel__content` | `id`         | `ui-lib-scroll-panel-{n}-content` (unique per instance) |
+| `.ui-lib-scroll-panel__content` | `aria-label` | Value of the `ariaLabel` input (omitted when `null`)    |
 
 ## Keyboard interaction
 
-| Key                     | Behaviour                                           |
-|-------------------------|-----------------------------------------------------|
-| `Tab`                   | Focuses the scrollable region                       |
-| `↑` / `↓`              | Scrolls the region vertically (browser native)      |
-| `←` / `→`              | Scrolls the region horizontally (browser native)    |
-| `Page Up` / `Page Down` | Scrolls the region by a page (browser native)       |
+| Key                     | Behaviour                                                  |
+| ----------------------- | ---------------------------------------------------------- |
+| `Tab`                   | Focuses the scrollable region                              |
+| `↑` / `↓`               | Scrolls the region vertically (browser native)             |
+| `←` / `→`               | Scrolls the region horizontally (browser native)           |
+| `Page Up` / `Page Down` | Scrolls the region by a page (browser native)              |
 | `Home` / `End`          | Scrolls to the top / bottom of the region (browser native) |
 
 ## Accessibility

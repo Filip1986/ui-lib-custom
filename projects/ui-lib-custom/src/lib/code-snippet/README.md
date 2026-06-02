@@ -11,7 +11,7 @@ A styled code display card with macOS-style window chrome, a language-labelled t
 ## Inputs
 
 | Input              | Type                         | Default  | Description                                                                            |
-|--------------------|------------------------------|----------|----------------------------------------------------------------------------------------|
+| ------------------ | ---------------------------- | -------- | -------------------------------------------------------------------------------------- |
 | `code`             | `string`                     | `''`     | Raw code string to display. Angular escapes it automatically — no XSS risk.            |
 | `language`         | `CodeSnippetLanguage`        | `'text'` | Drives the tab label and `data-language` attribute on `<pre>`.                         |
 | `filename`         | `string \| null`             | `null`   | Overrides the tab label with the actual filename when provided.                        |
@@ -22,13 +22,13 @@ A styled code display card with macOS-style window chrome, a language-labelled t
 | `showCopyButton`   | `boolean`                    | `true`   | Show/hide the copy-to-clipboard button.                                                |
 | `maxHeight`        | `string \| null`             | `null`   | CSS max-height on the code body (e.g. `'300px'`). Body scrolls on overflow.            |
 | `styleClass`       | `string \| null`             | `null`   | Extra CSS classes appended to the root element.                                        |
-| `tabsAriaLabel`    | `string \| null`             | `null`   | Overrides the `aria-label` on the tab list (multi-file mode). Falls back to i18n key. |
+| `tabsAriaLabel`    | `string \| null`             | `null`   | Overrides the `aria-label` on the tab list (multi-file mode). Falls back to i18n key.  |
 
 ## Outputs
 
-| Output         | Type     | Description                                          |
-|----------------|----------|------------------------------------------------------|
-| `codeCopied`   | `void`   | Emitted after the code is copied to the clipboard.   |
+| Output       | Type   | Description                                        |
+| ------------ | ------ | -------------------------------------------------- |
+| `codeCopied` | `void` | Emitted after the code is copied to the clipboard. |
 
 ## Supported languages
 
@@ -43,13 +43,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 @Component({
   imports: [CodeSnippet],
-  template: `
-    <ui-lib-code-snippet
-      language="typescript"
-      filename="app.ts"
-      [code]="myCode"
-    />
-  `,
+  template: ` <ui-lib-code-snippet language="typescript" filename="app.ts" [code]="myCode" /> `,
 })
 export class MyComponent {
   public readonly myCode = 'const x: number = 42;';
@@ -58,10 +52,10 @@ export class MyComponent {
 
 ## Content projection
 
-| Slot                     | Description                                                                                 |
-|--------------------------|---------------------------------------------------------------------------------------------|
+| Slot                     | Description                                                                                                                                                                  |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `[uilib-header-actions]` | Extra action elements rendered at the end of the header row (after the copy button). Use for custom buttons such as expand/fullscreen, language selector, or a "run" action. |
-| `[uilib-footer]`         | Content rendered below the code body. Use for run output, annotations, attribution, or any supplementary information. |
+| `[uilib-footer]`         | Content rendered below the code body. Use for run output, annotations, attribution, or any supplementary information.                                                        |
 
 **Example — custom header action and footer:**
 
@@ -75,7 +69,7 @@ export class MyComponent {
 ## CSS custom properties
 
 | Variable                            | Default             | Description                   |
-|-------------------------------------|---------------------|-------------------------------|
+| ----------------------------------- | ------------------- | ----------------------------- |
 | `--uilib-code-snippet-bg`           | `#1e1e2e`           | Editor background colour      |
 | `--uilib-code-snippet-header-bg`    | `#181825`           | Header/titlebar background    |
 | `--uilib-code-snippet-text`         | `#cdd6f4`           | Code text colour              |

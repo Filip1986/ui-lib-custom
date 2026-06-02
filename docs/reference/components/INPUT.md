@@ -13,28 +13,28 @@ Text input component with floating labels and validation states.
 
 ### Inputs
 
-| Name                 | Type                  | Default                | Description |
-| -------------------- | --------------------- | ---------------------- | ----------- |
-| `ariaLabel`          | `string | null`       | `null`                 | —           |
-| `ariaLabelledBy`     | `string | null`       | `null`                 | —           |
-| `disabled`           | `boolean`             | `false`                | —           |
-| `error`              | `string | null`       | `null`                 | —           |
-| `hint`               | `string | null`       | `null`                 | —           |
-| `id`                 | `string | null`       | `null`                 | —           |
-| `invalid`            | `boolean`             | `false`                | —           |
-| `label`              | `string`              | `''`                   | —           |
-| `labelFloat`         | `InputLabelFloat`     | `'over'`               | —           |
-| `maxLength`          | `number | null`       | `null`                 | —           |
-| `name`               | `string | null`       | `null`                 | —           |
-| `placeholder`        | `string`              | `''`                   | —           |
-| `readonly`           | `boolean`             | `false`                | —           |
-| `required`           | `boolean`             | `false`                | —           |
-| `showClear`          | `boolean`             | `false`                | —           |
-| `showCounter`        | `boolean`             | `false`                | —           |
-| `showTogglePassword` | `boolean`             | `false`                | —           |
-| `size`               | `InputSize`           | `SHARED_DEFAULTS.Size` | —           |
-| `type`               | `InputType`           | `'text'`               | —           |
-| `variant`            | `InputVariant | null` | `null`                 | —           |
+| Name                 | Type              | Default                | Description |
+| -------------------- | ----------------- | ---------------------- | ----------- | --- |
+| `ariaLabel`          | `string           | null`                  | `null`      | —   |
+| `ariaLabelledBy`     | `string           | null`                  | `null`      | —   |
+| `disabled`           | `boolean`         | `false`                | —           |
+| `error`              | `string           | null`                  | `null`      | —   |
+| `hint`               | `string           | null`                  | `null`      | —   |
+| `id`                 | `string           | null`                  | `null`      | —   |
+| `invalid`            | `boolean`         | `false`                | —           |
+| `label`              | `string`          | `''`                   | —           |
+| `labelFloat`         | `InputLabelFloat` | `'over'`               | —           |
+| `maxLength`          | `number           | null`                  | `null`      | —   |
+| `name`               | `string           | null`                  | `null`      | —   |
+| `placeholder`        | `string`          | `''`                   | —           |
+| `readonly`           | `boolean`         | `false`                | —           |
+| `required`           | `boolean`         | `false`                | —           |
+| `showClear`          | `boolean`         | `false`                | —           |
+| `showCounter`        | `boolean`         | `false`                | —           |
+| `showTogglePassword` | `boolean`         | `false`                | —           |
+| `size`               | `InputSize`       | `SHARED_DEFAULTS.Size` | —           |
+| `type`               | `InputType`       | `'text'`               | —           |
+| `variant`            | `InputVariant     | null`                  | `null`      | —   |
 
 ### Outputs
 
@@ -94,7 +94,7 @@ _none_
 | omits aria-labelledby when ariaLabelledBy is null                        |
 | omits aria-readonly by default                                           |
 | omits aria-required by default                                           |
-| required indicator (*) carries aria-hidden=                              |
+| required indicator (\*) carries aria-hidden=                             |
 | sets aria-describedby to errorId when error is shown                     |
 | sets aria-describedby to hintId when hint is shown                       |
 | sets aria-describedby to the error element                               |
@@ -111,11 +111,7 @@ _none_
 <ui-lib-input label="Email" type="email" [(ngModel)]="email" />
 
 <!-- with hint text -->
-<ui-lib-input
-  label="Email"
-  hint="We'll never share your email"
-  [(ngModel)]="email"
-/>
+<ui-lib-input label="Email" hint="We'll never share your email" [(ngModel)]="email" />
 
 <!-- with prefix icon, error, and character counter -->
 <ui-lib-input
@@ -135,4 +131,3 @@ _none_
 - [Demo page](/components/input)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/input/README.md)
-

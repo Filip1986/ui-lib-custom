@@ -20,7 +20,7 @@ export interface OrganizationChartContext {
    * or the `'default'` template, or `null` if none is registered.
    */
   getTemplateForNode: (
-    node: OrganizationChartNode
+    node: OrganizationChartNode,
   ) => TemplateRef<{ $implicit: OrganizationChartNode }> | null;
   /** Handles a node cell click: updates selection and emits outputs. */
   handleNodeClick: (event: MouseEvent, node: OrganizationChartNode) => void;

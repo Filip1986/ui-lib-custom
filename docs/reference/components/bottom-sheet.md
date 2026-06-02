@@ -13,14 +13,14 @@ BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport.
 
 ### Inputs
 
-| Name              | Type                        | Default | Description                                                       |
-| ----------------- | --------------------------- | ------- | ----------------------------------------------------------------- |
-| `closeOnBackdrop` | `boolean`                   | `true`  | Whether a click on the backdrop closes the sheet.                 |
-| `closeOnEscape`   | `boolean`                   | `true`  | Whether pressing Escape closes the sheet.                         |
-| `header`          | `string`                    | `''`    | Optional header text rendered in the sheet header bar.            |
-| `showBackdrop`    | `boolean`                   | `true`  | Whether to render the semi-transparent backdrop behind the sheet. |
-| `styleClass`      | `string | null`             | `null`  | Additional CSS classes applied to the host element.               |
-| `variant`         | `BottomSheetVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.   |
+| Name              | Type                | Default | Description                                                       |
+| ----------------- | ------------------- | ------- | ----------------------------------------------------------------- | --------------------------------------------------------------- |
+| `closeOnBackdrop` | `boolean`           | `true`  | Whether a click on the backdrop closes the sheet.                 |
+| `closeOnEscape`   | `boolean`           | `true`  | Whether pressing Escape closes the sheet.                         |
+| `header`          | `string`            | `''`    | Optional header text rendered in the sheet header bar.            |
+| `showBackdrop`    | `boolean`           | `true`  | Whether to render the semi-transparent backdrop behind the sheet. |
+| `styleClass`      | `string             | null`   | `null`                                                            | Additional CSS classes applied to the host element.             |
+| `variant`         | `BottomSheetVariant | null`   | `null`                                                            | Visual variant — inherits from ThemeConfigService when not set. |
 
 ### Models (two-way bindable)
 
@@ -120,4 +120,3 @@ BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport.
 - [Demo page](/components/bottom-sheet)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/bottom-sheet/README.md)
-

@@ -91,13 +91,13 @@ describe('color-utils', (): void => {
       expect(sourceRgb).toBeTruthy();
       expect(roundTripRgb).toBeTruthy();
       expect(
-        Math.abs((sourceRgb as RgbColor).r - (roundTripRgb as RgbColor).r)
+        Math.abs((sourceRgb as RgbColor).r - (roundTripRgb as RgbColor).r),
       ).toBeLessThanOrEqual(1);
       expect(
-        Math.abs((sourceRgb as RgbColor).g - (roundTripRgb as RgbColor).g)
+        Math.abs((sourceRgb as RgbColor).g - (roundTripRgb as RgbColor).g),
       ).toBeLessThanOrEqual(2);
       expect(
-        Math.abs((sourceRgb as RgbColor).b - (roundTripRgb as RgbColor).b)
+        Math.abs((sourceRgb as RgbColor).b - (roundTripRgb as RgbColor).b),
       ).toBeLessThanOrEqual(2);
     });
 

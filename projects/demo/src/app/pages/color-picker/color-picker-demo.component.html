@@ -71,10 +71,7 @@
             }
           </form>
         </ui-lib-panel>
-        <app-doc-code-example
-          [html]="templateDrivenHtml"
-          [typescript]="templateDrivenTs"
-        />
+        <app-doc-code-example [html]="templateDrivenHtml" [typescript]="templateDrivenTs" />
       </app-doc-section>
 
       <app-doc-section id="reactive" title="Reactive Form">
@@ -145,7 +142,6 @@
     </div>
   </app-doc-demo-viewport>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -154,7 +150,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -171,7 +167,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

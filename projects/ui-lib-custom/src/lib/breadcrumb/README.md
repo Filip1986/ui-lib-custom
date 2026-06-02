@@ -8,14 +8,14 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `items` | `BreadcrumbItem[]` | `[]` | Navigation items rendered after the optional `home` item |
-| `home` | `BreadcrumbItem \| null` | `null` | Pinned first crumb; prepended to `items` internally |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual variant; falls back to `ThemeConfigService` when null |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token |
-| `styleClass` | `string \| null` | `null` | Extra CSS class appended to the host `<nav>` element |
-| `ariaLabel` | `string` | `'Breadcrumb'` | Accessible label for the `<nav>` landmark |
+| Name         | Type                                             | Default        | Notes                                                        |
+| ------------ | ------------------------------------------------ | -------------- | ------------------------------------------------------------ |
+| `items`      | `BreadcrumbItem[]`                               | `[]`           | Navigation items rendered after the optional `home` item     |
+| `home`       | `BreadcrumbItem \| null`                         | `null`         | Pinned first crumb; prepended to `items` internally          |
+| `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`         | Visual variant; falls back to `ThemeConfigService` when null |
+| `size`       | `'sm' \| 'md' \| 'lg'`                           | `'md'`         | Size token                                                   |
+| `styleClass` | `string \| null`                                 | `null`         | Extra CSS class appended to the host `<nav>` element         |
+| `ariaLabel`  | `string`                                         | `'Breadcrumb'` | Accessible label for the `<nav>` landmark                    |
 
 **`BreadcrumbItem` shape:** `{ id?, label?, icon?, iconAriaLabel?, url?, routerLink?, target?, command?, disabled?, styleClass? }`
 
@@ -26,8 +26,8 @@
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
+| Name        | Payload                    | Notes                                                                                           |
+| ----------- | -------------------------- | ----------------------------------------------------------------------------------------------- |
 | `itemClick` | `BreadcrumbItemClickEvent` | Emitted on click or keyboard activation of any item; payload contains `{ item, originalEvent }` |
 
 ## Usage

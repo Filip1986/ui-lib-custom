@@ -13,30 +13,30 @@ Multi-line text input with optional auto-resize, character counter, floating-lab
 
 ### Inputs
 
-| Name             | Type                     | Default                         | Description                                                                    |
-| ---------------- | ------------------------ | ------------------------------- | ------------------------------------------------------------------------------ |
-| `ariaLabel`      | `string | null`          | `null`                          | Accessible label used when no visible label is rendered.                       |
-| `ariaLabelledBy` | `string | null`          | `null`                          | Space-separated ids of visible label elements for accessible-name composition. |
-| `autoResize`     | `boolean`                | `TEXTAREA_DEFAULTS.autoResize`  | When true, the textarea grows in height automatically to fit its content.      |
-| `cols`           | `number | null`          | `TEXTAREA_DEFAULTS.cols`        | Number of visible text columns.                                                |
-| `disabled`       | `boolean`                | `TEXTAREA_DEFAULTS.disabled`    | Whether the textarea is disabled.                                              |
-| `error`          | `string | null`          | `null`                          | Error message rendered below the textarea and announced to screen readers.     |
-| `hint`           | `string | null`          | `null`                          | Hint text rendered below the textarea and associated through aria-describedby. |
-| `inputId`        | `string | null`          | `null`                          | Explicit id forwarded to the native textarea element.                          |
-| `invalid`        | `boolean`                | `false`                         | Whether the control should expose validation error semantics.                  |
-| `label`          | `string`                 | `''`                            | Accessible label rendered above the textarea.                                  |
-| `maxLength`      | `number | null`          | `TEXTAREA_DEFAULTS.maxLength`   | Maximum allowed character length -- also sets maxlength on the native element. |
-| `maxRows`        | `number | null`          | `TEXTAREA_DEFAULTS.maxRows`     | Maximum number of text rows before auto-resize enables internal scrolling.     |
-| `name`           | `string | null`          | `null`                          | name attribute forwarded to the native textarea element.                       |
-| `placeholder`    | `string`                 | `TEXTAREA_DEFAULTS.placeholder` | Placeholder text shown inside the textarea when it is empty.                   |
-| `readonly`       | `boolean`                | `TEXTAREA_DEFAULTS.readonly`    | Whether the textarea is read-only (focusable but not editable).                |
-| `required`       | `boolean`                | `TEXTAREA_DEFAULTS.required`    | Whether the field is required.                                                 |
-| `resize`         | `TextareaResize`         | `TEXTAREA_DEFAULTS.resize`      | CSS resize behaviour. Use 'auto' to enable JS-driven auto-resize.              |
-| `rows`           | `number`                 | `TEXTAREA_DEFAULTS.rows`        | Number of visible text rows.                                                   |
-| `showCounter`    | `boolean`                | `TEXTAREA_DEFAULTS.showCounter` | When true, renders a character counter below the textarea.                     |
-| `size`           | `TextareaSize`           | `TEXTAREA_DEFAULTS.size`        | Size token -- controls padding and font size.                                  |
-| `styleClass`     | `string | null`          | `null`                          | Additional CSS classes appended to the host element.                           |
-| `variant`        | `TextareaVariant | null` | `TEXTAREA_DEFAULTS.variant`     | Design variant override. When null the active global theme variant is used.    |
+| Name             | Type             | Default                         | Description                                                               |
+| ---------------- | ---------------- | ------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `ariaLabel`      | `string          | null`                           | `null`                                                                    | Accessible label used when no visible label is rendered.                       |
+| `ariaLabelledBy` | `string          | null`                           | `null`                                                                    | Space-separated ids of visible label elements for accessible-name composition. |
+| `autoResize`     | `boolean`        | `TEXTAREA_DEFAULTS.autoResize`  | When true, the textarea grows in height automatically to fit its content. |
+| `cols`           | `number          | null`                           | `TEXTAREA_DEFAULTS.cols`                                                  | Number of visible text columns.                                                |
+| `disabled`       | `boolean`        | `TEXTAREA_DEFAULTS.disabled`    | Whether the textarea is disabled.                                         |
+| `error`          | `string          | null`                           | `null`                                                                    | Error message rendered below the textarea and announced to screen readers.     |
+| `hint`           | `string          | null`                           | `null`                                                                    | Hint text rendered below the textarea and associated through aria-describedby. |
+| `inputId`        | `string          | null`                           | `null`                                                                    | Explicit id forwarded to the native textarea element.                          |
+| `invalid`        | `boolean`        | `false`                         | Whether the control should expose validation error semantics.             |
+| `label`          | `string`         | `''`                            | Accessible label rendered above the textarea.                             |
+| `maxLength`      | `number          | null`                           | `TEXTAREA_DEFAULTS.maxLength`                                             | Maximum allowed character length -- also sets maxlength on the native element. |
+| `maxRows`        | `number          | null`                           | `TEXTAREA_DEFAULTS.maxRows`                                               | Maximum number of text rows before auto-resize enables internal scrolling.     |
+| `name`           | `string          | null`                           | `null`                                                                    | name attribute forwarded to the native textarea element.                       |
+| `placeholder`    | `string`         | `TEXTAREA_DEFAULTS.placeholder` | Placeholder text shown inside the textarea when it is empty.              |
+| `readonly`       | `boolean`        | `TEXTAREA_DEFAULTS.readonly`    | Whether the textarea is read-only (focusable but not editable).           |
+| `required`       | `boolean`        | `TEXTAREA_DEFAULTS.required`    | Whether the field is required.                                            |
+| `resize`         | `TextareaResize` | `TEXTAREA_DEFAULTS.resize`      | CSS resize behaviour. Use 'auto' to enable JS-driven auto-resize.         |
+| `rows`           | `number`         | `TEXTAREA_DEFAULTS.rows`        | Number of visible text rows.                                              |
+| `showCounter`    | `boolean`        | `TEXTAREA_DEFAULTS.showCounter` | When true, renders a character counter below the textarea.                |
+| `size`           | `TextareaSize`   | `TEXTAREA_DEFAULTS.size`        | Size token -- controls padding and font size.                             |
+| `styleClass`     | `string          | null`                           | `null`                                                                    | Additional CSS classes appended to the host element.                           |
+| `variant`        | `TextareaVariant | null`                           | `TEXTAREA_DEFAULTS.variant`                                               | Design variant override. When null the active global theme variant is used.    |
 
 ### Outputs
 
@@ -126,12 +126,7 @@ Multi-line text input with optional auto-resize, character counter, floating-lab
 />
 
 <!-- projected hint + projected rich error -->
-<ui-lib-textarea
-  label="Address"
-  [required]="true"
-  [invalid]="addressInvalid"
-  [(ngModel)]="address"
->
+<ui-lib-textarea label="Address" [required]="true" [invalid]="addressInvalid" [(ngModel)]="address">
   <span textareaHint>Include street, city, and postal code.</span>
   <span textareaError>Please provide a complete mailing address.</span>
 </ui-lib-textarea>
@@ -143,4 +138,3 @@ Multi-line text input with optional auto-resize, character counter, floating-lab
 - [Demo page](/components/textarea)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/textarea/README.md)
-

@@ -1,12 +1,14 @@
 <div class="ui-lib-upload__container" [class]="styleClass()">
-
   <!-- ── Header: custom slot or default toolbar ─────────────────────────── -->
   @if (headerTemplate()) {
     <ng-container [ngTemplateOutlet]="headerTemplate()!" />
   } @else {
     <div class="ui-lib-upload__header">
-      <div class="ui-lib-upload__toolbar" role="toolbar" [attr.aria-label]="i18n.translate('upload.toolbar')">
-
+      <div
+        class="ui-lib-upload__toolbar"
+        role="toolbar"
+        [attr.aria-label]="i18n.translate('upload.toolbar')"
+      >
         <button
           type="button"
           class="ui-lib-upload__btn ui-lib-upload__btn--choose"
@@ -15,10 +17,21 @@
           (click)="onChoose()"
         >
           <span class="ui-lib-upload__btn-icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="17 8 12 3 7 8"/>
-              <line x1="12" y1="3" x2="12" y2="15"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
             </svg>
           </span>
           <span>{{ resolvedChooseLabel() }}</span>
@@ -33,10 +46,21 @@
             (click)="onUpload()"
           >
             <span class="ui-lib-upload__btn-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
-                <polyline points="16 16 12 12 8 16"/>
-                <line x1="12" y1="12" x2="12" y2="21"/>
-                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <polyline points="16 16 12 12 8 16" />
+                <line x1="12" y1="12" x2="12" y2="21" />
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
               </svg>
             </span>
             <span>{{ resolvedUploadLabel() }}</span>
@@ -52,15 +76,25 @@
             (click)="onCancel()"
           >
             <span class="ui-lib-upload__btn-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </span>
             <span>{{ resolvedCancelLabel() }}</span>
           </button>
         }
-
       </div>
     </div>
   }
@@ -94,17 +128,27 @@
       (dragleave)="onDragLeave($event)"
       (drop)="onDrop($event)"
     >
-
       @if (!hasFiles()) {
         @if (emptyTemplate()) {
           <ng-container [ngTemplateOutlet]="emptyTemplate()!" />
         } @else {
           <div class="ui-lib-upload__empty">
             <span class="ui-lib-upload__empty-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="48" height="48" aria-hidden="true">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="17 8 12 3 7 8"/>
-                <line x1="12" y1="3" x2="12" y2="15"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="48"
+                height="48"
+                aria-hidden="true"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
               </svg>
             </span>
             <p class="ui-lib-upload__empty-message">{{ resolvedEmptyMessage() }}</p>
@@ -124,10 +168,13 @@
       }
 
       @if (hasFiles()) {
-        <ul class="ui-lib-upload__file-list" role="list" [attr.aria-label]="i18n.translate('upload.files-list')">
+        <ul
+          class="ui-lib-upload__file-list"
+          role="list"
+          [attr.aria-label]="i18n.translate('upload.files-list')"
+        >
           @for (item of files(); track item.file.name; let index = $index) {
             <li class="ui-lib-upload__file-item" role="listitem">
-
               @if (fileTemplate()) {
                 <ng-container
                   [ngTemplateOutlet]="fileTemplate()!"
@@ -145,9 +192,20 @@
                     />
                   } @else {
                     <span class="ui-lib-upload__file-icon" aria-hidden="true">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
-                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
-                        <polyline points="13 2 13 9 20 9"/>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                        <polyline points="13 2 13 9 20 9" />
                       </svg>
                     </span>
                   }
@@ -164,23 +222,34 @@
                   [attr.aria-label]="'Remove ' + item.file.name"
                   (click)="removeFile($event, index)"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
                 </button>
               }
-
             </li>
           }
         </ul>
       }
-
     </div>
   }
 
   <!-- ── Drag-over live region (polite screen-reader announcement) ──────── -->
-  <div class="ui-lib-upload__sr-only" aria-live="polite" aria-atomic="true">{{ dragStatusMessage() }}</div>
+  <div class="ui-lib-upload__sr-only" aria-live="polite" aria-atomic="true">
+    {{ dragStatusMessage() }}
+  </div>
 
   <!-- ── Validation messages ─────────────────────────────────────────────── -->
   @if (validationMessages().length > 0) {
@@ -199,12 +268,22 @@
         [attr.aria-label]="i18n.translate('upload.dismiss')"
         (click)="clearMessages()"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          width="14"
+          height="14"
+          aria-hidden="true"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
     </div>
   }
-
 </div>

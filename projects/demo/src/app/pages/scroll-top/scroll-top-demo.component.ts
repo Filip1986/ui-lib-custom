@@ -91,13 +91,13 @@ export class ScrollTopDemoComponent {
   /** Items for the scrollable container demo. */
   public readonly dummyItems: number[] = Array.from(
     { length: 20 },
-    (_: unknown, index: number): number => index + 1
+    (_: unknown, index: number): number => index + 1,
   );
 
   /** Filler items to make the page tall enough to scroll. */
   public readonly fillerItems: number[] = Array.from(
     { length: 8 },
-    (_: unknown, index: number): number => index + 1
+    (_: unknown, index: number): number => index + 1,
   );
 
   public readonly inputRows: readonly ApiPropRow[] = [

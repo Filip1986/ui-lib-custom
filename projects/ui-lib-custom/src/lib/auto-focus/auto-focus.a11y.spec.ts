@@ -122,7 +122,7 @@ async function createFixture<T>(
   options?: {
     providers?: Provider[];
     waitForAnimationFrame?: boolean;
-  }
+  },
 ): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
     imports: [componentType],
@@ -179,7 +179,7 @@ describe('AutoFocus (a11y)', (): void => {
     const fixture: ComponentFixture<AutoFocusA11yHostComponent> =
       await createFixture<AutoFocusA11yHostComponent>(AutoFocusA11yHostComponent);
     const input: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '#auto-focus-input'
+      '#auto-focus-input',
     ) as HTMLElement;
     expect(document.activeElement).toBe(input);
   });
@@ -188,7 +188,7 @@ describe('AutoFocus (a11y)', (): void => {
     const fixture: ComponentFixture<AutoFocusDisabledA11yHostComponent> =
       await createFixture<AutoFocusDisabledA11yHostComponent>(AutoFocusDisabledA11yHostComponent);
     const input: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '#auto-focus-input'
+      '#auto-focus-input',
     ) as HTMLElement;
     expect(document.activeElement).not.toBe(input);
   });
@@ -202,7 +202,7 @@ describe('AutoFocus (a11y)', (): void => {
     const fixture: ComponentFixture<AutoFocusRerenderA11yHostComponent> =
       await createFixture<AutoFocusRerenderA11yHostComponent>(AutoFocusRerenderA11yHostComponent);
     const input: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '#auto-focus-input'
+      '#auto-focus-input',
     ) as HTMLElement;
     const focusSpy: jest.SpyInstance = jest.spyOn(input, 'focus');
 
@@ -220,7 +220,7 @@ describe('AutoFocus (a11y)', (): void => {
     const fixture: ComponentFixture<AutoFocusSelectorA11yHostComponent> =
       await createFixture<AutoFocusSelectorA11yHostComponent>(AutoFocusSelectorA11yHostComponent);
     const childButton: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '[data-autofocus-target]'
+      '[data-autofocus-target]',
     ) as HTMLElement;
     expect(document.activeElement).toBe(childButton);
   });
@@ -232,15 +232,15 @@ describe('AutoFocus (a11y)', (): void => {
 
     const fixture: ComponentFixture<AutoFocusInvalidSelectorA11yHostComponent> =
       await createFixture<AutoFocusInvalidSelectorA11yHostComponent>(
-        AutoFocusInvalidSelectorA11yHostComponent
+        AutoFocusInvalidSelectorA11yHostComponent,
       );
     const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '#invalid-selector-host'
+      '#invalid-selector-host',
     ) as HTMLElement;
 
     expect(document.activeElement).toBe(host);
     expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Invalid selector ":not(" on <div>. Falling back to host element.')
+      expect.stringContaining('Invalid selector ":not(" on <div>. Falling back to host element.'),
     );
 
     warnSpy.mockRestore();
@@ -249,10 +249,10 @@ describe('AutoFocus (a11y)', (): void => {
   it('does not focus when selector match is missing', async (): Promise<void> => {
     const fixture: ComponentFixture<AutoFocusMissingSelectorA11yHostComponent> =
       await createFixture<AutoFocusMissingSelectorA11yHostComponent>(
-        AutoFocusMissingSelectorA11yHostComponent
+        AutoFocusMissingSelectorA11yHostComponent,
       );
     const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '#selector-host'
+      '#selector-host',
     ) as HTMLElement;
     expect(document.activeElement).not.toBe(host);
   });
@@ -263,11 +263,11 @@ describe('AutoFocus (a11y)', (): void => {
     });
 
     await createFixture<AutoFocusNonFocusableA11yHostComponent>(
-      AutoFocusNonFocusableA11yHostComponent
+      AutoFocusNonFocusableA11yHostComponent,
     );
 
     expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('<div> host or selector target is not programmatically focusable')
+      expect.stringContaining('<div> host or selector target is not programmatically focusable'),
     );
 
     warnSpy.mockRestore();
@@ -277,7 +277,7 @@ describe('AutoFocus (a11y)', (): void => {
     const fixture: ComponentFixture<AutoFocusExistingFocusHostComponent> =
       await createFixture<AutoFocusExistingFocusHostComponent>(AutoFocusExistingFocusHostComponent);
     const existing: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '#existing-focus'
+      '#existing-focus',
     ) as HTMLElement;
     existing.focus();
 
@@ -358,7 +358,7 @@ describe('AutoFocus (a11y)', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<AutoFocusA11yHostComponent> = TestBed.createComponent(
-      AutoFocusA11yHostComponent
+      AutoFocusA11yHostComponent,
     );
     document.body.appendChild(fixture.nativeElement);
     const focusSpy: jest.SpyInstance = jest.spyOn(HTMLElement.prototype, 'focus');
@@ -377,7 +377,7 @@ describe('AutoFocus (a11y)', (): void => {
     const fixture: ComponentFixture<AutoFocusA11yHostComponent> =
       await createFixture<AutoFocusA11yHostComponent>(AutoFocusA11yHostComponent);
     const input: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '#auto-focus-input'
+      '#auto-focus-input',
     ) as HTMLElement;
     expect(input.classList.contains('ui-lib-autofocus')).toBe(true);
   });

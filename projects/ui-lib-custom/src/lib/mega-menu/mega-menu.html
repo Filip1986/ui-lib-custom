@@ -1,25 +1,17 @@
-<nav
-  class="ui-lib-mega-menu__nav"
-  [attr.aria-label]="effectiveAriaLabel()"
->
-  <ul
-    class="ui-lib-mega-menu__root-list"
-    role="menubar"
-    [attr.aria-orientation]="orientation()"
-  >
+<nav class="ui-lib-mega-menu__nav" [attr.aria-label]="effectiveAriaLabel()">
+  <ul class="ui-lib-mega-menu__root-list" role="menubar" [attr.aria-orientation]="orientation()">
     @for (item of visibleItems(); track item.label ?? $index) {
-      <li
-        [class]="getRootItemClass(item, $index)"
-        role="none"
-      >
+      <li [class]="getRootItemClass(item, $index)" role="none">
         <a
           class="ui-lib-mega-menu__root-link"
-          [href]="(item.url && !item.items?.length) ? item.url : null"
-          [attr.target]="(item.url && !item.items?.length) ? (item.target || null) : null"
+          [href]="item.url && !item.items?.length ? item.url : null"
+          [attr.target]="item.url && !item.items?.length ? item.target || null : null"
           role="menuitem"
           [attr.aria-disabled]="item.disabled ? 'true' : null"
           [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
-          [attr.aria-expanded]="item.items?.length ? (isPanelOpen($index) ? 'true' : 'false') : null"
+          [attr.aria-expanded]="
+            item.items?.length ? (isPanelOpen($index) ? 'true' : 'false') : null
+          "
           [attr.aria-controls]="item.items?.length ? panelId : null"
           [attr.tabindex]="getRootTabIndex(item, $index)"
           (click)="onTopItemClick($event, item, $index)"
@@ -41,7 +33,9 @@
             class="ui-lib-mega-menu__panel"
             [class.ui-lib-mega-menu__panel--open]="isPanelPositioned()"
             [attr.id]="panelId"
-            [attr.aria-label]="item.label ? i18n.translate('mega-menu.submenu', { label: item.label }) : null"
+            [attr.aria-label]="
+              item.label ? i18n.translate('mega-menu.submenu', { label: item.label }) : null
+            "
           >
             <div class="ui-lib-mega-menu__panel-inner">
               @for (column of item.items; track column.header ?? $index) {
@@ -70,11 +64,13 @@
                           role="none"
                         >
                           <a
-                            [class]="subItem.styleClass
-                              ? 'ui-lib-mega-menu__sub-link ' + subItem.styleClass
-                              : 'ui-lib-mega-menu__sub-link'"
+                            [class]="
+                              subItem.styleClass
+                                ? 'ui-lib-mega-menu__sub-link ' + subItem.styleClass
+                                : 'ui-lib-mega-menu__sub-link'
+                            "
                             [href]="subItem.url || null"
-                            [attr.target]="subItem.url ? (subItem.target || null) : null"
+                            [attr.target]="subItem.url ? subItem.target || null : null"
                             role="menuitem"
                             [attr.aria-disabled]="subItem.disabled ? 'true' : null"
                             [attr.tabindex]="subItem.disabled ? '-1' : '0'"
@@ -82,7 +78,10 @@
                             (keydown)="onSubItemKeyDown($event, subItem)"
                           >
                             @if (subItem.icon) {
-                              <span class="ui-lib-mega-menu__sub-icon {{ subItem.icon }}" aria-hidden="true"></span>
+                              <span
+                                class="ui-lib-mega-menu__sub-icon {{ subItem.icon }}"
+                                aria-hidden="true"
+                              ></span>
                             }
                             @if (subItem.label) {
                               <span class="ui-lib-mega-menu__sub-label">{{ subItem.label }}</span>

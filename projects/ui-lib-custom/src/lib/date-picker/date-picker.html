@@ -12,7 +12,9 @@
         [placeholder]="placeholder()"
         [disabled]="isDisabled()"
         [attr.tabindex]="isDisabled() ? -1 : tabindex()"
-        [attr.aria-label]="ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('datepicker.input.label'))"
+        [attr.aria-label]="
+          ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('datepicker.input.label'))
+        "
         [attr.aria-labelledby]="ariaLabelledBy()"
         [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
         [attr.aria-controls]="panelVisible() ? resolvedInputId() + '-panel' : null"
@@ -72,7 +74,9 @@
               type="button"
               class="ui-lib-datepicker__prev-button"
               [disabled]="isDisabled() || !canNavigatePrev()"
-              [attr.aria-label]="i18n.translate('datepicker.prev.month.label', { month: prevMonthLabel() })"
+              [attr.aria-label]="
+                i18n.translate('datepicker.prev.month.label', { month: prevMonthLabel() })
+              "
               (click)="navigateMonth(-1)"
             >
               ‹
@@ -130,7 +134,9 @@
               type="button"
               class="ui-lib-datepicker__next-button"
               [disabled]="isDisabled() || !canNavigateNext()"
-              [attr.aria-label]="i18n.translate('datepicker.next.month.label', { month: nextMonthLabel() })"
+              [attr.aria-label]="
+                i18n.translate('datepicker.next.month.label', { month: nextMonthLabel() })
+              "
               (click)="navigateMonth(1)"
             >
               ›
@@ -139,152 +145,213 @@
 
           @switch (currentView()) {
             @case ('date') {
-            <div class="ui-lib-datepicker__months" [attr.data-count]="numberOfMonths()">
-              @for (monthGrid of monthGridData(); let monthIndex = $index; track monthIndex) {
-                <div class="ui-lib-datepicker__month-panel">
-                  @if (numberOfMonths() > 1) {
-                    <div class="ui-lib-datepicker__month-panel-title">
-                      {{ getMonthLabelByIndex(monthIndex) }} {{ getYearLabelByIndex(monthIndex) }}
-                    </div>
-                  }
+              <div class="ui-lib-datepicker__months" [attr.data-count]="numberOfMonths()">
+                @for (monthGrid of monthGridData(); let monthIndex = $index; track monthIndex) {
+                  <div class="ui-lib-datepicker__month-panel">
+                    @if (numberOfMonths() > 1) {
+                      <div class="ui-lib-datepicker__month-panel-title">
+                        {{ getMonthLabelByIndex(monthIndex) }} {{ getYearLabelByIndex(monthIndex) }}
+                      </div>
+                    }
 
-                  <table class="ui-lib-datepicker__grid" role="grid" [attr.aria-label]="getMonthLabelByIndex(monthIndex) + ' ' + getYearLabelByIndex(monthIndex)">
-                    <thead>
-                      <tr role="row">
-                        @if (showWeek()) {
-                          <th class="ui-lib-datepicker__week-header" scope="col" role="columnheader">Wk</th>
-                        }
-                        @for (weekDayLabel of weekDayLabels(); track weekDayLabel + '-' + $index) {
-                          <th
-                            class="ui-lib-datepicker__week-day"
-                            scope="col"
-                            role="columnheader"
-                            [attr.abbr]="weekDayFullLabels()[$index]"
-                            [attr.aria-label]="weekDayFullLabels()[$index]"
-                          >{{ weekDayLabel }}</th>
-                        }
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @for (week of getMonthWeeks(monthGrid); let weekIndex = $index; track weekIndex) {
+                    <table
+                      class="ui-lib-datepicker__grid"
+                      role="grid"
+                      [attr.aria-label]="
+                        getMonthLabelByIndex(monthIndex) + ' ' + getYearLabelByIndex(monthIndex)
+                      "
+                    >
+                      <thead>
                         <tr role="row">
                           @if (showWeek()) {
-                            <td class="ui-lib-datepicker__week-number" role="gridcell">{{ getWeekNumber(week) }}</td>
-                          }
-                          @for (dateMeta of week; track dateMeta.year + '-' + dateMeta.month + '-' + dateMeta.day + '-' + $index) {
-                            <td
-                              class="ui-lib-datepicker__day-cell"
-                              role="gridcell"
-                              [attr.aria-selected]="dateMeta.selected ? 'true' : 'false'"
-                              [attr.aria-disabled]="dateMeta.disabled ? 'true' : 'false'"
+                            <th
+                              class="ui-lib-datepicker__week-header"
+                              scope="col"
+                              role="columnheader"
                             >
-                              <button
-                                type="button"
-                                class="{{ getDateCellClasses(dateMeta) }}"
-                                [attr.id]="getDateCellId(monthIndex, dateMeta)"
-                                [attr.data-date-key]="dateMeta.year + '-' + dateMeta.month + '-' + dateMeta.day"
-                                [attr.aria-label]="getDateAriaLabel(dateMeta)"
-                                [attr.tabindex]="isDateFocused(dateMeta) ? 0 : -1"
-                                [disabled]="isDisabled() || dateMeta.disabled"
-                                (click)="onDateSelect($event, dateMeta)"
-                                (keydown)="onDateCellKeydown($event, dateMeta)"
-                                (mouseenter)="onDateHover(dateMeta)"
-                                (mouseleave)="onDateMouseLeave()"
-                              >
-                                @if (dateCellTemplate) {
-                                  <ng-container *ngTemplateOutlet="dateCellTemplate; context: { $implicit: dateMeta }" />
-                                } @else if (!dateMeta.otherMonth || showOtherMonths()) {
-                                  {{ dateMeta.day }}
-                                } @else {
-                                  <span class="ui-lib-datepicker__day-empty" aria-hidden="true">&nbsp;</span>
-                                }
-                              </button>
-                            </td>
+                              Wk
+                            </th>
+                          }
+                          @for (
+                            weekDayLabel of weekDayLabels();
+                            track weekDayLabel + '-' + $index
+                          ) {
+                            <th
+                              class="ui-lib-datepicker__week-day"
+                              scope="col"
+                              role="columnheader"
+                              [attr.abbr]="weekDayFullLabels()[$index]"
+                              [attr.aria-label]="weekDayFullLabels()[$index]"
+                            >
+                              {{ weekDayLabel }}
+                            </th>
                           }
                         </tr>
-                      }
-                    </tbody>
-                  </table>
-                </div>
-              }
-            </div>
+                      </thead>
+                      <tbody>
+                        @for (
+                          week of getMonthWeeks(monthGrid);
+                          let weekIndex = $index;
+                          track weekIndex
+                        ) {
+                          <tr role="row">
+                            @if (showWeek()) {
+                              <td class="ui-lib-datepicker__week-number" role="gridcell">
+                                {{ getWeekNumber(week) }}
+                              </td>
+                            }
+                            @for (
+                              dateMeta of week;
+                              track dateMeta.year +
+                                '-' +
+                                dateMeta.month +
+                                '-' +
+                                dateMeta.day +
+                                '-' +
+                                $index
+                            ) {
+                              <td
+                                class="ui-lib-datepicker__day-cell"
+                                role="gridcell"
+                                [attr.aria-selected]="dateMeta.selected ? 'true' : 'false'"
+                                [attr.aria-disabled]="dateMeta.disabled ? 'true' : 'false'"
+                              >
+                                <button
+                                  type="button"
+                                  class="{{ getDateCellClasses(dateMeta) }}"
+                                  [attr.id]="getDateCellId(monthIndex, dateMeta)"
+                                  [attr.data-date-key]="
+                                    dateMeta.year + '-' + dateMeta.month + '-' + dateMeta.day
+                                  "
+                                  [attr.aria-label]="getDateAriaLabel(dateMeta)"
+                                  [attr.tabindex]="isDateFocused(dateMeta) ? 0 : -1"
+                                  [disabled]="isDisabled() || dateMeta.disabled"
+                                  (click)="onDateSelect($event, dateMeta)"
+                                  (keydown)="onDateCellKeydown($event, dateMeta)"
+                                  (mouseenter)="onDateHover(dateMeta)"
+                                  (mouseleave)="onDateMouseLeave()"
+                                >
+                                  @if (dateCellTemplate) {
+                                    <ng-container
+                                      *ngTemplateOutlet="
+                                        dateCellTemplate;
+                                        context: { $implicit: dateMeta }
+                                      "
+                                    />
+                                  } @else if (!dateMeta.otherMonth || showOtherMonths()) {
+                                    {{ dateMeta.day }}
+                                  } @else {
+                                    <span class="ui-lib-datepicker__day-empty" aria-hidden="true"
+                                      >&nbsp;</span
+                                    >
+                                  }
+                                </button>
+                              </td>
+                            }
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                }
+              </div>
             }
 
             @case ('month') {
-            <div class="ui-lib-datepicker__month-grid" role="grid" [attr.aria-label]="i18n.translate('datepicker.month-picker')">
-              @for (monthOption of monthOptions(); let monthIndex = $index; track monthOption.month) {
-                <button
-                  type="button"
-                  class="ui-lib-datepicker__month-cell"
-                  [class.ui-lib-datepicker__month-cell--selected]="monthOption.selected"
-                  [class.ui-lib-datepicker__month-cell--disabled]="monthOption.disabled"
-                  [attr.aria-label]="locale().monthNames[monthOption.month]"
-                  [attr.aria-selected]="monthOption.selected ? 'true' : 'false'"
-                  [attr.aria-disabled]="monthOption.disabled ? 'true' : 'false'"
-                  [attr.data-month-index]="monthIndex"
-                  [attr.tabindex]="focusedMonthIndex() === monthIndex ? 0 : -1"
-                  [disabled]="isDisabled() || monthOption.disabled"
-                  (click)="onMonthSelect($event, monthIndex)"
-                  (keydown)="onMonthCellKeydown($event, monthIndex)"
-                >
-                  {{ monthOption.label }}
-                </button>
-              }
-            </div>
+              <div
+                class="ui-lib-datepicker__month-grid"
+                role="grid"
+                [attr.aria-label]="i18n.translate('datepicker.month-picker')"
+              >
+                @for (
+                  monthOption of monthOptions();
+                  let monthIndex = $index;
+                  track monthOption.month
+                ) {
+                  <button
+                    type="button"
+                    class="ui-lib-datepicker__month-cell"
+                    [class.ui-lib-datepicker__month-cell--selected]="monthOption.selected"
+                    [class.ui-lib-datepicker__month-cell--disabled]="monthOption.disabled"
+                    [attr.aria-label]="locale().monthNames[monthOption.month]"
+                    [attr.aria-selected]="monthOption.selected ? 'true' : 'false'"
+                    [attr.aria-disabled]="monthOption.disabled ? 'true' : 'false'"
+                    [attr.data-month-index]="monthIndex"
+                    [attr.tabindex]="focusedMonthIndex() === monthIndex ? 0 : -1"
+                    [disabled]="isDisabled() || monthOption.disabled"
+                    (click)="onMonthSelect($event, monthIndex)"
+                    (keydown)="onMonthCellKeydown($event, monthIndex)"
+                  >
+                    {{ monthOption.label }}
+                  </button>
+                }
+              </div>
             }
 
             @case ('year') {
-            <div class="ui-lib-datepicker__year-header">
-              <button
-                type="button"
-                class="ui-lib-datepicker__prev-button"
-                [disabled]="isDisabled()"
-                [attr.aria-label]="i18n.translate('datepicker.prev.decade')"
-                (click)="navigateDecade(-1)"
-              >
-                ‹
-              </button>
-              <div class="ui-lib-datepicker__decade-label">
-                {{ currentDecadeStart() }} - {{ currentDecadeStart() + 11 }}
-              </div>
-              <button
-                type="button"
-                class="ui-lib-datepicker__next-button"
-                [disabled]="isDisabled()"
-                [attr.aria-label]="i18n.translate('datepicker.next.decade')"
-                (click)="navigateDecade(1)"
-              >
-                ›
-              </button>
-            </div>
-
-            <div class="ui-lib-datepicker__year-grid" role="grid" [attr.aria-label]="i18n.translate('datepicker.year-picker')">
-              @for (yearOption of yearOptions(); let yearIndex = $index; track yearOption.year) {
+              <div class="ui-lib-datepicker__year-header">
                 <button
                   type="button"
-                  class="ui-lib-datepicker__year-cell"
-                  [class.ui-lib-datepicker__year-cell--selected]="yearOption.selected"
-                  [class.ui-lib-datepicker__year-cell--disabled]="yearOption.disabled"
-                  [attr.aria-label]="'' + yearOption.year"
-                  [attr.aria-selected]="yearOption.selected ? 'true' : 'false'"
-                  [attr.aria-disabled]="yearOption.disabled ? 'true' : 'false'"
-                  [attr.data-year-index]="yearIndex"
-                  [attr.tabindex]="focusedYearIndex() === yearIndex ? 0 : -1"
-                  [disabled]="isDisabled() || yearOption.disabled"
-                  (click)="onYearSelect($event, yearIndex)"
-                  (keydown)="onYearCellKeydown($event, yearIndex)"
+                  class="ui-lib-datepicker__prev-button"
+                  [disabled]="isDisabled()"
+                  [attr.aria-label]="i18n.translate('datepicker.prev.decade')"
+                  (click)="navigateDecade(-1)"
                 >
-                  {{ yearOption.year }}
+                  ‹
                 </button>
-              }
-            </div>
+                <div class="ui-lib-datepicker__decade-label">
+                  {{ currentDecadeStart() }} - {{ currentDecadeStart() + 11 }}
+                </div>
+                <button
+                  type="button"
+                  class="ui-lib-datepicker__next-button"
+                  [disabled]="isDisabled()"
+                  [attr.aria-label]="i18n.translate('datepicker.next.decade')"
+                  (click)="navigateDecade(1)"
+                >
+                  ›
+                </button>
+              </div>
+
+              <div
+                class="ui-lib-datepicker__year-grid"
+                role="grid"
+                [attr.aria-label]="i18n.translate('datepicker.year-picker')"
+              >
+                @for (yearOption of yearOptions(); let yearIndex = $index; track yearOption.year) {
+                  <button
+                    type="button"
+                    class="ui-lib-datepicker__year-cell"
+                    [class.ui-lib-datepicker__year-cell--selected]="yearOption.selected"
+                    [class.ui-lib-datepicker__year-cell--disabled]="yearOption.disabled"
+                    [attr.aria-label]="'' + yearOption.year"
+                    [attr.aria-selected]="yearOption.selected ? 'true' : 'false'"
+                    [attr.aria-disabled]="yearOption.disabled ? 'true' : 'false'"
+                    [attr.data-year-index]="yearIndex"
+                    [attr.tabindex]="focusedYearIndex() === yearIndex ? 0 : -1"
+                    [disabled]="isDisabled() || yearOption.disabled"
+                    (click)="onYearSelect($event, yearIndex)"
+                    (keydown)="onYearCellKeydown($event, yearIndex)"
+                  >
+                    {{ yearOption.year }}
+                  </button>
+                }
+              </div>
             }
           }
         }
 
         @if (showTime() || timeOnly()) {
-          <div class="ui-lib-datepicker__time-panel" role="group" [attr.aria-label]="i18n.translate('datepicker.time-panel')">
-            <div class="ui-lib-datepicker__time-group" role="group" [attr.aria-label]="i18n.translate('datepicker.time.hour')">
+          <div
+            class="ui-lib-datepicker__time-panel"
+            role="group"
+            [attr.aria-label]="i18n.translate('datepicker.time-panel')"
+          >
+            <div
+              class="ui-lib-datepicker__time-group"
+              role="group"
+              [attr.aria-label]="i18n.translate('datepicker.time.hour')"
+            >
               <button
                 type="button"
                 class="ui-lib-datepicker__time-action"
@@ -322,7 +389,11 @@
 
             <span class="ui-lib-datepicker__time-separator" aria-hidden="true">:</span>
 
-            <div class="ui-lib-datepicker__time-group" role="group" [attr.aria-label]="i18n.translate('datepicker.time.minute')">
+            <div
+              class="ui-lib-datepicker__time-group"
+              role="group"
+              [attr.aria-label]="i18n.translate('datepicker.time.minute')"
+            >
               <button
                 type="button"
                 class="ui-lib-datepicker__time-action"
@@ -361,7 +432,11 @@
             @if (showSeconds()) {
               <span class="ui-lib-datepicker__time-separator" aria-hidden="true">:</span>
 
-              <div class="ui-lib-datepicker__time-group" role="group" [attr.aria-label]="i18n.translate('datepicker.time.second')">
+              <div
+                class="ui-lib-datepicker__time-group"
+                role="group"
+                [attr.aria-label]="i18n.translate('datepicker.time.second')"
+              >
                 <button
                   type="button"
                   class="ui-lib-datepicker__time-action"
@@ -403,7 +478,9 @@
                 type="button"
                 class="ui-lib-datepicker__ampm-toggle"
                 [disabled]="isDisabled()"
-                [attr.aria-label]="i18n.translate('datepicker.ampm.toggle', { value: currentAmPm() })"
+                [attr.aria-label]="
+                  i18n.translate('datepicker.ampm.toggle', { value: currentAmPm() })
+                "
                 [attr.aria-pressed]="currentAmPm() === 'PM' ? 'true' : 'false'"
                 (click)="toggleAmPm()"
               >
@@ -441,7 +518,9 @@
         class="ui-lib-datepicker__live-region"
         aria-live="polite"
         aria-atomic="true"
-      >{{ currentMonthYearLabel() }}</div>
+      >
+        {{ currentMonthYearLabel() }}
+      </div>
     </div>
   }
 </div>

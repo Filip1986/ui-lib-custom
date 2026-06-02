@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <!-- ── Header ──────────────────────────────────────────────────────────── -->
   <app-doc-page-header
     docHeader
@@ -17,12 +16,17 @@
       </blockquote>
       <p class="vision-hero__body">
         Build the UI library that makes Angular developers feel what React developers felt when
-        modern UI ecosystems exploded: <strong>excitement, speed, elegance, composability,
-        confidence, and creative momentum.</strong>
+        modern UI ecosystems exploded:
+        <strong
+          >excitement, speed, elegance, composability, confidence, and creative momentum.</strong
+        >
       </p>
       <p class="vision-hero__goal">
         Not another Angular component library.
-        <strong>A new standard for what Angular UI development should feel like in the modern era.</strong>
+        <strong
+          >A new standard for what Angular UI development should feel like in the modern
+          era.</strong
+        >
       </p>
     </div>
 
@@ -57,8 +61,8 @@
         }
       </div>
       <p class="vision-emotional__reactions">
-        People should tweet about it, show coworkers, recommend it organically, and enjoy building with it.
-        The library should create whispers in developer communities:
+        People should tweet about it, show coworkers, recommend it organically, and enjoy building
+        with it. The library should create whispers in developer communities:
       </p>
       <div class="vision-whispers">
         <span class="vision-whisper">"This is different."</span>
@@ -68,8 +72,8 @@
       <div class="vision-ultimate">
         <p class="vision-ultimate__text">The ultimate emotional outcome:</p>
         <blockquote class="vision-ultimate__quote">
-          Developers feel excited when starting a project with it.
-          And after using it, they feel: <strong>"I don't want to go back."</strong>
+          Developers feel excited when starting a project with it. And after using it, they feel:
+          <strong>"I don't want to go back."</strong>
         </blockquote>
       </div>
     </div>
@@ -79,7 +83,8 @@
   <section id="core-philosophy" data-doc-anchor class="vision-section">
     <h2 class="section-title">Core Philosophy</h2>
     <p class="section-subtitle">
-      Five foundational principles. Every architectural and API decision must trace back to at least one of these.
+      Five foundational principles. Every architectural and API decision must trace back to at least
+      one of these.
     </p>
 
     <div class="principles-list">
@@ -104,14 +109,19 @@
   <section id="wow-factor" data-doc-anchor class="vision-section">
     <h2 class="section-title">The Wow Factor</h2>
     <p class="section-subtitle">
-      Legendary libraries commit to one undeniable strength first, then build the next, and the next.
-      There must always be at least one area where developers say:
+      Legendary libraries commit to one undeniable strength first, then build the next, and the
+      next. There must always be at least one area where developers say:
       <strong>"Nothing else in Angular comes close."</strong>
     </p>
 
     <div class="wow-grid">
       @for (wow of wowFactors; track trackByNumber($index, wow)) {
-        <div class="wow-card" [class.wow-card--committed]="wow.committed" [class.wow-card--achieved]="wow.status === 'achieved'" [class.wow-card--queued]="wow.status === 'queued'">
+        <div
+          class="wow-card"
+          [class.wow-card--committed]="wow.committed"
+          [class.wow-card--achieved]="wow.status === 'achieved'"
+          [class.wow-card--queued]="wow.status === 'queued'"
+        >
           <div class="wow-card__header">
             <span class="wow-number">WF{{ wow.number }}</span>
             @if (wow.committed) {
@@ -163,13 +173,27 @@
           Theming should feel effortless — and become one of the library's signature features.
         </p>
         <ul class="tech-list" aria-label="Theming requirements">
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Dark mode by default</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Runtime theme switching</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Design token system</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Minimal CSS specificity conflicts</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Easy brand customization</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> CSS variable driven</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Global + local theming support</li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Dark mode by default
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Runtime theme switching
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Design token system
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Minimal CSS specificity conflicts
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Easy brand customization
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> CSS variable driven
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Global + local theming support
+          </li>
         </ul>
       </div>
 
@@ -180,13 +204,28 @@
           <strong>Documentation is part of the product experience.</strong>
         </p>
         <ul class="tech-list" aria-label="Documentation requirements">
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Live playgrounds</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Copy-paste examples</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Interactive demos</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Accessibility explanations per component</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Performance notes</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Migration guides</li>
-          <li class="tech-list__item"><span class="tech-check" aria-hidden="true">✓</span> Real-world examples</li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Live playgrounds
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Copy-paste examples
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Interactive demos
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Accessibility explanations per
+            component
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Performance notes
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Migration guides
+          </li>
+          <li class="tech-list__item">
+            <span class="tech-check" aria-hidden="true">✓</span> Real-world examples
+          </li>
         </ul>
         <p class="tech-card__result">
           The docs should make developers think: <strong>"These people deeply care."</strong>
@@ -199,7 +238,8 @@
   <section id="component-philosophy" data-doc-anchor class="vision-section">
     <h2 class="section-title">Component Philosophy</h2>
     <p class="section-subtitle">
-      Do not chase component quantity. <strong>Fewer components, dramatically higher quality.</strong>
+      Do not chase component quantity.
+      <strong>Fewer components, dramatically higher quality.</strong>
       Every component should feel: refined, intentional, delightful.
     </p>
 
@@ -223,11 +263,25 @@
     <div class="scorecard-summary">
       <h3 class="scorecard-summary__title">The Quality Scorecard</h3>
       <p class="scorecard-summary__desc">
-        Before a component ships, it must score ≥&nbsp;8 across all 10 quality dimensions.
-        This scorecard is what separates a component library from a legendary UI ecosystem.
+        Before a component ships, it must score ≥&nbsp;8 across all 10 quality dimensions. This
+        scorecard is what separates a component library from a legendary UI ecosystem.
       </p>
       <div class="scorecard-dimensions" role="list" aria-label="Quality scorecard dimensions">
-        @for (dim of ['API Clarity', 'Accessibility', 'Performance', 'Composability', 'Theming', 'Developer Experience', 'Documentation', 'Visual & Interaction Polish', 'Angular Integration', 'Emotional Quality']; track trackByString($index, dim)) {
+        @for (
+          dim of [
+            'API Clarity',
+            'Accessibility',
+            'Performance',
+            'Composability',
+            'Theming',
+            'Developer Experience',
+            'Documentation',
+            'Visual & Interaction Polish',
+            'Angular Integration',
+            'Emotional Quality',
+          ];
+          track trackByString($index, dim)
+        ) {
           <div class="scorecard-dim" role="listitem">
             <span class="scorecard-dim__label">{{ dim }}</span>
             <span class="scorecard-dim__gate">≥ 8</span>
@@ -241,7 +295,8 @@
   <section id="long-term-vision" data-doc-anchor class="vision-section">
     <h2 class="section-title">Long-Term Vision</h2>
     <p class="section-subtitle">
-      The project evolves from a component library to a full design system platform, then to an enterprise tooling platform.
+      The project evolves from a component library to a full design system platform, then to an
+      enterprise tooling platform.
     </p>
 
     <div class="evolution-path">
@@ -259,7 +314,20 @@
     <div class="horizon-features">
       <h3 class="horizon-features__title">Potential Future Layers</h3>
       <div class="horizon-grid" role="list" aria-label="Potential future features">
-        @for (feature of ['Premium data grid', 'Visual theme builder', 'Design-to-code tooling', 'Figma integration', 'AI-assisted UI composition', 'Accessibility auditing tools', 'Enterprise support', 'Premium templates', 'Dashboard ecosystems']; track trackByString($index, feature)) {
+        @for (
+          feature of [
+            'Premium data grid',
+            'Visual theme builder',
+            'Design-to-code tooling',
+            'Figma integration',
+            'AI-assisted UI composition',
+            'Accessibility auditing tools',
+            'Enterprise support',
+            'Premium templates',
+            'Dashboard ecosystems',
+          ];
+          track trackByString($index, feature)
+        ) {
           <div class="horizon-item" role="listitem">
             <span class="horizon-item__dot" aria-hidden="true">◆</span>
             {{ feature }}
@@ -271,8 +339,9 @@
     <div class="strategic-position">
       <h3 class="strategic-position__title">Strategic Positioning</h3>
       <p class="strategic-position__desc">
-        The Angular ecosystem currently lacks a universally admired modern UI system with React-level DX,
-        elegant composability, modern theming, premium polish, exceptional animations, and ecosystem excitement.
+        The Angular ecosystem currently lacks a universally admired modern UI system with
+        React-level DX, elegant composability, modern theming, premium polish, exceptional
+        animations, and ecosystem excitement.
         <strong>This project exists to fill that gap.</strong>
       </p>
       <div class="positioning-tags">
@@ -289,16 +358,15 @@
     <h2 class="section-title">Business Model</h2>
     <p class="section-subtitle">
       The library is free. That is not a temporary state — it is a permanent strategic commitment.
-      Free is what builds the community. Community is what builds the trust. Trust is what builds every revenue stream that follows.
+      Free is what builds the community. Community is what builds the trust. Trust is what builds
+      every revenue stream that follows.
     </p>
 
     <div class="model-principle">
       <blockquote class="model-principle__quote">
         Give the world a genuinely exceptional free library. Monetise the ecosystem around it.
       </blockquote>
-      <p class="model-principle__attribution">
-        Proven by PrimeTek (PrimeNG), AG Grid, and others.
-      </p>
+      <p class="model-principle__attribution">Proven by PrimeTek (PrimeNG), AG Grid, and others.</p>
     </div>
 
     <div class="revenue-streams" role="list" aria-label="Revenue streams">
@@ -352,8 +420,10 @@
       </p>
       <p class="ultimate-goal__association">
         The library should become associated with:
-        <strong>modern Angular excellence, engineering quality, design elegance,
-        and exceptional developer experience.</strong>
+        <strong
+          >modern Angular excellence, engineering quality, design elegance, and exceptional
+          developer experience.</strong
+        >
       </p>
     </div>
   </section>
@@ -366,6 +436,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>
-

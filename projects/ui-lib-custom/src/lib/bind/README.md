@@ -18,9 +18,9 @@ binding point instead of many individual `[prop]` bindings.
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `uiLibBind` | `Record<string, unknown>` | `{}` | Key-value pairs applied as DOM properties on the host element. `unknown` is intentional so the directive can forward any valid native or component-host property without over-constraining callers. |
+| Name        | Type                      | Default | Notes                                                                                                                                                                                               |
+| ----------- | ------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `uiLibBind` | `Record<string, unknown>` | `{}`    | Key-value pairs applied as DOM properties on the host element. `unknown` is intentional so the directive can forward any valid native or component-host property without over-constraining callers. |
 
 ## Outputs
 
@@ -54,11 +54,9 @@ property form because it is clearer and matches other native properties.
 
 ```html
 @if (showDetails()) {
-  <section [uiLibBind]="detailsBindings()"></section>
-}
-
-@for (item of items(); track item.id) {
-  <li [uiLibBind]="item.bindings"></li>
+<section [uiLibBind]="detailsBindings()"></section>
+} @for (item of items(); track item.id) {
+<li [uiLibBind]="item.bindings"></li>
 }
 ```
 
@@ -116,10 +114,8 @@ _None — `Bind` is a directive that writes DOM properties. It has no component 
 
 ```ts
 // Correct
-[uiLibBind]="{ ariaHidden: 'true' }"
-
-// Also correct — removes the reflected attribute/property
-[uiLibBind]="{ ariaHidden: null }"
+[uiLibBind] = // Also correct — removes the reflected attribute/property
+  "{ ariaHidden: 'true' }"[uiLibBind] = '{ ariaHidden: null }';
 ```
 
 - Common pitfalls:

@@ -8,27 +8,27 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `uilibKeyFilter` | `KeyFilterPreset \| RegExp` | `'alphanum'` | Built-in preset name or a custom `RegExp` tested per character |
-| `keyFilterBypass` | `boolean` | `false` | When `true`, all filtering is suspended |
-| `hintText` | `string \| null` | `null` | Accessible format hint text linked through `aria-describedby` |
-| `pattern` | `KeyFilterPreset \| null` | `null` | Optional preset alias; ignored when `regex` is also set |
-| `regex` | `RegExp \| null` | `null` | Optional custom regex alias with precedence over `pattern` |
+| Name              | Type                        | Default      | Notes                                                          |
+| ----------------- | --------------------------- | ------------ | -------------------------------------------------------------- |
+| `uilibKeyFilter`  | `KeyFilterPreset \| RegExp` | `'alphanum'` | Built-in preset name or a custom `RegExp` tested per character |
+| `keyFilterBypass` | `boolean`                   | `false`      | When `true`, all filtering is suspended                        |
+| `hintText`        | `string \| null`            | `null`       | Accessible format hint text linked through `aria-describedby`  |
+| `pattern`         | `KeyFilterPreset \| null`   | `null`       | Optional preset alias; ignored when `regex` is also set        |
+| `regex`           | `RegExp \| null`            | `null`       | Optional custom regex alias with precedence over `pattern`     |
 
 ## Built-in Presets (`KeyFilterPreset`)
 
-| Preset | Allowed characters |
-|--------|--------------------|
-| `'pint'` | Positive integers (digits only) |
-| `'int'` | Integers (digits and `-`) |
-| `'pnum'` | Positive numbers (digits and `.`) |
-| `'num'` | Numbers (digits, `-`, `.`) |
-| `'hex'` | Hexadecimal (0-9, a-f, A-F) |
-| `'alpha'` | Letters only |
-| `'alphanum'` | Letters and digits |
-| `'money'` | Digits, `-`, `.`, `,` |
-| `'email'` | RFC 5321 local-part + domain characters |
+| Preset       | Allowed characters                      |
+| ------------ | --------------------------------------- |
+| `'pint'`     | Positive integers (digits only)         |
+| `'int'`      | Integers (digits and `-`)               |
+| `'pnum'`     | Positive numbers (digits and `.`)       |
+| `'num'`      | Numbers (digits, `-`, `.`)              |
+| `'hex'`      | Hexadecimal (0-9, a-f, A-F)             |
+| `'alpha'`    | Letters only                            |
+| `'alphanum'` | Letters and digits                      |
+| `'money'`    | Digits, `-`, `.`, `,`                   |
+| `'email'`    | RFC 5321 local-part + domain characters |
 
 ## Outputs
 

@@ -66,7 +66,7 @@ const renderAutoComplete: (args: Partial<AutoCompleteStoryArgs>) => {
   moduleMetadata: { imports: unknown[] };
   template: string;
 } = (
-  args: Partial<AutoCompleteStoryArgs>
+  args: Partial<AutoCompleteStoryArgs>,
 ): {
   props: Partial<AutoCompleteStoryArgs> & {
     suggestions: string[];
@@ -77,11 +77,11 @@ const renderAutoComplete: (args: Partial<AutoCompleteStoryArgs>) => {
 } => {
   let suggestions: string[] = [];
   const onComplete: (event: AutoCompleteCompleteEvent) => void = (
-    event: AutoCompleteCompleteEvent
+    event: AutoCompleteCompleteEvent,
   ): void => {
     const query: string = event.query.toLowerCase();
     suggestions = ALL_FRUITS.filter((fruit: string): boolean =>
-      fruit.toLowerCase().startsWith(query)
+      fruit.toLowerCase().startsWith(query),
     );
   };
 
@@ -132,11 +132,11 @@ export const Variants: Story = {
   } => {
     let suggestions: string[] = [];
     const onComplete: (event: AutoCompleteCompleteEvent) => void = (
-      event: AutoCompleteCompleteEvent
+      event: AutoCompleteCompleteEvent,
     ): void => {
       const query: string = event.query.toLowerCase();
       suggestions = ALL_FRUITS.filter((fruit: string): boolean =>
-        fruit.toLowerCase().startsWith(query)
+        fruit.toLowerCase().startsWith(query),
       );
     };
     return {
@@ -180,11 +180,11 @@ export const Sizes: Story = {
   } => {
     let suggestions: string[] = [];
     const onComplete: (event: AutoCompleteCompleteEvent) => void = (
-      event: AutoCompleteCompleteEvent
+      event: AutoCompleteCompleteEvent,
     ): void => {
       const query: string = event.query.toLowerCase();
       suggestions = ALL_FRUITS.filter((fruit: string): boolean =>
-        fruit.toLowerCase().startsWith(query)
+        fruit.toLowerCase().startsWith(query),
       );
     };
     return {
@@ -225,11 +225,11 @@ export const States: Story = {
   } => {
     let suggestions: string[] = [];
     const onComplete: (event: AutoCompleteCompleteEvent) => void = (
-      event: AutoCompleteCompleteEvent
+      event: AutoCompleteCompleteEvent,
     ): void => {
       const query: string = event.query.toLowerCase();
       suggestions = ALL_FRUITS.filter((fruit: string): boolean =>
-        fruit.toLowerCase().startsWith(query)
+        fruit.toLowerCase().startsWith(query),
       );
     };
     return {

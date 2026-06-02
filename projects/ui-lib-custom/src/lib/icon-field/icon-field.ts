@@ -21,6 +21,6 @@ import type { IconPosition } from './icon-field.types';
 })
 export class IconFieldComponent {
   public readonly iconPosition: InputSignal<IconPosition> = input<IconPosition>(
-    ICON_FIELD_DEFAULTS.iconPosition
+    ICON_FIELD_DEFAULTS.iconPosition,
   );
 }

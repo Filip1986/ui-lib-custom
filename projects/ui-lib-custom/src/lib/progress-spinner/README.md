@@ -20,23 +20,23 @@ import { ProgressSpinner } from 'ui-lib-custom/progress-spinner';
 rotating outer SVG element to produce a classic "arc chase" loading animation.
 Three design variants map the spinner style to the global theme:
 
-| Variant | Description |
-|---|---|
-| `material` | Colour-cycling arc (red → blue → green → orange) |
-| `bootstrap` | Solid primary-blue arc with square line cap |
-| `minimal` | Muted grey arc with round line cap |
+| Variant     | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `material`  | Colour-cycling arc (red → blue → green → orange) |
+| `bootstrap` | Solid primary-blue arc with square line cap      |
+| `minimal`   | Muted grey arc with round line cap               |
 
 ## Inputs
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `strokeWidth` | `string` | `'2'` | SVG `stroke-width` of the circle arc |
-| `fill` | `string` | `'none'` | SVG `fill` of the circle (transparent by default) |
-| `animationDuration` | `string` | `'2s'` | Duration of one full rotation/dash cycle |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Component size token |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Variant override (falls back to global theme) |
-| `styleClass` | `string \| null` | `null` | Extra CSS class(es) on the host element |
-| `ariaLabel` | `string` | `'Loading...'` | Accessible label announced to screen readers |
+| Input               | Type                                             | Default        | Description                                       |
+| ------------------- | ------------------------------------------------ | -------------- | ------------------------------------------------- |
+| `strokeWidth`       | `string`                                         | `'2'`          | SVG `stroke-width` of the circle arc              |
+| `fill`              | `string`                                         | `'none'`       | SVG `fill` of the circle (transparent by default) |
+| `animationDuration` | `string`                                         | `'2s'`         | Duration of one full rotation/dash cycle          |
+| `size`              | `'sm' \| 'md' \| 'lg'`                           | `'md'`         | Component size token                              |
+| `variant`           | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`         | Variant override (falls back to global theme)     |
+| `styleClass`        | `string \| null`                                 | `null`         | Extra CSS class(es) on the host element           |
+| `ariaLabel`         | `string`                                         | `'Loading...'` | Accessible label announced to screen readers      |
 
 ## Outputs
 
@@ -50,14 +50,14 @@ None — the component renders only an SVG internally.
 
 ### ARIA attributes
 
-| Attribute | Element | Value | Description |
-|---|---|---|---|
-| `role` | Host (`ui-lib-progress-spinner`) | `"status"` | Declares a polite live region — screen readers announce the label when the spinner mounts |
-| `aria-label` | Host | `ariaLabel` input (default `"Loading..."`) | Accessible name read by screen readers |
-| `aria-busy` | Host | `"true"` | Signals that the region is in a loading state for the lifetime of the component |
-| `id` | Host | `uilib-progress-spinner-{n}` | Auto-generated unique ID per instance; use with `aria-describedby` or `aria-labelledby` if needed |
-| `aria-hidden` | `<svg>` | `"true"` | Hides the SVG internals from AT; the meaningful label is on the host |
-| `focusable` | `<svg>` | `"false"` | Prevents focus on the SVG in legacy browsers |
+| Attribute     | Element                          | Value                                      | Description                                                                                       |
+| ------------- | -------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `role`        | Host (`ui-lib-progress-spinner`) | `"status"`                                 | Declares a polite live region — screen readers announce the label when the spinner mounts         |
+| `aria-label`  | Host                             | `ariaLabel` input (default `"Loading..."`) | Accessible name read by screen readers                                                            |
+| `aria-busy`   | Host                             | `"true"`                                   | Signals that the region is in a loading state for the lifetime of the component                   |
+| `id`          | Host                             | `uilib-progress-spinner-{n}`               | Auto-generated unique ID per instance; use with `aria-describedby` or `aria-labelledby` if needed |
+| `aria-hidden` | `<svg>`                          | `"true"`                                   | Hides the SVG internals from AT; the meaningful label is on the host                              |
+| `focusable`   | `<svg>`                          | `"false"`                                  | Prevents focus on the SVG in legacy browsers                                                      |
 
 ### Keyboard interaction
 
@@ -104,16 +104,16 @@ Always provide a meaningful label:
 
 ## CSS custom properties
 
-| Variable | Default | Description |
-|---|---|---|
-| `--uilib-progress-spinner-size-sm` | `32px` | Diameter for `size="sm"` |
-| `--uilib-progress-spinner-size-md` | `56px` | Diameter for `size="md"` |
-| `--uilib-progress-spinner-size-lg` | `96px` | Diameter for `size="lg"` |
-| `--uilib-progress-spinner-color-a` | `#ef5350` | Material variant — phase 1 colour |
-| `--uilib-progress-spinner-color-b` | `#42a5f5` | Material variant — phase 2 colour |
-| `--uilib-progress-spinner-color-c` | `#66bb6a` | Material variant — phase 3 colour |
-| `--uilib-progress-spinner-color-d` | `#ffa726` | Material variant — phase 4 colour |
-| `--uilib-progress-spinner-color-bootstrap` | `#0d6efd` | Bootstrap variant arc colour (light mode) |
-| `--uilib-progress-spinner-color-bootstrap-dark` | `#6ea8fe` | Bootstrap variant arc colour (dark mode) |
-| `--uilib-progress-spinner-color-minimal` | `#9ca3af` | Minimal variant arc colour (light mode) |
-| `--uilib-progress-spinner-color-minimal-dark` | `#6b7280` | Minimal variant arc colour (dark mode) |
+| Variable                                        | Default   | Description                               |
+| ----------------------------------------------- | --------- | ----------------------------------------- |
+| `--uilib-progress-spinner-size-sm`              | `32px`    | Diameter for `size="sm"`                  |
+| `--uilib-progress-spinner-size-md`              | `56px`    | Diameter for `size="md"`                  |
+| `--uilib-progress-spinner-size-lg`              | `96px`    | Diameter for `size="lg"`                  |
+| `--uilib-progress-spinner-color-a`              | `#ef5350` | Material variant — phase 1 colour         |
+| `--uilib-progress-spinner-color-b`              | `#42a5f5` | Material variant — phase 2 colour         |
+| `--uilib-progress-spinner-color-c`              | `#66bb6a` | Material variant — phase 3 colour         |
+| `--uilib-progress-spinner-color-d`              | `#ffa726` | Material variant — phase 4 colour         |
+| `--uilib-progress-spinner-color-bootstrap`      | `#0d6efd` | Bootstrap variant arc colour (light mode) |
+| `--uilib-progress-spinner-color-bootstrap-dark` | `#6ea8fe` | Bootstrap variant arc colour (dark mode)  |
+| `--uilib-progress-spinner-color-minimal`        | `#9ca3af` | Minimal variant arc colour (light mode)   |
+| `--uilib-progress-spinner-color-minimal-dark`   | `#6b7280` | Minimal variant arc colour (dark mode)    |

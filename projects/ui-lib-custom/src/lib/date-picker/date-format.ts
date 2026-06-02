@@ -15,8 +15,8 @@ function sortNamesByLength(names: string[]): Array<{ index: number; value: strin
     .sort(
       (
         leftName: { index: number; value: string },
-        rightName: { index: number; value: string }
-      ): number => rightName.value.length - leftName.value.length
+        rightName: { index: number; value: string },
+      ): number => rightName.value.length - leftName.value.length,
     );
 }
 
@@ -129,7 +129,7 @@ export function formatDate(date: Date, format: string, locale: DatePickerLocale)
 export function parseDate(
   dateString: string,
   format: string,
-  locale: DatePickerLocale
+  locale: DatePickerLocale,
 ): Date | null {
   const normalizedInput: string = dateString.trim();
   if (!normalizedInput || !format) {
@@ -146,7 +146,7 @@ export function parseDate(
 
   const readNumericValue: (minimumLength: number, maximumLength: number) => number | null = (
     minimumLength: number,
-    maximumLength: number
+    maximumLength: number,
   ): number | null => {
     const source: string = normalizedInput.slice(inputIndex);
     const matcher: RegExp = new RegExp(`^\\d{${minimumLength},${maximumLength}}`);
@@ -161,7 +161,7 @@ export function parseDate(
 
   const readNamedValue: (shortNames: string[], longNames: string[]) => number | null = (
     shortNames: string[],
-    longNames: string[]
+    longNames: string[],
   ): number | null => {
     const useLongNames: boolean =
       format.charAt(formatIndex + 1) === format.charAt(formatIndex) &&
@@ -169,7 +169,7 @@ export function parseDate(
         format.charAt(formatIndex) === DATE_PICKER_FORMAT_TOKENS.MonthNameShort);
 
     const orderedNames: Array<{ index: number; value: string }> = sortNamesByLength(
-      useLongNames ? longNames : shortNames
+      useLongNames ? longNames : shortNames,
     );
 
     for (const nameOption of orderedNames) {
@@ -253,7 +253,7 @@ export function parseDate(
       case DATE_PICKER_FORMAT_TOKENS.MonthNameShort: {
         const parsedMonthName: number | null = readNamedValue(
           locale.monthNamesShort,
-          locale.monthNames
+          locale.monthNames,
         );
         if (parsedMonthName === null) {
           return null;

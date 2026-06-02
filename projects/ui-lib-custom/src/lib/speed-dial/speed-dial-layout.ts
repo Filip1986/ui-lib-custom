@@ -12,7 +12,7 @@ export interface SpeedDialItemPosition {
 }
 
 export function computeSpeedDialLayout(
-  options: SpeedDialLayoutOptions
+  options: SpeedDialLayoutOptions,
 ): readonly SpeedDialItemPosition[] {
   if (options.count <= 0) {
     return [];
@@ -52,7 +52,7 @@ function computeCircle(radius: number, count: number): readonly SpeedDialItemPos
 function computeSemiCircle(
   radius: number,
   count: number,
-  direction: SpeedDialDirection
+  direction: SpeedDialDirection,
 ): readonly SpeedDialItemPosition[] {
   const step: number = Math.PI / (count - 1);
   const startAngle: number = semiCircleStartAngle(direction);
@@ -68,7 +68,7 @@ function computeSemiCircle(
 function computeQuarterCircle(
   radius: number,
   count: number,
-  direction: SpeedDialDirection
+  direction: SpeedDialDirection,
 ): readonly SpeedDialItemPosition[] {
   const step: number = Math.PI / 2 / (count - 1);
   const startAngle: number = quarterCircleStartAngle(direction);

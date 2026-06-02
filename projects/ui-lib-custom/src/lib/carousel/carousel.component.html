@@ -17,12 +17,22 @@
         (click)="toggleAutoplay()"
       >
         @if (playing()) {
-          <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <svg
+            class="uilib-carousel-nav-icon"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
             <rect x="6" y="4" width="4" height="16" />
             <rect x="14" y="4" width="4" height="16" />
           </svg>
         } @else {
-          <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <svg
+            class="uilib-carousel-nav-icon"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
             <polygon points="5,3 19,12 5,21" />
           </svg>
         }
@@ -48,11 +58,25 @@
             <ng-container [ngTemplateOutlet]="prevIconTemplate()!" />
           } @else {
             @if (isVertical()) {
-              <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <svg
+                class="uilib-carousel-nav-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
                 <polyline points="18 15 12 9 6 15" />
               </svg>
             } @else {
-              <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <svg
+                class="uilib-carousel-nav-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
                 <polyline points="15 18 9 12 15 6" />
               </svg>
             }
@@ -68,11 +92,7 @@
         (touchmove)="onTouchMove($event)"
         (touchend)="onTouchEnd($event)"
       >
-        <div
-          #itemsContainer
-          class="uilib-carousel-item-list"
-          (transitionend)="onTransitionEnd()"
-        >
+        <div #itemsContainer class="uilib-carousel-item-list" (transitionend)="onTransitionEnd()">
           <!-- Cloned items at start (for circular wrap-around) -->
           @for (item of clonedItemsForStarting; track $index) {
             <div
@@ -150,11 +170,25 @@
             <ng-container [ngTemplateOutlet]="nextIconTemplate()!" />
           } @else {
             @if (isVertical()) {
-              <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <svg
+                class="uilib-carousel-nav-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
                 <polyline points="6 9 12 15 18 9" />
               </svg>
             } @else {
-              <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <svg
+                class="uilib-carousel-nav-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             }

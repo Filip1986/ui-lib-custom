@@ -1,8 +1,4 @@
 <form #f="ngForm" (ngSubmit)="submitTemplateDriven(f)">
-  <ui-lib-editor
-    name="templateContent"
-    required
-    [(ngModel)]="templateDrivenHtml"
-  ></ui-lib-editor>
+  <ui-lib-editor name="templateContent" required [(ngModel)]="templateDrivenHtml"></ui-lib-editor>
   <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
 </form>

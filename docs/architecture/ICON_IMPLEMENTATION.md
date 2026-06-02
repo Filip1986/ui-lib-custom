@@ -89,4 +89,3 @@ Primary behavior to keep covered in icon tests:
 - Optional stricter validation for unknown icon names in development builds.
 - Add optional explicit interactive output (`onActivate`) for consistency with other components.
 - Expand mapping diagnostics to aid library migration.
-

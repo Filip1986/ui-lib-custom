@@ -61,7 +61,7 @@ function createContainer(config: DynamicDialogConfig = {}): {
 
 function getElement<T extends HTMLElement>(
   fixture: ComponentFixture<DynamicDialog>,
-  selector: string
+  selector: string,
 ): T {
   const host: HTMLElement = fixture.nativeElement as HTMLElement;
   const element: T | null = host.querySelector<T>(selector);
@@ -73,7 +73,7 @@ function getElement<T extends HTMLElement>(
 
 function queryElement<T extends HTMLElement>(
   fixture: ComponentFixture<DynamicDialog>,
-  selector: string
+  selector: string,
 ): T | null {
   const host: HTMLElement = fixture.nativeElement as HTMLElement;
   return host.querySelector<T>(selector);
@@ -147,7 +147,7 @@ describe('DynamicDialog container', (): void => {
   it('should render the backdrop when modal is true', (): void => {
     const { fixture } = createContainer({ modal: true });
     const backdrop: DebugElement = fixture.debugElement.query(
-      By.css('.ui-lib-dynamic-dialog__backdrop')
+      By.css('.ui-lib-dynamic-dialog__backdrop'),
     );
     expect(backdrop).toBeTruthy();
   });
@@ -155,7 +155,7 @@ describe('DynamicDialog container', (): void => {
   it('should not render the backdrop when modal is false', (): void => {
     const { fixture } = createContainer({ modal: false });
     const backdrop: DebugElement | null = fixture.debugElement.query(
-      By.css('.ui-lib-dynamic-dialog__backdrop')
+      By.css('.ui-lib-dynamic-dialog__backdrop'),
     );
     expect(backdrop).toBeNull();
   });
@@ -176,7 +176,7 @@ describe('DynamicDialog container', (): void => {
     const { fixture } = createContainer({ closable: true });
     const closeButton: HTMLElement | null = queryElement(
       fixture,
-      '.ui-lib-dynamic-dialog__close-btn'
+      '.ui-lib-dynamic-dialog__close-btn',
     );
     expect(closeButton).not.toBeNull();
   });
@@ -185,7 +185,7 @@ describe('DynamicDialog container', (): void => {
     const { fixture } = createContainer({ closable: false, header: 'Dialog' });
     const closeButton: HTMLElement | null = queryElement(
       fixture,
-      '.ui-lib-dynamic-dialog__close-btn'
+      '.ui-lib-dynamic-dialog__close-btn',
     );
     expect(closeButton).toBeNull();
   });
@@ -225,7 +225,7 @@ describe('DynamicDialog container', (): void => {
     const closeSpy: jest.SpyInstance<void, [data?: unknown], unknown> = jest.spyOn(ref, 'close');
     const closeButton: HTMLButtonElement = getElement<HTMLButtonElement>(
       fixture,
-      '.ui-lib-dynamic-dialog__close-btn'
+      '.ui-lib-dynamic-dialog__close-btn',
     );
     closeButton.click();
     expect(closeSpy).toHaveBeenCalled();

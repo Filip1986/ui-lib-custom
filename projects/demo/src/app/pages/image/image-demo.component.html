@@ -6,253 +6,236 @@
     description="Displays an image with optional preview overlay, zoom controls, and rotation. Supports fallback images, custom error templates, and a customisable hover indicator."
   />
 
-      <!-- ── a. Basic ─────────────────────────────────────────────────────────── -->
-      <app-doc-section id="basic" title="Basic">
-        <p class="demo-section__description">
-          Provide <code>src</code> and <code>alt</code> to render a simple image.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-row">
-            <ui-lib-image src="https://picsum.photos/seed/demo/400/300" alt="A scenic landscape" />
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-      </app-doc-section>
+  <!-- ── a. Basic ─────────────────────────────────────────────────────────── -->
+  <app-doc-section id="basic" title="Basic">
+    <p class="demo-section__description">
+      Provide <code>src</code> and <code>alt</code> to render a simple image.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-row">
+        <ui-lib-image src="https://picsum.photos/seed/demo/400/300" alt="A scenic landscape" />
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+  </app-doc-section>
 
-      <!-- ── b. Preview ───────────────────────────────────────────────────────── -->
-      <app-doc-section id="preview" title="Preview">
-        <p class="demo-section__description">
-          Set <code>[preview]="true"</code> to enable the lightbox overlay. Hover over the image to
-          see the indicator, then click to open the overlay. Inside the overlay you can
-          <strong>zoom in/out</strong> and <strong>rotate</strong> the image, or press
-          <kbd>Escape</kbd> to close.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-row">
-            <ui-lib-image
-              src="https://picsum.photos/seed/preview1/400/300"
-              alt="Click to preview"
-              [preview]="true"
-            />
-            <ui-lib-image
-              src="https://picsum.photos/seed/preview2/400/300"
-              alt="Another preview"
-              [preview]="true"
-            />
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example [html]="previewHtml" [typescript]="previewTs" />
-      </app-doc-section>
-
-      <!-- ── c. Custom Indicator ──────────────────────────────────────────────── -->
-      <app-doc-section id="custom-indicator" title="Custom Indicator">
-        <p class="demo-section__description">
-          Replace the default eye-icon indicator with your own content using the
-          <code>#imageIndicator</code> template slot.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-row">
-            <ui-lib-image
-              src="https://picsum.photos/seed/custom/400/300"
-              alt="Custom indicator demo"
-              [preview]="true"
-            >
-              <ng-template #imageIndicator>
-                <span style="font-size: 2rem; line-height: 1">🔍</span>
-              </ng-template>
-            </ui-lib-image>
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example
-          [html]="customIndicatorHtml"
-          [typescript]="customIndicatorTs"
+  <!-- ── b. Preview ───────────────────────────────────────────────────────── -->
+  <app-doc-section id="preview" title="Preview">
+    <p class="demo-section__description">
+      Set <code>[preview]="true"</code> to enable the lightbox overlay. Hover over the image to see
+      the indicator, then click to open the overlay. Inside the overlay you can
+      <strong>zoom in/out</strong> and <strong>rotate</strong> the image, or press
+      <kbd>Escape</kbd> to close.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-row">
+        <ui-lib-image
+          src="https://picsum.photos/seed/preview1/400/300"
+          alt="Click to preview"
+          [preview]="true"
         />
-      </app-doc-section>
-
-      <!-- ── d. Error Fallback ─────────────────────────────────────────────────── -->
-      <app-doc-section id="error-fallback" title="Error Fallback">
-        <p class="demo-section__description">
-          Pass <code>errorSrc</code> to display an alternative image when the primary source fails
-          to load.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-row">
-            <ui-lib-image
-              src="https://this-will-fail.invalid/broken.jpg"
-              errorSrc="https://picsum.photos/seed/fallback/400/300"
-              alt="Fallback on error"
-            />
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example
-          [html]="errorFallbackHtml"
-          [typescript]="errorFallbackTs"
+        <ui-lib-image
+          src="https://picsum.photos/seed/preview2/400/300"
+          alt="Another preview"
+          [preview]="true"
         />
-      </app-doc-section>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="previewHtml" [typescript]="previewTs" />
+  </app-doc-section>
 
-      <!-- ── e. Sizes ──────────────────────────────────────────────────────────── -->
-      <app-doc-section id="sizes" title="Sizes">
-        <p class="demo-section__description">
-          Use the <code>size</code> input (<code>sm</code>, <code>md</code>, <code>lg</code>) to
-          control border-radius scaling and indicator icon sizing.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-row demo-row--align-end">
-            <div class="size-item">
-              <ui-lib-image
-                src="https://picsum.photos/seed/size-sm/200/150"
-                alt="Small"
-                size="sm"
-                [preview]="true"
-              />
-              <span class="size-label">sm</span>
-            </div>
-            <div class="size-item">
-              <ui-lib-image
-                src="https://picsum.photos/seed/size-md/200/150"
-                alt="Medium"
-                size="md"
-                [preview]="true"
-              />
-              <span class="size-label">md</span>
-            </div>
-            <div class="size-item">
-              <ui-lib-image
-                src="https://picsum.photos/seed/size-lg/200/150"
-                alt="Large"
-                size="lg"
-                [preview]="true"
-              />
-              <span class="size-label">lg</span>
-            </div>
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-      </app-doc-section>
+  <!-- ── c. Custom Indicator ──────────────────────────────────────────────── -->
+  <app-doc-section id="custom-indicator" title="Custom Indicator">
+    <p class="demo-section__description">
+      Replace the default eye-icon indicator with your own content using the
+      <code>#imageIndicator</code> template slot.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-row">
+        <ui-lib-image
+          src="https://picsum.photos/seed/custom/400/300"
+          alt="Custom indicator demo"
+          [preview]="true"
+        >
+          <ng-template #imageIndicator>
+            <span style="font-size: 2rem; line-height: 1">🔍</span>
+          </ng-template>
+        </ui-lib-image>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="customIndicatorHtml" [typescript]="customIndicatorTs" />
+  </app-doc-section>
 
-      <!-- ── f. Variants ───────────────────────────────────────────────────────── -->
-      <app-doc-section id="variants" title="Variants">
-        <p class="demo-section__description">
-          Three design variants are available: <code>material</code> (subtle shadow),
-          <code>bootstrap</code> (visible border, tighter radius), and <code>minimal</code>
-          (no rounding).
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-row">
-            <div class="variant-item">
-              <ui-lib-image
-                src="https://picsum.photos/seed/var-mat/200/150"
-                alt="Material"
-                variant="material"
-                [preview]="true"
-              />
-              <span class="size-label">material</span>
-            </div>
-            <div class="variant-item">
-              <ui-lib-image
-                src="https://picsum.photos/seed/var-boot/200/150"
-                alt="Bootstrap"
-                variant="bootstrap"
-                [preview]="true"
-              />
-              <span class="size-label">bootstrap</span>
-            </div>
-            <div class="variant-item">
-              <ui-lib-image
-                src="https://picsum.photos/seed/var-min/200/150"
-                alt="Minimal"
-                variant="minimal"
-                [preview]="true"
-              />
-              <span class="size-label">minimal</span>
-            </div>
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-      </app-doc-section>
-
-      <!-- ── g. Custom Error Template ─────────────────────────────────────────── -->
-      <app-doc-section id="custom-error" title="Custom Error">
-        <p class="demo-section__description">
-          Use the <code>#imageError</code> template slot to render your own placeholder when the
-          image fails to load and no <code>errorSrc</code> is set.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-row">
-            <ui-lib-image src="https://this-will-fail.invalid/broken.jpg" alt="Broken image">
-              <ng-template #imageError>
-                <div class="custom-error-placeholder">
-                  <span class="custom-error-icon">⚠️</span>
-                  <span>Could not load image</span>
-                </div>
-              </ng-template>
-            </ui-lib-image>
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example
-          [html]="customErrorHtml"
-          [typescript]="customErrorTs"
+  <!-- ── d. Error Fallback ─────────────────────────────────────────────────── -->
+  <app-doc-section id="error-fallback" title="Error Fallback">
+    <p class="demo-section__description">
+      Pass <code>errorSrc</code> to display an alternative image when the primary source fails to
+      load.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-row">
+        <ui-lib-image
+          src="https://this-will-fail.invalid/broken.jpg"
+          errorSrc="https://picsum.photos/seed/fallback/400/300"
+          alt="Fallback on error"
         />
-      </app-doc-section>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="errorFallbackHtml" [typescript]="errorFallbackTs" />
+  </app-doc-section>
 
-      <!-- ── h. Dimensions ─────────────────────────────────────────────────────── -->
-      <app-doc-section id="dimensions" title="Dimensions">
-        <p class="demo-section__description">
-          Pass <code>width</code> and <code>height</code> to constrain the image element size. These
-          are forwarded directly to the underlying <code>&lt;img&gt;</code> element.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-row">
-            <ui-lib-image
-              src="https://picsum.photos/seed/wide/800/200"
-              alt="Wide constrained image"
-              width="400"
-              height="100"
-            />
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example
-          [html]="dimensionsHtml"
-          [typescript]="dimensionsTs"
-        />
-      </app-doc-section>
+  <!-- ── e. Sizes ──────────────────────────────────────────────────────────── -->
+  <app-doc-section id="sizes" title="Sizes">
+    <p class="demo-section__description">
+      Use the <code>size</code> input (<code>sm</code>, <code>md</code>, <code>lg</code>) to control
+      border-radius scaling and indicator icon sizing.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-row demo-row--align-end">
+        <div class="size-item">
+          <ui-lib-image
+            src="https://picsum.photos/seed/size-sm/200/150"
+            alt="Small"
+            size="sm"
+            [preview]="true"
+          />
+          <span class="size-label">sm</span>
+        </div>
+        <div class="size-item">
+          <ui-lib-image
+            src="https://picsum.photos/seed/size-md/200/150"
+            alt="Medium"
+            size="md"
+            [preview]="true"
+          />
+          <span class="size-label">md</span>
+        </div>
+        <div class="size-item">
+          <ui-lib-image
+            src="https://picsum.photos/seed/size-lg/200/150"
+            alt="Large"
+            size="lg"
+            [preview]="true"
+          />
+          <span class="size-label">lg</span>
+        </div>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
+  </app-doc-section>
 
-      <!-- ── i. Two-Way Binding ──────────────────────────────────────────────── -->
-      <app-doc-section id="two-way-binding" title="Two-Way Binding">
-        <p class="demo-section__description">
-          Use <code>[(previewVisible)]</code> to control and react to the overlay open state
-          programmatically.
-        </p>
-        <ui-lib-panel variant="minimal">
-          <div class="demo-col">
-            <div class="demo-row">
-              <ui-lib-image
-                src="https://picsum.photos/seed/binding/400/300"
-                alt="Two-way binding demo"
-                [preview]="true"
-                [(previewVisible)]="previewVisible"
-              />
+  <!-- ── f. Variants ───────────────────────────────────────────────────────── -->
+  <app-doc-section id="variants" title="Variants">
+    <p class="demo-section__description">
+      Three design variants are available: <code>material</code> (subtle shadow),
+      <code>bootstrap</code> (visible border, tighter radius), and <code>minimal</code>
+      (no rounding).
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-row">
+        <div class="variant-item">
+          <ui-lib-image
+            src="https://picsum.photos/seed/var-mat/200/150"
+            alt="Material"
+            variant="material"
+            [preview]="true"
+          />
+          <span class="size-label">material</span>
+        </div>
+        <div class="variant-item">
+          <ui-lib-image
+            src="https://picsum.photos/seed/var-boot/200/150"
+            alt="Bootstrap"
+            variant="bootstrap"
+            [preview]="true"
+          />
+          <span class="size-label">bootstrap</span>
+        </div>
+        <div class="variant-item">
+          <ui-lib-image
+            src="https://picsum.photos/seed/var-min/200/150"
+            alt="Minimal"
+            variant="minimal"
+            [preview]="true"
+          />
+          <span class="size-label">minimal</span>
+        </div>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
+  </app-doc-section>
+
+  <!-- ── g. Custom Error Template ─────────────────────────────────────────── -->
+  <app-doc-section id="custom-error" title="Custom Error">
+    <p class="demo-section__description">
+      Use the <code>#imageError</code> template slot to render your own placeholder when the image
+      fails to load and no <code>errorSrc</code> is set.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-row">
+        <ui-lib-image src="https://this-will-fail.invalid/broken.jpg" alt="Broken image">
+          <ng-template #imageError>
+            <div class="custom-error-placeholder">
+              <span class="custom-error-icon">⚠️</span>
+              <span>Could not load image</span>
             </div>
-            <p class="value-text">
-              Preview open: <strong>{{ previewVisible() }}</strong>
-            </p>
-          </div>
-        </ui-lib-panel>
-        <app-doc-code-example
-          [html]="twoWayBindingHtml"
-          [typescript]="twoWayBindingTs"
+          </ng-template>
+        </ui-lib-image>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="customErrorHtml" [typescript]="customErrorTs" />
+  </app-doc-section>
+
+  <!-- ── h. Dimensions ─────────────────────────────────────────────────────── -->
+  <app-doc-section id="dimensions" title="Dimensions">
+    <p class="demo-section__description">
+      Pass <code>width</code> and <code>height</code> to constrain the image element size. These are
+      forwarded directly to the underlying <code>&lt;img&gt;</code> element.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-row">
+        <ui-lib-image
+          src="https://picsum.photos/seed/wide/800/200"
+          alt="Wide constrained image"
+          width="400"
+          height="100"
         />
-      </app-doc-section>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="dimensionsHtml" [typescript]="dimensionsTs" />
+  </app-doc-section>
 
-      <!-- ── API Table ─────────────────────────────────────────────────────────── -->
-      <app-doc-section id="api" title="API Reference">
-        <app-doc-api-reference [rows]="apiInputRows" />
-        <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
-        <app-doc-api-reference [rows]="apiSlotRows" kind="name" [showDefault]="false" />
-      </app-doc-section>
+  <!-- ── i. Two-Way Binding ──────────────────────────────────────────────── -->
+  <app-doc-section id="two-way-binding" title="Two-Way Binding">
+    <p class="demo-section__description">
+      Use <code>[(previewVisible)]</code> to control and react to the overlay open state
+      programmatically.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="demo-col">
+        <div class="demo-row">
+          <ui-lib-image
+            src="https://picsum.photos/seed/binding/400/300"
+            alt="Two-way binding demo"
+            [preview]="true"
+            [(previewVisible)]="previewVisible"
+          />
+        </div>
+        <p class="value-text">
+          Preview open: <strong>{{ previewVisible() }}</strong>
+        </p>
+      </div>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="twoWayBindingHtml" [typescript]="twoWayBindingTs" />
+  </app-doc-section>
 
-  
-  
+  <!-- ── API Table ─────────────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <app-doc-api-reference [rows]="apiInputRows" />
+    <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
+    <app-doc-api-reference [rows]="apiSlotRows" kind="name" [showDefault]="false" />
+  </app-doc-section>
+
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -269,7 +252,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

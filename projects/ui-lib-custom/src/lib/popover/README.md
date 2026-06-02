@@ -46,37 +46,37 @@ import { Popover } from 'ui-lib-custom/popover';
 
 ## Inputs
 
-| Input            | Type                                             | Default      | Description                                                                              |
-|------------------|--------------------------------------------------|--------------|------------------------------------------------------------------------------------------|
-| `visible`        | `ModelSignal<boolean>`                           | `false`      | Two-way visibility binding.                                                              |
-| `header`         | `string \| null`                                 | `null`       | Optional header text. When set, also provides the accessible name via `aria-labelledby`. |
-| `showCloseButton`| `boolean`                                        | `false`      | Renders a close button (SVG ×) in the header area.                                       |
-| `dismissable`    | `boolean`                                        | `true`       | Click-away closes the popover.                                                           |
-| `closeOnEscape`  | `boolean`                                        | `true`       | Escape key closes the popover.                                                           |
-| `variant`        | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`       | Design variant; inherits from `ThemeConfigService` when `null`.                          |
-| `styleClass`     | `string \| null`                                 | `null`       | Extra CSS classes on the host element.                                                   |
+| Input             | Type                                             | Default | Description                                                                              |
+| ----------------- | ------------------------------------------------ | ------- | ---------------------------------------------------------------------------------------- |
+| `visible`         | `ModelSignal<boolean>`                           | `false` | Two-way visibility binding.                                                              |
+| `header`          | `string \| null`                                 | `null`  | Optional header text. When set, also provides the accessible name via `aria-labelledby`. |
+| `showCloseButton` | `boolean`                                        | `false` | Renders a close button (SVG ×) in the header area.                                       |
+| `dismissable`     | `boolean`                                        | `true`  | Click-away closes the popover.                                                           |
+| `closeOnEscape`   | `boolean`                                        | `true`  | Escape key closes the popover.                                                           |
+| `variant`         | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`  | Design variant; inherits from `ThemeConfigService` when `null`.                          |
+| `styleClass`      | `string \| null`                                 | `null`  | Extra CSS classes on the host element.                                                   |
 
 ## Outputs
 
 | Output   | Type   | Description                                                                                                                                                                                           |
-|----------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `shown`  | `void` | Emitted after the popover becomes visible. Note: emitted inside `afterNextRender`, so it will not fire in Jest unit tests — use the `hidden` output or integration tests to observe lifecycle events. |
 | `hidden` | `void` | Emitted after the popover is hidden.                                                                                                                                                                  |
 
 ## Public methods
 
 | Method                        | Description                                                                                                        |
-|-------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `show(target: HTMLElement)`   | Show the popover anchored to `target`. Also captures the currently focused element for focus restoration on close. |
 | `hide()`                      | Hide the popover.                                                                                                  |
 | `toggle(target: HTMLElement)` | Show if hidden, hide if visible.                                                                                   |
 
 ## Public properties
 
-| Property   | Type     | Description                                                                                               |
-|------------|----------|-----------------------------------------------------------------------------------------------------------|
-| `panelId`  | `string` | Stable unique `id` of the panel element. Use for consumer `aria-controls` wiring.                         |
-| `titleId`  | `string` | Stable `id` of the title span. Set automatically on the rendered title element when `header` is provided. |
+| Property  | Type     | Description                                                                                               |
+| --------- | -------- | --------------------------------------------------------------------------------------------------------- |
+| `panelId` | `string` | Stable unique `id` of the panel element. Use for consumer `aria-controls` wiring.                         |
+| `titleId` | `string` | Stable `id` of the title span. Set automatically on the rendered title element when `header` is provided. |
 
 ## Content projection
 
@@ -87,7 +87,7 @@ The default `<ng-content>` slot accepts any HTML or component content as the pop
 ### ARIA features
 
 | Feature                                | Detail                                                                                          |
-|----------------------------------------|-------------------------------------------------------------------------------------------------|
+| -------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `role="dialog"` + `aria-modal="false"` | Applied to the panel element. Non-modal: AT does not suppress background content.               |
 | `aria-labelledby`                      | When `header` is provided, points to the rendered title span's `id` (`titleId`).                |
 | `aria-label="Popover"`                 | Fallback when no `header` is set — satisfies WCAG 4.1.2 accessible name requirement.            |
@@ -106,7 +106,7 @@ The default `<ng-content>` slot accepts any HTML or component content as the pop
 ### Keyboard navigation
 
 | Key       | Behaviour                                                               |
-|-----------|-------------------------------------------------------------------------|
+| --------- | ----------------------------------------------------------------------- |
 | Tab       | Move focus to next focusable element within the popover                 |
 | Shift+Tab | Move focus to previous focusable element within the popover             |
 | Escape    | Close the popover (when `closeOnEscape=true`); focus returns to trigger |

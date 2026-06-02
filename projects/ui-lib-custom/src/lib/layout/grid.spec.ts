@@ -68,7 +68,7 @@ describe('Grid', (): void => {
     Object.assign(component, initial);
     fixture.detectChanges();
     const gridElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-grid'
+      'ui-lib-grid',
     ) as HTMLElement;
     return { fixture, component, gridElement };
   }
@@ -112,14 +112,14 @@ describe('Grid', (): void => {
   it('should accept custom template string for columns', (): void => {
     const { gridElement } = bootstrap({ columns: '2fr minmax(200px, 1fr)' });
     expect(gridElement.style.getPropertyValue('--uilib-grid-columns')).toBe(
-      '2fr minmax(200px, 1fr)'
+      '2fr minmax(200px, 1fr)',
     );
   });
 
   it('should apply responsive grid with minColumnWidth', (): void => {
     const { gridElement } = bootstrap({ minColumnWidth: '200px' });
     expect(gridElement.style.getPropertyValue('--uilib-grid-columns')).toBe(
-      'repeat(auto-fit, minmax(200px, 1fr))'
+      'repeat(auto-fit, minmax(200px, 1fr))',
     );
   });
 
@@ -138,7 +138,7 @@ describe('Grid', (): void => {
   it('creates with no inputs', (): void => {
     const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
     const gridElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-grid'
+      'ui-lib-grid',
     ) as HTMLElement;
     expect(gridElement).toBeTruthy();
   });
@@ -176,7 +176,7 @@ describe('Grid', (): void => {
   it('uses explicit column-gap value when provided', (): void => {
     const { gridElement } = bootstrap({ columnGap: 'sm' });
     expect(gridElement.style.getPropertyValue('--uilib-grid-column-gap')).toContain(
-      'var(--uilib-stack-sm'
+      'var(--uilib-stack-sm',
     );
   });
 

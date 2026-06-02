@@ -13,12 +13,12 @@ Panel — a flexible content container with an optional collapsible body. Suppor
 
 ### Inputs
 
-| Name         | Type                  | Default | Description                                                                   |
-| ------------ | --------------------- | ------- | ----------------------------------------------------------------------------- |
-| `header`     | `string`              | `''`    | Text to render in the header. Use `[panelHeader]` projection for custom HTML. |
-| `styleClass` | `string | null`       | `null`  | Additional CSS classes to attach to the host element.                         |
-| `toggleable` | `boolean`             | `false` | Whether the panel body can be collapsed/expanded by the user.                 |
-| `variant`    | `PanelVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.               |
+| Name         | Type          | Default | Description                                                                   |
+| ------------ | ------------- | ------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `header`     | `string`      | `''`    | Text to render in the header. Use `[panelHeader]` projection for custom HTML. |
+| `styleClass` | `string       | null`   | `null`                                                                        | Additional CSS classes to attach to the host element.           |
+| `toggleable` | `boolean`     | `false` | Whether the panel body can be collapsed/expanded by the user.                 |
+| `variant`    | `PanelVariant | null`   | `null`                                                                        | Visual variant — inherits from ThemeConfigService when not set. |
 
 ### Models (two-way bindable)
 
@@ -114,4 +114,3 @@ Panel — a flexible content container with an optional collapsible body. Suppor
 - [Demo page](/components/panel)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/panel/README.md)
-

@@ -64,17 +64,17 @@ export function rgbToHsb(color: RgbColor): HsbColor {
   const red: number = clamp(
     Math.round(color.r),
     COLOR_PICKER_LIMITS.RedMin,
-    COLOR_PICKER_LIMITS.RedMax
+    COLOR_PICKER_LIMITS.RedMax,
   );
   const green: number = clamp(
     Math.round(color.g),
     COLOR_PICKER_LIMITS.GreenMin,
-    COLOR_PICKER_LIMITS.GreenMax
+    COLOR_PICKER_LIMITS.GreenMax,
   );
   const blue: number = clamp(
     Math.round(color.b),
     COLOR_PICKER_LIMITS.BlueMin,
-    COLOR_PICKER_LIMITS.BlueMax
+    COLOR_PICKER_LIMITS.BlueMax,
   );
 
   const redNormalized: number = red / 255;
@@ -109,12 +109,12 @@ export function rgbToHsb(color: RgbColor): HsbColor {
     s: clamp(
       Math.round(saturation),
       COLOR_PICKER_LIMITS.SaturationMin,
-      COLOR_PICKER_LIMITS.SaturationMax
+      COLOR_PICKER_LIMITS.SaturationMax,
     ),
     b: clamp(
       Math.round(brightness),
       COLOR_PICKER_LIMITS.BrightnessMin,
-      COLOR_PICKER_LIMITS.BrightnessMax
+      COLOR_PICKER_LIMITS.BrightnessMax,
     ),
   };
 }
@@ -124,19 +124,19 @@ export function hsbToRgb(color: HsbColor): RgbColor {
   const hue: number = clamp(
     Math.round(color.h),
     COLOR_PICKER_LIMITS.HueMin,
-    COLOR_PICKER_LIMITS.HueMax
+    COLOR_PICKER_LIMITS.HueMax,
   );
   const saturationNormalized: number =
     clamp(
       Math.round(color.s),
       COLOR_PICKER_LIMITS.SaturationMin,
-      COLOR_PICKER_LIMITS.SaturationMax
+      COLOR_PICKER_LIMITS.SaturationMax,
     ) / 100;
   const brightnessNormalized: number =
     clamp(
       Math.round(color.b),
       COLOR_PICKER_LIMITS.BrightnessMin,
-      COLOR_PICKER_LIMITS.BrightnessMax
+      COLOR_PICKER_LIMITS.BrightnessMax,
     ) / 100;
 
   const chroma: number = brightnessNormalized * saturationNormalized;
@@ -173,17 +173,17 @@ export function hsbToRgb(color: HsbColor): RgbColor {
     r: clamp(
       Math.round((redPrime + match) * 255),
       COLOR_PICKER_LIMITS.RedMin,
-      COLOR_PICKER_LIMITS.RedMax
+      COLOR_PICKER_LIMITS.RedMax,
     ),
     g: clamp(
       Math.round((greenPrime + match) * 255),
       COLOR_PICKER_LIMITS.GreenMin,
-      COLOR_PICKER_LIMITS.GreenMax
+      COLOR_PICKER_LIMITS.GreenMax,
     ),
     b: clamp(
       Math.round((bluePrime + match) * 255),
       COLOR_PICKER_LIMITS.BlueMin,
-      COLOR_PICKER_LIMITS.BlueMax
+      COLOR_PICKER_LIMITS.BlueMax,
     ),
   };
 }
@@ -193,17 +193,17 @@ export function rgbToHex(color: RgbColor): string {
   const red: number = clamp(
     Math.round(color.r),
     COLOR_PICKER_LIMITS.RedMin,
-    COLOR_PICKER_LIMITS.RedMax
+    COLOR_PICKER_LIMITS.RedMax,
   );
   const green: number = clamp(
     Math.round(color.g),
     COLOR_PICKER_LIMITS.GreenMin,
-    COLOR_PICKER_LIMITS.GreenMax
+    COLOR_PICKER_LIMITS.GreenMax,
   );
   const blue: number = clamp(
     Math.round(color.b),
     COLOR_PICKER_LIMITS.BlueMin,
-    COLOR_PICKER_LIMITS.BlueMax
+    COLOR_PICKER_LIMITS.BlueMax,
   );
 
   const toHexPair: (channel: number) => string = (channel: number): string =>
@@ -261,12 +261,12 @@ export function toHsbColor(value: ColorPickerValue): HsbColor | null {
       s: clamp(
         Math.round(value.s),
         COLOR_PICKER_LIMITS.SaturationMin,
-        COLOR_PICKER_LIMITS.SaturationMax
+        COLOR_PICKER_LIMITS.SaturationMax,
       ),
       b: clamp(
         Math.round(value.b),
         COLOR_PICKER_LIMITS.BrightnessMin,
-        COLOR_PICKER_LIMITS.BrightnessMax
+        COLOR_PICKER_LIMITS.BrightnessMax,
       ),
     };
   }

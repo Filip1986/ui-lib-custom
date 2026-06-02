@@ -35,7 +35,7 @@ export class DocKeyboardNavComponent {
   public readonly rows: InputSignal<KeyboardNavRow[]> = input.required<KeyboardNavRow[]>();
 
   public readonly hasTarget: Signal<boolean> = computed<boolean>((): boolean =>
-    this.rows().some((row: KeyboardNavRow): boolean => row.target !== undefined)
+    this.rows().some((row: KeyboardNavRow): boolean => row.target !== undefined),
   );
 
   public readonly parsedRows: Signal<readonly ParsedRow[]> = computed<readonly ParsedRow[]>(
@@ -46,15 +46,15 @@ export class DocKeyboardNavComponent {
           suffix: row.suffix,
           target: row.target,
           action: row.action,
-        })
-      )
+        }),
+      ),
   );
 
   private parseKey(key: string): readonly ParsedCombo[] {
     return key.split(' / ').map(
       (alternative: string): ParsedCombo => ({
         parts: alternative.split('+').map((part: string): string => part.trim()),
-      })
+      }),
     );
   }
 }

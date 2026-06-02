@@ -143,7 +143,7 @@ export class NumberFormatService {
     ].reverse();
 
     this.digitIndex = new Map<string, string>(
-      numerals.map((digit: string, index: number): [string, string] => [digit, String(index)])
+      numerals.map((digit: string, index: number): [string, string] => [digit, String(index)]),
     );
 
     this.numeralExpression = this.createCharacterClassExpression(numerals);
@@ -192,7 +192,7 @@ export class NumberFormatService {
       .replace(this.decimalExpression, '.')
       .replace(
         this.numeralExpression,
-        (digit: string): string => this.digitIndex.get(digit) ?? digit
+        (digit: string): string => this.digitIndex.get(digit) ?? digit,
       )
       .replace(this.nonNumericExpression, '');
 
@@ -227,7 +227,7 @@ export class NumberFormatService {
 
     return new RegExp(
       `[${tokens.map((token: string): string => this.escapeRegExp(token)).join('')}]`,
-      'g'
+      'g',
     );
   }
 
@@ -276,10 +276,10 @@ export class NumberFormatService {
 
   private firstPartValue(
     parts: Intl.NumberFormatPart[],
-    type: Intl.NumberFormatPartTypes
+    type: Intl.NumberFormatPartTypes,
   ): string | null {
     const matchedPart: Intl.NumberFormatPart | undefined = parts.find(
-      (part: Intl.NumberFormatPart): boolean => part.type === type
+      (part: Intl.NumberFormatPart): boolean => part.type === type,
     );
 
     return matchedPart?.value ?? null;

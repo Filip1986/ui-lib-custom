@@ -1,6 +1,7 @@
 # SelectButton API
 
 ## Overview
+
 SelectButton presents a list of options as a segmented button group. It supports single or multiple selection, integrates with forms, and exposes a template slot for custom item rendering.
 
 ## API Reference
@@ -8,6 +9,7 @@ SelectButton presents a list of options as a segmented button group. It supports
 ### Inputs (signal-based)
 
 #### Core
+
 - `options = input<SelectButtonOption[]>([])`\
   Option items to render.
 - `value = input<any | any[]>()`\
@@ -20,12 +22,14 @@ SelectButton presents a list of options as a segmented button group. It supports
   Property name used for per-option disabled state.
 
 #### Behavior
+
 - `multiple = input<boolean>(false)`\
   Enables multi-select mode.
 - `allowEmpty = input<boolean>(true)`\
   Allows clearing selection in single mode.
 
 #### Appearance
+
 - `variant = input<SelectButtonVariant>('material')`\
   Visual variant.
 - `size = input<SelectButtonSize>('medium')`\
@@ -38,10 +42,12 @@ SelectButton presents a list of options as a segmented button group. It supports
   Stretches to full width.
 
 #### Accessibility
+
 - `ariaLabelledBy = input<string | null>(null)`\
   Sets `aria-labelledby` on the host.
 
 ### Outputs
+
 - `onChange = output<SelectButtonChangeEvent>()`\
   Fires on selection change.
 - `valueChange = output<any | any[]>()`\
@@ -70,6 +76,7 @@ export type SelectButtonSize = 'small' | 'medium' | 'large';
 ## Template Slot
 
 ### Item Template
+
 Use the `#item` template to customize item rendering.
 
 ```html
@@ -82,11 +89,13 @@ Use the `#item` template to customize item rendering.
 ```
 
 Template context:
+
 - `$implicit`: `SelectButtonOption`
 
 ## CSS Custom Properties
 
 ### Core
+
 - `--uilib-selectbutton-gap`
 - `--uilib-selectbutton-border-radius`
 - `--uilib-selectbutton-material-border-radius`
@@ -100,11 +109,13 @@ Template context:
 - `--uilib-selectbutton-disabled-opacity`
 
 ### Variant-based
+
 - `--uilib-selectbutton-{variant}-bg`
 - `--uilib-selectbutton-{variant}-selected-bg`
 - `--uilib-selectbutton-{variant}-hover-bg`
 
 ### Size-based
+
 - `--uilib-selectbutton-{size}-padding`
 - `--uilib-selectbutton-{size}-font-size`
 - `--uilib-selectbutton-{size}-min-height`
@@ -112,50 +123,37 @@ Template context:
 ## Usage Examples
 
 ### Single Selection (default)
+
 ```html
-<ui-lib-select-button
-  [options]="options"
-  [(value)]="selected"
-/>
+<ui-lib-select-button [options]="options" [(value)]="selected" />
 ```
 
 ### Multiple Selection
+
 ```html
-<ui-lib-select-button
-  [options]="options"
-  [multiple]="true"
-  [(value)]="selectedValues"
-/>
+<ui-lib-select-button [options]="options" [multiple]="true" [(value)]="selectedValues" />
 ```
 
 ### Disabling Options
+
 ```html
-<ui-lib-select-button
-  [options]="options"
-  optionDisabled="disabled"
-  [(value)]="selected"
-/>
+<ui-lib-select-button [options]="options" optionDisabled="disabled" [(value)]="selected" />
 ```
 
 ### Invalid State
+
 ```html
-<ui-lib-select-button
-  [options]="options"
-  [invalid]="true"
-  [(value)]="selected"
-/>
+<ui-lib-select-button [options]="options" [invalid]="true" [(value)]="selected" />
 ```
 
 ### Full Width (Fluid)
+
 ```html
-<ui-lib-select-button
-  [options]="options"
-  [fluid]="true"
-  [(value)]="selected"
-/>
+<ui-lib-select-button [options]="options" [fluid]="true" [(value)]="selected" />
 ```
 
 ### Custom Item Template
+
 ```html
 <ui-lib-select-button [options]="options" [(value)]="selected">
   <ng-template #item let-option="option">
@@ -166,16 +164,15 @@ Template context:
 ```
 
 ### Forms (ControlValueAccessor)
+
 ```html
 <form [formGroup]="form">
-  <ui-lib-select-button
-    formControlName="status"
-    [options]="options"
-  />
+  <ui-lib-select-button formControlName="status" [options]="options" />
 </form>
 ```
 
 ## Accessibility Notes
+
 - Single selection uses `role="radiogroup"` and `role="radio"` per option.
 - Multiple selection uses `role="group"` and `role="checkbox"` per option.
 - Roving `tabindex` is used so the group is a single tab stop.
@@ -184,19 +181,23 @@ Template context:
 ## Architecture Decisions
 
 ### ControlValueAccessor Strategy
+
 - Implement CVA directly on the SelectButton to support `ngModel` and `formControlName`.
 - For `multiple = false`, emit a single value (or `null` if `allowEmpty`).
 - For `multiple = true`, emit an array of selected values.
 
 ### Keyboard Navigation
+
 - Roving tabindex: only one option is tabbable at a time.
 - Arrow keys move focus across enabled options; disabled options are skipped.
 - Home/End move to first/last enabled option.
 
 ### Variant Styling Cascade
+
 - Host exposes variant-specific CSS vars and applies `btn-group`-like classes.
 - Option buttons inherit size and variant styling through CSS variables.
 
 ### Template Context
+
 - The `#item` template receives `$implicit` as the full `SelectButtonOption`.
 - Consumers can access custom fields (e.g., `icon`, `meta`) without extra APIs.

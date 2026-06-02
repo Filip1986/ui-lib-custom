@@ -49,7 +49,12 @@
       <code>position: relative</code> and <code>overflow-y: auto</code>.
     </p>
     <div class="demo-section__preview">
-      <div class="demo-scrollable-container" tabindex="0" role="region" aria-label="Scrollable demo content">
+      <div
+        class="demo-scrollable-container"
+        tabindex="0"
+        role="region"
+        aria-label="Scrollable demo content"
+      >
         <ui-lib-scroll-top target="parent" [threshold]="100" />
         @for (item of dummyItems; track item) {
           <div class="demo-scrollable-item">Item {{ item }}</div>
@@ -169,7 +174,6 @@
     }
   </div>
 
-  
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -186,7 +190,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

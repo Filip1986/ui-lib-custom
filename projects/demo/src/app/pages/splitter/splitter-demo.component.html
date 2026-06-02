@@ -1,12 +1,10 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Splitter"
     [importCode]="importCode"
     description="Coming soon — the Splitter component is under active development."
   />
-
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
@@ -18,7 +16,9 @@
   </app-doc-section>
   <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
   <app-doc-section id="css-vars" title="CSS Custom Properties">
-    <p class="demo-section__description">CSS custom properties will be documented here once the Splitter component is released.</p>
+    <p class="demo-section__description">
+      CSS custom properties will be documented here once the Splitter component is released.
+    </p>
   </app-doc-section>
 
   <!-- ── Accessibility ──────────────────────────────────────────────────── -->
@@ -38,5 +38,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

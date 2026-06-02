@@ -42,20 +42,20 @@ Files reviewed:
 
 ### Coverage summary (based on component entry points)
 
-| Component | API Doc | Implementation Doc | Notes |
-| --- | --- | --- | --- |
-| Accordion | ✅ `ACCORDION.md` | ✅ `ACCORDION_IMPLEMENTATION.md` | Complete. |
-| Badge | ✅ `BADGE.md` | ✅ `BADGE_IMPLEMENTATION.md` | Complete. |
-| Button | ✅ `BUTTON.md` | ✅ `BUTTON_IMPLEMENTATION.md` | Complete; README also includes a summary. |
-| Card | ❌ (README only) | ❌ | Needs dedicated docs. |
-| Checkbox | ✅ `CHECKBOX.md` | ❌ | Missing implementation doc. |
-| Icon | ✅ `ICON.md` | ❌ | Missing implementation doc. |
-| Icon Button | ✅ `ICON_BUTTON.md` | ❌ | Missing implementation doc. |
-| Input | ❌ | ❌ | Needs both docs. |
-| Layout | ❌ | ❌ | Needs layout component docs (Stack/Inline/Grid/Container). |
-| Select | ❌ | ❌ | Needs both docs. |
-| Select Button | ✅ `SELECTBUTTON.md` | ✅ `SELECTBUTTON_IMPLEMENTATION.md` | Complete; also has API + research supplements. |
-| Tabs | ✅ `TABS.md` | ✅ `TABS_IMPLEMENTATION.md` | Complete. |
+| Component     | API Doc              | Implementation Doc                  | Notes                                                      |
+| ------------- | -------------------- | ----------------------------------- | ---------------------------------------------------------- |
+| Accordion     | ✅ `ACCORDION.md`    | ✅ `ACCORDION_IMPLEMENTATION.md`    | Complete.                                                  |
+| Badge         | ✅ `BADGE.md`        | ✅ `BADGE_IMPLEMENTATION.md`        | Complete.                                                  |
+| Button        | ✅ `BUTTON.md`       | ✅ `BUTTON_IMPLEMENTATION.md`       | Complete; README also includes a summary.                  |
+| Card          | ❌ (README only)     | ❌                                  | Needs dedicated docs.                                      |
+| Checkbox      | ✅ `CHECKBOX.md`     | ❌                                  | Missing implementation doc.                                |
+| Icon          | ✅ `ICON.md`         | ❌                                  | Missing implementation doc.                                |
+| Icon Button   | ✅ `ICON_BUTTON.md`  | ❌                                  | Missing implementation doc.                                |
+| Input         | ❌                   | ❌                                  | Needs both docs.                                           |
+| Layout        | ❌                   | ❌                                  | Needs layout component docs (Stack/Inline/Grid/Container). |
+| Select        | ❌                   | ❌                                  | Needs both docs.                                           |
+| Select Button | ✅ `SELECTBUTTON.md` | ✅ `SELECTBUTTON_IMPLEMENTATION.md` | Complete; also has API + research supplements.             |
+| Tabs          | ✅ `TABS.md`         | ✅ `TABS_IMPLEMENTATION.md`         | Complete.                                                  |
 
 ## Root README.md Audit
 
@@ -122,20 +122,20 @@ From `BADGE.md` and `ACCORDION.md`, the standard structure includes:
 
 ## Gap Analysis
 
-| Component | API Doc | Implementation Doc | Quality | Gaps |
-| --- | --- | --- | --- | --- |
-| Button | ✅ | ✅ | Good | README still has duplicate partial docs. |
-| Card | README only | None | Partial | Needs API + implementation docs. |
-| Badge | ✅ | ✅ | Good | None. |
-| Accordion | ✅ | ✅ | Good | None. |
-| Tabs | ✅ | ✅ | Good | None. |
-| Input | None | None | None | Needs API + implementation docs. |
-| Select | None | None | None | Needs API + implementation docs. |
-| Select Button | ✅ | ✅ | Good | None (optional: consolidate extra API/Research files). |
-| Checkbox | ✅ | None | Partial | Needs implementation doc. |
-| Icon | ✅ | None | Partial | Needs implementation doc. |
-| Icon Button | ✅ | None | Partial | Needs implementation doc. |
-| Layout (Stack/Inline/Grid/Container) | None | None | None | Needs docs per primitive. |
+| Component                            | API Doc     | Implementation Doc | Quality | Gaps                                                   |
+| ------------------------------------ | ----------- | ------------------ | ------- | ------------------------------------------------------ |
+| Button                               | ✅          | ✅                 | Good    | README still has duplicate partial docs.               |
+| Card                                 | README only | None               | Partial | Needs API + implementation docs.                       |
+| Badge                                | ✅          | ✅                 | Good    | None.                                                  |
+| Accordion                            | ✅          | ✅                 | Good    | None.                                                  |
+| Tabs                                 | ✅          | ✅                 | Good    | None.                                                  |
+| Input                                | None        | None               | None    | Needs API + implementation docs.                       |
+| Select                               | None        | None               | None    | Needs API + implementation docs.                       |
+| Select Button                        | ✅          | ✅                 | Good    | None (optional: consolidate extra API/Research files). |
+| Checkbox                             | ✅          | None               | Partial | Needs implementation doc.                              |
+| Icon                                 | ✅          | None               | Partial | Needs implementation doc.                              |
+| Icon Button                          | ✅          | None               | Partial | Needs implementation doc.                              |
+| Layout (Stack/Inline/Grid/Container) | None        | None               | None    | Needs docs per primitive.                              |
 
 ## Priority Order
 

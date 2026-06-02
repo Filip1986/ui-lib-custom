@@ -8,44 +8,44 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `value` | `unknown[]` | `[]` | Array of data items to display |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal'` | `'material'` | Visual style; does NOT fall back to `ThemeConfigService` |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token |
-| `numVisible` | `number` | `1` | Number of items visible at once |
-| `numScroll` | `number` | `1` | Number of items scrolled per navigation step |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout direction |
-| `verticalViewportHeight` | `string` | `'300px'` | Viewport height override (vertical mode only) |
-| `circular` | `boolean` | `false` | Wraps navigation from last to first item |
-| `showNavigators` | `boolean` | `true` | Shows prev/next arrow buttons |
-| `showIndicators` | `boolean` | `true` | Shows dot indicator buttons |
-| `autoplayInterval` | `number` | `0` | Ms between auto-advances; `0` disables autoplay. Autoplay is automatically disabled when `prefers-reduced-motion: reduce` is detected |
-| `responsiveOptions` | `CarouselResponsiveOption[]` | `[]` | Breakpoint-based `numVisible`/`numScroll` overrides |
-| `styleClass` | `string` | `''` | Additional CSS class(es) on the host element |
-| `ariaLabel` | `string` | `'Carousel'` | ARIA label for the `role="region"` landmark. Provide a descriptive, unique value per page |
-| `prevAriaLabel` | `string` | `'Previous slide'` | Accessible label for the previous button (i18n) |
-| `nextAriaLabel` | `string` | `'Next slide'` | Accessible label for the next button (i18n) |
-| `pauseLabel` | `string` | `'Pause autoplay'` | Accessible label for the pause button when autoplay is running (i18n) |
-| `playLabel` | `string` | `'Resume autoplay'` | Accessible label for the resume button when autoplay is paused (i18n) |
+| Name                     | Type                                     | Default             | Notes                                                                                                                                 |
+| ------------------------ | ---------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `value`                  | `unknown[]`                              | `[]`                | Array of data items to display                                                                                                        |
+| `variant`                | `'material' \| 'bootstrap' \| 'minimal'` | `'material'`        | Visual style; does NOT fall back to `ThemeConfigService`                                                                              |
+| `size`                   | `'sm' \| 'md' \| 'lg'`                   | `'md'`              | Size token                                                                                                                            |
+| `numVisible`             | `number`                                 | `1`                 | Number of items visible at once                                                                                                       |
+| `numScroll`              | `number`                                 | `1`                 | Number of items scrolled per navigation step                                                                                          |
+| `orientation`            | `'horizontal' \| 'vertical'`             | `'horizontal'`      | Layout direction                                                                                                                      |
+| `verticalViewportHeight` | `string`                                 | `'300px'`           | Viewport height override (vertical mode only)                                                                                         |
+| `circular`               | `boolean`                                | `false`             | Wraps navigation from last to first item                                                                                              |
+| `showNavigators`         | `boolean`                                | `true`              | Shows prev/next arrow buttons                                                                                                         |
+| `showIndicators`         | `boolean`                                | `true`              | Shows dot indicator buttons                                                                                                           |
+| `autoplayInterval`       | `number`                                 | `0`                 | Ms between auto-advances; `0` disables autoplay. Autoplay is automatically disabled when `prefers-reduced-motion: reduce` is detected |
+| `responsiveOptions`      | `CarouselResponsiveOption[]`             | `[]`                | Breakpoint-based `numVisible`/`numScroll` overrides                                                                                   |
+| `styleClass`             | `string`                                 | `''`                | Additional CSS class(es) on the host element                                                                                          |
+| `ariaLabel`              | `string`                                 | `'Carousel'`        | ARIA label for the `role="region"` landmark. Provide a descriptive, unique value per page                                             |
+| `prevAriaLabel`          | `string`                                 | `'Previous slide'`  | Accessible label for the previous button (i18n)                                                                                       |
+| `nextAriaLabel`          | `string`                                 | `'Next slide'`      | Accessible label for the next button (i18n)                                                                                           |
+| `pauseLabel`             | `string`                                 | `'Pause autoplay'`  | Accessible label for the pause button when autoplay is running (i18n)                                                                 |
+| `playLabel`              | `string`                                 | `'Resume autoplay'` | Accessible label for the resume button when autoplay is paused (i18n)                                                                 |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
+| Name         | Payload             | Notes                                                                            |
+| ------------ | ------------------- | -------------------------------------------------------------------------------- |
 | `pageChange` | `CarouselPageEvent` | Emitted when the active page changes; payload includes `page` (zero-based index) |
 
 ## Keyboard shortcuts
 
-| Key | Context | Action |
-|-----|---------|--------|
-| `ArrowRight` / `ArrowDown` | Indicator dot list focused | Move focus to next dot |
-| `ArrowLeft` / `ArrowUp` | Indicator dot list focused | Move focus to previous dot |
-| `Home` | Indicator dot list focused | Move focus to first dot |
-| `End` | Indicator dot list focused | Move focus to last dot |
-| `Enter` / `Space` | Any indicator dot button | Navigate to that slide |
-| `Enter` / `Space` | Prev/Next button | Navigate one step backward/forward |
-| `Enter` / `Space` | Pause/Resume button | Toggle autoplay (only shown when `autoplayInterval > 0`) |
+| Key                        | Context                    | Action                                                   |
+| -------------------------- | -------------------------- | -------------------------------------------------------- |
+| `ArrowRight` / `ArrowDown` | Indicator dot list focused | Move focus to next dot                                   |
+| `ArrowLeft` / `ArrowUp`    | Indicator dot list focused | Move focus to previous dot                               |
+| `Home`                     | Indicator dot list focused | Move focus to first dot                                  |
+| `End`                      | Indicator dot list focused | Move focus to last dot                                   |
+| `Enter` / `Space`          | Any indicator dot button   | Navigate to that slide                                   |
+| `Enter` / `Space`          | Prev/Next button           | Navigate one step backward/forward                       |
+| `Enter` / `Space`          | Pause/Resume button        | Toggle autoplay (only shown when `autoplayInterval > 0`) |
 
 ## Autoplay
 

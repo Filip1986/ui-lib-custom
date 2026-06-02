@@ -13,12 +13,12 @@ Alert component for status messaging with optional dismiss action.
 
 ### Inputs
 
-| Name           | Type                  | Default  | Description |
-| -------------- | --------------------- | -------- | ----------- |
-| `dismissible`  | `boolean`             | `false`  | —           |
-| `dismissLabel` | `string | null`       | `null`   | —           |
-| `severity`     | `AlertSeverity`       | `'info'` | —           |
-| `variant`      | `AlertVariant | null` | `null`   | —           |
+| Name           | Type            | Default  | Description |
+| -------------- | --------------- | -------- | ----------- | --- |
+| `dismissible`  | `boolean`       | `false`  | —           |
+| `dismissLabel` | `string         | null`    | `null`      | —   |
+| `severity`     | `AlertSeverity` | `'info'` | —           |
+| `variant`      | `AlertVariant   | null`    | `null`      | —   |
 
 ### Outputs
 
@@ -74,4 +74,3 @@ Alert component for status messaging with optional dismiss action.
 - [Demo page](/components/alert)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/alert/README.md)
-

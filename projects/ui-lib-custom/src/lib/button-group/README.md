@@ -8,13 +8,13 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `variant` | `'material' \| 'bootstrap' \| 'minimal'` | `'material'` | Visual style applied to the group container |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Propagated to child buttons via CSS classes on the host |
-| `ariaLabel` | `string \| null` | `null` | Accessible label applied to the internal `role="group"` element |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout direction for grouped buttons |
-| `vertical` | `boolean` | `false` | Backward-compatible alias; when `true`, treated as `orientation="vertical"` |
+| Name          | Type                                     | Default        | Notes                                                                       |
+| ------------- | ---------------------------------------- | -------------- | --------------------------------------------------------------------------- |
+| `variant`     | `'material' \| 'bootstrap' \| 'minimal'` | `'material'`   | Visual style applied to the group container                                 |
+| `size`        | `'sm' \| 'md' \| 'lg'`                   | `'md'`         | Propagated to child buttons via CSS classes on the host                     |
+| `ariaLabel`   | `string \| null`                         | `null`         | Accessible label applied to the internal `role="group"` element             |
+| `orientation` | `'horizontal' \| 'vertical'`             | `'horizontal'` | Layout direction for grouped buttons                                        |
+| `vertical`    | `boolean`                                | `false`        | Backward-compatible alias; when `true`, treated as `orientation="vertical"` |
 
 ## Outputs
 
@@ -45,7 +45,7 @@ _none_
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `--uilib-button-group-gap` | `0px` | Spacing between grouped buttons |
-| `--uilib-button-group-connected-border-overlap` | `-1px` | Negative margin used to collapse adjacent borders in connected mode |
+| Variable                                        | Default | Description                                                         |
+| ----------------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `--uilib-button-group-gap`                      | `0px`   | Spacing between grouped buttons                                     |
+| `--uilib-button-group-connected-border-overlap` | `-1px`  | Negative margin used to collapse adjacent borders in connected mode |

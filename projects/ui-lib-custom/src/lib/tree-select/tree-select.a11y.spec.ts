@@ -99,7 +99,7 @@ class TwoTreeSelectHostComponent {
 }
 
 async function setup(
-  configure?: (host: TreeSelectA11yHostComponent) => void
+  configure?: (host: TreeSelectA11yHostComponent) => void,
 ): Promise<ComponentFixture<TreeSelectA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [TreeSelectA11yHostComponent],
@@ -107,7 +107,7 @@ async function setup(
   }).compileComponents();
 
   const fixture: ComponentFixture<TreeSelectA11yHostComponent> = TestBed.createComponent(
-    TreeSelectA11yHostComponent
+    TreeSelectA11yHostComponent,
   );
   configure?.(fixture.componentInstance);
   document.body.appendChild(fixture.nativeElement);
@@ -136,7 +136,9 @@ function comboboxElement(fixture: ComponentFixture<unknown>): HTMLElement {
 }
 
 function triggerElement(fixture: ComponentFixture<unknown>): HTMLElement {
-  const element: HTMLElement | null = rootElement(fixture).querySelector('.ui-lib-tree-select__trigger');
+  const element: HTMLElement | null = rootElement(fixture).querySelector(
+    '.ui-lib-tree-select__trigger',
+  );
   if (!element) {
     throw new Error('Expected trigger element');
   }
@@ -157,7 +159,7 @@ function treeElement(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function liveRegionElement(fixture: ComponentFixture<unknown>): HTMLElement {
   const element: HTMLElement | null = rootElement(fixture).querySelector(
-    '.ui-lib-tree-select__sr-live'
+    '.ui-lib-tree-select__sr-live',
   );
   if (!element) {
     throw new Error('Expected live region element');
@@ -171,7 +173,7 @@ function treeItems(fixture: ComponentFixture<unknown>): HTMLElement[] {
 
 function treeItemByLabel(fixture: ComponentFixture<unknown>, label: string): HTMLElement {
   const item: HTMLElement | undefined = treeItems(fixture).find(
-    (element: HTMLElement): boolean => (element.getAttribute('data-node-label') ?? '') === label
+    (element: HTMLElement): boolean => (element.getAttribute('data-node-label') ?? '') === label,
   );
   if (!item) {
     throw new Error(`Expected tree item with label "${label}"`);
@@ -196,7 +198,7 @@ async function openPanelWithClick(fixture: ComponentFixture<unknown>): Promise<v
 async function dispatchKey(
   fixture: ComponentFixture<unknown>,
   target: HTMLElement,
-  key: string
+  key: string,
 ): Promise<KeyboardEvent> {
   const event: KeyboardEvent = new KeyboardEvent('keydown', {
     key,
@@ -210,7 +212,7 @@ async function dispatchKey(
 
 async function focusElement(
   fixture: ComponentFixture<unknown>,
-  element: HTMLElement
+  element: HTMLElement,
 ): Promise<void> {
   element.focus();
   await stabilize(fixture);
@@ -238,7 +240,7 @@ describe('TreeSelect Accessibility', (): void => {
         (host: TreeSelectA11yHostComponent): void => {
           host.selectionMode.set('checkbox');
           host.filter.set(true);
-        }
+        },
       );
       await openPanelWithClick(fixture);
       await checkA11y(fixture, { rules: TREE_AXE_RULES });
@@ -288,10 +290,10 @@ describe('TreeSelect Accessibility', (): void => {
         (host: TreeSelectA11yHostComponent): void => {
           host.ariaLabel.set(null);
           host.ariaLabelledBy.set('tree-select-external-label');
-        }
+        },
       );
       expect(comboboxElement(fixture).getAttribute('aria-labelledby')).toBe(
-        'tree-select-external-label'
+        'tree-select-external-label',
       );
     });
 
@@ -299,7 +301,7 @@ describe('TreeSelect Accessibility', (): void => {
       const fixture: ComponentFixture<TreeSelectA11yHostComponent> = await setup();
       await openPanelWithClick(fixture);
       const groups: HTMLElement[] = Array.from(
-        rootElement(fixture).querySelectorAll<HTMLElement>('.uilib-tree-children')
+        rootElement(fixture).querySelectorAll<HTMLElement>('.uilib-tree-children'),
       );
       expect(groups.length).toBeGreaterThan(0);
       groups.forEach((group: HTMLElement): void => {
@@ -343,7 +345,7 @@ describe('TreeSelect Accessibility', (): void => {
       const fixture: ComponentFixture<TreeSelectA11yHostComponent> = await setup(
         (host: TreeSelectA11yHostComponent): void => {
           host.selection = cloneTreeNodes()[0]?.children?.[0] ?? null;
-        }
+        },
       );
       await openPanelWithClick(fixture);
       expect(treeItemByLabel(fixture, 'Work').getAttribute('aria-selected')).toBe('true');
@@ -353,7 +355,7 @@ describe('TreeSelect Accessibility', (): void => {
       const fixture: ComponentFixture<TreeSelectA11yHostComponent> = await setup(
         (host: TreeSelectA11yHostComponent): void => {
           host.selectionMode.set('checkbox');
-        }
+        },
       );
       await openPanelWithClick(fixture);
       expect(treeElement(fixture).getAttribute('aria-multiselectable')).toBe('true');
@@ -363,7 +365,7 @@ describe('TreeSelect Accessibility', (): void => {
       const fixture: ComponentFixture<TreeSelectA11yHostComponent> = await setup(
         (host: TreeSelectA11yHostComponent): void => {
           host.selectionMode.set('checkbox');
-        }
+        },
       );
       await openPanelWithClick(fixture);
       checkboxByLabel(fixture, 'Expenses.xlsx').click();
@@ -376,9 +378,10 @@ describe('TreeSelect Accessibility', (): void => {
       const fixture: ComponentFixture<TreeSelectA11yHostComponent> = await setup();
       await openPanelWithClick(fixture);
       const chevron: HTMLElement | null = rootElement(fixture).querySelector(
-        '.ui-lib-tree-select__chevron'
+        '.ui-lib-tree-select__chevron',
       );
-      const toggleIcon: HTMLElement | null = rootElement(fixture).querySelector('.uilib-tree-toggle-icon');
+      const toggleIcon: HTMLElement | null =
+        rootElement(fixture).querySelector('.uilib-tree-toggle-icon');
       expect(chevron?.getAttribute('aria-hidden')).toBe('true');
       expect(toggleIcon?.getAttribute('aria-hidden')).toBe('true');
     });
@@ -388,11 +391,11 @@ describe('TreeSelect Accessibility', (): void => {
         (host: TreeSelectA11yHostComponent): void => {
           host.showClear.set(true);
           host.selection = cloneTreeNodes()[0] ?? null;
-        }
+        },
       );
       await stabilize(fixture);
       const clearButton: HTMLButtonElement | null = rootElement(fixture).querySelector(
-        '.ui-lib-tree-select__clear'
+        '.ui-lib-tree-select__clear',
       );
       expect(clearButton?.getAttribute('aria-label')).toBe('Clear selection');
     });
@@ -417,12 +420,13 @@ describe('TreeSelect Accessibility', (): void => {
         imports: [TwoTreeSelectHostComponent],
         providers: [provideZonelessChangeDetection()],
       }).compileComponents();
-      const fixture: ComponentFixture<TwoTreeSelectHostComponent> =
-        TestBed.createComponent(TwoTreeSelectHostComponent);
+      const fixture: ComponentFixture<TwoTreeSelectHostComponent> = TestBed.createComponent(
+        TwoTreeSelectHostComponent,
+      );
       document.body.appendChild(fixture.nativeElement);
       await stabilize(fixture);
       const hosts: HTMLElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-tree-select')
+        (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-tree-select'),
       );
       expect(hosts[0]?.id).not.toBe(hosts[1]?.id);
     });
@@ -448,11 +452,11 @@ describe('TreeSelect Accessibility', (): void => {
       const fixture: ComponentFixture<TreeSelectA11yHostComponent> = await setup(
         (host: TreeSelectA11yHostComponent): void => {
           host.filter.set(true);
-        }
+        },
       );
       await openPanelWithClick(fixture);
       const filterInput: HTMLInputElement | null = rootElement(fixture).querySelector(
-        '.uilib-tree-filter-input'
+        '.uilib-tree-filter-input',
       );
       expect(document.activeElement).toBe(filterInput);
     });

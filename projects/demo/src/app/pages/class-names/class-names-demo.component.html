@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="ClassNames"
@@ -10,8 +9,8 @@
   <!-- Section: Function usage -->
   <app-doc-section id="function-usage" title="Function Usage">
     <p class="demo-section__description">
-      Import <code>classNames</code> and call it from TypeScript. Strings, objects
-      (keys with truthy values included), arrays, and falsy values (ignored) are all accepted.
+      Import <code>classNames</code> and call it from TypeScript. Strings, objects (keys with truthy
+      values included), arrays, and falsy values (ignored) are all accepted.
     </p>
 
     <div class="demo-card">
@@ -86,7 +85,12 @@
       <div class="demo-playground__result">
         <span class="demo-label">pipe result:</span>
         <code class="demo-output">{{
-          { 'demo-box': true, 'demo-box--active': isActive(), 'demo-box--disabled': isDisabled(), 'demo-box--highlighted': isHighlighted() } | classNames
+          {
+            'demo-box': true,
+            'demo-box--active': isActive(),
+            'demo-box--disabled': isDisabled(),
+            'demo-box--highlighted': isHighlighted(),
+          } | classNames
         }}</code>
       </div>
     </div>
@@ -94,14 +98,13 @@
 
   <!-- Section: API reference -->
   <app-doc-section id="api" title="API Reference">
-
     <h3 class="demo-subsection-title">classNames(...values)</h3>
     <app-doc-api-reference kind="name" [rows]="classnamesFnRows" [showDefault]="false" />
 
-    <h3 class="demo-subsection-title" style="margin-top: 1.5rem;">ClassNamesPipe</h3>
+    <h3 class="demo-subsection-title" style="margin-top: 1.5rem">ClassNamesPipe</h3>
     <app-doc-api-reference kind="name" [rows]="classnamesPipeRows" [showDefault]="false" />
 
-    <h3 class="demo-subsection-title" style="margin-top: 1.5rem;">ClassNameValue type</h3>
+    <h3 class="demo-subsection-title" style="margin-top: 1.5rem">ClassNameValue type</h3>
     <div class="demo-card">
       <ui-lib-code-snippet
         language="typescript"
@@ -114,16 +117,19 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
   <app-doc-section id="css-vars" title="CSS Custom Properties">
-    <p class="demo-section__description">This is a behavioral directive with no CSS custom properties. All visual styling is controlled by the wrapped component.</p>
+    <p class="demo-section__description">
+      This is a behavioral directive with no CSS custom properties. All visual styling is controlled
+      by the wrapped component.
+    </p>
   </app-doc-section>
 
   <!-- ── Accessibility ──────────────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <p class="demo-section__description">
-      <code>classNames</code> computes a CSS class string. It has no direct accessibility
-      impact, but the classes it produces may control <code>aria-*</code>-relevant visual
-      states (e.g. <code>.is-disabled</code>). Pair with <code>[uilibBind]</code> to keep
-      ARIA attributes in sync with CSS state.
+      <code>classNames</code> computes a CSS class string. It has no direct accessibility impact,
+      but the classes it produces may control <code>aria-*</code>-relevant visual states (e.g.
+      <code>.is-disabled</code>). Pair with <code>[uilibBind]</code> to keep ARIA attributes in sync
+      with CSS state.
     </p>
     <app-doc-aria-table [rows]="ariaRows" />
     <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
@@ -140,5 +146,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

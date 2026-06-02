@@ -121,13 +121,13 @@ export class MyComponent {}`;
   ];
 
   public readonly spacingLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.spacing(), this.spacingOptions)
+    this.displayLabel(this.spacing(), this.spacingOptions),
   );
   public readonly alignLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.align(), this.alignOptions)
+    this.displayLabel(this.align(), this.alignOptions),
   );
   public readonly justifyLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.justify(), this.justifyOptions)
+    this.displayLabel(this.justify(), this.justifyOptions),
   );
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
@@ -167,13 +167,13 @@ export class MyComponent {}`;
       ([key, value]: [string, string]): { label: string; value: T } => ({
         label: `${key} (${this.toPx(value)})`,
         value: key as T,
-      })
+      }),
     );
   }
 
   private displayLabel<T extends string>(value: T, options: { label: string; value: T }[]): string {
     const match: { label: string; value: T } | undefined = options.find(
-      (option: { label: string; value: T }): boolean => option.value === value
+      (option: { label: string; value: T }): boolean => option.value === value,
     );
     return match ? match.label : String(value);
   }

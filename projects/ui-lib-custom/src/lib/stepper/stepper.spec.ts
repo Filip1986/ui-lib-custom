@@ -24,7 +24,7 @@ function getStepperElement(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getStepHeaders(fixture: ComponentFixture<unknown>): NodeListOf<HTMLButtonElement> {
   return getStepperElement(fixture).querySelectorAll<HTMLButtonElement>(
-    '.ui-lib-stepper__step-header'
+    '.ui-lib-stepper__step-header',
   );
 }
 
@@ -93,13 +93,13 @@ class TestHostComponent {
   public readonly orientation: WritableSignal<StepperOrientation> =
     signal<StepperOrientation>('horizontal');
   public readonly variant: WritableSignal<StepperVariant | null> = signal<StepperVariant | null>(
-    null
+    null,
   );
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
   public lastStepChange: StepChangeEvent | null = null;
 
   public readonly stepperRef: WritableSignal<Stepper | undefined> = signal<Stepper | undefined>(
-    undefined
+    undefined,
   );
 }
 
@@ -273,7 +273,7 @@ describe('Stepper', (): void => {
       fixture.detectChanges();
       const stepper: HTMLElement = getStepperElement(fixture);
       const checkmarks: NodeListOf<SVGElement> = stepper.querySelectorAll<SVGElement>(
-        '.ui-lib-stepper__checkmark'
+        '.ui-lib-stepper__checkmark',
       );
       expect(checkmarks.length).toBe(2);
     });
@@ -447,28 +447,28 @@ describe('Stepper — vertical orientation', (): void => {
 
   it('should render vertical layout container', (): void => {
     const verticalList: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-stepper__vertical-list'
+      '.ui-lib-stepper__vertical-list',
     );
     expect(verticalList).toBeTruthy();
   });
 
   it('should apply vertical orientation class', (): void => {
     const stepper: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-stepper'
+      'ui-lib-stepper',
     ) as HTMLElement;
     expect(stepper.className).toContain('ui-lib-stepper--vertical');
   });
 
   it('should show active panel content inline in vertical mode', (): void => {
     const content: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.alpha-content'
+      '.alpha-content',
     );
     expect(content).toBeTruthy();
   });
 
   it('should not render inactive panel content in vertical mode', (): void => {
     const betaContent: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.beta-content'
+      '.beta-content',
     );
     expect(betaContent).toBeNull();
   });
@@ -487,7 +487,7 @@ describe('Stepper — vertical orientation', (): void => {
     indicators[0]!.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
     fixture.detectChanges();
     const betaContent: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.beta-content'
+      '.beta-content',
     );
     expect(betaContent).toBeTruthy();
   });

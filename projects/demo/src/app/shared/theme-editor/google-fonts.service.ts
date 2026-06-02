@@ -26,16 +26,16 @@ export class GoogleFontsService {
   public readonly error: WritableSignal<string | null> = signal<string | null>(null);
 
   public readonly serifFonts: Signal<string[]> = computed<string[]>((): string[] =>
-    this.getFontsByCategory('serif')
+    this.getFontsByCategory('serif'),
   );
   public readonly sansSerifFonts: Signal<string[]> = computed<string[]>((): string[] =>
-    this.getFontsByCategory('sans-serif')
+    this.getFontsByCategory('sans-serif'),
   );
   public readonly displayFonts: Signal<string[]> = computed<string[]>((): string[] =>
-    this.getFontsByCategory('display')
+    this.getFontsByCategory('display'),
   );
   public readonly monospaceFonts: Signal<string[]> = computed<string[]>((): string[] =>
-    this.getFontsByCategory('monospace')
+    this.getFontsByCategory('monospace'),
   );
 
   public loadFonts(apiKey: string): void {
@@ -52,7 +52,7 @@ export class GoogleFontsService {
               family: item.family,
               category: item.category,
               variants: item.variants,
-            })
+            }),
           );
           this.fontMeta.set(meta);
           this.fonts.set(meta.map((item: GoogleFont): string => item.family));

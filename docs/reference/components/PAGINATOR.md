@@ -13,21 +13,21 @@ Paginator provides page-based navigation controls for any list or data set. Supp
 
 ### Inputs
 
-| Name                        | Type                      | Default                                           | Description                                                                                                                                |
-| --------------------------- | ------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `alwaysShow`                | `boolean`                 | `true`                                            | When false, the paginator hides itself if there is only one page.                                                                          |
-| `ariaLabel`                 | `string`                  | `'Pagination'`                                    | Accessible label for the navigation landmark (used on the host element).                                                                   |
-| `currentPageReportTemplate` | `string`                  | `PAGINATOR_DEFAULTS.CURRENT_PAGE_REPORT_TEMPLATE` | Template string for the current-page report. Supported placeholders: {currentPage}, {totalPages}, {first}, {last}, {rows}, {totalRecords}. |
-| `pageLinkSize`              | `number`                  | `PAGINATOR_DEFAULTS.PAGE_LINK_SIZE`               | Maximum number of page-link buttons shown in the windowed range.                                                                           |
-| `rowsPerPageOptions`        | `number[] | null`         | `null`                                            | Array of row counts to show in the rows-per-page dropdown. Pass null to hide the dropdown.                                                 |
-| `showCurrentPageReport`     | `boolean`                 | `false`                                           | Show a summary of the current page position (e.g. "1 of 10").                                                                              |
-| `showFirstLastIcon`         | `boolean`                 | `true`                                            | Show buttons to jump to the first and last page.                                                                                           |
-| `showJumpToPageInput`       | `boolean`                 | `false`                                           | Show a numeric input that lets the user type a page number and press Enter.                                                                |
-| `showPageLinks`             | `boolean`                 | `true`                                            | Show the windowed list of numbered page-link buttons.                                                                                      |
-| `size`                      | `PaginatorSize`           | `'md'`                                            | Size token controlling padding and font size.                                                                                              |
-| `styleClass`                | `string`                  | `''`                                              | Additional CSS class(es) applied to the inner content wrapper.                                                                             |
-| `totalRecords`              | `number`                  | `0`                                               | Total number of records across all pages.                                                                                                  |
-| `variant`                   | `PaginatorVariant | null` | `null`                                            | Visual design variant. Falls back to the global ThemeConfigService variant when null.                                                      |
+| Name                        | Type              | Default                                           | Description                                                                                                                                |
+| --------------------------- | ----------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `alwaysShow`                | `boolean`         | `true`                                            | When false, the paginator hides itself if there is only one page.                                                                          |
+| `ariaLabel`                 | `string`          | `'Pagination'`                                    | Accessible label for the navigation landmark (used on the host element).                                                                   |
+| `currentPageReportTemplate` | `string`          | `PAGINATOR_DEFAULTS.CURRENT_PAGE_REPORT_TEMPLATE` | Template string for the current-page report. Supported placeholders: {currentPage}, {totalPages}, {first}, {last}, {rows}, {totalRecords}. |
+| `pageLinkSize`              | `number`          | `PAGINATOR_DEFAULTS.PAGE_LINK_SIZE`               | Maximum number of page-link buttons shown in the windowed range.                                                                           |
+| `rowsPerPageOptions`        | `number[]         | null`                                             | `null`                                                                                                                                     | Array of row counts to show in the rows-per-page dropdown. Pass null to hide the dropdown. |
+| `showCurrentPageReport`     | `boolean`         | `false`                                           | Show a summary of the current page position (e.g. "1 of 10").                                                                              |
+| `showFirstLastIcon`         | `boolean`         | `true`                                            | Show buttons to jump to the first and last page.                                                                                           |
+| `showJumpToPageInput`       | `boolean`         | `false`                                           | Show a numeric input that lets the user type a page number and press Enter.                                                                |
+| `showPageLinks`             | `boolean`         | `true`                                            | Show the windowed list of numbered page-link buttons.                                                                                      |
+| `size`                      | `PaginatorSize`   | `'md'`                                            | Size token controlling padding and font size.                                                                                              |
+| `styleClass`                | `string`          | `''`                                              | Additional CSS class(es) applied to the inner content wrapper.                                                                             |
+| `totalRecords`              | `number`          | `0`                                               | Total number of records across all pages.                                                                                                  |
+| `variant`                   | `PaginatorVariant | null`                                             | `null`                                                                                                                                     | Visual design variant. Falls back to the global ThemeConfigService variant when null.      |
 
 ### Models (two-way bindable)
 
@@ -141,4 +141,3 @@ Paginator provides page-based navigation controls for any list or data set. Supp
 - [Demo page](/components/paginator)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/paginator/README.md)
-

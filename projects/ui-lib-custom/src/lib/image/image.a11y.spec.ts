@@ -71,13 +71,13 @@ function getPreviewLiveRegion(fixture: ComponentFixture<unknown>): HTMLElement |
 
 function getCloseBtn(fixture: ComponentFixture<unknown>): HTMLButtonElement | null {
   return getHostElement(fixture).querySelector<HTMLButtonElement>(
-    '.uilib-image__toolbar-btn--close'
+    '.uilib-image__toolbar-btn--close',
   );
 }
 
 function getToolbarBtns(fixture: ComponentFixture<unknown>): HTMLButtonElement[] {
   return Array.from(
-    getHostElement(fixture).querySelectorAll<HTMLButtonElement>('.uilib-image__toolbar-btn')
+    getHostElement(fixture).querySelectorAll<HTMLButtonElement>('.uilib-image__toolbar-btn'),
   );
 }
 
@@ -199,7 +199,7 @@ describe('Image Accessibility', (): void => {
     const fixture: ComponentFixture<ImageA11yHostComponent> = await createFixture();
     await openPreview(fixture);
     const previewImg: HTMLImageElement | null = getHostElement(
-      fixture
+      fixture,
     ).querySelector<HTMLImageElement>('.uilib-image__preview-img');
     expect(previewImg?.getAttribute('alt')).toBe('A scenic mountain photo');
   });
@@ -212,7 +212,7 @@ describe('Image Accessibility', (): void => {
     expect(getMask(fixture)).toBeTruthy();
 
     getMask(fixture)!.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }),
     );
     fixture.detectChanges();
     await fixture.whenStable();
@@ -226,7 +226,7 @@ describe('Image Accessibility', (): void => {
     await openPreview(fixture);
 
     getMask(fixture)!.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }),
     );
     fixture.detectChanges();
     await fixture.whenStable();
@@ -269,7 +269,7 @@ describe('Image Accessibility', (): void => {
 
     // Tab forward — focus should wrap to first button inside the mask
     lastButton.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true })
+      new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true }),
     );
     fixture.detectChanges();
     await fixture.whenStable();
@@ -317,7 +317,7 @@ describe('Image Accessibility', (): void => {
     await openPreview(fixture);
 
     getMask(fixture)!.dispatchEvent(
-      new KeyboardEvent('keydown', { key: '+', bubbles: true, cancelable: true })
+      new KeyboardEvent('keydown', { key: '+', bubbles: true, cancelable: true }),
     );
     fixture.detectChanges();
     await fixture.whenStable();
@@ -331,7 +331,7 @@ describe('Image Accessibility', (): void => {
     await openPreview(fixture);
 
     getMask(fixture)!.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true })
+      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }),
     );
     fixture.detectChanges();
     await fixture.whenStable();
@@ -346,7 +346,7 @@ describe('Image Accessibility', (): void => {
 
     for (let index: number = 0; index < 4; index++) {
       getMask(fixture)!.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true })
+        new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }),
       );
     }
     fixture.detectChanges();
@@ -366,7 +366,7 @@ describe('Image Accessibility', (): void => {
         code: 'Equal',
         bubbles: true,
         cancelable: true,
-      })
+      }),
     );
     fixture.detectChanges();
     await fixture.whenStable();

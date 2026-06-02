@@ -1,7 +1,10 @@
 <app-doc-page-layout [sections]="sections">
-
-  <app-doc-page-header docHeader title="ProgressSpinner" [importCode]="importCode"
-    description="An animated circular spinner that signals an indeterminate loading state. Uses a CSS &lt;code&gt;stroke-dashoffset&lt;/code&gt; animation on an SVG circle combined with a continuous rotation to produce the characteristic &quot;arc chase&quot; effect. Three design variants, three sizes, and full CSS-variable theming.">
+  <app-doc-page-header
+    docHeader
+    title="ProgressSpinner"
+    [importCode]="importCode"
+    description='An animated circular spinner that signals an indeterminate loading state. Uses a CSS &lt;code&gt;stroke-dashoffset&lt;/code&gt; animation on an SVG circle combined with a continuous rotation to produce the characteristic "arc chase" effect. Three design variants, three sizes, and full CSS-variable theming.'
+  >
   </app-doc-page-header>
 
   <!-- Section 1: Basic -->
@@ -13,12 +16,7 @@
     <div class="ps-row">
       <ui-lib-progress-spinner />
     </div>
-    <ui-lib-code-snippet
-      language="html"
-      [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetBasic"
-    />
+    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetBasic" />
   </app-doc-section>
 
   <!-- Section 2: Sizes -->
@@ -32,21 +30,15 @@
       <ui-lib-progress-spinner size="md" />
       <ui-lib-progress-spinner size="lg" />
     </div>
-    <ui-lib-code-snippet
-      language="html"
-      [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetSizes"
-    />
+    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetSizes" />
   </app-doc-section>
 
   <!-- Section 3: Variants -->
   <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Override the global theme variant with the <code>variant</code> input.
-      <code>'material'</code> cycles through multiple colours,
-      <code>'bootstrap'</code> uses a solid primary blue, and
-      <code>'minimal'</code> uses a muted grey.
+      <code>'material'</code> cycles through multiple colours, <code>'bootstrap'</code> uses a solid
+      primary blue, and <code>'minimal'</code> uses a muted grey.
     </p>
     <div class="ps-row ps-row--gap-lg">
       <div class="ps-variant-card">
@@ -73,8 +65,8 @@
   <!-- Section 4: Custom animation speed -->
   <app-doc-section id="animation-duration" title="Animation Duration">
     <p class="demo-section__description">
-      Control the rotation speed with <code>animationDuration</code>.
-      Accepts any CSS <code>&lt;time&gt;</code> value.
+      Control the rotation speed with <code>animationDuration</code>. Accepts any CSS
+      <code>&lt;time&gt;</code> value.
     </p>
     <div class="ps-row ps-row--align-center">
       <div class="ps-labeled">
@@ -101,13 +93,29 @@
   <!-- Section 5: Custom stroke width and fill -->
   <app-doc-section id="stroke-width-fill" title="Stroke Width &amp; Fill">
     <p class="demo-section__description">
-      <code>strokeWidth</code> controls the arc thickness (SVG units).
-      <code>fill</code> sets the interior fill colour of the circle.
+      <code>strokeWidth</code> controls the arc thickness (SVG units). <code>fill</code> sets the
+      interior fill colour of the circle.
     </p>
     <div class="ps-row ps-row--align-center">
-      <ui-lib-progress-spinner strokeWidth="1" variant="bootstrap" size="lg" ariaLabel="Thin spinner" />
-      <ui-lib-progress-spinner strokeWidth="4" variant="bootstrap" size="lg" ariaLabel="Thick spinner" />
-      <ui-lib-progress-spinner strokeWidth="6" fill="#e0e7ff" variant="bootstrap" size="lg" ariaLabel="Filled spinner" />
+      <ui-lib-progress-spinner
+        strokeWidth="1"
+        variant="bootstrap"
+        size="lg"
+        ariaLabel="Thin spinner"
+      />
+      <ui-lib-progress-spinner
+        strokeWidth="4"
+        variant="bootstrap"
+        size="lg"
+        ariaLabel="Thick spinner"
+      />
+      <ui-lib-progress-spinner
+        strokeWidth="6"
+        fill="#e0e7ff"
+        variant="bootstrap"
+        size="lg"
+        ariaLabel="Filled spinner"
+      />
     </div>
     <ui-lib-code-snippet
       language="html"
@@ -120,8 +128,8 @@
   <!-- Section 6: Loading overlay pattern -->
   <app-doc-section id="loading-overlay" title="Loading Overlay Pattern">
     <p class="demo-section__description">
-      Combine <code>ProgressSpinner</code> with a semi-transparent overlay to block content
-      during async operations.
+      Combine <code>ProgressSpinner</code> with a semi-transparent overlay to block content during
+      async operations.
     </p>
     <div class="ps-overlay-example">
       <div class="ps-overlay-example__content">
@@ -159,9 +167,30 @@
         <div class="ps-control">
           <span class="ps-control__label">size</span>
           <div class="ps-control__buttons">
-            <ui-lib-button [appearance]="interactiveSize() === 'sm' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setSize('sm')">sm</ui-lib-button>
-            <ui-lib-button [appearance]="interactiveSize() === 'md' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setSize('md')">md</ui-lib-button>
-            <ui-lib-button [appearance]="interactiveSize() === 'lg' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setSize('lg')">lg</ui-lib-button>
+            <ui-lib-button
+              [appearance]="interactiveSize() === 'sm' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setSize('sm')"
+              >sm</ui-lib-button
+            >
+            <ui-lib-button
+              [appearance]="interactiveSize() === 'md' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setSize('md')"
+              >md</ui-lib-button
+            >
+            <ui-lib-button
+              [appearance]="interactiveSize() === 'lg' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setSize('lg')"
+              >lg</ui-lib-button
+            >
           </div>
         </div>
 
@@ -169,9 +198,30 @@
         <div class="ps-control">
           <span class="ps-control__label">variant</span>
           <div class="ps-control__buttons">
-            <ui-lib-button [appearance]="interactiveVariant() === 'material' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setVariant('material')">material</ui-lib-button>
-            <ui-lib-button [appearance]="interactiveVariant() === 'bootstrap' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setVariant('bootstrap')">bootstrap</ui-lib-button>
-            <ui-lib-button [appearance]="interactiveVariant() === 'minimal' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setVariant('minimal')">minimal</ui-lib-button>
+            <ui-lib-button
+              [appearance]="interactiveVariant() === 'material' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setVariant('material')"
+              >material</ui-lib-button
+            >
+            <ui-lib-button
+              [appearance]="interactiveVariant() === 'bootstrap' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setVariant('bootstrap')"
+              >bootstrap</ui-lib-button
+            >
+            <ui-lib-button
+              [appearance]="interactiveVariant() === 'minimal' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setVariant('minimal')"
+              >minimal</ui-lib-button
+            >
           </div>
         </div>
 
@@ -179,9 +229,30 @@
         <div class="ps-control">
           <span class="ps-control__label">animationDuration</span>
           <div class="ps-control__buttons">
-            <ui-lib-button [appearance]="interactiveDuration() === '4s' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setDuration('4s')">4s</ui-lib-button>
-            <ui-lib-button [appearance]="interactiveDuration() === '2s' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setDuration('2s')">2s</ui-lib-button>
-            <ui-lib-button [appearance]="interactiveDuration() === '750ms' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setDuration('750ms')">750ms</ui-lib-button>
+            <ui-lib-button
+              [appearance]="interactiveDuration() === '4s' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setDuration('4s')"
+              >4s</ui-lib-button
+            >
+            <ui-lib-button
+              [appearance]="interactiveDuration() === '2s' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setDuration('2s')"
+              >2s</ui-lib-button
+            >
+            <ui-lib-button
+              [appearance]="interactiveDuration() === '750ms' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setDuration('750ms')"
+              >750ms</ui-lib-button
+            >
           </div>
         </div>
 
@@ -189,10 +260,38 @@
         <div class="ps-control">
           <span class="ps-control__label">strokeWidth</span>
           <div class="ps-control__buttons">
-            <ui-lib-button [appearance]="interactiveStrokeWidth() === '1' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setStrokeWidth('1')">1</ui-lib-button>
-            <ui-lib-button [appearance]="interactiveStrokeWidth() === '2' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setStrokeWidth('2')">2</ui-lib-button>
-            <ui-lib-button [appearance]="interactiveStrokeWidth() === '4' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setStrokeWidth('4')">4</ui-lib-button>
-            <ui-lib-button [appearance]="interactiveStrokeWidth() === '6' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setStrokeWidth('6')">6</ui-lib-button>
+            <ui-lib-button
+              [appearance]="interactiveStrokeWidth() === '1' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setStrokeWidth('1')"
+              >1</ui-lib-button
+            >
+            <ui-lib-button
+              [appearance]="interactiveStrokeWidth() === '2' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setStrokeWidth('2')"
+              >2</ui-lib-button
+            >
+            <ui-lib-button
+              [appearance]="interactiveStrokeWidth() === '4' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setStrokeWidth('4')"
+              >4</ui-lib-button
+            >
+            <ui-lib-button
+              [appearance]="interactiveStrokeWidth() === '6' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
+              (click)="setStrokeWidth('6')"
+              >6</ui-lib-button
+            >
           </div>
         </div>
       </div>
@@ -205,7 +304,6 @@
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
 
-  
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -222,7 +320,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -232,5 +330,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

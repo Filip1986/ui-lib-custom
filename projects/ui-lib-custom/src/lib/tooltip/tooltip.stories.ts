@@ -41,7 +41,7 @@ const renderTooltip: (args: Partial<TooltipStoryArgs>) => {
   moduleMetadata: { imports: unknown[] };
   template: string;
 } = (
-  args: Partial<TooltipStoryArgs>
+  args: Partial<TooltipStoryArgs>,
 ): {
   props: Partial<TooltipStoryArgs>;
   moduleMetadata: { imports: unknown[] };

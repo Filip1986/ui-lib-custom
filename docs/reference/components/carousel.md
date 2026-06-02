@@ -14,7 +14,7 @@ Carousel is a content slider with support for multiple visible items, responsive
 ### Inputs
 
 | Name                     | Type                         | Default                                               | Description                                                                                     |
-| ------------------------ | ---------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| ------------------------ | ---------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `ariaLabel`              | `string`                     | `CAROUSEL_ARIA_REGION_LABEL`                          | ARIA label for the carousel landmark region. Falls back to `'Carousel'`.                        |
 | `autoplayInterval`       | `number`                     | `0`                                                   | Milliseconds between automatic page advances. Set to 0 (default) to disable autoplay.           |
 | `circular`               | `boolean`                    | `false`                                               | When true, navigation wraps from last item back to first.                                       |
@@ -31,7 +31,7 @@ Carousel is a content slider with support for multiple visible items, responsive
 | `size`                   | `CarouselSize`               | `'md'`                                                | Size token — controls padding, font-size, and button dimensions.                                |
 | `styleClass`             | `string`                     | `''`                                                  | Optional extra CSS class applied to the root host element.                                      |
 | `value`                  | `unknown[]`                  | `[]`                                                  | Array of data items to display in the carousel.                                                 |
-| `variant`                | `CarouselVariant | null`     | `null`                                                | Design variant — controls visual style. Defaults to the global ThemeConfigService variant.      |
+| `variant`                | `CarouselVariant             | null`                                                 | `null`                                                                                          | Design variant — controls visual style. Defaults to the global ThemeConfigService variant. |
 | `verticalViewportHeight` | `string`                     | `CAROUSEL_DEFAULT_VERTICAL_VIEWPORT_HEIGHT`           | Viewport height override — only applied in vertical orientation.                                |
 
 ### Outputs
@@ -163,4 +163,3 @@ _none_
 - [Demo page](/components/carousel)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/carousel/README.md)
-

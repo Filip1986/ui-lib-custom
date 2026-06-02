@@ -17,4 +17,3 @@ This sidebar panel provides live, in-demo customization for variants, shape, den
 - Services: `ThemeConfigService`, `ThemeEditorService`, `ThemePresetService`
 
 No additional dependencies are required.
-

@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Breadcrumb"
@@ -21,7 +20,9 @@
 
   <!-- ── With Home ─────────────────────────────────────────────────────── -->
   <app-doc-section id="with-home" title="With Home">
-    <p class="demo-section__description">Use the <code>home</code> input to pin a home item at the start.</p>
+    <p class="demo-section__description">
+      Use the <code>home</code> input to pin a home item at the start.
+    </p>
     <div class="demo-row">
       <ui-lib-breadcrumb [home]="homeItem" [items]="homeItems" />
     </div>
@@ -29,7 +30,9 @@
 
   <!-- ── RouterLink ────────────────────────────────────────────────────── -->
   <app-doc-section id="router-link" title="RouterLink">
-    <p class="demo-section__description">Use <code>routerLink</code> to navigate within the Angular application.</p>
+    <p class="demo-section__description">
+      Use <code>routerLink</code> to navigate within the Angular application.
+    </p>
     <div class="demo-row">
       <ui-lib-breadcrumb [items]="routerItems" />
     </div>
@@ -121,7 +124,6 @@
 
   <!-- ── API Table ─────────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API">
-
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
 
@@ -132,7 +134,6 @@
     <app-doc-api-reference kind="property" [rows]="apiBreadcrumbItemRows" [showDefault]="false" />
   </app-doc-section>
 
-  
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -149,7 +150,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -158,5 +159,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

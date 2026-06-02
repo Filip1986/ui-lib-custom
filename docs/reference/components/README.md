@@ -1,18 +1,10 @@
 # Components Reference
 
-
-
 Individual component documentation with complete API references and implementation details.
-
-
 
 ---
 
-
-
 ## 📦 Available Components
-
-
 
 ### Badge
 
@@ -22,11 +14,7 @@ Individual component documentation with complete API references and implementati
 
 - [BADGE_IMPLEMENTATION.md](../../architecture/BADGE_IMPLEMENTATION.md) - Implementation details and architecture
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -34,11 +22,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/badge/)
 
-
-
 ---
-
-
 
 ### Accordion
 
@@ -48,11 +32,7 @@ Individual component documentation with complete API references and implementati
 
 - [ACCORDION_IMPLEMENTATION.md](../../architecture/ACCORDION_IMPLEMENTATION.md) - Implementation details and architecture
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -60,11 +40,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/accordion/)
 
-
-
 ---
-
-
 
 ### Button
 
@@ -74,11 +50,7 @@ Individual component documentation with complete API references and implementati
 
 - [BUTTON_IMPLEMENTATION.md](../../architecture/BUTTON_IMPLEMENTATION.md) - Implementation details and architecture
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -86,11 +58,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/button/)
 
-
-
 ---
-
-
 
 ### Card
 
@@ -100,11 +68,7 @@ Individual component documentation with complete API references and implementati
 
 - [CARD_IMPLEMENTATION.md](../../architecture/CARD_IMPLEMENTATION.md) - Implementation details and architecture
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -112,11 +76,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/card/)
 
-
-
 ---
-
-
 
 ### Checkbox
 
@@ -126,21 +86,13 @@ Individual component documentation with complete API references and implementati
 
 - [CHECKBOX_IMPLEMENTATION.md](../../architecture/CHECKBOX_IMPLEMENTATION.md) - Implementation details and architecture
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/checkbox/)
 
-
-
 ---
-
-
 
 ### Icon
 
@@ -150,21 +102,13 @@ Individual component documentation with complete API references and implementati
 
 - [ICON_IMPLEMENTATION.md](../../architecture/ICON_IMPLEMENTATION.md) - Implementation details and architecture
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/icon/)
 
-
-
 ---
-
-
 
 ### Icon Button
 
@@ -172,21 +116,13 @@ Individual component documentation with complete API references and implementati
 
 - [icon-button.md](icon-button.md) - API reference and implementation notes
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/icon-button/)
 
-
-
 ---
-
-
 
 ### Input
 
@@ -196,11 +132,7 @@ Individual component documentation with complete API references and implementati
 
 - [INPUT_IMPLEMENTATION.md](../../architecture/INPUT_IMPLEMENTATION.md) - Implementation details and architecture
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -208,11 +140,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/input/)
 
-
-
 ---
-
-
 
 ### Textarea
 
@@ -220,11 +148,7 @@ Individual component documentation with complete API references and implementati
 
 - [TEXTAREA.md](TEXTAREA.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -232,11 +156,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/textarea/)
 
-
-
 ---
-
-
 
 ### Select
 
@@ -244,21 +164,13 @@ Individual component documentation with complete API references and implementati
 
 - [SELECT.md](SELECT.md) - Complete API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/select/)
 
-
-
 ---
-
-
 
 ### SelectButton
 
@@ -268,11 +180,7 @@ Individual component documentation with complete API references and implementati
 
 - [SELECTBUTTON_IMPLEMENTATION.md](../../architecture/SELECTBUTTON_IMPLEMENTATION.md) - Implementation details and architecture
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -280,11 +188,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/select-button/)
 
-
-
 ---
-
-
 
 ### Tabs
 
@@ -294,21 +198,13 @@ Individual component documentation with complete API references and implementati
 
 - [TABS_IMPLEMENTATION.md](../../architecture/TABS_IMPLEMENTATION.md) - Implementation details and architecture
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/tabs/)
 
-
-
 ---
-
-
 
 ### Alert
 
@@ -316,21 +212,13 @@ Individual component documentation with complete API references and implementati
 
 - [ALERT.md](ALERT.md) - Complete API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/alert/)
 
-
-
 ---
-
-
 
 ### Layout
 
@@ -338,21 +226,13 @@ Individual component documentation with complete API references and implementati
 
 - [LAYOUT.md](LAYOUT.md) - Layout primitives reference (Stack/Inline/Grid/Container)
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/layout/)
 
-
-
 ---
-
-
 
 ### AutoComplete
 
@@ -360,21 +240,13 @@ Individual component documentation with complete API references and implementati
 
 - [AUTOCOMPLETE_API.md](AUTOCOMPLETE_API.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/autocomplete/)
 
-
-
 ---
-
-
 
 ### CascadeSelect
 
@@ -382,21 +254,13 @@ Individual component documentation with complete API references and implementati
 
 - [CASCADESELECT_API.md](CASCADESELECT_API.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/cascade-select/)
 
-
-
 ---
-
-
 
 ### ColorPicker
 
@@ -404,11 +268,7 @@ Individual component documentation with complete API references and implementati
 
 - [color-picker.md](color-picker.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -416,11 +276,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/color-picker/)
 
-
-
 ---
-
-
 
 ### DatePicker
 
@@ -428,11 +284,7 @@ Individual component documentation with complete API references and implementati
 
 - [date-picker.md](date-picker.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -440,11 +292,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/date-picker/)
 
-
-
 ---
-
-
 
 ### Editor
 
@@ -452,11 +300,7 @@ Individual component documentation with complete API references and implementati
 
 - [EDITOR.md](EDITOR.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -464,11 +308,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/editor/)
 
-
-
 ---
-
-
 
 ### IconField
 
@@ -478,11 +318,7 @@ Individual component documentation with complete API references and implementati
 
 **Highlights:** Decorative icons default to `aria-hidden`, stay out of the tab order, and the wrapper now reserves CSS-only padding for native inputs plus Input/Password/InputMask/InputNumber compositions.
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -490,11 +326,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/icon-field/)
 
-
-
 ---
-
-
 
 ### InputGroup
 
@@ -502,11 +334,7 @@ Individual component documentation with complete API references and implementati
 
 - [input-group.md](input-group.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -514,11 +342,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/input-group/)
 
-
-
 ---
-
-
 
 ### InputMask
 
@@ -526,11 +350,7 @@ Individual component documentation with complete API references and implementati
 
 - [input-mask.md](input-mask.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -538,11 +358,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/input-mask/)
 
-
-
 ---
-
-
 
 ### InputNumber
 
@@ -550,11 +366,7 @@ Individual component documentation with complete API references and implementati
 
 - [input-number.md](input-number.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -562,11 +374,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/input-number/)
 
-
-
 ---
-
-
 
 ### DataView
 
@@ -574,11 +382,7 @@ Individual component documentation with complete API references and implementati
 
 - [data-view.md](data-view.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -586,11 +390,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/data-view/)
 
-
-
 ---
-
-
 
 ### Chart
 
@@ -598,11 +398,7 @@ Individual component documentation with complete API references and implementati
 
 - [CHART.md](CHART.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -610,11 +406,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/chart/)
 
-
-
 ---
-
-
 
 ### SpeedDial
 
@@ -622,11 +414,7 @@ Individual component documentation with complete API references and implementati
 
 - [speed-dial.md](speed-dial.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -634,11 +422,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/speed-dial/)
 
-
-
 ---
-
-
 
 ### SplitButton
 
@@ -648,11 +432,7 @@ Individual component documentation with complete API references and implementati
 
 **Highlights:** Hardened split menu-button semantics, keyboard navigation, and reduced-motion support.
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -660,11 +440,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/split-button/)
 
-
-
 ---
-
-
 
 ### OrderList
 
@@ -672,11 +448,7 @@ Individual component documentation with complete API references and implementati
 
 - [order-list.md](order-list.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -684,11 +456,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/order-list/)
 
-
-
 ---
-
-
 
 ### OrganizationChart
 
@@ -696,11 +464,7 @@ Individual component documentation with complete API references and implementati
 
 - [organization-chart.md](organization-chart.md) - API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -708,11 +472,7 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/organization-chart/)
 
-
-
 ---
-
-
 
 ### Dialog
 
@@ -722,21 +482,13 @@ Individual component documentation with complete API references and implementati
 
 - [DIALOG_IMPLEMENTATION.md](../../implementation/DIALOG_IMPLEMENTATION.md) - Maintainer implementation details
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/dialog/)
 
-
-
 ---
-
-
 
 ### Slider
 
@@ -744,11 +496,7 @@ Individual component documentation with complete API references and implementati
 
 - [SLIDER.md](SLIDER.md) - Complete API reference and usage guide
 
-
-
 **Status:** ✅ Complete
-
-
 
 **Quick Links:**
 
@@ -756,25 +504,15 @@ Individual component documentation with complete API references and implementati
 
 - [Source Code](../../../projects/ui-lib-custom/src/lib/slider/)
 
-
-
 ---
-
-
 
 ## 📋 Documentation Structure
 
-
-
 Each component should have two documentation files:
-
-
 
 ### 1. API Reference (`COMPONENT_NAME.md`)
 
 **Purpose:** User-facing documentation
-
-
 
 **Should include:**
 
@@ -792,13 +530,9 @@ Each component should have two documentation files:
 
 - Browser support and accessibility
 
-
-
 ### 2. Implementation Details (`COMPONENT_NAME_IMPLEMENTATION.md`)
 
 **Purpose:** Developer-facing documentation
-
-
 
 **Should include:**
 
@@ -816,15 +550,9 @@ Each component should have two documentation files:
 
 - Future enhancements
 
-
-
 ---
 
-
-
 ## 🎯 Quick Reference
-
-
 
 | Component | Description | Variants | Colors | Sizes | Status |
 

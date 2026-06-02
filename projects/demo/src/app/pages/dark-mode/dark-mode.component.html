@@ -6,7 +6,6 @@
   />
 
   <ui-lib-panel variant="minimal">
-
     <div class="mode-selector">
       <div class="mode-info">
         <p>
@@ -50,7 +49,6 @@
   </ui-lib-panel>
 
   <ui-lib-panel variant="minimal">
-
     <div class="component-showcase">
       <section class="showcase-section">
         <h3>Buttons</h3>
@@ -80,7 +78,11 @@
         <div class="showcase-form">
           <ui-lib-input label="Email" placeholder="Enter email" />
           <ui-lib-input label="Password" type="password" placeholder="Enter password" />
-          <ui-lib-select [options]="selectOptions" placeholder="Select option" ariaLabel="Example option" />
+          <ui-lib-select
+            [options]="selectOptions"
+            placeholder="Select option"
+            ariaLabel="Example option"
+          />
           <ui-lib-checkbox label="Remember me" />
         </div>
       </section>
@@ -120,17 +122,12 @@
   </ui-lib-panel>
 
   <ui-lib-panel variant="minimal">
-
     <h4>Using Theme Mode</h4>
-    <ui-lib-code-snippet [code]="usageCode" language="typescript" 
-      [showLineNumbers]="true"
-      />
+    <ui-lib-code-snippet [code]="usageCode" language="typescript" [showLineNumbers]="true" />
 
     <h4>CSS Variables</h4>
     <p>All components automatically adapt to dark mode via CSS custom properties.</p>
-    <ui-lib-code-snippet [code]="cssCode" language="css" 
-      [showLineNumbers]="true"
-      />
+    <ui-lib-code-snippet [code]="cssCode" language="css" [showLineNumbers]="true" />
 
     <h4>System Preference</h4>
     <p>Set mode to 'auto' to follow the user's system preference.</p>
@@ -144,5 +141,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

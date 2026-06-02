@@ -13,19 +13,19 @@ Drawer — a panel that slides in from the edge of the viewport. Bind `[(visible
 
 ### Inputs
 
-| Name              | Type                   | Default     | Description                                                                                                                      |
-| ----------------- | ---------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaDescribedby` | `string | undefined`   | `undefined` | `id` of an element that describes the drawer panel. When provided, the value is set on the panel's `aria-describedby` attribute. |
-| `blockScroll`     | `boolean`              | `true`      | Whether to lock body scroll while the drawer is open.                                                                            |
-| `closeOnBackdrop` | `boolean`              | `true`      | Whether a click on the backdrop closes the drawer.                                                                               |
-| `closeOnEscape`   | `boolean`              | `true`      | Whether pressing Escape closes the drawer.                                                                                       |
-| `header`          | `string`               | `''`        | Optional header text. Omit to hide the built-in header bar.                                                                      |
-| `modal`           | `boolean`              | `true`      | Whether to render the semi-transparent backdrop behind the drawer.                                                               |
-| `position`        | `DrawerPosition`       | `'right'`   | Which edge the drawer slides in from.                                                                                            |
-| `showCloseButton` | `boolean`              | `true`      | Whether to show the built-in close button in the header.                                                                         |
-| `size`            | `string`               | `'300px'`   | Panel width (left/right) or height (top/bottom). Accepts any CSS length.                                                         |
-| `styleClass`      | `string | null`        | `null`      | Additional CSS classes applied to the host element.                                                                              |
-| `variant`         | `DrawerVariant | null` | `null`      | Visual design variant — inherits from ThemeConfigService when not set.                                                           |
+| Name              | Type             | Default    | Description                                                              |
+| ----------------- | ---------------- | ---------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaDescribedby` | `string          | undefined` | `undefined`                                                              | `id` of an element that describes the drawer panel. When provided, the value is set on the panel's `aria-describedby` attribute. |
+| `blockScroll`     | `boolean`        | `true`     | Whether to lock body scroll while the drawer is open.                    |
+| `closeOnBackdrop` | `boolean`        | `true`     | Whether a click on the backdrop closes the drawer.                       |
+| `closeOnEscape`   | `boolean`        | `true`     | Whether pressing Escape closes the drawer.                               |
+| `header`          | `string`         | `''`       | Optional header text. Omit to hide the built-in header bar.              |
+| `modal`           | `boolean`        | `true`     | Whether to render the semi-transparent backdrop behind the drawer.       |
+| `position`        | `DrawerPosition` | `'right'`  | Which edge the drawer slides in from.                                    |
+| `showCloseButton` | `boolean`        | `true`     | Whether to show the built-in close button in the header.                 |
+| `size`            | `string`         | `'300px'`  | Panel width (left/right) or height (top/bottom). Accepts any CSS length. |
+| `styleClass`      | `string          | null`      | `null`                                                                   | Additional CSS classes applied to the host element.                                                                              |
+| `variant`         | `DrawerVariant   | null`      | `null`                                                                   | Visual design variant — inherits from ThemeConfigService when not set.                                                           |
 
 ### Models (two-way bindable)
 
@@ -135,4 +135,3 @@ Drawer — a panel that slides in from the edge of the viewport. Bind `[(visible
 - [Demo page](/components/drawer)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/drawer/README.md)
-

@@ -123,11 +123,11 @@ export class MyComponent {}
     <ui-lib-container size="sm" [padding]="6">
       <ui-lib-stack [gap]="6">
         <h1>Login</h1>
-        
+
         <ui-lib-stack [gap]="4">
           <input type="email" placeholder="Email">
           <input type="password" placeholder="Password">
-          
+
           <ui-lib-stack direction="horizontal" justify="space-between">
             <button>Cancel</button>
             <button>Login</button>
@@ -149,14 +149,14 @@ export class MyComponent {}
         <header>
           <h1>Dashboard</h1>
         </header>
-        
+
         <ui-lib-grid [columns]="4" [gap]="4">
           <div class="stat-card">Stat 1</div>
           <div class="stat-card">Stat 2</div>
           <div class="stat-card">Stat 3</div>
           <div class="stat-card">Stat 4</div>
         </ui-lib-grid>
-        
+
         <ui-lib-grid [columns]="2" [gap]="6">
           <div class="chart">Chart 1</div>
           <div class="chart">Chart 2</div>
@@ -171,26 +171,26 @@ export class MyComponent {}
 
 Use these spacing tokens for `gap` and `padding`:
 
-| Token | Size | Use Case |
-|-------|------|----------|
-| `1` | 4px | Tight spacing |
-| `2` | 8px | Tags, chips |
-| `3` | 12px | Compact layouts |
-| `4` | 16px | Default spacing |
-| `6` | 24px | Comfortable spacing |
-| `8` | 32px | Large spacing |
-| `12` | 48px | Section dividers |
+| Token | Size | Use Case            |
+| ----- | ---- | ------------------- |
+| `1`   | 4px  | Tight spacing       |
+| `2`   | 8px  | Tags, chips         |
+| `3`   | 12px | Compact layouts     |
+| `4`   | 16px | Default spacing     |
+| `6`   | 24px | Comfortable spacing |
+| `8`   | 32px | Large spacing       |
+| `12`  | 48px | Section dividers    |
 
 ## Container Sizes
 
-| Size | Max Width | Use Case |
-|------|-----------|----------|
-| `sm` | 640px | Forms, narrow content |
-| `md` | 768px | Blog posts, articles |
-| `lg` | 1024px | Default (recommended) |
-| `xl` | 1280px | Wide content |
-| `2xl` | 1536px | Full dashboards |
-| `full` | 100% | Edge-to-edge |
+| Size   | Max Width | Use Case              |
+| ------ | --------- | --------------------- |
+| `sm`   | 640px     | Forms, narrow content |
+| `md`   | 768px     | Blog posts, articles  |
+| `lg`   | 1024px    | Default (recommended) |
+| `xl`   | 1280px    | Wide content          |
+| `2xl`  | 1536px    | Full dashboards       |
+| `full` | 100%      | Edge-to-edge          |
 
 ## Next Steps
 

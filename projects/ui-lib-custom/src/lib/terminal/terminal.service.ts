@@ -34,7 +34,7 @@ let terminalCommandCounter: number = 0;
 @Injectable({ providedIn: 'root' })
 export class TerminalService {
   private readonly _history: WritableSignal<TerminalHistoryItem[]> = signal<TerminalHistoryItem[]>(
-    []
+    [],
   );
   private readonly _command: WritableSignal<TerminalCommand | null> =
     signal<TerminalCommand | null>(null);

@@ -8,27 +8,27 @@
 
 ## Exports
 
-| Name | Kind | Notes |
-|------|------|-------|
-| `LiveAnnouncerService` | service | Posts messages to a screen-reader live region |
-| `AnnounceDirective` | directive (`[uiLibAnnounce]`) | Announces a string whenever the signal value changes |
+| Name                        | Kind                                  | Notes                                                        |
+| --------------------------- | ------------------------------------- | ------------------------------------------------------------ |
+| `LiveAnnouncerService`      | service                               | Posts messages to a screen-reader live region                |
+| `AnnounceDirective`         | directive (`[uiLibAnnounce]`)         | Announces a string whenever the signal value changes         |
 | `AnnounceOnChangeDirective` | directive (`[uiLibAnnounceOnChange]`) | Announces `data-announce-message` on `change`/`input` events |
 
 ## `LiveAnnouncerService` API
 
-| Method | Signature | Notes |
-|--------|-----------|-------|
-| `announce` | `(message, politeness?, duration?) => Promise<void>` | `politeness` defaults to `'polite'`; `duration > 0` auto-clears after ms |
-| `announceError` | `(message) => Promise<void>` | Shorthand for `assertive` politeness |
-| `announceSuccess` | `(message) => Promise<void>` | Shorthand for `polite` politeness |
-| `clear` | `() => void` | Clears the live region immediately |
+| Method            | Signature                                            | Notes                                                                    |
+| ----------------- | ---------------------------------------------------- | ------------------------------------------------------------------------ |
+| `announce`        | `(message, politeness?, duration?) => Promise<void>` | `politeness` defaults to `'polite'`; `duration > 0` auto-clears after ms |
+| `announceError`   | `(message) => Promise<void>`                         | Shorthand for `assertive` politeness                                     |
+| `announceSuccess` | `(message) => Promise<void>`                         | Shorthand for `polite` politeness                                        |
+| `clear`           | `() => void`                                         | Clears the live region immediately                                       |
 
 ## `AnnounceDirective` Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `uiLibAnnounce` | `string` | `''` | Message to announce; re-announces on every change |
-| `politeness` | `'polite' \| 'assertive' \| 'off'` | `'polite'` | ARIA live politeness |
+| Name            | Type                               | Default    | Notes                                             |
+| --------------- | ---------------------------------- | ---------- | ------------------------------------------------- |
+| `uiLibAnnounce` | `string`                           | `''`       | Message to announce; re-announces on every change |
+| `politeness`    | `'polite' \| 'assertive' \| 'off'` | `'polite'` | ARIA live politeness                              |
 
 ## Outputs
 

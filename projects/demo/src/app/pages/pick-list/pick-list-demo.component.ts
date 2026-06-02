@@ -265,20 +265,20 @@ export class PickListDemoComponent {
   public onMoveToTarget(event: PickListMoveToTargetEvent): void {
     const items: DemoCountry[] = event.items as DemoCountry[];
     this.lastEventLog.set(
-      `Moved to target: ${items.map((c: DemoCountry): string => c.name).join(', ')}`
+      `Moved to target: ${items.map((c: DemoCountry): string => c.name).join(', ')}`,
     );
   }
 
   public onMoveToSource(event: PickListMoveToSourceEvent): void {
     const items: DemoCountry[] = event.items as DemoCountry[];
     this.lastEventLog.set(
-      `Returned to source: ${items.map((c: DemoCountry): string => c.name).join(', ')}`
+      `Returned to source: ${items.map((c: DemoCountry): string => c.name).join(', ')}`,
     );
   }
 
   public onReorder(event: PickListReorderEvent): void {
     this.lastEventLog.set(
-      `Reordered in ${event.list}: item ${event.previousIndex + 1} → ${event.currentIndex + 1}`
+      `Reordered in ${event.list}: item ${event.previousIndex + 1} → ${event.currentIndex + 1}`,
     );
   }
 

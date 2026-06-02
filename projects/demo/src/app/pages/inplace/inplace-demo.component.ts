@@ -152,7 +152,7 @@ export class InplaceDemoComponent {
       (current: Record<InplaceVariant, boolean>): Record<InplaceVariant, boolean> => ({
         ...current,
         [variant]: value,
-      })
+      }),
     );
   }
 

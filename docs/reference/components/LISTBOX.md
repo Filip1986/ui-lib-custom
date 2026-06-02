@@ -14,7 +14,7 @@ Listbox component — displays a scrollable list of options with single or multi
 ### Inputs
 
 | Name                  | Type                     | Default                                                      | Description                                                                                                                          |
-| --------------------- | ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| --------------------- | ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | `ariaLabel`           | `string`                 | `''`                                                         | Accessible label for the listbox element.                                                                                            |
 | `ariaLabelledBy`      | `string`                 | `''`                                                         | ID of an external element that labels this listbox.                                                                                  |
 | `checkbox`            | `boolean`                | `false`                                                      | When true and `multiple` is enabled, renders a checkbox beside each item.                                                            |
@@ -38,7 +38,7 @@ Listbox component — displays a scrollable list of options with single or multi
 | `showToggleAll`       | `boolean`                | `false`                                                      | When true and `multiple` is enabled, shows a "Toggle all" checkbox in the header to select or deselect every enabled option at once. |
 | `size`                | `ListboxSize`            | `'md'`                                                       | Size token controlling padding and font size.                                                                                        |
 | `striped`             | `boolean`                | `false`                                                      | When true, alternating rows receive a subtle background tint.                                                                        |
-| `variant`             | `ListboxVariant | null`  | `null`                                                       | Visual design variant. Falls back to the global ThemeConfigService variant.                                                          |
+| `variant`             | `ListboxVariant          | null`                                                        | `null`                                                                                                                               | Visual design variant. Falls back to the global ThemeConfigService variant. |
 
 ### Models (two-way bindable)
 
@@ -183,4 +183,3 @@ _none_
 - [Demo page](/components/listbox)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/listbox/README.md)
-

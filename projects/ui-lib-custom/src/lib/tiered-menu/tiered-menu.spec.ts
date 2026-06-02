@@ -15,14 +15,14 @@ import type { TieredMenuItem, TieredMenuItemCommandEvent } from './tiered-menu.t
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEls<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -156,7 +156,7 @@ describe('TieredMenu', (): void => {
     it('marks disabled items with aria-disabled', (): void => {
       const disabledLink: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--disabled .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--disabled .ui-lib-tiered-menu__link',
       );
       expect(disabledLink?.getAttribute('aria-disabled')).toBe('true');
     });
@@ -321,7 +321,7 @@ describe('TieredMenu', (): void => {
     it('sets aria-haspopup on items with children', (): void => {
       const linkWithSubmenu: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link',
       );
       expect(linkWithSubmenu?.getAttribute('aria-haspopup')).toBe('menu');
     });
@@ -329,7 +329,7 @@ describe('TieredMenu', (): void => {
     it('sets aria-expanded=false on collapsed submenu parent', (): void => {
       const linkWithSubmenu: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link',
       );
       expect(linkWithSubmenu?.getAttribute('aria-expanded')).toBe('false');
     });
@@ -337,13 +337,13 @@ describe('TieredMenu', (): void => {
     it('opens a flyout when hovering a parent item', (): void => {
       const parentItem: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu'
+        '.ui-lib-tiered-menu__item--has-submenu',
       );
       parentItem?.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
       fixture.detectChanges();
       const submenuWrapper: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__submenu-wrapper'
+        '.ui-lib-tiered-menu__submenu-wrapper',
       );
       expect(submenuWrapper).not.toBeNull();
     });

@@ -22,12 +22,12 @@ Centers content with a max-width constraint and uniform padding.
 
 ### Inputs
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `size` | `ContainerSize` | `'lg'` | Max-width token |
-| `centered` | `boolean` | `false` | Applies `margin: auto` to center horizontally |
-| `inset` | `'sm' \| 'md' \| 'lg' \| 'xl' \| null` | `null` | Semantic uniform padding (preferred); maps to `--uilib-inset-*` tokens. Note: `'xs'` is not accepted by Container |
-| `padding` | `SpacingToken` | `4` | Back-compat numeric padding token; ignored when `inset` is set |
+| Input      | Type                                   | Default | Description                                                                                                       |
+| ---------- | -------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
+| `size`     | `ContainerSize`                        | `'lg'`  | Max-width token                                                                                                   |
+| `centered` | `boolean`                              | `false` | Applies `margin: auto` to center horizontally                                                                     |
+| `inset`    | `'sm' \| 'md' \| 'lg' \| 'xl' \| null` | `null`  | Semantic uniform padding (preferred); maps to `--uilib-inset-*` tokens. Note: `'xs'` is not accepted by Container |
+| `padding`  | `SpacingToken`                         | `4`     | Back-compat numeric padding token; ignored when `inset` is set                                                    |
 
 ### Types
 
@@ -56,20 +56,20 @@ Vertical or horizontal flex layout with design-token spacing.
 
 ### Inputs
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `direction` | `StackDirection` | `'vertical'` | `flex-direction: column` or `row` |
-| `align` | `StackAlign` | `'stretch'` | `align-items` value |
-| `justify` | `StackJustify` | `'start'` | `justify-content` value |
-| `spacing` | `StackToken \| SpacingToken \| number \| null` | `null` | Semantic gap (preferred); maps to `--uilib-stack-*` tokens |
-| `gap` | `SpacingToken` | `4` | Back-compat numeric gap token; ignored when `spacing` is set |
+| Input       | Type                                           | Default      | Description                                                  |
+| ----------- | ---------------------------------------------- | ------------ | ------------------------------------------------------------ |
+| `direction` | `StackDirection`                               | `'vertical'` | `flex-direction: column` or `row`                            |
+| `align`     | `StackAlign`                                   | `'stretch'`  | `align-items` value                                          |
+| `justify`   | `StackJustify`                                 | `'start'`    | `justify-content` value                                      |
+| `spacing`   | `StackToken \| SpacingToken \| number \| null` | `null`       | Semantic gap (preferred); maps to `--uilib-stack-*` tokens   |
+| `gap`       | `SpacingToken`                                 | `4`          | Back-compat numeric gap token; ignored when `spacing` is set |
 
 ### Types
 
 ```typescript
 type StackDirection = 'vertical' | 'horizontal';
-type StackAlign     = 'start' | 'center' | 'end' | 'stretch';
-type StackJustify   = 'start' | 'center' | 'end' | 'space-between' | 'space-around' | 'space-evenly';
+type StackAlign = 'start' | 'center' | 'end' | 'stretch';
+type StackJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-around' | 'space-evenly';
 ```
 
 ### Example
@@ -96,17 +96,17 @@ Horizontal, wrapping flex layout — ideal for tags, chips, and button groups.
 
 ### Inputs
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `align` | `InlineAlign` | `'center'` | `align-items` value |
-| `justify` | `InlineJustify` | `'start'` | `justify-content` value |
-| `spacing` | `InlineToken \| SpacingToken \| number \| null` | `null` | Semantic gap (preferred); maps to `--uilib-inline-*` tokens |
-| `gap` | `SpacingToken` | `2` | Back-compat numeric gap token; ignored when `spacing` is set |
+| Input     | Type                                            | Default    | Description                                                  |
+| --------- | ----------------------------------------------- | ---------- | ------------------------------------------------------------ |
+| `align`   | `InlineAlign`                                   | `'center'` | `align-items` value                                          |
+| `justify` | `InlineJustify`                                 | `'start'`  | `justify-content` value                                      |
+| `spacing` | `InlineToken \| SpacingToken \| number \| null` | `null`     | Semantic gap (preferred); maps to `--uilib-inline-*` tokens  |
+| `gap`     | `SpacingToken`                                  | `2`        | Back-compat numeric gap token; ignored when `spacing` is set |
 
 ### Types
 
 ```typescript
-type InlineAlign   = 'start' | 'center' | 'end' | 'baseline' | 'stretch';
+type InlineAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch';
 type InlineJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-around';
 ```
 
@@ -130,20 +130,20 @@ CSS Grid layout with fixed column count or responsive auto-fit.
 
 ### Inputs
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `columns` | `GridColumns` (1–12) | `12` | Fixed column count via `repeat(N, 1fr)` |
-| `align` | `GridAlign` | `'stretch'` | `align-items` value |
-| `justify` | `GridJustify` | `'stretch'` | `justify-items` value |
-| `spacing` | `StackToken \| SpacingToken \| number \| null` | `null` | Semantic gap (preferred); maps to `--uilib-stack-*` tokens |
-| `gap` | `SpacingToken` | `4` | Back-compat numeric gap token; ignored when `spacing` is set |
-| `minColumnWidth` | `string \| undefined` | `undefined` | When set, switches to `repeat(auto-fit, minmax(value, 1fr))` — ignores `columns` |
+| Input            | Type                                           | Default     | Description                                                                      |
+| ---------------- | ---------------------------------------------- | ----------- | -------------------------------------------------------------------------------- |
+| `columns`        | `GridColumns` (1–12)                           | `12`        | Fixed column count via `repeat(N, 1fr)`                                          |
+| `align`          | `GridAlign`                                    | `'stretch'` | `align-items` value                                                              |
+| `justify`        | `GridJustify`                                  | `'stretch'` | `justify-items` value                                                            |
+| `spacing`        | `StackToken \| SpacingToken \| number \| null` | `null`      | Semantic gap (preferred); maps to `--uilib-stack-*` tokens                       |
+| `gap`            | `SpacingToken`                                 | `4`         | Back-compat numeric gap token; ignored when `spacing` is set                     |
+| `minColumnWidth` | `string \| undefined`                          | `undefined` | When set, switches to `repeat(auto-fit, minmax(value, 1fr))` — ignores `columns` |
 
 ### Types
 
 ```typescript
 type GridColumns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-type GridAlign   = 'start' | 'center' | 'end' | 'stretch';
+type GridAlign = 'start' | 'center' | 'end' | 'stretch';
 type GridJustify = 'start' | 'center' | 'end' | 'stretch';
 ```
 
@@ -183,13 +183,13 @@ type GridJustify = 'start' | 'center' | 'end' | 'stretch';
 
 The primitives use spacing and inset tokens resolved via CSS custom properties. Override them at `:root` or within any theme scope.
 
-| Variable pattern | Used by | Purpose |
-|---|---|---|
-| `--uilib-container-sm/md/lg/xl/2xl` | Container | Max-width values per size token |
-| `--uilib-inset-xs/sm/md/lg/xl` | Container | Uniform padding values per inset token |
-| `--uilib-stack-xs/sm/md/lg/xl` | Stack, Grid | Gap values per stack spacing token |
-| `--uilib-inline-xs/sm/md/lg/xl` | Inline | Gap values per inline spacing token |
-| `--uilib-space-{n}` | All | Numeric spacing tokens (1–16 scale) |
+| Variable pattern                    | Used by     | Purpose                                |
+| ----------------------------------- | ----------- | -------------------------------------- |
+| `--uilib-container-sm/md/lg/xl/2xl` | Container   | Max-width values per size token        |
+| `--uilib-inset-xs/sm/md/lg/xl`      | Container   | Uniform padding values per inset token |
+| `--uilib-stack-xs/sm/md/lg/xl`      | Stack, Grid | Gap values per stack spacing token     |
+| `--uilib-inline-xs/sm/md/lg/xl`     | Inline      | Gap values per inline spacing token    |
+| `--uilib-space-{n}`                 | All         | Numeric spacing tokens (1–16 scale)    |
 
 ---
 
@@ -208,7 +208,6 @@ Layout primitives add no ARIA attributes. Apply semantics directly to child elem
 ```html
 <ui-lib-container size="xl" [centered]="true" inset="lg">
   <ui-lib-stack direction="vertical" spacing="xl">
-
     <ui-lib-inline spacing="sm" align="center">
       <ui-lib-badge color="info">Beta</ui-lib-badge>
       <span>v2.0 Release</span>
@@ -224,7 +223,6 @@ Layout primitives add no ARIA attributes. Apply semantics directly to child elem
       <ui-lib-button variant="minimal">Cancel</ui-lib-button>
       <ui-lib-button>Save</ui-lib-button>
     </ui-lib-stack>
-
   </ui-lib-stack>
 </ui-lib-container>
 ```

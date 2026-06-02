@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Bind"
@@ -17,10 +16,9 @@
   <!-- Section 1: Basic usage -->
   <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__description">
-      Pass any object literal to <code>[uiLibBind]</code>. Each key is set as
-      a DOM property on the host element. Using <code>id</code>,
-      <code>title</code>, or custom <code>data-*</code> attributes all work out
-      of the box.
+      Pass any object literal to <code>[uiLibBind]</code>. Each key is set as a DOM property on the
+      host element. Using <code>id</code>, <code>title</code>, or custom
+      <code>data-*</code> attributes all work out of the box.
     </p>
     <div class="bd-demo-card">
       <div
@@ -41,8 +39,8 @@
   <!-- Section 2: Interactive playground -->
   <app-doc-section id="interactive-playground" title="Interactive Playground">
     <p class="demo-section__description">
-      The binding object reacts to signals. Change the id preset, cycle the
-      tooltip, or toggle <code>tabIndex</code> to see the DOM update live.
+      The binding object reacts to signals. Change the id preset, cycle the tooltip, or toggle
+      <code>tabIndex</code> to see the DOM update live.
     </p>
     <div class="bd-demo-card">
       <div class="bd-controls">
@@ -77,14 +75,15 @@
             type="button"
             (click)="toggleTabIndex()"
           >
-            @if (includeTabIndex()) { Included } @else { Excluded }
+            @if (includeTabIndex()) {
+              Included
+            } @else {
+              Excluded
+            }
           </ui-lib-button>
         </div>
       </div>
-      <div
-        class="bd-target bd-target--live"
-        [uiLibBind]="liveBindings()"
-      >
+      <div class="bd-target bd-target--live" [uiLibBind]="liveBindings()">
         Dynamic element — hover for tooltip
       </div>
       <div class="bd-live-preview">
@@ -97,15 +96,12 @@
   <!-- Section 3: Boolean and numeric properties -->
   <app-doc-section id="boolean-numeric" title="Boolean &amp; Numeric Properties">
     <p class="demo-section__description">
-      <code>uiLibBind</code> uses <code>Renderer2.setProperty</code> under the
-      hood, so boolean and numeric DOM properties work exactly as expected.
+      <code>uiLibBind</code> uses <code>Renderer2.setProperty</code> under the hood, so boolean and
+      numeric DOM properties work exactly as expected.
     </p>
     <div class="bd-demo-card">
       <div class="bd-prop-row">
-        <div
-          class="bd-target"
-          [uiLibBind]="{ hidden: false, tabIndex: 2, title: 'tabIndex is 2' }"
-        >
+        <div class="bd-target" [uiLibBind]="{ hidden: false, tabIndex: 2, title: 'tabIndex is 2' }">
           tabIndex = 2 (try Tab)
         </div>
         <div
@@ -146,14 +142,18 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
   <app-doc-section id="css-vars" title="CSS Custom Properties">
-    <p class="demo-section__description">This is a behavioral directive with no CSS custom properties. All visual styling is controlled by the wrapped component.</p>
+    <p class="demo-section__description">
+      This is a behavioral directive with no CSS custom properties. All visual styling is controlled
+      by the wrapped component.
+    </p>
   </app-doc-section>
 
   <!-- ── Accessibility ──────────────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <p class="demo-section__description">
       <code>Bind</code> is a declarative attribute-binding directive. Use it to reactively drive
-      ARIA attributes from signals — e.g. <code>[uilibBind]="&#123; 'aria-expanded': isOpen() &#125;"</code>.
+      ARIA attributes from signals — e.g.
+      <code>[uilibBind]="&#123; 'aria-expanded': isOpen() &#125;"</code>.
     </p>
     <app-doc-aria-table [rows]="ariaRows" />
     <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
@@ -170,5 +170,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

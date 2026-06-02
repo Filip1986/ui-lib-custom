@@ -27,14 +27,14 @@ import type { MenubarItem } from './menubar.types';
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -97,7 +97,7 @@ async function createFixture(): Promise<{
 
 async function openRootPanel(
   fixture: ComponentFixture<MenubarA11yHostComponent>,
-  linkIndex: number
+  linkIndex: number,
 ): Promise<void> {
   const links: HTMLElement[] = queryAllEl<HTMLElement>(fixture, '.ui-lib-menubar__root-link');
   dispatchKey(links[linkIndex] as HTMLElement, 'ArrowDown');
@@ -164,7 +164,7 @@ describe('Menubar Accessibility', (): void => {
       ({ fixture } = await createFixture());
       const items: HTMLElement[] = queryAllEl(
         fixture,
-        'ul[role="menubar"] > .ui-lib-menubar__root-item'
+        'ul[role="menubar"] > .ui-lib-menubar__root-item',
       );
       expect(items.length).toBeGreaterThan(0);
       for (const item of items) {
@@ -282,7 +282,7 @@ describe('Menubar Accessibility', (): void => {
       await openRootPanel(fixture, 0); // File panel has disabled Exit item
       const disabledLinks: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-menubar__sub-link[aria-disabled="true"]'
+        '.ui-lib-menubar__sub-link[aria-disabled="true"]',
       );
       expect(disabledLinks.length).toBeGreaterThan(0);
     });
@@ -324,7 +324,7 @@ describe('Menubar Accessibility', (): void => {
       ({ fixture } = await createFixture());
       const btn: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
         fixture,
-        'button.ui-lib-menubar__toggle'
+        'button.ui-lib-menubar__toggle',
       );
       btn?.click();
       fixture.detectChanges();
@@ -452,7 +452,7 @@ describe('Menubar Accessibility', (): void => {
       await openRootPanel(fixture, 0);
       const subLinks: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-menubar__panel:not(.ui-lib-menubar__panel--nested) .ui-lib-menubar__sub-link:not([aria-disabled="true"])'
+        '.ui-lib-menubar__panel:not(.ui-lib-menubar__panel--nested) .ui-lib-menubar__sub-link:not([aria-disabled="true"])',
       );
       expect(subLinks.length).toBeGreaterThan(1);
       // Focus the first sub-link manually
@@ -468,7 +468,7 @@ describe('Menubar Accessibility', (): void => {
       await openRootPanel(fixture, 0);
       const subLinks: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-menubar__panel:not(.ui-lib-menubar__panel--nested) .ui-lib-menubar__sub-link:not([aria-disabled="true"])'
+        '.ui-lib-menubar__panel:not(.ui-lib-menubar__panel--nested) .ui-lib-menubar__sub-link:not([aria-disabled="true"])',
       );
       expect(subLinks.length).toBeGreaterThan(1);
       // Focus the second sub-link manually
@@ -483,7 +483,7 @@ describe('Menubar Accessibility', (): void => {
       await openRootPanel(fixture, 0);
       const subLinks: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-menubar__sub-link:not([aria-disabled="true"])'
+        '.ui-lib-menubar__sub-link:not([aria-disabled="true"])',
       );
       expect(subLinks.length).toBeGreaterThan(0);
       dispatchKey(subLinks[0] as HTMLElement, 'Escape');

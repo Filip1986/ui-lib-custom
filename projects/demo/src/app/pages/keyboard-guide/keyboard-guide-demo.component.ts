@@ -26,7 +26,7 @@ export class KeyboardGuideDemoComponent implements OnDestroy {
   ];
 
   public readonly pressedKeys: WritableSignal<ReadonlySet<string>> = signal<ReadonlySet<string>>(
-    new Set()
+    new Set(),
   );
 
   public readonly highlightedKeys: WritableSignal<ReadonlySet<string>> = signal<

@@ -7,20 +7,20 @@
 
 ## Overview
 
-MegaMenu component — a horizontal (or vertical) navigation bar where top-level items can open multi-column mega panels of sub-items. **Basic horizontal usage:** ```html <ui-lib-mega-menu [model]="navItems" /> ``` **Vertical usage:** ```html <ui-lib-mega-menu [model]="navItems" orientation="vertical" /> ```
+MegaMenu component — a horizontal (or vertical) navigation bar where top-level items can open multi-column mega panels of sub-items. **Basic horizontal usage:** `html <ui-lib-mega-menu [model]="navItems" /> ` **Vertical usage:** `html <ui-lib-mega-menu [model]="navItems" orientation="vertical" /> `
 
 ## API
 
 ### Inputs
 
-| Name          | Type                     | Default                        | Description                                                               |
-| ------------- | ------------------------ | ------------------------------ | ------------------------------------------------------------------------- |
-| `ariaLabel`   | `string`                 | `MEGA_MENU_DEFAULT_ARIA_LABEL` | Accessible label for the navigation landmark (aria-label on the `<nav>`). |
-| `model`       | `MegaMenuItem[]`         | `[]`                           | Array of top-level navigation items.                                      |
-| `orientation` | `MegaMenuOrientation`    | `'horizontal'`                 | Layout orientation of the navigation bar.                                 |
-| `size`        | `MegaMenuSize`           | `'md'`                         | Size token: sm | md | lg.                                                 |
-| `styleClass`  | `string | null`          | `null`                         | Extra CSS class appended to the host element.                             |
-| `variant`     | `MegaMenuVariant | null` | `null`                         | Design-system variant; falls back to ThemeConfigService when null.        |
+| Name          | Type                  | Default                        | Description                                                               |
+| ------------- | --------------------- | ------------------------------ | ------------------------------------------------------------------------- | ------------------------------------------------------------------ | --- |
+| `ariaLabel`   | `string`              | `MEGA_MENU_DEFAULT_ARIA_LABEL` | Accessible label for the navigation landmark (aria-label on the `<nav>`). |
+| `model`       | `MegaMenuItem[]`      | `[]`                           | Array of top-level navigation items.                                      |
+| `orientation` | `MegaMenuOrientation` | `'horizontal'`                 | Layout orientation of the navigation bar.                                 |
+| `size`        | `MegaMenuSize`        | `'md'`                         | Size token: sm                                                            | md                                                                 | lg. |
+| `styleClass`  | `string               | null`                          | `null`                                                                    | Extra CSS class appended to the host element.                      |
+| `variant`     | `MegaMenuVariant      | null`                          | `null`                                                                    | Design-system variant; falls back to ThemeConfigService when null. |
 
 ### Outputs
 
@@ -169,4 +169,3 @@ _none_
 - [Demo page](/components/mega-menu)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/mega-menu/README.md)
-

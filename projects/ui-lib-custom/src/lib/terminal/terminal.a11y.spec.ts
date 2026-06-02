@@ -16,14 +16,14 @@ import type { TerminalVariant } from './terminal.types';
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): NodeListOf<T> {
   return (fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector);
 }
@@ -46,7 +46,7 @@ class TerminalA11yHostComponent {
   public readonly welcomeMessage: WritableSignal<string> = signal<string>('');
   public readonly prompt: WritableSignal<string> = signal<string>('$');
   public readonly variant: WritableSignal<TerminalVariant | null> = signal<TerminalVariant | null>(
-    null
+    null,
   );
 }
 
@@ -104,7 +104,7 @@ describe('Terminal a11y', (): void => {
     const fixture: ComponentFixture<TerminalA11yHostComponent> = await createFixture();
     const input: HTMLInputElement | null = queryEl<HTMLInputElement>(
       fixture,
-      '.ui-lib-terminal__input'
+      '.ui-lib-terminal__input',
     );
     const label: string = input?.getAttribute('aria-label') ?? '';
     expect(label.length).toBeGreaterThan(0);
@@ -163,7 +163,7 @@ describe('Terminal a11y', (): void => {
     const service: TerminalService = TestBed.inject(TerminalService);
     const input: HTMLInputElement | null = queryEl<HTMLInputElement>(
       fixture,
-      '.ui-lib-terminal__input'
+      '.ui-lib-terminal__input',
     );
 
     if (input) {
@@ -184,7 +184,7 @@ describe('Terminal a11y', (): void => {
     const service: TerminalService = TestBed.inject(TerminalService);
     const input: HTMLInputElement | null = queryEl<HTMLInputElement>(
       fixture,
-      '.ui-lib-terminal__input'
+      '.ui-lib-terminal__input',
     );
 
     if (input) {
@@ -203,7 +203,7 @@ describe('Terminal a11y', (): void => {
     const fixture: ComponentFixture<TerminalA11yHostComponent> = await createFixture();
     const input: HTMLInputElement | null = queryEl<HTMLInputElement>(
       fixture,
-      '.ui-lib-terminal__input'
+      '.ui-lib-terminal__input',
     );
 
     if (!input) {
@@ -229,7 +229,7 @@ describe('Terminal a11y', (): void => {
     const fixture: ComponentFixture<TerminalA11yHostComponent> = await createFixture();
     const input: HTMLInputElement | null = queryEl<HTMLInputElement>(
       fixture,
-      '.ui-lib-terminal__input'
+      '.ui-lib-terminal__input',
     );
 
     if (!input) {

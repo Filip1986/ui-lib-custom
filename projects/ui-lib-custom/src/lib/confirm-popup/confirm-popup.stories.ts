@@ -40,7 +40,7 @@ export default meta;
 
 export const Default: Story = {
   render: (
-    args: ConfirmPopupStoryArgs
+    args: ConfirmPopupStoryArgs,
   ): {
     props: ConfirmPopupStoryArgs & { onButtonClick: (event: MouseEvent) => void };
     moduleMetadata: { imports: unknown[] };

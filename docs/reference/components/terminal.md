@@ -13,11 +13,11 @@ Terminal — an interactive command-line interface component. Renders a command 
 
 ### Inputs
 
-| Name             | Type                     | Default | Description                                                         |
-| ---------------- | ------------------------ | ------- | ------------------------------------------------------------------- |
-| `prompt`         | `string`                 | `'$'`   | The prompt prefix string displayed before each command line.        |
-| `variant`        | `TerminalVariant | null` | `null`  | Design variant. Inherits from ThemeConfigService when not set.      |
-| `welcomeMessage` | `string`                 | `''`    | Optional welcome / banner message shown at the top of the terminal. |
+| Name             | Type             | Default | Description                                                         |
+| ---------------- | ---------------- | ------- | ------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `prompt`         | `string`         | `'$'`   | The prompt prefix string displayed before each command line.        |
+| `variant`        | `TerminalVariant | null`   | `null`                                                              | Design variant. Inherits from ThemeConfigService when not set. |
+| `welcomeMessage` | `string`         | `''`    | Optional welcome / banner message shown at the top of the terminal. |
 
 ### Outputs
 
@@ -106,4 +106,3 @@ export class MyComponent {
 - [Demo page](/components/terminal)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/terminal/README.md)
-

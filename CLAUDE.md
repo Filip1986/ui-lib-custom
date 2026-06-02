@@ -29,18 +29,19 @@ The library targets two tiers: a free/open-source foundation and a premium pro l
 
 **Highest-value premium component categories (prioritised):**
 
-| Category | Flagship examples |
-|---|---|
-| Advanced Data | Signals-first data grid with virtual scroll, column pinning, Excel-like editing, tree table, server-side ops |
+| Category                  | Flagship examples                                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Advanced Data             | Signals-first data grid with virtual scroll, column pinning, Excel-like editing, tree table, server-side ops        |
 | Workflow / Visual Builder | Drag-drop pipeline builder, query builder (nested conditions → SQL/Mongo/Elastic), BPMN editor, form/survey builder |
-| Enterprise Forms | JSON-schema-driven dynamic forms, complex conditional wizards, large reactive-form performance tooling |
-| Charts & Analytics | Gantt / resource scheduler, org chart, network graph, TradingView-like chart, realtime dashboard widgets |
-| AI-Integrated UI | Streaming chat widget, prompt playground, AI diff/review panels, token-usage viewer, AI workflow builder |
-| Rich Text / Document | Notion-like editor, collaborative editor, PDF annotation viewer, diff viewer, document approval flow |
-| Developer Experience | Query/log viewers, feature-flag dashboards, permission/role editors, API explorer, audit viewers |
-| Industry-Specific | Patient timeline (healthcare), order-book / candlestick (finance), route planner (logistics), org chart (HR) |
+| Enterprise Forms          | JSON-schema-driven dynamic forms, complex conditional wizards, large reactive-form performance tooling              |
+| Charts & Analytics        | Gantt / resource scheduler, org chart, network graph, TradingView-like chart, realtime dashboard widgets            |
+| AI-Integrated UI          | Streaming chat widget, prompt playground, AI diff/review panels, token-usage viewer, AI workflow builder            |
+| Rich Text / Document      | Notion-like editor, collaborative editor, PDF annotation viewer, diff viewer, document approval flow                |
+| Developer Experience      | Query/log viewers, feature-flag dashboards, permission/role editors, API explorer, audit viewers                    |
+| Industry-Specific         | Patient timeline (healthcare), order-book / candlestick (finance), route planner (logistics), org chart (HR)        |
 
 **Top 8 recommendations for 2026 Angular market:**
+
 1. Angular Signals-first data grid
 2. Query builder
 3. Workflow / pipeline builder
@@ -67,11 +68,11 @@ At the start of every session, read these files in order:
 
 **Standards reference** (apply to all generated code):
 
-| Standard       | File                               | Key library rules                                                    |
-|----------------|------------------------------------|----------------------------------------------------------------------|
-| CSS / SCSS     | `docs/standards/CSS-STANDARDS.md`  | `--uilib-*` tokens, `ViewEncapsulation.None` BEM, cascade layers     |
-| HTML templates | `docs/standards/HTML-STANDARDS.md` | ARIA completeness, keyboard patterns, content projection             |
-| JS runtime     | `docs/standards/JS-STANDARDS.md`   | `DestroyRef` cleanup, layout thrashing, no Workers in library code   |
+| Standard       | File                               | Key library rules                                                  |
+| -------------- | ---------------------------------- | ------------------------------------------------------------------ |
+| CSS / SCSS     | `docs/standards/CSS-STANDARDS.md`  | `--uilib-*` tokens, `ViewEncapsulation.None` BEM, cascade layers   |
+| HTML templates | `docs/standards/HTML-STANDARDS.md` | ARIA completeness, keyboard patterns, content projection           |
+| JS runtime     | `docs/standards/JS-STANDARDS.md`   | `DestroyRef` cleanup, layout thrashing, no Workers in library code |
 
 Do not skip step 1. It tells you exactly what is in-flight and what is next.
 
@@ -90,16 +91,16 @@ These rules apply to every task, no exceptions:
 - **Signal inputs/outputs** — use `input()`, `model()`, `output()` — never `@Input()` / `@Output()` decorators
 - **Explicit return types** on every method, getter, and function — no inference (`computed<Type>((): Type => ...)`)
 - **Angular block syntax** — `@if`, `@for (x of y; track z)`, `@switch` — never `*ngIf` / `*ngFor`
-- **No cross-entry-point relative imports** — use package paths: `import { X } from 'ui-lib-custom/button'`, never `from '../button'`. Relative paths are fine *within* the same entry point. Full rules: `LIBRARY_CONVENTIONS.md → Cross-Entry Import Rule`.
+- **No cross-entry-point relative imports** — use package paths: `import { X } from 'ui-lib-custom/button'`, never `from '../button'`. Relative paths are fine _within_ the same entry point. Full rules: `LIBRARY_CONVENTIONS.md → Cross-Entry Import Rule`.
 - **HTML templates** — see [`docs/standards/HTML-STANDARDS.md`](./docs/standards/HTML-STANDARDS.md) for the full library-specific standard. Key rules unique to this library:
   - **No hard-coded heading levels** (`<h1>`–`<h3>`) — heading level must be an input so consumers own the document outline
-  - **ARIA widget role completeness** — every ARIA role must include all required aria-* properties (enforced by ESLint `role-has-required-aria-props`)
+  - **ARIA widget role completeness** — every ARIA role must include all required aria-\* properties (enforced by ESLint `role-has-required-aria-props`)
   - **WAI-ARIA keyboard patterns** — implement the exact keyboard contract for the widget type (listbox, combobox, tree, grid, etc.)
   - **Content projection slots** follow `uilib-` prefix convention: `<ng-content select="[uilib-header]" />`
   - **Host bindings** must set both `[attr.disabled]` and `[attr.aria-disabled]` in sync
   - 13 `@angular-eslint/template/*` rules enforced — `errors` block PRs; `warnings` must be clean before marking a component complete
 - **Public input types are string unions** — `'material' | 'bootstrap' | 'minimal'` — not enum, not constants object
-- **No raw hex/px in CSS rule bodies** — always use a `var(--uilib-*)` CSS custom property. Exception: hex may appear as the *default value* in a CSS custom property definition (`--uilib-foo: #hex`) — that IS the token level. When a global palette token exists for that color, use `var(--uilib-color-neutral-300, #hex)` instead of bare hex. When the color is appearance-specific, add it as a constant to `design-tokens.ts` and link back from the SCSS comment. Full rules: `LIBRARY_CONVENTIONS.md → Design Token Rule`.
+- **No raw hex/px in CSS rule bodies** — always use a `var(--uilib-*)` CSS custom property. Exception: hex may appear as the _default value_ in a CSS custom property definition (`--uilib-foo: #hex`) — that IS the token level. When a global palette token exists for that color, use `var(--uilib-color-neutral-300, #hex)` instead of bare hex. When the color is appearance-specific, add it as a constant to `design-tokens.ts` and link back from the SCSS comment. Full rules: `LIBRARY_CONVENTIONS.md → Design Token Rule`.
 - **Every new component SCSS file must be wrapped in `@layer uilib.components { }`** — all library SCSS lives inside named cascade layers so consumer CSS always wins without specificity battles. `themes.scss` uses `@layer uilib.tokens { }`. Exception: `high-contrast.scss` stays outside layers. Full rules + rationale: `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule` and `docs/architecture/ADR_CSS_LAYER_ADOPTION.md`.
 - **Logical CSS properties everywhere** — never use physical directional properties (`margin-left/right`, `padding-left/right`, `border-left/right`, `border-top/bottom-left/right-radius`, `border-*-left/right-color/width/style`, `text-align: left/right`). Use logical equivalents (`margin-inline-*`, `padding-inline-*`, `border-inline-*`, `border-*-start/end-radius`, `text-align: start/end`). Severity: **error** (blocks commits). Exception: `left: 50%` for centering is still valid. Full rules + mapping table: `LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule`.
 - **Three-layer order: `uilib.base < uilib.tokens < uilib.components`**. Consumer app CSS resets (`* { margin:0; padding:0 }`) MUST go in `@layer uilib.base { }` — without this, unlayered resets override all component padding/margin. App-level `html/body` overrides stay unlayered.
@@ -119,28 +120,28 @@ These rules apply to every task, no exceptions:
 
 ## Active Anti-Patterns (will cause regressions)
 
-| Anti-pattern                                                                                     | Correct approach                                                                                              |
-|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| Relative import across entry points (`from '../button'`)                                         | Use `ui-lib-custom/<entry>` package paths (`from 'ui-lib-custom/button'`)                                     |
-| Missing `ViewEncapsulation.None`                                                                 | Always add it                                                                                                 |
-| Type inference on `computed()`                                                                   | Annotate: `computed<T>((): T => ...)`                                                                         |
-| Replacing public string unions with constants                                                    | Keep public types as union literals                                                                           |
-| Raw hex in CSS rule bodies (`.foo { color: #hex }`)                                              | Add to `design-tokens.ts`, use `var(--uilib-*)`                                                               |
-| Hex as CSS variable default when global token exists                                             | Use `var(--uilib-color-neutral-300, #hex)` — token first, hex as CSS fallback                                 |
-| Adding PrimeNG/Material to demo pages                                                            | Use `ui-lib-*` equivalents                                                                                    |
-| `enum` instead of `as const`                                                                     | `export const X = { ... } as const`                                                                           |
-| `on*` prefix on outputs                                                                          | Remove prefix: `buttonClick`, `checkboxChange`, `slideEnd`                                                    |
-| Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `select`, …) | Add component qualifier: `buttonClick` not `click`; `checkboxChange` not `change`; `dateSelect` not `select`  |
-| Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal         | Give it a distinct name (`treeChange` not `selectionChange`); `model()` owns `{name}Change` for `[(binding)]` |
-| `@HostListener('focus'/'blur')` on a component that also exposes focus/blur outputs              | Use imperative `addEventListener` in the constructor — see `cascade-select.ts`                                |
-| `uilib-` as element selector prefix                                                              | Element selectors: `ui-lib-{component}`; CSS vars: `--uilib-{component}-*`                                    |
-| New component SCSS file without `@layer uilib.components { }` wrapper                            | Wrap entire file: `@layer uilib.components { ... }` — see `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule`   |
-| Physical directional CSS properties (`margin-left/right`, `padding-left/right`, `border-left/right`, `border-top/bottom-left/right-radius`, `border-left/right-color/width/style`) | Use logical equivalents — see `LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule`. Severity: **error** (blocks commits). |
-| `text-align: left` or `text-align: right`                                                        | Use `text-align: start` / `text-align: end` — physical values break RTL layout                               |
-| `left: 0` or `right: 0` when the value IS directional (flush to start/end edge)                 | Use `inset-inline-start: 0` / `inset-inline-end: 0`; `left: 50%` for centering is still valid               |
-| Missing `await fixture.whenStable()` after `detectChanges()` in `beforeEach` of overlay/deferred panel specs | Add it — `@defer (on immediate)` resolves on a microtask; without this the panel view does not exist when tests run |
-| Calling `fixture.destroy()` while a body-mounted panel is open                                   | Call `closePanel()` + `detectChanges()` first — Angular's `@defer` teardown does NOT `removeChild` from `document.body` |
-| Plain class properties in OnPush host components mutated after `whenStable()`                    | Use `WritableSignal` — plain mutations do not trigger `detectChanges()` after `whenStable()` settles the scheduler |
+| Anti-pattern                                                                                                                                                                       | Correct approach                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Relative import across entry points (`from '../button'`)                                                                                                                           | Use `ui-lib-custom/<entry>` package paths (`from 'ui-lib-custom/button'`)                                               |
+| Missing `ViewEncapsulation.None`                                                                                                                                                   | Always add it                                                                                                           |
+| Type inference on `computed()`                                                                                                                                                     | Annotate: `computed<T>((): T => ...)`                                                                                   |
+| Replacing public string unions with constants                                                                                                                                      | Keep public types as union literals                                                                                     |
+| Raw hex in CSS rule bodies (`.foo { color: #hex }`)                                                                                                                                | Add to `design-tokens.ts`, use `var(--uilib-*)`                                                                         |
+| Hex as CSS variable default when global token exists                                                                                                                               | Use `var(--uilib-color-neutral-300, #hex)` — token first, hex as CSS fallback                                           |
+| Adding PrimeNG/Material to demo pages                                                                                                                                              | Use `ui-lib-*` equivalents                                                                                              |
+| `enum` instead of `as const`                                                                                                                                                       | `export const X = { ... } as const`                                                                                     |
+| `on*` prefix on outputs                                                                                                                                                            | Remove prefix: `buttonClick`, `checkboxChange`, `slideEnd`                                                              |
+| Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `select`, …)                                                                                   | Add component qualifier: `buttonClick` not `click`; `checkboxChange` not `change`; `dateSelect` not `select`            |
+| Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal                                                                                           | Give it a distinct name (`treeChange` not `selectionChange`); `model()` owns `{name}Change` for `[(binding)]`           |
+| `@HostListener('focus'/'blur')` on a component that also exposes focus/blur outputs                                                                                                | Use imperative `addEventListener` in the constructor — see `cascade-select.ts`                                          |
+| `uilib-` as element selector prefix                                                                                                                                                | Element selectors: `ui-lib-{component}`; CSS vars: `--uilib-{component}-*`                                              |
+| New component SCSS file without `@layer uilib.components { }` wrapper                                                                                                              | Wrap entire file: `@layer uilib.components { ... }` — see `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule`             |
+| Physical directional CSS properties (`margin-left/right`, `padding-left/right`, `border-left/right`, `border-top/bottom-left/right-radius`, `border-left/right-color/width/style`) | Use logical equivalents — see `LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule`. Severity: **error** (blocks commits).  |
+| `text-align: left` or `text-align: right`                                                                                                                                          | Use `text-align: start` / `text-align: end` — physical values break RTL layout                                          |
+| `left: 0` or `right: 0` when the value IS directional (flush to start/end edge)                                                                                                    | Use `inset-inline-start: 0` / `inset-inline-end: 0`; `left: 50%` for centering is still valid                           |
+| Missing `await fixture.whenStable()` after `detectChanges()` in `beforeEach` of overlay/deferred panel specs                                                                       | Add it — `@defer (on immediate)` resolves on a microtask; without this the panel view does not exist when tests run     |
+| Calling `fixture.destroy()` while a body-mounted panel is open                                                                                                                     | Call `closePanel()` + `detectChanges()` first — Angular's `@defer` teardown does NOT `removeChild` from `document.body` |
+| Plain class properties in OnPush host components mutated after `whenStable()`                                                                                                      | Use `WritableSignal` — plain mutations do not trigger `detectChanges()` after `whenStable()` settles the scheduler      |
 
 ---
 
@@ -198,8 +199,10 @@ npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 ```
 
 **Git hooks (via Husky):**
-- **pre-commit** — runs `lint-staged` (ESLint on staged `.ts`/`.html` + Prettier on staged `.ts` + Stylelint on staged `.scss`)
-- **pre-push** — runs `npm run typecheck` (full TS type-check across all five tsconfigs)
+
+- **pre-commit** — runs `lint-staged` (Prettier then ESLint on staged `.ts`; Prettier on staged `.html`/`.json`/`.md` and all `.scss`/`.css`; Stylelint only on staged library `.scss`)
+- **pre-push** — runs `npm run format:check` then `npm run typecheck`
+- **CI** — `npm run format:check` in the `lint` job (every PR and push to `main`)
 
 **Windows shell note:** If PowerShell blocks `.ps1` shims, run `.cmd` versions from `bash.exe` (`npx.cmd`, `npm.cmd`). Record any workarounds in the session handoff.
 
@@ -253,13 +256,13 @@ npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 
 Every component that uses `@defer (on immediate)` **or** `appendTo='body'` (DOM teleportation) must follow all five rules below. Failing any one causes tests to pass individually but fail in a suite run, or leaves orphaned DOM nodes that corrupt subsequent tests.
 
-| # | Rule | Why |
-|---|------|-----|
-| 1 | `await fixture.whenStable()` after `detectChanges()` in every `beforeEach` that sets up such a component | Flushes the `@defer (on immediate)` microtask so the panel view exists before the first test |
-| 2 | Call `closePanel()` + `detectChanges()` **before** `fixture.destroy()` in any test that opens a body-mounted panel | Angular's `@defer` teardown path does not `removeChild` from `document.body`; the `@if` removal must happen while the component is alive |
-| 3 | Add `afterEach` that `querySelectorAll`s the panel class on `document.body` and removes each element | Safety net when a test throws or future tests skip cleanup |
-| 4 | Host component properties that are mutated after `whenStable()` must be `WritableSignal`, not plain class properties | After `whenStable()` settles the CD scheduler, plain property mutations do not trigger `detectChanges()` on `OnPush` components — signals do |
-| 5 | Nested `beforeEach` blocks (e.g. ngModel describe group) must NOT include `whenStable()` — let the test body own it | Premature `whenStable()` in inner beforeEach disrupts `NgModel.writeValue()` propagation timing |
+| #   | Rule                                                                                                                 | Why                                                                                                                                          |
+| --- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | `await fixture.whenStable()` after `detectChanges()` in every `beforeEach` that sets up such a component             | Flushes the `@defer (on immediate)` microtask so the panel view exists before the first test                                                 |
+| 2   | Call `closePanel()` + `detectChanges()` **before** `fixture.destroy()` in any test that opens a body-mounted panel   | Angular's `@defer` teardown path does not `removeChild` from `document.body`; the `@if` removal must happen while the component is alive     |
+| 3   | Add `afterEach` that `querySelectorAll`s the panel class on `document.body` and removes each element                 | Safety net when a test throws or future tests skip cleanup                                                                                   |
+| 4   | Host component properties that are mutated after `whenStable()` must be `WritableSignal`, not plain class properties | After `whenStable()` settles the CD scheduler, plain property mutations do not trigger `detectChanges()` on `OnPush` components — signals do |
+| 5   | Nested `beforeEach` blocks (e.g. ngModel describe group) must NOT include `whenStable()` — let the test body own it  | Premature `whenStable()` in inner beforeEach disrupts `NgModel.writeValue()` propagation timing                                              |
 
 Full rationale and copy-paste patterns: `LIBRARY_CONVENTIONS.md → Testing Overlay / Deferred Panels — Required Patterns`.  
 Reference implementations: `autocomplete.spec.ts`, `cascade-select.spec.ts`, `color-picker.spec.ts`, `select.spec.ts`.
@@ -283,6 +286,7 @@ docs/
 ```
 
 When adding or changing a component, always update:
+
 - `docs/reference/components/<name>.md`
 - `docs/reference/components/README.md` (component index)
 

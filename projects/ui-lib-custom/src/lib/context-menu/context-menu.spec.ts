@@ -23,7 +23,7 @@ function getHost(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getInstance(fixture: ComponentFixture<unknown>): ContextMenu {
   return fixture.debugElement.query(
-    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof ContextMenu
+    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof ContextMenu,
   ).componentInstance as ContextMenu;
 }
 
@@ -34,8 +34,8 @@ function getPanel(fixture: ComponentFixture<unknown>): HTMLElement | null {
 function getMenuLinks(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-context-menu__panel > .ui-lib-context-menu__list > .ui-lib-context-menu__item > .ui-lib-context-menu__link'
-    )
+      '.ui-lib-context-menu__panel > .ui-lib-context-menu__list > .ui-lib-context-menu__item > .ui-lib-context-menu__link',
+    ),
   );
 }
 
@@ -75,7 +75,7 @@ class HostComponent {
   public readonly size: WritableSignal<ContextMenuSize> = signal<ContextMenuSize>('md');
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
   public readonly ariaLabel: WritableSignal<string> = signal<string>(
-    CONTEXT_MENU_DEFAULT_ARIA_LABEL
+    CONTEXT_MENU_DEFAULT_ARIA_LABEL,
   );
 
   public readonly lastClickEvent: WritableSignal<ContextMenuItemCommandEvent | null> =
@@ -331,7 +331,7 @@ describe('ContextMenu', (): void => {
     it('should emit itemClick for a normal item', (): void => {
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const item: ContextMenuItem = { label: 'Cut' };
       const fakeEvent: MouseEvent = new MouseEvent('click');
@@ -364,7 +364,7 @@ describe('ContextMenu', (): void => {
     it('should NOT emit itemClick for disabled items', (): void => {
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const item: ContextMenuItem = { label: 'Disabled', disabled: true };
 
@@ -377,7 +377,7 @@ describe('ContextMenu', (): void => {
     it('should NOT emit itemClick for separator items', (): void => {
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const item: ContextMenuItem = { separator: true };
 
@@ -438,7 +438,7 @@ describe('ContextMenu', (): void => {
     it('should emit itemClick for a normal subitem', (): void => {
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const subItem: ContextMenuItem = { label: 'Sub Action' };
       const fakeEvent: MouseEvent = new MouseEvent('click');
@@ -470,7 +470,7 @@ describe('ContextMenu', (): void => {
     it('should NOT emit for disabled subitems', (): void => {
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       instance.show(makeFakeMouseEvent());
       instance.onSubItemActivate(new MouseEvent('click'), { label: 'Sub', disabled: true });
@@ -541,7 +541,7 @@ describe('ContextMenu', (): void => {
     it('should activate item on Enter key', (): void => {
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const item: ContextMenuItem = { label: 'Cut' };
       const event: KeyboardEvent = new KeyboardEvent('keydown', { key: 'Enter' });
@@ -555,7 +555,7 @@ describe('ContextMenu', (): void => {
     it('should activate item on Space key', (): void => {
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       const item: ContextMenuItem = { label: 'Cut' };
       const event: KeyboardEvent = new KeyboardEvent('keydown', { key: ' ' });
@@ -593,7 +593,7 @@ describe('ContextMenu', (): void => {
     it('should not emit for unrelated keys', (): void => {
       const emitSpy: jest.SpiedFunction<typeof instance.itemClick.emit> = jest.spyOn(
         instance.itemClick,
-        'emit'
+        'emit',
       );
       instance.show(makeFakeMouseEvent());
       instance.onItemKeyDown(new KeyboardEvent('keydown', { key: 'Tab' }), { label: 'A' }, 0);
@@ -663,7 +663,7 @@ describe('ContextMenu', (): void => {
       fixture.detectChanges();
 
       const link: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-context-menu__link[aria-disabled="true"]'
+        '.ui-lib-context-menu__link[aria-disabled="true"]',
       );
       expect(link).toBeTruthy();
     });
@@ -674,7 +674,7 @@ describe('ContextMenu', (): void => {
       fixture.detectChanges();
 
       const link: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-context-menu__link[aria-haspopup="menu"]'
+        '.ui-lib-context-menu__link[aria-haspopup="menu"]',
       );
       expect(link).toBeTruthy();
     });

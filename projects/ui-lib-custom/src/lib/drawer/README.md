@@ -14,36 +14,36 @@ import { Drawer } from 'ui-lib-custom/drawer';
 
 ## Inputs
 
-| Input              | Type                                      | Default     | Description                                                          |
-|--------------------|-------------------------------------------|-------------|----------------------------------------------------------------------|
-| `visible`          | `model<boolean>`                          | `false`     | Two-way binding; controls open/close state.                          |
-| `header`           | `input<string>`                           | `''`        | Header text. Omit to hide the built-in header bar.                   |
-| `position`         | `input<'left'\|'right'\|'top'\|'bottom'>` | `'right'`   | Which edge the drawer slides in from.                                |
-| `size`             | `input<string>`                           | `'300px'`   | Panel width (left/right) or height (top/bottom).                     |
-| `modal`            | `input<boolean>`                          | `true`      | Whether to show the semi-transparent backdrop.                       |
-| `closeOnBackdrop`  | `input<boolean>`                          | `true`      | Close when the backdrop is clicked.                                  |
-| `closeOnEscape`    | `input<boolean>`                          | `true`      | Close on Escape key press.                                           |
-| `blockScroll`      | `input<boolean>`                          | `true`      | Lock body scroll while open.                                         |
-| `showCloseButton`  | `input<boolean>`                          | `true`      | Show the × close button in the header.                               |
-| `ariaDescribedby`  | `input<string \| undefined>`              | `undefined` | `id` of a description element; sets `aria-describedby` on the panel. |
-| `closeAriaLabel`   | `input<string \| null>`                   | `null`      | Accessible label for the × close button. Falls back to the i18n `drawer.close` key. |
-| `variant`          | `input<DrawerVariant \| null>`            | `null`      | Design variant; inherits from ThemeConfigService.                    |
-| `styleClass`       | `input<string \| null>`                   | `null`      | Extra CSS classes on the host element.                               |
+| Input             | Type                                      | Default     | Description                                                                         |
+| ----------------- | ----------------------------------------- | ----------- | ----------------------------------------------------------------------------------- |
+| `visible`         | `model<boolean>`                          | `false`     | Two-way binding; controls open/close state.                                         |
+| `header`          | `input<string>`                           | `''`        | Header text. Omit to hide the built-in header bar.                                  |
+| `position`        | `input<'left'\|'right'\|'top'\|'bottom'>` | `'right'`   | Which edge the drawer slides in from.                                               |
+| `size`            | `input<string>`                           | `'300px'`   | Panel width (left/right) or height (top/bottom).                                    |
+| `modal`           | `input<boolean>`                          | `true`      | Whether to show the semi-transparent backdrop.                                      |
+| `closeOnBackdrop` | `input<boolean>`                          | `true`      | Close when the backdrop is clicked.                                                 |
+| `closeOnEscape`   | `input<boolean>`                          | `true`      | Close on Escape key press.                                                          |
+| `blockScroll`     | `input<boolean>`                          | `true`      | Lock body scroll while open.                                                        |
+| `showCloseButton` | `input<boolean>`                          | `true`      | Show the × close button in the header.                                              |
+| `ariaDescribedby` | `input<string \| undefined>`              | `undefined` | `id` of a description element; sets `aria-describedby` on the panel.                |
+| `closeAriaLabel`  | `input<string \| null>`                   | `null`      | Accessible label for the × close button. Falls back to the i18n `drawer.close` key. |
+| `variant`         | `input<DrawerVariant \| null>`            | `null`      | Design variant; inherits from ThemeConfigService.                                   |
+| `styleClass`      | `input<string \| null>`                   | `null`      | Extra CSS classes on the host element.                                              |
 
 ## Outputs
 
-| Output   | Type             | Description                          |
-|----------|------------------|--------------------------------------|
-| `shown`  | `output<void>`   | Emits after the drawer opens.        |
-| `hidden` | `output<void>`   | Emits after the drawer closes.       |
+| Output   | Type           | Description                    |
+| -------- | -------------- | ------------------------------ |
+| `shown`  | `output<void>` | Emits after the drawer opens.  |
+| `hidden` | `output<void>` | Emits after the drawer closes. |
 
 ## Content projection
 
-| Slot          | Selector                               | Description                                                        |
-|---------------|----------------------------------------|--------------------------------------------------------------------|
-| Body          | *(default)*                            | Scrollable main content area.                                      |
-| Custom header | `[uilib-header]` *(or `[drawerHeader]`)* | Content rendered before the title in the header bar. The legacy `drawerHeader` attribute is kept for backward compatibility. |
-| Footer        | `[uilib-footer]` *(or `[drawerFooter]`)* | Sticky footer area rendered below the scrollable body. The legacy `drawerFooter` attribute is kept for backward compatibility. |
+| Slot          | Selector                                 | Description                                                                                                                    |
+| ------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Body          | _(default)_                              | Scrollable main content area.                                                                                                  |
+| Custom header | `[uilib-header]` _(or `[drawerHeader]`)_ | Content rendered before the title in the header bar. The legacy `drawerHeader` attribute is kept for backward compatibility.   |
+| Footer        | `[uilib-footer]` _(or `[drawerFooter]`)_ | Sticky footer area rendered below the scrollable body. The legacy `drawerFooter` attribute is kept for backward compatibility. |
 
 ## Types
 
@@ -54,18 +54,18 @@ type DrawerPosition = 'left' | 'right' | 'top' | 'bottom';
 
 ## CSS variables
 
-| Variable                             | Description                         |
-|--------------------------------------|-------------------------------------|
-| `--uilib-drawer-size`                | Panel width or height               |
-| `--uilib-drawer-panel-bg`            | Panel background colour             |
-| `--uilib-drawer-panel-shadow`        | Panel box shadow                    |
-| `--uilib-drawer-backdrop-bg`         | Backdrop colour                     |
-| `--uilib-drawer-z-index`             | Z-index layer                       |
-| `--uilib-drawer-transition-duration` | Slide animation duration            |
-| `--uilib-drawer-padding`             | Content padding                     |
-| `--uilib-drawer-header-border`       | Header bottom border                |
-| `--uilib-drawer-title-color`         | Title text colour                   |
-| `--uilib-drawer-close-color`         | Close button icon colour            |
+| Variable                             | Description                                                                              |
+| ------------------------------------ | ---------------------------------------------------------------------------------------- |
+| `--uilib-drawer-size`                | Panel width or height                                                                    |
+| `--uilib-drawer-panel-bg`            | Panel background colour                                                                  |
+| `--uilib-drawer-panel-shadow`        | Panel box shadow                                                                         |
+| `--uilib-drawer-backdrop-bg`         | Backdrop colour                                                                          |
+| `--uilib-drawer-z-index`             | Z-index layer                                                                            |
+| `--uilib-drawer-transition-duration` | Slide animation duration                                                                 |
+| `--uilib-drawer-padding`             | Content padding                                                                          |
+| `--uilib-drawer-header-border`       | Header bottom border                                                                     |
+| `--uilib-drawer-title-color`         | Title text colour                                                                        |
+| `--uilib-drawer-close-color`         | Close button icon colour                                                                 |
 | `--uilib-drawer-close-transition`    | Close button hover/color transition; set to `none` when `prefers-reduced-motion: reduce` |
 
 ## Usage example
@@ -95,10 +95,10 @@ type DrawerPosition = 'left' | 'right' | 'top' | 'bottom';
 
 ## Internationalisation
 
-| i18n key       | Default (en) | Overridden by          |
-|----------------|--------------|------------------------|
+| i18n key       | Default (en) | Overridden by                                                                            |
+| -------------- | ------------ | ---------------------------------------------------------------------------------------- |
 | `drawer.label` | `Drawer`     | Provide `header` input (switches to `aria-labelledby`); or supply a custom locale bundle |
-| `drawer.close` | `Close`      | `closeAriaLabel` input |
+| `drawer.close` | `Close`      | `closeAriaLabel` input                                                                   |
 
 ## Accessibility
 

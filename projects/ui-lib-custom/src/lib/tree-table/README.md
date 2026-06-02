@@ -8,32 +8,32 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `value` | `TreeTableNode[]` | `[]` | Root-level nodes to display. |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme when null. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Row height / density. |
-| `selectionMode` | `'single' \| 'multiple' \| 'checkbox' \| null` | `null` | How rows respond to click interactions. |
-| `selection` | `TreeTableNode \| TreeTableNode[] \| null` | `null` | Selected node(s). Two-way bindable via `[(selection)]`. |
-| `sortField` | `string \| null` | `null` | Active sort field. Two-way bindable via `[(sortField)]`. |
-| `sortOrder` | `1 \| -1 \| 0` | `0` | Sort direction. Two-way bindable via `[(sortOrder)]`. |
-| `globalFilter` | `boolean` | `false` | Renders a global filter input above the table. |
-| `globalFilterPlaceholder` | `string` | `'Search...'` | Placeholder for the global filter input. |
-| `scrollable` | `boolean` | `false` | Makes the table body scrollable. |
-| `scrollHeight` | `string \| null` | `null` | CSS height for the scrollable body (e.g. `'400px'`). |
-| `caption` | `string` | `''` | Caption text above the table. Also used as `aria-label` fallback. |
-| `ariaLabel` | `string` | `''` | Explicit accessible name for the treegrid. Overrides `caption` fallback. Defaults to `'Tree table'` when both are empty. |
-| `styleClass` | `string` | `''` | Extra CSS class on the host element. |
+| Name                      | Type                                             | Default       | Notes                                                                                                                    |
+| ------------------------- | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `value`                   | `TreeTableNode[]`                                | `[]`          | Root-level nodes to display.                                                                                             |
+| `variant`                 | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`        | Falls back to global theme when null.                                                                                    |
+| `size`                    | `'sm' \| 'md' \| 'lg'`                           | `'md'`        | Row height / density.                                                                                                    |
+| `selectionMode`           | `'single' \| 'multiple' \| 'checkbox' \| null`   | `null`        | How rows respond to click interactions.                                                                                  |
+| `selection`               | `TreeTableNode \| TreeTableNode[] \| null`       | `null`        | Selected node(s). Two-way bindable via `[(selection)]`.                                                                  |
+| `sortField`               | `string \| null`                                 | `null`        | Active sort field. Two-way bindable via `[(sortField)]`.                                                                 |
+| `sortOrder`               | `1 \| -1 \| 0`                                   | `0`           | Sort direction. Two-way bindable via `[(sortOrder)]`.                                                                    |
+| `globalFilter`            | `boolean`                                        | `false`       | Renders a global filter input above the table.                                                                           |
+| `globalFilterPlaceholder` | `string`                                         | `'Search...'` | Placeholder for the global filter input.                                                                                 |
+| `scrollable`              | `boolean`                                        | `false`       | Makes the table body scrollable.                                                                                         |
+| `scrollHeight`            | `string \| null`                                 | `null`        | CSS height for the scrollable body (e.g. `'400px'`).                                                                     |
+| `caption`                 | `string`                                         | `''`          | Caption text above the table. Also used as `aria-label` fallback.                                                        |
+| `ariaLabel`               | `string`                                         | `''`          | Explicit accessible name for the treegrid. Overrides `caption` fallback. Defaults to `'Tree table'` when both are empty. |
+| `styleClass`              | `string`                                         | `''`          | Extra CSS class on the host element.                                                                                     |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `nodeExpand` | `TreeTableNodeExpandEvent` | Emitted when a row is expanded. |
-| `nodeCollapse` | `TreeTableNodeCollapseEvent` | Emitted when a row is collapsed. |
-| `nodeSelect` | `TreeTableNodeSelectEvent` | Emitted when a node is selected. |
-| `nodeUnselect` | `TreeTableNodeSelectEvent` | Emitted when a node is unselected. |
-| `sortChange` | `TreeTableSortEvent` | Emitted when sort column or direction changes. |
+| Name           | Payload                      | Notes                                          |
+| -------------- | ---------------------------- | ---------------------------------------------- |
+| `nodeExpand`   | `TreeTableNodeExpandEvent`   | Emitted when a row is expanded.                |
+| `nodeCollapse` | `TreeTableNodeCollapseEvent` | Emitted when a row is collapsed.               |
+| `nodeSelect`   | `TreeTableNodeSelectEvent`   | Emitted when a node is selected.               |
+| `nodeUnselect` | `TreeTableNodeSelectEvent`   | Emitted when a node is unselected.             |
+| `sortChange`   | `TreeTableSortEvent`         | Emitted when sort column or direction changes. |
 
 ## Usage
 
@@ -45,7 +45,12 @@
 </ui-lib-tree-table>
 
 <!-- sortable with checkbox selection -->
-<ui-lib-tree-table [value]="nodes" selectionMode="checkbox" [(selection)]="selected" ariaLabel="File system">
+<ui-lib-tree-table
+  [value]="nodes"
+  selectionMode="checkbox"
+  [(selection)]="selected"
+  ariaLabel="File system"
+>
   <ui-lib-tree-table-column field="name" header="Name" [expander]="true" [sortable]="true" />
   <ui-lib-tree-table-column field="type" header="Type" [sortable]="true" />
 </ui-lib-tree-table>
@@ -68,45 +73,45 @@ table[role="treegrid"][aria-label]
 
 **Key attributes per row:**
 
-| Attribute | Value | Notes |
-|-----------|-------|-------|
-| `aria-level` | `1`–`N` | 1-based nesting depth. Root rows = 1. |
-| `aria-setsize` | integer | Number of visible siblings under the same parent. |
-| `aria-posinset` | integer | 1-based position among visible siblings. |
+| Attribute       | Value                | Notes                                                    |
+| --------------- | -------------------- | -------------------------------------------------------- |
+| `aria-level`    | `1`–`N`              | 1-based nesting depth. Root rows = 1.                    |
+| `aria-setsize`  | integer              | Number of visible siblings under the same parent.        |
+| `aria-posinset` | integer              | 1-based position among visible siblings.                 |
 | `aria-expanded` | `"true"` / `"false"` | Present only on rows with children. Absent on leaf rows. |
-| `aria-rowindex` | integer | 1-based row position (header = 1, body rows start at 2). |
-| `data-key` | string | Node key — used internally for keyboard navigation. |
+| `aria-rowindex` | integer              | 1-based row position (header = 1, body rows start at 2). |
+| `data-key`      | string               | Node key — used internally for keyboard navigation.      |
 
 ## Keyboard Interaction
 
-| Key | Behavior |
-|-----|----------|
-| `ArrowDown` | Move focus to the next visible row. |
-| `ArrowUp` | Move focus to the previous visible row. |
-| `ArrowRight` | If collapsed parent: expand it (focus stays). If expanded parent: move focus to first child. If leaf: no action. |
-| `ArrowLeft` | If expanded parent: collapse it (focus stays). If collapsed/leaf at depth > 1: move focus to parent row. |
-| `Home` | Move focus to the first visible row. |
-| `End` | Move focus to the last visible row. |
-| `Enter` / `Space` | Activate row (select/deselect in selection modes). |
-| `Tab` | Exits the treegrid to the next focusable element in the page. |
+| Key               | Behavior                                                                                                         |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `ArrowDown`       | Move focus to the next visible row.                                                                              |
+| `ArrowUp`         | Move focus to the previous visible row.                                                                          |
+| `ArrowRight`      | If collapsed parent: expand it (focus stays). If expanded parent: move focus to first child. If leaf: no action. |
+| `ArrowLeft`       | If expanded parent: collapse it (focus stays). If collapsed/leaf at depth > 1: move focus to parent row.         |
+| `Home`            | Move focus to the first visible row.                                                                             |
+| `End`             | Move focus to the last visible row.                                                                              |
+| `Enter` / `Space` | Activate row (select/deselect in selection modes).                                                               |
+| `Tab`             | Exits the treegrid to the next focusable element in the page.                                                    |
 
 ## CSS Custom Properties
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `--uilib-tree-table-header-bg` | `#f5f5f5` | Header row background. |
-| `--uilib-tree-table-header-color` | `#333` | Header text colour. |
-| `--uilib-tree-table-header-border` | `1px solid #e0e0e0` | Header bottom border. |
-| `--uilib-tree-table-row-bg` | `#ffffff` | Body row background. |
-| `--uilib-tree-table-row-bg-alt` | `#fafafa` | Alternating row background. |
-| `--uilib-tree-table-row-bg-hover` | `rgba(0,0,0,0.04)` | Row hover background. |
-| `--uilib-tree-table-row-bg-selected` | `rgba(25,118,210,0.12)` | Selected row background. |
-| `--uilib-tree-table-row-color` | `#333` | Body row text colour. |
-| `--uilib-tree-table-row-color-selected` | `#1976d2` | Selected row text colour. |
-| `--uilib-tree-table-row-border` | `1px solid #e0e0e0` | Row bottom border. |
-| `--uilib-tree-table-font-size` | `0.875rem` | Table font size. |
-| `--uilib-tree-table-toggle-size` | `1.25rem` | Expand/collapse toggle button size. |
-| `--uilib-tree-table-indent-size` | `1.5rem` | Indent per depth level. |
+| Property                                | Default                 | Description                         |
+| --------------------------------------- | ----------------------- | ----------------------------------- |
+| `--uilib-tree-table-header-bg`          | `#f5f5f5`               | Header row background.              |
+| `--uilib-tree-table-header-color`       | `#333`                  | Header text colour.                 |
+| `--uilib-tree-table-header-border`      | `1px solid #e0e0e0`     | Header bottom border.               |
+| `--uilib-tree-table-row-bg`             | `#ffffff`               | Body row background.                |
+| `--uilib-tree-table-row-bg-alt`         | `#fafafa`               | Alternating row background.         |
+| `--uilib-tree-table-row-bg-hover`       | `rgba(0,0,0,0.04)`      | Row hover background.               |
+| `--uilib-tree-table-row-bg-selected`    | `rgba(25,118,210,0.12)` | Selected row background.            |
+| `--uilib-tree-table-row-color`          | `#333`                  | Body row text colour.               |
+| `--uilib-tree-table-row-color-selected` | `#1976d2`               | Selected row text colour.           |
+| `--uilib-tree-table-row-border`         | `1px solid #e0e0e0`     | Row bottom border.                  |
+| `--uilib-tree-table-font-size`          | `0.875rem`              | Table font size.                    |
+| `--uilib-tree-table-toggle-size`        | `1.25rem`               | Expand/collapse toggle button size. |
+| `--uilib-tree-table-indent-size`        | `1.5rem`                | Indent per depth level.             |
 
 ## Accessibility Notes
 

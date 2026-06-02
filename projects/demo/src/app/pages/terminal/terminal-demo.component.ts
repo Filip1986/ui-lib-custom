@@ -161,7 +161,7 @@ export class TerminalDemoComponent {
           this.terminalService.sendResponse(`Variant switched to: ${requested}`);
         } else {
           this.terminalService.sendResponse(
-            `Unknown variant "${requested}". Use: material | bootstrap | minimal`
+            `Unknown variant "${requested}". Use: material | bootstrap | minimal`,
           );
         }
         return;

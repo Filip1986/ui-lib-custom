@@ -14,11 +14,11 @@ Core DataView shell that renders list/grid item templates with loading and empty
 ### Inputs
 
 | Name                        | Type                        | Default                                                 | Description |
-| --------------------------- | --------------------------- | ------------------------------------------------------- | ----------- |
+| --------------------------- | --------------------------- | ------------------------------------------------------- | ----------- | --- |
 | `ariaLabel`                 | `string`                    | `'Data list'`                                           | —           |
 | `controlsAriaLabel`         | `string`                    | `'Data view controls'`                                  | —           |
 | `currentPageReportTemplate` | `string`                    | `'Showing {first} to {last} of {totalRecords} entries'` | —           |
-| `dataKey`                   | `string | null`             | `null`                                                  | —           |
+| `dataKey`                   | `string                     | null`                                                   | `null`      | —   |
 | `emptyMessage`              | `string`                    | `'No records found.'`                                   | —           |
 | `filterAriaLabel`           | `string`                    | `'Filter items'`                                        | —           |
 | `filterPlaceholder`         | `string`                    | `'Filter items'`                                        | —           |
@@ -30,14 +30,14 @@ Core DataView shell that renders list/grid item templates with loading and empty
 | `paginator`                 | `boolean`                   | `false`                                                 | —           |
 | `paginatorPosition`         | `DataViewPaginatorPosition` | `'bottom'`                                              | —           |
 | `rows`                      | `number`                    | `DATA_VIEW_DEFAULT_ROWS_PER_PAGE`                       | —           |
-| `rowsPerPageOptions`        | `number[] | null`           | `null`                                                  | —           |
+| `rowsPerPageOptions`        | `number[]                   | null`                                                   | `null`      | —   |
 | `showCurrentPageReport`     | `boolean`                   | `true`                                                  | —           |
 | `size`                      | `DataViewSize`              | `'md'`                                                  | —           |
 | `sortAriaLabel`             | `string`                    | `'Sort items'`                                          | —           |
-| `sortField`                 | `string | null`             | `null`                                                  | —           |
+| `sortField`                 | `string                     | null`                                                   | `null`      | —   |
 | `sortOrder`                 | `DataViewSortOrder`         | `1`                                                     | —           |
-| `totalRecords`              | `number | null`             | `null`                                                  | —           |
-| `trackBy`                   | `TrackByFunction<T> | null` | `null`                                                  | —           |
+| `totalRecords`              | `number                     | null`                                                   | `null`      | —   |
+| `trackBy`                   | `TrackByFunction<T>         | null`                                                   | `null`      | —   |
 
 ### Models (two-way bindable)
 
@@ -136,4 +136,3 @@ _none_
 - [Demo page](/components/data-view)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/data-view/README.md)
-

@@ -1,11 +1,11 @@
 # ADR — CSS Cascade Layers (`@layer`) Adoption
 
-| Field | Value |
-|---|---|
-| **Status** | Accepted |
-| **Date** | 2026-05-24 |
-| **Deciders** | Core maintainer |
-| **Supersedes** | — |
+| Field          | Value           |
+| -------------- | --------------- |
+| **Status**     | Accepted        |
+| **Date**       | 2026-05-24      |
+| **Deciders**   | Core maintainer |
+| **Supersedes** | —               |
 
 ---
 
@@ -35,11 +35,11 @@ All library styles are placed inside a three-level `uilib` namespace:
 @layer uilib.base, uilib.tokens, uilib.components;
 ```
 
-| Sub-layer | Priority | Contents | File(s) |
-|---|---|---|---|
-| `uilib.base` | Lowest | Reserved for consumer CSS resets / normalizations | Consumer `styles.scss` |
-| `uilib.tokens` | Middle | Global design tokens (CSS custom properties on `:root`, `[data-theme]`, `[data-density]`, typography mapping) | `themes.scss` |
-| `uilib.components` | Highest (among layers) | Every component SCSS file (host tokens, structural styles, variant overrides) | All `*.scss` under `src/lib/**` except `high-contrast.scss` |
+| Sub-layer          | Priority               | Contents                                                                                                      | File(s)                                                     |
+| ------------------ | ---------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `uilib.base`       | Lowest                 | Reserved for consumer CSS resets / normalizations                                                             | Consumer `styles.scss`                                      |
+| `uilib.tokens`     | Middle                 | Global design tokens (CSS custom properties on `:root`, `[data-theme]`, `[data-density]`, typography mapping) | `themes.scss`                                               |
+| `uilib.components` | Highest (among layers) | Every component SCSS file (host tokens, structural styles, variant overrides)                                 | All `*.scss` under `src/lib/**` except `high-contrast.scss` |
 
 ### The consumer reset pattern
 
@@ -129,11 +129,11 @@ controls the final outcome by wrapping third-party styles in their own layer if 
 
 ### Risks and Mitigations
 
-| Risk | Likelihood | Mitigation |
-|---|---|---|
-| Consumer unlayered CSS unintentionally overrides library styles | Medium (this is actually the desired default behavior; some consumers may be surprised) | Document clearly in theming guide: "All library styles are inside `@layer uilib.*`; any CSS you write outside a layer will override library styles." |
-| Old browser receiving garbled styles | Very low | `@layer` is a graceful degradation feature; browsers that don't support it ignore the at-rule and treat the content as regular CSS. All supported Angular versions target modern browsers. |
-| `@keyframes` name collisions with consumer | Very low | All library keyframe names are prefixed with `uilib-*` (e.g. `uilib-scroller-spin`, `uilib-progress-spin`). |
+| Risk                                                            | Likelihood                                                                              | Mitigation                                                                                                                                                                                 |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Consumer unlayered CSS unintentionally overrides library styles | Medium (this is actually the desired default behavior; some consumers may be surprised) | Document clearly in theming guide: "All library styles are inside `@layer uilib.*`; any CSS you write outside a layer will override library styles."                                       |
+| Old browser receiving garbled styles                            | Very low                                                                                | `@layer` is a graceful degradation feature; browsers that don't support it ignore the at-rule and treat the content as regular CSS. All supported Angular versions target modern browsers. |
+| `@keyframes` name collisions with consumer                      | Very low                                                                                | All library keyframe names are prefixed with `uilib-*` (e.g. `uilib-scroller-spin`, `uilib-progress-spin`).                                                                                |
 
 ---
 
@@ -159,7 +159,7 @@ Every component `.scss` file (103 files as of this ADR) is wrapped:
 
 ```scss
 @layer uilib.components {
-// ... existing file content unchanged, no re-indentation ...
+  // ... existing file content unchanged, no re-indentation ...
 } // end @layer uilib.components
 ```
 

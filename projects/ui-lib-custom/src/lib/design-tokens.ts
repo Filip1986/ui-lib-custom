@@ -774,12 +774,12 @@ const NUMERIC_SHADOWS: Record<ShadowKeyName, string> = SHADOW_VALUES.reduce(
   (
     acc: Record<ShadowKeyName, string>,
     value: string,
-    idx: number
+    idx: number,
   ): Record<ShadowKeyName, string> => {
     acc[`shadow-${idx + 1}` as ShadowKeyName] = value;
     return acc;
   },
-  {} as Record<ShadowKeyName, string>
+  {} as Record<ShadowKeyName, string>,
 );
 
 export const SHADOWS: Record<'none' | ShadowKeyName, string> = {

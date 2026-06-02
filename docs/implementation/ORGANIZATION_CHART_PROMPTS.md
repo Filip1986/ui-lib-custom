@@ -8,14 +8,14 @@
 
 ## Execution Order
 
-| # | Phase | Can run after | Est. effort |
-|---|---|---|---|
-| 1 | Research & Gap Analysis | — | Small |
-| 2 | API Design, Types & Scaffold | 1 | Small |
-| 3 | Core Rendering (recursive tree + connectors) | 2 | Large |
-| 4 | Interactions (selection + expand/collapse) | 3 | Medium |
-| 5 | Styling (3 variants, CSS vars, animations) | 3 | Medium |
-| 6 | Tests + Demo + Documentation | 4, 5 | Medium |
+| #   | Phase                                        | Can run after | Est. effort |
+| --- | -------------------------------------------- | ------------- | ----------- |
+| 1   | Research & Gap Analysis                      | —             | Small       |
+| 2   | API Design, Types & Scaffold                 | 1             | Small       |
+| 3   | Core Rendering (recursive tree + connectors) | 2             | Large       |
+| 4   | Interactions (selection + expand/collapse)   | 3             | Medium      |
+| 5   | Styling (3 variants, CSS vars, animations)   | 3             | Medium      |
+| 6   | Tests + Demo + Documentation                 | 4, 5          | Medium      |
 
 Prompts 4 and 5 can run in parallel after Prompt 3 completes.
 
@@ -61,21 +61,22 @@ cat ./package/organizationchart/organizationchart.interface.d.ts 2>/dev/null || 
 
 **Step 3 — Produce a convention-divergence table** covering every place where our library's rules differ from PrimeNG's API:
 
-| PrimeNG concept | Our equivalent | Reason |
-|---|---|---|
-| `@Input() value` | `input<OrganizationChartNode[]>('value')` | Signal inputs only |
-| `@Input() selection` | `model<OrganizationChartNode \| OrganizationChartNode[] \| null>('selection')` | Two-way binding via `model()` |
-| `@Output() selectionChange` | Handled automatically by `model()` | No separate EventEmitter |
-| `@Output() onNodeSelect` | `output<OrganizationChartNodeSelectEvent>()` named `nodeSelect` | camelCase output names |
-| `p-` CSS classes | `uilib-` CSS classes | Library prefix |
-| Hardcoded hex/px | `--uilib-organization-chart-*` CSS variables | No raw values |
-| TypeScript `enum` | `as const` + string union | Library convention |
-| `@Input()` / `@Output()` decorators | `input()` / `model()` / `output()` signals | Library convention |
-| `styleClass` | `styleClass` | Keep as-is (escape-hatch pattern) |
+| PrimeNG concept                     | Our equivalent                                                                 | Reason                            |
+| ----------------------------------- | ------------------------------------------------------------------------------ | --------------------------------- |
+| `@Input() value`                    | `input<OrganizationChartNode[]>('value')`                                      | Signal inputs only                |
+| `@Input() selection`                | `model<OrganizationChartNode \| OrganizationChartNode[] \| null>('selection')` | Two-way binding via `model()`     |
+| `@Output() selectionChange`         | Handled automatically by `model()`                                             | No separate EventEmitter          |
+| `@Output() onNodeSelect`            | `output<OrganizationChartNodeSelectEvent>()` named `nodeSelect`                | camelCase output names            |
+| `p-` CSS classes                    | `uilib-` CSS classes                                                           | Library prefix                    |
+| Hardcoded hex/px                    | `--uilib-organization-chart-*` CSS variables                                   | No raw values                     |
+| TypeScript `enum`                   | `as const` + string union                                                      | Library convention                |
+| `@Input()` / `@Output()` decorators | `input()` / `model()` / `output()` signals                                     | Library convention                |
+| `styleClass`                        | `styleClass`                                                                   | Keep as-is (escape-hatch pattern) |
 
 **Step 4 — Produce a recommended API surface** for our component:
 
 Document the proposed inputs, model signals, outputs, and the `OrganizationChartNode` interface. The interface must use our naming conventions and support:
+
 - `key` (string, unique node id)
 - `label` (string, display text)
 - `type` (string, optional, for template selection)
@@ -171,6 +172,7 @@ Export the component, node component, and all types.
 **Step 4 — Create the secondary entry point** under `projects/ui-lib-custom/organization-chart/`:
 
 Exactly three files mirroring the `data-view` pattern:
+
 - `ng-package.json` with `entryFile: ../src/lib/organization-chart/index.ts`
 - `package.json` with `{ "name": "ui-lib-custom/organization-chart" }`
 - `public-api.ts` re-exporting from `../src/lib/organization-chart/index`
@@ -240,6 +242,7 @@ The node component is responsible for rendering one level of the tree. Its templ
 ```
 
 Key implementation requirements:
+
 - Use `@if` and `@for` block syntax throughout — no `*ngIf`/`*ngFor`
 - The recursive `<ui-lib-organization-chart-node>` self-closes (no projected content)
 - Pass `selectionMode`, `selection`, and `nodeTemplate` inputs down to each recursive child
@@ -250,6 +253,7 @@ Key implementation requirements:
 **Step 2 — Implement `OrganizationChartComponent`** (`organization-chart.html` + `organization-chart.ts`):
 
 The parent component:
+
 - Accepts `value = input<OrganizationChartNode[]>([])` — the root-level nodes array
 - Accepts `selectionMode = input<OrganizationChartSelectionMode>(null)`
 - Accepts `selection = model<OrganizationChartNode | OrganizationChartNode[] | null>(null)`
@@ -263,12 +267,14 @@ The parent component:
 **Step 3 — Connector line CSS architecture** (in `organization-chart.scss` and/or `organization-chart-node.scss`):
 
 The standard approach for org chart connectors uses borders on wrapper elements:
+
 - The **horizontal bar** across siblings is achieved via `::before`/`::after` pseudo-elements on the children row
 - The **vertical lines** use `border-left` on wrapper cells plus fixed heights
 - Use only `--uilib-organization-chart-*` CSS variables for all connector colors, widths, and spacing — no raw hex or px values
 - Declare those variables with sensible defaults on the `:root` or component host
 
 Define these CSS variables on the host (add to `design-tokens.ts` too):
+
 ```
 --uilib-organization-chart-connector-color
 --uilib-organization-chart-connector-width
@@ -330,11 +336,13 @@ public isNodeSelected(node: OrganizationChartNode): boolean
 ```
 
 `handleNodeClick` must:
+
 - Do nothing if `selectionMode()` is `null` or `node.selectable === false`
 - In `'single'` mode: toggle (deselect if already selected, select otherwise); update `this.selection` model; emit `nodeSelect` or `nodeUnselect`
 - In `'multiple'` mode: add/remove from the selection array; update `this.selection` model; emit accordingly
 
 `isNodeSelected` must:
+
 - Return `false` if `selectionMode()` is `null`
 - In `'single'` mode: compare by `key`
 - In `'multiple'` mode: check if the array includes the node by `key`
@@ -342,6 +350,7 @@ public isNodeSelected(node: OrganizationChartNode): boolean
 **Step 2 — Expand/collapse logic in `OrganizationChartComponent`:**
 
 Add a public method:
+
 ```typescript
 public handleNodeToggle(node: OrganizationChartNode): void
 ```
@@ -353,13 +362,15 @@ This mutates `node.expanded` (toggling between `true` and `false`) and emits `no
 Rather than threading event outputs through every level of the recursive tree, use Angular's DI to provide the parent `OrganizationChartComponent` to all descendant `OrganizationChartNodeComponent` instances:
 
 In `OrganizationChartComponent`:
+
 ```typescript
-providers: [{ provide: ORGANIZATION_CHART_CONTEXT, useExisting: OrganizationChart }]
+providers: [{ provide: ORGANIZATION_CHART_CONTEXT, useExisting: OrganizationChart }];
 ```
 
 Create `organization-chart-context.ts` with an `InjectionToken<OrganizationChartContext>` named `ORGANIZATION_CHART_CONTEXT`, where `OrganizationChartContext` is an interface exposing `handleNodeClick`, `handleNodeToggle`, `isNodeSelected`, `selectionMode`, and `selection`.
 
 In `OrganizationChartNodeComponent`:
+
 ```typescript
 private readonly chartContext = inject(ORGANIZATION_CHART_CONTEXT);
 ```
@@ -372,14 +383,15 @@ private readonly chartContext = inject(ORGANIZATION_CHART_CONTEXT);
 - Add a collapse toggle button (only rendered when the node has children):
   ```html
   @if (node().children?.length) {
-    <button
-      class="uilib-org-chart-toggle"
-      [attr.aria-expanded]="node().expanded !== false"
-      [attr.aria-label]="node().expanded !== false ? 'Collapse' : 'Expand'"
-      (click)="onToggleClick($event)"
-      type="button">
-      <!-- chevron icon via ng-content or inline SVG -->
-    </button>
+  <button
+    class="uilib-org-chart-toggle"
+    [attr.aria-expanded]="node().expanded !== false"
+    [attr.aria-label]="node().expanded !== false ? 'Collapse' : 'Expand'"
+    (click)="onToggleClick($event)"
+    type="button"
+  >
+    <!-- chevron icon via ng-content or inline SVG -->
+  </button>
   }
   ```
 - Wrap the children row in `@if (node().expanded !== false)` so collapsed subtrees are hidden
@@ -387,6 +399,7 @@ private readonly chartContext = inject(ORGANIZATION_CHART_CONTEXT);
 **Step 5 — Keyboard navigation on `OrganizationChartComponent`:**
 
 Add a `(keydown)` handler on the host element implementing the WAI-ARIA tree keyboard spec:
+
 - `ArrowDown` / `ArrowUp`: move focus between visible treeitem elements
 - `ArrowRight`: expand a collapsed node (if it has children); move focus to first child if already expanded
 - `ArrowLeft`: collapse an expanded node; move focus to parent if already collapsed
@@ -398,11 +411,10 @@ Use `querySelectorAll('[role="treeitem"]')` on the host element to get the navig
 **Step 6 — ARIA attributes:**
 
 Ensure each rendered node cell has:
+
 ```html
-role="treeitem"
-[attr.aria-expanded]="hasChildren ? (node().expanded !== false) : null"
-[attr.aria-selected]="selectionMode ? isSelected : null"
-[attr.tabindex]="isFirstNode ? 0 : -1"
+role="treeitem" [attr.aria-expanded]="hasChildren ? (node().expanded !== false) : null"
+[attr.aria-selected]="selectionMode ? isSelected : null" [attr.tabindex]="isFirstNode ? 0 : -1"
 ```
 
 The root container (`OrganizationChartComponent` host) must have `role="tree"`.
@@ -505,6 +517,7 @@ organizationChart: {
 **Step 7 — Expand/collapse animation:**
 
 Use a CSS height transition on the children container. The pattern (from accordion) is three layers:
+
 1. Clip wrapper: `overflow: hidden` — drives the `max-height` animation
 2. Padding wrapper (if needed)
 3. Content
@@ -512,6 +525,7 @@ Use a CSS height transition on the children container. The pattern (from accordi
 Add `@keyframes` or a CSS transition on `max-height` from `0` to `auto` (use the grid-row trick if needed to avoid the `auto` height animation limitation).
 
 Respect `prefers-reduced-motion`:
+
 ```scss
 @media (prefers-reduced-motion: reduce) {
   .uilib-org-chart-children-row {
@@ -564,6 +578,7 @@ Implementation and styling are complete. This prompt covers the full test suite,
 Create `projects/ui-lib-custom/src/lib/organization-chart/organization-chart.spec.ts`:
 
 Test host setup:
+
 ```typescript
 TestBed.configureTestingModule({
   providers: [provideZonelessChangeDetection()],
@@ -639,6 +654,7 @@ Remove the `badge: 'TODO'` from the sidebar entry for `organization-chart` in `p
 Create `docs/reference/components/ORGANIZATION_CHART.md` following the exact structure of `DATAVIEW.md`:
 
 Sections required:
+
 - Overview (what it is, when to use it)
 - Features list
 - Basic usage example
@@ -664,6 +680,7 @@ npx.cmd ng build demo
 ```
 
 After all pass, start the demo server and probe the route:
+
 ```bash
 npx.cmd ng serve demo --no-open &
 # wait for ready
@@ -671,6 +688,7 @@ curl -I http://localhost:4200/organization-chart
 ```
 
 Confirm the following manually (or via DOM assertions in tests):
+
 - [ ] `ViewEncapsulation.None` + `OnPush` + standalone on both components
 - [ ] Signal inputs/outputs only — no `@Input()` / `@Output()` decorators
 - [ ] `as const` objects used; no TypeScript enums
@@ -717,6 +735,7 @@ PrimeNG mutates `node.expanded` directly on the node object. We follow the same 
 ### On the connector lines
 
 The cleanest CSS approach is:
+
 - Each node wrapper is a flex column
 - The horizontal bar connecting siblings is drawn via `::before` on the children row (a `border-top` spanning from first child center to last child center)
 - The vertical drops from the horizontal bar to each child are `::before` pseudo-elements on each child wrapper (`border-left`, fixed height)

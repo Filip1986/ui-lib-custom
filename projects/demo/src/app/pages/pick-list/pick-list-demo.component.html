@@ -6,145 +6,140 @@
     description="Transfers items between a source list and a target list with reorder controls, optional filter inputs, drag-and-drop support, and full keyboard accessibility."
   />
 
-    <!-- 1. Basic -->
-    <app-doc-section id="basic" title="Basic">
-      <p class="demo-section__description">
-        Use <code>[(source)]</code> and <code>[(target)]</code> two-way bindings to let the
-        component manage transfers. <code>trackBy</code> identifies items by a property key.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-pick-list
-          [source]="basicSource()"
-          (sourceChange)="basicSource.set($any($event))"
-          [target]="basicTarget()"
-          (targetChange)="basicTarget.set($any($event))"
-          trackBy="name"
-          sourceHeader="Available"
-          targetHeader="Selected"
-        />
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="basicHtml"
-        [typescript]="basicTs"
-        [showLineNumbers]="true"
+  <!-- 1. Basic -->
+  <app-doc-section id="basic" title="Basic">
+    <p class="demo-section__description">
+      Use <code>[(source)]</code> and <code>[(target)]</code> two-way bindings to let the component
+      manage transfers. <code>trackBy</code> identifies items by a property key.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-pick-list
+        [source]="basicSource()"
+        (sourceChange)="basicSource.set($any($event))"
+        [target]="basicTarget()"
+        (targetChange)="basicTarget.set($any($event))"
+        trackBy="name"
+        sourceHeader="Available"
+        targetHeader="Selected"
       />
-    </app-doc-section>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" [showLineNumbers]="true" />
+  </app-doc-section>
 
-    <!-- 2. Filter -->
-    <app-doc-section id="filter" title="Filter">
-      <p class="demo-section__description">
-        Set <code>filterBy</code> to show independent filter inputs above each list. Filtering never
-        mutates the underlying arrays.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-pick-list
-          [source]="filterSource()"
-          (sourceChange)="filterSource.set($any($event))"
-          [target]="filterTarget()"
-          (targetChange)="filterTarget.set($any($event))"
-          trackBy="name"
-          filterBy="name"
-          sourceFilterPlaceholder="Search available…"
-          targetFilterPlaceholder="Search selected…"
-        />
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="filterHtml"
-        [typescript]="filterTs"
-        [showLineNumbers]="true"
+  <!-- 2. Filter -->
+  <app-doc-section id="filter" title="Filter">
+    <p class="demo-section__description">
+      Set <code>filterBy</code> to show independent filter inputs above each list. Filtering never
+      mutates the underlying arrays.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-pick-list
+        [source]="filterSource()"
+        (sourceChange)="filterSource.set($any($event))"
+        [target]="filterTarget()"
+        (targetChange)="filterTarget.set($any($event))"
+        trackBy="name"
+        filterBy="name"
+        sourceFilterPlaceholder="Search available…"
+        targetFilterPlaceholder="Search selected…"
       />
-    </app-doc-section>
+    </ui-lib-panel>
+    <app-doc-code-example [html]="filterHtml" [typescript]="filterTs" [showLineNumbers]="true" />
+  </app-doc-section>
 
-    <!-- 3. Custom Templates -->
-    <app-doc-section id="templates" title="Custom Templates">
-      <p class="demo-section__description">
-        Supply <code>uiPickListSourceHeader</code>, <code>uiPickListTargetHeader</code>,
-        <code>uiPickListItem</code>, and <code>uiPickListEmpty</code> directives for fully custom
-        rendering. The item template receives <code>let-item</code> as its implicit context.
-      </p>
-      <ui-lib-panel variant="minimal">
+  <!-- 3. Custom Templates -->
+  <app-doc-section id="templates" title="Custom Templates">
+    <p class="demo-section__description">
+      Supply <code>uiPickListSourceHeader</code>, <code>uiPickListTargetHeader</code>,
+      <code>uiPickListItem</code>, and <code>uiPickListEmpty</code> directives for fully custom
+      rendering. The item template receives <code>let-item</code> as its implicit context.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-pick-list
+        [source]="templateSource()"
+        (sourceChange)="templateSource.set($any($event))"
+        [target]="templateTarget()"
+        (targetChange)="templateTarget.set($any($event))"
+        trackBy="code"
+      >
+        <ng-template uiPickListSourceHeader>
+          <span>Available countries ({{ templateSource().length }})</span>
+        </ng-template>
+        <ng-template uiPickListTargetHeader>
+          <span>Selected countries ({{ templateTarget().length }})</span>
+        </ng-template>
+        <ng-template uiPickListItem let-country>
+          <div class="demo-pl-row">
+            <span class="demo-pl-code">{{ country.code }}</span>
+            <span class="demo-pl-name">{{ country.name }}</span>
+            <span class="demo-pl-region">{{ country.region }}</span>
+          </div>
+        </ng-template>
+        <ng-template uiPickListEmpty>
+          <span>No items here.</span>
+        </ng-template>
+      </ui-lib-pick-list>
+    </ui-lib-panel>
+    <app-doc-code-example
+      [html]="templatesHtml"
+      [typescript]="templatesTs"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
+
+  <!-- 4. Drag & Drop -->
+  <app-doc-section id="drag-drop" title="Drag & Drop">
+    <p class="demo-section__description">
+      Enable <code>[dragDrop]="true"</code> to allow dragging items within a list to reorder them,
+      or dragging between lists to transfer them. A drop indicator line shows the insertion point.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-stack [gap]="3">
         <ui-lib-pick-list
-          [source]="templateSource()"
-          (sourceChange)="templateSource.set($any($event))"
-          [target]="templateTarget()"
-          (targetChange)="templateTarget.set($any($event))"
+          [source]="dragSource()"
+          (sourceChange)="dragSource.set($any($event))"
+          [target]="dragTarget()"
+          (targetChange)="dragTarget.set($any($event))"
           trackBy="code"
-        >
-          <ng-template uiPickListSourceHeader>
-            <span>Available countries ({{ templateSource().length }})</span>
-          </ng-template>
-          <ng-template uiPickListTargetHeader>
-            <span>Selected countries ({{ templateTarget().length }})</span>
-          </ng-template>
-          <ng-template uiPickListItem let-country>
-            <div class="demo-pl-row">
-              <span class="demo-pl-code">{{ country.code }}</span>
-              <span class="demo-pl-name">{{ country.name }}</span>
-              <span class="demo-pl-region">{{ country.region }}</span>
-            </div>
-          </ng-template>
-          <ng-template uiPickListEmpty>
-            <span>No items here.</span>
-          </ng-template>
-        </ui-lib-pick-list>
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="templatesHtml"
-        [typescript]="templatesTs"
-        [showLineNumbers]="true"
-      />
-    </app-doc-section>
+          [dragDrop]="true"
+          sourceHeader="Source"
+          targetHeader="Target"
+          (movedToTarget)="onMoveToTarget($event)"
+          (movedToSource)="onMoveToSource($event)"
+          (reordered)="onReorder($event)"
+        />
+        <p class="demo-event-log">
+          Last action: <code>{{ lastEventLog() }}</code>
+        </p>
+      </ui-lib-stack>
+    </ui-lib-panel>
+    <app-doc-code-example
+      [html]="dragDropHtml"
+      [typescript]="dragDropTs"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
-    <!-- 4. Drag & Drop -->
-    <app-doc-section id="drag-drop" title="Drag & Drop">
-      <p class="demo-section__description">
-        Enable <code>[dragDrop]="true"</code> to allow dragging items within a list to reorder them,
-        or dragging between lists to transfer them. A drop indicator line shows the insertion point.
-      </p>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-stack [gap]="3">
-          <ui-lib-pick-list
-            [source]="dragSource()"
-            (sourceChange)="dragSource.set($any($event))"
-            [target]="dragTarget()"
-            (targetChange)="dragTarget.set($any($event))"
-            trackBy="code"
-            [dragDrop]="true"
-            sourceHeader="Source"
-            targetHeader="Target"
-            (movedToTarget)="onMoveToTarget($event)"
-            (movedToSource)="onMoveToSource($event)"
-            (reordered)="onReorder($event)"
-          />
-          <p class="demo-event-log">
-            Last action: <code>{{ lastEventLog() }}</code>
-          </p>
-        </ui-lib-stack>
-      </ui-lib-panel>
-      <app-doc-code-example
-        [html]="dragDropHtml"
-        [typescript]="dragDropTs"
-        [showLineNumbers]="true"
-      />
-    </app-doc-section>
+  <!-- 5. Accessibility -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle">Keyboard Navigation</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
 
-    <!-- 5. Accessibility -->
-    <app-doc-section id="accessibility" title="Accessibility">
-      <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
-      <app-doc-aria-table [rows]="ariaRows" />
-      <h3 class="demo-section__subtitle">Keyboard Navigation</h3>
-      <app-doc-keyboard-nav [rows]="keyboardRows" />
-    </app-doc-section>
+  <!-- 6. API Reference -->
+  <app-doc-section id="api" title="API Reference">
+    <app-doc-api-reference [rows]="apiInputRows" />
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+    <app-doc-api-reference
+      title="Template Slots"
+      kind="name"
+      [rows]="apiSlotRows"
+      [showDefault]="false"
+    />
+  </app-doc-section>
 
-    <!-- 6. API Reference -->
-    <app-doc-section id="api" title="API Reference">
-      <app-doc-api-reference [rows]="apiInputRows" />
-      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
-      <app-doc-api-reference title="Template Slots" kind="name" [rows]="apiSlotRows" [showDefault]="false" />
-    </app-doc-section>
-
-
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -153,7 +148,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

@@ -8,41 +8,42 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `items` | `DockItem[]` | `[]` | Items to display in the dock |
-| `position` | `'bottom' \| 'top' \| 'left' \| 'right'` | `'bottom'` | Position of the dock relative to its container |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to `ThemeConfigService` when `null` |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token |
-| `magnification` | `boolean` | `true` | Enables hover magnification effect |
-| `magnificationLevel` | `number` | `1.5` | Scale factor at the directly hovered item (1.2–2.5 recommended) |
-| `ariaLabel` | `string` | `'Dock'` | Accessible label for the `<nav>` landmark — override when multiple docks are on the same page |
-| `styleClass` | `string \| null` | `null` | Extra CSS class on the host |
+| Name                 | Type                                             | Default    | Notes                                                                                         |
+| -------------------- | ------------------------------------------------ | ---------- | --------------------------------------------------------------------------------------------- |
+| `items`              | `DockItem[]`                                     | `[]`       | Items to display in the dock                                                                  |
+| `position`           | `'bottom' \| 'top' \| 'left' \| 'right'`         | `'bottom'` | Position of the dock relative to its container                                                |
+| `variant`            | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`     | Falls back to `ThemeConfigService` when `null`                                                |
+| `size`               | `'sm' \| 'md' \| 'lg'`                           | `'md'`     | Size token                                                                                    |
+| `magnification`      | `boolean`                                        | `true`     | Enables hover magnification effect                                                            |
+| `magnificationLevel` | `number`                                         | `1.5`      | Scale factor at the directly hovered item (1.2–2.5 recommended)                               |
+| `ariaLabel`          | `string`                                         | `'Dock'`   | Accessible label for the `<nav>` landmark — override when multiple docks are on the same page |
+| `styleClass`         | `string \| null`                                 | `null`     | Extra CSS class on the host                                                                   |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
+| Name        | Payload                | Notes                                                       |
+| ----------- | ---------------------- | ----------------------------------------------------------- |
 | `itemClick` | `DockItemCommandEvent` | Fired when a dock item is clicked or activated via keyboard |
 
 ## DockItem interface
 
-| Field | Type | Notes |
-|-------|------|-------|
-| `label` | `string?` | Tooltip text and default accessible name |
-| `ariaLabel` | `string?` | Dedicated accessible name for screen readers — takes priority over `label` |
-| `icon` | `string?` | Icon name passed to `<ui-lib-icon>` |
-| `disabled` | `boolean?` | Disables the item |
-| `visible` | `boolean?` | `false` hides the item from the list |
-| `styleClass` | `string?` | Extra CSS class on the item wrapper |
-| `routerLink` | `string \| string[]?` | Angular Router link |
-| `url` | `string?` | External URL for anchor items |
-| `target` | `string?` | Anchor `target` attribute (e.g. `'_blank'`) |
-| `command` | `(event) => void?` | Callback invoked when the item is activated |
+| Field        | Type                  | Notes                                                                      |
+| ------------ | --------------------- | -------------------------------------------------------------------------- |
+| `label`      | `string?`             | Tooltip text and default accessible name                                   |
+| `ariaLabel`  | `string?`             | Dedicated accessible name for screen readers — takes priority over `label` |
+| `icon`       | `string?`             | Icon name passed to `<ui-lib-icon>`                                        |
+| `disabled`   | `boolean?`            | Disables the item                                                          |
+| `visible`    | `boolean?`            | `false` hides the item from the list                                       |
+| `styleClass` | `string?`             | Extra CSS class on the item wrapper                                        |
+| `routerLink` | `string \| string[]?` | Angular Router link                                                        |
+| `url`        | `string?`             | External URL for anchor items                                              |
+| `target`     | `string?`             | Anchor `target` attribute (e.g. `'_blank'`)                                |
+| `command`    | `(event) => void?`    | Callback invoked when the item is activated                                |
 
 ## Container role guidance
 
 The dock uses `<nav aria-label="...">` as its container:
+
 - Items that are **links** (`routerLink` or `url`) render as `<a>` elements.
 - Items that are **actions** (`command` only) render as `<button>` elements.
 - Items with no interaction render as `<span>` elements.
@@ -51,11 +52,11 @@ If all dock items are application actions (no navigation links), consider adding
 
 ## Keyboard interaction
 
-| Key | Behavior |
-|-----|----------|
-| `Tab` | Move focus to the next interactive dock item |
-| `Shift+Tab` | Move focus to the previous interactive dock item |
-| `Enter` / `Space` | Activate the focused button item |
+| Key               | Behavior                                         |
+| ----------------- | ------------------------------------------------ |
+| `Tab`             | Move focus to the next interactive dock item     |
+| `Shift+Tab`       | Move focus to the previous interactive dock item |
+| `Enter` / `Space` | Activate the focused button item                 |
 
 Disabled items (buttons with `disabled` attribute) are skipped by Tab order automatically.
 

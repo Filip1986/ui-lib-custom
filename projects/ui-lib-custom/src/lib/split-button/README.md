@@ -40,111 +40,111 @@ public readonly items: SplitButtonItem[] = [
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `label` | `string` | `''` | Primary button text and default accessible name fallback |
-| `icon` | `string \| null` | `null` | Leading or trailing primary button icon |
-| `iconPosition` | `'left' \| 'right'` | `'left'` | Primary icon placement |
-| `model` | `readonly SplitButtonItem[]` | `[]` | Menu items; entries with `visible: false` are filtered out |
-| `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warning' \| 'help' \| 'danger' \| 'contrast'` | `'primary'` | Color severity token |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Uses `ThemeConfigService` variant when `null` |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token |
-| `disabled` | `boolean` | `false` | Disables both buttons |
-| `buttonDisabled` | `boolean` | `false` | Disables only the primary action |
-| `menuButtonDisabled` | `boolean` | `false` | Disables only the dropdown trigger |
-| `loading` | `boolean` | `false` | Shows a loading icon and disables the primary action |
-| `loadingIcon` | `string` | `'spinner'` | Icon used while loading |
-| `raised` | `boolean` | `false` | Enables raised styling |
-| `rounded` | `boolean` | `false` | Enables pill radius styling |
-| `text` | `boolean` | `false` | Uses text-button styling |
-| `outlined` | `boolean` | `false` | Uses outlined styling |
-| `dropdownIcon` | `string` | `'chevron-down'` | Dropdown trigger icon when no custom slot is provided |
-| `buttonAriaLabel` | `string \| null` | `null` | Explicit accessible name for the primary button |
-| `menuButtonAriaLabel` | `string \| null` | `null` | Accessible name for the dropdown trigger and menu label fallback |
-| `tabindex` | `number` | `0` | Applied to both trigger buttons |
-| `styleClass` | `string \| null` | `null` | Additional host class names |
+| Name                  | Type                                                                                               | Default          | Notes                                                            |
+| --------------------- | -------------------------------------------------------------------------------------------------- | ---------------- | ---------------------------------------------------------------- |
+| `label`               | `string`                                                                                           | `''`             | Primary button text and default accessible name fallback         |
+| `icon`                | `string \| null`                                                                                   | `null`           | Leading or trailing primary button icon                          |
+| `iconPosition`        | `'left' \| 'right'`                                                                                | `'left'`         | Primary icon placement                                           |
+| `model`               | `readonly SplitButtonItem[]`                                                                       | `[]`             | Menu items; entries with `visible: false` are filtered out       |
+| `severity`            | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warning' \| 'help' \| 'danger' \| 'contrast'` | `'primary'`      | Color severity token                                             |
+| `variant`             | `'material' \| 'bootstrap' \| 'minimal' \| null`                                                   | `null`           | Uses `ThemeConfigService` variant when `null`                    |
+| `size`                | `'sm' \| 'md' \| 'lg'`                                                                             | `'md'`           | Size token                                                       |
+| `disabled`            | `boolean`                                                                                          | `false`          | Disables both buttons                                            |
+| `buttonDisabled`      | `boolean`                                                                                          | `false`          | Disables only the primary action                                 |
+| `menuButtonDisabled`  | `boolean`                                                                                          | `false`          | Disables only the dropdown trigger                               |
+| `loading`             | `boolean`                                                                                          | `false`          | Shows a loading icon and disables the primary action             |
+| `loadingIcon`         | `string`                                                                                           | `'spinner'`      | Icon used while loading                                          |
+| `raised`              | `boolean`                                                                                          | `false`          | Enables raised styling                                           |
+| `rounded`             | `boolean`                                                                                          | `false`          | Enables pill radius styling                                      |
+| `text`                | `boolean`                                                                                          | `false`          | Uses text-button styling                                         |
+| `outlined`            | `boolean`                                                                                          | `false`          | Uses outlined styling                                            |
+| `dropdownIcon`        | `string`                                                                                           | `'chevron-down'` | Dropdown trigger icon when no custom slot is provided            |
+| `buttonAriaLabel`     | `string \| null`                                                                                   | `null`           | Explicit accessible name for the primary button                  |
+| `menuButtonAriaLabel` | `string \| null`                                                                                   | `null`           | Accessible name for the dropdown trigger and menu label fallback |
+| `tabindex`            | `number`                                                                                           | `0`              | Applied to both trigger buttons                                  |
+| `styleClass`          | `string \| null`                                                                                   | `null`           | Additional host class names                                      |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `buttonClick` | `SplitButtonClickEvent` | Emitted when the primary button is activated. Named `buttonClick` (not `click`) to avoid clashing with the native `click` DOM event. |
-| `menuShow` | `SplitButtonMenuShowEvent` | Emitted when the menu opens |
-| `menuHide` | `SplitButtonMenuHideEvent` | Emitted when the menu closes |
-| `itemCommand` | `SplitButtonItemCommandEvent` | Emitted when a menu item command runs |
+| Name          | Payload                       | Notes                                                                                                                                |
+| ------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `buttonClick` | `SplitButtonClickEvent`       | Emitted when the primary button is activated. Named `buttonClick` (not `click`) to avoid clashing with the native `click` DOM event. |
+| `menuShow`    | `SplitButtonMenuShowEvent`    | Emitted when the menu opens                                                                                                          |
+| `menuHide`    | `SplitButtonMenuHideEvent`    | Emitted when the menu closes                                                                                                         |
+| `itemCommand` | `SplitButtonItemCommandEvent` | Emitted when a menu item command runs                                                                                                |
 
 ## Template slots
 
-| Selector | Description |
-|----------|-------------|
-| `[splitButtonContent]` | Replaces the primary button content area |
-| `[splitButtonDropdownIcon]` | Replaces the dropdown trigger icon |
+| Selector                    | Description                              |
+| --------------------------- | ---------------------------------------- |
+| `[splitButtonContent]`      | Replaces the primary button content area |
+| `[splitButtonDropdownIcon]` | Replaces the dropdown trigger icon       |
 
 ## `SplitButtonItem` reference
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `label` | `string` | Menu item text |
-| `icon` | `string` | Optional leading icon |
-| `command` | `(event: SplitButtonItemCommandEvent) => void` | Invoked on activation |
-| `disabled` | `boolean` | Removes item from activation paths |
-| `separator` | `boolean` | Renders a separator instead of an actionable row |
-| `tooltip` | `string` | Applied as native `title` |
-| `url` | `string` | Opens using the current document window |
-| `target` | `string` | Window target for `url` |
-| `routerLink` | `string \| unknown[]` | Angular Router target when Router is present |
-| `styleClass` | `string` | Consumer metadata/class slot |
-| `visible` | `boolean` | Hides the item when `false` |
+| Field        | Type                                           | Description                                      |
+| ------------ | ---------------------------------------------- | ------------------------------------------------ |
+| `label`      | `string`                                       | Menu item text                                   |
+| `icon`       | `string`                                       | Optional leading icon                            |
+| `command`    | `(event: SplitButtonItemCommandEvent) => void` | Invoked on activation                            |
+| `disabled`   | `boolean`                                      | Removes item from activation paths               |
+| `separator`  | `boolean`                                      | Renders a separator instead of an actionable row |
+| `tooltip`    | `string`                                       | Applied as native `title`                        |
+| `url`        | `string`                                       | Opens using the current document window          |
+| `target`     | `string`                                       | Window target for `url`                          |
+| `routerLink` | `string \| unknown[]`                          | Angular Router target when Router is present     |
+| `styleClass` | `string`                                       | Consumer metadata/class slot                     |
+| `visible`    | `boolean`                                      | Hides the item when `false`                      |
 
 ## ARIA attributes
 
-| Element | Attributes |
-|---------|------------|
-| Primary button | Native `<button>` semantics, `aria-label` from `buttonAriaLabel`, `label`, or icon-only fallback |
-| Menu trigger button | `aria-haspopup="menu"`, `aria-expanded`, `aria-controls`, `aria-label` |
-| Dropdown panel | `role="menu"`, unique `id`, `aria-label` |
-| Menu item | `role="menuitem"`, `aria-disabled` when disabled |
-| Separator | `role="separator"` |
-| Decorative icons | `aria-hidden="true"` |
+| Element             | Attributes                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------ |
+| Primary button      | Native `<button>` semantics, `aria-label` from `buttonAriaLabel`, `label`, or icon-only fallback |
+| Menu trigger button | `aria-haspopup="menu"`, `aria-expanded`, `aria-controls`, `aria-label`                           |
+| Dropdown panel      | `role="menu"`, unique `id`, `aria-label`                                                         |
+| Menu item           | `role="menuitem"`, `aria-disabled` when disabled                                                 |
+| Separator           | `role="separator"`                                                                               |
+| Decorative icons    | `aria-hidden="true"`                                                                             |
 
 ## Keyboard interaction
 
-| Target | Key | Behavior |
-|--------|-----|----------|
-| Main button | `Enter`, `Space` | Activates the primary action using native button behavior |
-| Menu trigger | `Enter`, `Space` | Toggle menu open/closed |
-| Menu trigger | `ArrowDown` | Open menu and focus first enabled item |
-| Menu trigger | `ArrowUp` | Open menu and focus last enabled item |
-| Menu trigger | `Escape` | Close menu and restore focus to the trigger |
-| Menu items | `Enter`, `Space` | Activate item and close menu |
-| Menu items | `ArrowDown`, `ArrowUp` | Move focus to next/previous enabled item, wrapping at ends |
-| Menu items | `Home`, `End` | Jump to first/last enabled item |
-| Menu items | `Escape` | Close menu and restore focus to the trigger |
-| Menu items | `Tab` | Close menu and continue normal tab flow |
+| Target       | Key                    | Behavior                                                   |
+| ------------ | ---------------------- | ---------------------------------------------------------- |
+| Main button  | `Enter`, `Space`       | Activates the primary action using native button behavior  |
+| Menu trigger | `Enter`, `Space`       | Toggle menu open/closed                                    |
+| Menu trigger | `ArrowDown`            | Open menu and focus first enabled item                     |
+| Menu trigger | `ArrowUp`              | Open menu and focus last enabled item                      |
+| Menu trigger | `Escape`               | Close menu and restore focus to the trigger                |
+| Menu items   | `Enter`, `Space`       | Activate item and close menu                               |
+| Menu items   | `ArrowDown`, `ArrowUp` | Move focus to next/previous enabled item, wrapping at ends |
+| Menu items   | `Home`, `End`          | Jump to first/last enabled item                            |
+| Menu items   | `Escape`               | Close menu and restore focus to the trigger                |
+| Menu items   | `Tab`                  | Close menu and continue normal tab flow                    |
 
 ## CSS custom properties
 
-| Variable | Default |
-|----------|---------|
-| `--uilib-split-button-bg` | `var(--uilib-button-secondary-bg, var(--uilib-color-secondary-600, var(--uilib-color-neutral-600, currentColor)))` |
-| `--uilib-split-button-fg` | `var(--uilib-button-secondary-fg, var(--uilib-color-neutral-50, currentColor))` |
-| `--uilib-split-button-border` | `var(--uilib-button-secondary-border, var(--uilib-split-button-bg))` |
-| `--uilib-split-button-bg-hover` | `var(--uilib-button-secondary-bg-hover, var(--uilib-split-button-bg))` |
-| `--uilib-split-button-radius` | `var(--uilib-button-radius, var(--uilib-shape-base, 0.375rem))` |
-| `--uilib-split-button-padding` | `var(--uilib-button-padding-medium, var(--uilib-space-2, 0.5rem) var(--uilib-space-4, 1rem))` |
-| `--uilib-split-button-font-size` | `var(--uilib-button-font-size-medium, var(--uilib-font-size-md, 1rem))` |
-| `--uilib-split-button-shadow` | `var(--uilib-button-shadow, none)` |
-| `--uilib-split-button-transition` | `var(--uilib-button-transition, all var(--uilib-transition-fast, 0.2s ease))` |
-| `--uilib-split-button-focus-ring` | `var(--uilib-button-focus-ring, 0 0 0 var(--uilib-border-width-2, 0.125rem) color-mix(in srgb, var(--uilib-color-primary-500, currentColor) 30%, transparent))` |
-| `--uilib-split-button-divider-color` | `color-mix(in srgb, var(--uilib-split-button-bg) 75%, transparent)` |
-| `--uilib-split-button-menu-bg` | `var(--uilib-select-dropdown-bg, var(--uilib-surface, transparent))` |
-| `--uilib-split-button-menu-shadow` | `var(--uilib-select-dropdown-shadow, var(--uilib-shadow-md, none))` |
-| `--uilib-split-button-menu-radius` | `var(--uilib-split-button-radius)` |
-| `--uilib-split-button-menu-z` | `var(--uilib-z-overlay, 1000)` |
-| `--uilib-split-button-menu-item-padding` | `var(--uilib-space-2, 0.5rem) var(--uilib-space-3, 0.75rem)` |
-| `--uilib-split-button-menu-item-hover-bg` | `var(--uilib-select-option-hover, color-mix(in srgb, var(--uilib-color-primary-600, currentColor) 8%, transparent))` |
-| `--uilib-split-button-separator-color` | `color-mix(in srgb, var(--uilib-split-button-border) 55%, transparent)` |
-| `--uilib-split-button-icon-size` | `var(--uilib-icon-size-sm, 1rem)` |
+| Variable                                  | Default                                                                                                                                                         |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--uilib-split-button-bg`                 | `var(--uilib-button-secondary-bg, var(--uilib-color-secondary-600, var(--uilib-color-neutral-600, currentColor)))`                                              |
+| `--uilib-split-button-fg`                 | `var(--uilib-button-secondary-fg, var(--uilib-color-neutral-50, currentColor))`                                                                                 |
+| `--uilib-split-button-border`             | `var(--uilib-button-secondary-border, var(--uilib-split-button-bg))`                                                                                            |
+| `--uilib-split-button-bg-hover`           | `var(--uilib-button-secondary-bg-hover, var(--uilib-split-button-bg))`                                                                                          |
+| `--uilib-split-button-radius`             | `var(--uilib-button-radius, var(--uilib-shape-base, 0.375rem))`                                                                                                 |
+| `--uilib-split-button-padding`            | `var(--uilib-button-padding-medium, var(--uilib-space-2, 0.5rem) var(--uilib-space-4, 1rem))`                                                                   |
+| `--uilib-split-button-font-size`          | `var(--uilib-button-font-size-medium, var(--uilib-font-size-md, 1rem))`                                                                                         |
+| `--uilib-split-button-shadow`             | `var(--uilib-button-shadow, none)`                                                                                                                              |
+| `--uilib-split-button-transition`         | `var(--uilib-button-transition, all var(--uilib-transition-fast, 0.2s ease))`                                                                                   |
+| `--uilib-split-button-focus-ring`         | `var(--uilib-button-focus-ring, 0 0 0 var(--uilib-border-width-2, 0.125rem) color-mix(in srgb, var(--uilib-color-primary-500, currentColor) 30%, transparent))` |
+| `--uilib-split-button-divider-color`      | `color-mix(in srgb, var(--uilib-split-button-bg) 75%, transparent)`                                                                                             |
+| `--uilib-split-button-menu-bg`            | `var(--uilib-select-dropdown-bg, var(--uilib-surface, transparent))`                                                                                            |
+| `--uilib-split-button-menu-shadow`        | `var(--uilib-select-dropdown-shadow, var(--uilib-shadow-md, none))`                                                                                             |
+| `--uilib-split-button-menu-radius`        | `var(--uilib-split-button-radius)`                                                                                                                              |
+| `--uilib-split-button-menu-z`             | `var(--uilib-z-overlay, 1000)`                                                                                                                                  |
+| `--uilib-split-button-menu-item-padding`  | `var(--uilib-space-2, 0.5rem) var(--uilib-space-3, 0.75rem)`                                                                                                    |
+| `--uilib-split-button-menu-item-hover-bg` | `var(--uilib-select-option-hover, color-mix(in srgb, var(--uilib-color-primary-600, currentColor) 8%, transparent))`                                            |
+| `--uilib-split-button-separator-color`    | `color-mix(in srgb, var(--uilib-split-button-border) 55%, transparent)`                                                                                         |
+| `--uilib-split-button-icon-size`          | `var(--uilib-icon-size-sm, 1rem)`                                                                                                                               |
 
 ## Accessibility notes
 

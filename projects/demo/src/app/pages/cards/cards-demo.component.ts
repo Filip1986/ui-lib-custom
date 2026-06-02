@@ -162,7 +162,7 @@ export class CardsDemoComponent {
   public readonly hoverable: WritableSignal<boolean> = signal<boolean>(false);
   public readonly title: WritableSignal<string> = signal<string>('Card Title');
   public readonly body: WritableSignal<string> = signal<string>(
-    'Cards can host arbitrary content and actions.'
+    'Cards can host arbitrary content and actions.',
   );
   public readonly showHeader: WritableSignal<boolean> = signal<boolean>(true);
   public readonly showFooter: WritableSignal<boolean> = signal<boolean>(true);
@@ -183,7 +183,7 @@ export class CardsDemoComponent {
     (): Record<string, string> => {
       const preset: ReturnType<ThemeConfigService['preset']> = this.themeService.preset();
       return this.themeService.getCssVars(preset);
-    }
+    },
   );
   private readonly localVars: Signal<Record<string, string>> = computed<Record<string, string>>(
     (): Record<string, string> => {
@@ -198,7 +198,7 @@ export class CardsDemoComponent {
         vars['--uilib-card-border'] = this.localBorder().trim();
       }
       return vars;
-    }
+    },
   );
 
   public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
@@ -206,25 +206,25 @@ export class CardsDemoComponent {
       const base: Record<string, string> = this.globalVars();
       if (!this.useLocalTheme()) return base;
       return { ...base, ...this.localVars() };
-    }
+    },
   );
 
   public readonly shadowOptions: ShadowKey[] = Object.keys(SHADOW_MAP).filter(
-    (key: string): boolean => key.startsWith('shadow-')
+    (key: string): boolean => key.startsWith('shadow-'),
   );
   public readonly globalShadow: Signal<string> = computed<string>(
     (): string =>
       SHADOW_MAP[
         this.themeService.preset().cardShadow ?? this.themeService.preset().shadow ?? ''
-      ] ?? 'none'
+      ] ?? 'none',
   );
   public readonly selectedShadow: WritableSignal<ShadowKey> = signal<ShadowKey>(
     this.resolveShadowKey(
-      this.themeService.preset().cardShadow ?? this.themeService.preset().shadow
-    )
+      this.themeService.preset().cardShadow ?? this.themeService.preset().shadow,
+    ),
   );
   public readonly shadowValue: Signal<string> = computed<string>((): string =>
-    this.useLocalTheme() ? (SHADOW_MAP[this.selectedShadow()] ?? 'none') : this.globalShadow()
+    this.useLocalTheme() ? (SHADOW_MAP[this.selectedShadow()] ?? 'none') : this.globalShadow(),
   );
 
   public setShadow(value: string): void {

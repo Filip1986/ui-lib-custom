@@ -90,7 +90,7 @@ describe('Stack', (): void => {
     Object.assign(component, initial);
     fixture.detectChanges();
     const stackElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-stack'
+      'ui-lib-stack',
     ) as HTMLElement;
     return { fixture, component, stackElement };
   }
@@ -191,7 +191,7 @@ describe('Stack', (): void => {
   it('should project content', (): void => {
     const { stackElement } = bootstrap();
     const items: NodeListOf<Element> = stackElement.querySelectorAll(
-      '.ui-lib-stack__content > div'
+      '.ui-lib-stack__content > div',
     );
     expect(items.length).toBe(3);
     expect(getRequiredItem(items, 0).textContent).toBe('Item 1');
@@ -200,7 +200,7 @@ describe('Stack', (): void => {
   it('creates with no inputs', (): void => {
     const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
     const stackElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-stack'
+      'ui-lib-stack',
     ) as HTMLElement;
     expect(stackElement).toBeTruthy();
   });
@@ -222,10 +222,10 @@ describe('Stack', (): void => {
       TestBed.createComponent(NestedLayoutHostComponent);
     fixture.detectChanges();
     const nestedStack: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-stack'
+      'ui-lib-stack',
     );
     const nestedGrid: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-grid'
+      'ui-lib-grid',
     );
     expect(nestedStack).toBeTruthy();
     expect(nestedGrid).toBeTruthy();

@@ -8,47 +8,47 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `items` | `unknown[] \| null \| undefined` | `null` | Full array of items to virtualize. |
-| `itemSize` | `number \| [number, number]` | `0` | Fixed pixel size per item: height (vertical), width (horizontal), or `[rowHeight, colWidth]` (both). |
-| `scrollHeight` | `string \| undefined` | `undefined` | CSS height of the viewport (e.g. `'400px'`). |
-| `scrollWidth` | `string \| undefined` | `undefined` | CSS width. Only relevant for horizontal/both orientations. |
-| `orientation` | `'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | Scroll direction. |
-| `lazy` | `boolean` | `false` | Enables lazy loading; emits `lazyLoad` when the visible range changes. |
-| `step` | `number` | `0` | Number of items per lazy-load page. `0` disables stepped paging. |
-| `delay` | `number` | `0` | Throttle delay in ms between processed scroll events. |
-| `resizeDelay` | `number` | `10` | Debounce in ms after window resize before re-initializing. |
-| `appendOnly` | `boolean` | `false` | Appends newly loaded items without removing older DOM nodes. |
-| `inline` | `boolean` | `false` | Fits the viewport inline within its containing flow. |
-| `disabled` | `boolean` | `false` | Disables virtualization — all items are rendered directly. |
-| `loaderDisabled` | `boolean` | `false` | Suppresses the built-in loader; provide your own via the loader template. |
-| `columns` | `unknown[] \| null \| undefined` | `null` | Column data array for horizontal/both orientations. |
-| `showSpacer` | `boolean` | `true` | Renders the spacer element that creates the virtual scroll height. |
-| `showLoader` | `boolean` | `false` | Shows a loading overlay when `loading` is true. |
-| `numToleratedItems` | `number \| undefined` | `undefined` | Override the number of off-screen tolerated items rendered on each side. |
-| `loading` | `boolean \| undefined` | `undefined` | External loading flag for the loading overlay. |
-| `trackByFn` | `((index: number, item: unknown) => unknown) \| undefined` | `undefined` | TrackBy function for the item loop. |
-| `tabIndex` | `number` | `0` | Tab index on the viewport element. |
-| `ariaLabel` | `string` | `'Scrollable list'` / `'Scrollable grid'` | Accessible label for the scroll region. Blank values fall back to a role-aware default. |
-| `contentRole` | `'list' \| 'grid'` | `'list'` | Exposes list or grid semantics on the scroll viewport and rendered item wrappers. |
-| `defaultListAriaLabel` | `string` | `'Scrollable list'` | Localizable fallback used when `contentRole="list"` and `ariaLabel` is blank. |
-| `defaultGridAriaLabel` | `string` | `'Scrollable grid'` | Localizable fallback used when `contentRole="grid"` and `ariaLabel` is blank. |
-| `loadingMessage` | `string` | `'Loading items…'` | Localizable live-region message for the initial loading state. |
-| `loadingMoreMessage` | `string` | `'Loading more items.'` | Localizable live-region message for incremental/lazy loading. |
-| `emptyMessage` | `string` | `'No items to display.'` | Localizable live-region message used when the total item count is zero. |
-| `availableItemsText` | `string` | `'item(s) available.'` | Localizable suffix appended after the announced total item count. |
-| `totalRecords` | `number \| undefined` | `undefined` | Total server-side record count used to pre-size the virtual spacer in lazy mode. |
-| `id` | `string` | auto | Unique HTML id on the viewport element. |
-| `styleClass` | `string` | `''` | Extra CSS class on the host element. |
+| Name                   | Type                                                       | Default                                   | Notes                                                                                                |
+| ---------------------- | ---------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `items`                | `unknown[] \| null \| undefined`                           | `null`                                    | Full array of items to virtualize.                                                                   |
+| `itemSize`             | `number \| [number, number]`                               | `0`                                       | Fixed pixel size per item: height (vertical), width (horizontal), or `[rowHeight, colWidth]` (both). |
+| `scrollHeight`         | `string \| undefined`                                      | `undefined`                               | CSS height of the viewport (e.g. `'400px'`).                                                         |
+| `scrollWidth`          | `string \| undefined`                                      | `undefined`                               | CSS width. Only relevant for horizontal/both orientations.                                           |
+| `orientation`          | `'vertical' \| 'horizontal' \| 'both'`                     | `'vertical'`                              | Scroll direction.                                                                                    |
+| `lazy`                 | `boolean`                                                  | `false`                                   | Enables lazy loading; emits `lazyLoad` when the visible range changes.                               |
+| `step`                 | `number`                                                   | `0`                                       | Number of items per lazy-load page. `0` disables stepped paging.                                     |
+| `delay`                | `number`                                                   | `0`                                       | Throttle delay in ms between processed scroll events.                                                |
+| `resizeDelay`          | `number`                                                   | `10`                                      | Debounce in ms after window resize before re-initializing.                                           |
+| `appendOnly`           | `boolean`                                                  | `false`                                   | Appends newly loaded items without removing older DOM nodes.                                         |
+| `inline`               | `boolean`                                                  | `false`                                   | Fits the viewport inline within its containing flow.                                                 |
+| `disabled`             | `boolean`                                                  | `false`                                   | Disables virtualization — all items are rendered directly.                                           |
+| `loaderDisabled`       | `boolean`                                                  | `false`                                   | Suppresses the built-in loader; provide your own via the loader template.                            |
+| `columns`              | `unknown[] \| null \| undefined`                           | `null`                                    | Column data array for horizontal/both orientations.                                                  |
+| `showSpacer`           | `boolean`                                                  | `true`                                    | Renders the spacer element that creates the virtual scroll height.                                   |
+| `showLoader`           | `boolean`                                                  | `false`                                   | Shows a loading overlay when `loading` is true.                                                      |
+| `numToleratedItems`    | `number \| undefined`                                      | `undefined`                               | Override the number of off-screen tolerated items rendered on each side.                             |
+| `loading`              | `boolean \| undefined`                                     | `undefined`                               | External loading flag for the loading overlay.                                                       |
+| `trackByFn`            | `((index: number, item: unknown) => unknown) \| undefined` | `undefined`                               | TrackBy function for the item loop.                                                                  |
+| `tabIndex`             | `number`                                                   | `0`                                       | Tab index on the viewport element.                                                                   |
+| `ariaLabel`            | `string`                                                   | `'Scrollable list'` / `'Scrollable grid'` | Accessible label for the scroll region. Blank values fall back to a role-aware default.              |
+| `contentRole`          | `'list' \| 'grid'`                                         | `'list'`                                  | Exposes list or grid semantics on the scroll viewport and rendered item wrappers.                    |
+| `defaultListAriaLabel` | `string`                                                   | `'Scrollable list'`                       | Localizable fallback used when `contentRole="list"` and `ariaLabel` is blank.                        |
+| `defaultGridAriaLabel` | `string`                                                   | `'Scrollable grid'`                       | Localizable fallback used when `contentRole="grid"` and `ariaLabel` is blank.                        |
+| `loadingMessage`       | `string`                                                   | `'Loading items…'`                        | Localizable live-region message for the initial loading state.                                       |
+| `loadingMoreMessage`   | `string`                                                   | `'Loading more items.'`                   | Localizable live-region message for incremental/lazy loading.                                        |
+| `emptyMessage`         | `string`                                                   | `'No items to display.'`                  | Localizable live-region message used when the total item count is zero.                              |
+| `availableItemsText`   | `string`                                                   | `'item(s) available.'`                    | Localizable suffix appended after the announced total item count.                                    |
+| `totalRecords`         | `number \| undefined`                                      | `undefined`                               | Total server-side record count used to pre-size the virtual spacer in lazy mode.                     |
+| `id`                   | `string`                                                   | auto                                      | Unique HTML id on the viewport element.                                                              |
+| `styleClass`           | `string`                                                   | `''`                                      | Extra CSS class on the host element.                                                                 |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `lazyLoad` | `VirtualScrollerLazyLoadEvent` | Fires when the visible range changes in lazy mode. Carries `first` and `last` indices. |
-| `scroll` | `VirtualScrollerScrollEvent` | Fires on every scroll event. |
-| `scrollIndexChange` | `VirtualScrollerScrollIndexChangeEvent` | Fires when the first/last rendered index changes. |
+| Name                | Payload                                 | Notes                                                                                  |
+| ------------------- | --------------------------------------- | -------------------------------------------------------------------------------------- |
+| `lazyLoad`          | `VirtualScrollerLazyLoadEvent`          | Fires when the visible range changes in lazy mode. Carries `first` and `last` indices. |
+| `scroll`            | `VirtualScrollerScrollEvent`            | Fires on every scroll event.                                                           |
+| `scrollIndexChange` | `VirtualScrollerScrollIndexChangeEvent` | Fires when the first/last rendered index changes.                                      |
 
 ## Usage
 
@@ -90,15 +90,15 @@
 
 ## CSS Custom Properties
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `--uilib-scroller-loader-bg` | `rgba(255,255,255,0.7)` | Loading overlay background (variant-dependent) |
-| `--uilib-scroller-loading-icon-size` | `2rem` | Diameter of the spinner icon |
-| `--uilib-scroller-loading-icon-color` | `var(--uilib-color-primary)` | Spinner arc colour |
-| `--uilib-scroller-item-border-color` | `var(--uilib-color-border)` | Border colour used in Bootstrap variant |
-| `--uilib-scroller-spinner-border-radius` | `var(--uilib-radius-full, 9999px)` | Border radius that makes the spinner circular |
-| `--uilib-scroller-spinner-animation` | `uilib-scroller-spin 0.75s linear infinite` | Spinner keyframe animation (set to `none` under `prefers-reduced-motion`) |
-| `--uilib-scroller-focus-ring` | `0 0 0 2px var(--uilib-color-focus-ring, #6366f1)` | `box-shadow` applied to the viewport on `:focus-visible`; override to match your brand focus colour |
+| Property                                 | Default                                            | Description                                                                                         |
+| ---------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `--uilib-scroller-loader-bg`             | `rgba(255,255,255,0.7)`                            | Loading overlay background (variant-dependent)                                                      |
+| `--uilib-scroller-loading-icon-size`     | `2rem`                                             | Diameter of the spinner icon                                                                        |
+| `--uilib-scroller-loading-icon-color`    | `var(--uilib-color-primary)`                       | Spinner arc colour                                                                                  |
+| `--uilib-scroller-item-border-color`     | `var(--uilib-color-border)`                        | Border colour used in Bootstrap variant                                                             |
+| `--uilib-scroller-spinner-border-radius` | `var(--uilib-radius-full, 9999px)`                 | Border radius that makes the spinner circular                                                       |
+| `--uilib-scroller-spinner-animation`     | `uilib-scroller-spin 0.75s linear infinite`        | Spinner keyframe animation (set to `none` under `prefers-reduced-motion`)                           |
+| `--uilib-scroller-focus-ring`            | `0 0 0 2px var(--uilib-color-focus-ring, #6366f1)` | `box-shadow` applied to the viewport on `:focus-visible`; override to match your brand focus colour |
 
 ## Accessibility
 

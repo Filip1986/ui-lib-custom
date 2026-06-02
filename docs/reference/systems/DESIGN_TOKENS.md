@@ -19,6 +19,7 @@ Design tokens are the single source of truth for design decisions in the library
 Each semantic color has a full palette from 50 (lightest) to 900 (darkest):
 
 **Available Palettes:**
+
 - `COLOR_PRIMARY` - Brand/primary colors
 - `COLOR_NEUTRAL` - Grayscale colors
 - `COLOR_SUCCESS` - Success states
@@ -27,11 +28,12 @@ Each semantic color has a full palette from 50 (lightest) to 900 (darkest):
 - `COLOR_INFO` - Informational states
 
 **Example:**
+
 ```typescript
 import { COLOR_PRIMARY, COLOR_SUCCESS } from 'ui-lib-custom';
 
-const primaryColor = COLOR_PRIMARY[700];  // #1976d2
-const successColor = COLOR_SUCCESS[500];  // #4caf50
+const primaryColor = COLOR_PRIMARY[700]; // #1976d2
+const successColor = COLOR_SUCCESS[500]; // #4caf50
 ```
 
 #### Semantic Colors
@@ -41,13 +43,13 @@ Pre-defined semantic color mappings for common use cases:
 ```typescript
 import { SEMANTIC_COLORS } from 'ui-lib-custom';
 
-SEMANTIC_COLORS.primary          // Main brand color
-SEMANTIC_COLORS['primary-hover'] // Primary hover state
-SEMANTIC_COLORS.success          // Success color
-SEMANTIC_COLORS.danger           // Danger/error color
-SEMANTIC_COLORS.text             // Main text color
-SEMANTIC_COLORS.border           // Border color
-SEMANTIC_COLORS.background       // Background color
+SEMANTIC_COLORS.primary; // Main brand color
+SEMANTIC_COLORS['primary-hover']; // Primary hover state
+SEMANTIC_COLORS.success; // Success color
+SEMANTIC_COLORS.danger; // Danger/error color
+SEMANTIC_COLORS.text; // Main text color
+SEMANTIC_COLORS.border; // Border color
+SEMANTIC_COLORS.background; // Background color
 ```
 
 **Complete Semantic Color List:**
@@ -84,9 +86,9 @@ For Bootstrap compatibility:
 ```typescript
 import { BOOTSTRAP_COLORS } from 'ui-lib-custom';
 
-BOOTSTRAP_COLORS.primary   // #0d6efd
-BOOTSTRAP_COLORS.success   // #198754
-BOOTSTRAP_COLORS.danger    // #dc3545
+BOOTSTRAP_COLORS.primary; // #0d6efd
+BOOTSTRAP_COLORS.success; // #198754
+BOOTSTRAP_COLORS.danger; // #dc3545
 ```
 
 ---
@@ -118,6 +120,7 @@ const gap: SpacingToken = 4; // 1rem (16px)
 | 20 | 5rem | 80px | Page sections |
 
 **Usage:**
+
 ```typescript
 <ui-lib-stack [gap]="4">  <!-- 16px gap -->
 <ui-lib-container [padding]="6">  <!-- 24px padding -->
@@ -134,11 +137,11 @@ const density: DensityToken = 'default';
 const scale = DENSITY_TOKENS[density].scale;
 ```
 
-| Token | Scale | Usage |
-|-------|-------|-------|
-| `compact` | 0.75 | Tighter layouts |
-| `default` | 1 | Default spacing |
-| `comfortable` | 1.33 | Looser layouts |
+| Token         | Scale | Usage           |
+| ------------- | ----- | --------------- |
+| `compact`     | 0.75  | Tighter layouts |
+| `default`     | 1     | Default spacing |
+| `comfortable` | 1.33  | Looser layouts  |
 
 **CSS Variable:** `--uilib-density`
 
@@ -154,14 +157,14 @@ Max-width constraints for content containers:
 import { CONTAINER_MAX_WIDTHS, type ContainerSize } from 'ui-lib-custom';
 ```
 
-| Size | Max Width | Use Case |
-|------|-----------|----------|
-| `sm` | 640px | Forms, narrow content |
-| `md` | 768px | Blog posts, articles |
-| `lg` | 1024px | **Default**, main content |
-| `xl` | 1280px | Wide layouts |
-| `2xl` | 1536px | Full dashboards |
-| `full` | 100% | Edge-to-edge |
+| Size   | Max Width | Use Case                  |
+| ------ | --------- | ------------------------- |
+| `sm`   | 640px     | Forms, narrow content     |
+| `md`   | 768px     | Blog posts, articles      |
+| `lg`   | 1024px    | **Default**, main content |
+| `xl`   | 1280px    | Wide layouts              |
+| `2xl`  | 1536px    | Full dashboards           |
+| `full` | 100%      | Edge-to-edge              |
 
 #### Grid Columns
 
@@ -183,17 +186,17 @@ Available: `1, 2, 3, 4, 5, 6, 8, 10, 12`
 import { FONT_SIZES, type FontSize } from 'ui-lib-custom';
 ```
 
-| Token | Value | Pixels | Usage |
-|-------|-------|--------|-------|
-| `xs` | 0.75rem | 12px | Fine print |
-| `sm` | 0.875rem | 14px | Small text |
-| `base` | 1rem | 16px | Body text |
-| `lg` | 1.125rem | 18px | Large text |
-| `xl` | 1.25rem | 20px | Subheadings |
-| `2xl` | 1.5rem | 24px | Headings |
-| `3xl` | 1.875rem | 30px | Large headings |
-| `4xl` | 2.25rem | 36px | Display |
-| `5xl` | 3rem | 48px | Hero |
+| Token  | Value    | Pixels | Usage          |
+| ------ | -------- | ------ | -------------- |
+| `xs`   | 0.75rem  | 12px   | Fine print     |
+| `sm`   | 0.875rem | 14px   | Small text     |
+| `base` | 1rem     | 16px   | Body text      |
+| `lg`   | 1.125rem | 18px   | Large text     |
+| `xl`   | 1.25rem  | 20px   | Subheadings    |
+| `2xl`  | 1.5rem   | 24px   | Headings       |
+| `3xl`  | 1.875rem | 30px   | Large headings |
+| `4xl`  | 2.25rem  | 36px   | Display        |
+| `5xl`  | 3rem     | 48px   | Hero           |
 
 #### Font Weights
 
@@ -201,13 +204,13 @@ import { FONT_SIZES, type FontSize } from 'ui-lib-custom';
 import { FONT_WEIGHTS, type FontWeight } from 'ui-lib-custom';
 ```
 
-| Token | Value |
-|-------|-------|
-| `light` | 300 |
-| `normal` | 400 |
-| `medium` | 500 |
-| `semibold` | 600 |
-| `bold` | 700 |
+| Token      | Value |
+| ---------- | ----- |
+| `light`    | 300   |
+| `normal`   | 400   |
+| `medium`   | 500   |
+| `semibold` | 600   |
+| `bold`     | 700   |
 
 #### Line Heights
 
@@ -215,12 +218,12 @@ import { FONT_WEIGHTS, type FontWeight } from 'ui-lib-custom';
 import { LINE_HEIGHTS, type LineHeight } from 'ui-lib-custom';
 ```
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `tight` | 1.25 | Headings |
-| `normal` | 1.5 | Body text |
-| `relaxed` | 1.75 | Long-form content |
-| `loose` | 2 | Poetry, quotes |
+| Token     | Value | Usage             |
+| --------- | ----- | ----------------- |
+| `tight`   | 1.25  | Headings          |
+| `normal`  | 1.5   | Body text         |
+| `relaxed` | 1.75  | Long-form content |
+| `loose`   | 2     | Poetry, quotes    |
 
 ---
 
@@ -237,12 +240,12 @@ const shape: ShapeToken = 'rounded';
 const radiusValue = SHAPE_TOKENS[shape];
 ```
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `sharp` | 0px | Square corners |
-| `rounded` | 6px | Default rounding |
-| `soft` | 12px | Softer cards/inputs |
-| `pill` | 9999px | Pills/circles |
+| Token     | Value  | Usage               |
+| --------- | ------ | ------------------- |
+| `sharp`   | 0px    | Square corners      |
+| `rounded` | 6px    | Default rounding    |
+| `soft`    | 12px   | Softer cards/inputs |
+| `pill`    | 9999px | Pills/circles       |
 
 #### Border Radius
 
@@ -250,16 +253,16 @@ const radiusValue = SHAPE_TOKENS[shape];
 import { BORDER_RADIUS, type BorderRadius } from 'ui-lib-custom';
 ```
 
-| Token | Value | Pixels | Usage |
-|-------|-------|--------|-------|
-| `none` | 0 | 0px | Sharp corners |
-| `sm` | 0.125rem | 2px | Subtle rounding |
-| `base` | 0.25rem | 4px | **Default** |
-| `md` | 0.375rem | 6px | Cards |
-| `lg` | 0.5rem | 8px | Modals |
-| `xl` | 0.75rem | 12px | Large cards |
-| `2xl` | 1rem | 16px | Hero sections |
-| `full` | 9999px | ∞ | Pills, circles |
+| Token  | Value    | Pixels | Usage           |
+| ------ | -------- | ------ | --------------- |
+| `none` | 0        | 0px    | Sharp corners   |
+| `sm`   | 0.125rem | 2px    | Subtle rounding |
+| `base` | 0.25rem  | 4px    | **Default**     |
+| `md`   | 0.375rem | 6px    | Cards           |
+| `lg`   | 0.5rem   | 8px    | Modals          |
+| `xl`   | 0.75rem  | 12px   | Large cards     |
+| `2xl`  | 1rem     | 16px   | Hero sections   |
+| `full` | 9999px   | ∞      | Pills, circles  |
 
 #### Border Width
 
@@ -268,11 +271,11 @@ import { BORDER_WIDTH, type BorderWidth } from 'ui-lib-custom';
 ```
 
 | Token | Value |
-|-------|-------|
-| `0` | 0 |
-| `1` | 1px |
-| `2` | 2px |
-| `4` | 4px |
+| ----- | ----- |
+| `0`   | 0     |
+| `1`   | 1px   |
+| `2`   | 2px   |
+| `4`   | 4px   |
 
 ---
 
@@ -284,21 +287,22 @@ Box shadows for elevation:
 import { SHADOWS, type Shadow } from 'ui-lib-custom';
 ```
 
-| Token | Usage |
-|-------|-------|
-| `none` | No shadow |
-| `sm` | Subtle elevation |
-| `base` | Cards |
-| `md` | Dropdowns |
-| `lg` | Modals |
-| `xl` | Popovers |
-| `2xl` | Hero elements |
-| `inner` | Inset shadow |
+| Token   | Usage            |
+| ------- | ---------------- |
+| `none`  | No shadow        |
+| `sm`    | Subtle elevation |
+| `base`  | Cards            |
+| `md`    | Dropdowns        |
+| `lg`    | Modals           |
+| `xl`    | Popovers         |
+| `2xl`   | Hero elements    |
+| `inner` | Inset shadow     |
 
 **Example Values:**
+
 ```typescript
-SHADOWS.sm   // '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
-SHADOWS.md   // '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+SHADOWS.sm; // '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+SHADOWS.md; // '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
 ```
 
 ---
@@ -311,11 +315,11 @@ SHADOWS.md   // '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0,
 import { TRANSITION_DURATION, type TransitionDuration } from 'ui-lib-custom';
 ```
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `fast` | 150ms | Micro-interactions |
-| `base` | 200ms | **Default** |
-| `slow` | 300ms | Smooth transitions |
+| Token    | Value | Usage              |
+| -------- | ----- | ------------------ |
+| `fast`   | 150ms | Micro-interactions |
+| `base`   | 200ms | **Default**        |
+| `slow`   | 300ms | Smooth transitions |
 | `slower` | 500ms | Animated sequences |
 
 #### Timing Functions
@@ -336,16 +340,16 @@ Stacking context management:
 import { Z_INDEX, type ZIndex } from 'ui-lib-custom';
 ```
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `base` | 0 | Normal flow |
-| `dropdown` | 1000 | Dropdowns |
-| `sticky` | 1020 | Sticky elements |
-| `fixed` | 1030 | Fixed positioning |
-| `backdrop` | 1040 | Modal backdrops |
-| `modal` | 1050 | Modals |
-| `popover` | 1060 | Popovers |
-| `tooltip` | 1070 | Tooltips |
+| Token      | Value | Usage             |
+| ---------- | ----- | ----------------- |
+| `base`     | 0     | Normal flow       |
+| `dropdown` | 1000  | Dropdowns         |
+| `sticky`   | 1020  | Sticky elements   |
+| `fixed`    | 1030  | Fixed positioning |
+| `backdrop` | 1040  | Modal backdrops   |
+| `modal`    | 1050  | Modals            |
+| `popover`  | 1060  | Popovers          |
+| `tooltip`  | 1070  | Tooltips          |
 
 ---
 
@@ -354,12 +358,7 @@ import { Z_INDEX, type ZIndex } from 'ui-lib-custom';
 ### In TypeScript
 
 ```typescript
-import { 
-  SEMANTIC_COLORS, 
-  SPACING_TOKENS, 
-  FONT_SIZES,
-  SHADOWS 
-} from 'ui-lib-custom';
+import { SEMANTIC_COLORS, SPACING_TOKENS, FONT_SIZES, SHADOWS } from 'ui-lib-custom';
 
 // Use in component logic
 const buttonColor = SEMANTIC_COLORS.primary;
@@ -374,11 +373,7 @@ import { Component } from '@angular/core';
 import { SEMANTIC_COLORS, type SemanticColor } from 'ui-lib-custom';
 
 @Component({
-  template: `
-    <div [style.color]="textColor">
-      Styled text
-    </div>
-  `
+  template: ` <div [style.color]="textColor">Styled text</div> `,
 })
 export class MyComponent {
   textColor = SEMANTIC_COLORS.primary;
@@ -421,8 +416,8 @@ function setColor(color: SemanticColor) {
   // color can only be valid semantic color keys
 }
 
-setGap(4);  // ✅ Valid
-setGap(7);  // ❌ TypeScript error - 7 is not a valid token
+setGap(4); // ✅ Valid
+setGap(7); // ❌ TypeScript error - 7 is not a valid token
 ```
 
 ---
@@ -430,26 +425,31 @@ setGap(7);  // ❌ TypeScript error - 7 is not a valid token
 ## Benefits
 
 ### ✅ Consistency
+
 - All components use the same values
 - Design decisions are centralized
 - Easy to maintain and update
 
 ### ✅ Type Safety
+
 - TypeScript prevents invalid values
 - IDE autocomplete for all tokens
 - Compile-time error checking
 
 ### ✅ Theming
+
 - Easy to create theme variants
 - Override tokens for different themes
 - Consistent theming API
 
 ### ✅ Maintainability
+
 - Single source of truth
 - Change once, update everywhere
 - Clear naming conventions
 
 ### ✅ Performance
+
 - No runtime computation
 - Constants are inlined
 - Tree-shakeable exports
@@ -493,7 +493,7 @@ const color = '#1976d2';
 // Good
 import { type SpacingToken, type SemanticColor } from 'ui-lib-custom';
 
-function myFunction(gap: SpacingToken, color: SemanticColor) { }
+function myFunction(gap: SpacingToken, color: SemanticColor) {}
 ```
 
 ---
@@ -511,10 +511,11 @@ To add new design tokens:
 5. Update tests if needed
 
 **Example:**
+
 ```typescript
 export const SPACING_TOKENS = {
   // ...existing tokens
-  24: '6rem',  // 96px
+  24: '6rem', // 96px
 } as const;
 ```
 
@@ -562,7 +563,7 @@ import { SEMANTIC_COLORS, SPACING_TOKENS, BORDER_RADIUS } from 'ui-lib-custom';
     '[style.padding]': 'buttonPadding',
     '[style.background]': 'buttonColor',
     '[style.border-radius]': 'buttonRadius',
-  }
+  },
 })
 export class Button {
   buttonPadding = `${SPACING_TOKENS[2]} ${SPACING_TOKENS[4]}`;
@@ -585,22 +586,22 @@ export class Button {
 import { COLORPICKER_TOKENS, type ColorPickerTokenKey } from 'ui-lib-custom/tokens';
 ```
 
-| Token | Default |
-| --- | --- |
-| `triggerWidth` | `2rem` |
-| `triggerHeight` | `2rem` |
-| `triggerBorderRadius` | `0.25rem` |
-| `triggerBorderColor` | `#e0e0e0` |
-| `panelWidth` | `196px` |
-| `panelPadding` | `0.75rem` |
-| `panelBg` | `#ffffff` |
-| `panelBorderColor` | `#eeeeee` |
-| `panelBorderRadius` | `0.375rem` |
-| `panelShadow` | `rgba(0, 0, 0, 0.1) 0px 4px 12px` |
-| `hueSliderWidth` | `18px` |
-| `hueSliderHeight` | `11rem` |
-| `selectorSize` | `12px` |
-| `transitionDuration` | `200ms` |
+| Token                 | Default                           |
+| --------------------- | --------------------------------- |
+| `triggerWidth`        | `2rem`                            |
+| `triggerHeight`       | `2rem`                            |
+| `triggerBorderRadius` | `0.25rem`                         |
+| `triggerBorderColor`  | `#e0e0e0`                         |
+| `panelWidth`          | `196px`                           |
+| `panelPadding`        | `0.75rem`                         |
+| `panelBg`             | `#ffffff`                         |
+| `panelBorderColor`    | `#eeeeee`                         |
+| `panelBorderRadius`   | `0.375rem`                        |
+| `panelShadow`         | `rgba(0, 0, 0, 0.1) 0px 4px 12px` |
+| `hueSliderWidth`      | `18px`                            |
+| `hueSliderHeight`     | `11rem`                           |
+| `selectorSize`        | `12px`                            |
+| `transitionDuration`  | `200ms`                           |
 
 These tokens map to public CSS variables under the `--uilib-colorpicker-*` namespace.
 
@@ -610,32 +611,32 @@ These tokens map to public CSS variables under the `--uilib-colorpicker-*` names
 import { EDITOR_TOKENS, type EditorTokenKey } from 'ui-lib-custom/tokens';
 ```
 
-| Token | Default |
-| --- | --- |
-| `toolbarBg` | `#f5f5f5` |
-| `toolbarBorderColor` | `#e0e0e0` |
-| `toolbarItemColor` | `#212121` |
-| `toolbarItemHoverColor` | `#212121` |
-| `toolbarItemHoverBg` | `color-mix(in srgb, #000000 8%, transparent)` |
-| `toolbarItemActiveColor` | `#212121` |
-| `toolbarItemActiveBg` | `color-mix(in srgb, #000000 12%, transparent)` |
-| `toolbarSeparatorColor` | `#e0e0e0` |
-| `toolbarPadding` | `0.5rem` |
-| `toolbarGap` | `0.25rem` |
-| `toolbarBorderRadius` | `0.5rem` |
-| `contentBg` | `#ffffff` |
-| `contentBorderColor` | `#e0e0e0` |
-| `contentFontFamily` | `var(--uilib-font-ui, system-ui, sans-serif)` |
-| `contentFontSize` | `0.875rem` |
-| `contentLineHeight` | `1.5` |
-| `contentColor` | `#212121` |
-| `contentPadding` | `0.75rem 1rem` |
-| `contentMinHeight` | `150px` |
-| `placeholderColor` | `#9e9e9e` |
-| `borderRadius` | `0.5rem` |
-| `focusRingColor` | `color-mix(in srgb, #1e88e5 45%, transparent)` |
-| `focusRingWidth` | `2px` |
-| `disabledOpacity` | `0.6` |
+| Token                    | Default                                        |
+| ------------------------ | ---------------------------------------------- |
+| `toolbarBg`              | `#f5f5f5`                                      |
+| `toolbarBorderColor`     | `#e0e0e0`                                      |
+| `toolbarItemColor`       | `#212121`                                      |
+| `toolbarItemHoverColor`  | `#212121`                                      |
+| `toolbarItemHoverBg`     | `color-mix(in srgb, #000000 8%, transparent)`  |
+| `toolbarItemActiveColor` | `#212121`                                      |
+| `toolbarItemActiveBg`    | `color-mix(in srgb, #000000 12%, transparent)` |
+| `toolbarSeparatorColor`  | `#e0e0e0`                                      |
+| `toolbarPadding`         | `0.5rem`                                       |
+| `toolbarGap`             | `0.25rem`                                      |
+| `toolbarBorderRadius`    | `0.5rem`                                       |
+| `contentBg`              | `#ffffff`                                      |
+| `contentBorderColor`     | `#e0e0e0`                                      |
+| `contentFontFamily`      | `var(--uilib-font-ui, system-ui, sans-serif)`  |
+| `contentFontSize`        | `0.875rem`                                     |
+| `contentLineHeight`      | `1.5`                                          |
+| `contentColor`           | `#212121`                                      |
+| `contentPadding`         | `0.75rem 1rem`                                 |
+| `contentMinHeight`       | `150px`                                        |
+| `placeholderColor`       | `#9e9e9e`                                      |
+| `borderRadius`           | `0.5rem`                                       |
+| `focusRingColor`         | `color-mix(in srgb, #1e88e5 45%, transparent)` |
+| `focusRingWidth`         | `2px`                                          |
+| `disabledOpacity`        | `0.6`                                          |
 
 Editor tokens map to public CSS variables under the `--uilib-editor-*` namespace and are applied by `ThemeConfigService` during preset-to-CSS-variable mapping.
 
@@ -645,66 +646,68 @@ Editor tokens map to public CSS variables under the `--uilib-editor-*` namespace
 import { DATEPICKER_TOKENS, type DatePickerTokenKey } from 'ui-lib-custom/tokens';
 ```
 
-| Token Path | Default |
-| --- | --- |
-| `input.bg` | `#ffffff` |
-| `input.color` | `#212121` |
-| `input.borderColor` | `#e0e0e0` |
-| `input.borderColorFocus` | `#1e88e5` |
-| `input.borderRadius` | `0.5rem` |
-| `input.paddingY.md` | `0.5rem` |
-| `input.paddingX.md` | `0.75rem` |
-| `input.minHeight.md` | `2.75rem` |
-| `input.filledBg` | `#f5f5f5` |
-| `panel.bg` | `#ffffff` |
-| `panel.borderColor` | `#e0e0e0` |
-| `panel.borderRadius` | `0.75rem` |
-| `panel.padding` | `0.75rem` |
-| `panel.maxHeight` | `28rem` |
-| `navigation.buttonSize` | `2rem` |
-| `navigation.titleFontSize` | `0.875rem` |
-| `cell.daySize.md` | `2.25rem` |
-| `cell.dayFontSize.md` | `0.875rem` |
-| `cell.dayBgHover` | `color-mix(in srgb, #1e88e5 12%, transparent)` |
-| `cell.dayBgToday` | `color-mix(in srgb, #1e88e5 16%, transparent)` |
-| `cell.dayBgSelected` | `#1e88e5` |
-| `cell.dayBgRangeBetween` | `color-mix(in srgb, #1e88e5 22%, transparent)` |
-| `cell.monthYearMinHeight.md` | `2.5rem` |
-| `time.inputWidth.md` | `2.5rem` |
-| `time.inputHeight.md` | `2rem` |
-| `time.buttonSize` | `1.625rem` |
-| `buttonBar.paddingTop` | `0.5rem` |
-| `buttonBar.gap` | `0.5rem` |
-| `variants.material.panelShadow` | `0 20px 40px 0 rgba(0, 0, 0, 0.3)` |
-| `variants.bootstrap.dayBgSelected` | `#0d6efd` |
-| `variants.minimal.dayBgSelected` | `#7e22ce` |
+| Token Path                         | Default                                        |
+| ---------------------------------- | ---------------------------------------------- |
+| `input.bg`                         | `#ffffff`                                      |
+| `input.color`                      | `#212121`                                      |
+| `input.borderColor`                | `#e0e0e0`                                      |
+| `input.borderColorFocus`           | `#1e88e5`                                      |
+| `input.borderRadius`               | `0.5rem`                                       |
+| `input.paddingY.md`                | `0.5rem`                                       |
+| `input.paddingX.md`                | `0.75rem`                                      |
+| `input.minHeight.md`               | `2.75rem`                                      |
+| `input.filledBg`                   | `#f5f5f5`                                      |
+| `panel.bg`                         | `#ffffff`                                      |
+| `panel.borderColor`                | `#e0e0e0`                                      |
+| `panel.borderRadius`               | `0.75rem`                                      |
+| `panel.padding`                    | `0.75rem`                                      |
+| `panel.maxHeight`                  | `28rem`                                        |
+| `navigation.buttonSize`            | `2rem`                                         |
+| `navigation.titleFontSize`         | `0.875rem`                                     |
+| `cell.daySize.md`                  | `2.25rem`                                      |
+| `cell.dayFontSize.md`              | `0.875rem`                                     |
+| `cell.dayBgHover`                  | `color-mix(in srgb, #1e88e5 12%, transparent)` |
+| `cell.dayBgToday`                  | `color-mix(in srgb, #1e88e5 16%, transparent)` |
+| `cell.dayBgSelected`               | `#1e88e5`                                      |
+| `cell.dayBgRangeBetween`           | `color-mix(in srgb, #1e88e5 22%, transparent)` |
+| `cell.monthYearMinHeight.md`       | `2.5rem`                                       |
+| `time.inputWidth.md`               | `2.5rem`                                       |
+| `time.inputHeight.md`              | `2rem`                                         |
+| `time.buttonSize`                  | `1.625rem`                                     |
+| `buttonBar.paddingTop`             | `0.5rem`                                       |
+| `buttonBar.gap`                    | `0.5rem`                                       |
+| `variants.material.panelShadow`    | `0 20px 40px 0 rgba(0, 0, 0, 0.3)`             |
+| `variants.bootstrap.dayBgSelected` | `#0d6efd`                                      |
+| `variants.minimal.dayBgSelected`   | `#7e22ce`                                      |
 
 DatePicker tokens map to public CSS variables under the `--uilib-datepicker-*` namespace and are consumed by `ThemeConfigService` during preset-to-CSS-variable mapping.
 
 **Full Token Export:**
+
 ```typescript
-export * from './design-tokens';  // All tokens available
+export * from './design-tokens'; // All tokens available
 ```
 
 **Import What You Need:**
+
 ```typescript
-import { 
+import {
   // Colors
   COLOR_PRIMARY,
   COLOR_SUCCESS,
   SEMANTIC_COLORS,
-  
+
   // Spacing
   SPACING_TOKENS,
-  
+
   // Typography
   FONT_SIZES,
   FONT_WEIGHTS,
-  
+
   // Visual
   SHADOWS,
   BORDER_RADIUS,
-  
+
   // Types
   type SemanticColor,
   type SpacingToken,

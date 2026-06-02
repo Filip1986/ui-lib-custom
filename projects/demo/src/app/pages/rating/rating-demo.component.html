@@ -1,13 +1,16 @@
 <app-doc-page-layout [sections]="sections">
-
-  <app-doc-page-header docHeader title="Rating" [importCode]="importCode"
-    description="Star rating component that lets users select a value via click or keyboard. Implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports custom icon templates, inline styles, read-only display, and three design variants." />
+  <app-doc-page-header
+    docHeader
+    title="Rating"
+    [importCode]="importCode"
+    description="Star rating component that lets users select a value via click or keyboard. Implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports custom icon templates, inline styles, read-only display, and three design variants."
+  />
 
   <!-- ---- Basic ---------------------------------------------------- -->
   <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
-      Bind the selected value with <code>[(ngModel)]</code>. Clicking the currently
-      selected star deselects it (clears to <code>null</code>).
+      Bind the selected value with <code>[(ngModel)]</code>. Clicking the currently selected star
+      deselects it (clears to <code>null</code>).
     </p>
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [(ngModel)]="basicRating" (ratingChange)="onRatingChange($event)" />
@@ -20,9 +23,10 @@
     </p>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic"
+      filename="Basic"
+      [code]="snippets.basic"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Pre-selected --------------------------------------------- -->
@@ -33,36 +37,40 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [(ngModel)]="preselectedRating" />
     </div>
-    <p class="demo-rating-hint">Value: <strong>{{ preselectedRating }}</strong></p>
+    <p class="demo-rating-hint">
+      Value: <strong>{{ preselectedRating }}</strong>
+    </p>
     <ui-lib-code-snippet
       language="html"
-      filename="Pre-selected" [code]="snippets.preSelected"
+      filename="Pre-selected"
+      [code]="snippets.preSelected"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- No Cancel ------------------------------------------------ -->
   <app-doc-section id="no-cancel" title="No Cancel">
     <p class="demo-section__description">
-      Set <code>[cancel]="false"</code> to hide the clear button and disable
-      keyboard clearing (Delete / Backspace).
+      Set <code>[cancel]="false"</code> to hide the clear button and disable keyboard clearing
+      (Delete / Backspace).
     </p>
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [(ngModel)]="noCancelRating" [cancel]="false" />
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="No cancel" [code]="snippets.noCancel"
+      filename="No cancel"
+      [code]="snippets.noCancel"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Variants ------------------------------------------------- -->
   <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
-      Three design variants: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
-      When <code>variant</code> is <code>null</code> (default) it inherits from
-      <code>ThemeConfigService</code>.
+      Three design variants: <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code>. When <code>variant</code> is <code>null</code> (default) it inherits
+      from <code>ThemeConfigService</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <div class="demo-rating-label-row">
@@ -80,9 +88,10 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants"
+      filename="Variants"
+      [code]="snippets.variants"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
@@ -106,9 +115,10 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Sizes" [code]="snippets.sizes"
+      filename="Sizes"
+      [code]="snippets.sizes"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Custom Star Count ---------------------------------------- -->
@@ -119,53 +129,58 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [stars]="10" [(ngModel)]="tenStarRating" />
     </div>
-    <p class="demo-rating-hint">Value: <strong>{{ tenStarRating }}</strong></p>
+    <p class="demo-rating-hint">
+      Value: <strong>{{ tenStarRating }}</strong>
+    </p>
     <ui-lib-code-snippet
       language="html"
-      filename="Custom star count" [code]="snippets.starCount"
+      filename="Custom star count"
+      [code]="snippets.starCount"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Readonly ------------------------------------------------- -->
   <app-doc-section id="readonly" title="Readonly">
     <p class="demo-section__description">
-      Set <code>[readonly]="true"</code> for a non-interactive display.
-      The component switches to <code>role="img"</code> with a descriptive
-      <code>aria-label</code> (e.g. <code>"Rating: 4 out of 5 stars"</code>).
+      Set <code>[readonly]="true"</code> for a non-interactive display. The component switches to
+      <code>role="img"</code> with a descriptive <code>aria-label</code> (e.g.
+      <code>"Rating: 4 out of 5 stars"</code>).
     </p>
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [readonly]="true" [(ngModel)]="readonlyRating" />
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Readonly" [code]="snippets.readonly"
+      filename="Readonly"
+      [code]="snippets.readonly"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
   <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
-      Set <code>[disabled]="true"</code> to prevent interaction.
-      Can also be controlled programmatically via <code>FormControl.disable()</code>.
+      Set <code>[disabled]="true"</code> to prevent interaction. Can also be controlled
+      programmatically via <code>FormControl.disable()</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [disabled]="true" [(ngModel)]="disabledRating" />
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Disabled" [code]="snippets.disabled"
+      filename="Disabled"
+      [code]="snippets.disabled"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Events --------------------------------------------------- -->
   <app-doc-section id="events" title="Events">
     <p class="demo-section__description">
       Four output events: <code>(ratingChange)</code> fires on every value change,
-      <code>(rate)</code> fires only on star selection, <code>(cleared)</code>
-      fires when the rating is cleared, and <code>(ratingFocus)</code> / <code>(ratingBlur)</code>
+      <code>(rate)</code> fires only on star selection, <code>(cleared)</code> fires when the rating
+      is cleared, and <code>(ratingFocus)</code> / <code>(ratingBlur)</code>
       fire on star focus changes.
     </p>
     <div class="demo-section__preview demo-section__preview--center">
@@ -181,22 +196,25 @@
       @for (entry of eventLog; track entry) {
         <li>{{ entry }}</li>
       } @empty {
-        <li class="demo-rating-event-log__empty">No events yet — click a star or use Tab / keyboard.</li>
+        <li class="demo-rating-event-log__empty">
+          No events yet — click a star or use Tab / keyboard.
+        </li>
       }
     </ul>
     <ui-lib-code-snippet
       language="html"
-      filename="Events" [code]="snippets.events"
+      filename="Events"
+      [code]="snippets.events"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Custom Templates ----------------------------------------- -->
   <app-doc-section id="custom-templates" title="Custom Templates">
     <p class="demo-section__description">
-      Project named <code>&lt;ng-template&gt;</code> references to replace the
-      default star glyph: <code>#onicon</code> (filled), <code>#officon</code> (empty),
-      and <code>#cancelicon</code> (cancel button icon).
+      Project named <code>&lt;ng-template&gt;</code> references to replace the default star glyph:
+      <code>#onicon</code> (filled), <code>#officon</code> (empty), and
+      <code>#cancelicon</code> (cancel button icon).
     </p>
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [(ngModel)]="customTemplateRating" [cancel]="false">
@@ -204,19 +222,22 @@
         <ng-template #officon>🤍</ng-template>
       </ui-lib-rating>
     </div>
-    <p class="demo-rating-hint">Value: <strong>{{ customTemplateRating ?? 'none' }}</strong></p>
+    <p class="demo-rating-hint">
+      Value: <strong>{{ customTemplateRating ?? 'none' }}</strong>
+    </p>
     <ui-lib-code-snippet
       language="html"
-      filename="Custom templates" [code]="snippets.customTemplates"
+      filename="Custom templates"
+      [code]="snippets.customTemplates"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Inline Styles -------------------------------------------- -->
   <app-doc-section id="inline-styles" title="Inline Styles">
     <p class="demo-section__description">
-      Use <code>[iconOnStyle]</code> and <code>[iconOffStyle]</code> to apply arbitrary
-      CSS to each icon element. Accepts a <code>Record&lt;string, string&gt;</code>.
+      Use <code>[iconOnStyle]</code> and <code>[iconOffStyle]</code> to apply arbitrary CSS to each
+      icon element. Accepts a <code>Record&lt;string, string&gt;</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating
@@ -226,20 +247,22 @@
         [iconOffStyle]="iconOffStyle"
       />
     </div>
-    <p class="demo-rating-hint">Value: <strong>{{ styledRating ?? 'none' }}</strong></p>
+    <p class="demo-rating-hint">
+      Value: <strong>{{ styledRating ?? 'none' }}</strong>
+    </p>
     <ui-lib-code-snippet
       language="css"
-      filename="Inline styles" [code]="snippets.inlineStyles"
+      filename="Inline styles"
+      [code]="snippets.inlineStyles"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Reactive Forms ------------------------------------------- -->
   <app-doc-section id="reactive-forms" title="Reactive Forms">
     <p class="demo-section__description">
-      Use <code>formControlName</code> or <code>[formControl]</code> for reactive form
-      integration. <code>FormControl.disable()</code> propagates through
-      <code>setDisabledState</code>.
+      Use <code>formControlName</code> or <code>[formControl]</code> for reactive form integration.
+      <code>FormControl.disable()</code> propagates through <code>setDisabledState</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <form [formGroup]="reviewForm">
@@ -253,17 +276,19 @@
         </div>
       </form>
     </div>
-    <p class="demo-rating-hint">Form value: <strong>{{ reviewForm.value | json }}</strong></p>
+    <p class="demo-rating-hint">
+      Form value: <strong>{{ reviewForm.value | json }}</strong>
+    </p>
     <ui-lib-code-snippet
       language="html"
-      filename="Reactive forms" [code]="snippets.reactiveForms"
+      filename="Reactive forms"
+      [code]="snippets.reactiveForms"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
   <app-doc-section id="api" title="API Reference">
-
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
@@ -273,7 +298,6 @@
       <h3 class="demo-section__subtitle">Outputs</h3>
       <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
-
   </app-doc-section>
 
   <!-- ---- CSS Custom Properties ------------------------------------ -->
@@ -283,7 +307,6 @@
 
   <!-- ---- Accessibility -------------------------------------------- -->
   <app-doc-section id="accessibility" title="Accessibility">
-
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <app-doc-aria-table [rows]="ariaRows" />
@@ -302,18 +325,15 @@
       </li>
       <li>
         Focus is managed with a roving <code>tabindex</code>: the active star has
-        <code>tabindex="0"</code>; all others have <code>tabindex="-1"</code>.
-        When no value is selected, the first star holds <code>tabindex="0"</code>.
+        <code>tabindex="0"</code>; all others have <code>tabindex="-1"</code>. When no value is
+        selected, the first star holds <code>tabindex="0"</code>.
       </li>
       <li>
-        Arrow keys both move focus and immediately commit the new value — no need to
-        press Space or Enter.
+        Arrow keys both move focus and immediately commit the new value — no need to press Space or
+        Enter.
       </li>
-      <li>
-        All transitions respect <code>prefers-reduced-motion: reduce</code>.
-      </li>
+      <li>All transitions respect <code>prefers-reduced-motion: reduce</code>.</li>
     </ul>
-
   </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
@@ -327,5 +347,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

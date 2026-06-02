@@ -112,7 +112,7 @@ describe('DatePickerComponent', (): void => {
 
   function getPickerFromHostFixture<T>(fixture: ComponentFixture<T>): DatePickerComponent {
     const pickerDebugElements: DebugElement[] = fixture.debugElement.queryAll(
-      By.directive(DatePickerComponent)
+      By.directive(DatePickerComponent),
     );
     const pickerDebugElement: DebugElement | undefined = pickerDebugElements[0];
     if (pickerDebugElement === undefined) {
@@ -137,11 +137,11 @@ describe('DatePickerComponent', (): void => {
     fixture: ComponentFixture<DatePickerComponent>,
     year: number,
     month: number,
-    day: number
+    day: number,
   ): HTMLButtonElement {
     return requiredElement<HTMLButtonElement>(
       hostElement(fixture),
-      `button[data-date-key='${year}-${month}-${day}']`
+      `button[data-date-key='${year}-${month}-${day}']`,
     );
   }
 
@@ -206,7 +206,7 @@ describe('DatePickerComponent', (): void => {
       fixture.detectChanges();
 
       const panel: HTMLDivElement | null = document.body.querySelector(
-        '.ui-lib-datepicker__panel'
+        '.ui-lib-datepicker__panel',
       ) as HTMLDivElement | null;
       expect(panel).toBeTruthy();
       expect(panel?.parentElement).toBe(document.body);
@@ -222,7 +222,7 @@ describe('DatePickerComponent', (): void => {
 
       const panel: HTMLDivElement = requiredElement<HTMLDivElement>(
         document.body,
-        '.ui-lib-datepicker__panel'
+        '.ui-lib-datepicker__panel',
       );
       panel.dispatchEvent(new MouseEvent('click', { bubbles: true }));
       fixture.detectChanges();
@@ -239,7 +239,7 @@ describe('DatePickerComponent', (): void => {
       const fixture: ComponentFixture<DatePickerComponent> = createFixture();
       const input: HTMLInputElement = requiredElement<HTMLInputElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__input'
+        '.ui-lib-datepicker__input',
       );
 
       input.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
@@ -255,7 +255,7 @@ describe('DatePickerComponent', (): void => {
 
       const input: HTMLInputElement = requiredElement<HTMLInputElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__input'
+        '.ui-lib-datepicker__input',
       );
       input.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
       fixture.detectChanges();
@@ -272,7 +272,7 @@ describe('DatePickerComponent', (): void => {
       const showSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.show, 'emit');
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__trigger'
+        '.ui-lib-datepicker__trigger',
       ).click();
       fixture.detectChanges();
 
@@ -300,7 +300,7 @@ describe('DatePickerComponent', (): void => {
 
       const panel: HTMLDivElement = requiredElement<HTMLDivElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__panel'
+        '.ui-lib-datepicker__panel',
       );
       panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
       fixture.detectChanges();
@@ -348,10 +348,10 @@ describe('DatePickerComponent', (): void => {
       fixture.detectChanges();
 
       expect(dateButton(fixture, 2026, 2, 10).className).toContain(
-        'ui-lib-datepicker__day--selected'
+        'ui-lib-datepicker__day--selected',
       );
       expect(dateButton(fixture, 2026, 2, 12).className).toContain(
-        'ui-lib-datepicker__day--selected'
+        'ui-lib-datepicker__day--selected',
       );
     });
 
@@ -363,13 +363,13 @@ describe('DatePickerComponent', (): void => {
       fixture.detectChanges();
 
       expect(dateButton(fixture, 2026, 2, 10).className).toContain(
-        'ui-lib-datepicker__day--range-start'
+        'ui-lib-datepicker__day--range-start',
       );
       expect(dateButton(fixture, 2026, 2, 12).className).toContain(
-        'ui-lib-datepicker__day--range-between'
+        'ui-lib-datepicker__day--range-between',
       );
       expect(dateButton(fixture, 2026, 2, 14).className).toContain(
-        'ui-lib-datepicker__day--range-end'
+        'ui-lib-datepicker__day--range-end',
       );
     });
 
@@ -408,7 +408,7 @@ describe('DatePickerComponent', (): void => {
 
       const input: HTMLInputElement = requiredElement<HTMLInputElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__input'
+        '.ui-lib-datepicker__input',
       );
       expect(input.disabled).toBeTruthy();
 
@@ -419,7 +419,7 @@ describe('DatePickerComponent', (): void => {
 
     it('supports template-driven forms via ngModel', (): void => {
       const fixture: ComponentFixture<TemplateDrivenHostComponent> = TestBed.createComponent(
-        TemplateDrivenHostComponent
+        TemplateDrivenHostComponent,
       );
       fixture.detectChanges();
       const pickerDebug: DatePickerComponent = getPickerFromHostFixture(fixture);
@@ -429,7 +429,7 @@ describe('DatePickerComponent', (): void => {
 
       const selectedDateButton: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         fixture.nativeElement as HTMLElement,
-        "button[data-date-key='2026-2-15']"
+        "button[data-date-key='2026-2-15']",
       );
       selectedDateButton.click();
       fixture.detectChanges();
@@ -461,7 +461,7 @@ describe('DatePickerComponent', (): void => {
         hostElement(fixture).querySelectorAll('.ui-lib-datepicker__day');
       const firstHeader: HTMLElement = requiredElement<HTMLElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__week-day'
+        '.ui-lib-datepicker__week-day',
       );
       expect(cells.length).toBe(42);
       expect(String(firstHeader.textContent).trim()).toBe('Mo');
@@ -476,7 +476,7 @@ describe('DatePickerComponent', (): void => {
 
       const otherMonth: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__day--other-month'
+        '.ui-lib-datepicker__day--other-month',
       );
       expect(otherMonth.disabled).toBeTruthy();
 
@@ -486,7 +486,7 @@ describe('DatePickerComponent', (): void => {
 
       const anotherOtherMonth: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__day--other-month'
+        '.ui-lib-datepicker__day--other-month',
       );
       expect(anotherOtherMonth.disabled).toBeFalsy();
     });
@@ -509,22 +509,22 @@ describe('DatePickerComponent', (): void => {
       fixture.detectChanges();
 
       expect(hostElement(fixture).querySelectorAll('.ui-lib-datepicker__month-panel').length).toBe(
-        2
+        2,
       );
       expect(
-        hostElement(fixture).querySelector('.ui-lib-datepicker__week-header')?.textContent
+        hostElement(fixture).querySelector('.ui-lib-datepicker__week-header')?.textContent,
       ).toContain('Wk');
       expect(
         hostElement(fixture).querySelector(
-          `button[data-date-key='${today.getFullYear()}-${today.getMonth()}-${today.getDate()}']`
-        )?.className
+          `button[data-date-key='${today.getFullYear()}-${today.getMonth()}-${today.getDate()}']`,
+        )?.className,
       ).toContain('ui-lib-datepicker__day--today');
 
       const disabledDate: HTMLButtonElement = dateButton(
         fixture,
         now.getFullYear(),
         now.getMonth(),
-        12
+        12,
       );
       expect(disabledDate.disabled).toBeTruthy();
     });
@@ -541,7 +541,7 @@ describe('DatePickerComponent', (): void => {
 
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__next-button'
+        '.ui-lib-datepicker__next-button',
       ).click();
       fixture.detectChanges();
       expect(fixture.componentInstance.currentMonth()).not.toBe(initialMonth);
@@ -549,7 +549,7 @@ describe('DatePickerComponent', (): void => {
 
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__prev-button'
+        '.ui-lib-datepicker__prev-button',
       ).click();
       fixture.detectChanges();
       expect(fixture.componentInstance.currentMonth()).toBe(initialMonth);
@@ -566,11 +566,11 @@ describe('DatePickerComponent', (): void => {
 
       const prevButton: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__prev-button'
+        '.ui-lib-datepicker__prev-button',
       );
       const nextButton: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__next-button'
+        '.ui-lib-datepicker__next-button',
       );
 
       expect(prevButton.disabled).toBeTruthy();
@@ -589,10 +589,10 @@ describe('DatePickerComponent', (): void => {
       dateButton(fixture, 2026, 2, 12).click();
       fixture.detectChanges();
       expect(dateButton(fixture, 2026, 2, 10).className).not.toContain(
-        'ui-lib-datepicker__day--selected'
+        'ui-lib-datepicker__day--selected',
       );
       expect(dateButton(fixture, 2026, 2, 12).className).toContain(
-        'ui-lib-datepicker__day--selected'
+        'ui-lib-datepicker__day--selected',
       );
 
       fixture.componentRef.setInput('selectionMode', 'multiple');
@@ -601,7 +601,7 @@ describe('DatePickerComponent', (): void => {
       dateButton(fixture, 2026, 2, 12).click();
       fixture.detectChanges();
       expect(dateButton(fixture, 2026, 2, 12).className).not.toContain(
-        'ui-lib-datepicker__day--selected'
+        'ui-lib-datepicker__day--selected',
       );
 
       fixture.componentRef.setInput('selectionMode', 'range');
@@ -610,10 +610,10 @@ describe('DatePickerComponent', (): void => {
       dateButton(fixture, 2026, 2, 10).click();
       fixture.detectChanges();
       expect(dateButton(fixture, 2026, 2, 10).className).toContain(
-        'ui-lib-datepicker__day--range-start'
+        'ui-lib-datepicker__day--range-start',
       );
       expect(dateButton(fixture, 2026, 2, 20).className).toContain(
-        'ui-lib-datepicker__day--range-end'
+        'ui-lib-datepicker__day--range-end',
       );
     });
   });
@@ -626,11 +626,11 @@ describe('DatePickerComponent', (): void => {
       fixture.detectChanges();
 
       expect(hostElement(fixture).querySelectorAll('.ui-lib-datepicker__month-cell').length).toBe(
-        12
+        12,
       );
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        "button[data-month-index='2']"
+        "button[data-month-index='2']",
       ).click();
       fixture.detectChanges();
       expect(fixture.componentInstance.currentView()).toBe('date');
@@ -643,11 +643,11 @@ describe('DatePickerComponent', (): void => {
       fixture.detectChanges();
 
       expect(hostElement(fixture).querySelectorAll('.ui-lib-datepicker__year-cell').length).toBe(
-        12
+        12,
       );
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        "button[data-year-index='1']"
+        "button[data-year-index='1']",
       ).click();
       fixture.detectChanges();
       expect(fixture.componentInstance.currentView()).toBe('month');
@@ -662,7 +662,7 @@ describe('DatePickerComponent', (): void => {
       const selectSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.dateSelect, 'emit');
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        "button[data-month-index='4']"
+        "button[data-month-index='4']",
       ).click();
       fixture.detectChanges();
 
@@ -678,11 +678,11 @@ describe('DatePickerComponent', (): void => {
 
       const monthSelect: HTMLSelectElement = requiredElement<HTMLSelectElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__month-select'
+        '.ui-lib-datepicker__month-select',
       );
       const yearSelect: HTMLSelectElement = requiredElement<HTMLSelectElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__year-select'
+        '.ui-lib-datepicker__year-select',
       );
       const monthSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.monthChange, 'emit');
       const yearSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.yearChange, 'emit');
@@ -750,14 +750,14 @@ describe('DatePickerComponent', (): void => {
       const clearSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.clear, 'emit');
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__today-button'
+        '.ui-lib-datepicker__today-button',
       ).click();
       fixture.detectChanges();
       expect(fixture.componentInstance.formattedValue().length).toBeGreaterThan(0);
 
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__clear-button'
+        '.ui-lib-datepicker__clear-button',
       ).click();
       fixture.detectChanges();
       expect(fixture.componentInstance.formattedValue()).toBe('');
@@ -776,7 +776,7 @@ describe('DatePickerComponent', (): void => {
       day.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
       day.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageDown', bubbles: true }));
       day.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'PageUp', shiftKey: true, bubbles: true })
+        new KeyboardEvent('keydown', { key: 'PageUp', shiftKey: true, bubbles: true }),
       );
       day.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
       day.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
@@ -801,11 +801,11 @@ describe('DatePickerComponent', (): void => {
 
       const input: HTMLInputElement = requiredElement<HTMLInputElement>(
         hostElement(inputFixture),
-        '.ui-lib-datepicker__input'
+        '.ui-lib-datepicker__input',
       );
       const panel: HTMLDivElement = requiredElement<HTMLDivElement>(
         hostElement(inputFixture),
-        '.ui-lib-datepicker__panel'
+        '.ui-lib-datepicker__panel',
       );
 
       expect(input.getAttribute('role')).toBe('combobox');
@@ -815,25 +815,25 @@ describe('DatePickerComponent', (): void => {
 
       const grid: HTMLTableElement = requiredElement<HTMLTableElement>(
         hostElement(fixture),
-        '.ui-lib-datepicker__grid'
+        '.ui-lib-datepicker__grid',
       );
       expect(grid.getAttribute('role')).toBe('grid');
 
       const selectedCell: HTMLElement = requiredElement<HTMLElement>(
         hostElement(fixture),
-        "td[role='gridcell'][aria-selected='true']"
+        "td[role='gridcell'][aria-selected='true']",
       );
       const disabledCell: HTMLElement = requiredElement<HTMLElement>(
         hostElement(fixture),
-        "td[role='gridcell'][aria-disabled='true']"
+        "td[role='gridcell'][aria-disabled='true']",
       );
       expect(selectedCell).toBeTruthy();
       expect(disabledCell).toBeTruthy();
       expect(
         requiredElement<HTMLButtonElement>(
           hostElement(fixture),
-          '.ui-lib-datepicker__prev-button'
-        ).getAttribute('aria-label')
+          '.ui-lib-datepicker__prev-button',
+        ).getAttribute('aria-label'),
       ).toMatch(/^Previous month,/);
     });
   });
@@ -862,7 +862,7 @@ describe('DatePickerComponent', (): void => {
       const jan31Meta: DatePickerDateMeta = createDateMeta(2025, 0, 31);
       fixture.componentInstance.onDateCellKeydown(
         new KeyboardEvent('keydown', { key: 'PageDown', bubbles: true }),
-        jan31Meta
+        jan31Meta,
       );
       fixture.detectChanges();
       expect(fixture.componentInstance.currentMonth()).toBeGreaterThan(0);

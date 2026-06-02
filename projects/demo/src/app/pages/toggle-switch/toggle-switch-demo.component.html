@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="ToggleSwitch"
@@ -32,16 +31,8 @@
         @for (variant of variants; track variant) {
           <div class="demo-variant-row">
             <span class="demo-variant-label">{{ variant }}</span>
-            <ui-lib-toggle-switch
-              [variant]="variant"
-              label="Toggle"
-              [checked]="true"
-            />
-            <ui-lib-toggle-switch
-              [variant]="variant"
-              label="Toggle"
-              [checked]="false"
-            />
+            <ui-lib-toggle-switch [variant]="variant" label="Toggle" [checked]="true" />
+            <ui-lib-toggle-switch [variant]="variant" label="Toggle" [checked]="false" />
           </div>
         }
       </div>
@@ -113,7 +104,8 @@
                   severity="primary"
                   size="sm"
                   (click)="setPlaygroundVariant(v)"
-                >{{ v }}</ui-lib-button>
+                  >{{ v }}</ui-lib-button
+                >
               }
             </div>
           </div>
@@ -128,7 +120,8 @@
                   severity="primary"
                   size="sm"
                   (click)="setPlaygroundSize(s)"
-                >{{ s }}</ui-lib-button>
+                  >{{ s }}</ui-lib-button
+                >
               }
             </div>
           </div>
@@ -165,7 +158,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -174,7 +166,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -183,7 +175,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -192,5 +184,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

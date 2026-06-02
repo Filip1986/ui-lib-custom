@@ -13,13 +13,13 @@ Accordion container managing panel expansion state.
 
 ### Inputs
 
-| Name                    | Type                      | Default    | Description |
-| ----------------------- | ------------------------- | ---------- | ----------- |
-| `defaultExpandedPanels` | `string[]`                | `[]`       | —           |
-| `expandedPanels`        | `string[]`                | `[]`       | —           |
-| `expandMode`            | `AccordionExpandMode`     | `'single'` | —           |
-| `size`                  | `AccordionSize`           | `'md'`     | —           |
-| `variant`               | `AccordionVariant | null` | `null`     | —           |
+| Name                    | Type                  | Default    | Description |
+| ----------------------- | --------------------- | ---------- | ----------- | --- |
+| `defaultExpandedPanels` | `string[]`            | `[]`       | —           |
+| `expandedPanels`        | `string[]`            | `[]`       | —           |
+| `expandMode`            | `AccordionExpandMode` | `'single'` | —           |
+| `size`                  | `AccordionSize`       | `'md'`     | —           |
+| `variant`               | `AccordionVariant     | null`      | `null`      | —   |
 
 ### Outputs
 
@@ -93,8 +93,12 @@ Accordion container managing panel expansion state.
 
 <!-- Multiple expand, pre-opened -->
 <ui-lib-accordion expandMode="multiple" [defaultExpandedPanels]="['s1']">
-  <ui-lib-accordion-panel header="Alpha" value="s1" [showIcon]="true">Alpha body</ui-lib-accordion-panel>
-  <ui-lib-accordion-panel header="Beta"  value="s2" [showIcon]="true">Beta body</ui-lib-accordion-panel>
+  <ui-lib-accordion-panel header="Alpha" value="s1" [showIcon]="true"
+    >Alpha body</ui-lib-accordion-panel
+  >
+  <ui-lib-accordion-panel header="Beta" value="s2" [showIcon]="true"
+    >Beta body</ui-lib-accordion-panel
+  >
 </ui-lib-accordion>
 ```
 
@@ -104,4 +108,3 @@ Accordion container managing panel expansion state.
 - [Demo page](/components/accordion)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/accordion/README.md)
-

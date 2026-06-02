@@ -205,7 +205,7 @@ describe('Tag', (): void => {
     host.tagDismissible.set(true);
     fixture.detectChanges();
     const removeButton: HTMLButtonElement | null = getTagElement().querySelector(
-      '.ui-lib-tag__remove-button'
+      '.ui-lib-tag__remove-button',
     );
     expect(removeButton).toBeTruthy();
     expect(removeButton?.getAttribute('aria-label')).toBe('Remove tag');
@@ -216,7 +216,7 @@ describe('Tag', (): void => {
     host.tagValue.set('Python');
     fixture.detectChanges();
     const removeButton: HTMLButtonElement | null = getTagElement().querySelector(
-      '.ui-lib-tag__remove-button'
+      '.ui-lib-tag__remove-button',
     );
     expect(removeButton?.getAttribute('aria-label')).toBe('Remove Python tag');
   });
@@ -226,7 +226,7 @@ describe('Tag', (): void => {
     host.tagRemoveIcon.set('pi pi-times-circle');
     fixture.detectChanges();
     const removeIcon: HTMLElement | null = getTagElement().querySelector(
-      '.ui-lib-tag__remove-button span'
+      '.ui-lib-tag__remove-button span',
     );
     expect(removeIcon?.getAttribute('aria-hidden')).toBe('true');
     expect(removeIcon?.classList).toContain('pi-times-circle');
@@ -237,7 +237,7 @@ describe('Tag', (): void => {
     fixture.detectChanges();
 
     const tagInstance: Tag = fixture.debugElement.query(
-      (element: DebugElement): boolean => element.name === 'ui-lib-tag'
+      (element: DebugElement): boolean => element.name === 'ui-lib-tag',
     ).componentInstance as Tag;
     const removedEvents: MouseEvent[] = [];
     tagInstance.removed.subscribe((event: MouseEvent): void => {
@@ -245,7 +245,7 @@ describe('Tag', (): void => {
     });
 
     const removeButton: HTMLButtonElement = getTagElement().querySelector(
-      '.ui-lib-tag__remove-button'
+      '.ui-lib-tag__remove-button',
     ) as HTMLButtonElement;
     removeButton.click();
 

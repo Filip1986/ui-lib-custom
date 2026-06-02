@@ -27,7 +27,7 @@ type ChartConstructorConfig = {
 })
 class LineChartHostComponent {
   public readonly data: WritableSignal<ChartData<'line'> | null> = signal<ChartData<'line'> | null>(
-    null
+    null,
   );
 }
 
@@ -83,7 +83,7 @@ describe('LineChartComponent', (): void => {
           destroy: jest.fn<void, []>(),
           resize: jest.fn<void, []>(),
         };
-      }
+      },
     );
 
     const fixture: ComponentFixture<LineChartHostComponent> =

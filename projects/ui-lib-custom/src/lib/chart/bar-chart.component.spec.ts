@@ -42,7 +42,7 @@ type MockChartInstance = {
 })
 class BarChartHostComponent {
   public readonly data: WritableSignal<ChartData<'bar'> | null> = signal<ChartData<'bar'> | null>(
-    null
+    null,
   );
   public readonly options: WritableSignal<ChartOptions<'bar'> | null> =
     signal<ChartOptions<'bar'> | null>(null);
@@ -98,7 +98,7 @@ describe('BarChartComponent', (): void => {
         };
         chartInstances.push(instance);
         return instance;
-      }
+      },
     );
 
     fixture = TestBed.createComponent(BarChartHostComponent);

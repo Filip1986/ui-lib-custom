@@ -2,7 +2,6 @@
   Source panel — reorder controls + list container
 ========================================================================== -->
 <div class="ui-lib-pick-list__panel ui-lib-pick-list__panel--source">
-
   <!-- Source reorder controls -->
   @if (showSourceControls()) {
     <div class="ui-lib-pick-list__controls">
@@ -47,7 +46,6 @@
 
   <!-- Source list container -->
   <div class="ui-lib-pick-list__list-container">
-
     <!-- Source header -->
     @if (sourceHeaderTemplate()) {
       <div class="ui-lib-pick-list__header">
@@ -89,9 +87,15 @@
           role="option"
           class="ui-lib-pick-list__item"
           [class.ui-lib-pick-list__item--selected]="isSourceSelected(item)"
-          [class.ui-lib-pick-list__item--dragging]="dragOriginList() === 'source' && draggedValueIndex() === getValueIndex('source', $index)"
-          [class.ui-lib-pick-list__item--drop-before]="dragOverList() === 'source' && dragOverIndex() === $index && dragPosition() === 'before'"
-          [class.ui-lib-pick-list__item--drop-after]="dragOverList() === 'source' && dragOverIndex() === $index && dragPosition() === 'after'"
+          [class.ui-lib-pick-list__item--dragging]="
+            dragOriginList() === 'source' && draggedValueIndex() === getValueIndex('source', $index)
+          "
+          [class.ui-lib-pick-list__item--drop-before]="
+            dragOverList() === 'source' && dragOverIndex() === $index && dragPosition() === 'before'
+          "
+          [class.ui-lib-pick-list__item--drop-after]="
+            dragOverList() === 'source' && dragOverIndex() === $index && dragPosition() === 'after'
+          "
           [attr.aria-selected]="isSourceSelected(item)"
           [attr.id]="itemId('source', $index)"
           [tabindex]="sourceFocusedIndex() === $index ? 0 : -1"
@@ -106,7 +110,11 @@
           @if (itemTemplate()) {
             <ng-container
               [ngTemplateOutlet]="itemTemplate()!"
-              [ngTemplateOutletContext]="{ $implicit: item, index: $index, selected: isSourceSelected(item) }"
+              [ngTemplateOutletContext]="{
+                $implicit: item,
+                index: $index,
+                selected: isSourceSelected(item),
+              }"
             />
           } @else {
             {{ resolveItemLabel(item) }}
@@ -134,7 +142,6 @@
         </p>
       }
     }
-
   </div>
 </div>
 
@@ -184,7 +191,6 @@
   Target panel — list container + reorder controls
 ========================================================================== -->
 <div class="ui-lib-pick-list__panel ui-lib-pick-list__panel--target">
-
   <!-- Target reorder controls -->
   @if (showTargetControls()) {
     <div class="ui-lib-pick-list__controls">
@@ -229,7 +235,6 @@
 
   <!-- Target list container -->
   <div class="ui-lib-pick-list__list-container">
-
     <!-- Target header -->
     @if (targetHeaderTemplate()) {
       <div class="ui-lib-pick-list__header">
@@ -271,9 +276,15 @@
           role="option"
           class="ui-lib-pick-list__item"
           [class.ui-lib-pick-list__item--selected]="isTargetSelected(item)"
-          [class.ui-lib-pick-list__item--dragging]="dragOriginList() === 'target' && draggedValueIndex() === getValueIndex('target', $index)"
-          [class.ui-lib-pick-list__item--drop-before]="dragOverList() === 'target' && dragOverIndex() === $index && dragPosition() === 'before'"
-          [class.ui-lib-pick-list__item--drop-after]="dragOverList() === 'target' && dragOverIndex() === $index && dragPosition() === 'after'"
+          [class.ui-lib-pick-list__item--dragging]="
+            dragOriginList() === 'target' && draggedValueIndex() === getValueIndex('target', $index)
+          "
+          [class.ui-lib-pick-list__item--drop-before]="
+            dragOverList() === 'target' && dragOverIndex() === $index && dragPosition() === 'before'
+          "
+          [class.ui-lib-pick-list__item--drop-after]="
+            dragOverList() === 'target' && dragOverIndex() === $index && dragPosition() === 'after'
+          "
           [attr.aria-selected]="isTargetSelected(item)"
           [attr.id]="itemId('target', $index)"
           [tabindex]="targetFocusedIndex() === $index ? 0 : -1"
@@ -288,7 +299,11 @@
           @if (itemTemplate()) {
             <ng-container
               [ngTemplateOutlet]="itemTemplate()!"
-              [ngTemplateOutletContext]="{ $implicit: item, index: $index, selected: isTargetSelected(item) }"
+              [ngTemplateOutletContext]="{
+                $implicit: item,
+                index: $index,
+                selected: isTargetSelected(item),
+              }"
             />
           } @else {
             {{ resolveItemLabel(item) }}
@@ -316,6 +331,5 @@
         </p>
       }
     }
-
   </div>
 </div>

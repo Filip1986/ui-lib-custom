@@ -85,7 +85,7 @@ export class AnimateOnScroll implements OnInit {
       {
         threshold: this.threshold(),
         rootMargin: this.rootMargin(),
-      }
+      },
     );
 
     this.observer.observe(this.elementRef.nativeElement);

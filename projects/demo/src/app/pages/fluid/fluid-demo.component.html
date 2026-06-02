@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Fluid"
@@ -19,8 +18,8 @@
   <!-- ── Section 1: Component usage ── -->
   <app-doc-section id="using-the-component" title="Using the Component">
     <p class="demo-section__desc">
-      Wrap any form or container with <code>&lt;ui-lib-fluid&gt;</code>.
-      All child inputs, textareas, and buttons grow to fill the full width.
+      Wrap any form or container with <code>&lt;ui-lib-fluid&gt;</code>. All child inputs,
+      textareas, and buttons grow to fill the full width.
     </p>
     <div class="fd-demo-card">
       <ui-lib-fluid>
@@ -63,31 +62,21 @@
   <!-- ── Section 2: Directive usage ── -->
   <app-doc-section id="using-the-directive" title="Using the Directive">
     <p class="demo-section__desc">
-      Apply <code>uiLibFluid</code> as an attribute on any existing element to avoid
-      adding an extra wrapper to the DOM. The directive adds the same
-      <code>ui-lib-fluid</code> CSS class to the host.
+      Apply <code>uiLibFluid</code> as an attribute on any existing element to avoid adding an extra
+      wrapper to the DOM. The directive adds the same <code>ui-lib-fluid</code> CSS class to the
+      host.
     </p>
     <div class="fd-demo-card">
       <form uiLibFluid>
         <div class="fd-field">
           <label class="fd-label" for="d-username">Username</label>
-          <input
-            id="d-username"
-            class="fd-input"
-            type="text"
-            placeholder="Choose a username"
-          />
+          <input id="d-username" class="fd-input" type="text" placeholder="Choose a username" />
         </div>
         <div class="fd-field">
           <label class="fd-label" for="d-password">Password</label>
-          <input
-            id="d-password"
-            class="fd-input"
-            type="password"
-            placeholder="Choose a password"
-          />
+          <input id="d-password" class="fd-input" type="password" placeholder="Choose a password" />
         </div>
-        <div style="display: flex; gap: 0.75rem;">
+        <div style="display: flex; gap: 0.75rem">
           <ui-lib-button severity="primary" type="submit">Sign Up</ui-lib-button>
           <ui-lib-button appearance="ghost" type="button">Cancel</ui-lib-button>
         </div>
@@ -98,31 +87,21 @@
   <!-- ── Section 3: Conditional fluid via binding ── -->
   <app-doc-section id="conditional-fluid" title="Conditional Fluid">
     <p class="demo-section__desc">
-      Bind <code>[uiLibFluid]="expression"</code> to toggle the fluid layout
-      at runtime. When <code>false</code>, inputs and buttons revert to their natural
-      intrinsic sizes.
+      Bind <code>[uiLibFluid]="expression"</code> to toggle the fluid layout at runtime. When
+      <code>false</code>, inputs and buttons revert to their natural intrinsic sizes.
     </p>
     <div class="fd-demo-card">
-      <span
-        class="fd-status"
-        [class.fd-status--on]="isFluid()"
-        [class.fd-status--off]="!isFluid()"
-      >
+      <span class="fd-status" [class.fd-status--on]="isFluid()" [class.fd-status--off]="!isFluid()">
         Fluid: {{ isFluid() ? 'ON' : 'OFF' }}
       </span>
       <div [uiLibFluid]="isFluid()">
         <div class="fd-field">
           <label class="fd-label" for="t-search">Search</label>
-          <input
-            id="t-search"
-            class="fd-input"
-            type="search"
-            placeholder="Search for something…"
-          />
+          <input id="t-search" class="fd-input" type="search" placeholder="Search for something…" />
         </div>
         <ui-lib-button severity="primary" type="button">Search</ui-lib-button>
       </div>
-      <div style="margin-top: 1rem;">
+      <div style="margin-top: 1rem">
         <ui-lib-button appearance="ghost" type="button" (click)="toggleFluid()">
           Toggle Fluid
         </ui-lib-button>
@@ -133,20 +112,15 @@
   <!-- ── Section 4: Attribute-only shorthand ── -->
   <app-doc-section id="attribute-shorthand" title="Attribute Shorthand">
     <p class="demo-section__desc">
-      The directive supports attribute-only usage — just add <code>uiLibFluid</code>
-      without a binding. It defaults to <code>true</code> through Angular's
+      The directive supports attribute-only usage — just add <code>uiLibFluid</code> without a
+      binding. It defaults to <code>true</code> through Angular's
       <code>booleanAttribute</code> transform.
     </p>
     <div class="fd-demo-card">
       <div uiLibFluid>
         <div class="fd-field">
           <label class="fd-label" for="a-topic">Topic</label>
-          <input
-            id="a-topic"
-            class="fd-input"
-            type="text"
-            placeholder="Enter a topic"
-          />
+          <input id="a-topic" class="fd-input" type="text" placeholder="Enter a topic" />
         </div>
         <ui-lib-button severity="primary" type="button">Go</ui-lib-button>
       </div>
@@ -155,14 +129,13 @@
 
   <!-- ── Section 5: API reference ── -->
   <app-doc-section id="api" title="API Reference">
-
-    <h3 class="demo-section__title" style="font-size: 1rem; margin-top: 1rem;">
+    <h3 class="demo-section__title" style="font-size: 1rem; margin-top: 1rem">
       &lt;ui-lib-fluid&gt; — Component
     </h3>
     <p class="demo-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
     <app-doc-api-reference [rows]="fluidComponentRows" />
 
-    <h3 class="demo-section__title" style="font-size: 1rem; margin-top: 1.5rem;">
+    <h3 class="demo-section__title" style="font-size: 1rem; margin-top: 1.5rem">
       [uiLibFluid] — Directive
     </h3>
     <p class="demo-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
@@ -171,7 +144,10 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
   <app-doc-section id="css-vars" title="CSS Custom Properties">
-    <p class="demo-section__description">The fluid directive and component apply no CSS custom properties. Width behaviour is achieved purely via structural CSS rules targeting host elements.</p>
+    <p class="demo-section__description">
+      The fluid directive and component apply no CSS custom properties. Width behaviour is achieved
+      purely via structural CSS rules targeting host elements.
+    </p>
   </app-doc-section>
 
   <!-- ── Accessibility ──────────────────────────────────────────────────── -->
@@ -195,5 +171,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

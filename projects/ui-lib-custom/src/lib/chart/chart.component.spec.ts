@@ -19,7 +19,7 @@ jest.mock('chart.js', (): { Chart: jest.Mock } => ({
 
 type ChartComponentCtor = new (...args: never[]) => ChartComponentType;
 const chartComponentModule: { ChartComponent: ChartComponentCtor } = jest.requireActual(
-  './chart.component'
+  './chart.component',
 ) as { ChartComponent: ChartComponentCtor };
 const ChartComponent: ChartComponentCtor = chartComponentModule.ChartComponent;
 
@@ -144,7 +144,7 @@ describe('ChartComponent', (): void => {
         };
         chartInstances.push(instance);
         return instance;
-      }
+      },
     );
 
     fixture = TestBed.createComponent(ChartHostComponent);
@@ -152,7 +152,7 @@ describe('ChartComponent', (): void => {
     refreshFixture(fixture);
 
     const chartDebugElement: DebugElement = fixture.debugElement.query(
-      By.directive(ChartComponent)
+      By.directive(ChartComponent),
     );
     chartComponent = chartDebugElement.componentInstance as ChartComponentType;
     const resolvedChartElement: HTMLElement | null = (
@@ -366,7 +366,7 @@ describe('ChartComponent', (): void => {
     clickHandler(
       { native: new MouseEvent('click') },
       [{ datasetIndex: 0, index: 0 }],
-      chartInstances[0] as unknown
+      chartInstances[0] as unknown,
     );
 
     expect(host.chartClickEvents.length).toBe(1);
@@ -384,7 +384,7 @@ describe('ChartComponent', (): void => {
     hoverHandler(
       { native: new MouseEvent('mousemove') },
       [{ datasetIndex: 0, index: 0 }],
-      chartInstances[0] as unknown
+      chartInstances[0] as unknown,
     );
 
     expect(host.chartHoverEvents.length).toBe(1);

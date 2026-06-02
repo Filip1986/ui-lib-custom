@@ -25,28 +25,30 @@
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
 import { join, extname } from 'path';
 
-const LIB_DIR = new URL('../projects/ui-lib-custom/src/lib', import.meta.url).pathname
-  .replace(/^\/([A-Za-z]:)/, '$1');
+const LIB_DIR = new URL('../projects/ui-lib-custom/src/lib', import.meta.url).pathname.replace(
+  /^\/([A-Za-z]:)/,
+  '$1',
+);
 
 // Each rule: [regex, replacement].
 // The regex must NOT match 50% (centering) or -2px (color-picker hue handle).
 const RULES = [
   // 0 and auto
-  [/^(\s+)left:\s*0(;.*)$/gm,    '$1inset-inline-start: 0$2'],
-  [/^(\s+)right:\s*0(;.*)$/gm,   '$1inset-inline-end: 0$2'],
+  [/^(\s+)left:\s*0(;.*)$/gm, '$1inset-inline-start: 0$2'],
+  [/^(\s+)right:\s*0(;.*)$/gm, '$1inset-inline-end: 0$2'],
   [/^(\s+)left:\s*auto(;.*)$/gm, '$1inset-inline-start: auto$2'],
-  [/^(\s+)right:\s*auto(;.*)$/gm,'$1inset-inline-end: auto$2'],
+  [/^(\s+)right:\s*auto(;.*)$/gm, '$1inset-inline-end: auto$2'],
   // 100%
-  [/^(\s+)left:\s*100%(;.*)$/gm,  '$1inset-inline-start: 100%$2'],
+  [/^(\s+)left:\s*100%(;.*)$/gm, '$1inset-inline-start: 100%$2'],
   [/^(\s+)right:\s*100%(;.*)$/gm, '$1inset-inline-end: 100%$2'],
   // positive rem/px values (not 50%, not negative)
-  [/^(\s+)left:\s*(\d[\d.]*(?:rem|px|em))(;.*)$/gm,  '$1inset-inline-start: $2$3'],
+  [/^(\s+)left:\s*(\d[\d.]*(?:rem|px|em))(;.*)$/gm, '$1inset-inline-start: $2$3'],
   [/^(\s+)right:\s*(\d[\d.]*(?:rem|px|em))(;.*)$/gm, '$1inset-inline-end: $2$3'],
   // var(…)
-  [/^(\s+)left:\s*(var\([^)]+\)(?:[^;]*)?)(;.*)$/gm,  '$1inset-inline-start: $2$3'],
+  [/^(\s+)left:\s*(var\([^)]+\)(?:[^;]*)?)(;.*)$/gm, '$1inset-inline-start: $2$3'],
   [/^(\s+)right:\s*(var\([^)]+\)(?:[^;]*)?)(;.*)$/gm, '$1inset-inline-end: $2$3'],
   // calc(…) — multiline safe: match up to ;
-  [/^(\s+)left:\s*(calc\([^;]+)(;.*)$/gm,  '$1inset-inline-start: $2$3'],
+  [/^(\s+)left:\s*(calc\([^;]+)(;.*)$/gm, '$1inset-inline-start: $2$3'],
   [/^(\s+)right:\s*(calc\([^;]+)(;.*)$/gm, '$1inset-inline-end: $2$3'],
 ];
 

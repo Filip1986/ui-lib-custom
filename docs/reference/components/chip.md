@@ -13,19 +13,19 @@ Chip — compact element representing an attribute, tag, or action. Supports an 
 
 ### Inputs
 
-| Name         | Type                 | Default         | Description                                                                                 |
-| ------------ | -------------------- | --------------- | ------------------------------------------------------------------------------------------- |
-| `icon`       | `string | null`      | `null`          | CSS class string for a PrimeIcons icon (e.g. "pi pi-user").                                 |
-| `image`      | `string | null`      | `null`          | URL of an image to display at the start of the chip.                                        |
-| `imageAlt`   | `string`             | `'Chip'`        | Alt text for the chip image.                                                                |
-| `label`      | `string | null`      | `null`          | Text label displayed inside the chip.                                                       |
-| `removable`  | `boolean`            | `false`         | When true, a remove button is rendered at the end of the chip.                              |
-| `removeIcon` | `string`             | `'pi pi-times'` | CSS class for the remove icon (defaults to "pi pi-times").                                  |
-| `selectable` | `boolean`            | `false`         | When true, the chip can be toggled via click or Space / Enter.                              |
-| `selected`   | `boolean`            | `false`         | Selected state when the chip is selectable. Pair with (selectedChange) for two-way binding. |
-| `size`       | `ChipSize`           | `'md'`          | Size of the chip.                                                                           |
-| `styleClass` | `string | null`      | `null`          | Additional CSS classes to attach to the host element.                                       |
-| `variant`    | `ChipVariant | null` | `null`          | Visual variant — inherits from ThemeConfigService when not set.                             |
+| Name         | Type         | Default         | Description                                                                                 |
+| ------------ | ------------ | --------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `icon`       | `string      | null`           | `null`                                                                                      | CSS class string for a PrimeIcons icon (e.g. "pi pi-user").     |
+| `image`      | `string      | null`           | `null`                                                                                      | URL of an image to display at the start of the chip.            |
+| `imageAlt`   | `string`     | `'Chip'`        | Alt text for the chip image.                                                                |
+| `label`      | `string      | null`           | `null`                                                                                      | Text label displayed inside the chip.                           |
+| `removable`  | `boolean`    | `false`         | When true, a remove button is rendered at the end of the chip.                              |
+| `removeIcon` | `string`     | `'pi pi-times'` | CSS class for the remove icon (defaults to "pi pi-times").                                  |
+| `selectable` | `boolean`    | `false`         | When true, the chip can be toggled via click or Space / Enter.                              |
+| `selected`   | `boolean`    | `false`         | Selected state when the chip is selectable. Pair with (selectedChange) for two-way binding. |
+| `size`       | `ChipSize`   | `'md'`          | Size of the chip.                                                                           |
+| `styleClass` | `string      | null`           | `null`                                                                                      | Additional CSS classes to attach to the host element.           |
+| `variant`    | `ChipVariant | null`           | `null`                                                                                      | Visual variant — inherits from ThemeConfigService when not set. |
 
 ### Outputs
 
@@ -113,18 +113,10 @@ Chip — compact element representing an attribute, tag, or action. Supports an 
 <ui-lib-chip label="Angular" />
 
 <!-- Removable chip -->
-<ui-lib-chip
-  label="TypeScript"
-  [removable]="true"
-  (chipRemove)="remove('ts')"
-/>
+<ui-lib-chip label="TypeScript" [removable]="true" (chipRemove)="remove('ts')" />
 
 <!-- Clickable / selectable chip -->
-<ui-lib-chip
-  label="Signals"
-  [selectable]="true"
-  [(selected)]="signalSelected"
-/>
+<ui-lib-chip label="Signals" [selectable]="true" [(selected)]="signalSelected" />
 ```
 
 ## Related
@@ -133,4 +125,3 @@ Chip — compact element representing an attribute, tag, or action. Supports an 
 - [Demo page](/components/chip)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/chip/README.md)
-

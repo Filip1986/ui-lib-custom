@@ -283,7 +283,7 @@ export class TabsDemoComponent {
         label,
         content: `${label} content`,
       };
-    }
+    },
   );
 
   public readonly navTabs: NavTabItem[] = [
@@ -302,18 +302,18 @@ export class TabsDemoComponent {
 
   public readonly controlledIndex: WritableSignal<number> = signal<number>(0);
   public readonly controlledSelection: Signal<number> = computed<number>((): number =>
-    this.controlledIndex()
+    this.controlledIndex(),
   );
 
   public readonly playgroundTabsResolved: Signal<DemoTab[]> = computed<DemoTab[]>((): DemoTab[] =>
-    this.scrollable() ? this.scrollTabs : this.playgroundTabs()
+    this.scrollable() ? this.scrollTabs : this.playgroundTabs(),
   );
 
   public readonly playgroundScrollBehavior: Signal<TabsScrollBehavior> =
     computed<TabsScrollBehavior>((): TabsScrollBehavior => (this.scrollable() ? 'arrows' : 'auto'));
 
   public readonly playgroundMode: Signal<TabsMode> = computed<TabsMode>(
-    (): TabsMode => (this.menuMode() ? 'navigation' : 'default')
+    (): TabsMode => (this.menuMode() ? 'navigation' : 'default'),
   );
 
   public readonly playgroundPerTabLazy: Signal<TabsLazyMode | undefined> = computed<
@@ -325,14 +325,14 @@ export class TabsDemoComponent {
 
   public readonly track: (index: number, item: unknown) => TabsValue | number = (
     index: number,
-    item: unknown
+    item: unknown,
   ): TabsValue | number =>
     item && typeof item === 'object' && 'value' in (item as { value?: unknown })
       ? (item as { value: TabsValue }).value
       : index;
 
   public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
-    (): Record<string, string> => this.themeService.getCssVars(this.themeService.preset())
+    (): Record<string, string> => this.themeService.getCssVars(this.themeService.preset()),
   );
 
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
@@ -386,7 +386,7 @@ export class TabsDemoComponent {
 
   public onCloseTab(payload: { value: TabsValue | null; index: number }): void {
     this.closableTabs.update((tabs: DemoTab[]): DemoTab[] =>
-      tabs.filter((tab: DemoTab): boolean => tab.value !== payload.value)
+      tabs.filter((tab: DemoTab): boolean => tab.value !== payload.value),
     );
   }
 

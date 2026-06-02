@@ -44,7 +44,7 @@ class SplitButtonA11yHostComponent {
     signal<SplitButtonVariant | null>('material');
   public readonly buttonAriaLabel: WritableSignal<string | null> = signal<string | null>(null);
   public readonly menuButtonAriaLabel: WritableSignal<string | null> = signal<string | null>(
-    'More save actions'
+    'More save actions',
   );
   public readonly model: WritableSignal<readonly SplitButtonItem[]> = signal<
     readonly SplitButtonItem[]
@@ -76,14 +76,14 @@ class SplitButtonMultiA11yHostComponent {
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -91,7 +91,7 @@ function queryAllEl<T extends HTMLElement>(
 function mainButton(fixture: ComponentFixture<unknown>): HTMLButtonElement {
   const element: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
     fixture,
-    '.ui-lib-split-button__default-button'
+    '.ui-lib-split-button__default-button',
   );
   if (!element) {
     throw new Error('Expected split button main button to exist.');
@@ -102,7 +102,7 @@ function mainButton(fixture: ComponentFixture<unknown>): HTMLButtonElement {
 function menuButton(fixture: ComponentFixture<unknown>): HTMLButtonElement {
   const element: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
     fixture,
-    '.ui-lib-split-button__menu-button'
+    '.ui-lib-split-button__menu-button',
   );
   if (!element) {
     throw new Error('Expected split button menu button to exist.');
@@ -137,10 +137,10 @@ async function detectChangesAndWait(fixture: ComponentFixture<unknown>): Promise
 
 async function createFixture(): Promise<ComponentFixture<SplitButtonA11yHostComponent>>;
 async function createFixture(
-  hostComponent: typeof SplitButtonMultiA11yHostComponent
+  hostComponent: typeof SplitButtonMultiA11yHostComponent,
 ): Promise<ComponentFixture<SplitButtonMultiA11yHostComponent>>;
 async function createFixture<T>(
-  hostComponent: Type<T> = SplitButtonA11yHostComponent as Type<T>
+  hostComponent: Type<T> = SplitButtonA11yHostComponent as Type<T>,
 ): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
     imports: [hostComponent],
@@ -231,7 +231,7 @@ describe('SplitButton Accessibility', (): void => {
       expect(items[0]?.getAttribute('role')).toBe('menuitem');
       expect(items[1]?.getAttribute('aria-disabled')).toBe('true');
       expect(
-        queryEl<HTMLElement>(fixture, '.ui-lib-split-button__separator')?.getAttribute('role')
+        queryEl<HTMLElement>(fixture, '.ui-lib-split-button__separator')?.getAttribute('role'),
       ).toBe('separator');
     });
 

@@ -5,11 +5,11 @@
 
 ---
 
-| File | Covers |
-|------|--------|
-| [CSS-STANDARDS.md](CSS-STANDARDS.md) | Token system (`--uilib-*`), `ViewEncapsulation.None` rules, BEM, cascade layers, Stylelint |
-| [HTML-STANDARDS.md](HTML-STANDARDS.md) | Semantic HTML, ARIA obligations, keyboard patterns, content projection, accessibility |
-| [JS-STANDARDS.md](JS-STANDARDS.md) | JavaScript runtime: memory cleanup, layout thrashing under `ViewEncapsulation.None`, data structures |
+| File                                   | Covers                                                                                               |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [CSS-STANDARDS.md](CSS-STANDARDS.md)   | Token system (`--uilib-*`), `ViewEncapsulation.None` rules, BEM, cascade layers, Stylelint           |
+| [HTML-STANDARDS.md](HTML-STANDARDS.md) | Semantic HTML, ARIA obligations, keyboard patterns, content projection, accessibility                |
+| [JS-STANDARDS.md](JS-STANDARDS.md)     | JavaScript runtime: memory cleanup, layout thrashing under `ViewEncapsulation.None`, data structures |
 
 ## Platform reference
 
@@ -23,4 +23,3 @@ platform/docs/standards/TS-STANDARDS.md
 ```
 
 When a rule is not covered here, consult the platform standard. When the projects diverge, this document takes precedence.
-

@@ -75,7 +75,7 @@ class OrganizationChartA11yHost {
 const fixtureRefs: ComponentFixture<unknown>[] = [];
 
 async function createFixture(
-  configure?: (host: OrganizationChartA11yHost) => void
+  configure?: (host: OrganizationChartA11yHost) => void,
 ): Promise<ComponentFixture<OrganizationChartA11yHost>> {
   await TestBed.configureTestingModule({
     imports: [OrganizationChartA11yHost],
@@ -111,10 +111,10 @@ function getTreeItems(fixture: ComponentFixture<OrganizationChartA11yHost>): HTM
 
 function focusTreeItemByLabel(
   fixture: ComponentFixture<OrganizationChartA11yHost>,
-  label: string
+  label: string,
 ): HTMLElement {
   const item: HTMLElement | undefined = getTreeItems(fixture).find(
-    (treeItem: HTMLElement): boolean => treeItem.textContent.includes(label)
+    (treeItem: HTMLElement): boolean => treeItem.textContent.includes(label),
   );
   expect(item).toBeTruthy();
   item!.focus();
@@ -135,14 +135,16 @@ describe('OrganizationChart — accessibility', (): void => {
     it('should set role="tree" on the root list', async (): Promise<void> => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture();
       expect(
-        query(fixture.nativeElement as Element, '.uilib-org-chart-root')?.getAttribute('role')
+        query(fixture.nativeElement as Element, '.uilib-org-chart-root')?.getAttribute('role'),
       ).toBe('tree');
     });
 
     it('should expose aria-label on the root tree', async (): Promise<void> => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture();
       expect(
-        query(fixture.nativeElement as Element, '.uilib-org-chart-root')?.getAttribute('aria-label')
+        query(fixture.nativeElement as Element, '.uilib-org-chart-root')?.getAttribute(
+          'aria-label',
+        ),
       ).toBe('Organization hierarchy');
     });
 
@@ -164,7 +166,7 @@ describe('OrganizationChart — accessibility', (): void => {
     it('should set aria-setsize on root nodes', async (): Promise<void> => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture();
       const rootNodes: HTMLElement[] = getTreeItems(fixture).filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-level') === '1'
+        (item: HTMLElement): boolean => item.getAttribute('aria-level') === '1',
       );
       expect(rootNodes[0]?.getAttribute('aria-setsize')).toBe('2');
       expect(rootNodes[1]?.getAttribute('aria-setsize')).toBe('2');
@@ -173,7 +175,7 @@ describe('OrganizationChart — accessibility', (): void => {
     it('should set aria-posinset for sibling order', async (): Promise<void> => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture();
       const rootNodes: HTMLElement[] = getTreeItems(fixture).filter(
-        (item: HTMLElement): boolean => item.getAttribute('aria-level') === '1'
+        (item: HTMLElement): boolean => item.getAttribute('aria-level') === '1',
       );
       expect(rootNodes[0]?.getAttribute('aria-posinset')).toBe('1');
       expect(rootNodes[1]?.getAttribute('aria-posinset')).toBe('2');
@@ -182,7 +184,7 @@ describe('OrganizationChart — accessibility', (): void => {
     it('should render nested child containers as role="group"', async (): Promise<void> => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture();
       expect(queryAll(fixture.nativeElement as Element, '[role="group"]').length).toBeGreaterThan(
-        0
+        0,
       );
     });
 
@@ -281,7 +283,7 @@ describe('OrganizationChart — accessibility', (): void => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture(
         (host: OrganizationChartA11yHost): void => {
           host.selectionMode.set('single');
-        }
+        },
       );
       const ceo: HTMLElement = focusTreeItemByLabel(fixture, 'CEO');
       dispatchKeydown(ceo, 'Enter');
@@ -294,14 +296,14 @@ describe('OrganizationChart — accessibility', (): void => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture(
         (host: OrganizationChartA11yHost): void => {
           host.selectionMode.set('single');
-        }
+        },
       );
       const vpEngineering: HTMLElement = focusTreeItemByLabel(fixture, 'VP Engineering');
       dispatchKeydown(vpEngineering, ' ');
       fixture.detectChanges();
       await fixture.whenStable();
       expect(focusTreeItemByLabel(fixture, 'VP Engineering').getAttribute('aria-selected')).toBe(
-        'true'
+        'true',
       );
     });
 
@@ -318,7 +320,7 @@ describe('OrganizationChart — accessibility', (): void => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture();
       const connectors: HTMLElement[] = queryAll(
         fixture.nativeElement as Element,
-        '.uilib-org-chart-connector-down'
+        '.uilib-org-chart-connector-down',
       );
       expect(connectors.length).toBeGreaterThan(0);
       connectors.forEach((connector: HTMLElement): void => {
@@ -330,7 +332,7 @@ describe('OrganizationChart — accessibility', (): void => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture();
       const connectors: HTMLElement[] = queryAll(
         fixture.nativeElement as Element,
-        '.uilib-org-chart-connector-up'
+        '.uilib-org-chart-connector-up',
       );
       expect(connectors.length).toBeGreaterThan(0);
       connectors.forEach((connector: HTMLElement): void => {
@@ -342,7 +344,7 @@ describe('OrganizationChart — accessibility', (): void => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture();
       const toggleIcons: HTMLElement[] = queryAll(
         fixture.nativeElement as Element,
-        '.uilib-org-chart-toggle-icon'
+        '.uilib-org-chart-toggle-icon',
       );
       expect(toggleIcons.length).toBeGreaterThan(0);
       toggleIcons.forEach((icon: HTMLElement): void => {
@@ -355,14 +357,14 @@ describe('OrganizationChart — accessibility', (): void => {
     it('should render projected fallback content', async (): Promise<void> => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture();
       expect(query(fixture.nativeElement as Element, '.fallback-list')?.textContent).toContain(
-        'Linear fallback list'
+        'Linear fallback list',
       );
     });
 
     it('should keep fallback content outside treeitem navigation', async (): Promise<void> => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture();
       expect(
-        query(fixture.nativeElement as Element, '.fallback-list')?.closest('[role="treeitem"]')
+        query(fixture.nativeElement as Element, '.fallback-list')?.closest('[role="treeitem"]'),
       ).toBeNull();
     });
   });
@@ -386,7 +388,7 @@ describe('OrganizationChart — accessibility', (): void => {
       const fixture: ComponentFixture<OrganizationChartA11yHost> = await createFixture(
         (host: OrganizationChartA11yHost): void => {
           host.selectionMode.set('single');
-        }
+        },
       );
       const ceo: HTMLElement = focusTreeItemByLabel(fixture, 'CEO');
       dispatchKeydown(ceo, 'Enter');

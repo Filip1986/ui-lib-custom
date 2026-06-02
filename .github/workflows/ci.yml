@@ -48,6 +48,8 @@ jobs:
         run: npm ci --legacy-peer-deps
       - name: Lint
         run: npm run lint
+      - name: Prettier (formatting)
+        run: npm run format:check
       - name: i18n checks (hardcoded strings + key-catalogue freshness)
         run: |
           npm run check:i18n

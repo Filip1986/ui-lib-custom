@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header docHeader title="Upload" [importCode]="importCode">
     <p class="doc-description">
       Advanced file uploader with drag-and-drop, image previews, validation, and custom upload mode.
@@ -96,8 +95,8 @@
   <app-doc-section id="auto-upload" title="Auto Upload">
     <p class="demo-section__description">
       Set <code>auto="true"</code> together with <code>customUpload="true"</code>
-      to trigger the upload immediately after file selection.
-      The Upload and Cancel buttons are hidden since they are not needed.
+      to trigger the upload immediately after file selection. The Upload and Cancel buttons are
+      hidden since they are not needed.
     </p>
 
     <ui-lib-upload
@@ -127,14 +126,11 @@
   <!-- ── Section 7: Custom file template ─────────────────────────────────── -->
   <app-doc-section id="custom-file-template" title="Custom File Template">
     <p class="demo-section__description">
-      Use the <code>uiUploadFile</code> directive to render each queued file
-      with a completely custom template.
+      Use the <code>uiUploadFile</code> directive to render each queued file with a completely
+      custom template.
     </p>
 
-    <ui-lib-upload
-      [variant]="activeVariant()"
-      [multiple]="true"
-    >
+    <ui-lib-upload [variant]="activeVariant()" [multiple]="true">
       <ng-template uiUploadFile let-item let-index="index">
         <div class="upload-demo__custom-file">
           <span class="upload-demo__custom-file-index">{{ index + 1 }}</span>
@@ -147,11 +143,7 @@
 
   <!-- ── Section 8: Disabled ─────────────────────────────────────────────── -->
   <app-doc-section id="disabled" title="Disabled">
-
-    <ui-lib-upload
-      [variant]="activeVariant()"
-      [disabled]="true"
-    />
+    <ui-lib-upload [variant]="activeVariant()" [disabled]="true" />
   </app-doc-section>
 
   <!-- ── Event log ──────────────────────────────────────────────────────────── -->
@@ -172,7 +164,6 @@
     </div>
   </app-doc-section>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -181,7 +172,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -198,7 +189,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -208,5 +199,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

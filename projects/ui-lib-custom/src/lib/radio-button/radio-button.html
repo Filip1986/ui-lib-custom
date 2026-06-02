@@ -27,11 +27,7 @@
 
 <!-- Optional label -->
 @if (label()) {
-  <label
-    [for]="getNativeInputId()"
-    [id]="getLabelElementId()"
-    class="ui-lib-radio-button__label"
-  >
+  <label [for]="getNativeInputId()" [id]="getLabelElementId()" class="ui-lib-radio-button__label">
     {{ label() }}
   </label>
 }

@@ -19,12 +19,12 @@ Your job is to make that discovery inevitable and the first impression undeniabl
 
 ## How the Best Launches Actually Worked
 
-| Library | What they did | Why it worked |
-|---|---|---|
-| **shadcn/ui** | The distribution model WAS the story — copy-paste, not install | The idea spread before anyone ran a component |
-| **Tailwind CSS** | Adam Wathan wrote about utility-first CSS for months before launch | By launch, thousands already agreed with the philosophy |
-| **TanStack Query** | Showed the PROBLEM publicly and repeatedly before the solution | Community trusted him before the product existed |
-| **Vite** | One sentence of pain: "webpack is slow." | Everyone nodded. The solution sold itself. |
+| Library            | What they did                                                      | Why it worked                                           |
+| ------------------ | ------------------------------------------------------------------ | ------------------------------------------------------- |
+| **shadcn/ui**      | The distribution model WAS the story — copy-paste, not install     | The idea spread before anyone ran a component           |
+| **Tailwind CSS**   | Adam Wathan wrote about utility-first CSS for months before launch | By launch, thousands already agreed with the philosophy |
+| **TanStack Query** | Showed the PROBLEM publicly and repeatedly before the solution     | Community trusted him before the product existed        |
+| **Vite**           | One sentence of pain: "webpack is slow."                           | Everyone nodded. The solution sold itself.              |
 
 **The pattern:** thought leadership before product. Education before announcement. Trust before launch.
 
@@ -50,20 +50,23 @@ Write. Not about your library — about **Angular UI problems**.
 
 #### Articles to write, in order
 
-**1. The axe-core benchmark article** *(write this when Phase 1 audit is complete)*
-> *"I ran axe-core on the 4 biggest Angular component libraries. Here's what I found."*
+**1. The axe-core benchmark article** _(write this when Phase 1 audit is complete)_
+
+> _"I ran axe-core on the 4 biggest Angular component libraries. Here's what I found."_
 
 This is your **biggest pre-launch asset**. It is a news event in the Angular community, not a blog post. It establishes you as the accessibility authority before you've announced a single component. Plan everything around it.
 
 **2. Deep technical education pieces**
-> *"Why combobox is the hardest ARIA pattern to get right — and why every Angular library gets it wrong"*
-> *"What signals-first actually means for component API design"*
-> *"The right way to implement focus management in Angular overlays"*
+
+> _"Why combobox is the hardest ARIA pattern to get right — and why every Angular library gets it wrong"_
+> _"What signals-first actually means for component API design"_
+> _"The right way to implement focus management in Angular overlays"_
 
 These are educational. No product pitch. Pure value. They signal deep expertise.
 
-**3. The "State of Angular UI" piece** *(pre-launch)*
-> *"What the Angular UI ecosystem is still missing in 2026"*
+**3. The "State of Angular UI" piece** _(pre-launch)_
+
+> _"What the Angular UI ecosystem is still missing in 2026"_
 
 Frame the gap. When your library fills it, the connection is obvious — and you don't even have to say it explicitly.
 
@@ -81,7 +84,8 @@ Before any public announcement, get **10–15 real Angular developers** using it
 - Collect authentic testimonials from the ones who are genuinely impressed
 
 When you launch, you don't launch alone. You launch with people already saying:
-> *"I've been using this for two months and it's different."*
+
+> _"I've been using this for two months and it's different."_
 
 That social proof is worth more than any announcement you could make.
 
@@ -91,13 +95,13 @@ That social proof is worth more than any announcement you could make.
 
 This is not a Product Hunt play. Not a Hacker News play.
 
-| Channel | How to use it |
-|---|---|
-| **Angular Discord** | The most active community hub — be present there during hardening, not just at launch |
-| **Twitter / X** | Tight, interconnected Angular dev community — the axe-core article goes here first |
-| **Angular Weekly newsletter** | Submit for inclusion on launch week |
-| **ng-conf** | Annual Angular conference — a demo or talk here is legitimately transformative |
-| **Dev.to / Medium** | Publish the educational articles here for reach |
+| Channel                       | How to use it                                                                         |
+| ----------------------------- | ------------------------------------------------------------------------------------- |
+| **Angular Discord**           | The most active community hub — be present there during hardening, not just at launch |
+| **Twitter / X**               | Tight, interconnected Angular dev community — the axe-core article goes here first    |
+| **Angular Weekly newsletter** | Submit for inclusion on launch week                                                   |
+| **ng-conf**                   | Annual Angular conference — a demo or talk here is legitimately transformative        |
+| **Dev.to / Medium**           | Publish the educational articles here for reach                                       |
 
 #### People worth connecting with
 
@@ -124,8 +128,9 @@ If any of these people authentically engage with your work, the Angular world no
 Not a tour of every component. A developer building something real — fast, with great autocomplete, with keyboard navigation that just works. Show, don't tell. The video is the thing people share.
 
 **The benchmark article drops the same day**
-> *"The most accessible Angular component library — here's the evidence."*
-The article and the launch are one event, not two.
+
+> _"The most accessible Angular component library — here's the evidence."_
+> The article and the launch are one event, not two.
 
 **The docs site IS the landing page**
 Interactive playgrounds. Copy-paste examples. Live demos. Accessibility notes per component. The docs are the product experience at launch — they must be as good as the code.
@@ -173,14 +178,14 @@ They do not pay attention to launch announcements. They pay attention to things 
 
 Do not take a step in the launch sequence until the gate before it is passed.
 
-| Gate | Required before |
-|---|---|
-| Phase 1 axe-core audit clean | Writing the benchmark article |
-| Phase 3 complete (all 76 components ≥ 8) | Seeding early access |
-| Docs site genuinely impressive | Any public announcement |
-| Demo video recorded | Launch day |
-| 10+ seed developers with positive signal | Launch day |
-| Benchmark article written and ready | Launch day |
+| Gate                                     | Required before               |
+| ---------------------------------------- | ----------------------------- |
+| Phase 1 axe-core audit clean             | Writing the benchmark article |
+| Phase 3 complete (all 76 components ≥ 8) | Seeding early access          |
+| Docs site genuinely impressive           | Any public announcement       |
+| Demo video recorded                      | Launch day                    |
+| 10+ seed developers with positive signal | Launch day                    |
+| Benchmark article written and ready      | Launch day                    |
 
 ---
 
@@ -197,11 +202,11 @@ The hardening work you are doing now IS the launch preparation. Every component 
 
 ## Related Documents
 
-| Document | How it connects |
-|---|---|
-| [`ROADMAP.md`](ROADMAP.md) | Phase gates that unlock each launch step |
-| [`COMPETITIVE_STRATEGY.md`](COMPETITIVE_STRATEGY.md) | The benchmark repo and "Built Different" content |
+| Document                                                 | How it connects                                                        |
+| -------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [`ROADMAP.md`](ROADMAP.md)                               | Phase gates that unlock each launch step                               |
+| [`COMPETITIVE_STRATEGY.md`](COMPETITIVE_STRATEGY.md)     | The benchmark repo and "Built Different" content                       |
 | [`COMPETITIVE_BENCHMARKS.md`](COMPETITIVE_BENCHMARKS.md) | The evidence base — parity tables and 🚀 differentiators per component |
-| [`VISION.md`](VISION.md) | The why behind every decision |
-| [`COMPONENT_SCORES.md`](COMPONENT_SCORES.md) | The scoreboard that tells you when you're ready |
-| [`SCORING_CRITERIA.md`](SCORING_CRITERIA.md) | The 149-checkpoint quality gate — what "ready" actually means |
+| [`VISION.md`](VISION.md)                                 | The why behind every decision                                          |
+| [`COMPONENT_SCORES.md`](COMPONENT_SCORES.md)             | The scoreboard that tells you when you're ready                        |
+| [`SCORING_CRITERIA.md`](SCORING_CRITERIA.md)             | The 149-checkpoint quality gate — what "ready" actually means          |

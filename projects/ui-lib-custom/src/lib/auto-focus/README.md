@@ -9,10 +9,10 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `disabled` | `boolean` | `false` | Set to `true` to skip autofocus |
-| `selector` | `string \| null` | `null` | Optional child selector. When set, the matching child is focused instead of the host. Missing matches do nothing; invalid selectors warn in DEV mode and fall back to the host |
+| Name       | Type             | Default | Notes                                                                                                                                                                          |
+| ---------- | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `disabled` | `boolean`        | `false` | Set to `true` to skip autofocus                                                                                                                                                |
+| `selector` | `string \| null` | `null`  | Optional child selector. When set, the matching child is focused instead of the host. Missing matches do nothing; invalid selectors warn in DEV mode and fall back to the host |
 
 ## Outputs
 
@@ -21,8 +21,7 @@ _none_
 ## Usage
 
 ```html
-<input uiLibAutoFocus />
-<input uiLibAutoFocus [disabled]="disableAutoFocus" />
+<input uiLibAutoFocus /> <input uiLibAutoFocus [disabled]="disableAutoFocus" />
 ```
 
 ```html

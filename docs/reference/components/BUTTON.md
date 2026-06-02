@@ -13,34 +13,34 @@ Action button component with 12 appearances, 9 severities, and orthogonal pill /
 
 ### Inputs
 
-| Name            | Type                                 | Default     | Description                                                                                                                                                                                                                                |
-| --------------- | ------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `appearance`    | `ButtonAppearance`                   | `'solid'`   | —                                                                                                                                                                                                                                          |
-| `ariaChecked`   | `boolean | null`                     | `null`      | —                                                                                                                                                                                                                                          |
-| `ariaLabel`     | `string | null`                      | `null`      | —                                                                                                                                                                                                                                          |
-| `ariaPressed`   | `boolean | null`                     | `null`      | —                                                                                                                                                                                                                                          |
-| `badge`         | `string | number | null | undefined` | `null`      | —                                                                                                                                                                                                                                          |
-| `badgeClass`    | `string | null`                      | `null`      | —                                                                                                                                                                                                                                          |
-| `badgeSeverity` | `BadgeSeverity`                      | `'danger'`  | —                                                                                                                                                                                                                                          |
-| `disabled`      | `boolean`                            | `false`     | —                                                                                                                                                                                                                                          |
-| `fullWidth`     | `boolean`                            | `false`     | —                                                                                                                                                                                                                                          |
-| `icon`          | `SemanticIcon | string | null`       | `null`      | —                                                                                                                                                                                                                                          |
-| `iconOnly`      | `boolean`                            | `false`     | —                                                                                                                                                                                                                                          |
-| `iconPosition`  | `IconPosition`                       | `'left'`    | —                                                                                                                                                                                                                                          |
-| `label`         | `string | null`                      | `null`      | Convenience text label, rendered inside the button when no content is projected. Prefer projected content (`<ui-lib-button>Save</ui-lib-button>`); this exists so `<ui-lib-button label="Save" />` also produces visible, accessible text. |
-| `loading`       | `boolean`                            | `false`     | —                                                                                                                                                                                                                                          |
-| `loadingIcon`   | `SemanticIcon | string`              | `'spinner'` | —                                                                                                                                                                                                                                          |
-| `loadingLabel`  | `string | null`                      | `null`      | —                                                                                                                                                                                                                                          |
-| `pill`          | `boolean`                            | `false`     | —                                                                                                                                                                                                                                          |
-| `raised`        | `boolean`                            | `false`     | —                                                                                                                                                                                                                                          |
-| `role`          | `string | null`                      | `null`      | —                                                                                                                                                                                                                                          |
-| `severity`      | `ButtonSeverity | null`              | `null`      | —                                                                                                                                                                                                                                          |
-| `shadow`        | `string | null`                      | `null`      | —                                                                                                                                                                                                                                          |
-| `size`          | `ButtonSize`                         | `'md'`      | —                                                                                                                                                                                                                                          |
-| `softDisabled`  | `boolean`                            | `false`     | —                                                                                                                                                                                                                                          |
-| `tabIndex`      | `number | null`                      | `null`      | —                                                                                                                                                                                                                                          |
-| `type`          | `ButtonType`                         | `'button'`  | —                                                                                                                                                                                                                                          |
-| `variant`       | `ButtonVariant | null`               | `null`      | —                                                                                                                                                                                                                                          |
+| Name            | Type               | Default    | Description |
+| --------------- | ------------------ | ---------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ | --- |
+| `appearance`    | `ButtonAppearance` | `'solid'`  | —           |
+| `ariaChecked`   | `boolean           | null`      | `null`      | —                                                                                                                                                                                                                                          |
+| `ariaLabel`     | `string            | null`      | `null`      | —                                                                                                                                                                                                                                          |
+| `ariaPressed`   | `boolean           | null`      | `null`      | —                                                                                                                                                                                                                                          |
+| `badge`         | `string            | number     | null        | undefined`                                                                                                                                                                                                                                 | `null` | —   |
+| `badgeClass`    | `string            | null`      | `null`      | —                                                                                                                                                                                                                                          |
+| `badgeSeverity` | `BadgeSeverity`    | `'danger'` | —           |
+| `disabled`      | `boolean`          | `false`    | —           |
+| `fullWidth`     | `boolean`          | `false`    | —           |
+| `icon`          | `SemanticIcon      | string     | null`       | `null`                                                                                                                                                                                                                                     | —      |
+| `iconOnly`      | `boolean`          | `false`    | —           |
+| `iconPosition`  | `IconPosition`     | `'left'`   | —           |
+| `label`         | `string            | null`      | `null`      | Convenience text label, rendered inside the button when no content is projected. Prefer projected content (`<ui-lib-button>Save</ui-lib-button>`); this exists so `<ui-lib-button label="Save" />` also produces visible, accessible text. |
+| `loading`       | `boolean`          | `false`    | —           |
+| `loadingIcon`   | `SemanticIcon      | string`    | `'spinner'` | —                                                                                                                                                                                                                                          |
+| `loadingLabel`  | `string            | null`      | `null`      | —                                                                                                                                                                                                                                          |
+| `pill`          | `boolean`          | `false`    | —           |
+| `raised`        | `boolean`          | `false`    | —           |
+| `role`          | `string            | null`      | `null`      | —                                                                                                                                                                                                                                          |
+| `severity`      | `ButtonSeverity    | null`      | `null`      | —                                                                                                                                                                                                                                          |
+| `shadow`        | `string            | null`      | `null`      | —                                                                                                                                                                                                                                          |
+| `size`          | `ButtonSize`       | `'md'`     | —           |
+| `softDisabled`  | `boolean`          | `false`    | —           |
+| `tabIndex`      | `number            | null`      | `null`      | —                                                                                                                                                                                                                                          |
+| `type`          | `ButtonType`       | `'button'` | —           |
+| `variant`       | `ButtonVariant     | null`      | `null`      | —                                                                                                                                                                                                                                          |
 
 ### Outputs
 
@@ -216,31 +216,37 @@ _none_
 
 <!-- Two-axis: appearance + severity -->
 <ui-lib-button appearance="outline" severity="danger" (click)="delete()">Delete</ui-lib-button>
-<ui-lib-button appearance="soft"    severity="success">Confirm</ui-lib-button>
-<ui-lib-button appearance="ghost"   severity="primary">Cancel</ui-lib-button>
+<ui-lib-button appearance="soft" severity="success">Confirm</ui-lib-button>
+<ui-lib-button appearance="ghost" severity="primary">Cancel</ui-lib-button>
 
 <!-- Orthogonal modifiers compose with any appearance -->
 <ui-lib-button appearance="outline" severity="primary" [pill]="true">Pill Outline</ui-lib-button>
-<ui-lib-button appearance="solid"   severity="primary" [raised]="true">Raised</ui-lib-button>
-<ui-lib-button appearance="soft"    severity="danger"  [pill]="true" [raised]="true">
+<ui-lib-button appearance="solid" severity="primary" [raised]="true">Raised</ui-lib-button>
+<ui-lib-button appearance="soft" severity="danger" [pill]="true" [raised]="true">
   Pill + Raised
 </ui-lib-button>
 
 <!-- Expressive styles -->
 <ui-lib-button appearance="elevated" severity="primary" icon="layers">Elevated</ui-lib-button>
 <ui-lib-button appearance="gradient" severity="primary">Gradient</ui-lib-button>
-<ui-lib-button appearance="glass"    severity="info"   [pill]="true">Glass Pill</ui-lib-button>
+<ui-lib-button appearance="glass" severity="info" [pill]="true">Glass Pill</ui-lib-button>
 <ui-lib-button appearance="glass-shadow">Glass Shadow</ui-lib-button>
-<ui-lib-button appearance="neon"     severity="success">Neon</ui-lib-button>
-<ui-lib-button appearance="tactile"  severity="primary" icon="search">Tactile</ui-lib-button>
+<ui-lib-button appearance="neon" severity="success">Neon</ui-lib-button>
+<ui-lib-button appearance="tactile" severity="primary" icon="search">Tactile</ui-lib-button>
 
 <!-- Link style -->
 <ui-lib-button appearance="link" severity="primary">Learn more</ui-lib-button>
 
 <!-- States -->
-<ui-lib-button [loading]="isSaving" severity="success" loadingLabel="Saving…" (click)="save()">Save</ui-lib-button>
-<ui-lib-button [disabled]="true" severity="primary">Disabled (removed from tab order)</ui-lib-button>
-<ui-lib-button [softDisabled]="true" severity="primary">Soft Disabled (keyboard-discoverable)</ui-lib-button>
+<ui-lib-button [loading]="isSaving" severity="success" loadingLabel="Saving…" (click)="save()"
+  >Save</ui-lib-button
+>
+<ui-lib-button [disabled]="true" severity="primary"
+  >Disabled (removed from tab order)</ui-lib-button
+>
+<ui-lib-button [softDisabled]="true" severity="primary"
+  >Soft Disabled (keyboard-discoverable)</ui-lib-button
+>
 
 <!-- Icon-only (ariaLabel required) -->
 <ui-lib-button icon="trash" [iconOnly]="true" severity="danger" ariaLabel="Delete item" />
@@ -257,4 +263,3 @@ _none_
 - [Demo page](/components/button)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/button/README.md)
-

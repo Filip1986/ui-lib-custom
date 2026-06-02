@@ -57,7 +57,7 @@ export function exportThemeAsScss(preset: ThemePreset, options: ScssExportOption
       ([key, value]: [string, string], index: number, entries: [string, string][]): void => {
         const comma: string = index < entries.length - 1 ? ',' : '';
         lines.push(`    '${kebabCase(key)}': ${value}${comma}`);
-      }
+      },
     );
     lines.push(`  ),`);
     lines.push(`  'border-radius': ${mapShapeRadius(preset.shape)}`);

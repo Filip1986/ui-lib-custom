@@ -39,21 +39,21 @@ const TOP_LEVEL_LINK_SELECTOR: string =
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
 
 function getContextMenuInstance(fixture: ComponentFixture<unknown>): ContextMenu {
   return fixture.debugElement.query(
-    (debugElement: DebugElement): boolean => debugElement.componentInstance instanceof ContextMenu
+    (debugElement: DebugElement): boolean => debugElement.componentInstance instanceof ContextMenu,
   ).componentInstance as ContextMenu;
 }
 
@@ -113,7 +113,7 @@ class ContextMenuDefaultLabelHostComponent {
 async function createFixture(
   hostComponent:
     | typeof ContextMenuA11yHostComponent
-    | typeof ContextMenuDefaultLabelHostComponent = ContextMenuA11yHostComponent
+    | typeof ContextMenuDefaultLabelHostComponent = ContextMenuA11yHostComponent,
 ): Promise<ComponentFixture<ContextMenuA11yHostComponent | ContextMenuDefaultLabelHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [hostComponent],
@@ -129,7 +129,7 @@ async function createFixture(
 }
 
 async function openMenu(
-  fixture: ComponentFixture<ContextMenuA11yHostComponent | ContextMenuDefaultLabelHostComponent>
+  fixture: ComponentFixture<ContextMenuA11yHostComponent | ContextMenuDefaultLabelHostComponent>,
 ): Promise<void> {
   const trigger: HTMLElement | null = queryEl<HTMLElement>(fixture, '.context-trigger');
   if (!trigger) {
@@ -149,11 +149,11 @@ async function openMenu(
 }
 
 async function openSubmenu(
-  fixture: ComponentFixture<ContextMenuA11yHostComponent | ContextMenuDefaultLabelHostComponent>
+  fixture: ComponentFixture<ContextMenuA11yHostComponent | ContextMenuDefaultLabelHostComponent>,
 ): Promise<void> {
   const parentLink: HTMLElement | null = queryEl<HTMLElement>(
     fixture,
-    '.ui-lib-context-menu__link[aria-haspopup="menu"]'
+    '.ui-lib-context-menu__link[aria-haspopup="menu"]',
   );
   if (!parentLink) {
     throw new Error('Expected a parent item with submenu');
@@ -184,7 +184,7 @@ describe('ContextMenu Accessibility', (): void => {
       fixture = await createFixture();
       await openMenu(fixture);
       expect(queryEl(fixture, '.ui-lib-context-menu__panel')?.getAttribute('aria-label')).toBe(
-        'Options'
+        'Options',
       );
     });
 
@@ -192,7 +192,7 @@ describe('ContextMenu Accessibility', (): void => {
       fixture = await createFixture(ContextMenuDefaultLabelHostComponent);
       await openMenu(fixture);
       expect(queryEl(fixture, '.ui-lib-context-menu__panel')?.getAttribute('aria-label')).toBe(
-        CONTEXT_MENU_DEFAULT_ARIA_LABEL
+        CONTEXT_MENU_DEFAULT_ARIA_LABEL,
       );
     });
 
@@ -201,7 +201,7 @@ describe('ContextMenu Accessibility', (): void => {
       await openMenu(fixture);
       const wrappers: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-context-menu__panel .ui-lib-context-menu__item'
+        '.ui-lib-context-menu__panel .ui-lib-context-menu__item',
       );
       expect(wrappers.length).toBeGreaterThan(0);
       for (const wrapper of wrappers) {
@@ -214,7 +214,7 @@ describe('ContextMenu Accessibility', (): void => {
       await openMenu(fixture);
       const links: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-context-menu__panel .ui-lib-context-menu__link'
+        '.ui-lib-context-menu__panel .ui-lib-context-menu__link',
       );
       expect(links.length).toBeGreaterThan(0);
       for (const link of links) {
@@ -233,8 +233,8 @@ describe('ContextMenu Accessibility', (): void => {
       await openMenu(fixture);
       expect(
         queryEl(fixture, '.ui-lib-context-menu__link[aria-haspopup="menu"]')?.getAttribute(
-          'aria-expanded'
-        )
+          'aria-expanded',
+        ),
       ).toBe('false');
     });
 
@@ -244,8 +244,8 @@ describe('ContextMenu Accessibility', (): void => {
       await openSubmenu(fixture);
       expect(
         queryEl(fixture, '.ui-lib-context-menu__link[aria-haspopup="menu"]')?.getAttribute(
-          'aria-expanded'
-        )
+          'aria-expanded',
+        ),
       ).toBe('true');
     });
 
@@ -263,7 +263,7 @@ describe('ContextMenu Accessibility', (): void => {
       await openSubmenu(fixture);
       const separator: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-context-menu__submenu .ui-lib-context-menu__separator'
+        '.ui-lib-context-menu__submenu .ui-lib-context-menu__separator',
       );
       expect(separator?.getAttribute('role')).toBe('separator');
       expect(separator?.hasAttribute('aria-hidden')).toBe(false);
@@ -280,7 +280,7 @@ describe('ContextMenu Accessibility', (): void => {
       await openMenu(fixture);
       const icons: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-context-menu__item-icon, .ui-lib-context-menu__submenu-icon'
+        '.ui-lib-context-menu__item-icon, .ui-lib-context-menu__submenu-icon',
       );
       expect(icons.length).toBeGreaterThan(0);
       for (const icon of icons) {
@@ -310,7 +310,7 @@ describe('ContextMenu Accessibility', (): void => {
       await openMenu(fixture);
       const disabledLink: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-context-menu__link[aria-disabled="true"]'
+        '.ui-lib-context-menu__link[aria-disabled="true"]',
       );
       expect(disabledLink?.getAttribute('tabindex')).toBe('-1');
     });
@@ -373,7 +373,7 @@ describe('ContextMenu Accessibility', (): void => {
       await openMenu(fixture);
       const parentLink: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-context-menu__link[aria-haspopup="menu"]'
+        '.ui-lib-context-menu__link[aria-haspopup="menu"]',
       );
       parentLink?.focus();
       dispatchKey(parentLink as HTMLElement, 'ArrowRight');
@@ -387,7 +387,7 @@ describe('ContextMenu Accessibility', (): void => {
       await openSubmenu(fixture);
       const parentLink: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-context-menu__link[aria-haspopup="menu"]'
+        '.ui-lib-context-menu__link[aria-haspopup="menu"]',
       );
       dispatchKey(parentLink as HTMLElement, 'ArrowLeft');
       fixture.detectChanges();

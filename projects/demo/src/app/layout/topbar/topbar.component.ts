@@ -22,13 +22,13 @@ export class TopbarComponent {
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
   public readonly mode: Signal<ThemeMode> = this.themeService.mode;
   public readonly variant: Signal<ThemeVariant> = computed<ThemeVariant>(
-    (): ThemeVariant => this.themeService.variant()
+    (): ThemeVariant => this.themeService.variant(),
   );
   public readonly shape: Signal<ShapeToken> = computed<ShapeToken>(
-    (): ShapeToken => this.themeService.shape()
+    (): ShapeToken => this.themeService.shape(),
   );
   public readonly density: Signal<DensityToken> = computed<DensityToken>(
-    (): DensityToken => this.themeService.density()
+    (): DensityToken => this.themeService.density(),
   );
 
   public readonly menuButtonClick: OutputEmitterRef<void> = output<void>();

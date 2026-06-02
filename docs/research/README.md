@@ -15,4 +15,3 @@ This folder contains implementation research and parity analysis used to plan co
 - Keep stable architecture and workflow rules in `AGENTS.md`.
 - Keep active session state in `AI_AGENT_CONTEXT.md`.
 - Keep long-form historical handoffs in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`.
-

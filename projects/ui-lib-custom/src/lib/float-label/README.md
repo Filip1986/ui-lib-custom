@@ -8,8 +8,8 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
+| Name      | Type                     | Default  | Notes                                      |
+| --------- | ------------------------ | -------- | ------------------------------------------ |
 | `variant` | `'over' \| 'in' \| 'on'` | `'over'` | Determines when and where the label floats |
 
 ## Outputs
@@ -78,7 +78,8 @@ The projected label should be a real `<label>` element. For native inputs and co
 <!-- ❌ Wrong — no for/id association -->
 <ui-lib-float-label>
   <input type="text" placeholder=" " />
-  <label>My Field</label> <!-- FloatLabel will repair this, but explicit wiring is preferred -->
+  <label>My Field</label>
+  <!-- FloatLabel will repair this, but explicit wiring is preferred -->
 </ui-lib-float-label>
 ```
 
@@ -132,13 +133,13 @@ FloatLabel composes well with:
 
 ## CSS Custom Properties
 
-| Token | Default | Description |
-|-------|---------|-------------|
-| `--ui-lib-float-label-color` | `var(--uilib-text-secondary-color, #6b7280)` | Resting label color |
-| `--ui-lib-float-label-active-color` | `var(--uilib-text-secondary-color, #6b7280)` | Filled-but-not-focused label color |
-| `--ui-lib-float-label-focus-color` | `var(--uilib-primary-color, #3b82f6)` | Label color when control is focused |
-| `--ui-lib-float-label-invalid-color` | `var(--uilib-error-color, #ef4444)` | Label color when control is invalid and dirty |
-| `--ui-lib-float-label-font-size` | `1rem` | Resting label font size |
-| `--ui-lib-float-label-active-font-size` | `0.75rem` | Floated/active label font size |
-| `--ui-lib-float-label-transition` | `0.2s ease` | Label animation timing (duration + easing); set to `0ms` when `prefers-reduced-motion: reduce` |
-| `--ui-lib-float-label-on-border-radius` | `var(--uilib-input-radius, var(--uilib-shape-base, 6px))` | Floated label chip radius for the `on` variant |
+| Token                                   | Default                                                   | Description                                                                                    |
+| --------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `--ui-lib-float-label-color`            | `var(--uilib-text-secondary-color, #6b7280)`              | Resting label color                                                                            |
+| `--ui-lib-float-label-active-color`     | `var(--uilib-text-secondary-color, #6b7280)`              | Filled-but-not-focused label color                                                             |
+| `--ui-lib-float-label-focus-color`      | `var(--uilib-primary-color, #3b82f6)`                     | Label color when control is focused                                                            |
+| `--ui-lib-float-label-invalid-color`    | `var(--uilib-error-color, #ef4444)`                       | Label color when control is invalid and dirty                                                  |
+| `--ui-lib-float-label-font-size`        | `1rem`                                                    | Resting label font size                                                                        |
+| `--ui-lib-float-label-active-font-size` | `0.75rem`                                                 | Floated/active label font size                                                                 |
+| `--ui-lib-float-label-transition`       | `0.2s ease`                                               | Label animation timing (duration + easing); set to `0ms` when `prefers-reduced-motion: reduce` |
+| `--ui-lib-float-label-on-border-radius` | `var(--uilib-input-radius, var(--uilib-shape-base, 6px))` | Floated label chip radius for the `on` variant                                                 |

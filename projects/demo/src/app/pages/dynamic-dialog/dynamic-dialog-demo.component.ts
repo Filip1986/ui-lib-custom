@@ -125,7 +125,7 @@ export class LongDialogContentComponent {
   protected readonly items: string[] = Array.from(
     { length: 12 },
     (_: unknown, index: number): string =>
-      `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Paragraph ${index + 1} of scrollable content.`
+      `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Paragraph ${index + 1} of scrollable content.`,
   );
 }
 

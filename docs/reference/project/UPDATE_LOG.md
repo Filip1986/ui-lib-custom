@@ -3,6 +3,7 @@
 ## CSS Custom Properties Standardization (BREAKING CHANGE)
 
 ### Changed
+
 - Standardized all CSS custom properties to use the `--uilib-{component}-{property}` pattern.
 - Renamed `--ui-select-*` to `--uilib-select-*`.
 - Renamed `--ui-input-*` to `--uilib-input-*`.
@@ -20,6 +21,7 @@
 - Checkbox variables were already compliant (`--uilib-checkbox-*`); no rename required.
 
 ### Migration
+
 See `docs/guides/MIGRATION_CSS_VARIABLES.md` for details.
 
 ---
@@ -27,6 +29,7 @@ See `docs/guides/MIGRATION_CSS_VARIABLES.md` for details.
 # Update Log - February 16, 2026
 
 ## Tabs Enhancements
+
 - Added scrollable tablist arrows with overflow detection and RTL-aware scrolling.
 - Added navigation mode (`mode='navigation'`) with `navigate` output for router-driven layouts.
 - Added per-tab lazy overrides and `uiLibTabContent` for deferred panel templates.
@@ -36,6 +39,7 @@ See `docs/guides/MIGRATION_CSS_VARIABLES.md` for details.
 ---
 
 ## Accordion Enhancements
+
 - Added expand/collapse icon swapping with toggle icon templates and icon positioning.
 - Improved content and icon animations with reduced-motion support and new animation tokens.
 - Added size-specific spacing and typography variables for sm/md/lg.
@@ -45,6 +49,7 @@ See `docs/guides/MIGRATION_CSS_VARIABLES.md` for details.
 ---
 
 ## Secondary Entry Points
+
 - Added secondary entry points for all components
 - Enables per-component imports for tree-shaking
 - Backward compatible
@@ -54,11 +59,13 @@ See `docs/guides/MIGRATION_CSS_VARIABLES.md` for details.
 # Update Log - January 25, 2026
 
 ## Demo Theming Improvements
+
 - Component playgrounds (buttons, cards, inputs, select) now follow the Theme Editor variant by default, with a per-demo toggle to opt out.
 - Demo previews apply theme changes via scoped CSS variables so global theme edits update live; local overrides are available but kept hidden in the UI for now.
 - Added a reusable theme scope directive to keep overrides contained to each preview.
 
 ## Card Minimal Styling
+
 - Minimal variant now uses the card background for header/footer and inset separators for a cleaner look.
 
 ---
@@ -72,6 +79,7 @@ This document tracks the upgrade to the latest versions of Angular and PrimeNG.
 ## Updated Packages
 
 ### Angular Framework
+
 - **@angular/core**: 20.3.16 → **21.1.1** ✅
 - **@angular/common**: 20.3.16 → **21.1.1** ✅
 - **@angular/compiler**: 20.3.16 → **21.1.1** ✅
@@ -80,20 +88,24 @@ This document tracks the upgrade to the latest versions of Angular and PrimeNG.
 - **@angular/router**: 20.3.16 → **21.1.1** ✅
 
 ### Angular DevTools
+
 - **@angular/cli**: 20.3.15 → **21.1.1** ✅
 - **@angular/build**: 20.3.15 → **21.1.1** ✅
 - **@angular/compiler-cli**: 20.3.16 → **21.1.1** ✅
 - **ng-packagr**: 20.3.2 → **21.1.0** ✅
 
 ### TypeScript
+
 - **typescript**: 5.8.3 → **5.9.3** ✅
   - Required for Angular 21 (needs TypeScript 5.9+)
 
 ### PrimeNG (Already Latest)
+
 - **primeng**: 21.0.4 ✅ (already latest)
 - **primeicons**: 7.0.0 ✅ (already latest)
 
 ### Testing Tools
+
 - **jasmine-core**: 5.8.0 → **6.0.1** ✅
 - **@types/jasmine**: 5.1.15 → **6.0.0** ✅
 
@@ -117,6 +129,7 @@ Updated peer dependencies to reflect new versions:
 ### Code Improvements
 
 Fixed deprecated Sass syntax in `button.scss`:
+
 - Changed `if()` function to `@if/@else` directive to address deprecation warning
 
 ## Documentation Updates
@@ -140,12 +153,14 @@ Updated the following files to reflect new versions:
 ## Breaking Changes
 
 ### Angular 21 Changes
+
 - TypeScript 5.9+ is now required
 - Some deprecated APIs may have been removed (review Angular changelog if issues arise)
 
 ### For Consuming Applications
 
 Applications using this library must now use:
+
 - **Angular 21.x or 22.x**
 - **PrimeNG 21.x**
 - **PrimeIcons 7.x**

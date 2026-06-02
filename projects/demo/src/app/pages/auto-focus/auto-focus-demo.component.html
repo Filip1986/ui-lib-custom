@@ -101,7 +101,6 @@
 
   <!-- ── Section 4: API ── -->
   <app-doc-section id="api" title="API">
-
     <h3 class="af-sub-title">Directive selector</h3>
     <ui-lib-code-snippet
       language="typescript"
@@ -122,15 +121,18 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
   <app-doc-section id="css-vars" title="CSS Custom Properties">
-    <p class="demo-section__description">This is a behavioral directive with no CSS custom properties. All visual styling is controlled by the wrapped component.</p>
+    <p class="demo-section__description">
+      This is a behavioral directive with no CSS custom properties. All visual styling is controlled
+      by the wrapped component.
+    </p>
   </app-doc-section>
 
   <!-- ── Accessibility ──────────────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <p class="demo-section__description">
-      <code>AutoFocus</code> is a pure focus-management directive. It improves accessibility
-      by placing keyboard focus on the most relevant element without requiring the user to Tab
-      through the page — but it does not add or modify any ARIA attributes.
+      <code>AutoFocus</code> is a pure focus-management directive. It improves accessibility by
+      placing keyboard focus on the most relevant element without requiring the user to Tab through
+      the page — but it does not add or modify any ARIA attributes.
     </p>
     <app-doc-aria-table [rows]="ariaRows" />
     <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>

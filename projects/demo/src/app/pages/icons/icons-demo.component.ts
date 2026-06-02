@@ -153,9 +153,9 @@ export class IconsDemoComponent {
       const query: string = this.searchQuery().toLowerCase();
       if (!query) return this.allIcons;
       return this.allIcons.filter((icon: SemanticIcon): boolean =>
-        icon.toLowerCase().includes(query)
+        icon.toLowerCase().includes(query),
       );
-    }
+    },
   );
 
   public onSearch(event: Event): void {

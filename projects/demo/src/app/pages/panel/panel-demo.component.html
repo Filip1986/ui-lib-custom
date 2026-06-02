@@ -79,10 +79,7 @@
         <p>This panel starts collapsed. Click the chevron to reveal the content.</p>
       </ui-lib-panel>
     </div>
-    <app-doc-code-example
-      [html]="collapsedDefaultHtml"
-      [typescript]="collapsedDefaultTs"
-    />
+    <app-doc-code-example [html]="collapsedDefaultHtml" [typescript]="collapsedDefaultTs" />
   </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -291,7 +288,6 @@
        API
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="api" title="API">
-
     <!-- Inputs -->
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
@@ -383,7 +379,6 @@
        ACCESSIBILITY
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="accessibility" title="Accessibility">
-
     <!-- ARIA -->
     <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
     <app-doc-aria-table [rows]="ariaRows" />

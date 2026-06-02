@@ -25,7 +25,7 @@ function queryEl<T extends HTMLElement>(fixture: ComponentFixture<unknown>, sele
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -222,7 +222,7 @@ describe('Tree', (): void => {
       // Pictures is collapsed; find its toggle
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const picsRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Pictures')
+        r.textContent.includes('Pictures'),
       );
       expect(picsRow).toBeTruthy();
 
@@ -240,7 +240,7 @@ describe('Tree', (): void => {
     it('should emit nodeExpand when expanding', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const picsRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Pictures')
+        r.textContent.includes('Pictures'),
       );
       const toggle: HTMLElement | null =
         picsRow?.querySelector<HTMLElement>('.uilib-tree-node-toggle') ?? null;
@@ -255,7 +255,7 @@ describe('Tree', (): void => {
       // Documents is expanded — collapse it
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const docsRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Documents')
+        r.textContent.includes('Documents'),
       );
       const toggle: HTMLElement | null =
         docsRow?.querySelector<HTMLElement>('.uilib-tree-node-toggle') ?? null;
@@ -270,7 +270,7 @@ describe('Tree', (): void => {
     it('should emit nodeCollapse when collapsing', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const docsRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Documents')
+        r.textContent.includes('Documents'),
       );
       const toggle: HTMLElement | null =
         docsRow?.querySelector<HTMLElement>('.uilib-tree-node-toggle') ?? null;
@@ -293,7 +293,7 @@ describe('Tree', (): void => {
     it('should select a node on click', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const workRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Work')
+        r.textContent.includes('Work'),
       );
       workRow?.click();
       fixture.detectChanges();
@@ -305,7 +305,7 @@ describe('Tree', (): void => {
     it('should apply selected class to clicked node', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const workRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Work')
+        r.textContent.includes('Work'),
       );
       workRow?.click();
       fixture.detectChanges();
@@ -316,7 +316,7 @@ describe('Tree', (): void => {
     it('should deselect when clicking the same node again', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const workRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Work')
+        r.textContent.includes('Work'),
       );
       workRow?.click();
       fixture.detectChanges();
@@ -331,10 +331,10 @@ describe('Tree', (): void => {
     it('should replace selection when clicking another node', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const workRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Work')
+        r.textContent.includes('Work'),
       );
       const homeRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Home')
+        r.textContent.includes('Home'),
       );
       workRow?.click();
       fixture.detectChanges();
@@ -369,10 +369,10 @@ describe('Tree', (): void => {
     it('should add nodes to selection on click', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const workRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Work')
+        r.textContent.includes('Work'),
       );
       const homeRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Home')
+        r.textContent.includes('Home'),
       );
       workRow?.click();
       fixture.detectChanges();
@@ -387,7 +387,7 @@ describe('Tree', (): void => {
     it('should deselect node on second click', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const workRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Work')
+        r.textContent.includes('Work'),
       );
       workRow?.click();
       fixture.detectChanges();
@@ -416,7 +416,7 @@ describe('Tree', (): void => {
     it('should check a leaf node on checkbox click', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const expensesRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Expenses')
+        r.textContent.includes('Expenses'),
       );
       const checkbox: HTMLElement | null =
         expensesRow?.querySelector<HTMLElement>('.uilib-tree-node-checkbox') ?? null;
@@ -431,7 +431,7 @@ describe('Tree', (): void => {
     it('should cascade check to all descendants when checking a branch', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const workRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Work')
+        r.textContent.includes('Work'),
       );
       const checkbox: HTMLElement | null =
         workRow?.querySelector<HTMLElement>('.uilib-tree-node-checkbox') ?? null;
@@ -449,7 +449,7 @@ describe('Tree', (): void => {
       // First check, then uncheck
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const workRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Work')
+        r.textContent.includes('Work'),
       );
       const checkbox: HTMLElement | null =
         workRow?.querySelector<HTMLElement>('.uilib-tree-node-checkbox') ?? null;
@@ -468,7 +468,7 @@ describe('Tree', (): void => {
     it('should emit nodeSelect on checkbox check', (): void => {
       const rows: HTMLElement[] = queryAllEl(fixture, '.uilib-tree-node-row');
       const expensesRow: HTMLElement | undefined = rows.find((r: HTMLElement): boolean =>
-        r.textContent.includes('Expenses')
+        r.textContent.includes('Expenses'),
       );
       const checkbox: HTMLElement | null =
         expensesRow?.querySelector<HTMLElement>('.uilib-tree-node-checkbox') ?? null;
@@ -503,7 +503,7 @@ describe('Tree', (): void => {
     it('should filter nodes (lenient mode) on text input', (): void => {
       const input: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.uilib-tree-filter-input'
+        '.uilib-tree-filter-input',
       );
       input.value = 'Resume';
       input.dispatchEvent(new Event('input'));
@@ -522,7 +522,7 @@ describe('Tree', (): void => {
     it('should show all nodes when filter is cleared', (): void => {
       const input: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.uilib-tree-filter-input'
+        '.uilib-tree-filter-input',
       );
       input.value = 'Resume';
       input.dispatchEvent(new Event('input'));
@@ -550,7 +550,7 @@ describe('Tree', (): void => {
 
       const input: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.uilib-tree-filter-input'
+        '.uilib-tree-filter-input',
       );
       input.value = 'barcelona';
       input.dispatchEvent(new Event('input'));
@@ -571,7 +571,7 @@ describe('Tree', (): void => {
 
       const input: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.uilib-tree-filter-input'
+        '.uilib-tree-filter-input',
       );
       input.value = 'Movies';
       input.dispatchEvent(new Event('input'));
@@ -622,7 +622,7 @@ describe('Tree', (): void => {
     it('should set aria-expanded on branch rows', (): void => {
       const docsRow: HTMLElement | null = queryEl(
         fixture,
-        '[role="treeitem"][aria-expanded="true"]'
+        '[role="treeitem"][aria-expanded="true"]',
       );
       expect(docsRow).toBeTruthy();
     });

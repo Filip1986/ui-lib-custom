@@ -48,6 +48,7 @@ Step 5 — Maintain it
 ### Tier 1 — Always measure, always publish
 
 **Accessibility (axe-core + manual)**
+
 - Automated axe-core scan across all components
 - Keyboard navigation: can every interaction be completed by keyboard alone?
 - Screen reader testing on key components: NVDA, VoiceOver
@@ -57,18 +58,19 @@ Step 5 — Maintain it
 **Angular modernity scorecard**
 A binary yes/no matrix per library:
 
-| Check                  | Angular Material | PrimeNG | Ng-Zorro | ui-lib-custom |
-|------------------------|------------------|---------|----------|---------------|
-| Signal inputs          | ?                | ?       | ?        | ✅             |
-| Standalone components  | ?                | ?       | ?        | ✅             |
-| OnPush by default      | ?                | ?       | ?        | ✅             |
-| SSR-native             | ?                | ?       | ?        | ✅             |
-| Zoneless-ready         | ?                | ?       | ?        | ✅             |
-| No NgModule required   | ?                | ?       | ?        | ✅             |
+| Check                 | Angular Material | PrimeNG | Ng-Zorro | ui-lib-custom |
+| --------------------- | ---------------- | ------- | -------- | ------------- |
+| Signal inputs         | ?                | ?       | ?        | ✅            |
+| Standalone components | ?                | ?       | ?        | ✅            |
+| OnPush by default     | ?                | ?       | ?        | ✅            |
+| SSR-native            | ?                | ?       | ?        | ✅            |
+| Zoneless-ready        | ?                | ?       | ?        | ✅            |
+| No NgModule required  | ?                | ?       | ?        | ✅            |
 
 Fill in the `?` cells when running the audit. Most competitors fail multiple columns — this is visually striking and immediately meaningful to any Angular developer.
 
 **Bundle size & tree-shaking quality**
+
 - Bytes per component imported in isolation
 - Tool: `bundlephobia`, `size-limit`, custom webpack-bundle-analyzer
 - Methodology: identical app, single component imported, minified + gzipped output
@@ -77,6 +79,7 @@ Fill in the `?` cells when running the audit. Most competitors fail multiple col
 
 **API ergonomics benchmark**
 Pick 5 real-world tasks and measure lines of code + TypeScript friction:
+
 - Accessible modal with focus trap
 - Data table with sort, filter, pagination
 - Form with validation and error states
@@ -86,11 +89,13 @@ Pick 5 real-world tasks and measure lines of code + TypeScript friction:
 Show side-by-side code comparisons on the landing page. No commentary needed — developers read code.
 
 **SSR / Hydration compatibility matrix**
+
 - Angular Universal
 - App Engine SSR
 - Partial hydration
 
 **TypeScript quality**
+
 - Strict generics flowing through form components
 - Autocomplete accuracy for inputs and outputs
 - Demonstrate through examples, not numbers
@@ -111,6 +116,7 @@ Too subjective. Make your own docs so obviously better that no comparison is nee
 ### What works
 
 **Verified, sourced claims in a "Built Different" section:**
+
 > "0 axe-core violations across all components — audited against Angular Material, PrimeNG, and Ng-Zorro."
 > "Signal-first APIs throughout — no legacy @Input/@Output decorators anywhere."
 > "Full keyboard navigation on every interactive component, without exception."
@@ -152,7 +158,7 @@ That is the "take over" outcome — executed through credibility, not claims.
 ## Competitors to Audit
 
 | Library          | Repo                                 | Notes                                          |
-|------------------|--------------------------------------|------------------------------------------------|
+| ---------------- | ------------------------------------ | ---------------------------------------------- |
 | Angular Material | github.com/angular/components        | Official Google library, highest install base  |
 | PrimeNG          | github.com/primefaces/primeng        | Most features, most stars in Angular ecosystem |
 | Ng-Zorro         | github.com/NG-ZORRO/ng-zorro-antd    | Ant Design port, enterprise-focused            |
@@ -175,12 +181,12 @@ Premature competitive publishing with an unfinished library is worse than silenc
 
 ## Related Documents
 
-| Document | How it connects |
-|---|---|
+| Document                                                 | How it connects                                                                                                                            |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`COMPETITIVE_BENCHMARKS.md`](COMPETITIVE_BENCHMARKS.md) | The internal per-component parity tables — the evidence base this strategy draws on. **This file is the strategy; that file is the data.** |
-| [`SCORING_CRITERIA.md`](SCORING_CRITERIA.md) | Category 11 (Competitive Parity & Differentiation) — the per-component scoring gate that tracks parity and 🚀 differentiators |
-| [`ROADMAP.md`](ROADMAP.md) | Phase 4 is when this strategy executes — the benchmark repo goes public, the "Built Different" content lands |
-| [`LAUNCH_STRATEGY.md`](LAUNCH_STRATEGY.md) | The full sequenced launch path — this strategy feeds into Step 5 (the launch event) |
-| [`VISION.md`](VISION.md) | The positioning north star — every claim must be consistent with the vision |
+| [`SCORING_CRITERIA.md`](SCORING_CRITERIA.md)             | Category 11 (Competitive Parity & Differentiation) — the per-component scoring gate that tracks parity and 🚀 differentiators              |
+| [`ROADMAP.md`](ROADMAP.md)                               | Phase 4 is when this strategy executes — the benchmark repo goes public, the "Built Different" content lands                               |
+| [`LAUNCH_STRATEGY.md`](LAUNCH_STRATEGY.md)               | The full sequenced launch path — this strategy feeds into Step 5 (the launch event)                                                        |
+| [`VISION.md`](VISION.md)                                 | The positioning north star — every claim must be consistent with the vision                                                                |
 
 > **Scope note:** This file covers competitive positioning against the **Angular ecosystem** (Angular Material, PrimeNG, Ng-Zorro, Ng-Bootstrap) for public-facing benchmarks. `COMPETITIVE_BENCHMARKS.md` covers internal API and a11y parity against **any UI library** including React-ecosystem references (Radix UI, Ark UI, Melt UI) — the best implementations regardless of framework. These are different audiences and different purposes; both are necessary.

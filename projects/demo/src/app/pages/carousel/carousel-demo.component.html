@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Carousel"
@@ -19,7 +18,9 @@
 
   <!-- ─── Basic (1 visible) ──────────────────────────────────────────────── -->
   <app-doc-section id="basic" title="Basic">
-    <p class="demo-section__description">Default configuration — one slide visible at a time, Material variant.</p>
+    <p class="demo-section__description">
+      Default configuration — one slide visible at a time, Material variant.
+    </p>
     <ui-lib-carousel [value]="slides">
       <ng-template #carouselItem let-slide>
         <div class="demo-slide demo-slide--basic">
@@ -48,7 +49,9 @@
 
   <!-- ─── Circular + Autoplay ────────────────────────────────────────────── -->
   <app-doc-section id="circular-autoplay" title="Circular &amp; Autoplay">
-    <p class="demo-section__description">Wraps from last item back to first; auto-advances every 3 seconds.</p>
+    <p class="demo-section__description">
+      Wraps from last item back to first; auto-advances every 3 seconds.
+    </p>
     <ui-lib-carousel
       [value]="products"
       [numVisible]="3"
@@ -71,7 +74,9 @@
 
   <!-- ─── Responsive ─────────────────────────────────────────────────────── -->
   <app-doc-section id="responsive" title="Responsive">
-    <p class="demo-section__description">Resize the window: 3 items above 1400 px, 2 from 1024 px, 1 below 640 px.</p>
+    <p class="demo-section__description">
+      Resize the window: 3 items above 1400 px, 2 from 1024 px, 1 below 640 px.
+    </p>
     <ui-lib-carousel
       [value]="products"
       [numVisible]="4"
@@ -110,7 +115,10 @@
 
   <!-- ─── Header / Footer templates ─────────────────────────────────────── -->
   <app-doc-section id="header-footer" title="Header &amp; Footer Templates">
-    <p class="demo-section__description">Custom header and footer slots via <code>#carouselHeader</code> and <code>#carouselFooter</code>.</p>
+    <p class="demo-section__description">
+      Custom header and footer slots via <code>#carouselHeader</code> and
+      <code>#carouselFooter</code>.
+    </p>
     <ui-lib-carousel [value]="products" [numVisible]="3" [numScroll]="1">
       <ng-template #carouselHeader>
         <div class="demo-header">
@@ -136,7 +144,9 @@
   <!-- ─── Page change event ───────────────────────────────────────────────── -->
   <app-doc-section id="page-change" title="Page Change Event">
     <p class="demo-section__description">Navigate to see the emitted page index update below.</p>
-    <p class="demo-event-display">Current page: <strong>{{ lastPage }}</strong></p>
+    <p class="demo-event-display">
+      Current page: <strong>{{ lastPage }}</strong>
+    </p>
     <ui-lib-carousel [value]="slides" (pageChange)="onPageChange($event)">
       <ng-template #carouselItem let-slide>
         <div class="demo-slide demo-slide--basic">
@@ -183,7 +193,9 @@
         <p><code>sm</code></p>
         <ui-lib-carousel [value]="slides" size="sm">
           <ng-template #carouselItem let-slide>
-            <div class="demo-slide demo-slide--sm"><span>{{ slide }}</span></div>
+            <div class="demo-slide demo-slide--sm">
+              <span>{{ slide }}</span>
+            </div>
           </ng-template>
         </ui-lib-carousel>
       </div>
@@ -191,7 +203,9 @@
         <p><code>md</code> (default)</p>
         <ui-lib-carousel [value]="slides" size="md">
           <ng-template #carouselItem let-slide>
-            <div class="demo-slide demo-slide--basic"><span>{{ slide }}</span></div>
+            <div class="demo-slide demo-slide--basic">
+              <span>{{ slide }}</span>
+            </div>
           </ng-template>
         </ui-lib-carousel>
       </div>
@@ -199,7 +213,9 @@
         <p><code>lg</code></p>
         <ui-lib-carousel [value]="slides" size="lg">
           <ng-template #carouselItem let-slide>
-            <div class="demo-slide demo-slide--lg"><span>{{ slide }}</span></div>
+            <div class="demo-slide demo-slide--lg">
+              <span>{{ slide }}</span>
+            </div>
           </ng-template>
         </ui-lib-carousel>
       </div>
@@ -208,14 +224,14 @@
 
   <!-- ─── No navigators / no indicators ─────────────────────────────────── -->
   <app-doc-section id="hidden-controls" title="Hidden Navigators &amp; Indicators">
-    <p class="demo-section__description">Navigation buttons and indicator dots are both hidden. Swipe on touch devices.</p>
-    <ui-lib-carousel
-      [value]="slides"
-      [showNavigators]="false"
-      [showIndicators]="false"
-    >
+    <p class="demo-section__description">
+      Navigation buttons and indicator dots are both hidden. Swipe on touch devices.
+    </p>
+    <ui-lib-carousel [value]="slides" [showNavigators]="false" [showIndicators]="false">
       <ng-template #carouselItem let-slide>
-        <div class="demo-slide"><span>{{ slide }}</span></div>
+        <div class="demo-slide">
+          <span>{{ slide }}</span>
+        </div>
       </ng-template>
     </ui-lib-carousel>
   </app-doc-section>
@@ -228,7 +244,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -237,7 +252,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -246,7 +261,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -256,5 +271,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

@@ -62,7 +62,7 @@ export class BlockUI {
       const direct: BlockUIVariant | null = this.variant();
       if (direct) return direct;
       return this.themeConfig.variant();
-    }
+    },
   );
 
   /** Computed host CSS classes. */

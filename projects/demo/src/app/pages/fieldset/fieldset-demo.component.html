@@ -24,7 +24,13 @@
           </div>
           <div class="demo-field">
             <label class="demo-label">Email</label>
-            <input class="demo-input" type="email" value="jane.doe@example.com" readonly aria-label="Email" />
+            <input
+              class="demo-input"
+              type="email"
+              value="jane.doe@example.com"
+              readonly
+              aria-label="Email"
+            />
           </div>
           <div class="demo-field">
             <label class="demo-label">Phone</label>
@@ -33,11 +39,7 @@
         </div>
       </ui-lib-fieldset>
     </div>
-    <app-doc-code-example
-      [html]="basicHtml"
-      [typescript]="basicTs"
-      [showLineNumbers]="true"
-    />
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── Toggleable ───────────────────────────────────────────────────────── -->
@@ -55,7 +57,13 @@
         <div class="demo-form-grid">
           <div class="demo-field">
             <label class="demo-label">Timeout (ms)</label>
-            <input class="demo-input" type="number" value="3000" readonly aria-label="Timeout in milliseconds" />
+            <input
+              class="demo-input"
+              type="number"
+              value="3000"
+              readonly
+              aria-label="Timeout in milliseconds"
+            />
           </div>
           <div class="demo-field">
             <label class="demo-label">Max Retries</label>
@@ -181,7 +189,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -190,7 +197,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

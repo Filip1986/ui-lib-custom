@@ -78,9 +78,10 @@
     <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
         language="html"
-        filename="Usage" [code]="snippets.usage"
+        filename="Usage"
+        [code]="snippets.usage"
         [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+      ></ui-lib-code-snippet>
     </ui-lib-panel>
   }
 
@@ -92,5 +93,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

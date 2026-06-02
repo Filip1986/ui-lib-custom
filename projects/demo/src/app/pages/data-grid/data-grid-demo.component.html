@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Data Grid"
@@ -11,8 +10,8 @@
   <app-doc-section id="overview" title="Overview">
     <p>
       The <code>DataGridComponent</code> is the library's flagship premium component. It renders
-      tabular data with a declarative column DSL, supports full client-side or server-side
-      (lazy) operations, and renders only the visible rows when virtual scroll is enabled.
+      tabular data with a declarative column DSL, supports full client-side or server-side (lazy)
+      operations, and renders only the visible rows when virtual scroll is enabled.
     </p>
     <ul>
       <li><strong>Virtual scroll</strong> — windowed rendering for 10,000+ rows</li>
@@ -34,46 +33,79 @@
         Variant
         <select (change)="activeVariant.set($any($event.target).value)">
           @for (variant of variants; track variant) {
-            <option [value]="variant" [selected]="variant === activeVariant()">{{ variant }}</option>
+            <option [value]="variant" [selected]="variant === activeVariant()">
+              {{ variant }}
+            </option>
           }
         </select>
       </label>
       <label>
         Selection
-        <select (change)="selectionMode.set($any($event.target).value === 'null' ? null : $any($event.target).value)">
+        <select
+          (change)="
+            selectionMode.set(
+              $any($event.target).value === 'null' ? null : $any($event.target).value
+            )
+          "
+        >
           @for (mode of selectionModes; track mode.value) {
-            <option [value]="mode.value ?? 'null'" [selected]="mode.value === selectionMode()">{{ mode.label }}</option>
+            <option [value]="mode.value ?? 'null'" [selected]="mode.value === selectionMode()">
+              {{ mode.label }}
+            </option>
           }
         </select>
       </label>
       <label>
         Edit mode
-        <select (change)="editMode.set($any($event.target).value === 'null' ? null : $any($event.target).value)">
+        <select
+          (change)="
+            editMode.set($any($event.target).value === 'null' ? null : $any($event.target).value)
+          "
+        >
           @for (mode of editModes; track mode.value) {
-            <option [value]="mode.value ?? 'null'" [selected]="mode.value === editMode()">{{ mode.label }}</option>
+            <option [value]="mode.value ?? 'null'" [selected]="mode.value === editMode()">
+              {{ mode.label }}
+            </option>
           }
         </select>
       </label>
       <label class="demo-controls__toggle">
-        <input type="checkbox" [checked]="stripedRows()" (change)="stripedRows.set($any($event.target).checked)" />
+        <input
+          type="checkbox"
+          [checked]="stripedRows()"
+          (change)="stripedRows.set($any($event.target).checked)"
+        />
         Striped rows
       </label>
       <label class="demo-controls__toggle">
-        <input type="checkbox" [checked]="rowHover()" (change)="rowHover.set($any($event.target).checked)" />
+        <input
+          type="checkbox"
+          [checked]="rowHover()"
+          (change)="rowHover.set($any($event.target).checked)"
+        />
         Row hover
       </label>
       <label class="demo-controls__toggle">
-        <input type="checkbox" [checked]="showGridlines()" (change)="showGridlines.set($any($event.target).checked)" />
+        <input
+          type="checkbox"
+          [checked]="showGridlines()"
+          (change)="showGridlines.set($any($event.target).checked)"
+        />
         Gridlines
       </label>
       <label class="demo-controls__toggle">
-        <input type="checkbox" [checked]="paginatorEnabled()" (change)="paginatorEnabled.set($any($event.target).checked)" />
+        <input
+          type="checkbox"
+          [checked]="paginatorEnabled()"
+          (change)="paginatorEnabled.set($any($event.target).checked)"
+        />
         Paginator
       </label>
     </div>
 
     <p class="demo-status">
-      Sort: <strong>{{ lastSortEvent() }}</strong> · Selected: <strong>{{ selectedCount() }}</strong>
+      Sort: <strong>{{ lastSortEvent() }}</strong> · Selected:
+      <strong>{{ selectedCount() }}</strong>
     </p>
 
     <ui-lib-data-grid
@@ -95,8 +127,20 @@
       (sorted)="onSortChange($event)"
     >
       <ui-lib-data-grid-column field="id" header="ID" [sortable]="true" width="70px" />
-      <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" [filterable]="true" [editable]="true" width="180px" />
-      <ui-lib-data-grid-column field="department" header="Department" [sortable]="true" [filterable]="true" />
+      <ui-lib-data-grid-column
+        field="name"
+        header="Name"
+        [sortable]="true"
+        [filterable]="true"
+        [editable]="true"
+        width="180px"
+      />
+      <ui-lib-data-grid-column
+        field="department"
+        header="Department"
+        [sortable]="true"
+        [filterable]="true"
+      />
       <ui-lib-data-grid-column field="role" header="Role" [sortable]="true" />
       <ui-lib-data-grid-column field="salary" header="Salary" [sortable]="true">
         <ng-template uiDataGridColumnBody let-row>
@@ -116,9 +160,9 @@
   <!-- ── Virtual scroll ─────────────────────────────────────────────── -->
   <app-doc-section id="virtual-scroll" title="Virtual Scroll">
     <p>
-      Enable <code>[virtualScroll]="true"</code> to render only the visible rows. The grid
-      uses a fixed-row-height model — set <code>[rowHeight]</code> to match your CSS row
-      height. The example below renders 2,000 rows with negligible DOM overhead.
+      Enable <code>[virtualScroll]="true"</code> to render only the visible rows. The grid uses a
+      fixed-row-height model — set <code>[rowHeight]</code> to match your CSS row height. The
+      example below renders 2,000 rows with negligible DOM overhead.
     </p>
 
     <ui-lib-data-grid
@@ -148,8 +192,8 @@
   <app-doc-section id="frozen-columns" title="Frozen Columns">
     <p>
       Pin columns to the start or end of the grid with <code>frozen="start"</code> or
-      <code>frozen="end"</code>. Frozen columns remain visible while the user scrolls
-      horizontally through the other columns.
+      <code>frozen="end"</code>. Frozen columns remain visible while the user scrolls horizontally
+      through the other columns.
     </p>
 
     <ui-lib-data-grid
@@ -159,7 +203,13 @@
       caption="Frozen start + end columns"
     >
       <ui-lib-data-grid-column field="id" header="ID" frozen="start" width="70px" />
-      <ui-lib-data-grid-column field="name" header="Name" frozen="start" width="180px" [sortable]="true" />
+      <ui-lib-data-grid-column
+        field="name"
+        header="Name"
+        frozen="start"
+        width="180px"
+        [sortable]="true"
+      />
       <ui-lib-data-grid-column field="department" header="Department" width="160px" />
       <ui-lib-data-grid-column field="role" header="Role" width="140px" />
       <ui-lib-data-grid-column field="joinDate" header="Join Date" width="130px" />
@@ -180,9 +230,9 @@
   <!-- ── Cell editing ───────────────────────────────────────────────── -->
   <app-doc-section id="cell-editing" title="Cell Editing">
     <p>
-      Set <code>[editMode]="'cell'"</code> on the grid and <code>[editable]="true"</code>
-      on individual columns. Click a cell (or press Enter when focused) to enter edit mode.
-      Press <kbd>Enter</kbd> or <kbd>Tab</kbd> to commit; press <kbd>Escape</kbd> to revert.
+      Set <code>[editMode]="'cell'"</code> on the grid and <code>[editable]="true"</code> on
+      individual columns. Click a cell (or press Enter when focused) to enter edit mode. Press
+      <kbd>Enter</kbd> or <kbd>Tab</kbd> to commit; press <kbd>Escape</kbd> to revert.
     </p>
 
     <ui-lib-data-grid
@@ -267,5 +317,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

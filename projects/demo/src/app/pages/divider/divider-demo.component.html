@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Divider"
@@ -15,9 +14,7 @@
 
   <!-- Section 1: Basic -->
   <app-doc-section id="basic" title="Basic">
-    <p class="demo-section__desc">
-      A plain horizontal divider with no content.
-    </p>
+    <p class="demo-section__desc">A plain horizontal divider with no content.</p>
     <p>Content above</p>
     <ui-lib-divider />
     <p>Content below</p>
@@ -36,8 +33,8 @@
   <!-- Section 3: Alignment -->
   <app-doc-section id="alignment" title="Alignment">
     <p class="demo-section__desc">
-      Use the <code>align</code> input to position the label at
-      <code>left</code>, <code>center</code> (default), or <code>right</code>.
+      Use the <code>align</code> input to position the label at <code>left</code>,
+      <code>center</code> (default), or <code>right</code>.
     </p>
     @for (align of horizontalAligns; track align) {
       <div class="demo-align-row">
@@ -49,8 +46,8 @@
   <!-- Section 4: Line Types -->
   <app-doc-section id="line-types" title="Line Types">
     <p class="demo-section__desc">
-      Three line styles are available via the <code>type</code> input:
-      <code>solid</code> (default), <code>dashed</code>, and <code>dotted</code>.
+      Three line styles are available via the <code>type</code> input: <code>solid</code> (default),
+      <code>dashed</code>, and <code>dotted</code>.
     </p>
     @for (type of types; track type) {
       <div class="demo-type-row">
@@ -62,8 +59,8 @@
   <!-- Section 5: Vertical -->
   <app-doc-section id="vertical" title="Vertical">
     <p class="demo-section__desc">
-      Set <code>orientation="vertical"</code> to render a vertical separator.
-      Use inside a flex container; the divider stretches to fill the available height.
+      Set <code>orientation="vertical"</code> to render a vertical separator. Use inside a flex
+      container; the divider stretches to fill the available height.
     </p>
     <div class="demo-vertical-row">
       <div class="demo-vertical-panel">
@@ -86,8 +83,8 @@
   <!-- Section 6: Vertical Alignment -->
   <app-doc-section id="vertical-alignment" title="Vertical Alignment">
     <p class="demo-section__desc">
-      For vertical dividers, use <code>align="top"</code>, <code>align="center"</code>,
-      or <code>align="bottom"</code>.
+      For vertical dividers, use <code>align="top"</code>, <code>align="center"</code>, or
+      <code>align="bottom"</code>.
     </p>
     <div class="demo-vertical-row">
       @for (align of verticalAligns; track align) {
@@ -127,7 +124,8 @@
                 [type]="playgroundType()"
                 [align]="playgroundAlign()"
                 [variant]="playgroundVariant()"
-              >Label</ui-lib-divider>
+                >Label</ui-lib-divider
+              >
             } @else {
               <ui-lib-divider
                 [orientation]="playgroundOrientation()"
@@ -147,7 +145,8 @@
                 [type]="playgroundType()"
                 [align]="playgroundAlign()"
                 [variant]="playgroundVariant()"
-              >OR</ui-lib-divider>
+                >OR</ui-lib-divider
+              >
             } @else {
               <ui-lib-divider
                 [orientation]="playgroundOrientation()"
@@ -172,14 +171,16 @@
               severity="primary"
               size="sm"
               (click)="setOrientation('horizontal')"
-            >horizontal</ui-lib-button>
+              >horizontal</ui-lib-button
+            >
             <ui-lib-button
               type="button"
               [appearance]="playgroundOrientation() === 'vertical' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               (click)="setOrientation('vertical')"
-            >vertical</ui-lib-button>
+              >vertical</ui-lib-button
+            >
           </div>
         </div>
 
@@ -194,7 +195,8 @@
                 severity="primary"
                 size="sm"
                 (click)="setType(type)"
-              >{{ type }}</ui-lib-button>
+                >{{ type }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -211,7 +213,8 @@
                   severity="primary"
                   size="sm"
                   (click)="setAlign(align)"
-                >{{ align }}</ui-lib-button>
+                  >{{ align }}</ui-lib-button
+                >
               }
             } @else {
               @for (align of verticalAligns; track align) {
@@ -221,7 +224,8 @@
                   severity="primary"
                   size="sm"
                   (click)="setAlign(align)"
-                >{{ align }}</ui-lib-button>
+                  >{{ align }}</ui-lib-button
+                >
               }
             }
           </div>
@@ -238,7 +242,8 @@
                 severity="primary"
                 size="sm"
                 (click)="setVariant(variant)"
-              >{{ variant }}</ui-lib-button>
+                >{{ variant }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -252,7 +257,8 @@
             severity="primary"
             size="sm"
             (click)="toggleContent()"
-          >{{ playgroundHasContent() ? 'On' : 'Off' }}</ui-lib-button>
+            >{{ playgroundHasContent() ? 'On' : 'Off' }}</ui-lib-button
+          >
         </div>
       </div>
     </div>
@@ -263,7 +269,6 @@
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
 
-  
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -280,7 +285,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -290,5 +295,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

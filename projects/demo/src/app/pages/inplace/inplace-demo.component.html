@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Inplace"
@@ -27,7 +26,9 @@
             (blur)="basicActive.set(false)"
           />
         </ui-lib-inplace>
-        <p class="demo-field__note">Active: <code>{{ basicActive() }}</code></p>
+        <p class="demo-field__note">
+          Active: <code>{{ basicActive() }}</code>
+        </p>
       </div>
     </div>
   </app-doc-section>
@@ -131,7 +132,9 @@
     <div class="demo-section__preview">
       <div class="inplace-demo__event-log">
         @if (eventLog().length === 0) {
-          <p class="inplace-demo__event-log-empty">No events yet — interact with the variants above.</p>
+          <p class="inplace-demo__event-log-empty">
+            No events yet — interact with the variants above.
+          </p>
         }
         @for (entry of eventLog(); track entry) {
           <p class="inplace-demo__event-log-entry">{{ entry }}</p>
@@ -147,7 +150,6 @@
 
   <!-- ---- API ---------------------------------------------------------- -->
   <app-doc-section id="api" title="API">
-
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
 
@@ -166,7 +168,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -175,7 +176,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -185,5 +186,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

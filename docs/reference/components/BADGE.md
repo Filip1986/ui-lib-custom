@@ -13,15 +13,15 @@ Badge - A performant badge/tag component for labels, status, and counts Single e
 
 ### Inputs
 
-| Name         | Type                  | Default     | Description                                                                      |
-| ------------ | --------------------- | ----------- | -------------------------------------------------------------------------------- |
-| `color`      | `BadgeColor`          | `'primary'` | Color theme of the badge                                                         |
-| `decorative` | `boolean`             | `false`     | Whether the badge is decorative and should be hidden from assistive technologies |
-| `dot`        | `boolean`             | `false`     | Whether the badge is a dot (small circular indicator)                            |
-| `label`      | `string | null`       | `null`      | Accessible label for the badge, used when screen reader support is needed        |
-| `pill`       | `boolean`             | `false`     | Whether the badge is a pill shape (fully rounded)                                |
-| `size`       | `BadgeSize`           | `'md'`      | Size of the badge                                                                |
-| `variant`    | `BadgeVariant | null` | `null`      | Visual variant of the badge                                                      |
+| Name         | Type          | Default     | Description                                                                      |
+| ------------ | ------------- | ----------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `color`      | `BadgeColor`  | `'primary'` | Color theme of the badge                                                         |
+| `decorative` | `boolean`     | `false`     | Whether the badge is decorative and should be hidden from assistive technologies |
+| `dot`        | `boolean`     | `false`     | Whether the badge is a dot (small circular indicator)                            |
+| `label`      | `string       | null`       | `null`                                                                           | Accessible label for the badge, used when screen reader support is needed |
+| `pill`       | `boolean`     | `false`     | Whether the badge is a pill shape (fully rounded)                                |
+| `size`       | `BadgeSize`   | `'md'`      | Size of the badge                                                                |
+| `variant`    | `BadgeVariant | null`       | `null`                                                                           | Visual variant of the badge                                               |
 
 ### Outputs
 
@@ -99,4 +99,3 @@ _none_
 - [Demo page](/components/badge)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/badge/README.md)
-

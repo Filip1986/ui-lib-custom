@@ -266,4 +266,3 @@ Recommended shared infra direction:
 - Accessibility tests: `projects/ui-lib-custom/src/lib/dialog/dialog.a11y.spec.ts`
 - Focus trap utility: `projects/ui-lib-custom/src/lib/core/a11y/focus-trap.ts`
 - Focus trap tests: `projects/ui-lib-custom/src/lib/core/a11y/focus-trap.spec.ts`
-

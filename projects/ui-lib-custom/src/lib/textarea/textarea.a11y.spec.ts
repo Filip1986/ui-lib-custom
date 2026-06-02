@@ -117,7 +117,7 @@ async function createFixture<T>(component: new () => T): Promise<ComponentFixtur
 
 function getTextareas<T>(fixture: ComponentFixture<T>): HTMLTextAreaElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll('textarea')
+    (fixture.nativeElement as HTMLElement).querySelectorAll('textarea'),
   ) as HTMLTextAreaElement[];
 }
 
@@ -129,7 +129,7 @@ describe('Textarea Accessibility', (): void => {
   describe('label association', (): void => {
     it('textarea has accessible name via ariaLabel input', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaAriaLabelHostComponent> = await createFixture(
-        TextareaAriaLabelHostComponent
+        TextareaAriaLabelHostComponent,
       );
 
       expect(getTextarea(fixture).getAttribute('aria-label')).toBe('Message');
@@ -137,7 +137,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('textarea has accessible name via ariaLabelledBy input', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaAriaLabelledByHostComponent> = await createFixture(
-        TextareaAriaLabelledByHostComponent
+        TextareaAriaLabelledByHostComponent,
       );
 
       expect(getTextarea(fixture).getAttribute('aria-labelledby')).toBe('textarea-label-source');
@@ -145,7 +145,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('textarea keeps native label association via generated id', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaVisibleLabelHostComponent> = await createFixture(
-        TextareaVisibleLabelHostComponent
+        TextareaVisibleLabelHostComponent,
       );
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const label: HTMLLabelElement = root.querySelector('label') as HTMLLabelElement;
@@ -165,7 +165,7 @@ describe('Textarea Accessibility', (): void => {
       class TextareaPlaceholderOnlyHostComponent {}
 
       const fixture: ComponentFixture<TextareaPlaceholderOnlyHostComponent> = await createFixture(
-        TextareaPlaceholderOnlyHostComponent
+        TextareaPlaceholderOnlyHostComponent,
       );
 
       expect(getTextarea(fixture).getAttribute('aria-label')).toBeNull();
@@ -173,7 +173,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('textarea id is unique per instance', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaMultipleInstanceHostComponent> = await createFixture(
-        TextareaMultipleInstanceHostComponent
+        TextareaMultipleInstanceHostComponent,
       );
       const textareas: HTMLTextAreaElement[] = getTextareas(fixture);
       const firstTextarea: HTMLTextAreaElement | undefined = textareas[0];
@@ -192,7 +192,7 @@ describe('Textarea Accessibility', (): void => {
   describe('validation state', (): void => {
     it('aria-invalid="true" when invalid is set', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaInvalidHostComponent> = await createFixture(
-        TextareaInvalidHostComponent
+        TextareaInvalidHostComponent,
       );
 
       expect(getTextarea(fixture).getAttribute('aria-invalid')).toBe('true');
@@ -200,7 +200,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('aria-invalid is absent when not invalid', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaAriaLabelHostComponent> = await createFixture(
-        TextareaAriaLabelHostComponent
+        TextareaAriaLabelHostComponent,
       );
 
       expect(getTextarea(fixture).getAttribute('aria-invalid')).toBeNull();
@@ -208,7 +208,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('aria-describedby points to the error element id', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaInvalidHostComponent> = await createFixture(
-        TextareaInvalidHostComponent
+        TextareaInvalidHostComponent,
       );
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const error: HTMLElement = root.querySelector('.ui-lib-textarea__error') as HTMLElement;
@@ -219,7 +219,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('aria-describedby also includes the hint id when hint text is present', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaInvalidHostComponent> = await createFixture(
-        TextareaInvalidHostComponent
+        TextareaInvalidHostComponent,
       );
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const hint: HTMLElement = root.querySelector('.ui-lib-textarea__hint') as HTMLElement;
@@ -230,10 +230,10 @@ describe('Textarea Accessibility', (): void => {
 
     it('error element has role="alert"', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaInvalidHostComponent> = await createFixture(
-        TextareaInvalidHostComponent
+        TextareaInvalidHostComponent,
       );
       const error: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-textarea__error'
+        '.ui-lib-textarea__error',
       ) as HTMLElement;
 
       expect(error.getAttribute('role')).toBe('alert');
@@ -241,10 +241,10 @@ describe('Textarea Accessibility', (): void => {
 
     it('renders projected [textareaError] content inside the error region', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaInvalidHostComponent> = await createFixture(
-        TextareaInvalidHostComponent
+        TextareaInvalidHostComponent,
       );
       const error: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-textarea__error'
+        '.ui-lib-textarea__error',
       ) as HTMLElement;
 
       expect(error.textContent.trim()).toBe('Details are required.');
@@ -263,10 +263,10 @@ describe('Textarea Accessibility', (): void => {
 
     it('renders projected [textareaHint] content', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaProjectedHintHostComponent> = await createFixture(
-        TextareaProjectedHintHostComponent
+        TextareaProjectedHintHostComponent,
       );
       const hint: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-textarea__hint'
+        '.ui-lib-textarea__hint',
       ) as HTMLElement;
 
       expect(hint.textContent.trim()).toBe('Projected hint content.');
@@ -276,7 +276,7 @@ describe('Textarea Accessibility', (): void => {
   describe('required', (): void => {
     it('aria-required="true" when required is set', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaStateHostComponent> = await createFixture(
-        TextareaStateHostComponent
+        TextareaStateHostComponent,
       );
 
       expect(getTextarea(fixture, 0).getAttribute('aria-required')).toBe('true');
@@ -286,7 +286,7 @@ describe('Textarea Accessibility', (): void => {
   describe('readonly/disabled', (): void => {
     it('readonly textarea has aria-readonly="true"', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaStateHostComponent> = await createFixture(
-        TextareaStateHostComponent
+        TextareaStateHostComponent,
       );
 
       expect(getTextarea(fixture, 1).getAttribute('aria-readonly')).toBe('true');
@@ -294,7 +294,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('readonly textarea has native readonly attribute', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaStateHostComponent> = await createFixture(
-        TextareaStateHostComponent
+        TextareaStateHostComponent,
       );
 
       expect(getTextarea(fixture, 1).hasAttribute('readonly')).toBe(true);
@@ -302,7 +302,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('disabled textarea has native disabled attribute', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaStateHostComponent> = await createFixture(
-        TextareaStateHostComponent
+        TextareaStateHostComponent,
       );
 
       expect(getTextarea(fixture, 2).disabled).toBe(true);
@@ -310,7 +310,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('disabled textarea exposes aria-disabled="true"', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaStateHostComponent> = await createFixture(
-        TextareaStateHostComponent
+        TextareaStateHostComponent,
       );
 
       expect(getTextarea(fixture, 2).getAttribute('aria-disabled')).toBe('true');
@@ -320,7 +320,7 @@ describe('Textarea Accessibility', (): void => {
   describe('axe-core automated checks', (): void => {
     it('passes axe — default state with ariaLabel', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaAriaLabelHostComponent> = await createFixture(
-        TextareaAriaLabelHostComponent
+        TextareaAriaLabelHostComponent,
       );
 
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
@@ -328,7 +328,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('passes axe — invalid state', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaInvalidHostComponent> = await createFixture(
-        TextareaInvalidHostComponent
+        TextareaInvalidHostComponent,
       );
 
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
@@ -336,7 +336,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('passes axe — disabled state', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaDisabledHostComponent> = await createFixture(
-        TextareaDisabledHostComponent
+        TextareaDisabledHostComponent,
       );
 
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
@@ -344,7 +344,7 @@ describe('Textarea Accessibility', (): void => {
 
     it('passes axe — readonly state', async (): Promise<void> => {
       const fixture: ComponentFixture<TextareaReadonlyHostComponent> = await createFixture(
-        TextareaReadonlyHostComponent
+        TextareaReadonlyHostComponent,
       );
 
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });

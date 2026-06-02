@@ -25,7 +25,7 @@ const isStringArray: (value: unknown) => value is string[] = (value: unknown): v
   Array.isArray(value) && value.every((item: unknown): boolean => typeof item === 'string');
 
 const isAxeViolation: (value: unknown) => value is AxeViolation = (
-  value: unknown
+  value: unknown,
 ): value is AxeViolation => {
   if (!value || typeof value !== 'object') {
     return false;
@@ -54,7 +54,7 @@ const isAxeViolation: (value: unknown) => value is AxeViolation = (
 };
 
 const isAxeResults: (value: unknown) => value is AxeResults = (
-  value: unknown
+  value: unknown,
 ): value is AxeResults => {
   if (!value || typeof value !== 'object') {
     return false;

@@ -73,4 +73,3 @@ _none_
 - [Demo page](/components/ripple)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/ripple/README.md)
-

@@ -70,7 +70,7 @@ export class TieredMenuSubComponent {
   /** Items filtered to `visible !== false`. */
   public readonly visibleItems: Signal<TieredMenuItem[]> = computed<TieredMenuItem[]>(
     (): TieredMenuItem[] =>
-      this.items().filter((item: TieredMenuItem): boolean => item.visible !== false)
+      this.items().filter((item: TieredMenuItem): boolean => item.visible !== false),
   );
 
   // ── Template helpers ──────────────────────────────────────────────────────
@@ -222,7 +222,7 @@ export class TieredMenuSubComponent {
       return;
     }
     const links: NodeListOf<HTMLElement> = list.querySelectorAll<HTMLElement>(
-      ':scope > li > a.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+      ':scope > li > a.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
     );
     const linksArray: HTMLElement[] = Array.from(links);
     const currentIndex: number = linksArray.indexOf(current);
@@ -240,7 +240,7 @@ export class TieredMenuSubComponent {
       return;
     }
     const links: NodeListOf<HTMLElement> = list.querySelectorAll<HTMLElement>(
-      ':scope > li > a.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+      ':scope > li > a.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
     );
     const linksArray: HTMLElement[] = Array.from(links);
     if (position === 'first') {

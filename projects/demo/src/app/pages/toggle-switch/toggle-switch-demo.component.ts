@@ -163,7 +163,7 @@ export class ToggleSwitchDemoComponent {
   });
   public readonly disabledControl: FormControl<boolean> = new FormControl<boolean>(
     { value: true, disabled: true },
-    { nonNullable: true }
+    { nonNullable: true },
   );
 
   public setPlaygroundVariant(variant: ToggleSwitchVariant): void {

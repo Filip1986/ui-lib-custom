@@ -26,7 +26,7 @@
   class="ui-lib-fieldset__content-wrapper"
   [class.ui-lib-fieldset__content-wrapper--collapsed]="toggleable() && collapsed()"
   [id]="contentId"
-  [attr.aria-hidden]="(toggleable() && collapsed()) ? 'true' : null"
+  [attr.aria-hidden]="toggleable() && collapsed() ? 'true' : null"
 >
   <div class="ui-lib-fieldset__content-inner">
     <ng-content />

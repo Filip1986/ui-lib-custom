@@ -78,13 +78,13 @@ describe('TreeSelect', (): void => {
 
   function getHost(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-tree-select'
+      'ui-lib-tree-select',
     ) as HTMLElement;
   }
 
   function getTrigger(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-tree-select__trigger'
+      '.ui-lib-tree-select__trigger',
     ) as HTMLElement;
   }
 
@@ -125,7 +125,7 @@ describe('TreeSelect', (): void => {
 
     it('should display placeholder when no value is selected', (): void => {
       const placeholder: HTMLElement | null = getTrigger().querySelector(
-        '.ui-lib-tree-select__placeholder'
+        '.ui-lib-tree-select__placeholder',
       );
       expect(placeholder).toBeTruthy();
     });
@@ -251,7 +251,7 @@ describe('TreeSelect', (): void => {
 
     it('should write value from ngModel', async (): Promise<void> => {
       const component: TreeSelect = (fixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-tree-select'
+        'ui-lib-tree-select',
       ) as unknown as TreeSelect;
       void component;
 
@@ -361,7 +361,7 @@ describe('TreeSelect', (): void => {
       clearFixture.componentInstance.registerOnChange(
         (value: TreeNode | TreeNode[] | null): void => {
           clearedValue = value;
-        }
+        },
       );
 
       const clearBtn: HTMLElement | null = (
@@ -417,7 +417,7 @@ describe('TreeSelect', (): void => {
       invalidFixture.componentRef.setInput('nodes', SAMPLE_NODES);
       invalidFixture.detectChanges();
       expect((invalidFixture.nativeElement as HTMLElement).getAttribute('aria-invalid')).toBe(
-        'true'
+        'true',
       );
     });
 
@@ -427,7 +427,7 @@ describe('TreeSelect', (): void => {
       requiredFixture.componentRef.setInput('nodes', SAMPLE_NODES);
       requiredFixture.detectChanges();
       expect((requiredFixture.nativeElement as HTMLElement).getAttribute('aria-required')).toBe(
-        'true'
+        'true',
       );
     });
 
@@ -437,7 +437,7 @@ describe('TreeSelect', (): void => {
       labelFixture.componentRef.setInput('nodes', SAMPLE_NODES);
       labelFixture.detectChanges();
       expect((labelFixture.nativeElement as HTMLElement).getAttribute('aria-label')).toBe(
-        'Choose category'
+        'Choose category',
       );
     });
   });
@@ -449,7 +449,7 @@ describe('TreeSelect', (): void => {
       emptyFixture.componentInstance.panelVisible.set(true);
       emptyFixture.detectChanges();
       const emptyEl: HTMLElement | null = (emptyFixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-tree-select__empty'
+        '.ui-lib-tree-select__empty',
       );
       expect(emptyEl).toBeTruthy();
     });
@@ -461,7 +461,7 @@ describe('TreeSelect', (): void => {
       emptyFixture.componentInstance.panelVisible.set(true);
       emptyFixture.detectChanges();
       const emptyEl: HTMLElement = (emptyFixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-tree-select__empty'
+        '.ui-lib-tree-select__empty',
       ) as HTMLElement;
       expect(emptyEl.textContent!.trim()).toBe('Nothing here');
     });

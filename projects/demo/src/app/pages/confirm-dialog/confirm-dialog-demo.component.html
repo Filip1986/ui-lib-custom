@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="ConfirmDialog"
@@ -153,8 +152,8 @@
   <!-- Section: Variants -->
   <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__description">
-      Three variants adapt the visual style to your project theme. Use the <code>variant</code> input
-      or rely on <code>ThemeConfigService</code> for the global default.
+      Three variants adapt the visual style to your project theme. Use the
+      <code>variant</code> input or rely on <code>ThemeConfigService</code> for the global default.
     </p>
     <div class="demo-card demo-card--row">
       @for (variant of variants; track variant) {
@@ -172,7 +171,6 @@
 
   <!-- API Reference -->
   <app-doc-section id="api" title="API Reference">
-
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
 
@@ -188,7 +186,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -197,7 +194,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -206,5 +203,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

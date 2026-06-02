@@ -8,12 +8,12 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `blocked` | `boolean` | `false` | Two-way bindable via `[(blocked)]`; toggles the overlay mask |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to `ThemeConfigService` global variant when null |
-| `styleClass` | `string \| null` | `null` | Additional CSS class(es) on the host element |
-| `baseZIndex` | `number` | `0` | Base z-index for the mask layer; `0` uses the CSS variable default |
+| Name         | Type                                             | Default | Notes                                                              |
+| ------------ | ------------------------------------------------ | ------- | ------------------------------------------------------------------ |
+| `blocked`    | `boolean`                                        | `false` | Two-way bindable via `[(blocked)]`; toggles the overlay mask       |
+| `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`  | Falls back to `ThemeConfigService` global variant when null        |
+| `styleClass` | `string \| null`                                 | `null`  | Additional CSS class(es) on the host element                       |
+| `baseZIndex` | `number`                                         | `0`     | Base z-index for the mask layer; `0` uses the CSS variable default |
 
 ## Outputs
 
@@ -21,34 +21,34 @@ _none_
 
 ## CSS Custom Properties
 
-| Property | Default | Notes |
-|----------|---------|-------|
-| `--uilib-block-ui-mask-bg` | `rgba(0,0,0,0.4)` | Mask background colour (overridden per variant) |
-| `--uilib-block-ui-mask-bg-material` | `rgba(0,0,0,0.3)` | Mask colour for the `material` variant |
-| `--uilib-block-ui-mask-bg-bootstrap` | `rgba(0,0,0,0.5)` | Mask colour for the `bootstrap` variant |
-| `--uilib-block-ui-mask-bg-minimal` | `rgba(0,0,0,0.15)` | Mask colour for the `minimal` variant |
-| `--uilib-block-ui-transition-duration` | `0.2s` | Fade duration; overridden to `0` under `prefers-reduced-motion` |
-| `--uilib-block-ui-transition` | `opacity var(…) ease` | Full transition shorthand |
-| `--uilib-block-ui-z-index` | `var(--uilib-z-overlay, 100)` | Z-index of the mask layer |
+| Property                               | Default                       | Notes                                                           |
+| -------------------------------------- | ----------------------------- | --------------------------------------------------------------- |
+| `--uilib-block-ui-mask-bg`             | `rgba(0,0,0,0.4)`             | Mask background colour (overridden per variant)                 |
+| `--uilib-block-ui-mask-bg-material`    | `rgba(0,0,0,0.3)`             | Mask colour for the `material` variant                          |
+| `--uilib-block-ui-mask-bg-bootstrap`   | `rgba(0,0,0,0.5)`             | Mask colour for the `bootstrap` variant                         |
+| `--uilib-block-ui-mask-bg-minimal`     | `rgba(0,0,0,0.15)`            | Mask colour for the `minimal` variant                           |
+| `--uilib-block-ui-transition-duration` | `0.2s`                        | Fade duration; overridden to `0` under `prefers-reduced-motion` |
+| `--uilib-block-ui-transition`          | `opacity var(…) ease`         | Full transition shorthand                                       |
+| `--uilib-block-ui-z-index`             | `var(--uilib-z-overlay, 100)` | Z-index of the mask layer                                       |
 
 ## ARIA Attributes
 
-| Element | Attribute | When |
-|---------|-----------|------|
-| `ui-lib-block-ui` (host) | `aria-busy="true"` | `blocked = true` |
-| `ui-lib-block-ui` (host) | `aria-busy="false"` | `blocked = false` |
-| `ui-lib-block-ui` (host) | `aria-disabled="true"` | `blocked = true` (attribute removed when false) |
-| `.ui-lib-block-ui__mask` | `role="status"` | always |
-| `.ui-lib-block-ui__mask` | `aria-live="polite"` | always |
-| `.ui-lib-block-ui__mask` | `aria-hidden="true"` | `blocked = false` (attribute removed when blocked) |
-| `.ui-lib-block-ui__content` | `inert=""` | `blocked = true` (attribute removed when false) |
+| Element                     | Attribute              | When                                               |
+| --------------------------- | ---------------------- | -------------------------------------------------- |
+| `ui-lib-block-ui` (host)    | `aria-busy="true"`     | `blocked = true`                                   |
+| `ui-lib-block-ui` (host)    | `aria-busy="false"`    | `blocked = false`                                  |
+| `ui-lib-block-ui` (host)    | `aria-disabled="true"` | `blocked = true` (attribute removed when false)    |
+| `.ui-lib-block-ui__mask`    | `role="status"`        | always                                             |
+| `.ui-lib-block-ui__mask`    | `aria-live="polite"`   | always                                             |
+| `.ui-lib-block-ui__mask`    | `aria-hidden="true"`   | `blocked = false` (attribute removed when blocked) |
+| `.ui-lib-block-ui__content` | `inert=""`             | `blocked = true` (attribute removed when false)    |
 
 ## Keyboard Interaction
 
-| Interaction | Behaviour |
-|-------------|-----------|
+| Interaction         | Behaviour                                                                                                                                           |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Tab` / `Shift+Tab` | Keyboard focus cannot enter the blocked content while `blocked = true` — the content wrapper receives `inert`, making all descendants non-focusable |
-| Any key | No special handling on the mask overlay; all standard keyboard interactions remain available outside the blocked area |
+| Any key             | No special handling on the mask overlay; all standard keyboard interactions remain available outside the blocked area                               |
 
 ## Accessibility Notes
 
@@ -69,9 +69,6 @@ _none_
 <!-- custom mask content with a spinner -->
 <ui-lib-block-ui [(blocked)]="isSaving">
   <form>...</form>
-  <span blockTemplate>
-    <ui-lib-spinner /> Saving…
-  </span>
+  <span blockTemplate> <ui-lib-spinner /> Saving… </span>
 </ui-lib-block-ui>
 ```
-

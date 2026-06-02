@@ -215,7 +215,7 @@ describe('Panel', (): void => {
     host.collapsedState.set(true);
     fixture.detectChanges();
     expect(getContentWrapper().classList.contains('ui-lib-panel__content-wrapper--collapsed')).toBe(
-      true
+      true,
     );
   });
 
@@ -292,28 +292,28 @@ describe('Panel content projection', (): void => {
 
   it('should project custom header via [panelHeader]', (): void => {
     const customHeader: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.custom-header'
+      '.custom-header',
     );
     expect(customHeader).toBeTruthy();
   });
 
   it('should project icon actions via [panelIcons]', (): void => {
     const iconButton: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.icon-btn'
+      '.icon-btn',
     );
     expect(iconButton).toBeTruthy();
   });
 
   it('should project body content into default slot', (): void => {
     const body: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.test-body'
+      '.test-body',
     );
     expect(body).toBeTruthy();
   });
 
   it('should project footer content via [panelFooter]', (): void => {
     const footer: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.custom-footer'
+      '.custom-footer',
     );
     expect(footer).toBeTruthy();
   });
@@ -338,10 +338,10 @@ describe('Panel unique IDs', (): void => {
     fixture2.detectChanges();
 
     const header1: HTMLElement = (fixture1.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-panel__header'
+      '.ui-lib-panel__header',
     ) as HTMLElement;
     const header2: HTMLElement = (fixture2.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-panel__header'
+      '.ui-lib-panel__header',
     ) as HTMLElement;
     expect(header1.getAttribute('id')).not.toBe(header2.getAttribute('id'));
   });

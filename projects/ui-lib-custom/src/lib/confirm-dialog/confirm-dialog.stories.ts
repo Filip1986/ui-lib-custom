@@ -47,7 +47,7 @@ export default meta;
 
 export const Default: Story = {
   render: (
-    args: ConfirmDialogStoryArgs
+    args: ConfirmDialogStoryArgs,
   ): {
     props: ConfirmDialogStoryArgs & { confirm: () => void };
     moduleMetadata: { imports: unknown[] };

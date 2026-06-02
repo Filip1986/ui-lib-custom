@@ -18,31 +18,31 @@ function getHost(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getContainer(fixture: ComponentFixture<unknown>): HTMLElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-    '.uilib-image-compare__container'
+    '.uilib-image-compare__container',
   );
 }
 
 function getLeftImage(fixture: ComponentFixture<unknown>): HTMLImageElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLImageElement>(
-    '.uilib-image-compare__img--left'
+    '.uilib-image-compare__img--left',
   );
 }
 
 function getRightImage(fixture: ComponentFixture<unknown>): HTMLImageElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLImageElement>(
-    '.uilib-image-compare__img--right'
+    '.uilib-image-compare__img--right',
   );
 }
 
 function getHandle(fixture: ComponentFixture<unknown>): HTMLElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-    '.uilib-image-compare__handle'
+    '.uilib-image-compare__handle',
   );
 }
 
 function getDivider(fixture: ComponentFixture<unknown>): HTMLElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-    '.uilib-image-compare__divider'
+    '.uilib-image-compare__divider',
   );
 }
 

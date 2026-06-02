@@ -8,4 +8,3 @@ This tiny app imports only `Button` from `ui-lib-custom/button` to validate seco
 cd D:\Work\Personal\Github\ui-lib-custom
 npm run build:minimal
 ```
-

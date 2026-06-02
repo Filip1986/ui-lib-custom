@@ -8,7 +8,7 @@ import type { ShapeToken } from 'ui-lib-custom/tokens';
 
 const withThemeWrapper: DecoratorFunction = (
   storyFn: () => IStory,
-  context: StoryContext
+  context: StoryContext,
 ): IStory => {
   const story: IStory = storyFn();
   const template: string = story.template ?? '';

@@ -8,15 +8,15 @@
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `label` | `string \| null` | `null` | Renders a `<label>` wired to the projected control ID |
-| `inputId` | `string \| null` | `null` | Optional explicit control ID. If omitted, FormField generates a stable `form-field-*-input` ID |
-| `hint` | `string \| null` | `null` | Hint text rendered below the control and included in `aria-describedby` |
-| `error` | `string \| null` | `null` | Error text rendered with `role="alert"` and included in `aria-describedby` when invalid |
-| `invalid` | `boolean` | `false` | Marks control invalid (`aria-invalid="true"`). Error text is treated as invalid automatically when present |
-| `required` | `boolean` | `false` | Sets `aria-required="true"` (and native `required`) on projected native controls |
-| `disabled` | `boolean` | `false` | Sets `aria-disabled="true"` (and native `disabled`) on projected native controls |
+| Name       | Type             | Default | Notes                                                                                                      |
+| ---------- | ---------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| `label`    | `string \| null` | `null`  | Renders a `<label>` wired to the projected control ID                                                      |
+| `inputId`  | `string \| null` | `null`  | Optional explicit control ID. If omitted, FormField generates a stable `form-field-*-input` ID             |
+| `hint`     | `string \| null` | `null`  | Hint text rendered below the control and included in `aria-describedby`                                    |
+| `error`    | `string \| null` | `null`  | Error text rendered with `role="alert"` and included in `aria-describedby` when invalid                    |
+| `invalid`  | `boolean`        | `false` | Marks control invalid (`aria-invalid="true"`). Error text is treated as invalid automatically when present |
+| `required` | `boolean`        | `false` | Sets `aria-required="true"` (and native `required`) on projected native controls                           |
+| `disabled` | `boolean`        | `false` | Sets `aria-disabled="true"` (and native `disabled`) on projected native controls                           |
 
 ## Outputs
 
@@ -65,6 +65,6 @@ For built-in inputs, FormField also exposes a DI context token (`FORM_FIELD_CONT
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
+| Variable                             | Default                                           | Description                                                                           |
+| ------------------------------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `--uilib-form-field-error-animation` | `ui-lib-form-field-error-slide-in 180ms ease-out` | Error message entrance animation; set to `none` when `prefers-reduced-motion: reduce` |

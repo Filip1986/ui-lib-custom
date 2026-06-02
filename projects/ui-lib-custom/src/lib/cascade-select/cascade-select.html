@@ -6,7 +6,10 @@
   (click)="togglePanel($event)"
   (keydown.enter)="togglePanel($event)"
 >
-  <div class="ui-lib-cascade-select__value" [class.ui-lib-cascade-select__value--placeholder]="!displayValue()">
+  <div
+    class="ui-lib-cascade-select__value"
+    [class.ui-lib-cascade-select__value--placeholder]="!displayValue()"
+  >
     @if (hasValue()) {
       @if (valueTemplate()) {
         <ng-container
@@ -44,84 +47,87 @@
 
 @defer (on immediate) {
   @if (panelVisible()) {
-  <div #panelElement class="ui-lib-cascade-select__panel">
-    @if (headerTemplate()) {
-      <div class="ui-lib-cascade-select__header">
-        <ng-container *ngTemplateOutlet="headerTemplate()" />
-      </div>
-    }
+    <div #panelElement class="ui-lib-cascade-select__panel">
+      @if (headerTemplate()) {
+        <div class="ui-lib-cascade-select__header">
+          <ng-container *ngTemplateOutlet="headerTemplate()" />
+        </div>
+      }
 
-    @if (loading()) {
-      <div class="ui-lib-cascade-select__loading">
-        @if (loadingTemplate()) {
-          <ng-container *ngTemplateOutlet="loadingTemplate()" />
-        } @else {
-          {{ i18n.translate('cascade-select.loading') }}
-        }
-      </div>
-    } @else {
-      <div class="ui-lib-cascade-select__columns">
-        @for (levelOptions of visibleLevels(); track $index; let level = $index) {
-          <ul
-            class="ui-lib-cascade-select__level"
-            role="listbox"
-            [attr.id]="getLevelListboxId(level)"
-            [attr.aria-label]="getLevelAriaLabel(level)"
-          >
-            @for (
-              option of levelOptions;
-              track optionTrackBy($index, option);
-              let optionIndex = $index
-            ) {
-              <li
-                class="ui-lib-cascade-select__option"
-                [attr.id]="getItemId(option, level, optionIndex)"
-                role="option"
-                tabindex="-1"
-                [attr.aria-haspopup]="isOptionGroupAtLevel(option, level) ? 'listbox' : null"
-                [attr.aria-selected]="isOptionSelected(option) ? 'true' : 'false'"
-                [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
-                [class.ui-lib-cascade-select__option--active]="isOptionActive(level, option)"
-                [class.ui-lib-cascade-select__option--selected]="isOptionSelected(option)"
-                [class.ui-lib-cascade-select__option--disabled]="isOptionDisabled(option)"
-                [class.ui-lib-cascade-select__option--group]="isOptionGroupAtLevel(option, level)"
-                (mouseenter)="onOptionHover(level, option)"
-                (click)="onOptionInteraction($event, level, option)"
-                (keydown.enter)="onOptionInteraction($event, level, option)"
-              >
-                <span class="ui-lib-cascade-select__option-label">
-                  @if (optionTemplate()) {
-                    <ng-container
-                      *ngTemplateOutlet="optionTemplate(); context: { $implicit: option }"
-                    />
-                  } @else {
-                    {{ resolveOptionLabel(option) }}
-                  }
-                </span>
-
-                @if (isOptionGroupAtLevel(option, level)) {
-                  <span class="ui-lib-cascade-select__option-group-icon" aria-hidden="true">
-                    @if (optionGroupIconTemplate()) {
+      @if (loading()) {
+        <div class="ui-lib-cascade-select__loading">
+          @if (loadingTemplate()) {
+            <ng-container *ngTemplateOutlet="loadingTemplate()" />
+          } @else {
+            {{ i18n.translate('cascade-select.loading') }}
+          }
+        </div>
+      } @else {
+        <div class="ui-lib-cascade-select__columns">
+          @for (levelOptions of visibleLevels(); track $index; let level = $index) {
+            <ul
+              class="ui-lib-cascade-select__level"
+              role="listbox"
+              [attr.id]="getLevelListboxId(level)"
+              [attr.aria-label]="getLevelAriaLabel(level)"
+            >
+              @for (
+                option of levelOptions;
+                track optionTrackBy($index, option);
+                let optionIndex = $index
+              ) {
+                <li
+                  class="ui-lib-cascade-select__option"
+                  [attr.id]="getItemId(option, level, optionIndex)"
+                  role="option"
+                  tabindex="-1"
+                  [attr.aria-haspopup]="isOptionGroupAtLevel(option, level) ? 'listbox' : null"
+                  [attr.aria-selected]="isOptionSelected(option) ? 'true' : 'false'"
+                  [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
+                  [class.ui-lib-cascade-select__option--active]="isOptionActive(level, option)"
+                  [class.ui-lib-cascade-select__option--selected]="isOptionSelected(option)"
+                  [class.ui-lib-cascade-select__option--disabled]="isOptionDisabled(option)"
+                  [class.ui-lib-cascade-select__option--group]="isOptionGroupAtLevel(option, level)"
+                  (mouseenter)="onOptionHover(level, option)"
+                  (click)="onOptionInteraction($event, level, option)"
+                  (keydown.enter)="onOptionInteraction($event, level, option)"
+                >
+                  <span class="ui-lib-cascade-select__option-label">
+                    @if (optionTemplate()) {
                       <ng-container
-                        *ngTemplateOutlet="optionGroupIconTemplate(); context: { $implicit: option }"
+                        *ngTemplateOutlet="optionTemplate(); context: { $implicit: option }"
                       />
                     } @else {
-                      >
+                      {{ resolveOptionLabel(option) }}
                     }
                   </span>
-                }
-              </li>
-            }
-          </ul>
-        }
-      </div>
-    }
 
-    @if (footerTemplate()) {
-      <div class="ui-lib-cascade-select__footer">
-        <ng-container *ngTemplateOutlet="footerTemplate()" />
-      </div>
-    }
-  </div>
+                  @if (isOptionGroupAtLevel(option, level)) {
+                    <span class="ui-lib-cascade-select__option-group-icon" aria-hidden="true">
+                      @if (optionGroupIconTemplate()) {
+                        <ng-container
+                          *ngTemplateOutlet="
+                            optionGroupIconTemplate();
+                            context: { $implicit: option }
+                          "
+                        />
+                      } @else {
+                        >
+                      }
+                    </span>
+                  }
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      }
+
+      @if (footerTemplate()) {
+        <div class="ui-lib-cascade-select__footer">
+          <ng-container *ngTemplateOutlet="footerTemplate()" />
+        </div>
+      }
+    </div>
   }
 }

@@ -84,7 +84,7 @@
             [attr.title]="item.tooltip ?? null"
             [attr.tabindex]="item.disabled ? -1 : 0"
             [attr.href]="item.url ?? null"
-            [attr.target]="item.url ? (item.target || '_self') : null"
+            [attr.target]="item.url ? item.target || '_self' : null"
             [id]="itemId(i, item)"
             [attr.data-menu-item-index]="i"
             (click)="onItemClick($event, item, i)"

@@ -75,6 +75,9 @@
 </ul>
 
 @if (mask() && visible()) {
-  <div class="ui-lib-speed-dial__mask" (click)="onMaskClick($event)" [attr.aria-hidden]="true"></div>
+  <div
+    class="ui-lib-speed-dial__mask"
+    (click)="onMaskClick($event)"
+    [attr.aria-hidden]="true"
+  ></div>
 }
-

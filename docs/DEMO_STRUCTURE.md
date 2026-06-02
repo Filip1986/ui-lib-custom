@@ -43,9 +43,11 @@ projects/demo/src/app/
 ## Components
 
 ### 1. Topbar Component
+
 Located in `layout/topbar/`
 
 **Features:**
+
 - Fixed position at the top
 - Logo with brand name
 - Mobile menu toggle button (hamburger icon)
@@ -53,14 +55,17 @@ Located in `layout/topbar/`
 - 80px height for consistent spacing
 
 **Usage:**
+
 ```typescript
 <app-topbar (menuButtonClick)="toggleSidebar()"></app-topbar>
 ```
 
 ### 2. Sidebar Component
+
 Located in `layout/sidebar/`
 
 **Features:**
+
 - Fixed position on the left (250px width)
 - Hierarchical navigation menu
 - Expandable/collapsible sections
@@ -69,6 +74,7 @@ Located in `layout/sidebar/`
 - Mobile-responsive (slides in/out)
 
 **Navigation Structure:**
+
 ```typescript
 menuItems: NavItem[] = [
   {
@@ -90,16 +96,18 @@ menuItems: NavItem[] = [
 ```
 
 ### 3. Main Layout
+
 Located in `app.html` and `app.scss`
 
 **Structure:**
+
 ```html
 <div class="layout-wrapper">
   <app-topbar (menuButtonClick)="toggleSidebar()"></app-topbar>
-  
+
   <div class="layout-container">
     <app-sidebar [class.mobile-visible]="sidebarVisible"></app-sidebar>
-    
+
     <div class="layout-content">
       <router-outlet></router-outlet>
     </div>
@@ -108,6 +116,7 @@ Located in `app.html` and `app.scss`
 ```
 
 **Key Features:**
+
 - Top margin of 80px to account for fixed topbar
 - Left margin of 250px for sidebar (removed on mobile)
 - Light gray background (#f8f9fa)
@@ -116,6 +125,7 @@ Located in `app.html` and `app.scss`
 ## Shared Styles
 
 ### doc-page.scss
+
 Located in `shared/styles/`
 
 Provides consistent styling for all documentation pages:
@@ -132,6 +142,7 @@ Provides consistent styling for all documentation pages:
 - `.doc-tabs` - Tab navigation (for future use)
 
 **Example Usage:**
+
 ```html
 <div class="doc-page">
   <div class="doc-header">
@@ -187,7 +198,9 @@ Each component page follows this structure:
 
   <div class="doc-section">
     <h2>Properties</h2>
-    <table class="doc-properties">...</table>
+    <table class="doc-properties">
+      ...
+    </table>
   </div>
 </div>
 ```
@@ -195,11 +208,13 @@ Each component page follows this structure:
 ## Responsive Behavior
 
 ### Desktop (> 968px)
+
 - Sidebar always visible on the left
 - Topbar shows logo text
 - Content has left margin for sidebar
 
 ### Mobile (≤ 968px)
+
 - Sidebar hidden by default
 - Hamburger menu button visible
 - Sidebar slides in from left when toggled

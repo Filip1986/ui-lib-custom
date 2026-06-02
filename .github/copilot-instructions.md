@@ -33,6 +33,7 @@ import { ... } from 'ui-lib-custom/testing';           // test utilities
 ## §2 Component Creation Rules
 
 Before generating a new component:
+
 1. Check if it already exists under `projects/ui-lib-custom/src/lib/`
 2. Read `COMPONENT_CREATION_GUIDE.md` for the exact file scaffold
 3. Every component **must** have:
@@ -54,6 +55,7 @@ projects/ui-lib-custom/src/lib/<name>/
 ```
 
 **Every component must use:**
+
 ```typescript
 @Component({
   standalone: true,
@@ -100,7 +102,7 @@ From `LIBRARY_CONVENTIONS.md`:
 ### Native CSS first
 
 | Feature                       | Use for                                                             |
-|-------------------------------|---------------------------------------------------------------------|
+| ----------------------------- | ------------------------------------------------------------------- |
 | `@layer`                      | Explicit override hierarchy for theme layers                        |
 | Container queries             | Component adapts to its container — critical for a library          |
 | `clamp()` / `min()` / `max()` | Fluid sizing without consumer breakpoint coupling                   |
@@ -187,18 +189,21 @@ Key template rules active (`warn`): `click-events-have-key-events`, `interactive
 Before generating code, answer:
 
 **Architecture**
+
 - [ ] Does this component already exist in `projects/ui-lib-custom/src/lib/`?
 - [ ] Which entry point will it belong to (primary barrel or a secondary entry)?
 - [ ] Will this be added to `public-api.ts`?
 - [ ] Is a Storybook story planned?
 
 **Accessibility (answer before writing HTML)**
+
 - [ ] What ARIA role does this widget have? What are all required ARIA properties?
 - [ ] What is the complete keyboard interaction pattern (WAI-ARIA design patterns)?
 - [ ] Is label/name exposed as a configurable `input()` for contextual cases?
 - [ ] Is `jest-axe` covered in the spec?
 
 **HTML / Template**
+
 - [ ] Correct semantic element used — no `<div>`/`<span>` for interactive roles
 - [ ] No `<h1>`–`<h3>` hard-coded — heading level configurable or `aria-labelledby` used
 - [ ] `@if` / `@for` / `@switch` syntax — no `*ngIf` / `*ngFor`
@@ -211,6 +216,7 @@ Before generating code, answer:
 - [ ] `npm run lint` passes — no new ESLint template errors
 
 **CSS / Styling**
+
 - [ ] Is `ViewEncapsulation.None` used? (never `Emulated`)
 - [ ] BEM class names all prefixed with `uilib-`? (collision guard)
 - [ ] All colours/font-sizes use `var(--uilib-*)` — no raw hex?
@@ -240,6 +246,7 @@ it('should have no accessibility violations', async () => {
 ```
 
 **Test setup:**
+
 ```typescript
 TestBed.configureTestingModule({
   imports: [MyComponent],
@@ -248,6 +255,7 @@ TestBed.configureTestingModule({
 ```
 
 **Running tests:**
+
 ```bash
 npm test                    # unit tests
 npm run test:coverage       # with coverage (threshold: 90%)
@@ -262,15 +270,15 @@ npm run test:all            # all unit tests
 
 Key rules — these will block your commit:
 
-| Rule | Why |
-|------|-----|
-| `@typescript-eslint/no-explicit-any` | Type safety — use generics or specific types |
-| `@typescript-eslint/explicit-function-return-type` | Prevents inference surprises |
-| `@typescript-eslint/no-floating-promises` | Unhandled promises cause silent failures |
-| `@typescript-eslint/prefer-readonly` | Immutability by default |
-| `@angular-eslint/prefer-on-push-component-change-detection` | Performance non-negotiable |
-| `@angular-eslint/component-max-inline-declarations` | Keep templates external |
-| `no-console` | Use a logger service, not console |
+| Rule                                                        | Why                                          |
+| ----------------------------------------------------------- | -------------------------------------------- |
+| `@typescript-eslint/no-explicit-any`                        | Type safety — use generics or specific types |
+| `@typescript-eslint/explicit-function-return-type`          | Prevents inference surprises                 |
+| `@typescript-eslint/no-floating-promises`                   | Unhandled promises cause silent failures     |
+| `@typescript-eslint/prefer-readonly`                        | Immutability by default                      |
+| `@angular-eslint/prefer-on-push-component-change-detection` | Performance non-negotiable                   |
+| `@angular-eslint/component-max-inline-declarations`         | Keep templates external                      |
+| `no-console`                                                | Use a logger service, not console            |
 
 Run `npm run lint:fix` to auto-fix where possible. Run `npm run lint:ci` (0 warnings) before committing.
 
@@ -279,14 +287,16 @@ Run `npm run lint:fix` to auto-fix where possible. Run `npm run lint:ci` (0 warn
 ## §7 Branch + Commit Rules
 
 **Branch naming:**
+
 - `feat/<scope>-<description>` — new features
-- `fix/<scope>-<description>` — bug fixes  
+- `fix/<scope>-<description>` — bug fixes
 - `docs/<description>` — documentation only
 - `chore/<description>` — tooling, deps, config
 
 **Commit scopes:** `lib` | `demo` | `minimal` | `theme` | `tokens` | `a11y` | `storybook` | `deps` | `ci` | `release` | `workspace`
 
 **Commit examples:**
+
 ```
 feat(lib): add accessible tooltip component
 fix(a11y): correct focus trap in modal
@@ -299,8 +309,8 @@ chore(deps): update @angular/core to 21.x
 
 ## §8 What NOT To Do
 
-| ❌ Never                                         | ✅ Instead                                                  |
-|-------------------------------------------------|------------------------------------------------------------|
+| ❌ Never                                        | ✅ Instead                                                 |
+| ----------------------------------------------- | ---------------------------------------------------------- |
 | `ViewEncapsulation.Emulated`                    | `ViewEncapsulation.None`                                   |
 | Hardcoded colours in SCSS (`#2563eb`)           | `var(--uilib-color-primary)` design tokens                 |
 | Raw hex in new token definitions                | `oklch(57% 0.24 264)`                                      |
@@ -359,4 +369,3 @@ npm pack                   # creates tarball for manual testing
 # 8. git push && git push --tags
 # 9. npm publish (from dist/ui-lib-custom)
 ```
-

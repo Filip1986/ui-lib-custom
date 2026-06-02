@@ -18,13 +18,13 @@ function getHost(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getImg(fixture: ComponentFixture<unknown>): HTMLImageElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLImageElement>(
-    '.uilib-image__img'
+    '.uilib-image__img',
   );
 }
 
 function getIndicator(fixture: ComponentFixture<unknown>): HTMLButtonElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>(
-    '.uilib-image__indicator'
+    '.uilib-image__indicator',
   );
 }
 
@@ -34,13 +34,13 @@ function getMask(fixture: ComponentFixture<unknown>): HTMLElement | null {
 
 function getPreviewImg(fixture: ComponentFixture<unknown>): HTMLImageElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLImageElement>(
-    '.uilib-image__preview-img'
+    '.uilib-image__preview-img',
   );
 }
 
 function getToolbarButtons(fixture: ComponentFixture<unknown>): NodeListOf<HTMLButtonElement> {
   return (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>(
-    '.uilib-image__toolbar-btn'
+    '.uilib-image__toolbar-btn',
   );
 }
 
@@ -56,7 +56,7 @@ function getZoomOutBtn(fixture: ComponentFixture<unknown>): HTMLButtonElement | 
 
 function getCloseBtn(fixture: ComponentFixture<unknown>): HTMLButtonElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>(
-    '.uilib-image__toolbar-btn--close'
+    '.uilib-image__toolbar-btn--close',
   );
 }
 
@@ -364,7 +364,7 @@ describe('ImageComponent', (): void => {
     await fixture.whenStable();
 
     const errorEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.uilib-image__error'
+      '.uilib-image__error',
     );
     expect(errorEl).toBeTruthy();
   });

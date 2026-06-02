@@ -111,24 +111,24 @@ function getRootContainer(fixture: ComponentFixture<unknown>): HTMLElement | nul
 function getRootHeaders(fixture: ComponentFixture<unknown>): HTMLButtonElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>(
-      '.ui-lib-panel-menu__header'
-    )
+      '.ui-lib-panel-menu__header',
+    ),
   );
 }
 
 function getPanelRegions(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-      '.ui-lib-panel-menu__content[role="region"]'
-    )
+      '.ui-lib-panel-menu__content[role="region"]',
+    ),
   );
 }
 
 function getSubLinks(fixture: ComponentFixture<unknown>): HTMLAnchorElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLAnchorElement>(
-      '.ui-lib-panel-menu__sub-link'
-    )
+      '.ui-lib-panel-menu__sub-link',
+    ),
   );
 }
 
@@ -154,7 +154,7 @@ describe('PanelMenu Accessibility', (): void => {
     it('defaults to PANEL_MENU_DEFAULT_ARIA_LABEL', async (): Promise<void> => {
       fixture = await createFixture(PanelMenuDefaultLabelHostComponent);
       expect(getRootContainer(fixture)?.getAttribute('aria-label')).toBe(
-        PANEL_MENU_DEFAULT_ARIA_LABEL
+        PANEL_MENU_DEFAULT_ARIA_LABEL,
       );
     });
   });
@@ -232,7 +232,7 @@ describe('PanelMenu Accessibility', (): void => {
       getRootHeaders(fixture)[0]?.click();
       fixture.detectChanges();
       const subList: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-panel-menu__content--visible .ui-lib-panel-menu__sub-list'
+        '.ui-lib-panel-menu__content--visible .ui-lib-panel-menu__sub-list',
       );
       expect(subList?.getAttribute('role')).toBe('menu');
     });
@@ -257,7 +257,7 @@ describe('PanelMenu Accessibility', (): void => {
     it('separator has role="separator"', async (): Promise<void> => {
       fixture = await createFixture(PanelMenuA11yHostComponent);
       const separator: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-panel-menu__separator'
+        '.ui-lib-panel-menu__separator',
       );
       expect(separator?.getAttribute('role')).toBe('separator');
     });
@@ -265,7 +265,7 @@ describe('PanelMenu Accessibility', (): void => {
     it('separator does not have aria-hidden="true"', async (): Promise<void> => {
       fixture = await createFixture(PanelMenuA11yHostComponent);
       const separator: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-panel-menu__separator'
+        '.ui-lib-panel-menu__separator',
       );
       expect(separator?.getAttribute('aria-hidden')).toBeNull();
     });
@@ -330,13 +330,13 @@ describe('PanelMenu Accessibility', (): void => {
       getRootHeaders(fixture)[2]?.click();
       fixture.detectChanges();
       const links: HTMLAnchorElement[] = getSubLinks(fixture).filter(
-        (link: HTMLAnchorElement): boolean => link.getAttribute('aria-disabled') !== 'true'
+        (link: HTMLAnchorElement): boolean => link.getAttribute('aria-disabled') !== 'true',
       );
       const documentationLink: HTMLAnchorElement | undefined = links.find(
-        (link: HTMLAnchorElement): boolean => link.textContent!.trim() === 'Documentation'
+        (link: HTMLAnchorElement): boolean => link.textContent!.trim() === 'Documentation',
       );
       const supportLink: HTMLAnchorElement | undefined = links.find(
-        (link: HTMLAnchorElement): boolean => link.textContent!.trim() === 'Support'
+        (link: HTMLAnchorElement): boolean => link.textContent!.trim() === 'Support',
       );
       documentationLink?.focus();
       if (documentationLink) {
@@ -365,12 +365,12 @@ describe('PanelMenu Accessibility', (): void => {
     it('supports unique IDs across two PanelMenu instances', async (): Promise<void> => {
       fixture = await createFixture(TwoPanelMenusHostComponent);
       const headers: HTMLButtonElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll('.ui-lib-panel-menu__header')
+        (fixture.nativeElement as HTMLElement).querySelectorAll('.ui-lib-panel-menu__header'),
       );
       const regions: HTMLElement[] = Array.from(
         (fixture.nativeElement as HTMLElement).querySelectorAll(
-          '.ui-lib-panel-menu__content[role="region"]'
-        )
+          '.ui-lib-panel-menu__content[role="region"]',
+        ),
       );
       const headerIds: string[] = headers.map((header: HTMLButtonElement): string => header.id);
       const regionIds: string[] = regions

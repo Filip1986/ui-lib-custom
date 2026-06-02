@@ -37,7 +37,7 @@ class TestHostComponent {
   public readonly activation: WritableSignal<'auto' | 'manual'> = signal<'auto' | 'manual'>('auto');
   public readonly disableSecond: WritableSignal<boolean> = signal<boolean>(false);
   public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(
-    'Project sections'
+    'Project sections',
   );
 }
 
@@ -134,19 +134,19 @@ function getTabList(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getTabs(fixture: ComponentFixture<unknown>): HTMLButtonElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('[role="tab"]')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('[role="tab"]'),
   );
 }
 
 function getPanels(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('[role="tabpanel"]')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('[role="tabpanel"]'),
   );
 }
 
 function dispatchKey(element: HTMLElement, key: string, shiftKey: boolean = false): void {
   element.dispatchEvent(
-    new KeyboardEvent('keydown', { key, shiftKey, bubbles: true, cancelable: true })
+    new KeyboardEvent('keydown', { key, shiftKey, bubbles: true, cancelable: true }),
   );
 }
 
@@ -198,7 +198,7 @@ describe('Tabs Accessibility', (): void => {
     expect(new Set(panelIds).size).toBe(panelIds.length);
     expect(tabIds.every((id: string): boolean => /^ui-lib-tabs-\d+-tab-\d+$/.test(id))).toBe(true);
     expect(panelIds.every((id: string): boolean => /^ui-lib-tabs-\d+-panel-\d+$/.test(id))).toBe(
-      true
+      true,
     );
   });
 

@@ -72,17 +72,17 @@ export class FormField implements FormFieldContext {
   private readonly projectedControlElement: WritableSignal<FormFieldControlElement | null> =
     signal<FormFieldControlElement | null>(null);
   public readonly inputId: Signal<string> = computed<string>(
-    (): string => this.inputIdOverride() ?? this.generatedInputId
+    (): string => this.inputIdOverride() ?? this.generatedInputId,
   );
   public readonly labelId: Signal<string> = computed<string>(
-    (): string => `${this.uniqueId}-label`
+    (): string => `${this.uniqueId}-label`,
   );
   public readonly errorId: Signal<string> = computed<string>(
-    (): string => `${this.uniqueId}-error`
+    (): string => `${this.uniqueId}-error`,
   );
   public readonly hintId: Signal<string> = computed<string>((): string => `${this.uniqueId}-hint`);
   public readonly invalid: Signal<boolean> = computed<boolean>(
-    (): boolean => this.invalidOverride() || Boolean(this.error())
+    (): boolean => this.invalidOverride() || Boolean(this.error()),
   );
   public readonly describedBy: Signal<string | null> = computed<string | null>(
     (): string | null => {
@@ -95,13 +95,13 @@ export class FormField implements FormFieldContext {
       }
 
       return ids.length > 0 ? ids.join(' ') : null;
-    }
+    },
   );
   public readonly showError: Signal<boolean> = computed<boolean>(
-    (): boolean => this.invalid() && Boolean(this.error())
+    (): boolean => this.invalid() && Boolean(this.error()),
   );
   public readonly showHint: Signal<boolean> = computed<boolean>((): boolean =>
-    Boolean(this.hint())
+    Boolean(this.hint()),
   );
 
   private previousError: string | null = null;
@@ -141,7 +141,7 @@ export class FormField implements FormFieldContext {
       this.setOptionalAttribute(
         projectedControl,
         'aria-labelledby',
-        this.label() ? this.labelId() : null
+        this.label() ? this.labelId() : null,
       );
       this.setOptionalAttribute(projectedControl, 'aria-describedby', this.describedBy());
       this.setOptionalAttribute(projectedControl, 'aria-invalid', this.invalid() ? 'true' : null);
@@ -163,14 +163,14 @@ export class FormField implements FormFieldContext {
 
   private resolveProjectedControl(): FormFieldControlElement | null {
     return (this.hostElementRef.nativeElement as HTMLElement).querySelector(
-      'input, select, textarea'
+      'input, select, textarea',
     );
   }
 
   private setOptionalAttribute(
     element: FormFieldControlElement,
     attributeName: string,
-    value: string | null
+    value: string | null,
   ): void {
     if (value !== null) {
       this.renderer.setAttribute(element, attributeName, value);

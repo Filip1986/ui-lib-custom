@@ -13,16 +13,16 @@ Native rich text editor with default toolbar and content projection support.
 
 ### Inputs
 
-| Name             | Type                  | Default                       | Description |
-| ---------------- | --------------------- | ----------------------------- | ----------- |
-| `ariaLabel`      | `string | null`       | `null`                        | —           |
-| `ariaLabelledBy` | `string | null`       | `null`                        | —           |
-| `disabled`       | `boolean`             | `EDITOR_DEFAULTS.disabled`    | —           |
-| `filled`         | `boolean`             | `EDITOR_DEFAULTS.filled`      | —           |
-| `placeholder`    | `string`              | `EDITOR_DEFAULTS.placeholder` | —           |
-| `readonly`       | `boolean`             | `EDITOR_DEFAULTS.readonly`    | —           |
-| `size`           | `'sm' | 'md' | 'lg'`  | `EDITOR_DEFAULTS.size`        | —           |
-| `variant`        | `ThemeVariant | null` | `EDITOR_DEFAULTS.variant`     | —           |
+| Name             | Type          | Default                       | Description               |
+| ---------------- | ------------- | ----------------------------- | ------------------------- | ---------------------- | --- |
+| `ariaLabel`      | `string       | null`                         | `null`                    | —                      |
+| `ariaLabelledBy` | `string       | null`                         | `null`                    | —                      |
+| `disabled`       | `boolean`     | `EDITOR_DEFAULTS.disabled`    | —                         |
+| `filled`         | `boolean`     | `EDITOR_DEFAULTS.filled`      | —                         |
+| `placeholder`    | `string`      | `EDITOR_DEFAULTS.placeholder` | —                         |
+| `readonly`       | `boolean`     | `EDITOR_DEFAULTS.readonly`    | —                         |
+| `size`           | `'sm'         | 'md'                          | 'lg'`                     | `EDITOR_DEFAULTS.size` | —   |
+| `variant`        | `ThemeVariant | null`                         | `EDITOR_DEFAULTS.variant` | —                      |
 
 ### Outputs
 
@@ -97,4 +97,3 @@ Native rich text editor with default toolbar and content projection support.
 - [Demo page](/components/editor)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/editor/README.md)
-

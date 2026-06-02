@@ -49,7 +49,9 @@
     [attr.aria-valuemax]="max()"
     [attr.aria-valuenow]="value()"
     [attr.aria-valuetext]="formattedValue()"
-    [attr.aria-label]="ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('input-number.input.label'))"
+    [attr.aria-label]="
+      ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('input-number.input.label'))
+    "
     [attr.aria-labelledby]="ariaLabelledBy() || null"
     [attr.aria-describedby]="ariaDescribedBy() || null"
     [attr.aria-required]="required() ? 'true' : null"

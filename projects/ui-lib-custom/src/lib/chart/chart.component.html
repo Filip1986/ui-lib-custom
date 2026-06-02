@@ -9,7 +9,11 @@
 
 @if (showDataTable() && data()) {
   <table [id]="tableId" class="ui-lib-chart__sr-table">
-    <caption>{{ effectiveAriaLabel() }}</caption>
+    <caption>
+      {{
+        effectiveAriaLabel()
+      }}
+    </caption>
     <thead>
       <tr>
         <th scope="col">Dataset</th>
@@ -30,4 +34,3 @@
     </tbody>
   </table>
 }
-

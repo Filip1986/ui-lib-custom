@@ -30,42 +30,42 @@ Pattern A maps naturally to the discrete 1-to-N integer selection semantics of a
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `value` | `number \| null` | `null` | Current rating. Two-way bindable via `[(value)]` or `ngModel`. |
-| `stars` | `number` | `5` | Number of star icons to render. |
-| `cancel` | `boolean` | `true` | Shows a clear/cancel button and enables Delete/Backspace keyboard clearing. |
-| `disabled` | `boolean` | `false` | Disables the component. Also controlled via CVA `setDisabledState`. |
-| `readonly` | `boolean` | `false` | Visible but not interactive. Changes role to `"img"`. |
-| `autofocus` | `boolean` | `false` | Focuses the first star after first render. |
-| `ariaLabel` | `string \| null` | `null` | Accessible label for the radiogroup element. If omitted, the component falls back to `"Rating"` and logs a DEV-mode warning unless `ariaLabelledby` is provided. Overridden with descriptive text in read-only mode. |
-| `ariaLabelledby` | `string \| null` | `null` | Overrides `ariaLabel` when set. Ignored in read-only mode. |
-| `iconOnClass` | `string \| null` | `null` | Extra CSS class on filled star icons. |
-| `iconOnStyle` | `Record<string, string> \| null` | `null` | Inline styles on filled star icons. |
-| `iconOffClass` | `string \| null` | `null` | Extra CSS class on empty star icons. |
-| `iconOffStyle` | `Record<string, string> \| null` | `null` | Inline styles on empty star icons. |
-| `iconCancelClass` | `string \| null` | `null` | Extra CSS class on the cancel icon. |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme when null. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Component density. |
+| Name              | Type                                             | Default | Notes                                                                                                                                                                                                                |
+| ----------------- | ------------------------------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `value`           | `number \| null`                                 | `null`  | Current rating. Two-way bindable via `[(value)]` or `ngModel`.                                                                                                                                                       |
+| `stars`           | `number`                                         | `5`     | Number of star icons to render.                                                                                                                                                                                      |
+| `cancel`          | `boolean`                                        | `true`  | Shows a clear/cancel button and enables Delete/Backspace keyboard clearing.                                                                                                                                          |
+| `disabled`        | `boolean`                                        | `false` | Disables the component. Also controlled via CVA `setDisabledState`.                                                                                                                                                  |
+| `readonly`        | `boolean`                                        | `false` | Visible but not interactive. Changes role to `"img"`.                                                                                                                                                                |
+| `autofocus`       | `boolean`                                        | `false` | Focuses the first star after first render.                                                                                                                                                                           |
+| `ariaLabel`       | `string \| null`                                 | `null`  | Accessible label for the radiogroup element. If omitted, the component falls back to `"Rating"` and logs a DEV-mode warning unless `ariaLabelledby` is provided. Overridden with descriptive text in read-only mode. |
+| `ariaLabelledby`  | `string \| null`                                 | `null`  | Overrides `ariaLabel` when set. Ignored in read-only mode.                                                                                                                                                           |
+| `iconOnClass`     | `string \| null`                                 | `null`  | Extra CSS class on filled star icons.                                                                                                                                                                                |
+| `iconOnStyle`     | `Record<string, string> \| null`                 | `null`  | Inline styles on filled star icons.                                                                                                                                                                                  |
+| `iconOffClass`    | `string \| null`                                 | `null`  | Extra CSS class on empty star icons.                                                                                                                                                                                 |
+| `iconOffStyle`    | `Record<string, string> \| null`                 | `null`  | Inline styles on empty star icons.                                                                                                                                                                                   |
+| `iconCancelClass` | `string \| null`                                 | `null`  | Extra CSS class on the cancel icon.                                                                                                                                                                                  |
+| `variant`         | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`  | Falls back to global theme when null.                                                                                                                                                                                |
+| `size`            | `'sm' \| 'md' \| 'lg'`                           | `'md'`  | Component density.                                                                                                                                                                                                   |
 
 ## Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `change` | `RatingChangeEvent` | Emitted on every value change, including clears. Value is `number \| null`. |
-| `rate` | `RatingRateEvent` | Emitted only when a star is selected (value is always a positive integer). |
-| `cleared` | `Event` | Emitted when the rating is cleared via cancel button, toggle-deselect, or Delete key. |
-| `focus` | `FocusEvent` | Emitted when any star receives focus. |
-| `blur` | `FocusEvent` | Emitted when any star loses focus. |
+| Name      | Payload             | Notes                                                                                 |
+| --------- | ------------------- | ------------------------------------------------------------------------------------- |
+| `change`  | `RatingChangeEvent` | Emitted on every value change, including clears. Value is `number \| null`.           |
+| `rate`    | `RatingRateEvent`   | Emitted only when a star is selected (value is always a positive integer).            |
+| `cleared` | `Event`             | Emitted when the rating is cleared via cancel button, toggle-deselect, or Delete key. |
+| `focus`   | `FocusEvent`        | Emitted when any star receives focus.                                                 |
+| `blur`    | `FocusEvent`        | Emitted when any star loses focus.                                                    |
 
 ## Keyboard navigation
 
-| Key | Action |
-|-----|--------|
-| `ArrowRight` / `ArrowUp` | Increase rating by one (max = `stars`). |
-| `ArrowLeft` / `ArrowDown` | Decrease rating by one (min = 1). |
-| `Delete` / `Backspace` | Clear rating (only when `cancel` is true). |
-| `1`–`9` | Set rating directly to that digit (if within `stars` range). |
+| Key                       | Action                                                       |
+| ------------------------- | ------------------------------------------------------------ |
+| `ArrowRight` / `ArrowUp`  | Increase rating by one (max = `stars`).                      |
+| `ArrowLeft` / `ArrowDown` | Decrease rating by one (min = 1).                            |
+| `Delete` / `Backspace`    | Clear rating (only when `cancel` is true).                   |
+| `1`–`9`                   | Set rating directly to that digit (if within `stars` range). |
 
 ## ControlValueAccessor
 
@@ -92,7 +92,12 @@ Provide either `ariaLabel` or `ariaLabelledby` whenever no visible label exists.
 <ui-lib-rating [(ngModel)]="rating" />
 
 <!-- ten stars, no cancel button, reactive form -->
-<ui-lib-rating [stars]="10" [cancel]="false" [formControl]="ratingControl" (ratingChange)="onRate($event)" />
+<ui-lib-rating
+  [stars]="10"
+  [cancel]="false"
+  [formControl]="ratingControl"
+  (ratingChange)="onRate($event)"
+/>
 
 <!-- read-only display (role="img", aria-label describes the value) -->
 <ui-lib-rating [readonly]="true" [(ngModel)]="rating" />
@@ -100,14 +105,14 @@ Provide either `ariaLabel` or `ariaLabelledby` whenever no visible label exists.
 
 ## CSS Custom Properties
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `--uilib-rating-star-on-color` | `var(--uilib-color-primary-500, #f59e0b)` | Filled star color |
-| `--uilib-rating-star-off-color` | `var(--uilib-color-neutral-300, #d1d5db)` | Empty star color |
-| `--uilib-rating-star-hover-color` | `var(--uilib-color-primary-400, #fbbf24)` | Star color on hover |
-| `--uilib-rating-cancel-color` | `var(--uilib-color-neutral-400, #9ca3af)` | Cancel button color |
-| `--uilib-rating-cancel-hover-color` | `var(--uilib-color-danger-500, #ef4444)` | Cancel button hover color |
-| `--uilib-rating-gap` | `0.25rem` | Gap between stars |
-| `--uilib-rating-focus-shadow` | `0 0 0 2px color-mix(…primary-500… 40%, transparent)` | Focus ring box-shadow |
-| `--uilib-rating-star-transition` | `color 0.15s ease, transform 0.1s ease` | Star hover/color transition; set to `none` when `prefers-reduced-motion: reduce` |
-| `--uilib-rating-cancel-transition` | `color 0.15s ease, transform 0.1s ease` | Cancel hover/color transition; set to `none` when `prefers-reduced-motion: reduce` |
+| Variable                            | Default                                               | Description                                                                        |
+| ----------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `--uilib-rating-star-on-color`      | `var(--uilib-color-primary-500, #f59e0b)`             | Filled star color                                                                  |
+| `--uilib-rating-star-off-color`     | `var(--uilib-color-neutral-300, #d1d5db)`             | Empty star color                                                                   |
+| `--uilib-rating-star-hover-color`   | `var(--uilib-color-primary-400, #fbbf24)`             | Star color on hover                                                                |
+| `--uilib-rating-cancel-color`       | `var(--uilib-color-neutral-400, #9ca3af)`             | Cancel button color                                                                |
+| `--uilib-rating-cancel-hover-color` | `var(--uilib-color-danger-500, #ef4444)`              | Cancel button hover color                                                          |
+| `--uilib-rating-gap`                | `0.25rem`                                             | Gap between stars                                                                  |
+| `--uilib-rating-focus-shadow`       | `0 0 0 2px color-mix(…primary-500… 40%, transparent)` | Focus ring box-shadow                                                              |
+| `--uilib-rating-star-transition`    | `color 0.15s ease, transform 0.1s ease`               | Star hover/color transition; set to `none` when `prefers-reduced-motion: reduce`   |
+| `--uilib-rating-cancel-transition`  | `color 0.15s ease, transform 0.1s ease`               | Cancel hover/color transition; set to `none` when `prefers-reduced-motion: reduce` |

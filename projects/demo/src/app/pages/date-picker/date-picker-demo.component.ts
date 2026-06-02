@@ -272,7 +272,7 @@ export class DatePickerDemoComponent {
     day: number,
     hour: number,
     minute: number,
-    second: number
+    second: number,
   ): Date {
     return new Date(year, month, day, hour, minute, second, 0);
   }

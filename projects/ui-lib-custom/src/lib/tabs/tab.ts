@@ -50,7 +50,7 @@ export class Tab {
   public readonly closable: InputSignal<boolean> = input<boolean>(false);
   /** Per-tab lazy override; falls back to the parent tabs lazy mode when undefined. */
   public readonly lazy: InputSignal<TabsLazyMode | undefined> = input<TabsLazyMode | undefined>(
-    undefined
+    undefined,
   );
 
   @ViewChild('defaultContent', { static: true }) public content?: TemplateRef<unknown>;

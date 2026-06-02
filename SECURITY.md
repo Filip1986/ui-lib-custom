@@ -2,9 +2,9 @@
 
 ## Supported Versions
 
-| Version | Supported |
-|---------|-----------|
-| latest  | ✅        |
+| Version  | Supported              |
+| -------- | ---------------------- |
+| latest   | ✅                     |
 | < latest | ❌ — upgrade to latest |
 
 ## Reporting a Vulnerability
@@ -16,6 +16,7 @@ Report vulnerabilities privately via GitHub's
 **hello@artificialsense.ai**.
 
 Include:
+
 - Description of the vulnerability
 - Steps to reproduce
 - Potential impact
@@ -51,12 +52,14 @@ forbidden. Always use Angular's `Renderer2` if DOM access is unavoidable.
 ### Peer Dependency Security
 
 Wide peer dependency ranges (`^18 || ^19 || ^20`) mean consumers may use vulnerable versions.
+
 - Publish security advisories when a peer dependency has a critical CVE
 - Document minimum safe versions in the advisory
 
 ### Vulnerability in the Published Package
 
 If a security vulnerability is discovered in the published npm package `ui-lib-custom`:
+
 1. Fix the vulnerability on a private branch
 2. Coordinate with the reporter on a disclosure timeline
 3. Publish a patched version
@@ -70,4 +73,3 @@ If a security vulnerability is discovered in the published npm package `ui-lib-c
 - Sanitization: Angular's built-in XSS protection is respected
 - No use of `CUSTOM_ELEMENTS_SCHEMA` (bypasses Angular template security)
 - No use of `NO_ERRORS_SCHEMA` in production code
-

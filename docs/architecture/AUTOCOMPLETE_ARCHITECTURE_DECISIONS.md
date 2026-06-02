@@ -14,15 +14,15 @@ Define implementation decisions for `ui-lib-autocomplete` that align with existi
 
 ## Decision Summary
 
-| Topic | Decision |
-| --- | --- |
-| CVA model | Single mode writes scalar (`unknown \| null`); multiple mode writes array (`unknown[]`). |
+| Topic             | Decision                                                                                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| CVA model         | Single mode writes scalar (`unknown \| null`); multiple mode writes array (`unknown[]`).                                                               |
 | Panel positioning | Default panel mounts to `document.body` via `appendTo='body'` and uses fixed-position anchoring to the control; `appendTo='self'` keeps host mounting. |
-| Debounce | Signal + timer-based debounce for `completeMethod` emissions (no RxJS hard dependency in v1). |
-| Keyboard nav | Reuse Select navigation semantics (`activeDescendant`, enabled-option traversal, Home/End). |
-| Chips | Token list rendered before input in multiple mode, removable via button and keyboard delete flow. |
-| Virtual scroll | Prefer CDK virtual scrolling when enabled; fallback to standard list when disabled. |
-| Force selection | Validate/normalize on blur and panel close boundaries, not on every keypress. |
+| Debounce          | Signal + timer-based debounce for `completeMethod` emissions (no RxJS hard dependency in v1).                                                          |
+| Keyboard nav      | Reuse Select navigation semantics (`activeDescendant`, enabled-option traversal, Home/End).                                                            |
+| Chips             | Token list rendered before input in multiple mode, removable via button and keyboard delete flow.                                                      |
+| Virtual scroll    | Prefer CDK virtual scrolling when enabled; fallback to standard list when disabled.                                                                    |
+| Force selection   | Validate/normalize on blur and panel close boundaries, not on every keypress.                                                                          |
 
 ## ControlValueAccessor Strategy
 

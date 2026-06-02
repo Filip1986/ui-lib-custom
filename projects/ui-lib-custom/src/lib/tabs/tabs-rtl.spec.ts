@@ -49,7 +49,7 @@ describe('Tabs RTL Support', (): void => {
 
   function tabButtons(): HTMLButtonElement[] {
     return Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('button.ui-lib-tabs__trigger')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button.ui-lib-tabs__trigger'),
     );
   }
 
@@ -63,7 +63,7 @@ describe('Tabs RTL Support', (): void => {
 
   it('should apply rtl class when dir is rtl', (): void => {
     const tabsEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-tabs'
+      'ui-lib-tabs',
     ) as HTMLElement;
     expect(tabsEl.classList.contains('ui-lib-tabs--rtl')).toBeTruthy();
   });

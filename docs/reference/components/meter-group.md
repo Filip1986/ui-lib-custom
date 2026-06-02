@@ -7,24 +7,24 @@
 
 ## Overview
 
-MeterGroup — segmented progress/meter bar component. Renders multiple coloured segments proportional to their values against a configurable min/max range.  An optional legend lists each segment's label, colour, and value.  Supports horizontal and vertical orientations and three design variants (material / bootstrap / minimal).
+MeterGroup — segmented progress/meter bar component. Renders multiple coloured segments proportional to their values against a configurable min/max range. An optional legend lists each segment's label, colour, and value. Supports horizontal and vertical orientations and three design variants (material / bootstrap / minimal).
 
 ## API
 
 ### Inputs
 
-| Name            | Type                       | Default         | Description                                                                                 |
-| --------------- | -------------------------- | --------------- | ------------------------------------------------------------------------------------------- |
-| `ariaLabel`     | `string`                   | `'Meter group'` | Accessible label for the meter container group.                                             |
-| `labelPosition` | `MeterGroupLabelPosition`  | `'end'`         | Position of the legend relative to the bar (`'start'` = above/left, `'end'` = below/right). |
-| `max`           | `number`                   | `100`           | Maximum value of the range (default `100`).                                                 |
-| `min`           | `number`                   | `0`             | Minimum value of the range (default `0`).                                                   |
-| `orientation`   | `MeterGroupOrientation`    | `'horizontal'`  | Bar orientation.                                                                            |
-| `showLabels`    | `boolean`                  | `true`          | Whether to render the legend.                                                               |
-| `size`          | `MeterGroupSize`           | `'md'`          | Component size token.                                                                       |
-| `styleClass`    | `string | null`            | `null`          | Additional CSS classes to attach to the host element.                                       |
-| `values`        | `MeterItem[]`              | `[]`            | Array of meter segments to render.                                                          |
-| `variant`       | `MeterGroupVariant | null` | `null`          | Visual variant — inherits from ThemeConfigService when not set.                             |
+| Name            | Type                      | Default         | Description                                                                                 |
+| --------------- | ------------------------- | --------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `ariaLabel`     | `string`                  | `'Meter group'` | Accessible label for the meter container group.                                             |
+| `labelPosition` | `MeterGroupLabelPosition` | `'end'`         | Position of the legend relative to the bar (`'start'` = above/left, `'end'` = below/right). |
+| `max`           | `number`                  | `100`           | Maximum value of the range (default `100`).                                                 |
+| `min`           | `number`                  | `0`             | Minimum value of the range (default `0`).                                                   |
+| `orientation`   | `MeterGroupOrientation`   | `'horizontal'`  | Bar orientation.                                                                            |
+| `showLabels`    | `boolean`                 | `true`          | Whether to render the legend.                                                               |
+| `size`          | `MeterGroupSize`          | `'md'`          | Component size token.                                                                       |
+| `styleClass`    | `string                   | null`           | `null`                                                                                      | Additional CSS classes to attach to the host element.           |
+| `values`        | `MeterItem[]`             | `[]`            | Array of meter segments to render.                                                          |
+| `variant`       | `MeterGroupVariant        | null`           | `null`                                                                                      | Visual variant — inherits from ThemeConfigService when not set. |
 
 ### Outputs
 
@@ -88,11 +88,7 @@ _none_
 ## Usage Examples
 
 ```html
-<ui-lib-meter-group
-  [values]="storageItems"
-  [max]="100"
-  labelPosition="end"
-/>
+<ui-lib-meter-group [values]="storageItems" [max]="100" labelPosition="end" />
 ```
 
 ```ts
@@ -110,4 +106,3 @@ storageItems: MeterItem[] = [
 - [Demo page](/components/meter-group)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/meter-group/README.md)
-

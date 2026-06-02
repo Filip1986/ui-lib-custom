@@ -27,37 +27,38 @@ import { StyleClass } from 'ui-lib-custom/style-class';
 
 ## Target Selectors
 
-| Value | Resolves to |
-|---|---|
-| `@next` | `host.nextElementSibling` |
-| `@prev` | `host.previousElementSibling` |
-| `@parent` | `host.parentElement` |
-| `@grandparent` | `host.parentElement?.parentElement` |
-| Any CSS selector string | `document.querySelector(selector)` |
+| Value                   | Resolves to                         |
+| ----------------------- | ----------------------------------- |
+| `@next`                 | `host.nextElementSibling`           |
+| `@prev`                 | `host.previousElementSibling`       |
+| `@parent`               | `host.parentElement`                |
+| `@grandparent`          | `host.parentElement?.parentElement` |
+| Any CSS selector string | `document.querySelector(selector)`  |
 
 ---
 
 ## Inputs
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `uiLibStyleClass` | `string` | *(required)* | Target selector (`@next`, `@prev`, `@parent`, `@grandparent`, or CSS selector). |
-| `toggleClass` | `string` | `''` | Single class to toggle on each click. When set, bypasses the full transition lifecycle. |
-| `enterFromClass` | `string` | `''` | Class(es) applied to the target at the very start of the enter transition. |
-| `enterActiveClass` | `string` | `''` | Class(es) applied during the enter transition (e.g. keyframe class). |
-| `enterToClass` | `string` | `''` | Class(es) applied at the end of the enter transition. |
-| `enterDoneClass` | `string` | `''` | Class(es) kept on the target after enter completes. |
-| `leaveFromClass` | `string` | `''` | Class(es) applied at the very start of the leave transition. |
-| `leaveActiveClass` | `string` | `''` | Class(es) applied during the leave transition. |
-| `leaveToClass` | `string` | `''` | Class(es) applied at the end of the leave transition. |
-| `leaveDoneClass` | `string` | `''` | Class(es) kept on the target after leave completes. |
-| `hideOnOutsideClick` | `boolean` | `false` | When `true`, clicking outside the target triggers leave / toggles off. |
+| Input                | Type      | Default      | Description                                                                             |
+| -------------------- | --------- | ------------ | --------------------------------------------------------------------------------------- |
+| `uiLibStyleClass`    | `string`  | _(required)_ | Target selector (`@next`, `@prev`, `@parent`, `@grandparent`, or CSS selector).         |
+| `toggleClass`        | `string`  | `''`         | Single class to toggle on each click. When set, bypasses the full transition lifecycle. |
+| `enterFromClass`     | `string`  | `''`         | Class(es) applied to the target at the very start of the enter transition.              |
+| `enterActiveClass`   | `string`  | `''`         | Class(es) applied during the enter transition (e.g. keyframe class).                    |
+| `enterToClass`       | `string`  | `''`         | Class(es) applied at the end of the enter transition.                                   |
+| `enterDoneClass`     | `string`  | `''`         | Class(es) kept on the target after enter completes.                                     |
+| `leaveFromClass`     | `string`  | `''`         | Class(es) applied at the very start of the leave transition.                            |
+| `leaveActiveClass`   | `string`  | `''`         | Class(es) applied during the leave transition.                                          |
+| `leaveToClass`       | `string`  | `''`         | Class(es) applied at the end of the leave transition.                                   |
+| `leaveDoneClass`     | `string`  | `''`         | Class(es) kept on the target after leave completes.                                     |
+| `hideOnOutsideClick` | `boolean` | `false`      | When `true`, clicking outside the target triggers leave / toggles off.                  |
 
 ---
 
 ## Transition Lifecycle
 
 ### Enter
+
 1. Remove `leaveDoneClass` and `leaveToClass` (clean prior leave state).
 2. Add `enterFromClass` to target.
 3. On next animation frame: remove `enterFromClass`, add `enterActiveClass` + `enterToClass`.
@@ -67,6 +68,7 @@ import { StyleClass } from 'ui-lib-custom/style-class';
 5. `isEntered = true`.
 
 ### Leave
+
 1. Remove `enterDoneClass` and `enterToClass`.
 2. Add `leaveFromClass` to target.
 3. On next animation frame: remove `leaveFromClass`, add `leaveActiveClass` + `leaveToClass`.
@@ -94,8 +96,12 @@ import { StyleClass } from 'ui-lib-custom/style-class';
 ```
 
 ```css
-.is-open { display: block; }
-div { display: none; }
+.is-open {
+  display: block;
+}
+div {
+  display: none;
+}
 ```
 
 ---
@@ -119,13 +125,33 @@ div { display: none; }
 ```
 
 ```css
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
-@keyframes fadeIn  { from { opacity: 0 } to { opacity: 1 } }
-@keyframes fadeOut { from { opacity: 1 } to { opacity: 0 } }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 
-.fade-in  { animation: fadeIn  200ms forwards; }
-.fade-out { animation: fadeOut 200ms forwards; }
+.fade-in {
+  animation: fadeIn 200ms forwards;
+}
+.fade-out {
+  animation: fadeOut 200ms forwards;
+}
 ```
 
 ---
@@ -154,17 +180,13 @@ div { display: none; }
 ```html
 <!-- @parent -->
 <nav>
-  <button [uiLibStyleClass]="'@parent'" [toggleClass]="'nav--expanded'">
-    Expand
-  </button>
+  <button [uiLibStyleClass]="'@parent'" [toggleClass]="'nav--expanded'">Expand</button>
 </nav>
 
 <!-- @grandparent -->
 <section>
   <div>
-    <button [uiLibStyleClass]="'@grandparent'" [toggleClass]="'section--active'">
-      Activate
-    </button>
+    <button [uiLibStyleClass]="'@grandparent'" [toggleClass]="'section--active'">Activate</button>
   </div>
 </section>
 ```

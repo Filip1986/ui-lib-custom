@@ -84,7 +84,7 @@ export class ThemedLayoutsSectionComponent {
     number
   >;
   private readonly gridColumnsList: GridColumns[] = Object.keys(this.gridColumnsMap).map(
-    (key: string): GridColumns => Number(key) as GridColumns
+    (key: string): GridColumns => Number(key) as GridColumns,
   );
   public readonly sizeOptions: { label: string; value: ContainerSize }[] = (
     Object.entries(this.containerWidths) as Array<[ContainerSize, string]>
@@ -103,7 +103,7 @@ export class ThemedLayoutsSectionComponent {
       } => ({
         label: `${key} (${value})`,
         value: key as Exclude<InsetToken, 'xs'>,
-      })
+      }),
     );
   public readonly spacingOptions: { label: string; value: StackToken }[] =
     this.buildOptions(STACK_TOKENS);
@@ -113,7 +113,7 @@ export class ThemedLayoutsSectionComponent {
     (value: GridColumns): { label: string; value: GridColumns } => ({
       label: `${value} cols`,
       value,
-    })
+    }),
   );
   public readonly themeOptions: { label: string; value: 'light' | 'dark' }[] = [
     { label: 'Light', value: 'light' },
@@ -121,25 +121,25 @@ export class ThemedLayoutsSectionComponent {
   ];
 
   public readonly sizeLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.containerSize(), this.sizeOptions)
+    this.displayLabel(this.containerSize(), this.sizeOptions),
   );
   public readonly insetLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.containerInset(), this.insetOptions)
+    this.displayLabel(this.containerInset(), this.insetOptions),
   );
   public readonly stackLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.stackSpacing(), this.spacingOptions)
+    this.displayLabel(this.stackSpacing(), this.spacingOptions),
   );
   public readonly inlineLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.inlineSpacing(), this.inlineSpacingOptions)
+    this.displayLabel(this.inlineSpacing(), this.inlineSpacingOptions),
   );
   public readonly gridSpacingLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.gridSpacing(), this.spacingOptions)
+    this.displayLabel(this.gridSpacing(), this.spacingOptions),
   );
   public readonly columnsLabel: Signal<string> = computed<string>(
-    (): string => `${this.columns()} cols`
+    (): string => `${this.columns()} cols`,
   );
   public readonly themePairLabel: Signal<string> = computed<string>(
-    (): string => `${this.leftTheme()} / ${this.rightTheme()}`
+    (): string => `${this.leftTheme()} / ${this.rightTheme()}`,
   );
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
@@ -199,16 +199,16 @@ export class ThemedLayoutsSectionComponent {
       ([key, value]: [string, string]): { label: string; value: T } => ({
         label: `${key} (${this.toPx(value)})`,
         value: key as T,
-      })
+      }),
     );
   }
 
   private displayLabel<T extends string | number>(
     value: T,
-    options: { label: string; value: T }[]
+    options: { label: string; value: T }[],
   ): string {
     const match: { label: string; value: T } | undefined = options.find(
-      (option: { label: string; value: T }): boolean => option.value === value
+      (option: { label: string; value: T }): boolean => option.value === value,
     );
     return match ? match.label : String(value);
   }

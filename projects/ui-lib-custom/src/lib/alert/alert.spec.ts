@@ -52,7 +52,7 @@ function setup(
     variant: AlertVariant | null;
     dismissible: boolean;
     dismissLabel: string | null;
-  }> = {}
+  }> = {},
 ): {
   fixture: ComponentFixture<AlertHostComponent>;
   host: AlertHostComponent;
@@ -126,7 +126,7 @@ describe('Alert', (): void => {
     it('uses role="status" and polite live region for success', (): void => {
       const { fixture } = setup({ severity: 'success' });
       const alertElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-alert'
+        'ui-lib-alert',
       ) as HTMLElement;
       expect(alertElement.getAttribute('role')).toBe('status');
       expect(alertElement.getAttribute('aria-live')).toBe('polite');
@@ -136,7 +136,7 @@ describe('Alert', (): void => {
     it('uses role="alert" and assertive live region for error', (): void => {
       const { fixture } = setup({ severity: 'error' });
       const alertElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-alert'
+        'ui-lib-alert',
       ) as HTMLElement;
       expect(alertElement.getAttribute('role')).toBe('alert');
       expect(alertElement.getAttribute('aria-live')).toBe('assertive');
@@ -170,7 +170,7 @@ describe('Alert', (): void => {
           const { component } = setup({ variant });
           expect(component.hostClasses()).toContain(`ui-lib-alert--${variant}`);
         });
-      }
+      },
     );
   });
 
@@ -187,7 +187,7 @@ describe('Alert', (): void => {
     it('does not render close button when dismissible is false', (): void => {
       const { fixture } = setup({ dismissible: false });
       const closeBtn: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-alert__close'
+        '.ui-lib-alert__close',
       );
       expect(closeBtn).toBeNull();
     });
@@ -195,7 +195,7 @@ describe('Alert', (): void => {
     it('renders close button when dismissible is true', (): void => {
       const { fixture } = setup({ dismissible: true });
       const closeBtn: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-alert__close'
+        '.ui-lib-alert__close',
       );
       expect(closeBtn).toBeTruthy();
     });
@@ -221,7 +221,7 @@ describe('Alert', (): void => {
     it('severity icon is decorative', (): void => {
       const { fixture } = setup();
       const severityIcon: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-alert__icon'
+        '.ui-lib-alert__icon',
       );
       expect(severityIcon?.getAttribute('aria-hidden')).toBe('true');
     });

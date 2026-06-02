@@ -251,11 +251,7 @@
           </div>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet
-        [code]="controlledTs"
-        language="typescript"
-        [showLineNumbers]="true"
-      />
+      <ui-lib-code-snippet [code]="controlledTs" language="typescript" [showLineNumbers]="true" />
     </ui-lib-panel>
   }
 
@@ -498,11 +494,7 @@
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
       <app-doc-api-reference [rows]="apiRows" />
-      <app-doc-code-example
-        [html]="basicHtml"
-        [typescript]="basicTs"
-        [showLineNumbers]="true"
-      />
+      <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" [showLineNumbers]="true" />
     </ui-lib-panel>
   }
 
@@ -532,7 +524,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -541,7 +532,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

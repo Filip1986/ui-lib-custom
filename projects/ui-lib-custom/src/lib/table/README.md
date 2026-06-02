@@ -4,23 +4,23 @@
 **Package:** `ui-lib-custom/table`
 **Content projection:** yes — `<ui-lib-table-column>` children are projected; structural template directives replace auto-generated sections:
 
-| Directive | Replaces | Context |
-|-----------|----------|---------|
-| `[uiTableCaption]` | Caption slot above the table | none |
-| `[uiTableHeader]` | Entire `<thead>` | none |
-| `[uiTableBody]` | Entire `<tbody>` | `{ $implicit: displayedRows, filteredRows, allRows }` |
-| `[uiTableFooter]` | Entire `<tfoot>` | none |
-| `[uiTableEmpty]` | Empty-state cell | `{ filtered: boolean }` |
-| `[uiTableExpansion]` | Expanded sub-row | `{ $implicit: T, index: number }` |
+| Directive            | Replaces                     | Context                                               |
+| -------------------- | ---------------------------- | ----------------------------------------------------- |
+| `[uiTableCaption]`   | Caption slot above the table | none                                                  |
+| `[uiTableHeader]`    | Entire `<thead>`             | none                                                  |
+| `[uiTableBody]`      | Entire `<tbody>`             | `{ $implicit: displayedRows, filteredRows, allRows }` |
+| `[uiTableFooter]`    | Entire `<tfoot>`             | none                                                  |
+| `[uiTableEmpty]`     | Empty-state cell             | `{ filtered: boolean }`                               |
+| `[uiTableExpansion]` | Expanded sub-row             | `{ $implicit: T, index: number }`                     |
 
 Column-level directives (place inside `<ui-lib-table-column>`):
 
-| Directive | Replaces | Context |
-|-----------|----------|---------|
-| `[uiTableColumnHeader]` | Header `<th>` content | none |
-| `[uiTableColumnBody]` | Body `<td>` content | `{ $implicit: T, index: number }` |
-| `[uiTableColumnFooter]` | Footer `<td>` content | none |
-| `[uiTableColumnFilter]` | Column filter input | none |
+| Directive               | Replaces              | Context                           |
+| ----------------------- | --------------------- | --------------------------------- |
+| `[uiTableColumnHeader]` | Header `<th>` content | none                              |
+| `[uiTableColumnBody]`   | Body `<td>` content   | `{ $implicit: T, index: number }` |
+| `[uiTableColumnFooter]` | Footer `<td>` content | none                              |
+| `[uiTableColumnFilter]` | Column filter input   | none                              |
 
 > Sorting, filtering, and pagination all operate client-side on `value[]` by default. `dataKey` is required for row expansion and for correct equality checks in selection mode — omitting it disables both features silently.
 
@@ -30,53 +30,53 @@ Column-level directives (place inside `<ui-lib-table-column>`):
 
 ### Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `value` | `unknown[]` | `[]` | Array of row objects |
-| `dataKey` | `string \| null` | `null` | Dot-notation property path for unique row identity; required for expansion and selection |
-| `sortField` | `string \| null` | `null` | **Two-way** (`model`). Active sort field |
-| `sortOrder` | `1 \| -1 \| 0` | `1` | **Two-way** (`model`). Sort direction |
-| `multiSortMode` | `boolean` | `false` | Ctrl+click adds columns to a multi-sort stack |
-| `multiSortMeta` | `TableSortMeta[]` | `[]` | **Two-way** (`model`). Current multi-sort stack |
-| `globalFilter` | `string` | `''` | **Two-way** (`model`). Filter string applied across all columns |
-| `globalFilterFields` | `string[] \| null` | `null` | Columns to search; searches all columns when null |
-| `filterMatchMode` | `'contains' \| 'startsWith' \| 'endsWith' \| 'equals'` | `'contains'` | String match strategy |
-| `filterLocale` | `string \| undefined` | `undefined` | BCP 47 locale for string comparisons |
-| `globalFilterPlaceholder` | `string` | `'Search...'` | Placeholder for the global filter input |
-| `selectionMode` | `'single' \| 'multiple' \| 'checkbox' \| null` | `null` | Row selection strategy |
-| `selection` | `unknown` | `null` | **Two-way** (`model`). Selected row(s); single object or array depending on mode |
-| `metaKeySelection` | `boolean` | `false` | Require Ctrl/Meta to toggle multi-select |
-| `expandedRowKeys` | `Set<unknown>` | `new Set()` | **Two-way** (`model`). Row keys currently expanded |
-| `paginator` | `boolean` | `false` | Renders the built-in paginator |
-| `rows` | `number` | `10` | **Two-way** (`model`). Rows per page |
-| `first` | `number` | `0` | **Two-way** (`model`). Zero-based first row offset |
-| `rowsPerPageOptions` | `number[]` | `[10, 25, 50]` | Options for the rows-per-page selector |
-| `currentPageReportTemplate` | `string` | `'{currentPage} of {totalPages}'` | Page report string; supports `{currentPage}`, `{totalPages}` |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual variant; inherits from `ThemeConfigService` when null |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token |
-| `stripedRows` | `boolean` | `false` | Alternating row background tint |
-| `rowHover` | `boolean` | `false` | Pointer cursor and hover highlight on rows |
-| `showGridlines` | `boolean` | `false` | Grid lines between all cells |
-| `scrollable` | `boolean` | `false` | Wraps table body in a scrollable container |
-| `scrollHeight` | `string \| null` | `null` | CSS height of the scrollable viewport (e.g. `'400px'`) |
-| `disabled` | `boolean` | `false` | Makes the entire table non-interactive |
-| `emptyMessage` | `string` | `'No records found.'` | Default empty-state text |
-| `caption` | `string \| null` | `null` | Caption text rendered above the table |
-| `ariaLabel` | `string \| null` | `null` | Accessible label for the `<table>` element |
-| `styleClass` | `string \| null` | `null` | Extra CSS class(es) on the host |
-| `rowClass` | `((row, index) => string \| null) \| null` | `null` | Function applied per body row; return extra CSS class(es) or `null` |
+| Name                        | Type                                                   | Default                           | Notes                                                                                    |
+| --------------------------- | ------------------------------------------------------ | --------------------------------- | ---------------------------------------------------------------------------------------- |
+| `value`                     | `unknown[]`                                            | `[]`                              | Array of row objects                                                                     |
+| `dataKey`                   | `string \| null`                                       | `null`                            | Dot-notation property path for unique row identity; required for expansion and selection |
+| `sortField`                 | `string \| null`                                       | `null`                            | **Two-way** (`model`). Active sort field                                                 |
+| `sortOrder`                 | `1 \| -1 \| 0`                                         | `1`                               | **Two-way** (`model`). Sort direction                                                    |
+| `multiSortMode`             | `boolean`                                              | `false`                           | Ctrl+click adds columns to a multi-sort stack                                            |
+| `multiSortMeta`             | `TableSortMeta[]`                                      | `[]`                              | **Two-way** (`model`). Current multi-sort stack                                          |
+| `globalFilter`              | `string`                                               | `''`                              | **Two-way** (`model`). Filter string applied across all columns                          |
+| `globalFilterFields`        | `string[] \| null`                                     | `null`                            | Columns to search; searches all columns when null                                        |
+| `filterMatchMode`           | `'contains' \| 'startsWith' \| 'endsWith' \| 'equals'` | `'contains'`                      | String match strategy                                                                    |
+| `filterLocale`              | `string \| undefined`                                  | `undefined`                       | BCP 47 locale for string comparisons                                                     |
+| `globalFilterPlaceholder`   | `string`                                               | `'Search...'`                     | Placeholder for the global filter input                                                  |
+| `selectionMode`             | `'single' \| 'multiple' \| 'checkbox' \| null`         | `null`                            | Row selection strategy                                                                   |
+| `selection`                 | `unknown`                                              | `null`                            | **Two-way** (`model`). Selected row(s); single object or array depending on mode         |
+| `metaKeySelection`          | `boolean`                                              | `false`                           | Require Ctrl/Meta to toggle multi-select                                                 |
+| `expandedRowKeys`           | `Set<unknown>`                                         | `new Set()`                       | **Two-way** (`model`). Row keys currently expanded                                       |
+| `paginator`                 | `boolean`                                              | `false`                           | Renders the built-in paginator                                                           |
+| `rows`                      | `number`                                               | `10`                              | **Two-way** (`model`). Rows per page                                                     |
+| `first`                     | `number`                                               | `0`                               | **Two-way** (`model`). Zero-based first row offset                                       |
+| `rowsPerPageOptions`        | `number[]`                                             | `[10, 25, 50]`                    | Options for the rows-per-page selector                                                   |
+| `currentPageReportTemplate` | `string`                                               | `'{currentPage} of {totalPages}'` | Page report string; supports `{currentPage}`, `{totalPages}`                             |
+| `variant`                   | `'material' \| 'bootstrap' \| 'minimal' \| null`       | `null`                            | Visual variant; inherits from `ThemeConfigService` when null                             |
+| `size`                      | `'sm' \| 'md' \| 'lg'`                                 | `'md'`                            | Size token                                                                               |
+| `stripedRows`               | `boolean`                                              | `false`                           | Alternating row background tint                                                          |
+| `rowHover`                  | `boolean`                                              | `false`                           | Pointer cursor and hover highlight on rows                                               |
+| `showGridlines`             | `boolean`                                              | `false`                           | Grid lines between all cells                                                             |
+| `scrollable`                | `boolean`                                              | `false`                           | Wraps table body in a scrollable container                                               |
+| `scrollHeight`              | `string \| null`                                       | `null`                            | CSS height of the scrollable viewport (e.g. `'400px'`)                                   |
+| `disabled`                  | `boolean`                                              | `false`                           | Makes the entire table non-interactive                                                   |
+| `emptyMessage`              | `string`                                               | `'No records found.'`             | Default empty-state text                                                                 |
+| `caption`                   | `string \| null`                                       | `null`                            | Caption text rendered above the table                                                    |
+| `ariaLabel`                 | `string \| null`                                       | `null`                            | Accessible label for the `<table>` element                                               |
+| `styleClass`                | `string \| null`                                       | `null`                            | Extra CSS class(es) on the host                                                          |
+| `rowClass`                  | `((row, index) => string \| null) \| null`             | `null`                            | Function applied per body row; return extra CSS class(es) or `null`                      |
 
 ### Outputs
 
-| Name | Payload | Notes |
-|------|---------|-------|
-| `sorted` | `TableSortEvent` | Emitted when sort order changes |
-| `filtered` | `TableFilterEvent` | Emitted when a filter value changes |
-| `rowSelected` | `TableRowSelectEvent` | Emitted when a row is selected |
-| `rowUnselected` | `TableRowUnselectEvent` | Emitted when a row is deselected |
-| `rowExpanded` | `TableRowExpandEvent` | Emitted when a row is expanded |
-| `rowCollapsed` | `TableRowCollapseEvent` | Emitted when a row is collapsed |
-| `pageChanged` | `TablePageEvent` | Emitted when the page or rows-per-page changes |
+| Name            | Payload                 | Notes                                          |
+| --------------- | ----------------------- | ---------------------------------------------- |
+| `sorted`        | `TableSortEvent`        | Emitted when sort order changes                |
+| `filtered`      | `TableFilterEvent`      | Emitted when a filter value changes            |
+| `rowSelected`   | `TableRowSelectEvent`   | Emitted when a row is selected                 |
+| `rowUnselected` | `TableRowUnselectEvent` | Emitted when a row is deselected               |
+| `rowExpanded`   | `TableRowExpandEvent`   | Emitted when a row is expanded                 |
+| `rowCollapsed`  | `TableRowCollapseEvent` | Emitted when a row is collapsed                |
+| `pageChanged`   | `TablePageEvent`        | Emitted when the page or rows-per-page changes |
 
 ---
 
@@ -84,19 +84,19 @@ Column-level directives (place inside `<ui-lib-table-column>`):
 
 ### Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `field` | `string` | `''` | Dot-notation path to the cell value |
-| `header` | `string` | `''` | Column header text |
-| `footer` | `string` | `''` | Column footer text |
-| `sortable` | `boolean` | `false` | Enables header-click sorting |
-| `sortField` | `string \| null` | `null` | Override field used for sorting |
-| `filterable` | `boolean` | `false` | Shows a filter input in the filter row |
-| `filterField` | `string \| null` | `null` | Override field used for filtering |
-| `filterPlaceholder` | `string` | `'Search...'` | Placeholder for the column filter input |
-| `width` | `string \| null` | `null` | Explicit column width (e.g. `'200px'`) |
-| `frozen` | `boolean` | `false` | Sticky column on the left |
-| `styleClass` | `string \| null` | `null` | Extra class on every `<td>` and `<th>` in this column |
+| Name                | Type             | Default       | Notes                                                 |
+| ------------------- | ---------------- | ------------- | ----------------------------------------------------- |
+| `field`             | `string`         | `''`          | Dot-notation path to the cell value                   |
+| `header`            | `string`         | `''`          | Column header text                                    |
+| `footer`            | `string`         | `''`          | Column footer text                                    |
+| `sortable`          | `boolean`        | `false`       | Enables header-click sorting                          |
+| `sortField`         | `string \| null` | `null`        | Override field used for sorting                       |
+| `filterable`        | `boolean`        | `false`       | Shows a filter input in the filter row                |
+| `filterField`       | `string \| null` | `null`        | Override field used for filtering                     |
+| `filterPlaceholder` | `string`         | `'Search...'` | Placeholder for the column filter input               |
+| `width`             | `string \| null` | `null`        | Explicit column width (e.g. `'200px'`)                |
+| `frozen`            | `boolean`        | `false`       | Sticky column on the left                             |
+| `styleClass`        | `string \| null` | `null`        | Extra class on every `<td>` and `<th>` in this column |
 
 ### Column definition shape
 
@@ -118,7 +118,7 @@ interface TableColumnDefinition {
 ```html
 <!-- Basic sortable table with pagination -->
 <ui-lib-table [value]="products" dataKey="id" [paginator]="true" [rows]="10">
-  <ui-lib-table-column field="name"  header="Name"  [sortable]="true" />
+  <ui-lib-table-column field="name" header="Name" [sortable]="true" />
   <ui-lib-table-column field="price" header="Price" [sortable]="true" />
 </ui-lib-table>
 
@@ -139,9 +139,9 @@ interface TableColumnDefinition {
 <ui-lib-table [value]="products" dataKey="id" [paginator]="true" [rows]="10">
   <ng-template uiTableBody let-rows>
     @for (row of rows; track row.id) {
-      <tr>
-        <td>{{ row.name }}</td>
-      </tr>
+    <tr>
+      <td>{{ row.name }}</td>
+    </tr>
     }
   </ng-template>
 </ui-lib-table>
@@ -149,25 +149,25 @@ interface TableColumnDefinition {
 
 ## Selection modes
 
-| Mode | Behavior |
-|------|----------|
-| `null` | No row selection; rows do not expose `aria-selected` |
-| `'single'` | One selected row at a time; the grid exposes `aria-multiselectable="false"` |
+| Mode         | Behavior                                                                                      |
+| ------------ | --------------------------------------------------------------------------------------------- |
+| `null`       | No row selection; rows do not expose `aria-selected`                                          |
+| `'single'`   | One selected row at a time; the grid exposes `aria-multiselectable="false"`                   |
 | `'multiple'` | Click/keyboard selection across multiple rows; the grid exposes `aria-multiselectable="true"` |
-| `'checkbox'` | Selection uses a checkbox column and `aria-multiselectable="true"` |
+| `'checkbox'` | Selection uses a checkbox column and `aria-multiselectable="true"`                            |
 
 ## Keyboard navigation
 
 Interactive tables render with `role="grid"` and use roving tabindex across header and body cells.
 
-| Key | Behavior |
-|-----|----------|
-| `Tab` / `Shift+Tab` | Enter or leave the grid from the currently active cell |
-| `ArrowLeft` / `ArrowRight` | Move focus between cells in the same row |
-| `ArrowUp` / `ArrowDown` | Move focus to the previous or next row in the same column |
-| `Home` / `End` | Move focus to the first or last cell in the current row |
-| `Ctrl+Home` / `Ctrl+End` | Move focus to the first or last focusable cell in the grid |
-| `Enter` / `Space` | Activate the focused sortable header or selectable row |
+| Key                        | Behavior                                                   |
+| -------------------------- | ---------------------------------------------------------- |
+| `Tab` / `Shift+Tab`        | Enter or leave the grid from the currently active cell     |
+| `ArrowLeft` / `ArrowRight` | Move focus between cells in the same row                   |
+| `ArrowUp` / `ArrowDown`    | Move focus to the previous or next row in the same column  |
+| `Home` / `End`             | Move focus to the first or last cell in the current row    |
+| `Ctrl+Home` / `Ctrl+End`   | Move focus to the first or last focusable cell in the grid |
+| `Enter` / `Space`          | Activate the focused sortable header or selectable row     |
 
 ## ARIA structure
 
@@ -197,24 +197,24 @@ table[role="grid|table"]
 
 ## CSS custom properties
 
-| Variable | Default | Purpose |
-|----------|---------|---------|
-| `--uilib-table-border-radius` | `var(--uilib-radius-md, 6px)` | Wrapper corner radius |
-| `--uilib-table-border-color` | `var(--uilib-color-border, #dee2e6)` | Grid and wrapper border color |
-| `--uilib-table-bg` | `var(--uilib-surface, #fff)` | Table and body background |
-| `--uilib-table-header-bg` | `var(--uilib-surface, #fff)` | Header row background |
-| `--uilib-table-header-color` | `var(--uilib-color-text, #212529)` | Header text color |
-| `--uilib-table-header-font-weight` | `600` | Header font weight |
-| `--uilib-table-row-bg-hover` | `rgba(0,0,0,0.04)` | Hovered row background |
-| `--uilib-table-row-bg-alt` | `rgba(0,0,0,0.02)` | Striped alternate row background |
-| `--uilib-table-row-bg-selected` | `rgba(primary, 0.12)` | Selected row background |
-| `--uilib-table-selection-border-color` | `var(--uilib-color-primary, #6366f1)` | Focus ring and selection accent |
-| `--uilib-table-sort-icon-color-active` | `var(--uilib-color-primary, #6366f1)` | Active sort indicator color |
-| `--uilib-table-expander-size` | `1.5rem` | Expand button width and height |
-| `--uilib-table-expander-border-radius` | `var(--uilib-radius-full, 9999px)` | Expand button corner radius |
-| `--uilib-table-expander-bg-hover` | `rgba(0,0,0,0.06)` | Expand button hover background |
-| `--uilib-table-cell-padding-y` | `0.75rem` | Body cell vertical padding |
-| `--uilib-table-cell-padding-x` | `1rem` | Body cell horizontal padding |
-| `--uilib-table-transition` | `var(--uilib-transition-fast, 150ms ease)` | All row/button/icon transitions; auto-zeroed by `prefers-reduced-motion` |
-| `--uilib-table-caption-bg` | `transparent` | Caption background |
-| `--uilib-table-paginator-margin-top` | `0.75rem` | Space above the embedded paginator |
+| Variable                               | Default                                    | Purpose                                                                  |
+| -------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------ |
+| `--uilib-table-border-radius`          | `var(--uilib-radius-md, 6px)`              | Wrapper corner radius                                                    |
+| `--uilib-table-border-color`           | `var(--uilib-color-border, #dee2e6)`       | Grid and wrapper border color                                            |
+| `--uilib-table-bg`                     | `var(--uilib-surface, #fff)`               | Table and body background                                                |
+| `--uilib-table-header-bg`              | `var(--uilib-surface, #fff)`               | Header row background                                                    |
+| `--uilib-table-header-color`           | `var(--uilib-color-text, #212529)`         | Header text color                                                        |
+| `--uilib-table-header-font-weight`     | `600`                                      | Header font weight                                                       |
+| `--uilib-table-row-bg-hover`           | `rgba(0,0,0,0.04)`                         | Hovered row background                                                   |
+| `--uilib-table-row-bg-alt`             | `rgba(0,0,0,0.02)`                         | Striped alternate row background                                         |
+| `--uilib-table-row-bg-selected`        | `rgba(primary, 0.12)`                      | Selected row background                                                  |
+| `--uilib-table-selection-border-color` | `var(--uilib-color-primary, #6366f1)`      | Focus ring and selection accent                                          |
+| `--uilib-table-sort-icon-color-active` | `var(--uilib-color-primary, #6366f1)`      | Active sort indicator color                                              |
+| `--uilib-table-expander-size`          | `1.5rem`                                   | Expand button width and height                                           |
+| `--uilib-table-expander-border-radius` | `var(--uilib-radius-full, 9999px)`         | Expand button corner radius                                              |
+| `--uilib-table-expander-bg-hover`      | `rgba(0,0,0,0.06)`                         | Expand button hover background                                           |
+| `--uilib-table-cell-padding-y`         | `0.75rem`                                  | Body cell vertical padding                                               |
+| `--uilib-table-cell-padding-x`         | `1rem`                                     | Body cell horizontal padding                                             |
+| `--uilib-table-transition`             | `var(--uilib-transition-fast, 150ms ease)` | All row/button/icon transitions; auto-zeroed by `prefers-reduced-motion` |
+| `--uilib-table-caption-bg`             | `transparent`                              | Caption background                                                       |
+| `--uilib-table-paginator-margin-top`   | `0.75rem`                                  | Space above the embedded paginator                                       |

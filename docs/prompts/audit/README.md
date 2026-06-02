@@ -10,11 +10,11 @@
 
 ## The Three Phases
 
-| Phase | File | What the agent does | Changes code? |
-|-------|------|---------------------|---------------|
-| 1 — Audit | `PHASE1_AUDIT.md` | Reads all source files, runs lint/tests/build, produces a gap report | ❌ No |
-| 2 — Fix | `PHASE2_FIX.md` | Takes the gap report and implements every fixable gap | ✅ Yes |
-| 3 — Finalize | `PHASE3_FINALIZE.md` | Updates COMPONENT_SCORES.md, reference docs, AI_AGENT_CONTEXT.md | ✅ Yes |
+| Phase        | File                 | What the agent does                                                  | Changes code? |
+| ------------ | -------------------- | -------------------------------------------------------------------- | ------------- |
+| 1 — Audit    | `PHASE1_AUDIT.md`    | Reads all source files, runs lint/tests/build, produces a gap report | ❌ No         |
+| 2 — Fix      | `PHASE2_FIX.md`      | Takes the gap report and implements every fixable gap                | ✅ Yes        |
+| 3 — Finalize | `PHASE3_FINALIZE.md` | Updates COMPONENT_SCORES.md, reference docs, AI_AGENT_CONTEXT.md     | ✅ Yes        |
 
 ---
 
@@ -30,6 +30,7 @@ The agent will read all files and report back. **Do not interrupt it.**
 ### Step 2 — Review the gap report
 
 Before running Phase 2, read the gap report. You may:
+
 - Add notes to any ⚠️ items where you have context the agent cannot see (e.g. "we intentionally excluded X")
 - Mark any ❌ as `[SKIP]` if you consciously defer it
 - Confirm human-verification items (screen reader, visual) yourself
@@ -60,12 +61,15 @@ Paste `PHASE3_FINALIZE.md`. The agent updates all documentation.
 Audit in this order for maximum impact:
 
 ### Tier 2 Priority 1 — Highest scrutiny (public-facing, benchmark-cited)
+
 Button · Dialog · Select · Toast · Menubar · Table · AutoComplete
 
 ### Tier 2 Priority 2 — Scoring 8.2–8.4 (most at risk below gate on real audit)
+
 Badge · ScrollTop · FocusTrap · Avatar · DynamicDialog · ConfirmDialog ·
 DataView · Timeline · OrganizationChart · Carousel · Galleria · MeterGroup ·
 Select · AutoComplete · CascadeSelect · Knob · ColorPicker
 
 ### Tier 2 Priority 3 — Remaining components
+
 Work alphabetically within tier groupings.

@@ -13,20 +13,20 @@ OrganizationChart renders an interactive hierarchical tree of nodes. Supports si
 
 ### Inputs
 
-| Name            | Type                              | Default          | Description                                                                        |
-| --------------- | --------------------------------- | ---------------- | ---------------------------------------------------------------------------------- |
-| `ariaLabel`     | `string`                          | `'Organization'` | Accessible label for the tree. Applied to the root tree element.                   |
-| `collapsible`   | `boolean`                         | `false`          | When `true`, nodes with children render an expand/collapse toggle button.          |
-| `selectionMode` | `OrganizationChartSelectionMode`  | `null`           | Defines how nodes respond to click interactions.                                   |
-| `styleClass`    | `string`                          | `''`             | Extra CSS class applied to the host element.                                       |
-| `value`         | `OrganizationChartNode[]`         | `[]`             | Root-level nodes of the tree.                                                      |
-| `variant`       | `OrganizationChartVariant | null` | `null`           | Design variant. Falls back to the global `ThemeConfigService` variant when `null`. |
+| Name            | Type                             | Default          | Description                                                               |
+| --------------- | -------------------------------- | ---------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ariaLabel`     | `string`                         | `'Organization'` | Accessible label for the tree. Applied to the root tree element.          |
+| `collapsible`   | `boolean`                        | `false`          | When `true`, nodes with children render an expand/collapse toggle button. |
+| `selectionMode` | `OrganizationChartSelectionMode` | `null`           | Defines how nodes respond to click interactions.                          |
+| `styleClass`    | `string`                         | `''`             | Extra CSS class applied to the host element.                              |
+| `value`         | `OrganizationChartNode[]`        | `[]`             | Root-level nodes of the tree.                                             |
+| `variant`       | `OrganizationChartVariant        | null`            | `null`                                                                    | Design variant. Falls back to the global `ThemeConfigService` variant when `null`. |
 
 ### Models (two-way bindable)
 
-| Name        | Type                                                     | Default | Description                                                          |
-| ----------- | -------------------------------------------------------- | ------- | -------------------------------------------------------------------- |
-| `selection` | `OrganizationChartNode | OrganizationChartNode[] | null` | `null`  | Currently selected node(s). Use `[(selection)]` for two-way binding. |
+| Name        | Type                   | Default                 | Description |
+| ----------- | ---------------------- | ----------------------- | ----------- | ------ | -------------------------------------------------------------------- |
+| `selection` | `OrganizationChartNode | OrganizationChartNode[] | null`       | `null` | Currently selected node(s). Use `[(selection)]` for two-way binding. |
 
 ### Outputs
 
@@ -104,7 +104,12 @@ _No component-level CSS variables detected._
 </ui-lib-organization-chart>
 
 <!-- selectable with type-specific templates -->
-<ui-lib-organization-chart [value]="nodes" selectionMode="single" [(selection)]="selected" [collapsible]="true">
+<ui-lib-organization-chart
+  [value]="nodes"
+  selectionMode="single"
+  [(selection)]="selected"
+  [collapsible]="true"
+>
   <ng-template uiOrgChartNode type="manager" let-node>{{ node.label }} (Mgr)</ng-template>
   <ng-template uiOrgChartNode let-node>{{ node.label }}</ng-template>
 </ui-lib-organization-chart>
@@ -116,4 +121,3 @@ _No component-level CSS variables detected._
 - [Demo page](/components/organization-chart)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/organization-chart/README.md)
-

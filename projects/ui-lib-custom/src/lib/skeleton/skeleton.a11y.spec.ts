@@ -8,7 +8,7 @@ import { Skeleton } from './skeleton';
 
 function queryElement<T extends Element>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
@@ -41,7 +41,7 @@ class SkeletonA11yHostComponent {
 class SkeletonTwoInstancesHostComponent {}
 
 async function createFixture(
-  loading: boolean = true
+  loading: boolean = true,
 ): Promise<ComponentFixture<SkeletonA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [SkeletonA11yHostComponent],
@@ -64,7 +64,7 @@ async function createTwoInstancesFixture(): Promise<
     providers: [provideZonelessChangeDetection()],
   }).compileComponents();
   const fixture: ComponentFixture<SkeletonTwoInstancesHostComponent> = TestBed.createComponent(
-    SkeletonTwoInstancesHostComponent
+    SkeletonTwoInstancesHostComponent,
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
@@ -126,7 +126,7 @@ describe('Skeleton Accessibility', (): void => {
       const fixture: ComponentFixture<SkeletonA11yHostComponent> = await createFixture(true);
       const placeholder: HTMLElement = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-skeleton__placeholder'
+        '.ui-lib-skeleton__placeholder',
       ) as HTMLElement;
       expect(placeholder.getAttribute('aria-hidden')).toBe('true');
     });
@@ -135,7 +135,7 @@ describe('Skeleton Accessibility', (): void => {
       const fixture: ComponentFixture<SkeletonA11yHostComponent> = await createFixture(true);
       const shimmer: HTMLElement = queryElement<HTMLElement>(
         fixture,
-        '.ui-lib-skeleton__shimmer'
+        '.ui-lib-skeleton__shimmer',
       ) as HTMLElement;
       expect(shimmer.getAttribute('aria-hidden')).toBe('true');
     });
@@ -164,7 +164,7 @@ describe('Skeleton Accessibility', (): void => {
       const fixture: ComponentFixture<SkeletonA11yHostComponent> = await createFixture(false);
       const content: HTMLElement = queryElement<HTMLElement>(
         fixture,
-        '.loaded-text'
+        '.loaded-text',
       ) as HTMLElement;
       const contentText: string = content.textContent as string;
       expect(contentText.trim()).toBe('Loaded content');
@@ -181,7 +181,7 @@ describe('Skeleton Accessibility', (): void => {
       const fixture: ComponentFixture<SkeletonA11yHostComponent> = await createFixture(false);
       const button: HTMLButtonElement = queryElement<HTMLButtonElement>(
         fixture,
-        '.loaded-button'
+        '.loaded-button',
       ) as HTMLButtonElement;
       button.focus();
       expect(document.activeElement).toBe(button);

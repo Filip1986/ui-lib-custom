@@ -234,7 +234,7 @@ describe('IconFieldComponent', (): void => {
       }).compileComponents();
 
       const leftFixture: ComponentFixture<LeftIconFieldHostComponent> = TestBed.createComponent(
-        LeftIconFieldHostComponent
+        LeftIconFieldHostComponent,
       );
       leftFixture.detectChanges();
 
@@ -251,7 +251,7 @@ describe('IconFieldComponent', (): void => {
       }).compileComponents();
 
       const rightFixture: ComponentFixture<RightIconFieldHostComponent> = TestBed.createComponent(
-        RightIconFieldHostComponent
+        RightIconFieldHostComponent,
       );
       rightFixture.detectChanges();
 
@@ -268,7 +268,7 @@ describe('IconFieldComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<SignalIconFieldHostComponent> = TestBed.createComponent(
-      SignalIconFieldHostComponent
+      SignalIconFieldHostComponent,
     );
     fixture.detectChanges();
 
@@ -298,13 +298,13 @@ describe('IconFieldComponent', (): void => {
 
     const iconFieldElement: HTMLElement = getIconFieldElement(fixture);
     const childTagNames: string[] = Array.from(iconFieldElement.children).map(
-      (element: Element): string => element.tagName.toLowerCase()
+      (element: Element): string => element.tagName.toLowerCase(),
     );
 
     expect(fixture.debugElement.query(By.css('ui-lib-icon-field > input'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('ui-lib-icon-field > ui-lib-input'))).toBeTruthy();
     expect(
-      fixture.debugElement.query(By.css('ui-lib-icon-field > ui-lib-input-icon'))
+      fixture.debugElement.query(By.css('ui-lib-icon-field > ui-lib-input-icon')),
     ).toBeTruthy();
     expect(childTagNames).toEqual(['input', 'ui-lib-input', 'ui-lib-input-icon']);
   });
@@ -316,7 +316,7 @@ describe('IconFieldComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<FloatLabelIconFieldHostComponent> = TestBed.createComponent(
-      FloatLabelIconFieldHostComponent
+      FloatLabelIconFieldHostComponent,
     );
     fixture.detectChanges();
 
@@ -338,7 +338,7 @@ describe('IconFieldComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<MultipleIconsHostComponent> = TestBed.createComponent(
-      MultipleIconsHostComponent
+      MultipleIconsHostComponent,
     );
     fixture.detectChanges();
 
@@ -348,7 +348,7 @@ describe('IconFieldComponent', (): void => {
 
     const inputIconClassMatches: boolean[] = inputIcons.map(
       (inputIconElement: HTMLElement): boolean =>
-        inputIconElement.classList.contains('ui-lib-input-icon')
+        inputIconElement.classList.contains('ui-lib-input-icon'),
     );
 
     expect(inputIcons.length).toBe(2);
@@ -364,7 +364,7 @@ describe('InputIconComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputIconBaseHostComponent> = TestBed.createComponent(
-      InputIconBaseHostComponent
+      InputIconBaseHostComponent,
     );
     fixture.detectChanges();
 
@@ -379,7 +379,7 @@ describe('InputIconComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputIconStyleHostComponent> = TestBed.createComponent(
-      InputIconStyleHostComponent
+      InputIconStyleHostComponent,
     );
     fixture.detectChanges();
 
@@ -399,7 +399,7 @@ describe('InputIconComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputIconStyleHostComponent> = TestBed.createComponent(
-      InputIconStyleHostComponent
+      InputIconStyleHostComponent,
     );
     fixture.componentInstance.styleClass = null;
     fixture.detectChanges();
@@ -420,7 +420,7 @@ describe('InputIconComponent', (): void => {
     fixture.detectChanges();
 
     expect(
-      fixture.debugElement.query(By.css('ui-lib-input-icon svg[data-testid="custom-svg"]'))
+      fixture.debugElement.query(By.css('ui-lib-input-icon svg[data-testid="custom-svg"]')),
     ).toBeTruthy();
   });
 
@@ -431,7 +431,7 @@ describe('InputIconComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputIconUiLibIconHostComponent> = TestBed.createComponent(
-      InputIconUiLibIconHostComponent
+      InputIconUiLibIconHostComponent,
     );
     fixture.detectChanges();
 
@@ -446,7 +446,7 @@ describe('InputIconComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputIconBaseHostComponent> = TestBed.createComponent(
-      InputIconBaseHostComponent
+      InputIconBaseHostComponent,
     );
     fixture.detectChanges();
 
@@ -462,7 +462,7 @@ describe('InputIconComponent', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<InputIconInformativeHostComponent> = TestBed.createComponent(
-      InputIconInformativeHostComponent
+      InputIconInformativeHostComponent,
     );
     fixture.detectChanges();
 

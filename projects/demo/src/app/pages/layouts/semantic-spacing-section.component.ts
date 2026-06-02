@@ -91,20 +91,20 @@ export class MyComponent {}`;
   public readonly insetOptions: { label: string; value: Exclude<InsetToken, 'xs'> }[] =
     this.buildOptions<Exclude<InsetToken, 'xs'>>(
       INSET_TOKENS as Record<InsetToken, string>,
-      (key: string): boolean => key !== 'xs'
+      (key: string): boolean => key !== 'xs',
     );
 
   public readonly stackSpacingLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.stackSpacing(), this.stackOptions)
+    this.displayLabel(this.stackSpacing(), this.stackOptions),
   );
   public readonly inlineSpacingLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.inlineSpacing(), this.inlineOptions)
+    this.displayLabel(this.inlineSpacing(), this.inlineOptions),
   );
   public readonly gridSpacingLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.gridSpacing(), this.stackOptions)
+    this.displayLabel(this.gridSpacing(), this.stackOptions),
   );
   public readonly insetLabel: Signal<string> = computed<string>((): string =>
-    this.displayLabel(this.inset(), this.insetOptions)
+    this.displayLabel(this.inset(), this.insetOptions),
   );
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
@@ -141,7 +141,7 @@ export class MyComponent {}`;
 
   private buildOptions<T extends string>(
     tokens: Record<T, string>,
-    predicate?: (key: string) => boolean
+    predicate?: (key: string) => boolean,
   ): { label: string; value: T }[] {
     return Object.entries(tokens as Record<string, string>)
       .filter(([key]: [string, string]): boolean => (predicate ? predicate(key) : true))
@@ -153,7 +153,7 @@ export class MyComponent {}`;
 
   private displayLabel<T extends string>(value: T, options: { label: string; value: T }[]): string {
     const match: { label: string; value: T } | undefined = options.find(
-      (option: { label: string; value: T }): boolean => option.value === value
+      (option: { label: string; value: T }): boolean => option.value === value,
     );
     return match ? match.label : String(value);
   }

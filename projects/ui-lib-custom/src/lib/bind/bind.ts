@@ -36,7 +36,7 @@ export class Bind {
    * or set an individual key to `null` to clear previously bound properties.
    */
   public readonly uiLibBind: InputSignal<Record<string, unknown>> = input<Record<string, unknown>>(
-    {}
+    {},
   );
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
@@ -85,7 +85,7 @@ export class Bind {
     }
 
     return key.replace(/-([a-z])/g, (_match: string, character: string): string =>
-      character.toUpperCase()
+      character.toUpperCase(),
     );
   }
 }

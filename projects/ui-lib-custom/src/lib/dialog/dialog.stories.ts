@@ -56,7 +56,7 @@ export default meta;
 
 export const Default: Story = {
   render: (
-    args: DialogStoryArgs
+    args: DialogStoryArgs,
   ): {
     props: DialogStoryArgs & { visible: WritableSignal<boolean> };
     moduleMetadata: { imports: unknown[] };

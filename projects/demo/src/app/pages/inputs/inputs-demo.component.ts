@@ -158,11 +158,11 @@ export class InputsDemoComponent {
     (): Record<string, string> => {
       const preset: ReturnType<ThemeConfigService['preset']> = this.themeService.preset();
       return this.themeService.getCssVars(preset);
-    }
+    },
   );
 
   public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
-    (): Record<string, string> => this.globalVars()
+    (): Record<string, string> => this.globalVars(),
   );
 
   constructor() {

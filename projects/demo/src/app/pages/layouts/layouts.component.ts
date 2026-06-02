@@ -75,7 +75,7 @@ export class LayoutsComponent {
   >([]);
 
   public readonly registerViewport: (viewport: DocDemoViewportComponent) => void = (
-    viewport: DocDemoViewportComponent
+    viewport: DocDemoViewportComponent,
   ): void => {
     if (!this.viewportSet.has(viewport)) {
       this.viewportSet.add(viewport);
@@ -84,7 +84,7 @@ export class LayoutsComponent {
   };
 
   public readonly unregisterViewport: (viewport: DocDemoViewportComponent) => void = (
-    viewport: DocDemoViewportComponent
+    viewport: DocDemoViewportComponent,
   ): void => {
     if (this.viewportSet.delete(viewport)) {
       this.viewports.set([...this.viewportSet]);

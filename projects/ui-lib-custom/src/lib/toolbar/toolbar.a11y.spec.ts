@@ -118,7 +118,7 @@ function getToolbar(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getToolbars(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-toolbar')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-toolbar'),
   );
 }
 
@@ -178,7 +178,7 @@ describe('Toolbar Accessibility', (): void => {
     it('decorative icons inside buttons have aria-hidden="true"', async (): Promise<void> => {
       const fixture: ComponentFixture<IconOnlyToolbarHost> = await setup(IconOnlyToolbarHost);
       const icons: HTMLElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.pi')
+        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.pi'),
       );
       expect(icons.length).toBeGreaterThan(0);
       icons.forEach((icon: HTMLElement): void => {

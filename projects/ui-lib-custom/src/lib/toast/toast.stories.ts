@@ -48,7 +48,7 @@ export default meta;
 
 export const Default: Story = {
   render: (
-    args: ToastStoryArgs
+    args: ToastStoryArgs,
   ): {
     props: ToastStoryArgs & {
       showSuccess: () => void;

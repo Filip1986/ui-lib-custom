@@ -27,7 +27,7 @@ type ChartConstructorConfig = {
 })
 class PieChartHostComponent {
   public readonly data: WritableSignal<ChartData<'pie'> | null> = signal<ChartData<'pie'> | null>(
-    null
+    null,
   );
 }
 
@@ -83,7 +83,7 @@ describe('PieChartComponent', (): void => {
           destroy: jest.fn<void, []>(),
           resize: jest.fn<void, []>(),
         };
-      }
+      },
     );
 
     const fixture: ComponentFixture<PieChartHostComponent> =

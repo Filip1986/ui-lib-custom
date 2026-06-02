@@ -32,7 +32,7 @@ export class IconService {
   });
   private readonly injectedConfig: IconConfig | null = inject(ICON_CONFIG, { optional: true });
   private readonly configSignal: WritableSignal<IconConfig> = signal<IconConfig>(
-    this.injectedConfig ?? { ...DEFAULT_ICON_CONFIG }
+    this.injectedConfig ?? { ...DEFAULT_ICON_CONFIG },
   );
   private readonly mappings: Record<IconLibrary, IconMapping> = {
     material: MATERIAL_ICON_MAPPING,
@@ -53,7 +53,7 @@ export class IconService {
         return null;
       }
       return themeConfig.getPreset().variant;
-    }
+    },
   );
 
   private readonly themeIcons: Signal<ThemeIconConfig | null> = computed<ThemeIconConfig | null>(
@@ -64,7 +64,7 @@ export class IconService {
       }
       const preset: ThemePreset = themeConfig.getPreset();
       return preset.icons ?? null;
-    }
+    },
   );
 
   private readConfig(): IconConfig {
@@ -91,13 +91,13 @@ export class IconService {
 
   public setDefaultLibrary(library: IconLibrary): void {
     this.configSignal.update(
-      (current: IconConfig): IconConfig => ({ ...current, defaultLibrary: library })
+      (current: IconConfig): IconConfig => ({ ...current, defaultLibrary: library }),
     );
   }
 
   public setDefaultSize(size: IconSize): void {
     this.configSignal.update(
-      (current: IconConfig): IconConfig => ({ ...current, defaultSize: size })
+      (current: IconConfig): IconConfig => ({ ...current, defaultSize: size }),
     );
   }
 
@@ -106,7 +106,7 @@ export class IconService {
       (current: IconConfig): IconConfig => ({
         ...current,
         variantMapping: { ...current.variantMapping, ...mapping },
-      })
+      }),
     );
   }
 
@@ -120,7 +120,7 @@ export class IconService {
 
   public resolveLibrary(
     override?: IconLibrary | null,
-    variant?: ComponentVariant | null
+    variant?: ComponentVariant | null,
   ): IconLibrary {
     if (override) return override;
     if (variant) return this.getLibraryForVariant(variant);

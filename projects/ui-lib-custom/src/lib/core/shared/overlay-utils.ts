@@ -13,7 +13,7 @@ let overlayZIndexCounter: number = 1000;
 
 export function resolveOverlayAppendTarget(
   appendTarget: OverlayAppendTarget,
-  documentRef: Document
+  documentRef: Document,
 ): HTMLElement | null {
   if (appendTarget === undefined || appendTarget === null) {
     return null;

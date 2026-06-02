@@ -59,13 +59,13 @@ export class DarkModeComponent {
     viewChild(DocPageLayoutComponent);
 
   public readonly mode: Signal<ThemeMode> = computed<ThemeMode>(
-    (): ThemeMode => this.themeService.mode()
+    (): ThemeMode => this.themeService.mode(),
   );
   public readonly effectiveTheme: Signal<'light' | 'dark'> = computed<'light' | 'dark'>(
-    (): 'light' | 'dark' => this.themeService.effectiveTheme()
+    (): 'light' | 'dark' => this.themeService.effectiveTheme(),
   );
   public readonly systemPreference: WritableSignal<'light' | 'dark'> = signal<'light' | 'dark'>(
-    'light'
+    'light',
   );
 
   public readonly sections: DocSection[] = [
@@ -106,7 +106,7 @@ export class Example {
   constructor() {
     if (typeof window !== 'undefined') {
       this.systemPreference.set(
-        window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
       );
     }
   }

@@ -152,7 +152,7 @@ async function setup<T>(componentType: new () => T): Promise<ComponentFixture<T>
 
 function getContent(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-scroll-panel__content'
+    '.ui-lib-scroll-panel__content',
   ) as HTMLElement;
 }
 
@@ -223,8 +223,8 @@ describe('ScrollPanel Accessibility', (): void => {
       const fixture: ComponentFixture<TwoPanelsHost> = await setup(TwoPanelsHost);
       const wrappers: HTMLElement[] = Array.from(
         (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-          '.ui-lib-scroll-panel__content'
-        )
+          '.ui-lib-scroll-panel__content',
+        ),
       );
       expect(wrappers.length).toBe(2);
       const id1: string | null = wrappers[0]?.getAttribute('id') ?? null;
@@ -300,8 +300,8 @@ describe('ScrollPanel Accessibility', (): void => {
       const fixture: ComponentFixture<MultiVariantHost> = await setup(MultiVariantHost);
       const wrappers: HTMLElement[] = Array.from(
         (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
-          '.ui-lib-scroll-panel__content'
-        )
+          '.ui-lib-scroll-panel__content',
+        ),
       );
       expect(wrappers.length).toBe(3);
       wrappers.forEach((w: HTMLElement): void => {

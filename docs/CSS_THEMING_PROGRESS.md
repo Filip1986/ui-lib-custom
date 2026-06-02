@@ -17,6 +17,7 @@ The CSS/SCSS architecture of `ui-lib-custom` has been audited, benchmarked again
 
 **Host-element-scoped tokens (better than PrimeNG, on par with Angular Material)**
 Every component defines its CSS variables on its own element selector (`ui-lib-button { --uilib-button-bg: ... }`), not on `:root`. This means:
+
 - Consumers can override tokens for one component without affecting others
 - Components can be dropped into any host application without polluting the global stylesheet
 - Multiple instances of the same component can have different styles in the same page
@@ -45,16 +46,16 @@ All inputs/outputs use `input()`, `model()`, `output()` — the Angular 21+ sign
 
 ### Structural correctness
 
-| Problem | Files affected | Fix |
-|---|---|---|
-| `themes.scss` re-declared spacing/typography in dark block (180 redundant lines) | `themes.scss` | Moved mode-independent tokens to `:root` (Section 1); dark block is now overrides-only (~100 lines) |
-| Dark block had `--uilib-card-bg: #fff` (cards rendered white in dark mode) | `themes.scss` | Fixed to `#22262b` |
-| Global scale tokens (`--uilib-radius-*`, `--uilib-font-size-*`, `--uilib-space-*`) undefined globally | `themes.scss` | Added all missing tokens to `:root` Section 1 |
-| `badge.scss` redefined global scale tokens on the badge host (13 lines) | `badge.scss` | Deleted — badge now inherits correct global values |
-| Component tokens on `:root` instead of host element | `slider.scss`, `knob.component.scss`, `ripple.scss`, `progress-spinner.scss`, `table.component.scss` | Moved to `ui-lib-<component>` element selector |
-| Dark overrides on bare `[data-theme='dark']` (affected all descendants globally) | Same 5 files | Changed to `[data-theme='dark'] ui-lib-<component>` |
-| `:host { ... }` rules silently ignored (ViewEncapsulation.None) | `cascade-select.scss`, `date-picker.scss`, `split-button.component.scss`, `virtual-scroller.component.scss`, `editor.scss` | Replaced with correct element/class selectors |
-| `_theme-mixins.scss` had no indication it was deprecated | `_theme-mixins.scss` | Added deprecation header comment |
+| Problem                                                                                               | Files affected                                                                                                             | Fix                                                                                                 |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `themes.scss` re-declared spacing/typography in dark block (180 redundant lines)                      | `themes.scss`                                                                                                              | Moved mode-independent tokens to `:root` (Section 1); dark block is now overrides-only (~100 lines) |
+| Dark block had `--uilib-card-bg: #fff` (cards rendered white in dark mode)                            | `themes.scss`                                                                                                              | Fixed to `#22262b`                                                                                  |
+| Global scale tokens (`--uilib-radius-*`, `--uilib-font-size-*`, `--uilib-space-*`) undefined globally | `themes.scss`                                                                                                              | Added all missing tokens to `:root` Section 1                                                       |
+| `badge.scss` redefined global scale tokens on the badge host (13 lines)                               | `badge.scss`                                                                                                               | Deleted — badge now inherits correct global values                                                  |
+| Component tokens on `:root` instead of host element                                                   | `slider.scss`, `knob.component.scss`, `ripple.scss`, `progress-spinner.scss`, `table.component.scss`                       | Moved to `ui-lib-<component>` element selector                                                      |
+| Dark overrides on bare `[data-theme='dark']` (affected all descendants globally)                      | Same 5 files                                                                                                               | Changed to `[data-theme='dark'] ui-lib-<component>`                                                 |
+| `:host { ... }` rules silently ignored (ViewEncapsulation.None)                                       | `cascade-select.scss`, `date-picker.scss`, `split-button.component.scss`, `virtual-scroller.component.scss`, `editor.scss` | Replaced with correct element/class selectors                                                       |
+| `_theme-mixins.scss` had no indication it was deprecated                                              | `_theme-mixins.scss`                                                                                                       | Added deprecation header comment                                                                    |
 
 ### What this means in practice
 
@@ -66,22 +67,22 @@ All inputs/outputs use `input()`, `model()`, `output()` — the Angular 21+ sign
 
 ## Competitive Benchmark
 
-| Capability | ui-lib-custom | PrimeNG 19 | Angular Material 3 |
-|---|---|---|---|
-| Host-element-scoped tokens | ✅ | ❌ (global `:root`) | ✅ |
-| Runtime variant/theme switch | ✅ | ❌ (rebuild) | ❌ (rebuild) |
-| Density system | ✅ | ❌ | ❌ (removed in M3) |
-| Global radius scale override | ✅ | ❌ | Partial |
-| Global shadow scale | ✅ | ❌ | ✅ (`--mat-*`) |
-| Dark mode (attribute) | ✅ | ✅ | ✅ |
-| Dark mode (OS fallback) | Partial (some components) | ✅ | ✅ |
-| No SCSS build dep at runtime | ✅ | ❌ | ❌ |
-| `color-mix()` hover states | ✅ | ❌ | ❌ |
-| Forced-colors / high contrast | Partial | ❌ | ✅ |
-| Design token JSON export | ❌ (planned) | ✅ (Figma plugin) | ✅ (Style Dictionary) |
-| Angular Signals-native | ✅ | Partial | ❌ |
-| Three-tier token taxonomy | ❌ (two-tier) | ❌ | ✅ (system/component/instance) |
-| SCSS theme generation API | ❌ (not needed) | ✅ (presets) | ✅ (`mat.theme()`) |
+| Capability                    | ui-lib-custom             | PrimeNG 19          | Angular Material 3             |
+| ----------------------------- | ------------------------- | ------------------- | ------------------------------ |
+| Host-element-scoped tokens    | ✅                        | ❌ (global `:root`) | ✅                             |
+| Runtime variant/theme switch  | ✅                        | ❌ (rebuild)        | ❌ (rebuild)                   |
+| Density system                | ✅                        | ❌                  | ❌ (removed in M3)             |
+| Global radius scale override  | ✅                        | ❌                  | Partial                        |
+| Global shadow scale           | ✅                        | ❌                  | ✅ (`--mat-*`)                 |
+| Dark mode (attribute)         | ✅                        | ✅                  | ✅                             |
+| Dark mode (OS fallback)       | Partial (some components) | ✅                  | ✅                             |
+| No SCSS build dep at runtime  | ✅                        | ❌                  | ❌                             |
+| `color-mix()` hover states    | ✅                        | ❌                  | ❌                             |
+| Forced-colors / high contrast | Partial                   | ❌                  | ✅                             |
+| Design token JSON export      | ❌ (planned)              | ✅ (Figma plugin)   | ✅ (Style Dictionary)          |
+| Angular Signals-native        | ✅                        | Partial             | ❌                             |
+| Three-tier token taxonomy     | ❌ (two-tier)             | ❌                  | ✅ (system/component/instance) |
+| SCSS theme generation API     | ❌ (not needed)           | ✅ (presets)        | ✅ (`mat.theme()`)             |
 
 ### Reading the comparison
 
@@ -99,6 +100,7 @@ All inputs/outputs use `input()`, `model()`, `output()` — the Angular 21+ sign
 
 **1. Four parallel dark-mode systems**
 The library currently has dark-mode implemented four different ways across different components. This is the single largest source of inconsistency. Consolidation plan:
+
 - Migrate the 17 components using `dark-theme.scss` / `_theme-mixins.scss` to inline `[data-theme='dark'] ui-lib-<component>` blocks
 - Add `@media (prefers-color-scheme: dark)` as a global wrapper around the dark overrides in `themes.scss` Section 3
 - Delete `dark-theme.scss` and `_theme-mixins.scss`

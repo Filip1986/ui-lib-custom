@@ -141,7 +141,7 @@ async function createFixture<T>(component: Type<T>): Promise<ComponentFixture<T>
 
 function query<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
@@ -165,7 +165,7 @@ describe('Tag Accessibility', (): void => {
 
   it('dismissible tag should have no axe violations', async (): Promise<void> => {
     const fixture: ComponentFixture<DismissibleTagHostComponent> = await createFixture(
-      DismissibleTagHostComponent
+      DismissibleTagHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
@@ -179,7 +179,7 @@ describe('Tag Accessibility', (): void => {
 
   it('dismissible tag host should expose role="group"', async (): Promise<void> => {
     const fixture: ComponentFixture<DismissibleTagHostComponent> = await createFixture(
-      DismissibleTagHostComponent
+      DismissibleTagHostComponent,
     );
     const tag: HTMLElement | null = query(fixture, 'ui-lib-tag');
     expect(tag?.getAttribute('role')).toBe('group');
@@ -201,7 +201,7 @@ describe('Tag Accessibility', (): void => {
 
   it('dismiss button should include tag value in aria-label', async (): Promise<void> => {
     const fixture: ComponentFixture<DismissibleTagHostComponent> = await createFixture(
-      DismissibleTagHostComponent
+      DismissibleTagHostComponent,
     );
     const button: HTMLButtonElement | null = query(fixture, '.ui-lib-tag__remove-button');
     expect(button?.getAttribute('aria-label')).toBe('Remove Python tag');
@@ -209,7 +209,7 @@ describe('Tag Accessibility', (): void => {
 
   it('dismiss button should fallback to "Remove tag" when value is missing', async (): Promise<void> => {
     const fixture: ComponentFixture<DismissibleNoValueHostComponent> = await createFixture(
-      DismissibleNoValueHostComponent
+      DismissibleNoValueHostComponent,
     );
     const button: HTMLButtonElement | null = query(fixture, '.ui-lib-tag__remove-button');
     expect(button?.getAttribute('aria-label')).toBe('Remove tag');
@@ -217,7 +217,7 @@ describe('Tag Accessibility', (): void => {
 
   it('dismiss button icon should be aria-hidden', async (): Promise<void> => {
     const fixture: ComponentFixture<DismissibleTagHostComponent> = await createFixture(
-      DismissibleTagHostComponent
+      DismissibleTagHostComponent,
     );
     const icon: HTMLElement | null = query(fixture, '.ui-lib-tag__remove-button span');
     expect(icon?.getAttribute('aria-hidden')).toBe('true');
@@ -225,7 +225,7 @@ describe('Tag Accessibility', (): void => {
 
   it('dismiss button should use native button semantics', async (): Promise<void> => {
     const fixture: ComponentFixture<DismissibleTagHostComponent> = await createFixture(
-      DismissibleTagHostComponent
+      DismissibleTagHostComponent,
     );
     const button: HTMLButtonElement | null = query(fixture, '.ui-lib-tag__remove-button');
     expect(button?.tagName.toLowerCase()).toBe('button');
@@ -234,11 +234,11 @@ describe('Tag Accessibility', (): void => {
 
   it('dismiss button should be keyboard focusable', async (): Promise<void> => {
     const fixture: ComponentFixture<DismissKeyboardHostComponent> = await createFixture(
-      DismissKeyboardHostComponent
+      DismissKeyboardHostComponent,
     );
     const button: HTMLButtonElement = query(
       fixture,
-      '.ui-lib-tag__remove-button'
+      '.ui-lib-tag__remove-button',
     ) as HTMLButtonElement;
     button.focus();
     expect(document.activeElement).toBe(button);
@@ -248,10 +248,10 @@ describe('Tag Accessibility', (): void => {
     const fixture: ComponentFixture<BasicTagHostComponent> =
       await createFixture(BasicTagHostComponent);
     const tags: NodeListOf<HTMLElement> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      'ui-lib-tag'
+      'ui-lib-tag',
     );
     const ids: string[] = Array.from(tags).map(
-      (tag: HTMLElement): string => tag.getAttribute('id') ?? ''
+      (tag: HTMLElement): string => tag.getAttribute('id') ?? '',
     );
     ids.forEach((id: string): void => {
       expect(id).toMatch(/^ui-lib-tag-\d+$/);
@@ -261,10 +261,10 @@ describe('Tag Accessibility', (): void => {
 
   it('dismiss button click should emit removed output once', async (): Promise<void> => {
     const fixture: ComponentFixture<DismissibleTagHostComponent> = await createFixture(
-      DismissibleTagHostComponent
+      DismissibleTagHostComponent,
     );
     const tagInstance: Tag = fixture.debugElement.query(
-      (element: DebugElement): boolean => element.name === 'ui-lib-tag'
+      (element: DebugElement): boolean => element.name === 'ui-lib-tag',
     ).componentInstance as Tag;
     let emissionCount: number = 0;
     tagInstance.removed.subscribe((): void => {
@@ -273,7 +273,7 @@ describe('Tag Accessibility', (): void => {
 
     const button: HTMLButtonElement = query(
       fixture,
-      '.ui-lib-tag__remove-button'
+      '.ui-lib-tag__remove-button',
     ) as HTMLButtonElement;
     button.click();
 

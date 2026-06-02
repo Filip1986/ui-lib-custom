@@ -40,11 +40,11 @@ import { VirtualScrollerComponent } from './virtual-scroller.component';
 })
 class VirtualScrollerA11yHostComponent {
   public readonly items: WritableSignal<string[]> = signal<string[]>(
-    Array.from({ length: 50 }, (_: unknown, index: number): string => `Item ${index + 1}`)
+    Array.from({ length: 50 }, (_: unknown, index: number): string => `Item ${index + 1}`),
   );
   public readonly totalRecords: WritableSignal<number | undefined> = signal<number | undefined>(50);
   public readonly loading: WritableSignal<boolean | undefined> = signal<boolean | undefined>(
-    undefined
+    undefined,
   );
   public readonly ariaLabel: WritableSignal<string> = signal<string>('');
   public readonly contentRole: WritableSignal<'list' | 'grid'> = signal<'list' | 'grid'>('list');
@@ -59,7 +59,7 @@ async function setup(): Promise<ComponentFixture<VirtualScrollerA11yHostComponen
   }).compileComponents();
 
   const fixture: ComponentFixture<VirtualScrollerA11yHostComponent> = TestBed.createComponent(
-    VirtualScrollerA11yHostComponent
+    VirtualScrollerA11yHostComponent,
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
@@ -78,19 +78,19 @@ function getComponent(fixture: ComponentFixture<unknown>): VirtualScrollerCompon
 
 function getViewport(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.uilib-scroller-viewport'
+    '.uilib-scroller-viewport',
   ) as HTMLElement;
 }
 
 function getLiveRegion(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.uilib-scroller-sr-only'
+    '.uilib-scroller-sr-only',
   ) as HTMLElement;
 }
 
 function getRenderedItems(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll('.uilib-scroller-item')
+    (fixture.nativeElement as HTMLElement).querySelectorAll('.uilib-scroller-item'),
   ) as HTMLElement[];
 }
 
@@ -103,7 +103,7 @@ function mockViewportMetrics(
     scrollHeight?: number;
     clientWidth?: number;
     scrollWidth?: number;
-  }
+  },
 ): void {
   Object.entries(metrics).forEach(([propertyName, value]: [string, number | undefined]): void => {
     if (value === undefined) {
@@ -169,8 +169,8 @@ describe('VirtualScroller Accessibility', (): void => {
 
     expect(
       getRenderedItems(fixture).map((item: HTMLElement): string | null =>
-        item.getAttribute('aria-posinset')
-      )
+        item.getAttribute('aria-posinset'),
+      ),
     ).toEqual(['11', '12', '13']);
   });
 
@@ -195,8 +195,8 @@ describe('VirtualScroller Accessibility', (): void => {
 
     expect(
       getRenderedItems(fixture).map((item: HTMLElement): string | null =>
-        item.getAttribute('aria-rowindex')
-      )
+        item.getAttribute('aria-rowindex'),
+      ),
     ).toEqual(['21', '22', '23']);
   });
 

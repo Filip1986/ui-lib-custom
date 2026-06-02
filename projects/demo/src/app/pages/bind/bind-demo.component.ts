@@ -130,7 +130,7 @@ export class MyComponent {}
         base['tabIndex'] = 0;
       }
       return base;
-    }
+    },
   );
 
   public scrollTo(id: string): void {

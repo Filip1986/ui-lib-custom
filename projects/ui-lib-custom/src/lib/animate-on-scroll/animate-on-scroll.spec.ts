@@ -123,7 +123,7 @@ function setupHost(): {
     providers: [provideZonelessChangeDetection()],
   });
   const fixture: ComponentFixture<AnimateOnScrollHostComponent> = TestBed.createComponent(
-    AnimateOnScrollHostComponent
+    AnimateOnScrollHostComponent,
   );
   fixture.detectChanges();
   const host: AnimateOnScrollHostComponent = fixture.componentInstance;
@@ -142,7 +142,7 @@ function setupRepeatHost(): {
     providers: [provideZonelessChangeDetection()],
   });
   const fixture: ComponentFixture<AnimateOnScrollRepeatHostComponent> = TestBed.createComponent(
-    AnimateOnScrollRepeatHostComponent
+    AnimateOnScrollRepeatHostComponent,
   );
   fixture.detectChanges();
   const host: AnimateOnScrollRepeatHostComponent = fixture.componentInstance;
@@ -163,7 +163,7 @@ function triggerIntersection(isIntersecting: boolean): void {
   };
   intersectionCallback(
     [entry as IntersectionObserverEntry],
-    mockObserver as unknown as IntersectionObserver
+    mockObserver as unknown as IntersectionObserver,
   );
 }
 
@@ -183,7 +183,7 @@ describe('AnimateOnScroll', (): void => {
       (callback: IntersectionObserverCallback): IntersectionObserver => {
         intersectionCallback = callback;
         return mockObserver as unknown as IntersectionObserver;
-      }
+      },
     ) as unknown as typeof IntersectionObserver;
 
     globalThis.requestAnimationFrame = jest.fn((callback: FrameRequestCallback): number => {

@@ -16,6 +16,7 @@ Follow [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`
 - **PATCH** (x.x.1): Bug fixes, backwards-compatible
 
 Examples:
+
 - `1.0.0` → Initial stable release
 - `1.0.1` → Bug fix
 - `1.1.0` → New component added
@@ -30,7 +31,7 @@ Edit `projects/ui-lib-custom/package.json`:
 ```json
 {
   "name": "ui-lib-custom",
-  "version": "1.0.1",  // ← Update this
+  "version": "1.0.1" // ← Update this
   // ... rest of config
 }
 ```
@@ -50,6 +51,7 @@ npm publish --access public
 ```
 
 Or with 2FA:
+
 ```bash
 npm publish --access public --otp=123456
 ```
@@ -72,11 +74,13 @@ For beta/alpha releases, use pre-release tags:
 ```
 
 Publish with tag:
+
 ```bash
 npm publish --access public --tag beta
 ```
 
 Users can install with:
+
 ```bash
 npm install @filip86/ui-components@beta
 ```
@@ -106,6 +110,7 @@ npm version 1.2.3
 ```
 
 Then build and publish:
+
 ```bash
 cd ../..
 ng build ui-lib-custom
@@ -137,6 +142,7 @@ npm unpublish @filip86/ui-components@1.0.1
 ⚠️ **Warning:** Unpublishing is discouraged. Instead, publish a new patch version with fixes.
 
 To deprecate a version:
+
 ```bash
 npm deprecate @filip86/ui-components@1.0.1 "This version has critical bugs. Please upgrade to 1.0.2"
 ```
@@ -169,21 +175,25 @@ This metadata will automatically be included in the built package.
 ## Common Version Management Tasks
 
 ### Check Current Published Version
+
 ```bash
 npm view ui-lib-custom version
 ```
 
 ### List All Published Versions
+
 ```bash
 npm view ui-lib-custom versions
 ```
 
 ### Check Latest Tag
+
 ```bash
 npm view ui-lib-custom dist-tags
 ```
 
 ### Update a Distribution Tag
+
 ```bash
 # Point 'latest' tag to a specific version
 npm dist-tag add ui-lib-custom@1.0.1 latest

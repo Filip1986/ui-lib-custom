@@ -42,6 +42,6 @@ export class DocAriaTableComponent {
   public readonly rows: InputSignal<readonly AriaRow[]> = input.required<readonly AriaRow[]>();
 
   public readonly tableRows: Signal<AriaRow[]> = computed<AriaRow[]>(
-    (): AriaRow[] => this.rows() as AriaRow[]
+    (): AriaRow[] => this.rows() as AriaRow[],
   );
 }

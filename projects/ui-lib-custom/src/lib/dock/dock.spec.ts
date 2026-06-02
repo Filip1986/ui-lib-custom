@@ -27,19 +27,19 @@ function getHost(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getListItems(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-dock__item')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-dock__item'),
   );
 }
 
 function getTooltips(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-dock__tooltip')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-dock__tooltip'),
   );
 }
 
 function getDockInstance(fixture: ComponentFixture<unknown>): Dock {
   return fixture.debugElement.query(
-    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Dock
+    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Dock,
   ).componentInstance as Dock;
 }
 
@@ -95,7 +95,7 @@ class HostComponent {
   public readonly size: WritableSignal<DockSize> = signal<DockSize>('md');
   public readonly magnification: WritableSignal<boolean> = signal<boolean>(true);
   public readonly magnificationLevel: WritableSignal<number> = signal<number>(
-    DOCK_DEFAULT_MAGNIFICATION_LEVEL
+    DOCK_DEFAULT_MAGNIFICATION_LEVEL,
   );
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
 
@@ -297,7 +297,7 @@ describe('Dock', (): void => {
 
     it('should render icons for items with icon property', (): void => {
       const icons: NodeListOf<Element> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-        '.ui-lib-dock__item-icon'
+        '.ui-lib-dock__item-icon',
       );
       expect(icons.length).toBe(SAMPLE_ITEMS.length);
     });

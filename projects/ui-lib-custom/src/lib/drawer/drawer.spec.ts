@@ -12,7 +12,7 @@ import type { DrawerPosition, DrawerVariant } from './drawer.types';
 
 function getElement<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T {
   const element: T | null = (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
   if (!element) throw new Error(`Element not found: ${selector}`);
@@ -21,7 +21,7 @@ function getElement<T extends HTMLElement>(
 
 function queryElement<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
@@ -61,11 +61,11 @@ class TestHostComponent {
   public readonly blockScroll: WritableSignal<boolean> = signal<boolean>(true);
   public readonly showCloseButton: WritableSignal<boolean> = signal<boolean>(true);
   public readonly variant: WritableSignal<DrawerVariant | null> = signal<DrawerVariant | null>(
-    null
+    null,
   );
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
   public readonly ariaDescribedby: WritableSignal<string | undefined> = signal<string | undefined>(
-    undefined
+    undefined,
   );
 }
 
@@ -329,7 +329,7 @@ describe('Drawer', (): void => {
       const labelledById: string | null = panel.getAttribute('aria-labelledby');
       expect(labelledById).toBeTruthy();
       const titleEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        `#${labelledById}`
+        `#${labelledById}`,
       );
       expect(titleEl).toBeTruthy();
       expect(titleEl?.textContent!.trim()).toBe('Test Header');

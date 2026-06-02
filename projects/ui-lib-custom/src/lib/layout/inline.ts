@@ -64,7 +64,7 @@ export class Inline {
 
   /** Final rendered tag name (defaults to div). */
   protected readonly _renderTag: Signal<InlineTag> = computed<InlineTag>(
-    (): InlineTag => this.as() ?? this.tag() ?? 'div'
+    (): InlineTag => this.as() ?? this.tag() ?? 'div',
   );
 
   /** Computed justify-content value */

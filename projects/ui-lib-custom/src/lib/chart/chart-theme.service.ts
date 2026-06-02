@@ -49,47 +49,47 @@ export class ChartThemeService {
       fontFamily: this.readStringToken(
         styleDeclaration,
         '--uilib-chart-font-family',
-        CHART_THEME_DEFAULTS.fontFamily
+        CHART_THEME_DEFAULTS.fontFamily,
       ),
       fontSize: this.readNumberToken(
         styleDeclaration,
         '--uilib-chart-font-size',
-        CHART_THEME_DEFAULTS.fontSize
+        CHART_THEME_DEFAULTS.fontSize,
       ),
       fontColor: this.readStringToken(
         styleDeclaration,
         '--uilib-chart-font-color',
-        CHART_THEME_DEFAULTS.fontColor
+        CHART_THEME_DEFAULTS.fontColor,
       ),
       gridColor: this.readStringToken(
         styleDeclaration,
         '--uilib-chart-grid-color',
-        CHART_THEME_DEFAULTS.gridColor
+        CHART_THEME_DEFAULTS.gridColor,
       ),
       borderColor: this.readStringToken(
         styleDeclaration,
         '--uilib-chart-border-color',
-        CHART_THEME_DEFAULTS.borderColor
+        CHART_THEME_DEFAULTS.borderColor,
       ),
       backgroundColor: this.readStringToken(
         styleDeclaration,
         '--uilib-chart-background-color',
-        CHART_THEME_DEFAULTS.backgroundColor
+        CHART_THEME_DEFAULTS.backgroundColor,
       ),
       tooltipBackground: this.readStringToken(
         styleDeclaration,
         '--uilib-chart-tooltip-background',
-        CHART_THEME_DEFAULTS.tooltipBackground
+        CHART_THEME_DEFAULTS.tooltipBackground,
       ),
       tooltipFontColor: this.readStringToken(
         styleDeclaration,
         '--uilib-chart-tooltip-font-color',
-        CHART_THEME_DEFAULTS.tooltipFontColor
+        CHART_THEME_DEFAULTS.tooltipFontColor,
       ),
       legendFontColor: this.readStringToken(
         styleDeclaration,
         '--uilib-chart-legend-font-color',
-        CHART_THEME_DEFAULTS.legendFontColor
+        CHART_THEME_DEFAULTS.legendFontColor,
       ),
       colorPalette: this.readColorPalette(styleDeclaration),
     };
@@ -186,7 +186,7 @@ export class ChartThemeService {
         const fallbackColor: string =
           CHART_THEME_DEFAULTS.colorPalette[index] ?? DEFAULT_COLOR_PALETTE[0];
         return this.readStringToken(styleDeclaration, tokenName, fallbackColor);
-      }
+      },
     );
 
     return resolvedPalette.length > 0 ? resolvedPalette : CHART_THEME_DEFAULTS.colorPalette;
@@ -195,7 +195,7 @@ export class ChartThemeService {
   private readStringToken(
     styleDeclaration: CSSStyleDeclaration,
     tokenName: string,
-    fallback: string
+    fallback: string,
   ): string {
     const value: string = styleDeclaration.getPropertyValue(tokenName).trim();
     return value.length > 0 ? value : fallback;
@@ -204,7 +204,7 @@ export class ChartThemeService {
   private readNumberToken(
     styleDeclaration: CSSStyleDeclaration,
     tokenName: string,
-    fallback: number
+    fallback: number,
   ): number {
     const rawValue: string = styleDeclaration.getPropertyValue(tokenName).trim();
     if (rawValue.length === 0) {

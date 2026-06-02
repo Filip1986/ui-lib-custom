@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="BlockUI"
@@ -19,9 +18,9 @@
   <!-- ---- Basic ---------------------------------------------------- -->
   <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
-      Toggle <code>blocked</code> to overlay a semi-transparent mask on the wrapped content.
-      The content remains in the DOM but receives <code>inert</code>, preventing pointer
-      events and keyboard focus.
+      Toggle <code>blocked</code> to overlay a semi-transparent mask on the wrapped content. The
+      content remains in the DOM but receives <code>inert</code>, preventing pointer events and
+      keyboard focus.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-button (click)="toggleBasic()">
@@ -30,25 +29,29 @@
       <ui-lib-block-ui [blocked]="basicBlocked()" styleClass="demo-block-rounded">
         <div class="demo-block-panel">
           <h3>Panel Content</h3>
-          <p>This content is blocked when the mask is active. The button below cannot be reached by keyboard while blocked.</p>
+          <p>
+            This content is blocked when the mask is active. The button below cannot be reached by
+            keyboard while blocked.
+          </p>
           <ui-lib-button severity="secondary">Blocked Button</ui-lib-button>
         </div>
       </ui-lib-block-ui>
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic"
+      filename="Basic"
+      [code]="snippets.basic"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Custom Mask ---------------------------------------------- -->
   <app-doc-section id="custom-mask" title="Custom Mask">
     <p class="demo-section__description">
       Project content into the mask overlay using the <code>[blockTemplate]</code> attribute
-      selector. Ideal for spinners, progress indicators, or status messages. The mask element
-      has <code>role="status"</code> and <code>aria-live="polite"</code>, so projected text is
-      announced by screen readers when the component becomes blocked.
+      selector. Ideal for spinners, progress indicators, or status messages. The mask element has
+      <code>role="status"</code> and <code>aria-live="polite"</code>, so projected text is announced
+      by screen readers when the component becomes blocked.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-button (click)="toggleSpinner()">
@@ -68,9 +71,10 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Custom mask" [code]="snippets.customMask"
+      filename="Custom mask"
+      [code]="snippets.customMask"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Variants ------------------------------------------------- -->
@@ -81,13 +85,16 @@
       <code>ThemeConfigService</code>.
     </p>
     <div class="demo-section__preview demo-block-variant-grid">
-
       <div class="demo-block-variant-cell">
         <span class="demo-block-variant-label">material</span>
         <ui-lib-button size="sm" (click)="toggleMaterial()">
           {{ materialBlocked() ? 'Unblock' : 'Block' }}
         </ui-lib-button>
-        <ui-lib-block-ui variant="material" [blocked]="materialBlocked()" styleClass="demo-block-rounded">
+        <ui-lib-block-ui
+          variant="material"
+          [blocked]="materialBlocked()"
+          styleClass="demo-block-rounded"
+        >
           <div class="demo-block-mini-panel">Material-style content</div>
           <span blockTemplate class="demo-block-mask-label">Blocked</span>
         </ui-lib-block-ui>
@@ -98,7 +105,11 @@
         <ui-lib-button size="sm" (click)="toggleBootstrap()">
           {{ bootstrapBlocked() ? 'Unblock' : 'Block' }}
         </ui-lib-button>
-        <ui-lib-block-ui variant="bootstrap" [blocked]="bootstrapBlocked()" styleClass="demo-block-rounded">
+        <ui-lib-block-ui
+          variant="bootstrap"
+          [blocked]="bootstrapBlocked()"
+          styleClass="demo-block-rounded"
+        >
           <div class="demo-block-mini-panel">Bootstrap-style content</div>
           <span blockTemplate class="demo-block-mask-label">Blocked</span>
         </ui-lib-block-ui>
@@ -109,23 +120,26 @@
         <ui-lib-button size="sm" (click)="toggleMinimal()">
           {{ minimalBlocked() ? 'Unblock' : 'Block' }}
         </ui-lib-button>
-        <ui-lib-block-ui variant="minimal" [blocked]="minimalBlocked()" styleClass="demo-block-rounded">
+        <ui-lib-block-ui
+          variant="minimal"
+          [blocked]="minimalBlocked()"
+          styleClass="demo-block-rounded"
+        >
           <div class="demo-block-mini-panel">Minimal-style content</div>
           <span blockTemplate class="demo-block-mask-label">Blocked</span>
         </ui-lib-block-ui>
       </div>
-
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants"
+      filename="Variants"
+      [code]="snippets.variants"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
   <app-doc-section id="api" title="API Reference">
-
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
@@ -140,12 +154,10 @@
       <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
       <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
-
   </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
   <app-doc-section id="accessibility" title="Accessibility">
-
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <app-doc-aria-table [rows]="ariaRows" />
@@ -161,8 +173,8 @@
       <li>
         <strong>Focus prevention:</strong> The protected content wrapper receives the
         <code>inert</code> HTML attribute when <code>blocked = true</code>. This prevents all
-        interactive descendants (buttons, links, inputs) from receiving keyboard focus or
-        pointer events — no custom focus trap is needed.
+        interactive descendants (buttons, links, inputs) from receiving keyboard focus or pointer
+        events — no custom focus trap is needed.
       </li>
       <li>
         <strong>Live region:</strong> The mask element carries <code>role="status"</code> and
@@ -174,15 +186,14 @@
         container is loading or processing, suppressing interaction expectations.
       </li>
       <li>
-        All transitions respect <code>prefers-reduced-motion: reduce</code> — the opacity
-        transition is set to <code>0</code> duration.
+        All transitions respect <code>prefers-reduced-motion: reduce</code> — the opacity transition
+        is set to <code>0</code> duration.
       </li>
     </ul>
-
   </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -191,7 +202,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -201,5 +212,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

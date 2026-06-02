@@ -94,7 +94,7 @@ class TwoListboxHostComponent {
 const fixtures: ComponentFixture<unknown>[] = [];
 
 async function setup(
-  configure?: (host: ListboxA11yHostComponent) => void
+  configure?: (host: ListboxA11yHostComponent) => void,
 ): Promise<ComponentFixture<ListboxA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [ListboxA11yHostComponent],
@@ -135,7 +135,7 @@ function hostElement(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function listboxElement(fixture: ComponentFixture<unknown>): HTMLElement {
   const element: HTMLElement | null = hostElement(fixture).querySelector(
-    '.ui-lib-listbox__list-container'
+    '.ui-lib-listbox__list-container',
   );
   if (!element) {
     throw new Error('Listbox element not found');
@@ -149,7 +149,7 @@ function optionElements(fixture: ComponentFixture<unknown>): HTMLElement[] {
 
 function liveRegionElement(fixture: ComponentFixture<unknown>): HTMLElement {
   const element: HTMLElement | null = hostElement(fixture).querySelector(
-    '.ui-lib-listbox__sr-live'
+    '.ui-lib-listbox__sr-live',
   );
   if (!element) {
     throw new Error('Live region element not found');
@@ -160,7 +160,7 @@ function liveRegionElement(fixture: ComponentFixture<unknown>): HTMLElement {
 async function pressKey(
   fixture: ComponentFixture<unknown>,
   element: HTMLElement,
-  key: string
+  key: string,
 ): Promise<void> {
   element.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
   fixture.detectChanges();
@@ -192,7 +192,7 @@ describe('Listbox Accessibility', (): void => {
           host.multiple.set(true);
           host.checkbox.set(true);
           host.showToggleAll.set(true);
-        }
+        },
       );
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
@@ -202,7 +202,7 @@ describe('Listbox Accessibility', (): void => {
         (host: ListboxA11yHostComponent): void => {
           host.options.set(GROUPED_OPTIONS as unknown[]);
           host.group.set(true);
-        }
+        },
       );
       await checkA11y(fixture, { rules: SKIP_LISTBOX_STRUCTURE_RULES });
     });
@@ -211,10 +211,10 @@ describe('Listbox Accessibility', (): void => {
       const fixture: ComponentFixture<ListboxA11yHostComponent> = await setup(
         (host: ListboxA11yHostComponent): void => {
           host.filter.set(true);
-        }
+        },
       );
       const filterInput: HTMLInputElement = hostElement(fixture).querySelector(
-        '.ui-lib-listbox__filter-input'
+        '.ui-lib-listbox__filter-input',
       ) as HTMLInputElement;
       filterInput.value = 'zzzz';
       filterInput.dispatchEvent(new Event('input', { bubbles: true }));
@@ -248,7 +248,7 @@ describe('Listbox Accessibility', (): void => {
       const fixture: ComponentFixture<ListboxA11yHostComponent> = await setup(
         (host: ListboxA11yHostComponent): void => {
           host.multiple.set(true);
-        }
+        },
       );
       expect(listboxElement(fixture).getAttribute('aria-multiselectable')).toBe('true');
     });
@@ -263,7 +263,7 @@ describe('Listbox Accessibility', (): void => {
         (host: ListboxA11yHostComponent): void => {
           host.ariaLabel.set('');
           host.ariaLabelledBy.set('external-label');
-        }
+        },
       );
       expect(listboxElement(fixture).getAttribute('aria-labelledby')).toBe('external-label');
     });
@@ -273,10 +273,10 @@ describe('Listbox Accessibility', (): void => {
         (host: ListboxA11yHostComponent): void => {
           host.options.set(GROUPED_OPTIONS as unknown[]);
           host.group.set(true);
-        }
+        },
       );
       const groupHeader: HTMLElement | null = hostElement(fixture).querySelector(
-        '.ui-lib-listbox__group-header'
+        '.ui-lib-listbox__group-header',
       );
       expect(groupHeader?.getAttribute('aria-hidden')).toBe('true');
     });
@@ -286,10 +286,10 @@ describe('Listbox Accessibility', (): void => {
         (host: ListboxA11yHostComponent): void => {
           host.multiple.set(true);
           host.showToggleAll.set(true);
-        }
+        },
       );
       const selectAll: HTMLInputElement | null = hostElement(fixture).querySelector(
-        '.ui-lib-listbox__header input[type="checkbox"]'
+        '.ui-lib-listbox__header input[type="checkbox"]',
       );
       expect(selectAll?.getAttribute('aria-label')).toBe('Select all options');
     });
@@ -298,13 +298,13 @@ describe('Listbox Accessibility', (): void => {
       const fixture: ComponentFixture<ListboxA11yHostComponent> = await setup(
         (host: ListboxA11yHostComponent): void => {
           host.filter.set(true);
-        }
+        },
       );
       const iconWrap: HTMLElement | null = hostElement(fixture).querySelector(
-        '.ui-lib-listbox__filter-icon'
+        '.ui-lib-listbox__filter-icon',
       );
       const iconSvg: SVGElement | null = hostElement(fixture).querySelector(
-        '.ui-lib-listbox__filter-icon svg'
+        '.ui-lib-listbox__filter-icon svg',
       );
       expect(iconWrap?.getAttribute('aria-hidden')).toBe('true');
       expect(iconSvg?.getAttribute('aria-hidden')).toBe('true');
@@ -316,7 +316,7 @@ describe('Listbox Accessibility', (): void => {
         (host: ListboxA11yHostComponent): void => {
           host.multiple.set(true);
           host.checkbox.set(true);
-        }
+        },
       );
       optionElements(fixture)[0]?.click();
       fixture.detectChanges();
@@ -324,7 +324,7 @@ describe('Listbox Accessibility', (): void => {
       fixture.detectChanges();
 
       const checkedIcon: SVGElement | null = hostElement(fixture).querySelector(
-        '.ui-lib-listbox__checkbox--checked svg'
+        '.ui-lib-listbox__checkbox--checked svg',
       );
       expect(checkedIcon?.getAttribute('aria-hidden')).toBe('true');
       expect(checkedIcon?.getAttribute('focusable')).toBe('false');
@@ -408,7 +408,7 @@ describe('Listbox Accessibility', (): void => {
       const fixture: ComponentFixture<ListboxA11yHostComponent> = await setup();
       const listbox: HTMLElement = listboxElement(fixture);
       const enabledOptions: HTMLElement[] = optionElements(fixture).filter(
-        (option: HTMLElement): boolean => option.getAttribute('aria-disabled') !== 'true'
+        (option: HTMLElement): boolean => option.getAttribute('aria-disabled') !== 'true',
       );
       const expectedLastEnabledId: string = enabledOptions[enabledOptions.length - 1]!.id;
 
@@ -440,11 +440,11 @@ describe('Listbox Accessibility', (): void => {
       const fixture: ComponentFixture<ListboxA11yHostComponent> = await setup(
         (host: ListboxA11yHostComponent): void => {
           host.filter.set(true);
-        }
+        },
       );
       const listbox: HTMLElement = listboxElement(fixture);
       const filterInput: HTMLInputElement = hostElement(fixture).querySelector(
-        '.ui-lib-listbox__filter-input'
+        '.ui-lib-listbox__filter-input',
       ) as HTMLInputElement;
 
       listbox.focus();
@@ -506,10 +506,10 @@ describe('Listbox Accessibility', (): void => {
       const fixture: ComponentFixture<ListboxA11yHostComponent> = await setup(
         (host: ListboxA11yHostComponent): void => {
           host.filter.set(true);
-        }
+        },
       );
       const filterInput: HTMLInputElement = hostElement(fixture).querySelector(
-        '.ui-lib-listbox__filter-input'
+        '.ui-lib-listbox__filter-input',
       ) as HTMLInputElement;
 
       filterInput.value = 'a';
@@ -551,10 +551,10 @@ describe('Listbox Accessibility', (): void => {
         (host: ListboxA11yHostComponent): void => {
           host.multiple.set(true);
           host.showToggleAll.set(true);
-        }
+        },
       );
       const selectAll: HTMLInputElement = hostElement(fixture).querySelector(
-        '.ui-lib-listbox__header input[type="checkbox"]'
+        '.ui-lib-listbox__header input[type="checkbox"]',
       ) as HTMLInputElement;
 
       selectAll.click();
@@ -570,10 +570,10 @@ describe('Listbox Accessibility', (): void => {
         (host: ListboxA11yHostComponent): void => {
           host.multiple.set(true);
           host.showToggleAll.set(true);
-        }
+        },
       );
       const selectAll: HTMLInputElement = hostElement(fixture).querySelector(
-        '.ui-lib-listbox__header input[type="checkbox"]'
+        '.ui-lib-listbox__header input[type="checkbox"]',
       ) as HTMLInputElement;
 
       selectAll.click();
@@ -592,7 +592,7 @@ describe('Listbox Accessibility', (): void => {
     it('creates distinct listbox ids for different component instances', async (): Promise<void> => {
       const fixture: ComponentFixture<TwoListboxHostComponent> = await setupTwoListboxHost();
       const listboxes: HTMLElement[] = Array.from(
-        hostElement(fixture).querySelectorAll('.ui-lib-listbox__list-container')
+        hostElement(fixture).querySelectorAll('.ui-lib-listbox__list-container'),
       );
 
       expect(listboxes.length).toBe(2);

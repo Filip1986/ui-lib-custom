@@ -114,7 +114,7 @@ function queryRequired<T extends Element>(root: ParentNode, selector: string, la
   const el: T | null = root.querySelector<T>(selector);
   if (!el) {
     throw new Error(
-      `Expected element "${selector}" (${label}) to exist in radio-button a11y test.`
+      `Expected element "${selector}" (${label}) to exist in radio-button a11y test.`,
     );
   }
 
@@ -123,23 +123,23 @@ function queryRequired<T extends Element>(root: ParentNode, selector: string, la
 
 function allRadioElements(fixture: ComponentFixture<RadioButtonA11yHostComponent>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-radio-button')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-radio-button'),
   );
 }
 
 function allNativeInputs(
-  fixture: ComponentFixture<RadioButtonA11yHostComponent>
+  fixture: ComponentFixture<RadioButtonA11yHostComponent>,
 ): HTMLInputElement[] {
   return Array.from(
     (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLInputElement>(
-      '.ui-lib-radio-button__native-input'
-    )
+      '.ui-lib-radio-button__native-input',
+    ),
   );
 }
 
 function nativeInputAt(
   fixture: ComponentFixture<RadioButtonA11yHostComponent>,
-  index: number
+  index: number,
 ): HTMLInputElement {
   const inputs: HTMLInputElement[] = allNativeInputs(fixture);
   const input: HTMLInputElement | undefined = inputs[index];
@@ -152,7 +152,7 @@ function nativeInputAt(
 
 function labelAt(
   fixture: ComponentFixture<RadioButtonA11yHostComponent>,
-  index: number
+  index: number,
 ): HTMLLabelElement {
   const radios: HTMLElement[] = allRadioElements(fixture);
   const radio: HTMLElement | undefined = radios[index];
@@ -225,7 +225,7 @@ describe('RadioButton Accessibility', (): void => {
       const lbl: HTMLLabelElement = queryRequired<HTMLLabelElement>(
         radio,
         '.ui-lib-radio-button__label',
-        'label'
+        'label',
       );
 
       return lbl.id;
@@ -240,7 +240,7 @@ describe('RadioButton Accessibility', (): void => {
     const group: HTMLElement = queryRequired<HTMLElement>(
       fixture.nativeElement as HTMLElement,
       '[role="radiogroup"]',
-      'radiogroup'
+      'radiogroup',
     );
     expect(group.getAttribute('role')).toBe('radiogroup');
   });
@@ -249,12 +249,12 @@ describe('RadioButton Accessibility', (): void => {
     const group: HTMLElement = queryRequired<HTMLElement>(
       fixture.nativeElement as HTMLElement,
       '[role="radiogroup"]',
-      'radiogroup'
+      'radiogroup',
     );
     const labelSpan: HTMLElement = queryRequired<HTMLElement>(
       fixture.nativeElement as HTMLElement,
       '#rb-group-label',
-      'group label'
+      'group label',
     );
     expect(group.getAttribute('aria-labelledby')).toBe(labelSpan.id);
   });
@@ -266,7 +266,7 @@ describe('RadioButton Accessibility', (): void => {
     const group: HTMLElement = queryRequired<HTMLElement>(
       fixture.nativeElement as HTMLElement,
       '[role="radiogroup"]',
-      'radiogroup'
+      'radiogroup',
     );
     expect(group.getAttribute('aria-required')).toBe('true');
   });
@@ -275,7 +275,7 @@ describe('RadioButton Accessibility', (): void => {
     const group: HTMLElement = queryRequired<HTMLElement>(
       fixture.nativeElement as HTMLElement,
       '[role="radiogroup"]',
-      'radiogroup'
+      'radiogroup',
     );
     expect(group.getAttribute('aria-required')).toBeNull();
   });
@@ -323,7 +323,7 @@ describe('RadioButton Accessibility', (): void => {
     const group: HTMLElement = queryRequired<HTMLElement>(
       fixture.nativeElement as HTMLElement,
       '[role="radiogroup"]',
-      'radiogroup'
+      'radiogroup',
     );
     expect(group.getAttribute('aria-invalid')).toBe('true');
     expect(group.getAttribute('aria-describedby')).toBe(host.groupErrorId());
@@ -333,7 +333,7 @@ describe('RadioButton Accessibility', (): void => {
     const group: HTMLElement = queryRequired<HTMLElement>(
       fixture.nativeElement as HTMLElement,
       '[role="radiogroup"]',
-      'radiogroup'
+      'radiogroup',
     );
     expect(group.getAttribute('aria-invalid')).toBeNull();
     expect(group.getAttribute('aria-describedby')).toBeNull();

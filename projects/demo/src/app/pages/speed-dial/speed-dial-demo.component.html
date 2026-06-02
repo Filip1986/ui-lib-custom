@@ -1,7 +1,10 @@
 <app-doc-page-layout [sections]="sections">
-
-  <app-doc-page-header docHeader title="SpeedDial" [importCode]="importCode"
-    description="Floating action menu with linear and radial layouts, template customization, tooltips, and masking.">
+  <app-doc-page-header
+    docHeader
+    title="SpeedDial"
+    [importCode]="importCode"
+    description="Floating action menu with linear and radial layouts, template customization, tooltips, and masking."
+  >
   </app-doc-page-header>
 
   <!-- Section 1: Linear -->
@@ -30,7 +33,8 @@
   <!-- Section 2: Circle -->
   <app-doc-section id="circle" title="Circle">
     <p class="demo-section__description">
-      Set <code>type="circle"</code> and <code>[radius]</code> to place items radially around the trigger.
+      Set <code>type="circle"</code> and <code>[radius]</code> to place items radially around the
+      trigger.
     </p>
 
     <div class="speed-dial-demo__grid speed-dial-demo__grid--single">
@@ -169,11 +173,7 @@
 
     <div class="speed-dial-demo__grid speed-dial-demo__grid--single">
       <div class="speed-dial-demo__arena speed-dial-demo__arena--tall">
-        <ui-lib-speed-dial
-          [model]="items"
-          [disabled]="true"
-          [variant]="activeVariant()"
-        />
+        <ui-lib-speed-dial [model]="items" [disabled]="true" [variant]="activeVariant()" />
       </div>
     </div>
   </app-doc-section>
@@ -196,7 +196,6 @@
     </div>
   </app-doc-section>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -205,7 +204,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -222,7 +221,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -231,5 +230,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

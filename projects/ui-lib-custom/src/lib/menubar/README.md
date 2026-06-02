@@ -9,7 +9,7 @@
 ## Inputs
 
 | Name         | Type                                             | Default        | Notes                                                                                                   |
-|--------------|--------------------------------------------------|----------------|---------------------------------------------------------------------------------------------------------|
+| ------------ | ------------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------- |
 | `model`      | `MenubarItem[]`                                  | `[]`           | Top-level navigation items; items with `items` array open dropdown panels                               |
 | `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`         | Falls back to `ThemeConfigService` when `null`                                                          |
 | `size`       | `'sm' \| 'md' \| 'lg'`                           | `'md'`         | Size token                                                                                              |
@@ -18,14 +18,14 @@
 
 ## Outputs
 
-| Name          | Payload                 | Notes                                              |
-|---------------|-------------------------|----------------------------------------------------|
-| `itemClick`   | `MenubarCommandEvent`   | Fired when a non-disabled leaf item is activated   |
+| Name        | Payload               | Notes                                            |
+| ----------- | --------------------- | ------------------------------------------------ |
+| `itemClick` | `MenubarCommandEvent` | Fired when a non-disabled leaf item is activated |
 
 ## Public Properties
 
 | Name          | Type                     | Notes                                                                |
-|---------------|--------------------------|----------------------------------------------------------------------|
+| ------------- | ------------------------ | -------------------------------------------------------------------- |
 | `menubarId`   | `string`                 | Unique instance ID (e.g. `uilib-menubar-1`)                          |
 | `rootListId`  | `string`                 | ID of the root `<ul>` — used by `aria-controls` on the toggle button |
 | `activeIndex` | `WritableSignal<number>` | Index of the currently open root panel (-1 = none)                   |
@@ -34,7 +34,7 @@
 ## MenubarItem Interface
 
 | Property     | Type                                                | Default | Description                                 |
-|--------------|-----------------------------------------------------|---------|---------------------------------------------|
+| ------------ | --------------------------------------------------- | ------- | ------------------------------------------- |
 | `label`      | `string \| undefined`                               | —       | Display text for the item                   |
 | `icon`       | `string \| undefined`                               | —       | Icon class applied to a decorative `<span>` |
 | `disabled`   | `boolean \| undefined`                              | `false` | When true, item is inert                    |
@@ -48,10 +48,10 @@
 
 ## Content Projection
 
-| Slot attribute     | Position               | Use for                               |
-|--------------------|------------------------|---------------------------------------|
-| `[menubarStart]`   | Left side of the bar   | Logo, branding, back button           |
-| `[menubarEnd]`     | Right side of the bar  | Search box, auth button, theme toggle |
+| Slot attribute   | Position              | Use for                               |
+| ---------------- | --------------------- | ------------------------------------- |
+| `[menubarStart]` | Left side of the bar  | Logo, branding, back button           |
+| `[menubarEnd]`   | Right side of the bar | Search box, auth button, theme toggle |
 
 ```html
 <ui-lib-menubar [model]="items">
@@ -78,7 +78,7 @@
 ### ARIA structure
 
 | Element                     | Role / attribute                                 | Notes                                                                                                                             |
-|-----------------------------|--------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| --------------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
 | `<nav>`                     | landmark + `aria-label`                          | Labels the navigation region. Customise via `ariaLabel` input — use a unique label when multiple navbars appear on the same page. |
 | Root `<ul>`                 | `role="menubar"`                                 | Identifies the horizontal menu bar.                                                                                               |
 | Root `<li>`                 | `role="none"`                                    | Neutral wrapper — the `<a>` carries the semantic role.                                                                            |
@@ -93,23 +93,24 @@
 
 ### Keyboard navigation
 
-| Context                | Key                             | Behaviour                                                |
-|------------------------|---------------------------------|----------------------------------------------------------|
-| Menubar (root level)   | `ArrowRight`                    | Move focus to the next root item (wraps)                 |
-| Menubar (root level)   | `ArrowLeft`                     | Move focus to the previous root item (wraps)             |
-| Menubar (root level)   | `Home`                          | Move focus to the first root item                        |
-| Menubar (root level)   | `End`                           | Move focus to the last root item                         |
-| Menubar (root level)   | `ArrowDown` / `Enter` / `Space` | Open the dropdown panel and focus the first item         |
-| Menubar (root level)   | `Escape`                        | Close open panel; return focus to the triggering item    |
-| Submenu panel          | `ArrowDown`                     | Move focus to the next item (wraps)                      |
-| Submenu panel          | `ArrowUp`                       | Move focus to the previous item (wraps)                  |
-| Submenu panel          | `ArrowRight`                    | Open nested sub-panel (when item has children)           |
-| Submenu panel          | `ArrowLeft` / `Escape`          | Close current panel; return focus to parent root item    |
-| Anywhere               | `Tab`                           | Move focus out of the menubar entirely (roving tabindex) |
+| Context              | Key                             | Behaviour                                                |
+| -------------------- | ------------------------------- | -------------------------------------------------------- |
+| Menubar (root level) | `ArrowRight`                    | Move focus to the next root item (wraps)                 |
+| Menubar (root level) | `ArrowLeft`                     | Move focus to the previous root item (wraps)             |
+| Menubar (root level) | `Home`                          | Move focus to the first root item                        |
+| Menubar (root level) | `End`                           | Move focus to the last root item                         |
+| Menubar (root level) | `ArrowDown` / `Enter` / `Space` | Open the dropdown panel and focus the first item         |
+| Menubar (root level) | `Escape`                        | Close open panel; return focus to the triggering item    |
+| Submenu panel        | `ArrowDown`                     | Move focus to the next item (wraps)                      |
+| Submenu panel        | `ArrowUp`                       | Move focus to the previous item (wraps)                  |
+| Submenu panel        | `ArrowRight`                    | Open nested sub-panel (when item has children)           |
+| Submenu panel        | `ArrowLeft` / `Escape`          | Close current panel; return focus to parent root item    |
+| Anywhere             | `Tab`                           | Move focus out of the menubar entirely (roving tabindex) |
 
 ### Roving tabindex
 
 The Menubar implements the **roving tabindex** pattern required by WAI-ARIA for `role="menubar"`:
+
 - Only **one** root item is in the tab sequence at a time (the one at `rovingIndex`)
 - Arrow keys move between root items; `Tab` exits the menubar entirely
 - The active tab stop follows arrow key navigation and click interactions
@@ -129,7 +130,7 @@ are never duplicated across instances:
 ## CSS Custom Properties
 
 | Property                            | Default                                    | Description                                                                        |
-|-------------------------------------|--------------------------------------------|------------------------------------------------------------------------------------|
+| ----------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------- |
 | `--uilib-menubar-bar-bg`            | `var(--uilib-surface-100, #f8f9fa)`        | Bar background colour                                                              |
 | `--uilib-menubar-bar-border`        | `1px solid var(--uilib-color-border)`      | Bar border                                                                         |
 | `--uilib-menubar-bar-border-radius` | `var(--uilib-radius-md, 4px)`              | Bar corner radius                                                                  |

@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header docHeader title="Chip" [importCode]="importCode">
     <p class="doc-description">
       Compact inline element representing an attribute, tag, or dismissible item. Supports an
@@ -82,8 +81,8 @@
   <app-doc-section id="removable" title="Removable">
     <p class="demo-section__description">
       Set <code>[removable]="true"</code> to display a close button. Clicking it emits the
-      <code>(removed)</code> event — the chip does not disappear automatically. Manage visibility
-      in the parent component.
+      <code>(removed)</code> event — the chip does not disappear automatically. Manage visibility in
+      the parent component.
     </p>
     <div class="demo-section__preview">
       @for (chip of activeChips(); track chip) {
@@ -112,10 +111,10 @@
   <!-- ---- Selectable --------------------------------------------------- -->
   <app-doc-section id="selectable" title="Selectable">
     <p class="demo-section__description">
-      Set <code>[selectable]="true"</code> to make the chip keyboard-focusable and toggleable.
-      Bind <code>[selected]</code> and <code>(selectedChange)</code> to track state. Wrap
-      selectable chips in a <code>role="listbox"</code> container so screen readers announce the
-      collection correctly.
+      Set <code>[selectable]="true"</code> to make the chip keyboard-focusable and toggleable. Bind
+      <code>[selected]</code> and <code>(selectedChange)</code> to track state. Wrap selectable
+      chips in a <code>role="listbox"</code> container so screen readers announce the collection
+      correctly.
     </p>
     <div
       class="demo-section__preview"
@@ -182,7 +181,11 @@
   </app-doc-section>
 
   <!-- ---- Playground --------------------------------------------------- -->
-  <app-doc-section id="playground" title="Playground" description="Adjust the controls to see the chip update live.">
+  <app-doc-section
+    id="playground"
+    title="Playground"
+    description="Adjust the controls to see the chip update live."
+  >
     <div class="demo-playground">
       <div class="demo-playground__preview">
         <ui-lib-chip
@@ -207,7 +210,8 @@
                 size="sm"
                 type="button"
                 (click)="setSize(size)"
-              >{{ size }}</ui-lib-button>
+                >{{ size }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -221,7 +225,8 @@
                 size="sm"
                 type="button"
                 (click)="setVariant(variant)"
-              >{{ variant }}</ui-lib-button>
+                >{{ variant }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -234,21 +239,24 @@
               size="sm"
               type="button"
               (click)="toggleRemovable()"
-            >removable</ui-lib-button>
+              >removable</ui-lib-button
+            >
             <ui-lib-button
               [appearance]="playgroundSelectable() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
               (click)="toggleSelectable()"
-            >selectable</ui-lib-button>
+              >selectable</ui-lib-button
+            >
             <ui-lib-button
               [appearance]="playgroundIcon() !== null ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
               (click)="toggleIcon()"
-            >icon</ui-lib-button>
+              >icon</ui-lib-button
+            >
           </div>
         </div>
       </div>
@@ -287,8 +295,8 @@
         <code>aria-label</code> so screen readers announce the collection correctly.
       </li>
       <li>
-        The <code>label</code> input provides the accessible name via <code>aria-label</code> on
-        the host element. When using the default content projection slot instead, set
+        The <code>label</code> input provides the accessible name via <code>aria-label</code> on the
+        host element. When using the default content projection slot instead, set
         <code>aria-label</code> manually on the chip or its parent container.
       </li>
       <li>
@@ -309,5 +317,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

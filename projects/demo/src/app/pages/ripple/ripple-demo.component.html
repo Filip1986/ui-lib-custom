@@ -1,7 +1,10 @@
 <app-doc-page-layout [sections]="sections">
-
-  <app-doc-page-header docHeader title="Ripple" [importCode]="importCode"
-    description="A directive that adds a Material-style circular wave effect to any element on click. Apply &lt;code&gt;[uiLibRipple]&lt;/code&gt; to any host — button, card, list item, or custom element. Purely decorative: it does not alter ARIA semantics or keyboard behaviour.">
+  <app-doc-page-header
+    docHeader
+    title="Ripple"
+    [importCode]="importCode"
+    description="A directive that adds a Material-style circular wave effect to any element on click. Apply &lt;code&gt;[uiLibRipple]&lt;/code&gt; to any host — button, card, list item, or custom element. Purely decorative: it does not alter ARIA semantics or keyboard behaviour."
+  >
   </app-doc-page-header>
 
   <!-- ---- Basic ---------------------------------------------------- -->
@@ -17,38 +20,32 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic"
+      filename="Basic"
+      [code]="snippets.basic"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Dark ripple ---------------------------------------------- -->
   <app-doc-section id="dark-ripple" title="Dark Ripple">
     <p class="demo-section__description">
-      Use <code>[rippleColor]="'rgba(0,0,0,0.12)'"</code> for light-coloured or white surfaces
-      where the default white ripple would be invisible.
+      Use <code>[rippleColor]="'rgba(0,0,0,0.12)'"</code> for light-coloured or white surfaces where
+      the default white ripple would be invisible.
     </p>
     <div class="demo-section__preview demo-ripple-light-surface">
-      <ui-lib-button
-        appearance="soft"
-        uiLibRipple
-        [rippleColor]="'rgba(0,0,0,0.12)'"
-      >
+      <ui-lib-button appearance="soft" uiLibRipple [rippleColor]="'rgba(0,0,0,0.12)'">
         Light Button
       </ui-lib-button>
-      <div
-        class="demo-ripple-surface"
-        uiLibRipple
-        [rippleColor]="'rgba(99,102,241,0.25)'"
-      >
+      <div class="demo-ripple-surface" uiLibRipple [rippleColor]="'rgba(99,102,241,0.25)'">
         Click me — card surface
       </div>
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Dark ripple" [code]="snippets.darkRipple"
+      filename="Dark ripple"
+      [code]="snippets.darkRipple"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Custom duration ------------------------------------------ -->
@@ -58,22 +55,27 @@
       such as <code>'200ms'</code> or <code>'1.2s'</code>.
     </p>
     <div class="demo-section__preview">
-      <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'200ms'">Fast (200ms)</ui-lib-button>
+      <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'200ms'"
+        >Fast (200ms)</ui-lib-button
+      >
       <ui-lib-button severity="primary" uiLibRipple>Default (600ms)</ui-lib-button>
-      <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'1200ms'">Slow (1200ms)</ui-lib-button>
+      <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'1200ms'"
+        >Slow (1200ms)</ui-lib-button
+      >
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Custom duration" [code]="snippets.customDuration"
+      filename="Custom duration"
+      [code]="snippets.customDuration"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
   <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
-      Set <code>[disabled]="true"</code> to suppress the wave while keeping the host element
-      fully interactive. Toggle the button below to compare the two states.
+      Set <code>[disabled]="true"</code> to suppress the wave while keeping the host element fully
+      interactive. Toggle the button below to compare the two states.
     </p>
     <div class="demo-section__preview">
       <ui-lib-button severity="primary" uiLibRipple [disabled]="isDisabled()">
@@ -89,17 +91,18 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Disabled" [code]="snippets.disabled"
+      filename="Disabled"
+      [code]="snippets.disabled"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Any element ---------------------------------------------- -->
   <app-doc-section id="any-element" title="Any Element">
     <p class="demo-section__description">
-      The directive works on any HTML element — <code>&lt;div&gt;</code>,
-      <code>&lt;li&gt;</code>, images, or custom components. The host automatically
-      receives <code>position: relative</code> and <code>overflow: hidden</code>.
+      The directive works on any HTML element — <code>&lt;div&gt;</code>, <code>&lt;li&gt;</code>,
+      images, or custom components. The host automatically receives
+      <code>position: relative</code> and <code>overflow: hidden</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <ul class="demo-ripple-list">
@@ -116,19 +119,17 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Any element" [code]="snippets.anyElement"
+      filename="Any element"
+      [code]="snippets.anyElement"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
   <app-doc-section id="api" title="API Reference">
-
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <p class="demo-section__description">
-        Selector: <code>[uiLibRipple]</code>
-      </p>
+      <p class="demo-section__description">Selector: <code>[uiLibRipple]</code></p>
       <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
@@ -136,12 +137,10 @@
       <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
       <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
-
   </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
   <app-doc-section id="accessibility" title="Accessibility">
-
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <app-doc-aria-table [rows]="ariaRows" />
@@ -155,25 +154,26 @@
     <h3 class="demo-section__subtitle">Notes</h3>
     <ul class="doc-list">
       <li>
-        The Ripple directive is a <strong>visual enhancement only</strong> — it carries no
-        semantic meaning and does not change the host's ARIA attributes or keyboard behaviour.
+        The Ripple directive is a <strong>visual enhancement only</strong> — it carries no semantic
+        meaning and does not change the host's ARIA attributes or keyboard behaviour.
       </li>
       <li>
         When the user has enabled <strong>Reduce Motion</strong>, the ripple is completely
-        suppressed in two layers: the JavaScript handler skips spawning the wave element, and
-        a CSS <code>@media (prefers-reduced-motion: reduce)</code> block sets
+        suppressed in two layers: the JavaScript handler skips spawning the wave element, and a CSS
+        <code>@media (prefers-reduced-motion: reduce)</code> block sets
         <code>animation: none; display: none</code> as a defence-in-depth measure.
       </li>
       <li>
-        The click listener is only registered in browser environments
-        (<code>isPlatformBrowser</code> check) — <strong>SSR-safe</strong>.
+        The click listener is only registered in browser environments (<code
+          >isPlatformBrowser</code
+        >
+        check) — <strong>SSR-safe</strong>.
       </li>
     </ul>
-
   </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -182,7 +182,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -192,5 +192,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

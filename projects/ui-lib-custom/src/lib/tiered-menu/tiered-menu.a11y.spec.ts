@@ -28,14 +28,14 @@ const TIERED_MENU_AXE_RULES: Record<string, { enabled: boolean }> = {
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -87,7 +87,7 @@ const NESTED_ITEMS: TieredMenuItem[] = [
 class InlineHostComponent {
   public readonly items: WritableSignal<TieredMenuItem[]> = signal<TieredMenuItem[]>(SIMPLE_ITEMS);
   public readonly ariaLabel: WritableSignal<string> = signal<string>(
-    TIERED_MENU_DEFAULT_ARIA_LABEL
+    TIERED_MENU_DEFAULT_ARIA_LABEL,
   );
   public readonly menu: Signal<TieredMenu | undefined> = viewChild<TieredMenu>('menu');
 }
@@ -255,7 +255,7 @@ describe('TieredMenu a11y', (): void => {
     it('parent item with submenu has aria-haspopup="menu"', (): void => {
       const parentLink: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link',
       );
       expect(parentLink?.getAttribute('aria-haspopup')).toBe('menu');
     });
@@ -263,7 +263,7 @@ describe('TieredMenu a11y', (): void => {
     it('parent item has aria-expanded="false" when closed', (): void => {
       const parentLink: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link',
       );
       expect(parentLink?.getAttribute('aria-expanded')).toBe('false');
     });
@@ -271,13 +271,13 @@ describe('TieredMenu a11y', (): void => {
     it('parent item has aria-expanded="true" when open', (): void => {
       const parentItem: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu'
+        '.ui-lib-tiered-menu__item--has-submenu',
       );
       parentItem?.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
       fixture.detectChanges();
       const parentLink: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link',
       );
       expect(parentLink?.getAttribute('aria-expanded')).toBe('true');
     });
@@ -285,13 +285,13 @@ describe('TieredMenu a11y', (): void => {
     it('nested <ul> has role="menu"', (): void => {
       const parentItem: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu'
+        '.ui-lib-tiered-menu__item--has-submenu',
       );
       parentItem?.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
       fixture.detectChanges();
       const submenuLists: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-tiered-menu__list[role="menu"]'
+        '.ui-lib-tiered-menu__list[role="menu"]',
       );
       // Root list + at least one nested list
       expect(submenuLists.length).toBeGreaterThanOrEqual(2);
@@ -300,7 +300,7 @@ describe('TieredMenu a11y', (): void => {
     it('nested <ul> has aria-label matching parent item label', (): void => {
       const parentItem: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu'
+        '.ui-lib-tiered-menu__item--has-submenu',
       );
       parentItem?.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
       fixture.detectChanges();
@@ -338,7 +338,7 @@ describe('TieredMenu a11y', (): void => {
     it('disabled item link has aria-disabled="true"', (): void => {
       const disabledLink: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--disabled .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--disabled .ui-lib-tiered-menu__link',
       );
       expect(disabledLink?.getAttribute('aria-disabled')).toBe('true');
     });
@@ -346,7 +346,7 @@ describe('TieredMenu a11y', (): void => {
     it('disabled item link has tabindex="-1"', (): void => {
       const disabledLink: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--disabled .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--disabled .ui-lib-tiered-menu__link',
       );
       expect(disabledLink?.getAttribute('tabindex')).toBe('-1');
     });
@@ -354,7 +354,7 @@ describe('TieredMenu a11y', (): void => {
     it('enabled items have tabindex="0"', (): void => {
       const enabledLinks: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       expect(enabledLinks.length).toBeGreaterThan(0);
       for (const link of enabledLinks) {
@@ -392,7 +392,7 @@ describe('TieredMenu a11y', (): void => {
     it('ArrowDown moves focus to next item', (): void => {
       const links: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       links[0]?.focus();
       dispatchKey(links[0] as HTMLElement, 'ArrowDown');
@@ -402,7 +402,7 @@ describe('TieredMenu a11y', (): void => {
     it('ArrowUp moves focus to previous item', (): void => {
       const links: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       links[1]?.focus();
       dispatchKey(links[1] as HTMLElement, 'ArrowUp');
@@ -412,7 +412,7 @@ describe('TieredMenu a11y', (): void => {
     it('ArrowDown wraps from last item to first', (): void => {
       const links: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       const last: HTMLElement = links[links.length - 1] as HTMLElement;
       last.focus();
@@ -423,7 +423,7 @@ describe('TieredMenu a11y', (): void => {
     it('ArrowUp wraps from first item to last', (): void => {
       const links: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       links[0]?.focus();
       dispatchKey(links[0] as HTMLElement, 'ArrowUp');
@@ -433,7 +433,7 @@ describe('TieredMenu a11y', (): void => {
     it('Home moves focus to first item', (): void => {
       const links: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       links[1]?.focus();
       dispatchKey(links[1] as HTMLElement, 'Home');
@@ -443,7 +443,7 @@ describe('TieredMenu a11y', (): void => {
     it('End moves focus to last item', (): void => {
       const links: HTMLElement[] = queryAllEl(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       links[0]?.focus();
       dispatchKey(links[0] as HTMLElement, 'End');
@@ -483,7 +483,7 @@ describe('TieredMenu a11y', (): void => {
     it('Enter activates a leaf item', (): void => {
       const link: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__link',
       ) as HTMLElement;
       link.focus();
       dispatchKey(link, 'Enter');
@@ -493,7 +493,7 @@ describe('TieredMenu a11y', (): void => {
     it('Space activates a leaf item', (): void => {
       const link: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__link',
       ) as HTMLElement;
       link.focus();
       dispatchKey(link, ' ');
@@ -524,7 +524,7 @@ describe('TieredMenu a11y', (): void => {
     it('ArrowRight on a parent item opens the flyout (aria-expanded becomes true)', (): void => {
       const parentLink: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link',
       ) as HTMLElement;
       parentLink.focus();
       dispatchKey(parentLink, 'ArrowRight');
@@ -536,13 +536,13 @@ describe('TieredMenu a11y', (): void => {
       // 'Edit' and 'View' are leaf items in NESTED_ITEMS
       const links: HTMLElement[] = queryAllEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       // Find a known leaf: 'Edit'
       const editLink: HTMLElement | undefined = links.find(
         (link: HTMLElement): boolean =>
           (link.querySelector('.ui-lib-tiered-menu__item-label')?.textContent ?? '').trim() ===
-          'Edit'
+          'Edit',
       );
       if (editLink) {
         editLink.focus();
@@ -558,7 +558,7 @@ describe('TieredMenu a11y', (): void => {
     it('submenu wrapper is rendered after ArrowRight on parent', (): void => {
       const parentLink: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link',
       ) as HTMLElement;
       parentLink.focus();
       dispatchKey(parentLink, 'ArrowRight');
@@ -592,7 +592,7 @@ describe('TieredMenu a11y', (): void => {
       // Open flyout via mouseenter
       const parentItem: HTMLElement | null = queryEl(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu'
+        '.ui-lib-tiered-menu__item--has-submenu',
       );
       parentItem?.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
       fixture.detectChanges();
@@ -601,7 +601,7 @@ describe('TieredMenu a11y', (): void => {
       // Press Escape on the parent link
       const parentLink: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__item--has-submenu .ui-lib-tiered-menu__link',
       ) as HTMLElement;
       dispatchKey(parentLink, 'Escape');
       fixture.detectChanges();
@@ -612,7 +612,7 @@ describe('TieredMenu a11y', (): void => {
       // In inline mode, ArrowLeft at root does nothing visible — panel stays rendered
       const link: HTMLElement = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__link'
+        '.ui-lib-tiered-menu__link',
       ) as HTMLElement;
       dispatchKey(link, 'ArrowLeft');
       fixture.detectChanges();
@@ -658,7 +658,7 @@ describe('TieredMenu a11y', (): void => {
 
       const firstLink: HTMLElement | null = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       if (firstLink) {
         firstLink.focus();
@@ -672,7 +672,7 @@ describe('TieredMenu a11y', (): void => {
       openPopup(fixture);
       const firstLink: HTMLElement | null = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       if (firstLink) {
         firstLink.focus();
@@ -761,7 +761,7 @@ describe('TieredMenu a11y', (): void => {
       openPopup(fixture);
       const firstLink: HTMLElement | null = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       if (firstLink) {
         firstLink.focus();
@@ -775,7 +775,7 @@ describe('TieredMenu a11y', (): void => {
       openPopup(fixture);
       const firstLink: HTMLElement | null = queryEl<HTMLElement>(
         fixture,
-        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
       );
       if (firstLink) {
         firstLink.focus();

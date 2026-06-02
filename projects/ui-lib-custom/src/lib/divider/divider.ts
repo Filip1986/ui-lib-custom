@@ -108,12 +108,12 @@ export class Divider {
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<DividerVariant> = computed<DividerVariant>(
-    (): DividerVariant => this.variant() ?? this.themeConfig.variant()
+    (): DividerVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Resolved alignment — direct input wins, then defaults to `'center'`. */
   private readonly effectiveAlign: Signal<DividerAlign> = computed<DividerAlign>(
-    (): DividerAlign => this.align() ?? 'center'
+    (): DividerAlign => this.align() ?? 'center',
   );
 
   /** Trimmed aria label value, or null when empty. */
@@ -125,17 +125,17 @@ export class Divider {
       }
       const trimmedAriaLabel: string = ariaLabel.trim();
       return trimmedAriaLabel.length > 0 ? trimmedAriaLabel : null;
-    }
+    },
   );
 
   /** ARIA orientation mirrors the current divider orientation. */
   public readonly ariaOrientation: Signal<DividerOrientation> = computed<DividerOrientation>(
-    (): DividerOrientation => this.orientation()
+    (): DividerOrientation => this.orientation(),
   );
 
   /** Hide decorative-only dividers from the accessibility tree. */
   public readonly ariaHidden: Signal<'true' | null> = computed<'true' | null>((): 'true' | null =>
-    this.decorative() && this.resolvedAriaLabel() === null ? 'true' : null
+    this.decorative() && this.resolvedAriaLabel() === null ? 'true' : null,
   );
 
   /** Computed CSS classes applied to the host element. */

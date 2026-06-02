@@ -1,2 +1,4 @@
-{ "name": "ui-lib-custom/speed-dial", "sideEffects": false }
-
+{
+  "name": "ui-lib-custom/speed-dial",
+  "sideEffects": false
+}

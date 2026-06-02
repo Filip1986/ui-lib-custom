@@ -13,7 +13,7 @@
 ## Libraries Audited
 
 | Library              | Components | Why included                                                   |
-|----------------------|------------|----------------------------------------------------------------|
+| -------------------- | ---------- | -------------------------------------------------------------- |
 | **Angular Material** | ~35        | Google's official Angular library — canonical baseline         |
 | **PrimeNG**          | ~90        | Most feature-complete Angular library in active use            |
 | **Ng-Zorro**         | ~75        | Ant Design for Angular — strong enterprise component set       |
@@ -57,60 +57,61 @@ SplitButton, Terminal, SpeedDial
 ## Gap Analysis Table
 
 **Legend:**
+
 - ✅ Library has it
 - ⚠️ Library has a partial or limited version
 - ❌ Library does not have it
 - — Not applicable (e.g. React-only concept)
 
 | Component                                    | Angular Material | PrimeNG | Ng-Zorro | Ng-Bootstrap | shadcn | Radix | **This Library** | **Decision**                                                                                             |
-|----------------------------------------------|------------------|---------|----------|--------------|--------|-------|------------------|----------------------------------------------------------------------------------------------------------|
+| -------------------------------------------- | ---------------- | ------- | -------- | ------------ | ------ | ----- | ---------------- | -------------------------------------------------------------------------------------------------------- |
 | **CONFIRMED GAPS — not yet in this library** |                  |         |          |              |        |       |                  |                                                                                                          |
-| Empty State                                  | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | ❌                | ✅ **Add**                                                                                                |
-| TimePicker                                   | ❌                | ✅       | ✅        | ✅            | ❌      | ❌     | ❌                | ✅ **Add**                                                                                                |
-| DateRangePicker                              | ✅                | ✅       | ✅        | ✅            | ✅      | ❌     | ❌                | ✅ **Add**                                                                                                |
-| Splitter / Resizable Panels                  | ❌                | ✅       | ✅        | ❌            | ✅      | ❌     | ❌                | ✅ **Add**                                                                                                |
-| Statistic / Number Display                   | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | ❌                | ✅ **Add**                                                                                                |
-| Typography (Heading / Text / Code / Link)    | ❌                | ❌       | ✅        | ❌            | ✅      | ❌     | ❌                | ✅ **Add**                                                                                                |
-| Descriptions / Definition List               | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | ❌                | ✅ **Add**                                                                                                |
-| Scroll Area (custom scrollbar)               | ❌                | ❌       | ❌        | ❌            | ✅      | ✅     | ❌                | ✅ **Add**                                                                                                |
-| Kbd / Keyboard Shortcut Badge                | ❌                | ❌       | ❌        | ❌            | ✅      | ❌     | ❌                | ✅ **Add**                                                                                                |
-| Segmented Control                            | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | ❌                | ✅ **Add**                                                                                                |
-| Navigation Menu (top-level with panels)      | ❌                | ❌       | ❌        | ❌            | ✅      | ✅     | ❌                | ✅ **Add**                                                                                                |
-| Calendar (full month/year view)              | ❌                | ✅       | ✅        | ✅            | ✅      | ❌     | ❌                | ✅ **Add**                                                                                                |
-| Result / Status Page                         | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | ❌                | ⏳ **Horizon**                                                                                            |
-| Hover Card                                   | ❌                | ❌       | ❌        | ❌            | ✅      | ✅     | ❌                | ⏳ **Horizon**                                                                                            |
-| Collapsible (simple show/hide)               | ❌                | ❌       | ❌        | ✅            | ✅      | ✅     | ❌                | ⏳ **Horizon**                                                                                            |
-| Anchor / TOC Navigation                      | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | ❌                | ⏳ **Horizon**                                                                                            |
-| Command Palette                              | ❌                | ❌       | ❌        | ❌            | ✅      | ❌     | ❌                | ⏳ **Horizon** (already in VISION.md)                                                                     |
+| Empty State                                  | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | ❌               | ✅ **Add**                                                                                               |
+| TimePicker                                   | ❌               | ✅      | ✅       | ✅           | ❌     | ❌    | ❌               | ✅ **Add**                                                                                               |
+| DateRangePicker                              | ✅               | ✅      | ✅       | ✅           | ✅     | ❌    | ❌               | ✅ **Add**                                                                                               |
+| Splitter / Resizable Panels                  | ❌               | ✅      | ✅       | ❌           | ✅     | ❌    | ❌               | ✅ **Add**                                                                                               |
+| Statistic / Number Display                   | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | ❌               | ✅ **Add**                                                                                               |
+| Typography (Heading / Text / Code / Link)    | ❌               | ❌      | ✅       | ❌           | ✅     | ❌    | ❌               | ✅ **Add**                                                                                               |
+| Descriptions / Definition List               | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | ❌               | ✅ **Add**                                                                                               |
+| Scroll Area (custom scrollbar)               | ❌               | ❌      | ❌       | ❌           | ✅     | ✅    | ❌               | ✅ **Add**                                                                                               |
+| Kbd / Keyboard Shortcut Badge                | ❌               | ❌      | ❌       | ❌           | ✅     | ❌    | ❌               | ✅ **Add**                                                                                               |
+| Segmented Control                            | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | ❌               | ✅ **Add**                                                                                               |
+| Navigation Menu (top-level with panels)      | ❌               | ❌      | ❌       | ❌           | ✅     | ✅    | ❌               | ✅ **Add**                                                                                               |
+| Calendar (full month/year view)              | ❌               | ✅      | ✅       | ✅           | ✅     | ❌    | ❌               | ✅ **Add**                                                                                               |
+| Result / Status Page                         | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | ❌               | ⏳ **Horizon**                                                                                           |
+| Hover Card                                   | ❌               | ❌      | ❌       | ❌           | ✅     | ✅    | ❌               | ⏳ **Horizon**                                                                                           |
+| Collapsible (simple show/hide)               | ❌               | ❌      | ❌       | ✅           | ✅     | ✅    | ❌               | ⏳ **Horizon**                                                                                           |
+| Anchor / TOC Navigation                      | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | ❌               | ⏳ **Horizon**                                                                                           |
+| Command Palette                              | ❌               | ❌      | ❌       | ❌           | ✅     | ❌    | ❌               | ⏳ **Horizon** (already in VISION.md)                                                                    |
 | **THIS LIBRARY GOES BEYOND**                 |                  |         |          |              |        |       |                  |                                                                                                          |
-| BottomSheet                                  | ❌                | ❌       | ❌        | ❌            | ✅      | ❌     | ✅                | 🚀 Differentiator                                                                                        |
-| ImageCompare                                 | ❌                | ❌       | ❌        | ❌            | ❌      | ❌     | ✅                | 🚀 Differentiator                                                                                        |
-| Terminal                                     | ❌                | ✅       | ❌        | ❌            | ❌      | ❌     | ✅                | 🚀 Differentiator                                                                                        |
-| MeterGroup                                   | ❌                | ✅       | ❌        | ❌            | ❌      | ❌     | ✅                | 🚀 Differentiator                                                                                        |
-| OrganizationChart                            | ❌                | ✅       | ❌        | ❌            | ❌      | ❌     | ✅                | 🚀 Differentiator                                                                                        |
-| Dock                                         | ❌                | ✅       | ❌        | ❌            | ❌      | ❌     | ✅                | 🚀 Differentiator                                                                                        |
-| KeyFilter                                    | ❌                | ✅       | ❌        | ❌            | ❌      | ❌     | ✅                | 🚀 Differentiator                                                                                        |
-| InputMask                                    | ❌                | ✅       | ❌        | ❌            | ❌      | ❌     | ✅                | 🚀 Differentiator                                                                                        |
-| Knob                                         | ❌                | ✅       | ❌        | ❌            | ❌      | ❌     | ✅                | 🚀 Differentiator                                                                                        |
+| BottomSheet                                  | ❌               | ❌      | ❌       | ❌           | ✅     | ❌    | ✅               | 🚀 Differentiator                                                                                        |
+| ImageCompare                                 | ❌               | ❌      | ❌       | ❌           | ❌     | ❌    | ✅               | 🚀 Differentiator                                                                                        |
+| Terminal                                     | ❌               | ✅      | ❌       | ❌           | ❌     | ❌    | ✅               | 🚀 Differentiator                                                                                        |
+| MeterGroup                                   | ❌               | ✅      | ❌       | ❌           | ❌     | ❌    | ✅               | 🚀 Differentiator                                                                                        |
+| OrganizationChart                            | ❌               | ✅      | ❌       | ❌           | ❌     | ❌    | ✅               | 🚀 Differentiator                                                                                        |
+| Dock                                         | ❌               | ✅      | ❌       | ❌           | ❌     | ❌    | ✅               | 🚀 Differentiator                                                                                        |
+| KeyFilter                                    | ❌               | ✅      | ❌       | ❌           | ❌     | ❌    | ✅               | 🚀 Differentiator                                                                                        |
+| InputMask                                    | ❌               | ✅      | ❌       | ❌           | ❌     | ❌    | ✅               | 🚀 Differentiator                                                                                        |
+| Knob                                         | ❌               | ✅      | ❌       | ❌           | ❌     | ❌    | ✅               | 🚀 Differentiator                                                                                        |
 | **CONSCIOUSLY EXCLUDED**                     |                  |         |          |              |        |       |                  |                                                                                                          |
-| QR Code                                      | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | —                | — Excluded: single-purpose utility; a dedicated `qrcode` npm package is the right tool                   |
-| Watermark                                    | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | —                | — Excluded: canvas overlay concern; out of scope for a UI component library                              |
-| Float Button / FAB                           | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | —                | — Excluded: fading UI pattern; SpeedDial covers the use case                                             |
-| Bottom Navigation Bar                        | ✅                | ❌       | ❌        | ❌            | ❌      | ❌     | —                | — Excluded: app shell / layout concern, not a component; developers build this with layout primitives    |
-| Affix / Sticky Directive                     | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | —                | — Excluded: `position: sticky` handles this natively; a directive wrapper adds no value                  |
-| Scrollspy                                    | ❌                | ❌       | ❌        | ✅            | ❌      | ❌     | —                | — Excluded: IntersectionObserver in a directive; trivial to implement per-app; too opinionated           |
-| Direction (RTL)                              | ❌                | ❌       | ❌        | ❌            | ✅      | ❌     | —                | — Excluded: Angular handles directionality natively via `dir` attribute and `Directionality` CDK service |
-| Offcanvas                                    | ❌                | ❌       | ❌        | ✅            | ❌      | ❌     | —                | — Excluded: same as Drawer; duplicate concept                                                            |
-| Sheet                                        | ❌                | ❌       | ❌        | ❌            | ✅      | ❌     | —                | — Excluded: same as Drawer                                                                               |
-| Typeahead                                    | ❌                | ❌       | ❌        | ✅            | ❌      | ❌     | —                | — Excluded: same as AutoComplete                                                                         |
-| Mention / @-mention Input                    | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | —                | — Excluded: social/messaging app-specific; too opinionated for a general component library               |
-| Comment / Thread Display                     | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | —                | — Excluded: too app-domain-specific                                                                      |
-| Page Header                                  | ❌                | ❌       | ✅        | ❌            | ❌      | ❌     | —                | — Excluded: app layout concern; developers compose this from Breadcrumb + Toolbar + Typography           |
-| Native Select wrapper                        | ❌                | ❌       | ❌        | ❌            | ✅      | ❌     | —                | — Excluded: use the native `<select>` element                                                            |
-| Spinner (standalone)                         | ❌                | ❌       | ✅        | ❌            | ✅      | ❌     | —                | — Excluded: ProgressSpinner covers this                                                                  |
-| Sonner / Toast variant                       | ❌                | ❌       | ❌        | ❌            | ✅      | ❌     | —                | — Excluded: animation style preference, not a separate component                                         |
-| Aspect Ratio                                 | ❌                | ❌       | ❌        | ❌            | ✅      | ✅     | —                | — Excluded: `aspect-ratio` CSS property handles this natively                                            |
-| Grid List (tile grid)                        | ✅                | ❌       | ❌        | ❌            | ❌      | ❌     | —                | — Excluded: Grid layout primitive + CSS handles this                                                     |
+| QR Code                                      | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | —                | — Excluded: single-purpose utility; a dedicated `qrcode` npm package is the right tool                   |
+| Watermark                                    | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | —                | — Excluded: canvas overlay concern; out of scope for a UI component library                              |
+| Float Button / FAB                           | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | —                | — Excluded: fading UI pattern; SpeedDial covers the use case                                             |
+| Bottom Navigation Bar                        | ✅               | ❌      | ❌       | ❌           | ❌     | ❌    | —                | — Excluded: app shell / layout concern, not a component; developers build this with layout primitives    |
+| Affix / Sticky Directive                     | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | —                | — Excluded: `position: sticky` handles this natively; a directive wrapper adds no value                  |
+| Scrollspy                                    | ❌               | ❌      | ❌       | ✅           | ❌     | ❌    | —                | — Excluded: IntersectionObserver in a directive; trivial to implement per-app; too opinionated           |
+| Direction (RTL)                              | ❌               | ❌      | ❌       | ❌           | ✅     | ❌    | —                | — Excluded: Angular handles directionality natively via `dir` attribute and `Directionality` CDK service |
+| Offcanvas                                    | ❌               | ❌      | ❌       | ✅           | ❌     | ❌    | —                | — Excluded: same as Drawer; duplicate concept                                                            |
+| Sheet                                        | ❌               | ❌      | ❌       | ❌           | ✅     | ❌    | —                | — Excluded: same as Drawer                                                                               |
+| Typeahead                                    | ❌               | ❌      | ❌       | ✅           | ❌     | ❌    | —                | — Excluded: same as AutoComplete                                                                         |
+| Mention / @-mention Input                    | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | —                | — Excluded: social/messaging app-specific; too opinionated for a general component library               |
+| Comment / Thread Display                     | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | —                | — Excluded: too app-domain-specific                                                                      |
+| Page Header                                  | ❌               | ❌      | ✅       | ❌           | ❌     | ❌    | —                | — Excluded: app layout concern; developers compose this from Breadcrumb + Toolbar + Typography           |
+| Native Select wrapper                        | ❌               | ❌      | ❌       | ❌           | ✅     | ❌    | —                | — Excluded: use the native `<select>` element                                                            |
+| Spinner (standalone)                         | ❌               | ❌      | ✅       | ❌           | ✅     | ❌    | —                | — Excluded: ProgressSpinner covers this                                                                  |
+| Sonner / Toast variant                       | ❌               | ❌      | ❌       | ❌           | ✅     | ❌    | —                | — Excluded: animation style preference, not a separate component                                         |
+| Aspect Ratio                                 | ❌               | ❌      | ❌       | ❌           | ✅     | ✅    | —                | — Excluded: `aspect-ratio` CSS property handles this natively                                            |
+| Grid List (tile grid)                        | ✅               | ❌      | ❌       | ❌           | ❌     | ❌    | —                | — Excluded: Grid layout primitive + CSS handles this                                                     |
 
 ---
 
@@ -120,7 +121,7 @@ Work this list after the current hardening milestone is complete. Priority is ba
 developer demand, how many reference libraries include it, and complexity.
 
 | Priority | Component                          | Rationale                                                                                             | Complexity  | Reference                                             |
-|----------|------------------------------------|-------------------------------------------------------------------------------------------------------|-------------|-------------------------------------------------------|
+| -------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------------------- |
 | 1        | **DateRangePicker**                | Every library has it; date range selection is a daily developer need                                  | Medium      | PrimeNG, Ng-Zorro, Material DateRangePicker           |
 | 2        | **TimePicker**                     | Standalone time input; extremely common in scheduling/booking UIs                                     | Low-Medium  | PrimeNG TimePicker, Ng-Zorro TimePicker               |
 | 3        | **Empty State**                    | "No data" placeholder; every app needs this; almost no library ships it as a proper component         | Low         | Ng-Zorro Empty                                        |
@@ -142,7 +143,7 @@ These are interesting, multiple libraries have them, but they are lower priority
 complexity. Revisit after v1.0 ships.
 
 | Component                   | Why Horizon                                                                                | Reference                             |
-|-----------------------------|--------------------------------------------------------------------------------------------|---------------------------------------|
+| --------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------- |
 | **Command Palette**         | Already in VISION.md; high complexity; requires global keyboard shortcut management        | shadcn/ui Command                     |
 | **Hover Card**              | Rich tooltip-like card on hover; distinct from Tooltip; needs deliberate API design        | Radix HoverCard, shadcn/ui Hover Card |
 | **Collapsible**             | Simple show/hide container; simpler than Accordion; useful but Accordion covers most cases | Radix Collapsible, shadcn Collapsible |
@@ -156,7 +157,7 @@ complexity. Revisit after v1.0 ships.
 Components or capabilities that this library ships and that no major reference library offers:
 
 | Differentiator                                                 | Notes                                                                                        |
-|----------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | Signal-native API throughout                                   | No Angular library (Material, PrimeNG, Ng-Zorro) has fully migrated to `input()` / `model()` |
 | Zoneless-compatible every component                            | None of the Angular libraries guarantee this                                                 |
 | Three runtime visual variants (material / bootstrap / minimal) | No other Angular library supports runtime variant switching                                  |
@@ -181,7 +182,7 @@ Components or capabilities that this library ships and that no major reference l
 > Philosophy: Opinionated Material Design 3, high quality, limited breadth.
 
 | Category                       | Components                                                                                                                                    |
-|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Form Controls**              | Autocomplete, Checkbox, Chips (input), Datepicker, Date Range Picker, Form Field, Input, Radio Button, Select, Slide Toggle, Slider, Textarea |
 | **Navigation**                 | Bottom Nav Bar, Menu, Sidenav / Drawer, Tabs, Toolbar                                                                                         |
 | **Layout**                     | Card, Divider, Expansion Panel, Grid List, List, Stepper, Tree                                                                                |
@@ -198,7 +199,7 @@ Components or capabilities that this library ships and that no major reference l
 > Philosophy: Maximum breadth — if you can think of it, PrimeNG has it.
 
 | Category                    | Components                                                                                                                               |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | **Form — Basic Inputs**     | InputText, Textarea, InputNumber, InputMask, InputGroup, Password, InputOtp, AutoComplete, CascadeSelect, ColorPicker, KeyFilter         |
 | **Form — Selection**        | Checkbox, Tri-State Checkbox, RadioButton, ToggleSwitch, ToggleButton, SelectButton, MultiSelect, Listbox, Select (Dropdown), TreeSelect |
 | **Form — Date & Time**      | DatePicker (Calendar), TimePicker                                                                                                        |
@@ -225,7 +226,7 @@ Components or capabilities that this library ships and that no major reference l
 > Philosophy: Enterprise-grade, rich functionality, strong i18n, Ant Design system.
 
 | Category         | Components                                                                                                                                                                                                                                                 |
-|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **General**      | Button, Icon, Typography (Title / Text / Paragraph / Link / Code)                                                                                                                                                                                          |
 | **Layout**       | Divider, Flex, Grid (Row / Col), Layout (Header / Sider / Content / Footer), Space, Splitter                                                                                                                                                               |
 | **Navigation**   | Anchor, Breadcrumb, Dropdown, Menu, Page Header, Pagination, Steps, Tabs                                                                                                                                                                                   |
@@ -242,7 +243,7 @@ Components or capabilities that this library ships and that no major reference l
 > Philosophy: Thin Bootstrap 5 wrappers — familiar to Bootstrap users, limited beyond Bootstrap.
 
 | Category             | Components                                                  |
-|----------------------|-------------------------------------------------------------|
+| -------------------- | ----------------------------------------------------------- |
 | **Layout & Display** | Accordion, Alert, Badge, Card (via Bootstrap CSS), Collapse |
 | **Navigation**       | Breadcrumb, Nav (Tabs / Pills), Pagination                  |
 | **Forms**            | Datepicker, Rating, Timepicker, Typeahead (AutoComplete)    |
@@ -260,7 +261,7 @@ Components or capabilities that this library ships and that no major reference l
 > Note: React library. Included as the DX and API design reference.
 
 | Category                     | Components                                                                                |
-|------------------------------|-------------------------------------------------------------------------------------------|
+| ---------------------------- | ----------------------------------------------------------------------------------------- |
 | **Layout & Structure**       | Aspect Ratio, Card, Resizable (Splitter), Scroll Area, Separator (Divider), Sidebar       |
 | **Typography & Display**     | Typography (H1–H4 / P / Lead / Muted / Code), Kbd, Badge, Avatar                          |
 | **Form — Inputs**            | Input, Textarea, Checkbox, Radio Group, Select, Switch, Slider, Label, Input OTP          |
@@ -284,7 +285,7 @@ Components or capabilities that this library ships and that no major reference l
 > Note: React library. Included as the a11y correctness reference.
 
 | Category              | Primitives                                                                                                      |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------|
+| --------------------- | --------------------------------------------------------------------------------------------------------------- |
 | **Disclosure**        | Accordion, Collapsible                                                                                          |
 | **Overlay**           | Alert Dialog, Dialog, Hover Card, Popover, Tooltip                                                              |
 | **Menu & Navigation** | Context Menu, Dropdown Menu, Menubar, Navigation Menu, Toolbar                                                  |
@@ -297,17 +298,20 @@ Components or capabilities that this library ships and that no major reference l
 ## How to Use This Document
 
 **When adding a component from the Build Queue:**
+
 1. Check its entry in this table — the reference library URLs are your starting point
 2. Research its APG pattern (if interactive) and add it to `COMPETITIVE_BENCHMARKS.md`
 3. Follow `COMPONENT_CREATION_GUIDE.md` end-to-end
 4. Mark the row in this table: ❌ → ✅ and record the date
 
 **When a new component is proposed (not in this table):**
+
 1. Add a row with the current ecosystem coverage
 2. Apply the decision framework: Add / Horizon / Exclude with reason
 3. If Add: insert it into the Build Queue at the appropriate priority
 
 **When re-auditing:**
+
 1. Check each reference library for components added since last audit date
 2. Add any new rows with the same decision process
 3. Update the "Last researched" date at the top of this file

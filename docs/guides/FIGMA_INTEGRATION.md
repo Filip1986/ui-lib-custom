@@ -11,15 +11,16 @@
 ## Token Structure
 
 The export creates tokens compatible with Figma Tokens plugin:
-- color/* - Color tokens
-- borderRadius/* - Border radius tokens
-- fontFamily/* - Typography tokens
-- spacing/* - Spacing scale
-- shadow/* - Shadow tokens
+
+- color/\* - Color tokens
+- borderRadius/\* - Border radius tokens
+- fontFamily/\* - Typography tokens
+- spacing/\* - Spacing scale
+- shadow/\* - Shadow tokens
 
 ## Syncing Changes
 
 For bi-directional sync, consider:
+
 - Style Dictionary for build-time token generation
 - Figma API for automated sync
-

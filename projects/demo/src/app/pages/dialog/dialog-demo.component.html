@@ -19,7 +19,12 @@
           Open Basic Dialog
         </ui-lib-button>
 
-        <ui-lib-dialog [visible]="basicVisible()" (visibleChange)="basicVisible.set($event)" header="Edit Profile" [modal]="true">
+        <ui-lib-dialog
+          [visible]="basicVisible()"
+          (visibleChange)="basicVisible.set($event)"
+          header="Edit Profile"
+          [modal]="true"
+        >
           <div id="dialog-basic-content">
             <p>Update profile details and save changes when finished.</p>
           </div>
@@ -39,7 +44,12 @@
           Open Custom Dialog
         </ui-lib-button>
 
-        <ui-lib-dialog [visible]="customVisible()" (visibleChange)="customVisible.set($event)" [modal]="true" [closable]="true">
+        <ui-lib-dialog
+          [visible]="customVisible()"
+          (visibleChange)="customVisible.set($event)"
+          [modal]="true"
+          [closable]="true"
+        >
           <div uiLibDialogHeader class="custom-header">
             <ui-lib-icon name="settings" />
             <span>Project Settings</span>
@@ -107,7 +117,8 @@
         </ui-lib-button>
 
         <ui-lib-dialog
-          [visible]="maximizableVisible()" (visibleChange)="maximizableVisible.set($event)"
+          [visible]="maximizableVisible()"
+          (visibleChange)="maximizableVisible.set($event)"
           [modal]="true"
           [maximizable]="true"
           header="Review Dashboard"
@@ -131,7 +142,12 @@
           Open Long Content Dialog
         </ui-lib-button>
 
-        <ui-lib-dialog [visible]="longContentVisible()" (visibleChange)="longContentVisible.set($event)" [modal]="true" header="Release Notes">
+        <ui-lib-dialog
+          [visible]="longContentVisible()"
+          (visibleChange)="longContentVisible.set($event)"
+          [modal]="true"
+          header="Release Notes"
+        >
           <div id="dialog-long-content" class="long-content">
             @for (paragraph of longParagraphs; track paragraph) {
               <p>{{ paragraph }}</p>
@@ -153,7 +169,12 @@
           Open Non-Modal Dialog
         </ui-lib-button>
 
-        <ui-lib-dialog [visible]="nonModalVisible()" (visibleChange)="nonModalVisible.set($event)" [modal]="false" header="Quick Notes">
+        <ui-lib-dialog
+          [visible]="nonModalVisible()"
+          (visibleChange)="nonModalVisible.set($event)"
+          [modal]="false"
+          header="Quick Notes"
+        >
           <div id="dialog-non-modal-content">
             <p>This dialog keeps background context visible and interactive.</p>
           </div>
@@ -174,7 +195,8 @@
         </ui-lib-button>
 
         <ui-lib-dialog
-          [visible]="responsiveVisible()" (visibleChange)="responsiveVisible.set($event)"
+          [visible]="responsiveVisible()"
+          (visibleChange)="responsiveVisible.set($event)"
           [modal]="true"
           [breakpoints]="responsiveBreakpoints"
           header="Responsive Layout"
@@ -199,7 +221,8 @@
         </ui-lib-button>
 
         <ui-lib-dialog
-          [visible]="draggableVisible()" (visibleChange)="draggableVisible.set($event)"
+          [visible]="draggableVisible()"
+          (visibleChange)="draggableVisible.set($event)"
           [modal]="false"
           [draggable]="true"
           header="Move Me"
@@ -223,7 +246,12 @@
           Open Headless Dialog
         </ui-lib-button>
 
-        <ui-lib-dialog [visible]="headlessVisible()" (visibleChange)="headlessVisible.set($event)" [headless]="true" [modal]="true">
+        <ui-lib-dialog
+          [visible]="headlessVisible()"
+          (visibleChange)="headlessVisible.set($event)"
+          [headless]="true"
+          [modal]="true"
+        >
           <app-doc-section id="dialog-headless-content" title="Dialog Headless Content">
             <header class="headless-shell__header">
               <h4 id="dialog-headless-title">Custom Design Review</h4>
@@ -308,7 +336,8 @@
         </ui-lib-button>
 
         <ui-lib-dialog
-          [visible]="variantVisible()" (visibleChange)="variantVisible.set($event)"
+          [visible]="variantVisible()"
+          (visibleChange)="variantVisible.set($event)"
           [modal]="true"
           [variant]="selectedVariant"
           header="Variant Preview"
@@ -392,7 +421,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
@@ -401,7 +429,7 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
-  
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -410,7 +438,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -420,5 +448,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

@@ -74,7 +74,7 @@ class NoLabelHostComponent {}
 class ReactiveFormHostComponent {
   public readonly control: FormControl<boolean> = new FormControl<boolean>(
     { value: false, disabled: true },
-    { nonNullable: true }
+    { nonNullable: true },
   );
 }
 
@@ -130,7 +130,7 @@ function buildMockTheme(): {
 
 async function createFixture<T>(
   hostType: new () => T,
-  extraProviders: Provider[] = []
+  extraProviders: Provider[] = [],
 ): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
     imports: [hostType],
@@ -151,7 +151,7 @@ async function createFixture<T>(
 
 function getInput(fixture: ComponentFixture<unknown>): HTMLInputElement {
   const input: HTMLInputElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-toggle-switch__native-input'
+    '.ui-lib-toggle-switch__native-input',
   );
   if (!input) {
     throw new Error('Expected native input element to exist');
@@ -173,14 +173,14 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('native input has role="switch"', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     expect(getInput(fixture).getAttribute('role')).toBe('switch');
   });
 
   it('native input has type="checkbox"', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     expect(getInput(fixture).type).toBe('checkbox');
   });
@@ -189,14 +189,14 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('aria-checked is "false" when unchecked', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     expect(getInput(fixture).getAttribute('aria-checked')).toBe('false');
   });
 
   it('aria-checked becomes "true" after toggling', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     getInput(fixture).dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
@@ -209,14 +209,14 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('ariaLabel path: sets aria-label on native input', async (): Promise<void> => {
     const fixture: ComponentFixture<AriaLabelOnlyHostComponent> = await createFixture(
-      AriaLabelOnlyHostComponent
+      AriaLabelOnlyHostComponent,
     );
     expect(getInput(fixture).getAttribute('aria-label')).toBe('Toggle notifications');
   });
 
   it('ariaLabel path: does not set aria-labelledby when ariaLabel is provided', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     fixture.componentInstance.label.set(null);
     fixture.componentInstance.ariaLabel.set('Direct label');
@@ -227,14 +227,14 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('label input path: sets aria-labelledby pointing to visible label element', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     const input: HTMLInputElement = getInput(fixture);
     const labelledby: string | null = input.getAttribute('aria-labelledby');
     expect(labelledby).toBeTruthy();
 
     const labelEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      `#${labelledby}`
+      `#${labelledby}`,
     );
     expect(labelEl).not.toBeNull();
     expect(String((labelEl as HTMLElement).textContent).trim()).toBe('Enable feature');
@@ -242,7 +242,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('label input path: label for attribute matches native input id', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     const input: HTMLInputElement = getInput(fixture);
     const labelEl: HTMLLabelElement | null = (
@@ -253,7 +253,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('projected label path: projected <label for> connects to native input id', async (): Promise<void> => {
     const fixture: ComponentFixture<ProjectedLabelHostComponent> = await createFixture(
-      ProjectedLabelHostComponent
+      ProjectedLabelHostComponent,
     );
     const input: HTMLInputElement = getInput(fixture);
     const projectedLabel: HTMLLabelElement | null = (
@@ -267,7 +267,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('readonly: aria-readonly="true" is present', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     fixture.componentInstance.readonly.set(true);
     fixture.detectChanges();
@@ -277,14 +277,14 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('readonly: aria-readonly is absent when not readonly', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     expect(getInput(fixture).getAttribute('aria-readonly')).toBeNull();
   });
 
   it('readonly: Space key does not toggle the switch', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     fixture.componentInstance.readonly.set(true);
     fixture.detectChanges();
@@ -302,7 +302,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('disabled: native input has disabled attribute', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
@@ -312,7 +312,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('disabled: tabindex is -1', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
@@ -322,7 +322,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('disabled: Space key does not toggle the switch', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
@@ -339,7 +339,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('Space key toggles the switch when enabled', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     const input: HTMLInputElement = getInput(fixture);
     input.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
@@ -351,7 +351,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('Space key does not fire toggle twice (no double-toggle)', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     const input: HTMLInputElement = getInput(fixture);
     // Dispatch keydown (handled by component) — no separate change event should re-toggle
@@ -370,7 +370,7 @@ describe('ToggleSwitch Accessibility', (): void => {
       .mockImplementation((): void => {});
     await createFixture(NoLabelHostComponent);
     expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('[ui-lib-toggle-switch] No accessible name found.')
+      expect.stringContaining('[ui-lib-toggle-switch] No accessible name found.'),
     );
     warnSpy.mockRestore();
   });
@@ -399,7 +399,7 @@ describe('ToggleSwitch Accessibility', (): void => {
     const mockAnnounce: jest.Mock = jest.fn().mockResolvedValue(undefined);
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
       ToggleSwitchA11yHostComponent,
-      [{ provide: LiveAnnouncerService, useValue: { announce: mockAnnounce } }]
+      [{ provide: LiveAnnouncerService, useValue: { announce: mockAnnounce } }],
     );
 
     getInput(fixture).dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -413,7 +413,7 @@ describe('ToggleSwitch Accessibility', (): void => {
     const mockAnnounce: jest.Mock = jest.fn().mockResolvedValue(undefined);
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
       ToggleSwitchA11yHostComponent,
-      [{ provide: LiveAnnouncerService, useValue: { announce: mockAnnounce } }]
+      [{ provide: LiveAnnouncerService, useValue: { announce: mockAnnounce } }],
     );
 
     // Toggle on then off
@@ -433,7 +433,7 @@ describe('ToggleSwitch Accessibility', (): void => {
     const mockAnnounce: jest.Mock = jest.fn().mockResolvedValue(undefined);
     const fixture: ComponentFixture<AriaLabelOnlyHostComponent> = await createFixture(
       AriaLabelOnlyHostComponent,
-      [{ provide: LiveAnnouncerService, useValue: { announce: mockAnnounce } }]
+      [{ provide: LiveAnnouncerService, useValue: { announce: mockAnnounce } }],
     );
 
     getInput(fixture).dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -450,7 +450,7 @@ describe('ToggleSwitch Accessibility', (): void => {
       .mockImplementation((): void => {});
     const fixture: ComponentFixture<NoLabelHostComponent> = await createFixture(
       NoLabelHostComponent,
-      [{ provide: LiveAnnouncerService, useValue: { announce: mockAnnounce } }]
+      [{ provide: LiveAnnouncerService, useValue: { announce: mockAnnounce } }],
     );
 
     getInput(fixture).dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -484,14 +484,14 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('axe: default state with label passes', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
   it('axe: checked state passes', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     getInput(fixture).dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
@@ -500,7 +500,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('axe: disabled state passes', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
@@ -509,7 +509,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('axe: readonly state passes', async (): Promise<void> => {
     const fixture: ComponentFixture<ToggleSwitchA11yHostComponent> = await createFixture(
-      ToggleSwitchA11yHostComponent
+      ToggleSwitchA11yHostComponent,
     );
     fixture.componentInstance.readonly.set(true);
     fixture.detectChanges();
@@ -518,7 +518,7 @@ describe('ToggleSwitch Accessibility', (): void => {
 
   it('axe: aria-label only passes', async (): Promise<void> => {
     const fixture: ComponentFixture<AriaLabelOnlyHostComponent> = await createFixture(
-      AriaLabelOnlyHostComponent
+      AriaLabelOnlyHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });

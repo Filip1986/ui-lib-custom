@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Stepper"
@@ -75,7 +74,8 @@
   <!-- Linear Mode -->
   <app-doc-section id="linear-mode" title="Linear Mode">
     <p class="demo-section__desc">
-      With <code>linear</code> enabled, users must complete steps in order. Clicking ahead is blocked.
+      With <code>linear</code> enabled, users must complete steps in order. Clicking ahead is
+      blocked.
     </p>
 
     <div class="demo-card">
@@ -205,7 +205,8 @@
   <!-- Variants -->
   <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__desc">
-      Three variants to match your design system: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
+      Three variants to match your design system: <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code>.
     </p>
 
     <div class="demo-variants">
@@ -219,7 +220,12 @@
               </ng-template>
               <ng-template #stepperFooter>
                 <div class="demo-step-footer">
-                  <ui-lib-button severity="primary" type="button" (click)="materialStepper.nextStep()">Next</ui-lib-button>
+                  <ui-lib-button
+                    severity="primary"
+                    type="button"
+                    (click)="materialStepper.nextStep()"
+                    >Next</ui-lib-button
+                  >
                 </div>
               </ng-template>
             </ui-lib-stepper-panel>
@@ -229,8 +235,18 @@
               </ng-template>
               <ng-template #stepperFooter>
                 <div class="demo-step-footer">
-                  <ui-lib-button appearance="ghost" type="button" (click)="materialStepper.prevStep()">Back</ui-lib-button>
-                  <ui-lib-button severity="primary" type="button" (click)="materialStepper.nextStep()">Next</ui-lib-button>
+                  <ui-lib-button
+                    appearance="ghost"
+                    type="button"
+                    (click)="materialStepper.prevStep()"
+                    >Back</ui-lib-button
+                  >
+                  <ui-lib-button
+                    severity="primary"
+                    type="button"
+                    (click)="materialStepper.nextStep()"
+                    >Next</ui-lib-button
+                  >
                 </div>
               </ng-template>
             </ui-lib-stepper-panel>
@@ -240,8 +256,15 @@
               </ng-template>
               <ng-template #stepperFooter>
                 <div class="demo-step-footer">
-                  <ui-lib-button appearance="ghost" type="button" (click)="materialStepper.prevStep()">Back</ui-lib-button>
-                  <ui-lib-button severity="success" type="button" (click)="materialStep.set(0)">Reset</ui-lib-button>
+                  <ui-lib-button
+                    appearance="ghost"
+                    type="button"
+                    (click)="materialStepper.prevStep()"
+                    >Back</ui-lib-button
+                  >
+                  <ui-lib-button severity="success" type="button" (click)="materialStep.set(0)"
+                    >Reset</ui-lib-button
+                  >
                 </div>
               </ng-template>
             </ui-lib-stepper-panel>
@@ -259,7 +282,12 @@
               </ng-template>
               <ng-template #stepperFooter>
                 <div class="demo-step-footer">
-                  <ui-lib-button severity="primary" type="button" (click)="bootstrapStepper.nextStep()">Next</ui-lib-button>
+                  <ui-lib-button
+                    severity="primary"
+                    type="button"
+                    (click)="bootstrapStepper.nextStep()"
+                    >Next</ui-lib-button
+                  >
                 </div>
               </ng-template>
             </ui-lib-stepper-panel>
@@ -269,8 +297,18 @@
               </ng-template>
               <ng-template #stepperFooter>
                 <div class="demo-step-footer">
-                  <ui-lib-button appearance="ghost" type="button" (click)="bootstrapStepper.prevStep()">Back</ui-lib-button>
-                  <ui-lib-button severity="primary" type="button" (click)="bootstrapStepper.nextStep()">Next</ui-lib-button>
+                  <ui-lib-button
+                    appearance="ghost"
+                    type="button"
+                    (click)="bootstrapStepper.prevStep()"
+                    >Back</ui-lib-button
+                  >
+                  <ui-lib-button
+                    severity="primary"
+                    type="button"
+                    (click)="bootstrapStepper.nextStep()"
+                    >Next</ui-lib-button
+                  >
                 </div>
               </ng-template>
             </ui-lib-stepper-panel>
@@ -280,8 +318,15 @@
               </ng-template>
               <ng-template #stepperFooter>
                 <div class="demo-step-footer">
-                  <ui-lib-button appearance="ghost" type="button" (click)="bootstrapStepper.prevStep()">Back</ui-lib-button>
-                  <ui-lib-button severity="success" type="button" (click)="bootstrapStep.set(0)">Reset</ui-lib-button>
+                  <ui-lib-button
+                    appearance="ghost"
+                    type="button"
+                    (click)="bootstrapStepper.prevStep()"
+                    >Back</ui-lib-button
+                  >
+                  <ui-lib-button severity="success" type="button" (click)="bootstrapStep.set(0)"
+                    >Reset</ui-lib-button
+                  >
                 </div>
               </ng-template>
             </ui-lib-stepper-panel>
@@ -299,7 +344,12 @@
               </ng-template>
               <ng-template #stepperFooter>
                 <div class="demo-step-footer">
-                  <ui-lib-button severity="primary" type="button" (click)="minimalStepper.nextStep()">Next</ui-lib-button>
+                  <ui-lib-button
+                    severity="primary"
+                    type="button"
+                    (click)="minimalStepper.nextStep()"
+                    >Next</ui-lib-button
+                  >
                 </div>
               </ng-template>
             </ui-lib-stepper-panel>
@@ -309,8 +359,18 @@
               </ng-template>
               <ng-template #stepperFooter>
                 <div class="demo-step-footer">
-                  <ui-lib-button appearance="ghost" type="button" (click)="minimalStepper.prevStep()">Back</ui-lib-button>
-                  <ui-lib-button severity="primary" type="button" (click)="minimalStepper.nextStep()">Next</ui-lib-button>
+                  <ui-lib-button
+                    appearance="ghost"
+                    type="button"
+                    (click)="minimalStepper.prevStep()"
+                    >Back</ui-lib-button
+                  >
+                  <ui-lib-button
+                    severity="primary"
+                    type="button"
+                    (click)="minimalStepper.nextStep()"
+                    >Next</ui-lib-button
+                  >
                 </div>
               </ng-template>
             </ui-lib-stepper-panel>
@@ -320,8 +380,15 @@
               </ng-template>
               <ng-template #stepperFooter>
                 <div class="demo-step-footer">
-                  <ui-lib-button appearance="ghost" type="button" (click)="minimalStepper.prevStep()">Back</ui-lib-button>
-                  <ui-lib-button severity="success" type="button" (click)="minimalStep.set(0)">Reset</ui-lib-button>
+                  <ui-lib-button
+                    appearance="ghost"
+                    type="button"
+                    (click)="minimalStepper.prevStep()"
+                    >Back</ui-lib-button
+                  >
+                  <ui-lib-button severity="success" type="button" (click)="minimalStep.set(0)"
+                    >Reset</ui-lib-button
+                  >
                 </div>
               </ng-template>
             </ui-lib-stepper-panel>
@@ -414,7 +481,11 @@
             </ng-template>
             <ng-template #stepperFooter>
               <div class="demo-step-footer">
-                <ui-lib-button severity="primary" type="button" (click)="playgroundStepper.nextStep()">
+                <ui-lib-button
+                  severity="primary"
+                  type="button"
+                  (click)="playgroundStepper.nextStep()"
+                >
                   Next
                 </ui-lib-button>
               </div>
@@ -430,10 +501,18 @@
             </ng-template>
             <ng-template #stepperFooter>
               <div class="demo-step-footer">
-                <ui-lib-button appearance="ghost" type="button" (click)="playgroundStepper.prevStep()">
+                <ui-lib-button
+                  appearance="ghost"
+                  type="button"
+                  (click)="playgroundStepper.prevStep()"
+                >
                   Back
                 </ui-lib-button>
-                <ui-lib-button severity="primary" type="button" (click)="playgroundStepper.nextStep()">
+                <ui-lib-button
+                  severity="primary"
+                  type="button"
+                  (click)="playgroundStepper.nextStep()"
+                >
                   Next
                 </ui-lib-button>
               </div>
@@ -449,7 +528,11 @@
             </ng-template>
             <ng-template #stepperFooter>
               <div class="demo-step-footer">
-                <ui-lib-button appearance="ghost" type="button" (click)="playgroundStepper.prevStep()">
+                <ui-lib-button
+                  appearance="ghost"
+                  type="button"
+                  (click)="playgroundStepper.prevStep()"
+                >
                   Back
                 </ui-lib-button>
                 <ui-lib-button severity="success" type="button" (click)="playgroundStep.set(0)">
@@ -464,7 +547,9 @@
       @if (lastStepChange()) {
         <div class="demo-event-log">
           <strong>Last stepChange event:</strong>
-          activeStep={{ lastStepChange()!.activeStep }}, previousStep={{ lastStepChange()!.previousStep }}
+          activeStep={{ lastStepChange()!.activeStep }}, previousStep={{
+            lastStepChange()!.previousStep
+          }}
         </div>
       }
     </div>
@@ -472,7 +557,6 @@
 
   <!-- API Reference -->
   <app-doc-section id="api" title="API Reference">
-
     <h3 class="demo-api-subtitle">Stepper — <code>ui-lib-stepper</code></h3>
     <app-doc-api-reference [rows]="apiStepperInputRows" />
 
@@ -480,7 +564,9 @@
 
     <app-doc-api-reference kind="property" [rows]="apiStepperMethodRows" [showDefault]="false" />
 
-    <h3 class="demo-api-subtitle demo-api-subtitle--mt">StepperPanel — <code>ui-lib-stepper-panel</code></h3>
+    <h3 class="demo-api-subtitle demo-api-subtitle--mt">
+      StepperPanel — <code>ui-lib-stepper-panel</code>
+    </h3>
     <app-doc-api-reference [rows]="apiStepperPanelInputRows" />
 
     <app-doc-api-reference kind="name" [rows]="apiStepperPanelSlotRows" [showDefault]="false" />
@@ -493,7 +579,6 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
-  
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"
@@ -502,7 +587,7 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
-<app-doc-quality-badge [audit]="qualityAudit" />
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -511,5 +596,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

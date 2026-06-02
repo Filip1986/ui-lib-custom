@@ -13,47 +13,47 @@ Numeric input with locale-aware parsing/formatting, CVA support, and spinner con
 
 ### Inputs
 
-| Name                | Type                                          | Default                                           | Description |
-| ------------------- | --------------------------------------------- | ------------------------------------------------- | ----------- |
-| `ariaDescribedBy`   | `string | undefined`                          | `undefined`                                       | —           |
-| `ariaLabel`         | `string | undefined`                          | `undefined`                                       | —           |
-| `ariaLabelledBy`    | `string | undefined`                          | `undefined`                                       | —           |
-| `autocomplete`      | `string`                                      | `'off'`                                           | —           |
-| `buttonLayout`      | `InputNumberButtonLayout`                     | `INPUT_NUMBER_DEFAULTS.buttonLayout`              | —           |
-| `currency`          | `string | undefined`                          | `undefined`                                       | —           |
-| `currencyDisplay`   | `InputNumberCurrencyDisplay`                  | `INPUT_NUMBER_DEFAULTS.currencyDisplay`           | —           |
-| `disabled`          | `boolean`                                     | `false`                                           | —           |
-| `filled`            | `boolean`                                     | `false`                                           | —           |
-| `fluid`             | `boolean`                                     | `false`                                           | —           |
-| `format`            | `boolean`                                     | `INPUT_NUMBER_DEFAULTS.format`                    | —           |
-| `inputId`           | `string`                                      | ``ui-lib-input-number-${++inputNumberIdCounter}`` | —           |
-| `invalid`           | `boolean`                                     | `false`                                           | —           |
-| `label`             | `string | undefined`                          | `undefined`                                       | —           |
-| `locale`            | `string | undefined`                          | `undefined`                                       | —           |
-| `localeMatcher`     | `InputNumberLocaleMatcher`                    | `INPUT_NUMBER_DEFAULTS.localeMatcher`             | —           |
-| `max`               | `number | null`                               | `INPUT_NUMBER_DEFAULTS.max`                       | —           |
-| `maxFractionDigits` | `number | null`                               | `INPUT_NUMBER_DEFAULTS.maxFractionDigits`         | —           |
-| `min`               | `number | null`                               | `INPUT_NUMBER_DEFAULTS.min`                       | —           |
-| `minFractionDigits` | `number | null`                               | `INPUT_NUMBER_DEFAULTS.minFractionDigits`         | —           |
-| `mode`              | `InputNumberMode`                             | `INPUT_NUMBER_DEFAULTS.mode`                      | —           |
-| `placeholder`       | `string`                                      | `''`                                              | —           |
-| `prefix`            | `string`                                      | `''`                                              | —           |
-| `readonly`          | `boolean`                                     | `false`                                           | —           |
-| `required`          | `boolean`                                     | `false`                                           | —           |
-| `showButtons`       | `boolean`                                     | `INPUT_NUMBER_DEFAULTS.showButtons`               | —           |
-| `showClear`         | `boolean`                                     | `INPUT_NUMBER_DEFAULTS.showClear`                 | —           |
-| `size`              | `'sm' | 'md' | 'lg'`                          | `'md'`                                            | —           |
-| `step`              | `number`                                      | `INPUT_NUMBER_DEFAULTS.step`                      | —           |
-| `suffix`            | `string`                                      | `''`                                              | —           |
-| `tabindex`          | `number`                                      | `0`                                               | —           |
-| `useGrouping`       | `boolean`                                     | `INPUT_NUMBER_DEFAULTS.useGrouping`               | —           |
-| `variant`           | `'material' | 'bootstrap' | 'minimal' | null` | `null`                                            | —           |
+| Name                | Type                         | Default                                         | Description                               |
+| ------------------- | ---------------------------- | ----------------------------------------------- | ----------------------------------------- | ------ | ------ | --- |
+| `ariaDescribedBy`   | `string                      | undefined`                                      | `undefined`                               | —      |
+| `ariaLabel`         | `string                      | undefined`                                      | `undefined`                               | —      |
+| `ariaLabelledBy`    | `string                      | undefined`                                      | `undefined`                               | —      |
+| `autocomplete`      | `string`                     | `'off'`                                         | —                                         |
+| `buttonLayout`      | `InputNumberButtonLayout`    | `INPUT_NUMBER_DEFAULTS.buttonLayout`            | —                                         |
+| `currency`          | `string                      | undefined`                                      | `undefined`                               | —      |
+| `currencyDisplay`   | `InputNumberCurrencyDisplay` | `INPUT_NUMBER_DEFAULTS.currencyDisplay`         | —                                         |
+| `disabled`          | `boolean`                    | `false`                                         | —                                         |
+| `filled`            | `boolean`                    | `false`                                         | —                                         |
+| `fluid`             | `boolean`                    | `false`                                         | —                                         |
+| `format`            | `boolean`                    | `INPUT_NUMBER_DEFAULTS.format`                  | —                                         |
+| `inputId`           | `string`                     | `ui-lib-input-number-${++inputNumberIdCounter}` | —                                         |
+| `invalid`           | `boolean`                    | `false`                                         | —                                         |
+| `label`             | `string                      | undefined`                                      | `undefined`                               | —      |
+| `locale`            | `string                      | undefined`                                      | `undefined`                               | —      |
+| `localeMatcher`     | `InputNumberLocaleMatcher`   | `INPUT_NUMBER_DEFAULTS.localeMatcher`           | —                                         |
+| `max`               | `number                      | null`                                           | `INPUT_NUMBER_DEFAULTS.max`               | —      |
+| `maxFractionDigits` | `number                      | null`                                           | `INPUT_NUMBER_DEFAULTS.maxFractionDigits` | —      |
+| `min`               | `number                      | null`                                           | `INPUT_NUMBER_DEFAULTS.min`               | —      |
+| `minFractionDigits` | `number                      | null`                                           | `INPUT_NUMBER_DEFAULTS.minFractionDigits` | —      |
+| `mode`              | `InputNumberMode`            | `INPUT_NUMBER_DEFAULTS.mode`                    | —                                         |
+| `placeholder`       | `string`                     | `''`                                            | —                                         |
+| `prefix`            | `string`                     | `''`                                            | —                                         |
+| `readonly`          | `boolean`                    | `false`                                         | —                                         |
+| `required`          | `boolean`                    | `false`                                         | —                                         |
+| `showButtons`       | `boolean`                    | `INPUT_NUMBER_DEFAULTS.showButtons`             | —                                         |
+| `showClear`         | `boolean`                    | `INPUT_NUMBER_DEFAULTS.showClear`               | —                                         |
+| `size`              | `'sm'                        | 'md'                                            | 'lg'`                                     | `'md'` | —      |
+| `step`              | `number`                     | `INPUT_NUMBER_DEFAULTS.step`                    | —                                         |
+| `suffix`            | `string`                     | `''`                                            | —                                         |
+| `tabindex`          | `number`                     | `0`                                             | —                                         |
+| `useGrouping`       | `boolean`                    | `INPUT_NUMBER_DEFAULTS.useGrouping`             | —                                         |
+| `variant`           | `'material'                  | 'bootstrap'                                     | 'minimal'                                 | null`  | `null` | —   |
 
 ### Models (two-way bindable)
 
-| Name    | Type            | Default | Description |
-| ------- | --------------- | ------- | ----------- |
-| `value` | `number | null` | `null`  | —           |
+| Name    | Type    | Default | Description |
+| ------- | ------- | ------- | ----------- | --- |
+| `value` | `number | null`   | `null`      | —   |
 
 ### Outputs
 
@@ -190,4 +190,3 @@ _none_
 - [Demo page](/components/input-number)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/input-number/README.md)
-

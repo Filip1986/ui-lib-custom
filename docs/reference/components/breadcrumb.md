@@ -13,14 +13,14 @@ Breadcrumb component for displaying hierarchical navigation trails. Supports URL
 
 ### Inputs
 
-| Name         | Type                       | Default                         | Description                                                        |
-| ------------ | -------------------------- | ------------------------------- | ------------------------------------------------------------------ |
-| `ariaLabel`  | `string`                   | `BREADCRUMB_DEFAULT_ARIA_LABEL` | Accessible label for the `<nav>` landmark element.                 |
-| `home`       | `BreadcrumbItem | null`    | `null`                          | Optional home item pinned as the first crumb.                      |
-| `model`      | `BreadcrumbItem[]`         | `[]`                            | Array of navigation items to display after the optional home item. |
-| `size`       | `BreadcrumbSize`           | `'md'`                          | Size token: sm | md | lg.                                          |
-| `styleClass` | `string | null`            | `null`                          | Extra CSS class appended to the host element.                      |
-| `variant`    | `BreadcrumbVariant | null` | `null`                          | Design-system variant; falls back to ThemeConfigService when null. |
+| Name         | Type               | Default                         | Description                                                        |
+| ------------ | ------------------ | ------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------ | --- |
+| `ariaLabel`  | `string`           | `BREADCRUMB_DEFAULT_ARIA_LABEL` | Accessible label for the `<nav>` landmark element.                 |
+| `home`       | `BreadcrumbItem    | null`                           | `null`                                                             | Optional home item pinned as the first crumb.                      |
+| `model`      | `BreadcrumbItem[]` | `[]`                            | Array of navigation items to display after the optional home item. |
+| `size`       | `BreadcrumbSize`   | `'md'`                          | Size token: sm                                                     | md                                                                 | lg. |
+| `styleClass` | `string            | null`                           | `null`                                                             | Extra CSS class appended to the host element.                      |
+| `variant`    | `BreadcrumbVariant | null`                           | `null`                                                             | Design-system variant; falls back to ThemeConfigService when null. |
 
 ### Outputs
 
@@ -109,4 +109,3 @@ _none_
 - [Demo page](/components/breadcrumb)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/breadcrumb/README.md)
-

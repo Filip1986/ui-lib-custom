@@ -13,21 +13,21 @@ Select component with single or multiple selection and optional search.
 
 ### Inputs
 
-| Name             | Type                   | Default                | Description                                                                                           |
-| ---------------- | ---------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- |
-| `ariaLabel`      | `string | null`        | `null`                 | Sets `aria-label` on the host combobox. Use when no visible label is rendered. Default: `null`.       |
-| `ariaLabelledBy` | `string | null`        | `null`                 | Sets `aria-labelledby` to an external element id; overrides the auto-generated link. Default: `null`. |
-| `disabled`       | `boolean`              | `false`                | Disables the control and sets `aria-disabled`. Default: `false`.                                      |
-| `invalid`        | `boolean`              | `false`                | Sets `aria-invalid="true"` and applies error border colour. Default: `false`.                         |
-| `label`          | `string`               | `''`                   | Visible label rendered above the control; linked via `aria-labelledby`. Default: `''`.                |
-| `loading`        | `boolean`              | `false`                | Shows spinner and blocks interaction; communicates state via `aria-disabled`. Default: `false`.       |
-| `multiple`       | `boolean`              | `false`                | Enable multi-selection; `ngModel` receives `unknown[]`. Default: `false`.                             |
-| `options`        | `SelectOption[]`       | `[]`                   | Option array. Each item: `{ label, value, disabled?, group? }`. Default: `[]`.                        |
-| `placeholder`    | `string`               | `'Select...'`          | Text shown when no value is selected. Default: `'Select...'`.                                         |
-| `required`       | `boolean`              | `false`                | Sets `aria-required="true"` on the host element. Default: `false`.                                    |
-| `searchable`     | `boolean`              | `false`                | Show filter input inside panel; announces result count via live region. Default: `false`.             |
-| `size`           | `SelectSize`           | `SHARED_DEFAULTS.Size` | Control height: `'sm'` (32px) · `'md'` (40px) · `'lg'` (48px). Default: `'md'`.                       |
-| `variant`        | `SelectVariant | null` | `null`                 | Visual variant. Falls back to global theme when `null`. Default: `null`.                              |
+| Name             | Type             | Default                | Description                                                                                     |
+| ---------------- | ---------------- | ---------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `ariaLabel`      | `string          | null`                  | `null`                                                                                          | Sets `aria-label` on the host combobox. Use when no visible label is rendered. Default: `null`.       |
+| `ariaLabelledBy` | `string          | null`                  | `null`                                                                                          | Sets `aria-labelledby` to an external element id; overrides the auto-generated link. Default: `null`. |
+| `disabled`       | `boolean`        | `false`                | Disables the control and sets `aria-disabled`. Default: `false`.                                |
+| `invalid`        | `boolean`        | `false`                | Sets `aria-invalid="true"` and applies error border colour. Default: `false`.                   |
+| `label`          | `string`         | `''`                   | Visible label rendered above the control; linked via `aria-labelledby`. Default: `''`.          |
+| `loading`        | `boolean`        | `false`                | Shows spinner and blocks interaction; communicates state via `aria-disabled`. Default: `false`. |
+| `multiple`       | `boolean`        | `false`                | Enable multi-selection; `ngModel` receives `unknown[]`. Default: `false`.                       |
+| `options`        | `SelectOption[]` | `[]`                   | Option array. Each item: `{ label, value, disabled?, group? }`. Default: `[]`.                  |
+| `placeholder`    | `string`         | `'Select...'`          | Text shown when no value is selected. Default: `'Select...'`.                                   |
+| `required`       | `boolean`        | `false`                | Sets `aria-required="true"` on the host element. Default: `false`.                              |
+| `searchable`     | `boolean`        | `false`                | Show filter input inside panel; announces result count via live region. Default: `false`.       |
+| `size`           | `SelectSize`     | `SHARED_DEFAULTS.Size` | Control height: `'sm'` (32px) · `'md'` (40px) · `'lg'` (48px). Default: `'md'`.                 |
+| `variant`        | `SelectVariant   | null`                  | `null`                                                                                          | Visual variant. Falls back to global theme when `null`. Default: `null`.                              |
 
 ### Outputs
 
@@ -141,11 +141,7 @@ _none_
 
 ```html
 <!-- minimal example -->
-<ui-lib-select
-  label="Country"
-  [options]="countryOptions"
-  [(ngModel)]="selectedCountry"
-/>
+<ui-lib-select label="Country" [options]="countryOptions" [(ngModel)]="selectedCountry" />
 
 <!-- multi-select with search -->
 <ui-lib-select
@@ -157,11 +153,7 @@ _none_
 />
 
 <!-- grouped options -->
-<ui-lib-select
-  label="Choose a symbol"
-  [options]="groupedOptions"
-  [(ngModel)]="selectedSymbol"
-/>
+<ui-lib-select label="Choose a symbol" [options]="groupedOptions" [(ngModel)]="selectedSymbol" />
 <!-- where groupedOptions = [
   { label: 'Alpha', value: 'a', group: 'Greek' },
   { label: 'Beta',  value: 'b', group: 'Greek' },
@@ -183,4 +175,3 @@ _none_
 - [Demo page](/components/select)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/select/README.md)
-

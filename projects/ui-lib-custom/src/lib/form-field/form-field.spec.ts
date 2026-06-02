@@ -48,7 +48,7 @@ function setup(
     invalid?: boolean;
     disabled?: boolean;
     inputId?: string | null;
-  } = {}
+  } = {},
 ): {
   fixture: ComponentFixture<FormFieldHostComponent>;
   host: FormFieldHostComponent;
@@ -98,7 +98,7 @@ describe('FormField', (): void => {
   it('renders label and wires htmlFor to input id', (): void => {
     const { fixture, component } = setup();
     const label: HTMLLabelElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-label'
+      '.ui-form-field-label',
     ) as HTMLLabelElement;
 
     expect(label).toBeTruthy();
@@ -109,7 +109,7 @@ describe('FormField', (): void => {
   it('does not render label when label input is null', (): void => {
     const { fixture } = setup({ label: null });
     const label: HTMLLabelElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-label'
+      '.ui-form-field-label',
     );
     expect(label).toBeNull();
   });
@@ -117,7 +117,7 @@ describe('FormField', (): void => {
   it('renders required indicator with aria-hidden when required', (): void => {
     const { fixture } = setup({ required: true });
     const indicator: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-required-indicator'
+      '.ui-form-field-required-indicator',
     ) as HTMLElement;
 
     expect(indicator).toBeTruthy();
@@ -139,7 +139,7 @@ describe('FormField', (): void => {
   it('shows hint and links it in aria-describedby', (): void => {
     const { fixture, input, component } = setup({ hint: 'Use work email' });
     const hintElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-hint'
+      '.ui-form-field-hint',
     ) as HTMLElement;
 
     expect(hintElement.id).toBe(component.hintId());
@@ -149,7 +149,7 @@ describe('FormField', (): void => {
   it('shows error with role=alert when invalid and error is set', (): void => {
     const { fixture, component } = setup({ invalid: true, error: 'Required' });
     const errorElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-error'
+      '.ui-form-field-error',
     ) as HTMLElement;
 
     expect(errorElement.id).toBe(component.errorId());
@@ -159,7 +159,7 @@ describe('FormField', (): void => {
   it('renders error when error text is provided regardless of invalid flag', (): void => {
     const { fixture } = setup({ error: 'Required', invalid: false });
     const errorElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-form-field-error'
+      '.ui-form-field-error',
     );
     expect(errorElement).toBeTruthy();
   });
@@ -171,7 +171,7 @@ describe('FormField', (): void => {
       error: 'Required',
     });
     expect(input.getAttribute('aria-describedby')).toBe(
-      `${component.hintId()} ${component.errorId()}`
+      `${component.hintId()} ${component.errorId()}`,
     );
   });
 

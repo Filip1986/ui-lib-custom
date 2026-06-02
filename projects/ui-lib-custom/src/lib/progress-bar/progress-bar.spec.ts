@@ -19,10 +19,10 @@ function query<T extends HTMLElement>(fixture: ComponentFixture<unknown>, select
 
 function queryMaybe<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   const debug: DebugElement | null = fixture.debugElement.query(
-    By.css(selector)
+    By.css(selector),
   ) as DebugElement | null;
   return debug === null ? null : (debug.nativeElement as T);
 }

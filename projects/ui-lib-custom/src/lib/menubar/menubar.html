@@ -1,7 +1,4 @@
-<nav
-  class="ui-lib-menubar__nav"
-  [attr.aria-label]="resolvedAriaLabel()"
->
+<nav class="ui-lib-menubar__nav" [attr.aria-label]="resolvedAriaLabel()">
   <!-- Start projection slot (e.g. logo, branding) -->
   <div class="ui-lib-menubar__start">
     <ng-content select="[menubarStart]" />
@@ -30,16 +27,9 @@
   >
     @for (item of visibleItems(); track $index) {
       @if (item.separator) {
-        <li
-          class="ui-lib-menubar__root-separator"
-          role="separator"
-          aria-hidden="true"
-        ></li>
+        <li class="ui-lib-menubar__root-separator" role="separator" aria-hidden="true"></li>
       } @else {
-        <li
-          [class]="getRootItemClasses(item, $index)"
-          role="none"
-        >
+        <li [class]="getRootItemClasses(item, $index)" role="none">
           @if (item.url && !item.items?.length) {
             <a
               class="ui-lib-menubar__root-link"
@@ -48,7 +38,9 @@
               role="menuitem"
               [attr.aria-disabled]="item.disabled ? 'true' : null"
               [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
-              [attr.aria-expanded]="item.items?.length ? (isPanelOpen($index) ? 'true' : 'false') : null"
+              [attr.aria-expanded]="
+                item.items?.length ? (isPanelOpen($index) ? 'true' : 'false') : null
+              "
               [attr.tabindex]="getRootTabIndex(item, $index)"
               (click)="onRootItemClick($event, item, $index)"
               (keydown)="onRootItemKeyDown($event, item, $index)"
@@ -66,7 +58,9 @@
               role="menuitem"
               [attr.aria-disabled]="item.disabled ? 'true' : null"
               [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
-              [attr.aria-expanded]="item.items?.length ? (isPanelOpen($index) ? 'true' : 'false') : null"
+              [attr.aria-expanded]="
+                item.items?.length ? (isPanelOpen($index) ? 'true' : 'false') : null
+              "
               [attr.tabindex]="getRootTabIndex(item, $index)"
               (click)="onRootItemClick($event, item, $index)"
               (keydown)="onRootItemKeyDown($event, item, $index)"

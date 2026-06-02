@@ -14,7 +14,7 @@ export class ThemePresetService {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
   private readonly presetsSignal: WritableSignal<ThemePreset[]> = signal<ThemePreset[]>(
-    this.loadPresets()
+    this.loadPresets(),
   );
   private readonly activePresetSignal: WritableSignal<ThemePreset | null> =
     signal<ThemePreset | null>(null);
@@ -58,7 +58,7 @@ export class ThemePresetService {
 
   public deletePreset(id: string): void {
     const list: ThemePreset[] = this.presetsSignal().filter(
-      (item: ThemePreset): boolean => item.id !== id
+      (item: ThemePreset): boolean => item.id !== id,
     );
     this.presetsSignal.set(list);
     this.persistPresets(list);

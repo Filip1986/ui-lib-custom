@@ -71,7 +71,7 @@ export class ScrollPanel {
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   private readonly effectiveVariant: Signal<ScrollPanelVariant> = computed<ScrollPanelVariant>(
-    (): ScrollPanelVariant => this.variant() ?? this.themeConfig.variant()
+    (): ScrollPanelVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Computed CSS classes applied to the host element. */

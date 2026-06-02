@@ -1,14 +1,17 @@
 <app-doc-page-layout [sections]="sections">
-
-  <app-doc-page-header docHeader title="RadioButton" [importCode]="importCode"
-    description="Accessible radio button that implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports arrow-key group navigation, three design variants, three sizes, and a filled appearance.">
+  <app-doc-page-header
+    docHeader
+    title="RadioButton"
+    [importCode]="importCode"
+    description="Accessible radio button that implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports arrow-key group navigation, three design variants, three sizes, and a filled appearance."
+  >
   </app-doc-page-header>
 
   <!-- ---- Basic ---------------------------------------------------- -->
   <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
-      All buttons in a group share the same <code>name</code>. Bind the shared group value
-      with <code>[(ngModel)]</code>. Wrap the group in a <code>&lt;fieldset&gt;</code> /
+      All buttons in a group share the same <code>name</code>. Bind the shared group value with
+      <code>[(ngModel)]</code>. Wrap the group in a <code>&lt;fieldset&gt;</code> /
       <code>&lt;legend&gt;</code> for accessible group labeling.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
@@ -35,49 +38,105 @@
     </p>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic"
+      filename="Basic"
+      [code]="snippets.basic"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Variants ------------------------------------------------- -->
   <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
-      Three design variants: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
-      When <code>variant</code> is <code>null</code> (default), it inherits from
-      <code>ThemeConfigService</code>.
+      Three design variants: <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code>. When <code>variant</code> is <code>null</code> (default), it inherits
+      from <code>ThemeConfigService</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <div class="demo-radio-variant-row">
         <span class="demo-radio-variant-label">Material</span>
         <div class="demo-radio-group">
-          <ui-lib-radio-button name="v-material" value="a" label="Option A" variant="material" [(ngModel)]="variantMaterialValue" />
-          <ui-lib-radio-button name="v-material" value="b" label="Option B" variant="material" [(ngModel)]="variantMaterialValue" />
-          <ui-lib-radio-button name="v-material" value="c" label="Option C (pre-selected)" variant="material" [(ngModel)]="variantMaterialValue" />
+          <ui-lib-radio-button
+            name="v-material"
+            value="a"
+            label="Option A"
+            variant="material"
+            [(ngModel)]="variantMaterialValue"
+          />
+          <ui-lib-radio-button
+            name="v-material"
+            value="b"
+            label="Option B"
+            variant="material"
+            [(ngModel)]="variantMaterialValue"
+          />
+          <ui-lib-radio-button
+            name="v-material"
+            value="c"
+            label="Option C (pre-selected)"
+            variant="material"
+            [(ngModel)]="variantMaterialValue"
+          />
         </div>
       </div>
       <div class="demo-radio-variant-row">
         <span class="demo-radio-variant-label">Bootstrap</span>
         <div class="demo-radio-group">
-          <ui-lib-radio-button name="v-bootstrap" value="a" label="Option A" variant="bootstrap" [(ngModel)]="variantBootstrapValue" />
-          <ui-lib-radio-button name="v-bootstrap" value="b" label="Option B" variant="bootstrap" [(ngModel)]="variantBootstrapValue" />
-          <ui-lib-radio-button name="v-bootstrap" value="c" label="Option C (pre-selected)" variant="bootstrap" [(ngModel)]="variantBootstrapValue" />
+          <ui-lib-radio-button
+            name="v-bootstrap"
+            value="a"
+            label="Option A"
+            variant="bootstrap"
+            [(ngModel)]="variantBootstrapValue"
+          />
+          <ui-lib-radio-button
+            name="v-bootstrap"
+            value="b"
+            label="Option B"
+            variant="bootstrap"
+            [(ngModel)]="variantBootstrapValue"
+          />
+          <ui-lib-radio-button
+            name="v-bootstrap"
+            value="c"
+            label="Option C (pre-selected)"
+            variant="bootstrap"
+            [(ngModel)]="variantBootstrapValue"
+          />
         </div>
       </div>
       <div class="demo-radio-variant-row">
         <span class="demo-radio-variant-label">Minimal</span>
         <div class="demo-radio-group">
-          <ui-lib-radio-button name="v-minimal" value="a" label="Option A" variant="minimal" [(ngModel)]="variantMinimalValue" />
-          <ui-lib-radio-button name="v-minimal" value="b" label="Option B" variant="minimal" [(ngModel)]="variantMinimalValue" />
-          <ui-lib-radio-button name="v-minimal" value="c" label="Option C (pre-selected)" variant="minimal" [(ngModel)]="variantMinimalValue" />
+          <ui-lib-radio-button
+            name="v-minimal"
+            value="a"
+            label="Option A"
+            variant="minimal"
+            [(ngModel)]="variantMinimalValue"
+          />
+          <ui-lib-radio-button
+            name="v-minimal"
+            value="b"
+            label="Option B"
+            variant="minimal"
+            [(ngModel)]="variantMinimalValue"
+          />
+          <ui-lib-radio-button
+            name="v-minimal"
+            value="c"
+            label="Option C (pre-selected)"
+            variant="minimal"
+            [(ngModel)]="variantMinimalValue"
+          />
         </div>
       </div>
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants"
+      filename="Variants"
+      [code]="snippets.variants"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
@@ -87,27 +146,35 @@
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <div class="demo-radio-group">
-        <ui-lib-radio-button name="size-demo" value="sm" label="Small (sm)"  size="sm" />
+        <ui-lib-radio-button name="size-demo" value="sm" label="Small (sm)" size="sm" />
         <ui-lib-radio-button name="size-demo" value="md" label="Medium (md)" size="md" />
-        <ui-lib-radio-button name="size-demo" value="lg" label="Large (lg)"  size="lg" />
+        <ui-lib-radio-button name="size-demo" value="lg" label="Large (lg)" size="lg" />
       </div>
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Sizes" [code]="snippets.sizes"
+      filename="Sizes"
+      [code]="snippets.sizes"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Filled Appearance ---------------------------------------- -->
   <app-doc-section id="filled" title="Filled Appearance">
     <p class="demo-section__description">
-      Set <code>appearance="filled"</code> to use a solid checked background instead of
-      the default outlined ring style.
+      Set <code>appearance="filled"</code> to use a solid checked background instead of the default
+      outlined ring style.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <div class="demo-radio-group">
-        @for (option of [{label: 'One', value: 'one'}, {label: 'Two', value: 'two'}, {label: 'Three', value: 'three'}]; track option.value) {
+        @for (
+          option of [
+            { label: 'One', value: 'one' },
+            { label: 'Two', value: 'two' },
+            { label: 'Three', value: 'three' },
+          ];
+          track option.value
+        ) {
           <ui-lib-radio-button
             name="filled-demo"
             [value]="option.value"
@@ -120,35 +187,48 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Filled" [code]="snippets.filled"
+      filename="Filled"
+      [code]="snippets.filled"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
   <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
-      Set <code>[disabled]="true"</code> on individual buttons. Disabled radios are
-      automatically skipped during arrow-key navigation.
+      Set <code>[disabled]="true"</code> on individual buttons. Disabled radios are automatically
+      skipped during arrow-key navigation.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <div class="demo-radio-group">
-        <ui-lib-radio-button name="disabled-demo" value="option-a" label="Option A (disabled, unchecked)" [disabled]="true" />
-        <ui-lib-radio-button name="disabled-demo" value="option-b" label="Option B (disabled, checked)"   [disabled]="true" [(ngModel)]="disabledValue" />
+        <ui-lib-radio-button
+          name="disabled-demo"
+          value="option-a"
+          label="Option A (disabled, unchecked)"
+          [disabled]="true"
+        />
+        <ui-lib-radio-button
+          name="disabled-demo"
+          value="option-b"
+          label="Option B (disabled, checked)"
+          [disabled]="true"
+          [(ngModel)]="disabledValue"
+        />
       </div>
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Disabled" [code]="snippets.disabled"
+      filename="Disabled"
+      [code]="snippets.disabled"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- With ngModel --------------------------------------------- -->
   <app-doc-section id="ngmodel" title="With ngModel">
     <p class="demo-section__description">
-      All buttons in the group share the same <code>[(ngModel)]</code> binding.
-      The button whose <code>[value]</code> matches the bound value becomes checked.
+      All buttons in the group share the same <code>[(ngModel)]</code> binding. The button whose
+      <code>[value]</code> matches the bound value becomes checked.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <fieldset class="demo-radio-fieldset">
@@ -165,20 +245,22 @@
         </div>
       </fieldset>
     </div>
-    <p class="demo-radio-hint">Selected fruit: <strong>{{ selectedFruit }}</strong></p>
+    <p class="demo-radio-hint">
+      Selected fruit: <strong>{{ selectedFruit }}</strong>
+    </p>
     <ui-lib-code-snippet
       language="html"
-      filename="With ngModel" [code]="snippets.ngmodel"
+      filename="With ngModel"
+      [code]="snippets.ngmodel"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- Reactive Forms ------------------------------------------- -->
   <app-doc-section id="reactive-forms" title="Reactive Forms">
     <p class="demo-section__description">
-      Use <code>formControlName</code> or <code>[formControl]</code> for reactive form
-      integration. <code>FormControl.disable()</code> propagates through
-      <code>setDisabledState</code>.
+      Use <code>formControlName</code> or <code>[formControl]</code> for reactive form integration.
+      <code>FormControl.disable()</code> propagates through <code>setDisabledState</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <form [formGroup]="planForm">
@@ -197,17 +279,19 @@
         </fieldset>
       </form>
     </div>
-    <p class="demo-radio-hint">Form value: <strong>{{ planForm.value | json }}</strong></p>
+    <p class="demo-radio-hint">
+      Form value: <strong>{{ planForm.value | json }}</strong>
+    </p>
     <ui-lib-code-snippet
       language="html"
-      filename="Reactive forms" [code]="snippets.reactiveForms"
+      filename="Reactive forms"
+      [code]="snippets.reactiveForms"
       [showLineNumbers]="true"
-      />
+    />
   </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
   <app-doc-section id="api" title="API Reference">
-
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
@@ -217,7 +301,6 @@
       <h3 class="demo-section__subtitle">Outputs</h3>
       <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
-
   </app-doc-section>
 
   <!-- ---- CSS Custom Properties ------------------------------------ -->
@@ -227,13 +310,12 @@
 
   <!-- ---- Accessibility -------------------------------------------- -->
   <app-doc-section id="accessibility" title="Accessibility">
-
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <app-doc-aria-table [rows]="ariaRows" />
       <p class="demo-section__description" style="margin-top: 1rem">
-        <strong>Group labeling is consumer responsibility.</strong> Wrap radio buttons in
-        a <code>&lt;fieldset&gt;</code> / <code>&lt;legend&gt;</code> (recommended) or a
+        <strong>Group labeling is consumer responsibility.</strong> Wrap radio buttons in a
+        <code>&lt;fieldset&gt;</code> / <code>&lt;legend&gt;</code> (recommended) or a
         <code>role="radiogroup"</code> element with <code>aria-labelledby</code>.
       </p>
     </div>
@@ -245,14 +327,12 @@
 
     <h3 class="demo-section__subtitle">Notes</h3>
     <ul class="doc-list">
-      <li>
-        Disabled radios are automatically skipped during arrow-key navigation.
-      </li>
+      <li>Disabled radios are automatically skipped during arrow-key navigation.</li>
       <li>
         Group labeling is <strong>consumer responsibility</strong> — use
         <code>&lt;fieldset&gt;</code> / <code>&lt;legend&gt;</code> or
-        <code>role="radiogroup"</code> with <code>aria-labelledby</code> to
-        give the group an accessible name.
+        <code>role="radiogroup"</code> with <code>aria-labelledby</code> to give the group an
+        accessible name.
       </li>
       <li>
         When no visible label is supplied, use <code>ariaLabel</code> or
@@ -260,7 +340,6 @@
       </li>
       <li>All transitions respect <code>prefers-reduced-motion: reduce</code>.</li>
     </ul>
-
   </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
@@ -273,5 +352,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

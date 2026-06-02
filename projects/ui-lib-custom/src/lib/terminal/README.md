@@ -23,11 +23,11 @@ import type { TerminalHistoryItem, TerminalVariant, TerminalCommand } from 'ui-l
 
 ## Inputs
 
-| Input            | Type                               | Default      | Description                                                     |
-| ---------------- | ---------------------------------- | ------------ | --------------------------------------------------------------- |
-| `welcomeMessage` | `string`                           | `''`         | Optional banner text shown at the top (supports `\n` newlines). |
-| `prompt`         | `string`                           | `'$'`        | The prompt prefix rendered before each command line.            |
-| `variant`        | `TerminalVariant \| null`          | `null`       | Design variant. Falls back to `ThemeConfigService` when `null`. |
+| Input            | Type                      | Default | Description                                                     |
+| ---------------- | ------------------------- | ------- | --------------------------------------------------------------- |
+| `welcomeMessage` | `string`                  | `''`    | Optional banner text shown at the top (supports `\n` newlines). |
+| `prompt`         | `string`                  | `'$'`   | The prompt prefix rendered before each command line.            |
+| `variant`        | `TerminalVariant \| null` | `null`  | Design variant. Falls back to `ThemeConfigService` when `null`. |
 
 ---
 
@@ -43,17 +43,17 @@ The terminal uses a service-driven architecture. Place `<ui-lib-terminal />` in 
 
 ### Properties
 
-| Property  | Type                              | Description                                                    |
-| --------- | --------------------------------- | -------------------------------------------------------------- |
-| `history` | `Signal<TerminalHistoryItem[]>`   | Read-only signal of all command/response pairs.                |
+| Property  | Type                              | Description                                                       |
+| --------- | --------------------------------- | ----------------------------------------------------------------- |
+| `history` | `Signal<TerminalHistoryItem[]>`   | Read-only signal of all command/response pairs.                   |
 | `command` | `Signal<TerminalCommand \| null>` | Emits whenever the user submits a command. Watch with `effect()`. |
 
 ### Methods
 
-| Method                          | Description                                                                            |
-| ------------------------------- | -------------------------------------------------------------------------------------- |
-| `sendResponse(response: string)` | Adds a response to the most recent pending command.                                   |
-| `clear()`                       | Clears all history and resets the pending command.                                     |
+| Method                           | Description                                         |
+| -------------------------------- | --------------------------------------------------- |
+| `sendResponse(response: string)` | Adds a response to the most recent pending command. |
+| `clear()`                        | Clears all history and resets the pending command.  |
 
 > **Note:** `submitCommand()` is called internally by the Terminal component and should not be called by consumers directly.
 
@@ -70,7 +70,7 @@ export interface TerminalHistoryItem {
 }
 
 export interface TerminalCommand {
-  readonly id: number;   // unique id, incremented on every submission
+  readonly id: number; // unique id, incremented on every submission
   readonly text: string; // the raw command text entered by the user
 }
 ```
@@ -79,21 +79,21 @@ export interface TerminalCommand {
 
 ## Variants
 
-| Variant     | Description                                              |
-| ----------- | -------------------------------------------------------- |
-| `material`  | Dark terminal with green prompt, elevated shadow.        |
-| `bootstrap` | Dark Bootstrap-style terminal with teal prompt.          |
-| `minimal`   | GitHub-dark style with blue prompt and subtle border.    |
+| Variant     | Description                                           |
+| ----------- | ----------------------------------------------------- |
+| `material`  | Dark terminal with green prompt, elevated shadow.     |
+| `bootstrap` | Dark Bootstrap-style terminal with teal prompt.       |
+| `minimal`   | GitHub-dark style with blue prompt and subtle border. |
 
 ---
 
 ## Keyboard navigation
 
-| Key      | Behaviour                                       |
-| -------- | ----------------------------------------------- |
-| `Enter`  | Submit the current command.                     |
-| `↑`      | Navigate to the previous command in history.    |
-| `↓`      | Navigate to the next command (or clear input).  |
+| Key     | Behaviour                                      |
+| ------- | ---------------------------------------------- |
+| `Enter` | Submit the current command.                    |
+| `↑`     | Navigate to the previous command in history.   |
+| `↓`     | Navigate to the next command (or clear input). |
 
 ---
 
@@ -109,12 +109,7 @@ import type { TerminalCommand } from 'ui-lib-custom/terminal';
   selector: 'app-root',
   standalone: true,
   imports: [Terminal],
-  template: `
-    <ui-lib-terminal
-      welcomeMessage="Type 'help' to get started."
-      prompt="$"
-    />
-  `,
+  template: ` <ui-lib-terminal welcomeMessage="Type 'help' to get started." prompt="$" /> `,
 })
 export class AppComponent {
   private readonly terminalService = inject(TerminalService);
@@ -148,21 +143,21 @@ export class AppComponent {
 
 All tokens follow the pattern `--uilib-terminal-{property}[-{variant}]`:
 
-| Variable                            | Default              | Description                        |
-| ----------------------------------- | -------------------- | ---------------------------------- |
-| `--uilib-terminal-bg`               | `#1e1e1e`            | Terminal background colour.        |
-| `--uilib-terminal-color`            | `#f0f0f0`            | Default text colour.               |
-| `--uilib-terminal-prompt-color`     | `#4caf50`            | Prompt text colour.                |
-| `--uilib-terminal-response-color`   | `#e0e0e0`            | Response text colour.              |
-| `--uilib-terminal-welcome-color`    | `#aaaaaa`            | Welcome message colour.            |
-| `--uilib-terminal-border`           | `1px solid …`        | Terminal border.                   |
-| `--uilib-terminal-border-radius`    | `var(--uilib-radius-md)` | Corner radius.                 |
-| `--uilib-terminal-padding`          | `1rem`               | Inner padding.                     |
-| `--uilib-terminal-font-family`      | `'Courier New', …`   | Monospace font stack.              |
-| `--uilib-terminal-font-size`        | `0.875rem`           | Font size.                         |
-| `--uilib-terminal-min-height`       | `18rem`              | Minimum scrollable area height.    |
-| `--uilib-terminal-max-height`       | `30rem`              | Maximum scrollable area height.    |
-| `--uilib-terminal-input-caret-color`| `#4caf50`            | Text-cursor colour in the input.   |
+| Variable                             | Default                  | Description                      |
+| ------------------------------------ | ------------------------ | -------------------------------- |
+| `--uilib-terminal-bg`                | `#1e1e1e`                | Terminal background colour.      |
+| `--uilib-terminal-color`             | `#f0f0f0`                | Default text colour.             |
+| `--uilib-terminal-prompt-color`      | `#4caf50`                | Prompt text colour.              |
+| `--uilib-terminal-response-color`    | `#e0e0e0`                | Response text colour.            |
+| `--uilib-terminal-welcome-color`     | `#aaaaaa`                | Welcome message colour.          |
+| `--uilib-terminal-border`            | `1px solid …`            | Terminal border.                 |
+| `--uilib-terminal-border-radius`     | `var(--uilib-radius-md)` | Corner radius.                   |
+| `--uilib-terminal-padding`           | `1rem`                   | Inner padding.                   |
+| `--uilib-terminal-font-family`       | `'Courier New', …`       | Monospace font stack.            |
+| `--uilib-terminal-font-size`         | `0.875rem`               | Font size.                       |
+| `--uilib-terminal-min-height`        | `18rem`                  | Minimum scrollable area height.  |
+| `--uilib-terminal-max-height`        | `30rem`                  | Maximum scrollable area height.  |
+| `--uilib-terminal-input-caret-color` | `#4caf50`                | Text-cursor colour in the input. |
 
 ---
 
@@ -170,18 +165,18 @@ All tokens follow the pattern `--uilib-terminal-{property}[-{variant}]`:
 
 ### ARIA attributes
 
-| Element                            | Attribute                      | Value / Notes                                           |
-| ---------------------------------- | ------------------------------ | ------------------------------------------------------- |
-| `ui-lib-terminal` host             | `role`                         | `region`                                                |
-| `ui-lib-terminal` host             | `aria-label`                   | `"Terminal"`                                            |
-| `ui-lib-terminal` host             | `id`                           | `ui-lib-terminal-{n}` (unique per instance)             |
-| `.ui-lib-terminal__output` div     | `role`                         | `log` (implies `aria-live="polite"`, `aria-relevant="additions text"`) |
-| `.ui-lib-terminal__output` div     | `aria-label`                   | `"Terminal output"`                                     |
-| `.ui-lib-terminal__output` div     | `id`                           | `ui-lib-terminal-{n}-output`                            |
-| `.ui-lib-terminal__output` div     | `aria-atomic`                  | `false` — individual entries are announced incrementally |
-| `.ui-lib-terminal__input` input    | `aria-label`                   | `"Terminal command input"`                              |
-| `.ui-lib-terminal__input` input    | `aria-autocomplete`            | `none`                                                  |
-| `.ui-lib-terminal__prompt` spans   | `aria-hidden`                  | `true` — decorative, not read aloud                     |
+| Element                          | Attribute           | Value / Notes                                                          |
+| -------------------------------- | ------------------- | ---------------------------------------------------------------------- |
+| `ui-lib-terminal` host           | `role`              | `region`                                                               |
+| `ui-lib-terminal` host           | `aria-label`        | `"Terminal"`                                                           |
+| `ui-lib-terminal` host           | `id`                | `ui-lib-terminal-{n}` (unique per instance)                            |
+| `.ui-lib-terminal__output` div   | `role`              | `log` (implies `aria-live="polite"`, `aria-relevant="additions text"`) |
+| `.ui-lib-terminal__output` div   | `aria-label`        | `"Terminal output"`                                                    |
+| `.ui-lib-terminal__output` div   | `id`                | `ui-lib-terminal-{n}-output`                                           |
+| `.ui-lib-terminal__output` div   | `aria-atomic`       | `false` — individual entries are announced incrementally               |
+| `.ui-lib-terminal__input` input  | `aria-label`        | `"Terminal command input"`                                             |
+| `.ui-lib-terminal__input` input  | `aria-autocomplete` | `none`                                                                 |
+| `.ui-lib-terminal__prompt` spans | `aria-hidden`       | `true` — decorative, not read aloud                                    |
 
 ### Notes
 
@@ -192,4 +187,3 @@ All tokens follow the pattern `--uilib-terminal-{property}[-{variant}]`:
 - Keyboard focus on the input shows a visible outline (`outline: 2px solid`) drawn using the current prompt-caret colour, so it adapts to all three design variants.
 - Animations and transitions honour `prefers-reduced-motion: reduce` — all durations are collapsed to `0.01ms` when the OS preference is set.
 - See **Keyboard navigation** above for key bindings.
-

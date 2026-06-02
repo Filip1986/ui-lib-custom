@@ -230,7 +230,7 @@ describe('Popover', (): void => {
       });
       const title: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__title'
+        '.ui-lib-popover__title',
       );
       expect(title.textContent!.trim()).toBe('My Title');
     });
@@ -253,7 +253,7 @@ describe('Popover', (): void => {
       });
       const closeBtn: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__close-btn'
+        '.ui-lib-popover__close-btn',
       );
       closeBtn.click();
       fixture.detectChanges();
@@ -270,7 +270,7 @@ describe('Popover', (): void => {
       });
       const overlay: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__overlay'
+        '.ui-lib-popover__overlay',
       );
       expect(overlay.classList.contains('ui-lib-popover__overlay--active')).toBe(true);
     });
@@ -282,7 +282,7 @@ describe('Popover', (): void => {
       });
       const overlay: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__overlay'
+        '.ui-lib-popover__overlay',
       );
       expect(overlay.classList.contains('ui-lib-popover__overlay--active')).toBe(false);
     });
@@ -294,7 +294,7 @@ describe('Popover', (): void => {
       });
       const overlay: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__overlay'
+        '.ui-lib-popover__overlay',
       );
       overlay.click();
       fixture.detectChanges();
@@ -309,7 +309,7 @@ describe('Popover', (): void => {
       });
       const overlay: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__overlay'
+        '.ui-lib-popover__overlay',
       );
       overlay.click();
       fixture.detectChanges();
@@ -326,7 +326,7 @@ describe('Popover', (): void => {
       });
       const panel: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__panel'
+        '.ui-lib-popover__panel',
       );
       panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
       fixture.detectChanges();
@@ -341,7 +341,7 @@ describe('Popover', (): void => {
       });
       const panel: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__panel'
+        '.ui-lib-popover__panel',
       );
       panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
       fixture.detectChanges();
@@ -358,7 +358,7 @@ describe('Popover', (): void => {
       });
       const panel: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__panel'
+        '.ui-lib-popover__panel',
       );
       expect(panel.classList.contains('ui-lib-popover--variant-material')).toBe(true);
     });
@@ -370,7 +370,7 @@ describe('Popover', (): void => {
       });
       const panel: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__panel'
+        '.ui-lib-popover__panel',
       );
       expect(panel.classList.contains('ui-lib-popover--variant-bootstrap')).toBe(true);
     });
@@ -382,7 +382,7 @@ describe('Popover', (): void => {
       });
       const panel: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__panel'
+        '.ui-lib-popover__panel',
       );
       expect(panel.classList.contains('ui-lib-popover--variant-minimal')).toBe(true);
     });
@@ -423,7 +423,7 @@ describe('Popover', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture({ visible: true });
       const panel: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__panel'
+        '.ui-lib-popover__panel',
       );
       expect(panel.getAttribute('role')).toBe('dialog');
     });
@@ -432,7 +432,7 @@ describe('Popover', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture({ visible: true });
       const panel: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__panel'
+        '.ui-lib-popover__panel',
       );
       expect(panel.getAttribute('aria-modal')).toBe('false');
     });
@@ -444,7 +444,7 @@ describe('Popover', (): void => {
       });
       const closeBtn: HTMLElement = getElement(
         fixture.nativeElement as HTMLElement,
-        '.ui-lib-popover__close-btn'
+        '.ui-lib-popover__close-btn',
       );
       expect(closeBtn.getAttribute('aria-label')).toBe('Close');
     });

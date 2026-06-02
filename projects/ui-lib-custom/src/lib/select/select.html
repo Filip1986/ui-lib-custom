@@ -52,16 +52,14 @@
     Lives outside @if(open()) so the browser can track content changes across open/close cycles.
   -->
   @if (searchable()) {
-    <div
-      class="ui-lib-select__sr-live"
-      aria-live="polite"
-      aria-atomic="true"
-    >{{ filteredResultsAnnouncement() }}</div>
+    <div class="ui-lib-select__sr-live" aria-live="polite" aria-atomic="true">
+      {{ filteredResultsAnnouncement() }}
+    </div>
   }
 
   @defer (on immediate) {
     @if (open()) {
-    <!--
+      <!--
       Search input lives OUTSIDE the listbox element.
       role="listbox" may only own role="option" and role="group" elements;
       placing any other element inside it violates aria-required-children.
@@ -96,13 +94,9 @@
               The visual group label is rendered via CSS content: attr(aria-label) on ::before,
               keeping the DOM clean (no extra divs inside the listbox or group).
             -->
-            <div
-              role="group"
-              [attr.aria-label]="groupKey"
-              class="ui-lib-select__group-container"
-            >
+            <div role="group" [attr.aria-label]="groupKey" class="ui-lib-select__group-container">
               @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
-                  <!-- Keyboard handled via aria-activedescendant on the host combobox (APG Combobox §3.1).
+                <!-- Keyboard handled via aria-activedescendant on the host combobox (APG Combobox §3.1).
                      Options are not independently focusable — focus stays on the host. -->
                 <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
                 <div
@@ -123,7 +117,10 @@
                 >
                   @if (optionTemplate(); as tpl) {
                     <ng-container
-                      *ngTemplateOutlet="tpl; context: contextFor(opt, optionIndexMap().get(opt) ?? -1)"
+                      *ngTemplateOutlet="
+                        tpl;
+                        context: contextFor(opt, optionIndexMap().get(opt) ?? -1)
+                      "
                     />
                   } @else {
                     <span>{{ opt.label }}</span>
@@ -155,7 +152,10 @@
               >
                 @if (optionTemplate(); as tpl) {
                   <ng-container
-                    *ngTemplateOutlet="tpl; context: contextFor(opt, optionIndexMap().get(opt) ?? -1)"
+                    *ngTemplateOutlet="
+                      tpl;
+                      context: contextFor(opt, optionIndexMap().get(opt) ?? -1)
+                    "
                   />
                 } @else {
                   <span>{{ opt.label }}</span>
