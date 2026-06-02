@@ -144,7 +144,7 @@ export class InputNumberComponent implements ControlValueAccessor {
   protected readonly displayValue: WritableSignal<string> = signal<string>('');
   private readonly numberFormatService: NumberFormatService = new NumberFormatService();
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
-  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   private spinDelayTimer: ReturnType<typeof setTimeout> | null = null;
   private spinIntervalTimer: ReturnType<typeof setInterval> | null = null;

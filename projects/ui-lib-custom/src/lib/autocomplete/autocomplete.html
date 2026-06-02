@@ -15,7 +15,7 @@
     [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
     [attr.aria-controls]="panelVisible() ? listboxId : null"
     [attr.aria-activedescendant]="activeDescendantId()"
-    [attr.aria-label]="ariaLabel()"
+    [attr.aria-label]="ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('autocomplete.input.label'))"
     [attr.aria-labelledby]="ariaLabelledBy()"
     [attr.aria-invalid]="invalid() ? 'true' : null"
     autocomplete="off"

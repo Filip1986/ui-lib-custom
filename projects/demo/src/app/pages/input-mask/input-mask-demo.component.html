@@ -15,6 +15,7 @@
           <div class="stack-sm">
             <ui-lib-input-mask
               mask="(999) 999-9999"
+              ariaLabel="Phone number"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="basicValue"
             />
@@ -33,6 +34,7 @@
               <label>Phone</label>
               <ui-lib-input-mask
                 mask="(999) 999-9999"
+                ariaLabel="Phone"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="formatValues.phone"
               />
@@ -41,6 +43,7 @@
               <label>Date</label>
               <ui-lib-input-mask
                 mask="99/99/9999"
+                ariaLabel="Date"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="formatValues.date"
               />
@@ -49,6 +52,7 @@
               <label>SSN</label>
               <ui-lib-input-mask
                 mask="999-99-9999"
+                ariaLabel="SSN"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="formatValues.ssn"
               />

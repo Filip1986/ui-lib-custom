@@ -95,7 +95,8 @@ const CASCADE_SELECT_PANEL_MODE_CLASSES: readonly string[] = [
     '[attr.aria-activedescendant]': 'focusedItemId() || null',
     '[attr.aria-disabled]': 'isDisabled() || loading() ? "true" : null',
     '[attr.aria-invalid]': 'invalid() ? "true" : null',
-    '[attr.aria-label]': 'ariaLabel() || null',
+    '[attr.aria-label]':
+      'ariaLabel() || (ariaLabelledBy() ? null : i18n.translate("cascade-select.label"))',
     '[attr.aria-labelledby]': 'ariaLabelledBy() || null',
     '[attr.tabindex]': 'isDisabled() || loading() ? -1 : tabindex()',
     '(keydown)': 'onKeydown($event)',

@@ -7,7 +7,7 @@
   [attr.name]="name()"
   [id]="controlId()"
   [attr.autocomplete]="autocomplete()"
-  [attr.aria-label]="ariaLabel() || null"
+  [attr.aria-label]="ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('input-mask.input.label'))"
   [attr.aria-labelledby]="ariaLabelledBy() || null"
   [attr.aria-invalid]="isInvalid() ? 'true' : null"
   [attr.aria-describedby]="ariaDescribedBy()"

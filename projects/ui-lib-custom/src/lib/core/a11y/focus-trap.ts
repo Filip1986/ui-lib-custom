@@ -251,7 +251,12 @@ export class FocusTrap {
 
   private configureSentinel(sentinel: HTMLElement, position: 'start' | 'end'): void {
     sentinel.setAttribute('tabindex', '0');
-    sentinel.setAttribute('aria-hidden', 'true');
+    // No aria-hidden: a focusable element must not be aria-hidden (axe
+    // aria-hidden-focus / WCAG 4.1.2), and adding a presentational role would conflict
+    // with tabindex. The sentinel is an empty, 1px, transparent span that focus only
+    // touches momentarily during tab-wrap, so it has no meaningful screen-reader
+    // presence. Sentinels live outside the trap container, so dropping aria-hidden does
+    // not affect getFocusableElements().
     sentinel.setAttribute('data-ui-lib-focus-trap-sentinel', position);
     sentinel.id = `ui-lib-focus-trap-${position}-${this.instanceId}`;
     sentinel.style.position = 'fixed';

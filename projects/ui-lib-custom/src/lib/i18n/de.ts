@@ -454,4 +454,14 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'code-snippet.label.language': '{language}-Codeausschnitt',
   'code-snippet.label.file': 'Codeausschnitt: {filename}',
   'code-snippet.label.multi-file': 'Codeausschnitt mit {count} Dateien',
+
+  // ── Accessible-name fallbacks (applied when no ariaLabel/ariaLabelledBy is set) ──
+  'datepicker.input.label': 'Datum auswählen',
+  'input-number.input.label': 'Zahleneingabe',
+  'cascade-select.label': 'Auswählen',
+  'tree-select.label': 'Auswählen',
+  'editor.content.label': 'Rich-Text-Editor',
+  'orderlist.label': 'Sortierbare Liste',
+  'autocomplete.input.label': 'Suchen',
+  'input-mask.input.label': 'Maskierte Eingabe',
 };

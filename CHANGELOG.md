@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CONFIRM_BUTTON_COLORS` constant in `design-tokens.ts` — tracks `warningFg: '#1f2937'` (Tailwind gray-800 dark text used on warning-yellow confirm buttons, not present in the Material palette).
 - `COLORPICKER_TOKENS.selectorBorderColor` field — documents the always-white selector border that must contrast against any hue on the colour canvas.
 - `--uilib-code-snippet-syntax-*` CSS variables (9 tokens) — all syntax highlight colours are now overridable at runtime, enabling full syntax theme customisation without a rebuild.
+- `label` input on `Button` (`ui-lib-button`) — renders convenience text for self-closing usage (`<ui-lib-button label="Save" />`); projected content (`<ui-lib-button>Save</ui-lib-button>`) still takes precedence.
+- Default accessible names for name-required widgets: `DatePicker`, `InputNumber`, `Editor`, `OrderList`, `AutoComplete`, `CascadeSelect`, `TreeSelect`, and `InputMask` now supply a localised default `aria-label` (en/de/es/fr) when neither `ariaLabel` nor `ariaLabelledBy` is provided.
 
 ### Changed
 - All components now support dark mode.
@@ -55,6 +57,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `table.component.scss`: Bootstrap variant dark-mode border was `#4a5568` (Tailwind gray-700); corrected to `#495057` (Bootstrap `borderColorDark`) with source-of-truth comment.
 - `mega-menu.scss` / `menubar.scss`: focus ring `outline-color: #ffffff` in dark variant now uses the already-defined `--uilib-*-root-link-color-active` variable, removing the raw hex rule-body violation and creating semantic alignment.
 - `color-picker.scss`: selector crosshair border `2px solid #fff` is now driven by `--uilib-colorpicker-selector-border-color` (always white — must contrast against any hue on the canvas). Consumers can now override this token.
+- **Modal dialogs never opened in real apps** — `ui-lib-dialog`'s focus-trap effect called `afterNextRender()` without an injector, throwing `NG0203` and aborting change detection so the `@if (visible())` panel never rendered. It now passes the captured injector.
+- **`Button` rendered empty for `<ui-lib-button label="…" />`** — the button reads its text from projected content and silently ignored the `label` attribute, producing buttons with no visible text and no accessible name. Fixed by the new `label` input (see Added).
+- Accessibility violations surfaced by the full-route axe sweep (now gated in CI with zero failing routes):
+  - `Drawer`, `BottomSheet`, and `PanelMenu` left focusable controls inside `aria-hidden` subtrees when closed/collapsed; they are now made `inert`.
+  - `StyleClass` now also applies `inert` (not just `aria-hidden`) when hiding a separate panel, and no longer hides a target that wraps its own trigger.
+  - `FocusTrap` tab-wrap sentinels are no longer `aria-hidden` (a focusable element must not be aria-hidden).
+  - `InputMask` emitted invalid `aria-valuetext` on a text input and a literal `placeholder="undefined"`.
+  - `Chip` used `role="option"` outside a listbox (now only when `selectable`); `Dock` carried `aria-label` on a roleless element; `ProgressBar` determinate bars lacked an accessible name.
+  - The code-snippet body and a disabled `Listbox` were not keyboard-scrollable; both are now focusable (`tabindex="0"`).
 
 ### Security
 - 

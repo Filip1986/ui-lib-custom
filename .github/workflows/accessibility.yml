@@ -83,21 +83,19 @@ jobs:
           npm run build
           npm run build:demo
 
-      # Gating suites — proven green in CI. a11y.spec covers labelled scenarios;
-      # a11y-interactions exercises open-state keyboard + axe per widget and guards
-      # the modal-dialog NG0203 regression fixed in this branch.
+      # Gating suites — all green. a11y.spec covers labelled scenarios;
+      # a11y-interactions exercises open-state keyboard + axe per widget (guards the
+      # modal-dialog NG0203 regression); a11y-full-sweep runs axe on every demo route
+      # (the violations it surfaced are now fixed at the component/demo level).
       - name: Run E2E accessibility tests (gating)
-        run: npx playwright test e2e/a11y.spec.ts e2e/a11y-interactions.spec.ts
+        run: npx playwright test e2e/a11y.spec.ts e2e/a11y-interactions.spec.ts e2e/a11y-full-sweep.spec.ts
 
-      # Non-blocking suites — pending CI-environment triage. The full-route sweep
-      # reports axe violations across most routes only under CI (not locally; not
-      # color-contrast, which is disabled) — likely incremental-render timing on the
-      # slower runner. overlay-mounting's clipping checks depend on headless layout.
-      # Kept running for visibility (artifact uploaded below) but not gating until
-      # the violations are triaged against the uploaded axe-violations.json.
-      - name: Run E2E accessibility sweep (non-blocking, pending triage)
+      # Non-blocking — overlay-mounting's panel-clipping assertions depend on headless
+      # layout and can be flaky on the CI runner. Kept running for visibility (artifact
+      # uploaded below) but not yet gating.
+      - name: Run overlay-mounting checks (non-blocking)
         continue-on-error: true
-        run: npx playwright test e2e/a11y-full-sweep.spec.ts e2e/overlay-mounting.spec.ts
+        run: npx playwright test e2e/overlay-mounting.spec.ts
 
       - name: Upload test results
         if: always()

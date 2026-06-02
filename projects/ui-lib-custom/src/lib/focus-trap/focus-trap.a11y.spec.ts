@@ -198,17 +198,17 @@ describe('FocusTrapDirective (a11y)', (): void => {
     expect(end.dataset['uiLibFocusTrapSentinel']).toBe('end');
   });
 
-  it('marks sentinel nodes aria-hidden and tabbable', async (): Promise<void> => {
+  it('marks sentinel nodes tabbable without aria-hidden (a focusable element must not be aria-hidden)', async (): Promise<void> => {
     const fixture: ComponentFixture<FocusTrapA11yHostComponent> =
       await createFixture<FocusTrapA11yHostComponent>(FocusTrapA11yHostComponent);
     const container: HTMLElement = (
       fixture.nativeElement as HTMLElement
     ).querySelector<HTMLElement>('#trap') as HTMLElement;
     const { start, end }: { start: HTMLElement; end: HTMLElement } = querySentinels(container);
-    expect(start.getAttribute('aria-hidden')).toBe('true');
     expect(start.getAttribute('tabindex')).toBe('0');
-    expect(end.getAttribute('aria-hidden')).toBe('true');
+    expect(start.getAttribute('aria-hidden')).toBeNull();
     expect(end.getAttribute('tabindex')).toBe('0');
+    expect(end.getAttribute('aria-hidden')).toBeNull();
   });
 
   it('assigns unique sentinel ids per focus trap instance', async (): Promise<void> => {
