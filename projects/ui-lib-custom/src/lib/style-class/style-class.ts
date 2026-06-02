@@ -450,7 +450,7 @@ export class StyleClass implements OnInit, OnDestroy {
 
   private targetHasAnyClass(target: HTMLElement, classString: string): boolean {
     return this.classNamesFromString(classString).some((cssClass: string): boolean =>
-      target.classList.contains(cssClass)
+      target.classList.contains(cssClass),
     );
   }
 
@@ -458,8 +458,19 @@ export class StyleClass implements OnInit, OnDestroy {
     const host: HTMLElement = this.elementRef.nativeElement;
     host.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
 
-    if (target !== host) {
+    // Only manage hidden-state on a separate panel target that does not contain the
+    // trigger — hiding a target that wraps the trigger (e.g. an `@parent` style toggle)
+    // would hide the trigger itself.
+    if (target !== host && !target.contains(host)) {
       target.setAttribute('aria-hidden', isExpanded ? 'false' : 'true');
+      // inert keeps a collapsed panel's controls out of the tab order, so a focusable
+      // element never lives inside an aria-hidden subtree (axe aria-hidden-focus /
+      // WCAG 4.1.2). Removed when expanded so the panel is operable.
+      if (isExpanded) {
+        target.removeAttribute('inert');
+      } else {
+        target.setAttribute('inert', '');
+      }
     }
   }
 
@@ -481,7 +492,7 @@ export class StyleClass implements OnInit, OnDestroy {
     if (this.clickListener) {
       this.elementRef.nativeElement.removeEventListener(
         'click',
-        this.clickListener as EventListener
+        this.clickListener as EventListener,
       );
       this.clickListener = null;
     }

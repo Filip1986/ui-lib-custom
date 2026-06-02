@@ -38,7 +38,7 @@ describe('FocusTrap', (): void => {
     expect(document.activeElement).toBe(first);
   });
 
-  it('creates aria-hidden tabbable sentinels around the container', (): void => {
+  it('creates tabbable sentinels (without aria-hidden) around the container', (): void => {
     document.body.innerHTML = `
       <div id="container">
         <button id="first">First</button>
@@ -53,10 +53,10 @@ describe('FocusTrap', (): void => {
     const endSentinel: HTMLElement = container.nextElementSibling as HTMLElement;
 
     expect(startSentinel.dataset['uiLibFocusTrapSentinel']).toBe('start');
-    expect(startSentinel.getAttribute('aria-hidden')).toBe('true');
+    expect(startSentinel.getAttribute('aria-hidden')).toBeNull();
     expect(startSentinel.getAttribute('tabindex')).toBe('0');
     expect(endSentinel.dataset['uiLibFocusTrapSentinel']).toBe('end');
-    expect(endSentinel.getAttribute('aria-hidden')).toBe('true');
+    expect(endSentinel.getAttribute('aria-hidden')).toBeNull();
     expect(endSentinel.getAttribute('tabindex')).toBe('0');
   });
 

@@ -68,6 +68,12 @@ export class Button implements AfterViewChecked {
   private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   public readonly variant: InputSignal<ButtonVariant | null> = input<ButtonVariant | null>(null);
+  /**
+   * Convenience text label, rendered inside the button when no content is projected.
+   * Prefer projected content (`<ui-lib-button>Save</ui-lib-button>`); this exists so
+   * `<ui-lib-button label="Save" />` also produces visible, accessible text.
+   */
+  public readonly label: InputSignal<string | null> = input<string | null>(null);
   public readonly appearance: InputSignal<ButtonAppearance> = input<ButtonAppearance>('solid');
   public readonly size: InputSignal<ButtonSize> = input<ButtonSize>('md');
   public readonly severity: InputSignal<ButtonSeverity | null> = input<ButtonSeverity | null>(null);

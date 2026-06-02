@@ -28,6 +28,9 @@
 
   <span class="ui-lib-button__content">
     <ng-content />
+    @if (label()) {
+      {{ label() }}
+    }
   </span>
 
   @if ((iconPosition() === 'right' || iconPosition() === 'bottom') && icon()) {
