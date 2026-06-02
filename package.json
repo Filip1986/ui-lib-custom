@@ -541,7 +541,7 @@
     "*.{scss,css}": [
       "prettier --write"
     ],
-    "projects/ui-lib-custom/**/*.scss": [
+    "**/ui-lib-custom/**/*.scss": [
       "stylelint --allow-empty-input --fix"
     ],
     "*.{json,md}": [
