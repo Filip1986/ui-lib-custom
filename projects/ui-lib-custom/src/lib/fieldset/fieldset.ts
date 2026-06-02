@@ -4,15 +4,17 @@ import {
   computed,
   inject,
   input,
-  model,
-  output,
-  ViewEncapsulation,
   type InputSignal,
+  model,
   type ModelSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
+
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { FieldsetToggleEvent, FieldsetVariant } from './fieldset.types';
 
 export type { FieldsetToggleEvent, FieldsetVariant } from './fieldset.types';

@@ -1,17 +1,20 @@
+import { NgTemplateOutlet } from '@angular/common';
+import type { InputSignal, Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  TemplateRef,
-  ViewEncapsulation,
   computed,
   contentChild,
   inject,
   input,
+  TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, Signal } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import { TIMELINE_DEFAULTS } from './timeline.constants';
 import type {
   TimelineAlign,
   TimelineItemContext,
@@ -24,7 +27,6 @@ import {
   TimelineMarkerDirective,
   TimelineOppositeDirective,
 } from './timeline-template-directives';
-import { TIMELINE_DEFAULTS } from './timeline.constants';
 /** Monotonic counter for unique Timeline element IDs. */
 let nextTimelineId: number = 0;
 /**

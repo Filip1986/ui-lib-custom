@@ -1,6 +1,6 @@
 .demo-page {
-  max-width: 860px;
   margin: 0 auto;
+  max-width: 860px;
   padding: 2rem 1.5rem 4rem;
 }
 
@@ -8,59 +8,59 @@
   margin-bottom: 3rem;
 
   &__title {
+    color: var(--uilib-page-fg);
     font-size: 2rem;
     font-weight: 700;
     margin: 0 0 0.5rem;
-    color: var(--uilib-page-fg);
   }
 
   &__subtitle {
-    font-size: 1.0625rem;
     color: var(--uilib-muted);
+    font-size: 1.0625rem;
+    line-height: 1.6;
     margin: 0;
     max-width: 60ch;
-    line-height: 1.6;
   }
 }
 
 .demo-section {
+  border-bottom: 1px solid var(--uilib-border);
   margin-bottom: 2.5rem;
   padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--uilib-border);
 
   &:last-child {
     border-bottom: none;
   }
 
   &__title {
+    color: var(--uilib-page-fg);
     font-size: 1.125rem;
     font-weight: 600;
     margin: 0 0 0.5rem;
-    color: var(--uilib-page-fg);
   }
 
   &__desc {
-    margin: 0 0 1rem;
     color: var(--uilib-muted);
     font-size: 0.9375rem;
     line-height: 1.6;
+    margin: 0 0 1rem;
 
     code {
-      font-family: var(--uilib-font-mono, monospace);
-      font-size: 0.875em;
       background: var(--uilib-surface-alt);
-      padding: 0.1em 0.35em;
       border-radius: 3px;
       color: var(--uilib-page-fg);
+      font-family: var(--uilib-font-mono, monospace);
+      font-size: 0.875em;
+      padding: 0.1em 0.35em;
     }
   }
 }
 
 .demo-row {
-  display: flex;
   align-items: center;
-  gap: 0.75rem;
+  display: flex;
   flex-wrap: wrap;
+  gap: 0.75rem;
   margin-bottom: 1rem;
 
   &--wrap {
@@ -69,17 +69,17 @@
 }
 
 .demo-btn {
-  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.25rem;
+  background: var(--uilib-color-primary-600, #4f46e5);
   border: 1px solid var(--uilib-color-primary-600, #4f46e5);
   border-radius: 6px;
-  background: var(--uilib-color-primary-600, #4f46e5);
   color: #fff;
+  cursor: pointer;
+  display: inline-flex;
   font-size: 0.875rem;
   font-weight: 500;
-  cursor: pointer;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
   transition:
     background 120ms ease,
     border-color 120ms ease;
@@ -101,28 +101,28 @@
 }
 
 .demo-code {
-  margin: 0;
-  padding: 1rem 1.25rem;
   background: var(--uilib-surface-alt);
   border: 1px solid var(--uilib-border);
   border-radius: 6px;
+  color: var(--uilib-page-fg);
   font-family: var(--uilib-font-mono, monospace);
   font-size: 0.8125rem;
   line-height: 1.6;
-  color: var(--uilib-page-fg);
+  margin: 0;
   overflow-x: auto;
+  padding: 1rem 1.25rem;
   white-space: pre;
 }
 
 .demo-result {
-  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
   background: var(--uilib-surface-alt);
   border: 1px solid var(--uilib-border);
   border-radius: 6px;
+  display: inline-flex;
   font-size: 0.875rem;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
 
   &__label {
     color: var(--uilib-muted);
@@ -136,38 +136,38 @@
 }
 
 .demo-table__heading {
+  color: var(--uilib-page-fg);
   font-size: 0.9375rem;
   font-weight: 600;
   margin: 1.5rem 0 0.5rem;
-  color: var(--uilib-page-fg);
 }
 
 .demo-table-wrapper {
-  overflow-x: auto;
   border: 1px solid var(--uilib-border);
   border-radius: 6px;
+  overflow-x: auto;
 }
 
 .demo-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  width: 100%;
 
   th,
   td {
-    padding: 0.625rem 0.875rem;
-    text-align: left;
     border-bottom: 1px solid var(--uilib-border);
     color: var(--uilib-page-fg);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
   }
 
   th {
     background: var(--uilib-surface-alt);
-    font-weight: 600;
     color: var(--uilib-muted);
     font-size: 0.8125rem;
-    text-transform: uppercase;
+    font-weight: 600;
     letter-spacing: 0.03em;
+    text-transform: uppercase;
   }
 
   tr:last-child td {
@@ -175,10 +175,16 @@
   }
 
   code {
+    background: var(--uilib-surface-alt);
+    border-radius: 3px;
     font-family: var(--uilib-font-mono, monospace);
     font-size: 0.875em;
-    background: var(--uilib-surface-alt);
     padding: 0.1em 0.35em;
-    border-radius: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-btn {
+    /* TODO: set transition / animation to none */
   }
 }

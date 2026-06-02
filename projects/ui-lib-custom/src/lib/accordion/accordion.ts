@@ -1,32 +1,34 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  contentChildren,
   computed,
+  contentChildren,
   effect,
-  input,
-  output,
-  signal,
-  ViewEncapsulation,
   inject,
+  input,
   type InputSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { AccordionPanel } from './accordion-panel';
-import { ACCORDION_CONTEXT } from './accordion-context';
+
 import type { AccordionContext } from './accordion-context';
+import { ACCORDION_CONTEXT } from './accordion-context';
+import { AccordionPanel } from './accordion-panel';
 
 let nextAccordionId: number = 0;
+import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   AccordionChangeEvent,
   AccordionExpandMode,
   AccordionSize,
   AccordionVariant,
 } from './accordion.types';
-import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 interface AccordionPanelContext {
   panel: AccordionPanel;

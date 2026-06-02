@@ -1,14 +1,14 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+
 import { Tree } from './tree';
-import { TreeNodeTemplateDirective } from './tree-template-directives';
 import type {
   TreeNode,
   TreeNodeCollapseEvent,
@@ -16,6 +16,7 @@ import type {
   TreeNodeSelectEvent,
   TreeSelectionMode,
 } from './tree.types';
+import { TreeNodeTemplateDirective } from './tree-template-directives';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

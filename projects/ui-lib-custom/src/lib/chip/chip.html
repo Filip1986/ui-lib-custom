@@ -1,8 +1,8 @@
 @if (showImage()) {
-  <img class="ui-lib-chip__image" [src]="image()!" [alt]="resolvedImageAlt()" />
+  <img class="ui-lib-chip__image" [alt]="resolvedImageAlt()" [src]="image()!" />
 }
 @if (showIcon()) {
-  <span class="ui-lib-chip__icon" [class]="icon()!" aria-hidden="true"></span>
+  <span aria-hidden="true" class="ui-lib-chip__icon" [class]="icon()!"></span>
 }
 @if (label()) {
   <span class="ui-lib-chip__label">{{ label() }}</span>
@@ -10,11 +10,11 @@
 <ng-content />
 @if (removable()) {
   <button
-    type="button"
     class="ui-lib-chip__remove-button"
+    type="button"
     [attr.aria-label]="removeAriaLabel()"
     (click)="onRemoveClick($event)"
   >
-    <span [class]="removeIcon()" aria-hidden="true"></span>
+    <span aria-hidden="true" [class]="removeIcon()"></span>
   </button>
 }

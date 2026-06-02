@@ -16,8 +16,8 @@
 
 .chips {
   display: flex;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .control-chip {
@@ -37,26 +37,26 @@
 }
 
 .custom-header-row {
-  display: flex;
   align-items: center;
-  gap: 0.5rem;
+  display: flex;
   font-weight: 600;
+  gap: 0.5rem;
 }
 
 .api-table {
   display: grid;
-  grid-template-columns: 1fr;
   gap: 0.5rem;
+  grid-template-columns: 1fr;
 }
 
 .api-row {
-  display: grid;
-  grid-template-columns: 160px 220px 1fr;
-  gap: 0.75rem;
-  padding: 0.5rem 0.75rem;
+  background: var(--uilib-surface, #fff);
   border: 1px solid var(--uilib-color-border, #e5e7eb);
   border-radius: var(--uilib-radius-sm, 6px);
-  background: var(--uilib-surface, #fff);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 160px 220px 1fr;
+  padding: 0.5rem 0.75rem;
 }
 
 .api-header {
@@ -65,15 +65,15 @@
 }
 
 .a11y-list {
-  margin: 0;
-  padding-left: 1.25rem;
   display: grid;
   gap: 0.5rem;
+  margin: 0;
+  padding-left: 1.25rem;
 }
 
 .controlled-state {
-  font-size: 0.9rem;
   color: var(--uilib-color-text-secondary, #6b7280);
+  font-size: 0.9rem;
 }
 
 .control-grid {
@@ -94,30 +94,30 @@
 }
 
 .size-label {
-  font-weight: 600;
   color: var(--uilib-color-text-secondary, #6b7280);
+  font-weight: 600;
 }
 
 .custom-indicator {
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 999px;
   background: var(--uilib-surface, #fff);
-  color: var(--uilib-color-text-secondary, #6b7280);
   border: 1px solid var(--uilib-color-border, #e5e7eb);
+  border-radius: 999px;
+  color: var(--uilib-color-text-secondary, #6b7280);
+  display: inline-flex;
+  height: 1.5rem;
+  justify-content: center;
   transition:
     color 150ms ease,
     border-color 150ms ease,
     background 150ms ease;
+  width: 1.5rem;
 }
 
 .custom-indicator.active {
-  color: var(--uilib-color-primary, #2563eb);
-  border-color: var(--uilib-color-primary, #2563eb);
   background: color-mix(in srgb, var(--uilib-color-primary, #2563eb) 12%, transparent);
+  border-color: var(--uilib-color-primary, #2563eb);
+  color: var(--uilib-color-primary, #2563eb);
 }
 
 .indicator-rotate {
@@ -129,16 +129,16 @@
 }
 
 .icon-with-badge {
-  position: relative;
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
   justify-content: center;
+  position: relative;
 }
 
 .icon-with-badge .icon-badge {
   position: absolute;
-  top: -0.35rem;
   right: -0.35rem;
+  top: -0.35rem;
 }
 
 .demo-reduced-motion {
@@ -167,11 +167,11 @@
 }
 
 .speed-label {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   color: var(--uilib-color-text-secondary, #6b7280);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
   margin-bottom: 0.35rem;
+  text-transform: uppercase;
 }
 
 @keyframes demo-spin {
@@ -183,11 +183,25 @@
 @keyframes demo-pulse {
   0%,
   100% {
-    transform: scale(1);
     opacity: 0.7;
+    transform: scale(1);
   }
   50% {
-    transform: scale(1.08);
     opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-indicator {
+    /* TODO: set transition / animation to none */
+  }
+
+  .indicator-rotate {
+    /* TODO: set transition / animation to none */
+  }
+
+  .indicator-pulse {
+    /* TODO: set transition / animation to none */
   }
 }

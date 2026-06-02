@@ -1,15 +1,16 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import { AnnounceDirective, AnnounceOnChangeDirective } from './announce.directive';
-import { LiveAnnouncerService } from './live-announcer.service';
 import type { AriaLivePoliteness } from './live-announcer.service';
+import { LiveAnnouncerService } from './live-announcer.service';
 
 @Component({
   selector: 'ui-lib-announce-host',

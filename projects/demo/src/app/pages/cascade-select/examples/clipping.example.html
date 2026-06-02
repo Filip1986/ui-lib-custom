@@ -1,11 +1,11 @@
 <div class="clipping-card">
   <ui-lib-cascade-select
-    [(ngModel)]="clippingCode"
-    [options]="countries"
     optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
     optionLabel="cname"
     optionValue="code"
     placeholder="Open inside clipped card"
+    [optionGroupChildren]="['states', 'cities']"
+    [options]="countries"
+    [(ngModel)]="clippingCode"
   />
 </div>

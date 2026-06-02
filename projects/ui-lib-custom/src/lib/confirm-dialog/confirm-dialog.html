@@ -1,13 +1,13 @@
 @if (visible()) {
-  <div class="ui-lib-confirm-dialog__backdrop" aria-hidden="true" (click)="onBackdropClick()"></div>
+  <div aria-hidden="true" class="ui-lib-confirm-dialog__backdrop" (click)="onBackdropClick()"></div>
 
   <div
-    [class]="panelClasses()"
-    role="alertdialog"
     aria-modal="true"
+    role="alertdialog"
     tabindex="-1"
-    [attr.aria-labelledby]="headerId"
     [attr.aria-describedby]="messageId"
+    [attr.aria-labelledby]="headerId"
+    [class]="panelClasses()"
     (keydown)="onPanelKeydown($event)"
   >
     <div class="ui-lib-confirm-dialog__header">
@@ -17,18 +17,18 @@
 
       @if (resolvedClosable()) {
         <button
-          type="button"
           class="ui-lib-confirm-dialog__close-btn"
+          type="button"
           [attr.aria-label]="i18n.translate('confirm-dialog.close')"
           (click)="close()"
         >
           <svg
+            aria-hidden="true"
             class="ui-lib-confirm-dialog__close-icon"
+            focusable="false"
+            height="16"
             viewBox="0 0 24 24"
             width="16"
-            height="16"
-            aria-hidden="true"
-            focusable="false"
           >
             <path
               d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6L17.6 19l1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"
@@ -41,7 +41,7 @@
 
     <div class="ui-lib-confirm-dialog__content" [id]="messageId">
       @if (resolvedIcon()) {
-        <i [class]="resolvedIcon()" class="ui-lib-confirm-dialog__icon" aria-hidden="true"></i>
+        <i aria-hidden="true" class="ui-lib-confirm-dialog__icon" [class]="resolvedIcon()"></i>
       }
       <p class="ui-lib-confirm-dialog__message">{{ resolvedMessage() }}</p>
 
@@ -54,7 +54,7 @@
       @if (!resolvedAcceptOnly()) {
         <button type="button" [class]="rejectBtnClasses()" (click)="handleReject()">
           @if (resolvedRejectIcon()) {
-            <i [class]="resolvedRejectIcon()" aria-hidden="true"></i>
+            <i aria-hidden="true" [class]="resolvedRejectIcon()"></i>
           }
           {{ resolvedRejectLabel() }}
         </button>
@@ -62,7 +62,7 @@
 
       <button type="button" [class]="acceptBtnClasses()" (click)="handleAccept()">
         @if (resolvedAcceptIcon()) {
-          <i [class]="resolvedAcceptIcon()" aria-hidden="true"></i>
+          <i aria-hidden="true" [class]="resolvedAcceptIcon()"></i>
         }
         {{ resolvedAcceptLabel() }}
       </button>

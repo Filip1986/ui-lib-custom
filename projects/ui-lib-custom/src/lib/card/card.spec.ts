@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import type { ThemeVariant, ThemeScopeInput } from 'ui-lib-custom/theme';
-import { provideUiLibIcons } from 'ui-lib-custom/icon';
+import { TestBed } from '@angular/core/testing';
 
-import { Card } from './card';
-import type { CardElevation, CardVariant } from './card';
 import { SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
+import type { ThemeScopeInput, ThemeVariant } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { CardElevation, CardVariant } from './card';
+import { Card } from './card';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

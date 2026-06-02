@@ -30,27 +30,27 @@
 
   // ---- Base host ----------------------------------------------------------
   .ui-lib-toolbar {
-    display: flex;
     align-items: center;
-    flex-wrap: nowrap;
-    box-sizing: border-box;
-    width: 100%;
-    min-height: var(--uilib-toolbar-min-height);
-    padding: var(--uilib-toolbar-padding-y) var(--uilib-toolbar-padding-x);
     background: var(--uilib-toolbar-background);
     border: var(--uilib-toolbar-border-width) solid var(--uilib-toolbar-border-color);
     border-radius: var(--uilib-toolbar-border-radius);
     box-shadow: var(--uilib-toolbar-shadow);
-    font-family: var(--uilib-toolbar-font-family);
+    box-sizing: border-box;
     color: var(--uilib-toolbar-color);
+    display: flex;
+    flex-wrap: nowrap;
+    font-family: var(--uilib-toolbar-font-family);
     gap: var(--uilib-toolbar-gap);
+    min-height: var(--uilib-toolbar-min-height);
+    padding: var(--uilib-toolbar-padding-y) var(--uilib-toolbar-padding-x);
+    width: 100%;
 
     // ---- Slot groups --------------------------------------------------------
     &__group {
-      display: flex;
       align-items: center;
-      gap: var(--uilib-toolbar-gap);
+      display: flex;
       flex-shrink: 0;
+      gap: var(--uilib-toolbar-gap);
 
       // Start and end groups stretch to fill remaining space
       &--start {
@@ -137,9 +137,9 @@
     select:focus-visible,
     textarea:focus-visible,
     [tabindex]:focus-visible {
+      border-radius: 2px;
       outline: 2px solid var(--uilib-color-primary, #3b82f6);
       outline-offset: 2px;
-      border-radius: 2px;
     }
 
     // =========================================================================
@@ -174,8 +174,8 @@
   @media (prefers-reduced-motion: reduce) {
     .ui-lib-toolbar,
     .ui-lib-toolbar__group {
-      transition: none;
       animation: none;
+      transition: none;
     }
   }
 } // end @layer uilib.components

@@ -1,3 +1,11 @@
+import { NgTemplateOutlet } from '@angular/common';
+import type {
+  InputSignal,
+  ModelSignal,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,14 +21,13 @@ import {
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import type {
-  InputSignal,
-  ModelSignal,
-  OutputEmitterRef,
-  Signal,
-  WritableSignal,
-} from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
+
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import type { PaginatorPageEvent } from 'ui-lib-custom/paginator';
+import { PaginatorComponent } from 'ui-lib-custom/paginator';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import { TABLE_DEFAULTS } from './table.constants';
 import type {
   TableCellContext,
   TableEmptyContext,
@@ -40,7 +47,6 @@ import type {
   TableSortOrder,
   TableVariant,
 } from './table.types';
-import { TABLE_DEFAULTS } from './table.constants';
 import { TableColumnComponent } from './table-column.component';
 import {
   TableBodyDirective,
@@ -50,10 +56,6 @@ import {
   TableFooterDirective,
   TableHeaderDirective,
 } from './table-templates.directive';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { PaginatorComponent } from 'ui-lib-custom/paginator';
-import type { PaginatorPageEvent } from 'ui-lib-custom/paginator';
 
 /** Monotonic counter for unique element IDs. */
 let nextTableId: number = 0;

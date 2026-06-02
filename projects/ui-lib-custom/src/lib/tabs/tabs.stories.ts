@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 import {
   SHARED_DEFAULTS,
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
-import { Tabs } from './tabs';
+
 import { Tab } from './tab';
+import { Tabs } from './tabs';
 import type { TabsAlignment, TabsOrientation, TabsSize, TabsVariant } from './tabs.types';
 
 type TabsStoryArgs = {

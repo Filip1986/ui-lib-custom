@@ -1,14 +1,15 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { ThemeScopeDirective } from './theme-scope.directive';
+import { TestBed } from '@angular/core/testing';
+
 import type { ThemeScopeInput } from './theme-scope.directive';
+import { ThemeScopeDirective } from './theme-scope.directive';
 
 @Component({
   selector: 'ui-lib-theme-scope-host',

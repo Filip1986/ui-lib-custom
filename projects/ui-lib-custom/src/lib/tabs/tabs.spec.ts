@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { DebugElement } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
-import { Tabs } from './tabs';
+
 import { Tab } from './tab';
-import type { TabsVariant } from './tabs.types';
 import type { TabsContextItem } from './tabs';
+import { Tabs } from './tabs';
+import type { TabsVariant } from './tabs.types';
 
 @Component({
   standalone: true,

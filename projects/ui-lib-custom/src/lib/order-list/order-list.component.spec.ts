@@ -5,12 +5,15 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { provideIcons } from '@ng-icons/core';
-import { lucideArrowUp, lucideArrowDown } from '@ng-icons/lucide';
+import { lucideArrowDown, lucideArrowUp } from '@ng-icons/lucide';
+
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
+
 import { OrderListComponent } from './order-list.component';
 import type {
   OrderListControlsPosition,

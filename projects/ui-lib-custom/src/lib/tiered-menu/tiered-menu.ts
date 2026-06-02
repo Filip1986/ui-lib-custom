@@ -1,34 +1,36 @@
+import { DOCUMENT } from '@angular/common';
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  Injector,
-  ViewEncapsulation,
-  afterNextRender,
   computed,
   effect,
+  ElementRef,
   inject,
+  Injector,
   input,
-  output,
-  signal,
-  viewChild,
   type InputSignal,
   type OnDestroy,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  viewChild,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { TieredMenuSubComponent } from './tiered-menu-sub';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   TieredMenuItem,
   TieredMenuItemCommandEvent,
   TieredMenuSize,
   TieredMenuVariant,
 } from './tiered-menu.types';
+import { TieredMenuSubComponent } from './tiered-menu-sub';
 
 export type {
   TieredMenuItem,

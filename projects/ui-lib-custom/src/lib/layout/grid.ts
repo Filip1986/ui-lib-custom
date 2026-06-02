@@ -1,20 +1,22 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  input,
+  Component,
   computed,
-  ViewEncapsulation,
+  input,
   type InputSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
+
 import {
-  SPACING_TOKENS,
-  type SpacingToken,
   GRID_COLUMNS,
   type GridColumns,
+  SPACING_TOKENS,
+  type SpacingToken,
   STACK_TOKENS,
   type StackToken,
 } from 'ui-lib-custom/tokens';
+
 import type { GridAlign, GridJustify } from './grid.types';
 
 export type { GridAlign, GridJustify } from './grid.types';

@@ -1,16 +1,17 @@
+import type { DebugElement } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   input,
+  type InputSignal,
   provideZonelessChangeDetection,
   signal,
-  type InputSignal,
   type WritableSignal,
 } from '@angular/core';
-import type { DebugElement } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { FloatLabelComponent } from '../float-label';
 import { IconFieldComponent } from './icon-field';
 import type { IconPosition } from './icon-field.types';

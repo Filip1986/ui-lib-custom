@@ -20,9 +20,9 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-listbox
-              [options]="cities"
               ariaLabel="Select a city"
               [ngModelOptions]="{ standalone: true }"
+              [options]="cities"
               [(ngModel)]="basicValue"
               (selectionChange)="onSelectionChange($event)"
             />
@@ -44,10 +44,10 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-listbox
-              [options]="cities"
-              [multiple]="true"
               ariaLabel="Select cities"
+              [multiple]="true"
               [ngModelOptions]="{ standalone: true }"
+              [options]="cities"
               [(ngModel)]="multipleValue"
             />
             <p class="demo-value">
@@ -69,11 +69,11 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-listbox
-              [options]="cities"
-              [filter]="true"
-              filterPlaceholder="Search cities..."
               ariaLabel="Select a city"
+              filterPlaceholder="Search cities..."
+              [filter]="true"
               [ngModelOptions]="{ standalone: true }"
+              [options]="cities"
               [(ngModel)]="filterValue"
             />
             <p class="demo-value">
@@ -96,24 +96,24 @@
           <div class="demo-row">
             <span class="demo-label">startsWith</span>
             <ui-lib-listbox
-              [options]="cities"
-              [filter]="true"
+              ariaLabel="startsWith filter"
               filterMatchMode="startsWith"
               filterPlaceholder="e.g. Ber..."
-              ariaLabel="startsWith filter"
+              [filter]="true"
               [ngModelOptions]="{ standalone: true }"
+              [options]="cities"
               [(ngModel)]="filterMatchModeValue"
             />
           </div>
           <div class="demo-row">
             <span class="demo-label">endsWith</span>
             <ui-lib-listbox
-              [options]="cities"
-              [filter]="true"
+              ariaLabel="endsWith filter"
               filterMatchMode="endsWith"
               filterPlaceholder="e.g. ...in"
-              ariaLabel="endsWith filter"
+              [filter]="true"
               [ngModelOptions]="{ standalone: true }"
+              [options]="cities"
               [(ngModel)]="filterMatchModeValue"
             />
           </div>
@@ -132,13 +132,13 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-listbox
-              [options]="groupedCities"
-              [group]="true"
-              optionGroupLabel="label"
-              optionGroupChildren="items"
-              scrollHeight="300px"
               ariaLabel="Select a city"
+              optionGroupChildren="items"
+              optionGroupLabel="label"
+              scrollHeight="300px"
+              [group]="true"
               [ngModelOptions]="{ standalone: true }"
+              [options]="groupedCities"
               [(ngModel)]="groupValue"
             />
             <p class="demo-value">
@@ -159,11 +159,11 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-listbox
-              [options]="cities"
-              [multiple]="true"
-              [checkbox]="true"
               ariaLabel="Select cities"
+              [checkbox]="true"
+              [multiple]="true"
               [ngModelOptions]="{ standalone: true }"
+              [options]="cities"
               [(ngModel)]="checkboxValue"
             />
             <p class="demo-value">
@@ -184,12 +184,12 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-listbox
-              [options]="cities"
-              [multiple]="true"
-              [checkbox]="true"
-              [showToggleAll]="true"
               ariaLabel="Select cities"
+              [checkbox]="true"
+              [multiple]="true"
               [ngModelOptions]="{ standalone: true }"
+              [options]="cities"
+              [showToggleAll]="true"
               [(ngModel)]="toggleAllValue"
             />
             <p class="demo-value">
@@ -212,19 +212,19 @@
           <div class="demo-row">
             <span class="demo-label">Component disabled</span>
             <ui-lib-listbox
-              [options]="cities"
-              [disabled]="true"
               ariaLabel="Disabled listbox"
+              [disabled]="true"
               [ngModelOptions]="{ standalone: true }"
+              [options]="cities"
               [(ngModel)]="disabledValue"
             />
           </div>
           <div class="demo-row">
             <span class="demo-label">Individual options disabled</span>
             <ui-lib-listbox
-              [options]="disabledCities"
               ariaLabel="Options with some disabled"
               [ngModelOptions]="{ standalone: true }"
+              [options]="disabledCities"
               [(ngModel)]="disabledValue"
             />
           </div>
@@ -241,10 +241,10 @@
           <code>setDisabledState</code>.
         </p>
         <ui-lib-panel variant="minimal">
-          <form [formGroup]="form" class="demo-form">
+          <form class="demo-form" [formGroup]="form">
             <div class="demo-row">
               <span class="demo-label">Single (formControlName="city")</span>
-              <ui-lib-listbox [options]="cities" formControlName="city" />
+              <ui-lib-listbox formControlName="city" [options]="cities" />
               <p class="demo-value">
                 Value: <code>{{ cityControl.value | json }}</code>
               </p>
@@ -252,10 +252,10 @@
             <div class="demo-row">
               <span class="demo-label">Multiple (formControlName="cities")</span>
               <ui-lib-listbox
-                [options]="cities"
-                [multiple]="true"
-                [checkbox]="true"
                 formControlName="cities"
+                [checkbox]="true"
+                [multiple]="true"
+                [options]="cities"
               />
               <p class="demo-value">
                 Value: <code>{{ citiesControl.value | json }}</code>
@@ -271,7 +271,7 @@
   <!-- ── API Reference ────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <app-doc-api-reference [rows]="apiInputRows" />
-    <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
   </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
@@ -284,9 +284,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -294,8 +294,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

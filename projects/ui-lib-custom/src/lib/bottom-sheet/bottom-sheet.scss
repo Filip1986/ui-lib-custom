@@ -32,12 +32,12 @@
     --uilib-bottom-sheet-close-color: var(--uilib-color-text-secondary, #6b7280);
     --uilib-bottom-sheet-close-hover-bg: var(--uilib-color-surface-hover, rgba(0, 0, 0, 0.06));
     --uilib-bottom-sheet-close-size: 2rem;
-
-    position: fixed;
     inset: 0;
-    z-index: var(--uilib-bottom-sheet-z-index);
     /* pointer-events off when closed so click-through works */
     pointer-events: none;
+
+    position: fixed;
+    z-index: var(--uilib-bottom-sheet-z-index);
 
     &.ui-lib-bottom-sheet--open {
       pointer-events: auto;
@@ -46,11 +46,11 @@
 
   /* ── Backdrop ───────────────────────────────────────────────────── */
   .ui-lib-bottom-sheet__backdrop {
-    position: absolute;
-    inset: 0;
     background-color: var(--uilib-bottom-sheet-backdrop-bg);
+    inset: 0;
     opacity: 0;
     pointer-events: none;
+    position: absolute;
     transition: opacity var(--uilib-bottom-sheet-transition-duration) ease;
   }
 
@@ -61,23 +61,23 @@
 
   /* ── Panel ──────────────────────────────────────────────────────── */
   .ui-lib-bottom-sheet__panel {
-    position: absolute;
-    bottom: 0;
-    inset-inline-start: 0;
-    inset-inline-end: 0;
     background-color: var(--uilib-bottom-sheet-panel-bg);
     border-radius: var(--uilib-bottom-sheet-border-radius) var(--uilib-bottom-sheet-border-radius) 0
       0;
     box-shadow: var(--uilib-bottom-sheet-panel-shadow);
-    transform: translateY(100%);
-    transition: transform var(--uilib-bottom-sheet-transition-duration)
-      var(--uilib-bottom-sheet-transition-easing);
-    /* Remove default focus outline — we rely on visible focus within content */
-    outline: none;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     max-height: 90vh;
+    /* Remove default focus outline — we rely on visible focus within content */
+    outline: none;
     overflow: hidden;
+    position: absolute;
+    transform: translateY(100%);
+    transition: transform var(--uilib-bottom-sheet-transition-duration)
+      var(--uilib-bottom-sheet-transition-easing);
   }
 
   .ui-lib-bottom-sheet__panel--open {
@@ -86,38 +86,38 @@
 
   /* ── Header ─────────────────────────────────────────────────────── */
   .ui-lib-bottom-sheet__header {
-    display: flex;
     align-items: center;
+    background-color: var(--uilib-bottom-sheet-header-bg);
+    border-bottom: var(--uilib-bottom-sheet-header-border);
+    display: flex;
+    flex-shrink: 0;
     justify-content: space-between;
     padding: var(--uilib-bottom-sheet-padding);
     padding-bottom: calc(var(--uilib-bottom-sheet-padding) * 0.75);
-    background-color: var(--uilib-bottom-sheet-header-bg);
-    border-bottom: var(--uilib-bottom-sheet-header-border);
-    flex-shrink: 0;
   }
 
   .ui-lib-bottom-sheet__title {
+    color: var(--uilib-bottom-sheet-title-color);
     font-size: var(--uilib-bottom-sheet-title-font-size);
     font-weight: var(--uilib-bottom-sheet-title-font-weight);
-    color: var(--uilib-bottom-sheet-title-color);
     line-height: 1.4;
   }
 
   .ui-lib-bottom-sheet__close {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    width: var(--uilib-bottom-sheet-close-size);
-    height: var(--uilib-bottom-sheet-close-size);
-    border: none;
     background: transparent;
+    border: none;
     border-radius: 50%;
     color: var(--uilib-bottom-sheet-close-color);
     cursor: pointer;
+    display: flex;
+    flex-shrink: 0;
+    height: var(--uilib-bottom-sheet-close-size);
+    justify-content: center;
     transition:
       background-color 0.15s ease,
       color 0.15s ease;
-    flex-shrink: 0;
+    width: var(--uilib-bottom-sheet-close-size);
 
     &:hover {
       background-color: var(--uilib-bottom-sheet-close-hover-bg);
@@ -131,10 +131,10 @@
 
   /* ── Content ────────────────────────────────────────────────────── */
   .ui-lib-bottom-sheet__content {
-    padding: var(--uilib-bottom-sheet-padding);
-    overflow-y: auto;
     flex: 1 1 auto;
+    overflow-y: auto;
     overscroll-behavior: contain;
+    padding: var(--uilib-bottom-sheet-padding);
   }
 
   /* ── Footer — only rendered when [bottomSheetFooter] is projected ─ */

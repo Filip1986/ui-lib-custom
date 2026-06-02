@@ -1,7 +1,7 @@
 <ui-lib-textarea
-  label="Address"
   error="This field is required"
+  label="Address"
+  [ngModelOptions]="{ standalone: true }"
   [required]="true"
   [(ngModel)]="invalidValue"
-  [ngModelOptions]="{ standalone: true }"
 />

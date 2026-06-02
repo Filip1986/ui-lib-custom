@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Represents a person or entity with an image, initials, or icon. Supports three shapes, three sizes, and three theme variants. Group multiple avatars with <code>AvatarGroup</code> for a stacked appearance."
     docHeader
     title="Avatar"
     [importCode]="importCode"
-    description="Represents a person or entity with an image, initials, or icon. Supports three shapes, three sizes, and three theme variants. Group multiple avatars with <code>AvatarGroup</code> for a stacked appearance."
   />
 
   <div class="demo-page-header__preview">
@@ -51,7 +51,7 @@
         size="lg"
       />
     </div>
-    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetImage" />
+    <ui-lib-code-snippet language="html" size="sm" [code]="snippetImage" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- Section 2: Label avatars -->
@@ -64,7 +64,7 @@
       <ui-lib-avatar label="AB" size="md" />
       <ui-lib-avatar label="XY" size="lg" />
     </div>
-    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetLabel" />
+    <ui-lib-code-snippet language="html" size="sm" [code]="snippetLabel" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- Section 3: Icon avatars -->
@@ -77,7 +77,7 @@
       <ui-lib-avatar icon="pi pi-user" size="md" />
       <ui-lib-avatar icon="pi pi-user" size="lg" />
     </div>
-    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetIcon" />
+    <ui-lib-code-snippet language="html" size="sm" [code]="snippetIcon" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- Section 4: Shapes -->
@@ -111,7 +111,7 @@
         <span class="av-shape-label">square</span>
       </div>
     </div>
-    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetShape" />
+    <ui-lib-code-snippet language="html" size="sm" [code]="snippetShape" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- Section 5: Variants -->
@@ -130,9 +130,9 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetVariant"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -161,9 +161,9 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetAvatarGroup"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -174,8 +174,8 @@
       <div class="av-playground__preview">
         <ui-lib-avatar
           label="PG"
-          [size]="playgroundSize()"
           [shape]="playgroundShape()"
+          [size]="playgroundSize()"
           [variant]="playgroundVariant()"
         />
       </div>
@@ -185,10 +185,10 @@
           <div class="av-btn-row">
             @for (size of sizes; track size) {
               <ui-lib-button
-                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
                 (click)="setSize(size)"
                 >{{ size }}</ui-lib-button
               >
@@ -200,10 +200,10 @@
           <div class="av-btn-row">
             @for (shape of shapes; track shape) {
               <ui-lib-button
-                [appearance]="playgroundShape() === shape ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundShape() === shape ? 'solid' : 'outline'"
                 (click)="setShape(shape)"
                 >{{ shape }}</ui-lib-button
               >
@@ -215,10 +215,10 @@
           <div class="av-btn-row">
             @for (variant of variants; track variant) {
               <ui-lib-button
-                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 (click)="setVariant(variant)"
                 >{{ variant }}</ui-lib-button
               >
@@ -247,9 +247,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -258,8 +258,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

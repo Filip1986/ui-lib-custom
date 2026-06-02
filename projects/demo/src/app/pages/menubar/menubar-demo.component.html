@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A horizontal navigation bar with dropdown submenus. Items can have nested sub-panels for hierarchical navigation. Supports start/end content projection, three visual variants, three sizes, and a responsive mobile toggle."
     docHeader
     title="Menubar"
     [importCode]="importCode"
-    description="A horizontal navigation bar with dropdown submenus. Items can have nested sub-panels for hierarchical navigation. Supports start/end content projection, three visual variants, three sizes, and a responsive mobile toggle."
   />
 
   <!-- Basic -->
@@ -81,8 +81,8 @@
     </p>
     <div class="demo-section__preview">
       <ui-lib-menubar [model]="basicModel">
-        <span menubarStart class="demo-brand">&#9670; MyApp</span>
-        <span menubarEnd class="demo-user">&#128100; Account</span>
+        <span class="demo-brand" menubarStart>&#9670; MyApp</span>
+        <span class="demo-user" menubarEnd>&#128100; Account</span>
       </ui-lib-menubar>
     </div>
     <app-doc-code-example [html]="startEndHtml" [typescript]="startEndTs" />
@@ -97,15 +97,15 @@
     <div class="demo-section__variants">
       <div class="demo-section__variant-row">
         <span class="demo-section__variant-label">material</span>
-        <ui-lib-menubar [model]="basicModel" variant="material" />
+        <ui-lib-menubar variant="material" [model]="basicModel" />
       </div>
       <div class="demo-section__variant-row">
         <span class="demo-section__variant-label">bootstrap</span>
-        <ui-lib-menubar [model]="basicModel" variant="bootstrap" />
+        <ui-lib-menubar variant="bootstrap" [model]="basicModel" />
       </div>
       <div class="demo-section__variant-row">
         <span class="demo-section__variant-label">minimal</span>
-        <ui-lib-menubar [model]="basicModel" variant="minimal" />
+        <ui-lib-menubar variant="minimal" [model]="basicModel" />
       </div>
     </div>
   </app-doc-section>
@@ -118,15 +118,15 @@
     <div class="demo-section__variants">
       <div class="demo-section__variant-row">
         <span class="demo-section__variant-label">sm</span>
-        <ui-lib-menubar [model]="basicModel" size="sm" />
+        <ui-lib-menubar size="sm" [model]="basicModel" />
       </div>
       <div class="demo-section__variant-row">
         <span class="demo-section__variant-label">md</span>
-        <ui-lib-menubar [model]="basicModel" size="md" />
+        <ui-lib-menubar size="md" [model]="basicModel" />
       </div>
       <div class="demo-section__variant-row">
         <span class="demo-section__variant-label">lg</span>
-        <ui-lib-menubar [model]="basicModel" size="lg" />
+        <ui-lib-menubar size="lg" [model]="basicModel" />
       </div>
     </div>
   </app-doc-section>
@@ -140,10 +140,10 @@
         <div class="demo-control-buttons">
           @for (v of variants; track v) {
             <ui-lib-button
-              [appearance]="playgroundVariant() === v ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="playgroundVariant() === v ? 'solid' : 'outline'"
               (click)="setVariant(v)"
               >{{ v }}</ui-lib-button
             >
@@ -155,10 +155,10 @@
         <div class="demo-control-buttons">
           @for (s of sizes; track s) {
             <ui-lib-button
-              [appearance]="playgroundSize() === s ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="playgroundSize() === s ? 'solid' : 'outline'"
               (click)="setSize(s)"
               >{{ s }}</ui-lib-button
             >
@@ -169,8 +169,8 @@
     <div class="demo-section__preview">
       <ui-lib-menubar
         [model]="basicModel"
-        [variant]="playgroundVariant()"
         [size]="playgroundSize()"
+        [variant]="playgroundVariant()"
       />
     </div>
   </app-doc-section>
@@ -197,9 +197,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -207,8 +207,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

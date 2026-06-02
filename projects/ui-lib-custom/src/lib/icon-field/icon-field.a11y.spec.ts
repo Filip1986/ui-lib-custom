@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { PasswordComponent } from '../password/password.component';
+
+import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { UiLibInput } from '../input/input';
 import { InputMaskComponent } from '../input-mask/input-mask.component';
 import { InputNumberComponent } from '../input-number/input-number.component';
-import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { PasswordComponent } from '../password/password.component';
 import { IconFieldComponent } from './icon-field';
 import { InputIconComponent } from './input-icon';
 

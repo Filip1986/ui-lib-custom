@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,56 +8,58 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
 import { Button } from 'ui-lib-custom/button';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
-import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-
 import { Panel } from 'ui-lib-custom/panel';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
 import {
   basicHtml,
   basicTsTs,
-  formatsHtml,
-  formatsTsTs,
-  optionalHtml,
-  optionalTsTs,
-  slotCharsHtml,
-  slotCharsTsTs,
-  unmaskHtml,
-  unmaskTsTs,
+  disabledHtml,
+  disabledTsTs,
   filledHtml,
   filledTsTs,
   floatLabelHtml,
   floatLabelTsTs,
-  iftaLabelHtml,
-  iftaLabelTsTs,
-  sizesHtml,
-  sizesTsTs,
   fluidHtml,
   fluidTsTs,
-  disabledHtml,
-  disabledTsTs,
+  formatsHtml,
+  formatsTsTs,
+  iftaLabelHtml,
+  iftaLabelTsTs,
   invalidHtml,
   invalidTsTs,
+  optionalHtml,
+  optionalTsTs,
   reactiveHtml,
   reactiveTsTs,
+  sizesHtml,
+  sizesTsTs,
+  slotCharsHtml,
+  slotCharsTsTs,
+  unmaskHtml,
+  unmaskTsTs,
 } from './snippets.generated';
-import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 interface InputMaskSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';

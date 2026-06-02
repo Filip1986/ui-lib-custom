@@ -1,40 +1,40 @@
 .fluid-demo {
-  padding: 1.5rem;
   max-width: 860px;
+  padding: 1.5rem;
 
   // ── hero ──────────────────────────────────────────────────────────
   .fd-hero {
     margin-bottom: 2.5rem;
 
     &__title {
-      margin: 0 0 0.5rem;
+      color: var(--uilib-page-fg);
       font-size: 2rem;
       font-weight: 700;
-      color: var(--uilib-page-fg);
+      margin: 0 0 0.5rem;
     }
 
     &__lead {
-      margin: 0 0 1rem;
-      font-size: 1rem;
       color: var(--uilib-muted);
+      font-size: 1rem;
       line-height: 1.6;
+      margin: 0 0 1rem;
     }
 
     &__tags {
       display: flex;
-      gap: 0.5rem;
       flex-wrap: wrap;
+      gap: 0.5rem;
     }
   }
 
   .fd-tag {
-    display: inline-block;
-    padding: 0.2rem 0.65rem;
+    background: var(--uilib-surface-alt, #f1f3f5);
     border-radius: 999px;
+    color: var(--uilib-muted);
+    display: inline-block;
     font-size: 0.75rem;
     font-weight: 600;
-    background: var(--uilib-surface-alt, #f1f3f5);
-    color: var(--uilib-muted);
+    padding: 0.2rem 0.65rem;
   }
 
   // ── sections ──────────────────────────────────────────────────────
@@ -42,17 +42,17 @@
     margin-bottom: 2.5rem;
 
     &__title {
-      margin: 0 0 0.35rem;
+      color: var(--uilib-page-fg);
       font-size: 1.25rem;
       font-weight: 600;
-      color: var(--uilib-page-fg);
+      margin: 0 0 0.35rem;
     }
 
     &__desc {
-      margin: 0 0 1rem;
-      font-size: 0.9rem;
       color: var(--uilib-muted);
+      font-size: 0.9rem;
       line-height: 1.6;
+      margin: 0 0 1rem;
     }
   }
 
@@ -77,19 +77,19 @@
   }
 
   .fd-label {
+    color: var(--uilib-page-fg);
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--uilib-page-fg);
   }
 
   .fd-input {
-    padding: 0.5rem 0.75rem;
+    background: var(--uilib-surface, #fff);
     border: 1px solid var(--uilib-surface-border, #ced4da);
     border-radius: 6px;
-    font-size: 0.95rem;
-    background: var(--uilib-surface, #fff);
     color: var(--uilib-page-fg);
+    font-size: 0.95rem;
     outline: none;
+    padding: 0.5rem 0.75rem;
     transition: border-color 0.15s;
 
     &:focus {
@@ -98,12 +98,12 @@
   }
 
   .fd-btn {
-    padding: 0.5rem 1.25rem;
     border: none;
     border-radius: 6px;
+    cursor: pointer;
     font-size: 0.9rem;
     font-weight: 600;
-    cursor: pointer;
+    padding: 0.5rem 1.25rem;
     transition: opacity 0.15s;
 
     &:hover {
@@ -123,12 +123,12 @@
 
   // toggle state badge
   .fd-status {
-    display: inline-block;
-    margin-bottom: 1rem;
-    padding: 0.3rem 0.8rem;
     border-radius: 999px;
+    display: inline-block;
     font-size: 0.8rem;
     font-weight: 600;
+    margin-bottom: 1rem;
+    padding: 0.3rem 0.8rem;
 
     &--on {
       background: #d1fae5;
@@ -143,34 +143,43 @@
 
   // ── API table ─────────────────────────────────────────────────────
   .fd-table-wrap {
-    overflow-x: auto;
     margin-top: 1rem;
+    overflow-x: auto;
   }
 
   .fd-api-table {
-    width: 100%;
     border-collapse: collapse;
     font-size: 0.88rem;
+    width: 100%;
 
     th,
     td {
-      text-align: left;
-      padding: 0.55rem 0.75rem;
       border-bottom: 1px solid var(--uilib-surface-border, #dee2e6);
       color: var(--uilib-page-fg);
+      padding: 0.55rem 0.75rem;
+      text-align: left;
     }
 
     th {
-      font-weight: 600;
       background: var(--uilib-surface-alt, #f8f9fa);
+      font-weight: 600;
     }
 
     code {
+      background: var(--uilib-surface-alt, #f1f3f5);
+      border-radius: 4px;
       font-family: monospace;
       font-size: 0.85em;
-      background: var(--uilib-surface-alt, #f1f3f5);
       padding: 0.1em 0.4em;
-      border-radius: 4px;
     }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fd-input {
+    /* TODO: set transition / animation to none */
+  }
+
+  .fd-btn {
+    /* TODO: set transition / animation to none */
   }
 }

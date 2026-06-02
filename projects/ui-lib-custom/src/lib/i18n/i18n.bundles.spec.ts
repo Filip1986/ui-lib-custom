@@ -1,7 +1,7 @@
-import { UI_LIB_EN } from './en';
 import { UI_LIB_DE } from './de';
-import { UI_LIB_FR } from './fr';
+import { UI_LIB_EN } from './en';
 import { UI_LIB_ES } from './es';
+import { UI_LIB_FR } from './fr';
 import type { UiLibTranslationBundle, UiLibTranslationKey } from './i18n.types';
 
 /**

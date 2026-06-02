@@ -2,9 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
-import { Tabs } from './tabs';
+
 import { Tab } from './tab';
+import { Tabs } from './tabs';
 
 @Component({
   standalone: true,

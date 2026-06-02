@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A labelled content container with an optional collapse/expand animation. Use it to group related form fields or information sections under a clear heading."
     docHeader
     title="Fieldset"
     [importCode]="importCode"
-    description="A labelled content container with an optional collapse/expand animation. Use it to group related form fields or information sections under a clear heading."
   />
 
   <!-- ── Basic ────────────────────────────────────────────────────────────── -->
@@ -16,30 +16,30 @@
         <div class="demo-form-grid">
           <div class="demo-field">
             <label class="demo-label">First Name</label>
-            <input class="demo-input" type="text" value="Jane" readonly aria-label="First Name" />
+            <input aria-label="First Name" class="demo-input" readonly type="text" value="Jane" />
           </div>
           <div class="demo-field">
             <label class="demo-label">Last Name</label>
-            <input class="demo-input" type="text" value="Doe" readonly aria-label="Last Name" />
+            <input aria-label="Last Name" class="demo-input" readonly type="text" value="Doe" />
           </div>
           <div class="demo-field">
             <label class="demo-label">Email</label>
             <input
+              aria-label="Email"
               class="demo-input"
+              readonly
               type="email"
               value="jane.doe@example.com"
-              readonly
-              aria-label="Email"
             />
           </div>
           <div class="demo-field">
             <label class="demo-label">Phone</label>
-            <input class="demo-input" type="tel" value="+1 555 0100" readonly aria-label="Phone" />
+            <input aria-label="Phone" class="demo-input" readonly type="tel" value="+1 555 0100" />
           </div>
         </div>
       </ui-lib-fieldset>
     </div>
-    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" [showLineNumbers]="true" />
+    <app-doc-code-example [html]="basicHtml" [showLineNumbers]="true" [typescript]="basicTs" />
   </app-doc-section>
 
   <!-- ── Toggleable ───────────────────────────────────────────────────────── -->
@@ -58,16 +58,16 @@
           <div class="demo-field">
             <label class="demo-label">Timeout (ms)</label>
             <input
+              aria-label="Timeout in milliseconds"
               class="demo-input"
+              readonly
               type="number"
               value="3000"
-              readonly
-              aria-label="Timeout in milliseconds"
             />
           </div>
           <div class="demo-field">
             <label class="demo-label">Max Retries</label>
-            <input class="demo-input" type="number" value="3" readonly aria-label="Max retries" />
+            <input aria-label="Max retries" class="demo-input" readonly type="number" value="3" />
           </div>
         </div>
       </ui-lib-fieldset>
@@ -77,8 +77,8 @@
     </div>
     <app-doc-code-example
       [html]="toggleableHtml"
-      [typescript]="toggleableTs"
       [showLineNumbers]="true"
+      [typescript]="toggleableTs"
     />
   </app-doc-section>
 
@@ -100,8 +100,8 @@
     </div>
     <app-doc-code-example
       [html]="preCollapsedHtml"
-      [typescript]="preCollapsedTs"
       [showLineNumbers]="true"
+      [typescript]="preCollapsedTs"
     />
   </app-doc-section>
 
@@ -113,7 +113,7 @@
     </p>
     <div class="demo-preview">
       <ui-lib-fieldset [toggleable]="true">
-        <span fieldsetLegend class="demo-custom-legend">
+        <span class="demo-custom-legend" fieldsetLegend>
           <i class="pi pi-user demo-legend-icon"></i>
           User <strong>Profile</strong>
         </span>
@@ -122,8 +122,8 @@
     </div>
     <app-doc-code-example
       [html]="customLegendHtml"
-      [typescript]="customLegendTs"
       [showLineNumbers]="true"
+      [typescript]="customLegendTs"
     />
   </app-doc-section>
 
@@ -135,7 +135,7 @@
     </p>
     <div class="demo-preview demo-preview--column">
       @for (variant of variants; track variant) {
-        <ui-lib-fieldset [legend]="variant" [variant]="variant" [toggleable]="true">
+        <ui-lib-fieldset [legend]="variant" [toggleable]="true" [variant]="variant">
           <p class="demo-paragraph">
             Content inside the <strong>{{ variant }}</strong> variant fieldset.
           </p>
@@ -144,8 +144,8 @@
     </div>
     <app-doc-code-example
       [html]="variantsHtml"
-      [typescript]="variantsTs"
       [showLineNumbers]="true"
+      [typescript]="variantsTs"
     />
   </app-doc-section>
 
@@ -165,9 +165,9 @@
     </div>
     <ui-lib-code-snippet
       language="typescript"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetToggleEvent"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -191,9 +191,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -202,8 +202,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

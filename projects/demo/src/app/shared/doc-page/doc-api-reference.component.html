@@ -3,20 +3,20 @@
 }
 
 <ui-lib-table
-  [value]="tableRows()"
-  [showGridlines]="true"
   size="sm"
-  variant="minimal"
   styleClass="doc-api-reference__table"
+  variant="minimal"
   [ariaLabel]="title() || nameColumnLabel() + ' reference'"
+  [showGridlines]="true"
+  [value]="tableRows()"
 >
   <!-- Name / Input / Output / Property column -->
-  <ui-lib-table-column field="name" [header]="nameColumnLabel()" width="18%">
-    <ng-template uiTableColumnBody let-row>
+  <ui-lib-table-column field="name" width="18%" [header]="nameColumnLabel()">
+    <ng-template let-row uiTableColumnBody>
       <span class="doc-api-reference__name-cell">
         <code class="doc-api-reference__name">{{ row.name }}</code>
         @if (row.required) {
-          <span class="doc-api-reference__required" aria-label="required">*</span>
+          <span aria-label="required" class="doc-api-reference__required">*</span>
         }
       </span>
     </ng-template>
@@ -24,7 +24,7 @@
 
   <!-- Type column -->
   <ui-lib-table-column field="type" header="Type" width="22%">
-    <ng-template uiTableColumnBody let-row>
+    <ng-template let-row uiTableColumnBody>
       <code class="doc-api-reference__type">{{ row.type }}</code>
     </ng-template>
   </ui-lib-table-column>
@@ -32,11 +32,11 @@
   <!-- Default column (conditional) -->
   @if (showDefaultColumn()) {
     <ui-lib-table-column field="default" header="Default" width="15%">
-      <ng-template uiTableColumnBody let-row>
+      <ng-template let-row uiTableColumnBody>
         @if (row.default !== undefined) {
           <code class="doc-api-reference__default">{{ row.default }}</code>
         } @else {
-          <span class="doc-api-reference__no-default" aria-label="no default">—</span>
+          <span aria-label="no default" class="doc-api-reference__no-default">—</span>
         }
       </ng-template>
     </ui-lib-table-column>
@@ -44,7 +44,7 @@
 
   <!-- Description column -->
   <ui-lib-table-column field="description" header="Description">
-    <ng-template uiTableColumnBody let-row>
+    <ng-template let-row uiTableColumnBody>
       <span [innerHTML]="row.description"></span>
     </ng-template>
   </ui-lib-table-column>

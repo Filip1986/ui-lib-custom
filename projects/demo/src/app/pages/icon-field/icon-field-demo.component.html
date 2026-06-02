@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Input icon composition with leading/trailing placement, custom projected icon templates, and FloatLabel compatibility."
     docHeader
     title="IconField"
     [importCode]="importCode"
-    description="Input icon composition with leading/trailing placement, custom projected icon templates, and FloatLabel compatibility."
   />
 
   <app-doc-demo-viewport [autoHeight]="true">
@@ -16,8 +16,8 @@
             <ui-lib-icon-field iconPosition="left">
               <ui-lib-input-icon styleClass="pi pi-search" />
               <input
-                type="text"
                 placeholder="Search"
+                type="text"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="basicSearchValue"
               />
@@ -26,8 +26,8 @@
             <ui-lib-icon-field iconPosition="right">
               <ui-lib-input-icon styleClass="pi pi-spinner pi-spin" />
               <input
-                type="text"
                 placeholder="Loading"
+                type="text"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="basicLoadingValue"
               />
@@ -46,14 +46,14 @@
           <div class="stack-md">
             <ui-lib-icon-field iconPosition="left">
               <ui-lib-input-icon>
-                <svg class="demo-svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <svg aria-hidden="true" class="demo-svg-icon" viewBox="0 0 24 24">
                   <circle cx="11" cy="11" r="7" />
-                  <line x1="16.5" y1="16.5" x2="21" y2="21" />
+                  <line x1="16.5" x2="21" y1="16.5" y2="21" />
                 </svg>
               </ui-lib-input-icon>
               <input
-                type="text"
                 placeholder="SVG icon"
+                type="text"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="templateSvgValue"
               />
@@ -83,8 +83,8 @@
               <ui-lib-icon-field iconPosition="left">
                 <ui-lib-input-icon styleClass="pi pi-envelope" />
                 <input
-                  type="text"
                   placeholder=" "
+                  type="text"
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="floatOverValue"
                 />
@@ -96,8 +96,8 @@
               <ui-lib-icon-field iconPosition="left">
                 <ui-lib-input-icon styleClass="pi pi-user" />
                 <input
-                  type="text"
                   placeholder=" "
+                  type="text"
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="floatInValue"
                 />
@@ -109,8 +109,8 @@
               <ui-lib-icon-field iconPosition="left">
                 <ui-lib-input-icon styleClass="pi pi-lock" />
                 <input
-                  type="password"
                   placeholder=" "
+                  type="password"
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="floatOnValue"
                 />
@@ -130,8 +130,8 @@
             <ui-lib-icon-field iconPosition="left">
               <ui-lib-input-icon styleClass="pi pi-search" />
               <ui-lib-input
-                size="sm"
                 placeholder="Small"
+                size="sm"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizeSmallValue"
               />
@@ -140,8 +140,8 @@
             <ui-lib-icon-field iconPosition="left">
               <ui-lib-input-icon styleClass="pi pi-search" />
               <ui-lib-input
-                size="md"
                 placeholder="Medium"
+                size="md"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizeMediumValue"
               />
@@ -150,8 +150,8 @@
             <ui-lib-icon-field iconPosition="left">
               <ui-lib-input-icon styleClass="pi pi-search" />
               <ui-lib-input
-                size="lg"
                 placeholder="Large"
+                size="lg"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizeLargeValue"
               />
@@ -171,8 +171,8 @@
               <ui-lib-icon-field iconPosition="left">
                 <ui-lib-input-icon styleClass="pi pi-search" />
                 <ui-lib-input
-                  variant="material"
                   placeholder="Material"
+                  variant="material"
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="variantMaterialValue"
                 />
@@ -184,8 +184,8 @@
               <ui-lib-icon-field iconPosition="left">
                 <ui-lib-input-icon styleClass="pi pi-search" />
                 <ui-lib-input
-                  variant="bootstrap"
                   placeholder="Bootstrap"
+                  variant="bootstrap"
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="variantBootstrapValue"
                 />
@@ -197,8 +197,8 @@
               <ui-lib-icon-field iconPosition="left">
                 <ui-lib-input-icon styleClass="pi pi-search" />
                 <ui-lib-input
-                  variant="minimal"
                   placeholder="Minimal"
+                  variant="minimal"
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="variantMinimalValue"
                 />
@@ -222,9 +222,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -240,8 +240,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

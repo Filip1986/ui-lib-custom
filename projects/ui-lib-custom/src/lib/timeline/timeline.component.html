@@ -18,24 +18,24 @@
     <div class="ui-lib-timeline__separator">
       @if (!context.first) {
         <span
-          class="ui-lib-timeline__connector ui-lib-timeline__connector--before"
           aria-hidden="true"
+          class="ui-lib-timeline__connector ui-lib-timeline__connector--before"
         ></span>
       }
-      <div class="ui-lib-timeline__marker" aria-hidden="true">
+      <div aria-hidden="true" class="ui-lib-timeline__marker">
         @if (markerTemplate()) {
           <ng-container
             [ngTemplateOutlet]="markerTemplate()!"
             [ngTemplateOutletContext]="context"
           />
         } @else {
-          <span class="ui-lib-timeline__dot" aria-hidden="true"></span>
+          <span aria-hidden="true" class="ui-lib-timeline__dot"></span>
         }
       </div>
       @if (!context.last) {
         <span
-          class="ui-lib-timeline__connector ui-lib-timeline__connector--after"
           aria-hidden="true"
+          class="ui-lib-timeline__connector ui-lib-timeline__connector--after"
         ></span>
       }
     </div>

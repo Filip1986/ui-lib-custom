@@ -1,6 +1,6 @@
 @if (shouldShow()) {
   <div class="uilib-paginator-content" [class]="styleClass()">
-    <span class="uilib-paginator-live" aria-live="polite" aria-atomic="true">
+    <span aria-atomic="true" aria-live="polite" class="uilib-paginator-live">
       {{ pageAnnouncement() }}
     </span>
 
@@ -9,7 +9,7 @@
 
     <!-- Current page report -->
     @if (showCurrentPageReport()) {
-      <span class="uilib-paginator-current" aria-live="polite" aria-atomic="true">
+      <span aria-atomic="true" aria-live="polite" class="uilib-paginator-current">
         {{ currentPageReport() }}
       </span>
     }
@@ -17,24 +17,24 @@
     <!-- First page button -->
     @if (showFirstLastIcon()) {
       <button
-        type="button"
         class="uilib-paginator-button uilib-paginator-first"
+        type="button"
+        [attr.aria-disabled]="isFirstPage() || isEmpty()"
+        [attr.aria-label]="i18n.translate('paginator.first')"
         [class.uilib-paginator-button--disabled]="isFirstPage() || isEmpty()"
         [disabled]="isFirstPage() || isEmpty()"
-        [attr.aria-label]="i18n.translate('paginator.first')"
-        [attr.aria-disabled]="isFirstPage() || isEmpty()"
         (click)="changePageToFirst($event)"
       >
         <!-- Double chevron left -->
         <svg
-          viewBox="0 0 24 24"
+          aria-hidden="true"
           fill="none"
+          focusable="false"
           stroke="currentColor"
-          stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          aria-hidden="true"
-          focusable="false"
+          stroke-width="2"
+          viewBox="0 0 24 24"
         >
           <polyline points="11 17 6 12 11 7" />
           <polyline points="18 17 13 12 18 7" />
@@ -44,24 +44,24 @@
 
     <!-- Previous page button -->
     <button
-      type="button"
       class="uilib-paginator-button uilib-paginator-prev"
+      type="button"
+      [attr.aria-disabled]="isFirstPage() || isEmpty()"
+      [attr.aria-label]="i18n.translate('paginator.prev')"
       [class.uilib-paginator-button--disabled]="isFirstPage() || isEmpty()"
       [disabled]="isFirstPage() || isEmpty()"
-      [attr.aria-label]="i18n.translate('paginator.prev')"
-      [attr.aria-disabled]="isFirstPage() || isEmpty()"
       (click)="changePageToPrev($event)"
     >
       <!-- Chevron left -->
       <svg
-        viewBox="0 0 24 24"
+        aria-hidden="true"
         fill="none"
+        focusable="false"
         stroke="currentColor"
-        stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        aria-hidden="true"
-        focusable="false"
+        stroke-width="2"
+        viewBox="0 0 24 24"
       >
         <polyline points="15 18 9 12 15 6" />
       </svg>
@@ -72,11 +72,11 @@
       <span class="uilib-paginator-pages">
         @for (pageLink of pageLinks(); track pageLink) {
           <button
-            type="button"
             class="uilib-paginator-button uilib-paginator-page"
-            [class.uilib-paginator-page--selected]="pageLink - 1 === currentPage()"
-            [attr.aria-label]="getPageLinkAriaLabel(pageLink)"
+            type="button"
             [attr.aria-current]="pageLink - 1 === currentPage() ? 'page' : null"
+            [attr.aria-label]="getPageLinkAriaLabel(pageLink)"
+            [class.uilib-paginator-page--selected]="pageLink - 1 === currentPage()"
             (click)="onPageLinkClick($event, pageLink)"
           >
             {{ pageLink }}
@@ -87,24 +87,24 @@
 
     <!-- Next page button -->
     <button
-      type="button"
       class="uilib-paginator-button uilib-paginator-next"
+      type="button"
+      [attr.aria-disabled]="isLastPage() || isEmpty()"
+      [attr.aria-label]="i18n.translate('paginator.next')"
       [class.uilib-paginator-button--disabled]="isLastPage() || isEmpty()"
       [disabled]="isLastPage() || isEmpty()"
-      [attr.aria-label]="i18n.translate('paginator.next')"
-      [attr.aria-disabled]="isLastPage() || isEmpty()"
       (click)="changePageToNext($event)"
     >
       <!-- Chevron right -->
       <svg
-        viewBox="0 0 24 24"
+        aria-hidden="true"
         fill="none"
+        focusable="false"
         stroke="currentColor"
-        stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        aria-hidden="true"
-        focusable="false"
+        stroke-width="2"
+        viewBox="0 0 24 24"
       >
         <polyline points="9 18 15 12 9 6" />
       </svg>
@@ -113,24 +113,24 @@
     <!-- Last page button -->
     @if (showFirstLastIcon()) {
       <button
-        type="button"
         class="uilib-paginator-button uilib-paginator-last"
+        type="button"
+        [attr.aria-disabled]="isLastPage() || isEmpty()"
+        [attr.aria-label]="i18n.translate('paginator.last')"
         [class.uilib-paginator-button--disabled]="isLastPage() || isEmpty()"
         [disabled]="isLastPage() || isEmpty()"
-        [attr.aria-label]="i18n.translate('paginator.last')"
-        [attr.aria-disabled]="isLastPage() || isEmpty()"
         (click)="changePageToLast($event)"
       >
         <!-- Double chevron right -->
         <svg
-          viewBox="0 0 24 24"
+          aria-hidden="true"
           fill="none"
+          focusable="false"
           stroke="currentColor"
-          stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          aria-hidden="true"
-          focusable="false"
+          stroke-width="2"
+          viewBox="0 0 24 24"
         >
           <polyline points="13 17 18 12 13 7" />
           <polyline points="6 17 11 12 6 7" />
@@ -141,13 +141,13 @@
     <!-- Jump-to-page input -->
     @if (showJumpToPageInput()) {
       <input
-        type="number"
         class="uilib-paginator-jtp-input"
-        [min]="1"
-        [max]="pageCount()"
-        [disabled]="isEmpty()"
+        type="number"
         [attr.aria-label]="i18n.translate('paginator.jump')"
         [attr.placeholder]="i18n.translate('paginator.jump.placeholder')"
+        [disabled]="isEmpty()"
+        [max]="pageCount()"
+        [min]="1"
         (keydown)="onJumpToPageKeydown($event)"
       />
     }
@@ -156,9 +156,9 @@
     @if (rowsPerPageOptions()) {
       <select
         class="uilib-paginator-rpp-select"
-        [value]="rows()"
-        [disabled]="isEmpty()"
         [attr.aria-label]="i18n.translate('paginator.rows.label')"
+        [disabled]="isEmpty()"
+        [value]="rows()"
         (change)="onRowsPerPageChange($event)"
       >
         @for (option of rowsPerPageOptions()!; track option) {

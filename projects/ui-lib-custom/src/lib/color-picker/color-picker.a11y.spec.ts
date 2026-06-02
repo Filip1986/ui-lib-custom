@@ -1,15 +1,16 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { ColorPicker } from './index';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { ColorPicker } from './index';
 
 // ── Host components ───────────────────────────────────────────────────────────
 

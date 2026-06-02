@@ -4,10 +4,10 @@
 
 .demo-brand,
 .demo-user {
-  font-weight: 600;
-  font-size: 0.9375rem;
-  padding: 0 0.5rem;
   color: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 0 0.5rem;
 }
 
 .demo-section__variants {
@@ -23,15 +23,15 @@
 }
 
 .demo-section__variant-label {
+  color: var(--uilib-color-text-secondary, #6c757d);
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--uilib-color-text-secondary, #6c757d);
-  text-transform: uppercase;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .demo-hint {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
   color: var(--uilib-color-text-secondary, #6c757d);
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
 }

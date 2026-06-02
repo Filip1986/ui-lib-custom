@@ -1,39 +1,41 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, computed, inject, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
+
+import { ICON_SIZES } from 'ui-lib-custom/core';
+import { SHARED_DEFAULTS } from 'ui-lib-custom/core';
 import {
   BORDER_RADIUS,
   COLORPICKER_TOKENS,
   DATEPICKER_TOKENS,
-  EDITOR_TOKENS,
-  ICON_FIELD_TOKENS,
-  SHADOWS,
-  SELECTBUTTON_TOKENS,
-  SHAPE_TOKENS,
-  type ShapeToken,
   DENSITY_TOKENS,
   type DensityToken,
+  EDITOR_TOKENS,
+  ICON_FIELD_TOKENS,
+  SELECTBUTTON_TOKENS,
+  SHADOWS,
+  SHAPE_TOKENS,
+  type ShapeToken,
 } from 'ui-lib-custom/tokens';
+
+import { type CssExportOptions, exportThemeAsCss } from './exporters/css-exporter';
+import { exportThemeAsFigmaJson } from './exporters/figma-exporter';
+import { exportThemeAsScss, type ScssExportOptions } from './exporters/scss-exporter';
 import { brandExamplePreset } from './presets/brand-example';
 import { darkPreset } from './presets/dark';
 import { lightPreset } from './presets/light';
-import { ICON_SIZES } from 'ui-lib-custom/core';
 import type {
   DeepPartial,
+  ThemeConfig,
+  ThemeIconConfig,
+  ThemeMode,
   ThemePreset,
   ThemePresetOverrides,
-  ThemeShapeRadius,
-  ThemeIconConfig,
-  ThemeConfig,
-  ThemeMode,
-  ThemeVariant,
   ThemePresetShape,
+  ThemeShapeRadius,
+  ThemeVariant,
 } from './theme-preset.interface';
 import { saveAs } from './utils/file-download';
-import { exportThemeAsScss, type ScssExportOptions } from './exporters/scss-exporter';
-import { exportThemeAsCss, type CssExportOptions } from './exporters/css-exporter';
-import { exportThemeAsFigmaJson } from './exporters/figma-exporter';
-import { SHARED_DEFAULTS } from 'ui-lib-custom/core';
 
 type LoadOptions = {
   merge?: boolean;

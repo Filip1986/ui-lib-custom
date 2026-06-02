@@ -1,19 +1,20 @@
 import {
-  computed,
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   ElementRef,
+  inject,
   InjectionToken,
   input,
-  inject,
+  type InputSignal,
   Renderer2,
+  type Signal,
   signal,
   ViewEncapsulation,
-  type Signal,
-  type InputSignal,
   type WritableSignal,
 } from '@angular/core';
+
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 
 let formFieldId: number = 0;

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import type { ThemePreset } from './theme-preset.interface';
+
 import { ThemeEditorService } from './theme-editor.service';
+import type { ThemePreset } from './theme-preset.interface';
 import { ThemePresetService } from './theme-preset.service';
 
 type MockPresetService = {

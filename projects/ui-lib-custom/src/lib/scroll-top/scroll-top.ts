@@ -7,17 +7,19 @@ import {
   ElementRef,
   inject,
   input,
+  type InputSignal,
   NgZone,
+  type OnInit,
   PLATFORM_ID,
+  type Signal,
   signal,
   ViewEncapsulation,
-  type InputSignal,
-  type OnInit,
-  type Signal,
   type WritableSignal,
 } from '@angular/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   ScrollTopBehavior,
   ScrollTopSize,

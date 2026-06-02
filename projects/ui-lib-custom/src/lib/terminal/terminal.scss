@@ -27,25 +27,29 @@
 
   // ---- Host element ------------------------------------------------
   .ui-lib-terminal {
-    display: block;
     background: var(--uilib-terminal-bg);
-    color: var(--uilib-terminal-color);
     border: var(--uilib-terminal-border);
     border-radius: var(--uilib-terminal-border-radius);
-    overflow: hidden;
+    color: var(--uilib-terminal-color);
+    cursor: text;
+    display: block;
     font-family: var(--uilib-terminal-font-family);
     font-size: var(--uilib-terminal-font-size);
     line-height: var(--uilib-terminal-line-height);
-    cursor: text;
+    overflow: hidden;
 
     // ---- Content container ------------------------------------------
     &__content {
-      padding: var(--uilib-terminal-padding);
-      min-height: var(--uilib-terminal-min-height);
-      max-height: var(--uilib-terminal-max-height);
-      overflow-y: auto;
       display: flex;
       flex-direction: column;
+      max-height: var(--uilib-terminal-max-height);
+      min-height: var(--uilib-terminal-min-height);
+      overflow-y: auto;
+      padding: var(--uilib-terminal-padding);
+      scrollbar-color: var(--uilib-terminal-scrollbar-thumb) var(--uilib-terminal-scrollbar-bg);
+
+      // Firefox scrollbar
+      scrollbar-width: thin;
 
       // Custom scrollbar (Webkit)
       &::-webkit-scrollbar {
@@ -60,16 +64,12 @@
         background: var(--uilib-terminal-scrollbar-thumb);
         border-radius: 3px;
       }
-
-      // Firefox scrollbar
-      scrollbar-width: thin;
-      scrollbar-color: var(--uilib-terminal-scrollbar-thumb) var(--uilib-terminal-scrollbar-bg);
     }
 
     // ---- Output live region (role=log) --------------------------------
     &__output {
-      flex: 1;
       display: flex;
+      flex: 1;
       flex-direction: column;
     }
 
@@ -86,16 +86,16 @@
 
     &__command-row,
     &__input-row {
-      display: flex;
       align-items: flex-start;
+      display: flex;
       gap: 0.5rem;
     }
 
     &__prompt {
       color: var(--uilib-terminal-prompt-color);
       flex-shrink: 0;
-      user-select: none;
       font-weight: bold;
+      user-select: none;
     }
 
     &__command-text {
@@ -104,33 +104,33 @@
 
     &__response {
       color: var(--uilib-terminal-response-color);
+      margin-top: 0.125rem;
       padding-inline-start: var(--uilib-terminal-response-indent);
       white-space: pre-wrap;
       word-break: break-all;
-      margin-top: 0.125rem;
     }
 
     &__input-row {
-      margin-top: 0.25rem;
       align-items: center;
+      margin-top: 0.25rem;
       min-height: 1.5em;
     }
 
     &__input {
-      flex: 1;
-      min-width: 0;
       background: transparent;
       border: none;
-      outline: none;
-      color: inherit;
-      font: inherit;
       caret-color: var(--uilib-terminal-input-caret-color);
+      color: inherit;
+      flex: 1;
+      font: inherit;
+      min-width: 0;
+      outline: none;
       padding: 0;
 
       &:focus-visible {
+        border-radius: 2px;
         outline: 2px solid var(--uilib-terminal-input-caret-color);
         outline-offset: 2px;
-        border-radius: 2px;
       }
 
       &::selection {

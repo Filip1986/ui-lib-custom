@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 // noinspection JSUnusedGlobalSymbols
 import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
 import { Alert } from './alert';
 
 type AlertStoryArgs = {

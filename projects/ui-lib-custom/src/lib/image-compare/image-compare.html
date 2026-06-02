@@ -7,54 +7,54 @@
   <!-- ── Left image (always full-width, anchored to the left) ─────────────────── -->
   <img
     class="uilib-image-compare__img uilib-image-compare__img--left"
-    [src]="leftImage()"
-    [attr.alt]="leftAlt()"
     draggable="false"
+    [attr.alt]="leftAlt()"
+    [src]="leftImage()"
   />
 
   <!-- ── Right image (clipped to reveal only the right portion) ───────────────── -->
   <img
     class="uilib-image-compare__img uilib-image-compare__img--right"
-    [src]="rightImage()"
-    [attr.alt]="rightAlt()"
-    [style.clip-path]="rightClipPath()"
     draggable="false"
+    [attr.alt]="rightAlt()"
+    [src]="rightImage()"
+    [style.clip-path]="rightClipPath()"
   />
 
   <!-- ── Divider line ─────────────────────────────────────────────────────────── -->
   <div
+    aria-hidden="true"
     class="uilib-image-compare__divider"
     [style.left]="handlePosition()"
-    aria-hidden="true"
   ></div>
 
   <!-- ── Draggable handle ─────────────────────────────────────────────────────── -->
   <div
+    aria-valuemax="100"
+    aria-valuemin="0"
     class="uilib-image-compare__handle"
-    [style.left]="handlePosition()"
     role="slider"
     tabindex="0"
+    [attr.aria-disabled]="disabled() ? 'true' : null"
     [attr.aria-label]="effectiveAriaLabel()"
     [attr.aria-valuenow]="clampedValue()"
     [attr.aria-valuetext]="ariaValueText()"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    [attr.aria-disabled]="disabled() ? 'true' : null"
-    (pointerdown)="onHandlePointerDown($event)"
-    (keydown)="onHandleKeyDown($event)"
-    (focus)="onHandleFocus()"
+    [style.left]="handlePosition()"
     (blur)="onHandleBlur()"
+    (focus)="onHandleFocus()"
+    (keydown)="onHandleKeyDown($event)"
+    (pointerdown)="onHandlePointerDown($event)"
   >
     <!-- Handle knob icon -->
     <svg
+      aria-hidden="true"
       class="uilib-image-compare__handle-icon"
-      viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      aria-hidden="true"
+      stroke-width="2"
+      viewBox="0 0 24 24"
     >
       <polyline points="9 18 15 12 9 6" />
       <polyline points="15 6 9 12 15 18" transform="translate(-6,0)" />

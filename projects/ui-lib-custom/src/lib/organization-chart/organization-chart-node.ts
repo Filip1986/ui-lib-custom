@@ -1,17 +1,19 @@
+import { NgTemplateOutlet } from '@angular/common';
+import type { InputSignal, Signal, TemplateRef } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   inject,
   input,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, Signal, TemplateRef } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
-import { ORGANIZATION_CHART_CONTEXT } from './organization-chart-context';
-import type { OrganizationChartContext } from './organization-chart-context';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+
 import type { OrganizationChartNode } from './organization-chart.types';
+import type { OrganizationChartContext } from './organization-chart-context';
+import { ORGANIZATION_CHART_CONTEXT } from './organization-chart-context';
 
 /**
  * Internal recursive node component for `OrganizationChart`.

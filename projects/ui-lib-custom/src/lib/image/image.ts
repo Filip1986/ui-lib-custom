@@ -1,30 +1,32 @@
+import { DOCUMENT, isPlatformBrowser, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  PLATFORM_ID,
-  ViewEncapsulation,
   computed,
   contentChild,
   effect,
+  type ElementRef,
   inject,
   input,
-  model,
-  output,
-  signal,
-  viewChild,
-  type ElementRef,
   type InputSignal,
+  model,
   type ModelSignal,
   type OnDestroy,
+  output,
   type OutputEmitterRef,
+  PLATFORM_ID,
   type Signal,
+  signal,
   type TemplateRef,
+  viewChild,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { DOCUMENT, NgStyle, NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
+
 import { FocusTrap } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import {
   IMAGE_ROTATE_STEP,
   IMAGE_ZOOM_MAX,

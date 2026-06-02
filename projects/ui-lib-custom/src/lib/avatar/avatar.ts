@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,17 +6,18 @@ import {
   contentChild,
   inject,
   input,
-  ViewEncapsulation,
   type InputSignal,
   type Signal,
   type TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { AvatarFallbackContext, AvatarShape, AvatarSize, AvatarVariant } from './avatar.types';
 import { AVATAR_GROUP_CONTEXT } from './avatar-group';
-import type { AvatarFallbackContext, AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
-export type { AvatarFallbackContext, AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
+export type { AvatarFallbackContext, AvatarShape, AvatarSize, AvatarVariant } from './avatar.types';
 let nextAvatarId: number = 0;
 /**
  * Avatar - Represents a person or object with an image, initials, or icon.

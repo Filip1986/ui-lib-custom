@@ -1,15 +1,16 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UiLibTextarea } from './textarea';
+
 import type { TextareaChangeEvent, TextareaSize, TextareaVariant } from './textarea';
+import { UiLibTextarea } from './textarea';
 
 // ---------------------------------------------------------------------------
 // Typed DOM helpers

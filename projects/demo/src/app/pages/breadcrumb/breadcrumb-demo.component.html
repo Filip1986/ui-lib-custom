@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A breadcrumb displays a hierarchical navigation trail, helping users understand where they are in an application and navigate back to parent sections."
     docHeader
     title="Breadcrumb"
     [importCode]="importCode"
-    description="A breadcrumb displays a hierarchical navigation trail, helping users understand where they are in an application and navigate back to parent sections."
   />
 
   <div class="demo-page-header__preview">
@@ -96,7 +96,7 @@
       <ui-lib-breadcrumb [items]="commandItems" (itemClick)="onItemClick($event)" />
     </div>
     @if (eventLog().length > 0) {
-      <div class="demo-event-log" aria-live="polite">
+      <div aria-live="polite" class="demo-event-log">
         @for (entry of eventLog(); track $index) {
           <p>{{ entry }}</p>
         }
@@ -144,9 +144,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -154,8 +154,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

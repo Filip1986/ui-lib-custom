@@ -5,8 +5,9 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import { ImageCompareComponent } from './image-compare';
 import type { ImageCompareSize, ImageCompareVariant } from './image-compare.types';
 

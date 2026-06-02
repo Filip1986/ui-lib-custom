@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { ThemePresetService } from './theme-preset.service';
+
 import { ThemeConfigService } from './theme-config.service';
 import type { ThemePreset } from './theme-preset.interface';
+import { ThemePresetService } from './theme-preset.service';
 
 type StorageRecord = Record<string, string>;
 

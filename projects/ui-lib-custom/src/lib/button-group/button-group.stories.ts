@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 import {
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
-import { ButtonGroup } from './button-group';
+
 import { Button } from '../button/button';
+import { ButtonGroup } from './button-group';
 
 type Story = StoryObj;
 

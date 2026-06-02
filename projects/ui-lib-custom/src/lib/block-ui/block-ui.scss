@@ -27,17 +27,17 @@
 
   /* ── Mask ───────────────────────────────────────────────────────── */
   .ui-lib-block-ui__mask {
-    position: absolute;
-    inset: 0;
-    background-color: var(--uilib-block-ui-mask-bg);
-    display: flex;
     align-items: center;
+    background-color: var(--uilib-block-ui-mask-bg);
+    border-radius: inherit;
+    display: flex;
+    inset: 0;
     justify-content: center;
     opacity: 0;
     pointer-events: none;
+    position: absolute;
     transition: var(--uilib-block-ui-transition);
     z-index: var(--uilib-block-ui-z-index);
-    border-radius: inherit;
   }
 
   .ui-lib-block-ui__mask--visible {

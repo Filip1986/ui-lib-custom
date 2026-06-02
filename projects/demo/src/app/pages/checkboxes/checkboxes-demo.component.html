@@ -1,9 +1,9 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Accessible, signal-friendly checkbox supporting binary and group modes, customizable values, and form integrations."
     docHeader
     title="Checkbox"
     [importCode]="importCode"
-    description="Accessible, signal-friendly checkbox supporting binary and group modes, customizable values, and form integrations."
   />
 
   <app-checkbox-basic-example />
@@ -11,16 +11,16 @@
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
-      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
-      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
-      <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
-      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
+      <ui-lib-tab label="Playground" value="playground" />
+      <ui-lib-tab label="Variants" value="variants" />
+      <ui-lib-tab label="API Reference" value="api-reference" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="Accessibility" value="accessibility" />
     </ui-lib-tabs>
   </div>
 
@@ -33,10 +33,10 @@
             @for (item of variantOptions; track item) {
               <ui-lib-button
                 class="control-chip"
+                color="primary"
                 size="sm"
                 variant="minimal"
                 [appearance]="variant() === item ? 'solid' : 'ghost'"
-                color="primary"
                 (click)="selectVariant(item)"
                 >{{ item }}</ui-lib-button
               >
@@ -50,10 +50,10 @@
             @for (item of sizeOptions; track item) {
               <ui-lib-button
                 class="control-chip"
+                color="primary"
                 size="sm"
                 variant="minimal"
                 [appearance]="size() === item ? 'solid' : 'ghost'"
-                color="primary"
                 (click)="selectSize(item)"
                 >{{ item }}</ui-lib-button
               >
@@ -67,10 +67,10 @@
             @for (item of appearanceOptions; track item) {
               <ui-lib-button
                 class="control-chip"
+                color="primary"
                 size="sm"
                 variant="minimal"
                 [appearance]="appearance() === item ? 'solid' : 'ghost'"
-                color="primary"
                 (click)="appearance.set(item)"
                 >{{ item }}</ui-lib-button
               >
@@ -112,28 +112,28 @@
         <div class="viewport-controls">
           <div class="preset-buttons">
             @for (preset of viewportPresets; track preset.key) {
-              <ui-lib-button size="sm" appearance="ghost" (click)="setViewportPreset(preset)">{{
+              <ui-lib-button appearance="ghost" size="sm" (click)="setViewportPreset(preset)">{{
                 preset.label
               }}</ui-lib-button>
             }
             <div class="custom">
               <label>Custom</label>
               <input
-                type="number"
-                min="200"
-                max="2000"
                 aria-label="Custom viewport width in pixels"
+                max="2000"
+                min="200"
+                type="number"
                 [ngModel]="viewportCustomWidth()"
                 (ngModelChange)="setViewportCustomWidth($event)"
               />
-              <ui-lib-button size="sm" appearance="ghost" (click)="applyViewportCustom()"
+              <ui-lib-button appearance="ghost" size="sm" (click)="applyViewportCustom()"
                 >Apply</ui-lib-button
               >
             </div>
           </div>
           <div class="controls">
             <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-            <ui-lib-button size="sm" appearance="ghost" (click)="rotateViewport()"
+            <ui-lib-button appearance="ghost" size="sm" (click)="rotateViewport()"
               >Rotate</ui-lib-button
             >
           </div>
@@ -143,24 +143,24 @@
       <ui-lib-panel variant="minimal">
         <div class="density-controls">
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('default')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'default'"
+            (click)="setViewportDensity('default')"
             >Default</ui-lib-button
           >
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('comfortable')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'comfortable'"
+            (click)="setViewportDensity('comfortable')"
             >Comfortable</ui-lib-button
           >
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('compact')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'compact'"
+            (click)="setViewportDensity('compact')"
             >Compact</ui-lib-button
           >
         </div>
@@ -176,13 +176,13 @@
             <h3>Binary checkbox</h3>
             <ui-lib-checkbox
               class="demo-checkbox"
-              [variant]="variant()"
               [appearance]="appearance()"
-              [size]="size()"
-              [disabled]="disabled()"
-              [readonly]="readonlyState()"
-              [label]="label()"
               [description]="playgroundDescription()"
+              [disabled]="disabled()"
+              [label]="label()"
+              [readonly]="readonlyState()"
+              [size]="size()"
+              [variant]="variant()"
               [(checked)]="checkedPrimary"
             />
           </div>
@@ -191,20 +191,20 @@
             <h3>Indeterminate</h3>
             <ui-lib-checkbox
               class="demo-checkbox"
-              [variant]="variant()"
-              [appearance]="appearance()"
-              [size]="size()"
-              [disabled]="disabled()"
-              [readonly]="readonlyState()"
               label="Select all channels"
+              [appearance]="appearance()"
+              [disabled]="disabled()"
               [indeterminate]="indeterminate()"
+              [readonly]="readonlyState()"
+              [size]="size()"
+              [variant]="variant()"
               [(checked)]="indeterminateChecked"
               (checkedChange)="onIndeterminateChange($event)"
             />
             <ui-lib-button
+              appearance="ghost"
               size="sm"
               variant="minimal"
-              appearance="ghost"
               (click)="resetIndeterminateState()"
               >Reset to mixed</ui-lib-button
             >
@@ -220,15 +220,15 @@
         <div class="doc-demo stack">
           @for (option of groupOptions; track option.value) {
             <ui-lib-checkbox
-              [variant]="variant()"
               [appearance]="appearance()"
-              [size]="size()"
-              [disabled]="disabled() || option.disabled === true"
-              [readonly]="readonlyState()"
               [binary]="false"
-              [value]="option.value"
+              [disabled]="disabled() || option.disabled === true"
               [label]="option.label"
               [ngModelOptions]="{ standalone: true }"
+              [readonly]="readonlyState()"
+              [size]="size()"
+              [value]="option.value"
+              [variant]="variant()"
               [(ngModel)]="groupSelection"
             />
           }
@@ -242,12 +242,12 @@
 
       <div class="dynamic-controls">
         <input
+          placeholder="Add option label"
           type="text"
           [value]="dynamicOptionLabel()"
-          placeholder="Add option label"
           (input)="dynamicOptionLabel.set($any($event.target).value)"
         />
-        <ui-lib-button size="sm" variant="minimal" appearance="solid" (click)="addDynamicOption()"
+        <ui-lib-button appearance="solid" size="sm" variant="minimal" (click)="addDynamicOption()"
           >Add option</ui-lib-button
         >
       </div>
@@ -257,21 +257,21 @@
           @for (option of dynamicOptions(); track option.value) {
             <div class="dynamic-option-row">
               <ui-lib-checkbox
-                [variant]="variant()"
                 [appearance]="appearance()"
-                [size]="size()"
-                [disabled]="disabled()"
-                [readonly]="readonlyState()"
                 [binary]="false"
-                [value]="option.value"
+                [disabled]="disabled()"
                 [label]="option.label"
                 [ngModelOptions]="{ standalone: true }"
+                [readonly]="readonlyState()"
+                [size]="size()"
+                [value]="option.value"
+                [variant]="variant()"
                 [(ngModel)]="dynamicSelection"
               />
               <ui-lib-button
+                appearance="ghost"
                 size="sm"
                 variant="minimal"
-                appearance="ghost"
                 (click)="removeDynamicOption(option.value)"
                 >Remove</ui-lib-button
               >
@@ -288,14 +288,14 @@
       <app-doc-demo-viewport>
         <div class="doc-demo stack">
           <ui-lib-checkbox
-            [variant]="variant()"
             [appearance]="appearance()"
-            [size]="size()"
             [binary]="true"
-            [trueValue]="customTrueValue"
             [falseValue]="customFalseValue"
             [label]="'Custom status toggle'"
             [ngModelOptions]="{ standalone: true }"
+            [size]="size()"
+            [trueValue]="customTrueValue"
+            [variant]="variant()"
             [(ngModel)]="customModel"
           />
           <div class="doc-note">
@@ -320,11 +320,11 @@
             <h4>{{ variantItem }}</h4>
             @for (appearanceItem of appearances; track appearanceItem) {
               <ui-lib-checkbox
-                [variant]="variantItem"
                 [appearance]="appearanceItem"
-                [size]="'md'"
                 [label]="appearanceItem"
                 [ngModelOptions]="{ standalone: true }"
+                [size]="'md'"
+                [variant]="variantItem"
                 [(ngModel)]="checkedSecondary"
               />
             }
@@ -336,11 +336,11 @@
       <div class="size-row">
         @for (sizeItem of sizes; track sizeItem) {
           <ui-lib-checkbox
-            [variant]="variant()"
             [appearance]="appearance()"
-            [size]="sizeItem"
             [label]="'Size ' + sizeItem"
             [ngModelOptions]="{ standalone: true }"
+            [size]="sizeItem"
+            [variant]="variant()"
             [(ngModel)]="checkedSecondary"
           />
         }
@@ -349,21 +349,21 @@
       <h3>Disabled and Readonly</h3>
       <div class="state-row">
         <ui-lib-checkbox
-          [variant]="variant()"
-          [appearance]="appearance()"
-          [size]="size()"
           label="Disabled"
+          [appearance]="appearance()"
           [disabled]="true"
           [ngModelOptions]="{ standalone: true }"
+          [size]="size()"
+          [variant]="variant()"
           [(ngModel)]="checkedSecondary"
         />
         <ui-lib-checkbox
-          [variant]="variant()"
-          [appearance]="appearance()"
-          [size]="size()"
           label="Readonly"
-          [readonly]="true"
+          [appearance]="appearance()"
           [ngModelOptions]="{ standalone: true }"
+          [readonly]="true"
+          [size]="size()"
+          [variant]="variant()"
           [(ngModel)]="checkedSecondary"
         />
       </div>
@@ -375,12 +375,12 @@
       <div class="forms-grid">
         <div class="form-card">
           <h3>Reactive forms</h3>
-          <form [formGroup]="reactiveForm" class="form-stack">
+          <form class="form-stack" [formGroup]="reactiveForm">
             <ui-lib-checkbox
-              formControlName="accepted"
-              [required]="true"
-              label="Accept terms"
               description="Required to submit"
+              formControlName="accepted"
+              label="Accept terms"
+              [required]="true"
             />
 
             <div class="form-group">
@@ -389,18 +389,18 @@
                 <ui-lib-checkbox
                   formControlName="channels"
                   [binary]="false"
-                  [value]="option.value"
                   [label]="option.label"
+                  [value]="option.value"
                 />
               }
             </div>
 
             <ui-lib-checkbox
               formControlName="customStatus"
-              [binary]="true"
-              [trueValue]="customTrueValue"
-              [falseValue]="customFalseValue"
               label="Custom status"
+              [binary]="true"
+              [falseValue]="customFalseValue"
+              [trueValue]="customTrueValue"
             />
 
             @if (acceptedInvalid()) {
@@ -422,13 +422,13 @@
             (ngSubmit)="submitTemplateForm(templateForm)"
           >
             <ui-lib-checkbox
+              label="I agree to the policy"
               name="templateAccepted"
               [required]="true"
-              label="I agree to the policy"
               [(ngModel)]="templateAccepted"
             />
 
-            <ui-lib-button type="submit" size="sm" variant="minimal" appearance="solid"
+            <ui-lib-button appearance="solid" size="sm" type="submit" variant="minimal"
               >Validate</ui-lib-button
             >
 
@@ -452,11 +452,11 @@
   @if (activeTab() === 'usage') {
     <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
-        language="typescript"
         filename="Usage"
+        language="typescript"
         [code]="usageTs"
         [showLineNumbers]="true"
-      ></ui-lib-code-snippet>
+      />
     </ui-lib-panel>
   }
 
@@ -493,9 +493,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -503,8 +503,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

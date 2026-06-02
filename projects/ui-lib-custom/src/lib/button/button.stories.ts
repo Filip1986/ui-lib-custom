@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { Button } from './button';
-import type { ButtonAppearance, ButtonSeverity, ButtonSize, ButtonVariant } from './button';
+
 import {
   SHARED_DEFAULTS,
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
+
+import type { ButtonAppearance, ButtonSeverity, ButtonSize, ButtonVariant } from './button';
+import { Button } from './button';
 
 type ButtonStoryArgs = {
   label: string;

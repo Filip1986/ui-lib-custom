@@ -11,9 +11,9 @@
 }
 
 .example-note {
-  margin: 0;
   color: var(--uilib-muted);
   font-size: 0.875rem;
+  margin: 0;
 }
 
 .row-2,
@@ -36,9 +36,9 @@
 }
 
 .error-text {
-  margin: 0;
   color: var(--uilib-color-danger-600);
   font-size: 0.875rem;
+  margin: 0;
 }
 
 .template-header {
@@ -46,26 +46,26 @@
 }
 
 .chip-template {
-  display: inline-flex;
   align-items: center;
-  padding: 0.125rem 0.5rem;
-  border-radius: 999px;
   background: color-mix(in srgb, var(--uilib-color-primary-600) 16%, transparent);
+  border-radius: 999px;
+  display: inline-flex;
+  padding: 0.125rem 0.5rem;
 }
 
 .clipping-card {
-  max-width: 22rem;
-  max-height: 5.5rem;
-  padding: 0.75rem;
   border: 1px dashed color-mix(in srgb, var(--uilib-border) 75%, transparent);
   border-radius: 0.5rem;
+  max-height: 5.5rem;
+  max-width: 22rem;
   overflow: hidden;
+  padding: 0.75rem;
 }
 
 .clipping-note {
-  margin: 0.5rem 0 0;
   color: var(--uilib-muted);
   font-size: 0.8125rem;
+  margin: 0.5rem 0 0;
 }
 
 @media (max-width: 960px) {

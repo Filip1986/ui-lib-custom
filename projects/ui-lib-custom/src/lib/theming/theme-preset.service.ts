@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, inject, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+
 import { ThemeConfigService } from './theme-config.service';
 import type { ThemePreset, ThemePresetColors, ThemePresetFonts } from './theme-preset.interface';
 import { saveAs } from './utils/file-download';

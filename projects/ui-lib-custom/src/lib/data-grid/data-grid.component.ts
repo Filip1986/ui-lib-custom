@@ -1,3 +1,13 @@
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
+import type {
+  AfterViewInit,
+  InputSignal,
+  ModelSignal,
+  OnInit,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,35 +21,26 @@ import {
   output,
   signal,
   TemplateRef,
-  ViewEncapsulation,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import type {
-  AfterViewInit,
-  InputSignal,
-  ModelSignal,
-  OnInit,
-  OutputEmitterRef,
-  Signal,
-  WritableSignal,
-} from '@angular/core';
-import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent } from 'rxjs';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { PaginatorComponent } from 'ui-lib-custom/paginator';
 import type { PaginatorPageEvent } from 'ui-lib-custom/paginator';
-import { DataGridColumnComponent } from './data-grid-column.component';
+import { PaginatorComponent } from 'ui-lib-custom/paginator';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { DATA_GRID_DEFAULTS } from './data-grid.constants';
 import type {
+  DataGridCellContext,
   DataGridCellEditCancelEvent,
   DataGridCellEditCompleteEvent,
   DataGridCellEditInitEvent,
-  DataGridCellContext,
   DataGridColumnResizeEvent,
-  DataGridEditorContext,
   DataGridEditMode,
+  DataGridEditorContext,
   DataGridEmptyContext,
   DataGridFilterEvent,
   DataGridFilterMatchMode,
@@ -56,6 +57,7 @@ import type {
   DataGridSortOrder,
   DataGridVariant,
 } from './data-grid.types';
+import { DataGridColumnComponent } from './data-grid-column.component';
 
 /** Monotonic id counter. */
 let nextDataGridId: number = 0;

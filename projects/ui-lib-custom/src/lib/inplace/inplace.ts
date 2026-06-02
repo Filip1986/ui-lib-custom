@@ -7,16 +7,18 @@ import {
   inject,
   Injector,
   input,
-  model,
-  output,
-  ViewEncapsulation,
   type InputSignal,
+  model,
   type ModelSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { InplaceVariant } from './inplace.types';
 
 export type { InplaceVariant } from './inplace.types';

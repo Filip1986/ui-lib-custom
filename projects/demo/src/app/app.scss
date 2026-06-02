@@ -1,7 +1,7 @@
 .layout-wrapper {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .layout-container {
@@ -11,11 +11,11 @@
 }
 
 .layout-content {
+  background: #f8f9fa;
   flex: 1;
   margin-left: 250px;
-  padding: 2rem;
-  background: #f8f9fa;
   overflow: visible;
+  padding: 2rem;
 
   @media (max-width: 968px) {
     margin-left: 0;
@@ -26,15 +26,15 @@
   display: none;
 
   @media (max-width: 968px) {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 998;
     animation: fadeIn 0.3s;
+    background: rgba(0, 0, 0, 0.4);
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 998;
   }
 }
 
@@ -44,5 +44,11 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layout-mask {
+    animation: none;
   }
 }

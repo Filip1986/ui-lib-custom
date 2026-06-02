@@ -67,10 +67,10 @@
 
     // Transition
     --uilib-mega-menu-transition: var(--uilib-transition-fast, 150ms ease);
+    display: block;
 
     // Base layout
     position: relative;
-    display: block;
   }
 
   // -----------------------------------------------------------------------------
@@ -90,14 +90,14 @@
     }
 
     .ui-lib-mega-menu__root-list {
+      align-items: center;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      align-items: center;
+      gap: 0.125rem;
       list-style: none;
       margin: 0;
       padding: 0.25rem;
-      gap: 0.125rem;
     }
 
     .ui-lib-mega-menu__root-item {
@@ -106,16 +106,16 @@
 
     // Panel drops below the root item
     .ui-lib-mega-menu__panel {
-      position: absolute;
-      top: calc(100% + 4px);
       inset-inline-start: 0;
-      z-index: var(--uilib-z-overlay, 1000);
       opacity: 0;
       pointer-events: none;
+      position: absolute;
+      top: calc(100% + 4px);
       transform: translateY(-4px);
       transition:
         opacity var(--uilib-mega-menu-transition),
         transform var(--uilib-mega-menu-transition);
+      z-index: var(--uilib-z-overlay, 1000);
 
       &.ui-lib-mega-menu__panel--open {
         opacity: 1;
@@ -128,15 +128,15 @@
   // Vertical — stacked list
   .ui-lib-mega-menu--vertical {
     .ui-lib-mega-menu__root-list {
-      display: flex;
-      flex-direction: column;
-      list-style: none;
-      margin: 0;
-      padding: 0.25rem;
-      gap: 0.125rem;
       background: var(--uilib-mega-menu-bar-bg);
       border: var(--uilib-mega-menu-bar-border);
       border-radius: var(--uilib-mega-menu-bar-border-radius);
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+      list-style: none;
+      margin: 0;
+      padding: 0.25rem;
     }
 
     .ui-lib-mega-menu__root-item {
@@ -145,16 +145,16 @@
 
     // Panel opens to the right
     .ui-lib-mega-menu__panel {
-      position: absolute;
-      top: 0;
       inset-inline-start: calc(100% + 4px);
-      z-index: var(--uilib-z-overlay, 1000);
       opacity: 0;
       pointer-events: none;
+      position: absolute;
+      top: 0;
       transform: translateX(-4px);
       transition:
         opacity var(--uilib-mega-menu-transition),
         transform var(--uilib-mega-menu-transition);
+      z-index: var(--uilib-z-overlay, 1000);
 
       &.ui-lib-mega-menu__panel--open {
         opacity: 1;
@@ -169,25 +169,25 @@
   // -----------------------------------------------------------------------------
 
   .ui-lib-mega-menu__root-link {
-    display: inline-flex;
     align-items: center;
-    gap: var(--uilib-mega-menu-root-item-gap);
-    padding: var(--uilib-mega-menu-root-item-padding);
     border-radius: var(--uilib-mega-menu-root-link-border-radius);
     color: var(--uilib-mega-menu-root-link-color);
+    cursor: pointer;
+    display: inline-flex;
     font-size: var(--uilib-mega-menu-root-link-font-size-md);
     font-weight: var(--uilib-mega-menu-root-link-font-weight);
+    gap: var(--uilib-mega-menu-root-item-gap);
+    outline: none;
+    padding: var(--uilib-mega-menu-root-item-padding);
     text-decoration: none;
-    cursor: pointer;
-    white-space: nowrap;
     transition:
       color var(--uilib-mega-menu-transition),
       background-color var(--uilib-mega-menu-transition);
-    outline: none;
+    white-space: nowrap;
 
     &:hover {
-      color: var(--uilib-mega-menu-root-link-color-hover);
       background-color: var(--uilib-mega-menu-root-link-bg-hover);
+      color: var(--uilib-mega-menu-root-link-color-hover);
     }
 
     &:focus-visible {
@@ -197,26 +197,26 @@
   }
 
   .ui-lib-mega-menu__root-item--active > .ui-lib-mega-menu__root-link {
-    color: var(--uilib-mega-menu-root-link-color-active);
     background-color: var(--uilib-mega-menu-root-link-bg-active);
+    color: var(--uilib-mega-menu-root-link-color-active);
   }
 
   .ui-lib-mega-menu__root-item--disabled > .ui-lib-mega-menu__root-link {
+    cursor: not-allowed;
     opacity: 0.5;
     pointer-events: none;
-    cursor: not-allowed;
   }
 
   // Caret — down-pointing triangle built with CSS borders
   .ui-lib-mega-menu__root-caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-inline-start: var(--uilib-mega-menu-caret-size) solid transparent;
     border-inline-end: var(--uilib-mega-menu-caret-size) solid transparent;
+    border-inline-start: var(--uilib-mega-menu-caret-size) solid transparent;
     border-top: var(--uilib-mega-menu-caret-size) solid var(--uilib-mega-menu-caret-color);
+    display: inline-block;
+    height: 0;
     margin-inline-start: 0.125rem;
     transition: transform var(--uilib-mega-menu-transition);
+    width: 0;
   }
 
   .ui-lib-mega-menu__root-item--active
@@ -260,22 +260,22 @@
   }
 
   .ui-lib-mega-menu__column-header {
+    border-bottom: var(--uilib-mega-menu-column-header-border-bottom);
     color: var(--uilib-mega-menu-column-header-color);
     font-size: var(--uilib-mega-menu-column-header-font-size);
     font-weight: var(--uilib-mega-menu-column-header-font-weight);
     letter-spacing: var(--uilib-mega-menu-column-header-letter-spacing);
-    text-transform: uppercase;
-    padding-bottom: var(--uilib-mega-menu-column-header-padding-bottom);
     margin-bottom: var(--uilib-mega-menu-column-header-margin-bottom);
-    border-bottom: var(--uilib-mega-menu-column-header-border-bottom);
+    padding-bottom: var(--uilib-mega-menu-column-header-padding-bottom);
+    text-transform: uppercase;
   }
 
   .ui-lib-mega-menu__column-list {
+    display: flex;
+    flex-direction: column;
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
   }
 
   // -----------------------------------------------------------------------------
@@ -287,24 +287,24 @@
   }
 
   .ui-lib-mega-menu__sub-link {
-    display: flex;
     align-items: center;
-    gap: var(--uilib-mega-menu-sub-item-gap);
-    padding: var(--uilib-mega-menu-sub-item-padding);
     border-radius: var(--uilib-mega-menu-sub-link-border-radius);
     color: var(--uilib-mega-menu-sub-link-color);
-    font-size: var(--uilib-mega-menu-sub-link-font-size);
-    text-decoration: none;
     cursor: pointer;
-    white-space: nowrap;
+    display: flex;
+    font-size: var(--uilib-mega-menu-sub-link-font-size);
+    gap: var(--uilib-mega-menu-sub-item-gap);
+    outline: none;
+    padding: var(--uilib-mega-menu-sub-item-padding);
+    text-decoration: none;
     transition:
       color var(--uilib-mega-menu-transition),
       background-color var(--uilib-mega-menu-transition);
-    outline: none;
+    white-space: nowrap;
 
     &:hover {
-      color: var(--uilib-mega-menu-sub-link-color-hover);
       background-color: var(--uilib-mega-menu-sub-link-bg-hover);
+      color: var(--uilib-mega-menu-sub-link-color-hover);
     }
 
     &:focus-visible {
@@ -313,9 +313,9 @@
     }
 
     &[aria-disabled='true'] {
+      cursor: not-allowed;
       opacity: var(--uilib-mega-menu-sub-link-disabled-opacity);
       pointer-events: none;
-      cursor: not-allowed;
     }
   }
 
@@ -326,8 +326,8 @@
 
   // Separator inside column
   .ui-lib-mega-menu__sub-separator {
-    height: 1px;
     background-color: var(--uilib-mega-menu-separator-color);
+    height: 1px;
     margin: var(--uilib-mega-menu-separator-margin);
   }
 
@@ -391,14 +391,14 @@
       color: var(--uilib-color-primary, #1976d2);
 
       &::after {
-        content: '';
-        position: absolute;
-        bottom: -0.25rem;
-        inset-inline-start: 0.75rem;
-        inset-inline-end: 0.75rem;
-        height: 2px;
         background-color: var(--uilib-color-primary, #1976d2);
         border-radius: 1px;
+        bottom: -0.25rem;
+        content: '';
+        height: 2px;
+        inset-inline-end: 0.75rem;
+        inset-inline-start: 0.75rem;
+        position: absolute;
       }
     }
 
@@ -407,16 +407,16 @@
     }
 
     .ui-lib-mega-menu__column-header {
-      color: var(--uilib-color-primary, #1976d2);
       border-bottom-color: var(--uilib-color-primary-light, #bbdefb);
+      color: var(--uilib-color-primary, #1976d2);
     }
 
     .ui-lib-mega-menu__sub-link {
       --uilib-mega-menu-sub-link-bg-hover: rgba(25, 118, 210, 0.06);
 
       &:hover {
-        color: var(--uilib-color-primary, #1976d2);
         background-color: var(--uilib-mega-menu-sub-link-bg-hover);
+        color: var(--uilib-color-primary, #1976d2);
       }
     }
   }
@@ -468,8 +468,8 @@
 
     .ui-lib-mega-menu__column-header {
       --uilib-mega-menu-column-header-font-size: var(--uilib-font-size-sm, 0.8125rem);
-      text-transform: none;
       letter-spacing: 0;
+      text-transform: none;
     }
   }
 

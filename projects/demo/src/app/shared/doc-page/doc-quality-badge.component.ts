@@ -1,12 +1,12 @@
+import type { InputSignal, Signal, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   input,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, Signal, WritableSignal } from '@angular/core';
 
 export interface CategoryCheckpointCount {
   readonly checked: number;

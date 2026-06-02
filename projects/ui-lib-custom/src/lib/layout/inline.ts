@@ -1,18 +1,20 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  input,
+  Component,
   computed,
-  ViewEncapsulation,
+  input,
   type InputSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
+
 import {
-  SPACING_TOKENS,
-  type SpacingToken,
   INLINE_TOKENS,
   type InlineToken,
+  SPACING_TOKENS,
+  type SpacingToken,
 } from 'ui-lib-custom/tokens';
+
 import type { InlineAlign, InlineJustify, InlineTag } from './inline.types';
 
 export type { InlineAlign, InlineJustify, InlineTag } from './inline.types';

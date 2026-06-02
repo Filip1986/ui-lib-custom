@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+
 import type { CodeSnippetFile } from 'ui-lib-custom/code-snippet';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the CodeSnippet component — styled as the "Clean Snippet Cards" showcase.

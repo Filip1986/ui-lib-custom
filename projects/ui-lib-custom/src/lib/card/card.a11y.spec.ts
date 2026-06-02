@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { Card } from './card';
+import { TestBed } from '@angular/core/testing';
+
 import { Button } from 'ui-lib-custom/button';
+import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import type { ThemeVariant, ThemePreset } from 'ui-lib-custom/theme';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { Card } from './card';
 
 // ---------------------------------------------------------------------------
 // Shared mock

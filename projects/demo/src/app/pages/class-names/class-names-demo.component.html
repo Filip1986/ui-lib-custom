@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A utility function and Angular pipe for composing CSS class strings from strings, conditional objects, and arrays — similar to the popular <code>classnames</code> npm package and PrimeNG's <code>classNames</code> utility."
     docHeader
     title="ClassNames"
     [importCode]="importCode"
-    description="A utility function and Angular pipe for composing CSS class strings from strings, conditional objects, and arrays — similar to the popular <code>classnames</code> npm package and PrimeNG's <code>classNames</code> utility."
   />
 
   <!-- Section: Function usage -->
@@ -16,9 +16,9 @@
     <div class="demo-card">
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetFunctionUsage"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -33,9 +33,9 @@
     <div class="demo-card">
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetPipeUsage"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -49,29 +49,29 @@
     <div class="demo-card demo-playground">
       <div class="demo-playground__controls">
         <ui-lib-button
-          [appearance]="isActive() ? 'solid' : 'outline'"
           severity="primary"
           size="sm"
-          (click)="toggleActive()"
           type="button"
+          [appearance]="isActive() ? 'solid' : 'outline'"
+          (click)="toggleActive()"
         >
           active: {{ isActive() }}
         </ui-lib-button>
         <ui-lib-button
-          [appearance]="isDisabled() ? 'solid' : 'outline'"
           severity="primary"
           size="sm"
-          (click)="toggleDisabled()"
           type="button"
+          [appearance]="isDisabled() ? 'solid' : 'outline'"
+          (click)="toggleDisabled()"
         >
           disabled: {{ isDisabled() }}
         </ui-lib-button>
         <ui-lib-button
-          [appearance]="isHighlighted() ? 'solid' : 'outline'"
           severity="primary"
           size="sm"
-          (click)="toggleHighlighted()"
           type="button"
+          [appearance]="isHighlighted() ? 'solid' : 'outline'"
+          (click)="toggleHighlighted()"
         >
           highlighted: {{ isHighlighted() }}
         </ui-lib-button>
@@ -108,9 +108,9 @@
     <div class="demo-card">
       <ui-lib-code-snippet
         language="typescript"
-        [showLineNumbers]="true"
         size="sm"
         [code]="snippetClassNameValueType"
+        [showLineNumbers]="true"
       />
     </div>
   </app-doc-section>
@@ -141,8 +141,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

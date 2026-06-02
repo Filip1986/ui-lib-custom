@@ -1,13 +1,13 @@
 <!-- Display button: always in DOM, hidden via CSS class when active -->
 <button
-  type="button"
   class="ui-lib-inplace__display"
-  [class.ui-lib-inplace__display--hidden]="active()"
-  [id]="displayId"
-  [disabled]="disabled()"
-  [attr.aria-expanded]="active()"
+  type="button"
   [attr.aria-controls]="contentId"
+  [attr.aria-expanded]="active()"
   [attr.aria-label]="effectiveDisplayLabel()"
+  [class.ui-lib-inplace__display--hidden]="active()"
+  [disabled]="disabled()"
+  [id]="displayId"
   (click)="onDisplayClick()"
   (keydown)="onDisplayKeydown($event)"
 >
@@ -17,20 +17,20 @@
 <!-- Content slot: always in DOM, hidden via CSS class when inactive -->
 <div
   class="ui-lib-inplace__content"
-  [id]="contentId"
-  [class.ui-lib-inplace__content--hidden]="!active()"
   [attr.aria-hidden]="!active() || null"
+  [class.ui-lib-inplace__content--hidden]="!active()"
+  [id]="contentId"
   (keydown)="onContentKeydown($event)"
 >
   <ng-content select="[inplaceContent]" />
   @if (closable()) {
     <button
-      type="button"
       class="ui-lib-inplace__close-button"
+      type="button"
       [attr.aria-label]="effectiveCloseLabel()"
       (click)="deactivate()"
     >
-      <span [class]="closeIcon()" aria-hidden="true"></span>
+      <span aria-hidden="true" [class]="closeIcon()"></span>
     </button>
   }
 </div>

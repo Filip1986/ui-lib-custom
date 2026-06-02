@@ -1,4 +1,4 @@
 <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
-  <ui-lib-input-number formControlName="amount" [min]="0" [max]="1000" [showButtons]="true" />
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+  <ui-lib-input-number formControlName="amount" [max]="1000" [min]="0" [showButtons]="true" />
+  <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
 </form>

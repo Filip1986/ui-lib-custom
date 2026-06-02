@@ -1,8 +1,8 @@
 .skeleton-demo {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
   font-family: var(--uilib-font-ui, inherit);
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 2rem 1.5rem 4rem;
 }
 
 .demo-hero {
@@ -10,43 +10,43 @@
 }
 
 .demo-title {
+  color: var(--uilib-color-text, #111827);
   font-size: 2rem;
   font-weight: 700;
   margin: 0 0 0.5rem;
-  color: var(--uilib-color-text, #111827);
 }
 
 .demo-subtitle {
-  font-size: 1rem;
   color: var(--uilib-color-text-muted, #6b7280);
+  font-size: 1rem;
+  line-height: 1.6;
   margin: 0;
   max-width: 560px;
-  line-height: 1.6;
 }
 
 .demo-section {
   margin-bottom: 3rem;
 
   &__title {
+    color: var(--uilib-color-text, #111827);
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0 0 0.5rem;
-    color: var(--uilib-color-text, #111827);
   }
 
   &__desc {
-    font-size: 0.875rem;
     color: var(--uilib-color-text-muted, #6b7280);
-    margin: 0 0 1rem;
+    font-size: 0.875rem;
     line-height: 1.6;
+    margin: 0 0 1rem;
 
     code {
       background: var(--uilib-surface-100, #f3f4f6);
-      padding: 0.1em 0.35em;
       border-radius: 4px;
-      font-size: 0.8125rem;
-      font-family: var(--uilib-font-mono, monospace);
       color: var(--uilib-color-primary, #6366f1);
+      font-family: var(--uilib-font-mono, monospace);
+      font-size: 0.8125rem;
+      padding: 0.1em 0.35em;
     }
   }
 }
@@ -64,12 +64,12 @@
 }
 
 .demo-label {
+  color: var(--uilib-color-text-muted, #6b7280);
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--uilib-color-text-muted, #6b7280);
   margin: 0 0 0.75rem;
+  text-transform: uppercase;
 }
 
 .shapes-row {
@@ -79,9 +79,9 @@
 }
 
 .shapes-inline {
+  align-items: center;
   display: flex;
   gap: 1rem;
-  align-items: center;
 }
 
 .card-placeholder {
@@ -97,15 +97,15 @@
   }
 
   &__header {
-    display: flex;
     align-items: center;
+    display: flex;
     gap: 0.75rem;
     margin-bottom: 0.5rem;
   }
 
   &__meta {
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 0.375rem;
   }
@@ -117,14 +117,14 @@
   gap: 1rem;
 
   &__row {
-    display: flex;
     align-items: center;
+    display: flex;
     gap: 0.75rem;
   }
 
   &__lines {
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 0.375rem;
   }
@@ -132,8 +132,8 @@
 
 .variants-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
 
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
@@ -141,12 +141,12 @@
 }
 
 .variant-label {
+  color: var(--uilib-color-text-muted, #6b7280);
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--uilib-color-text-muted, #6b7280);
   margin: 0 0 0.75rem;
+  text-transform: uppercase;
 }
 
 .variant-circles {
@@ -156,16 +156,16 @@
 }
 
 .animation-col {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 0.5rem;
 }
 
 .sizes-row {
+  align-items: flex-end;
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
   gap: 1rem;
 }
 
@@ -174,21 +174,21 @@
 }
 
 .api-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  width: 100%;
 
   th,
   td {
+    border-bottom: 1px solid var(--uilib-surface-200, #e5e7eb);
     padding: 0.625rem 0.875rem;
     text-align: left;
-    border-bottom: 1px solid var(--uilib-surface-200, #e5e7eb);
   }
 
   th {
-    font-weight: 600;
-    color: var(--uilib-color-text, #111827);
     background: var(--uilib-surface-50, #f9fafb);
+    color: var(--uilib-color-text, #111827);
+    font-weight: 600;
   }
 
   td {
@@ -196,11 +196,11 @@
 
     code {
       background: var(--uilib-surface-100, #f3f4f6);
-      padding: 0.1em 0.35em;
       border-radius: 4px;
-      font-size: 0.8125rem;
-      font-family: var(--uilib-font-mono, monospace);
       color: var(--uilib-color-primary, #6366f1);
+      font-family: var(--uilib-font-mono, monospace);
+      font-size: 0.8125rem;
+      padding: 0.1em 0.35em;
     }
   }
 

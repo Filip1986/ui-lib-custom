@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
-import type { WritableSignal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 
 export interface ComponentScore {
   name: string;

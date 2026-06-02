@@ -29,10 +29,10 @@
       insufficient space in the requested direction.
     </p>
     <div class="tooltip-row tooltip-row--positions">
-      <ui-lib-button uiLibTooltip="Top tooltip" tooltipPosition="top">Top</ui-lib-button>
-      <ui-lib-button uiLibTooltip="Bottom tooltip" tooltipPosition="bottom">Bottom</ui-lib-button>
-      <ui-lib-button uiLibTooltip="Left tooltip" tooltipPosition="left">Left</ui-lib-button>
-      <ui-lib-button uiLibTooltip="Right tooltip" tooltipPosition="right">Right</ui-lib-button>
+      <ui-lib-button tooltipPosition="top" uiLibTooltip="Top tooltip">Top</ui-lib-button>
+      <ui-lib-button tooltipPosition="bottom" uiLibTooltip="Bottom tooltip">Bottom</ui-lib-button>
+      <ui-lib-button tooltipPosition="left" uiLibTooltip="Left tooltip">Left</ui-lib-button>
+      <ui-lib-button tooltipPosition="right" uiLibTooltip="Right tooltip">Right</ui-lib-button>
     </div>
     <app-doc-code-example [html]="positionsHtml" [typescript]="positionsTs" />
   </app-doc-section>
@@ -48,14 +48,14 @@
       <input
         class="demo-input"
         placeholder="Tab to this field"
-        uiLibTooltip="Enter your full name"
         tooltipEvent="focus"
+        uiLibTooltip="Enter your full name"
       />
       <input
         class="demo-input"
         placeholder="Hover or tab here"
-        uiLibTooltip="Accepts hover and focus"
         tooltipEvent="both"
+        uiLibTooltip="Accepts hover and focus"
       />
     </div>
     <app-doc-code-example [html]="focusEventHtml" [typescript]="focusEventTs" />
@@ -74,7 +74,7 @@
       <ui-lib-button uiLibTooltip="Stays 600 ms after leaving" [hideDelay]="600">
         600 ms hide delay
       </ui-lib-button>
-      <ui-lib-button uiLibTooltip="Both delays combined" [showDelay]="300" [hideDelay]="400">
+      <ui-lib-button uiLibTooltip="Both delays combined" [hideDelay]="400" [showDelay]="300">
         Show 300 ms / Hide 400 ms
       </ui-lib-button>
     </div>
@@ -107,23 +107,23 @@
     </p>
     <div class="tooltip-row">
       <ui-lib-button
-        uiLibTooltip="Material variant — larger radius and elevated shadow"
-        tooltipVariant="material"
         tooltipPosition="bottom"
+        tooltipVariant="material"
+        uiLibTooltip="Material variant — larger radius and elevated shadow"
       >
         Material
       </ui-lib-button>
       <ui-lib-button
-        uiLibTooltip="Bootstrap variant — dark background, tight radius"
-        tooltipVariant="bootstrap"
         tooltipPosition="bottom"
+        tooltipVariant="bootstrap"
+        uiLibTooltip="Bootstrap variant — dark background, tight radius"
       >
         Bootstrap
       </ui-lib-button>
       <ui-lib-button
-        uiLibTooltip="Minimal variant — uses page foreground colour"
-        tooltipVariant="minimal"
         tooltipPosition="bottom"
+        tooltipVariant="minimal"
+        uiLibTooltip="Minimal variant — uses page foreground colour"
       >
         Minimal
       </ui-lib-button>
@@ -138,8 +138,8 @@
     </p>
     <div class="tooltip-row">
       <ui-lib-button
-        uiLibTooltip="This is a much longer tooltip that wraps onto multiple lines when the content exceeds the maximum width."
         tooltipPosition="bottom"
+        uiLibTooltip="This is a much longer tooltip that wraps onto multiple lines when the content exceeds the maximum width."
       >
         Hover for long text
       </ui-lib-button>
@@ -162,9 +162,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -173,8 +173,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -68,16 +68,16 @@
   // Host element
   // ---------------------------------------------------------------------------
   .ui-lib-slider {
+    cursor: pointer;
     display: block;
     position: relative;
-    cursor: pointer;
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 
     // ── Disabled state ────────────────────────────────────────────────────────
     &--disabled {
-      opacity: var(--uilib-slider-disabled-opacity);
       cursor: not-allowed;
+      opacity: var(--uilib-slider-disabled-opacity);
       pointer-events: none;
     }
 
@@ -92,49 +92,49 @@
 
     // ── Track container ───────────────────────────────────────────────────────
     &__track-container {
-      display: flex;
       align-items: center;
-      width: 100%;
-      padding: var(--uilib-slider-track-padding) 0;
       box-sizing: border-box;
+      display: flex;
+      padding: var(--uilib-slider-track-padding) 0;
+      width: 100%;
     }
 
     // ── Track ─────────────────────────────────────────────────────────────────
     &__track {
-      position: relative;
       background: var(--uilib-slider-track-color);
       border-radius: var(--uilib-slider-track-border-radius);
-      width: 100%;
-      height: var(--uilib-slider-track-height-md);
       flex-shrink: 0;
+      height: var(--uilib-slider-track-height-md);
+      position: relative;
+      width: 100%;
     }
 
     // ── Fill bar ──────────────────────────────────────────────────────────────
     &__fill {
-      position: absolute;
-      inset-block-start: 0;
-      inset-block-end: 0;
       background: var(--uilib-slider-fill-color);
       border-radius: var(--uilib-slider-track-border-radius);
+      inset-block-end: 0;
+      inset-block-start: 0;
       pointer-events: none;
+      position: absolute;
     }
 
     // ── Handle ────────────────────────────────────────────────────────────────
     &__handle {
-      position: absolute;
-      top: 50%;
-      width: var(--uilib-slider-handle-size-md);
-      height: var(--uilib-slider-handle-size-md);
       background: var(--uilib-slider-handle-bg);
       border: var(--uilib-slider-handle-border);
       border-radius: var(--uilib-slider-handle-border-radius);
       box-shadow: var(--uilib-slider-handle-shadow);
-      transform: translate(-50%, -50%);
-      cursor: grab;
-      outline: none;
-      transition: var(--uilib-slider-handle-transition);
-      z-index: 1;
       box-sizing: border-box;
+      cursor: grab;
+      height: var(--uilib-slider-handle-size-md);
+      outline: none;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: var(--uilib-slider-handle-transition);
+      width: var(--uilib-slider-handle-size-md);
+      z-index: 1;
 
       &:hover {
         transform: translate(-50%, -50%) scale(var(--uilib-slider-handle-hover-scale));
@@ -158,8 +158,8 @@
       }
 
       .ui-lib-slider__handle {
-        width: var(--uilib-slider-handle-size-sm);
         height: var(--uilib-slider-handle-size-sm);
+        width: var(--uilib-slider-handle-size-sm);
       }
     }
 
@@ -169,8 +169,8 @@
       }
 
       .ui-lib-slider__handle {
-        width: var(--uilib-slider-handle-size-md);
         height: var(--uilib-slider-handle-size-md);
+        width: var(--uilib-slider-handle-size-md);
       }
     }
 
@@ -180,8 +180,8 @@
       }
 
       .ui-lib-slider__handle {
-        width: var(--uilib-slider-handle-size-lg);
         height: var(--uilib-slider-handle-size-lg);
+        width: var(--uilib-slider-handle-size-lg);
       }
     }
 
@@ -190,29 +190,29 @@
       display: inline-flex;
 
       .ui-lib-slider__track-container {
-        flex-direction: column;
         align-items: center;
-        width: auto;
+        flex-direction: column;
         height: var(--uilib-slider-vertical-height);
         padding: 0 var(--uilib-slider-track-padding);
+        width: auto;
       }
 
       .ui-lib-slider__track {
-        width: var(--uilib-slider-track-height-md);
         height: 100%;
+        width: var(--uilib-slider-track-height-md);
       }
 
       .ui-lib-slider__fill {
         inset-block-start: auto;
-        inset-inline-start: 0;
         inset-inline-end: 0;
+        inset-inline-start: 0;
       }
 
       .ui-lib-slider__handle {
+        cursor: ns-resize;
         left: 50%;
         top: auto;
         transform: translate(-50%, 50%);
-        cursor: ns-resize;
 
         &:hover {
           transform: translate(-50%, 50%) scale(var(--uilib-slider-handle-hover-scale));

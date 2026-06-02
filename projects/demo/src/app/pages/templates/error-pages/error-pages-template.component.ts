@@ -1,12 +1,14 @@
-import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 
 /** Free template: Error Pages (404, 500, 403) using ui-lib-custom. */
 @Component({

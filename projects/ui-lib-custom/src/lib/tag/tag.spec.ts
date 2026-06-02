@@ -1,3 +1,4 @@
+import type { DebugElement } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,9 +6,9 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import type { DebugElement } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import { Tag } from './tag';
 import type { TagSeverity, TagSize, TagVariant } from './tag.types';
 

@@ -1,30 +1,33 @@
+import type { EffectRef, InputSignal, OutputEmitterRef, Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
-  ElementRef,
-  ViewEncapsulation,
   computed,
+  DestroyRef,
   effect,
+  ElementRef,
   inject,
   input,
   output,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { EffectRef, InputSignal, OutputEmitterRef, Signal } from '@angular/core';
-import { Chart, type ActiveElement, type ChartEvent, type Plugin } from 'chart.js';
-import { ChartThemeService } from './chart-theme.service';
+
+import { type ActiveElement, Chart, type ChartEvent, type Plugin } from 'chart.js';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+
 import type {
+  ChartAccessibleDataset,
   ChartClickEvent,
   ChartData,
+  ChartDatasetRow,
   ChartOptions,
   ChartSize,
   ChartThemeTokens,
   ChartType,
-  ChartDatasetRow,
-  ChartAccessibleDataset,
 } from './chart.types';
+import { ChartThemeService } from './chart-theme.service';
 
 let nextChartId: number = 0;
 

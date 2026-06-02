@@ -1,9 +1,8 @@
 export { EditorComponent } from './editor';
-export { EditorToolbarDirective } from './editor-toolbar.directive';
-
 export type {
-  EditorTextChangeEvent,
-  EditorSelectionChangeEvent,
-  EditorToolbarState,
   EditorCommand,
+  EditorSelectionChangeEvent,
+  EditorTextChangeEvent,
+  EditorToolbarState,
 } from './editor.types';
+export { EditorToolbarDirective } from './editor-toolbar.directive';

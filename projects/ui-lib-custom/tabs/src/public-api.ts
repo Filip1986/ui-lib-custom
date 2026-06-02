@@ -1,14 +1,14 @@
-export { Tabs } from '../../src/lib/tabs/tabs';
-export { Tab, TabLabel, TabContent } from '../../src/lib/tabs/tab';
+export { Tab, TabContent, TabLabel } from '../../src/lib/tabs/tab';
 export { TabPanel } from '../../src/lib/tabs/tab-panel';
+export { Tabs } from '../../src/lib/tabs/tabs';
 export type {
-  TabsVariant,
-  TabsSize,
-  TabsValue,
-  TabsOrientation,
-  TabsMode,
+  TabContext,
   TabsAlignment,
   TabsLazyMode,
+  TabsMode,
+  TabsOrientation,
   TabsScrollBehavior,
-  TabContext,
+  TabsSize,
+  TabsValue,
+  TabsVariant,
 } from '../../src/lib/tabs/tabs.types';

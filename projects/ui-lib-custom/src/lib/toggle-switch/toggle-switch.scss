@@ -30,44 +30,44 @@
     --uilib-toggle-switch-transition-duration: 0.2s;
     --uilib-toggle-switch-font-size-sm: var(--uilib-font-size-sm, 0.875rem);
     --uilib-toggle-switch-font-size-lg: 1.0625rem;
+    align-items: center;
+    color: inherit;
+    cursor: pointer;
 
     // ── Host layout ───────────────────────────────────────────────────
     display: inline-flex;
-    align-items: center;
-    gap: var(--uilib-toggle-switch-gap);
-    cursor: pointer;
     font-family: var(--uilib-toggle-switch-font), sans-serif;
-    color: inherit;
+    gap: var(--uilib-toggle-switch-gap);
     outline: none;
     user-select: none;
   }
 
   // ── Visually hidden native input (accessible) ─────────────────────────
   ui-lib-toggle-switch .ui-lib-toggle-switch__native-input {
-    position: absolute;
-    inline-size: 1px;
     block-size: 1px;
-    opacity: 0;
-    margin: 0;
-    padding: 0;
     border: 0;
-    overflow: hidden;
     clip: rect(0, 0, 0, 0);
     clip-path: inset(50%);
+    inline-size: 1px;
+    margin: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
     white-space: nowrap;
   }
 
   // ── Track ──────────────────────────────────────────────────────────────
   ui-lib-toggle-switch .ui-lib-toggle-switch__track {
-    display: inline-flex;
     align-items: center;
-    position: relative;
+    background-color: var(--uilib-toggle-switch-track-bg);
+    block-size: var(--uilib-toggle-switch-track-height);
+    border: 1px solid var(--uilib-toggle-switch-track-border-color);
+    border-radius: var(--uilib-toggle-switch-track-border-radius);
+    display: inline-flex;
     flex-shrink: 0;
     inline-size: var(--uilib-toggle-switch-track-width);
-    block-size: var(--uilib-toggle-switch-track-height);
-    border-radius: var(--uilib-toggle-switch-track-border-radius);
-    border: 1px solid var(--uilib-toggle-switch-track-border-color);
-    background-color: var(--uilib-toggle-switch-track-bg);
+    position: relative;
     transition:
       background-color var(--uilib-toggle-switch-transition-duration) ease,
       border-color var(--uilib-toggle-switch-transition-duration) ease,
@@ -76,13 +76,13 @@
 
   // ── Thumb ──────────────────────────────────────────────────────────────
   ui-lib-toggle-switch .ui-lib-toggle-switch__thumb {
-    position: absolute;
-    inset-inline-start: var(--uilib-toggle-switch-thumb-offset);
-    inline-size: var(--uilib-toggle-switch-thumb-size);
+    background-color: var(--uilib-toggle-switch-thumb-bg);
     block-size: var(--uilib-toggle-switch-thumb-size);
     border-radius: var(--uilib-radius-full, 9999px);
-    background-color: var(--uilib-toggle-switch-thumb-bg);
     box-shadow: var(--uilib-toggle-switch-thumb-shadow);
+    inline-size: var(--uilib-toggle-switch-thumb-size);
+    inset-inline-start: var(--uilib-toggle-switch-thumb-offset);
+    position: absolute;
     transition: inset-inline-start var(--uilib-toggle-switch-transition-duration) ease;
   }
 
@@ -118,10 +118,10 @@
 
   // ── Label ──────────────────────────────────────────────────────────────
   ui-lib-toggle-switch .ui-lib-toggle-switch__label {
+    color: inherit;
+    cursor: pointer;
     font-weight: 500;
     line-height: 1.2;
-    cursor: pointer;
-    color: inherit;
   }
 
   // ── Disabled state ─────────────────────────────────────────────────────

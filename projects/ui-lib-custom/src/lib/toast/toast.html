@@ -1,14 +1,14 @@
 @for (message of visibleMessages(); track message.id) {
   <div
     class="ui-lib-toast__item"
-    [class]="itemClass(message)"
     [attr.role]="message.severity === 'error' ? 'alert' : 'status'"
+    [class]="itemClass(message)"
   >
     <ui-lib-icon
+      aria-hidden="true"
       class="ui-lib-toast__icon"
       [name]="resolvedIcon(message)"
       [variant]="effectiveVariant()"
-      aria-hidden="true"
     />
     <div class="ui-lib-toast__content">
       @if (message.summary) {
@@ -20,8 +20,8 @@
     </div>
     @if (message.closable !== false) {
       <button
-        type="button"
         class="ui-lib-toast__close"
+        type="button"
         [attr.aria-label]="
           message.summary || message.detail
             ? i18n.translate('toast.dismiss', { title: message.summary || message.detail || '' })
@@ -29,7 +29,7 @@
         "
         (click)="dismiss(message.id ?? '')"
       >
-        <ui-lib-icon name="close" [variant]="effectiveVariant()" size="sm" aria-hidden="true" />
+        <ui-lib-icon aria-hidden="true" name="close" size="sm" [variant]="effectiveVariant()" />
       </button>
     }
   </div>

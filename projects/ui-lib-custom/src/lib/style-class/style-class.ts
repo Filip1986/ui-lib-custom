@@ -1,14 +1,14 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import type { InputSignal, OnDestroy, OnInit } from '@angular/core';
 import {
   DestroyRef,
   Directive,
   ElementRef,
-  NgZone,
-  PLATFORM_ID,
   inject,
   input,
+  NgZone,
+  PLATFORM_ID,
 } from '@angular/core';
-import type { InputSignal, OnDestroy, OnInit } from '@angular/core';
 
 /**
  * StyleClass directive — triggers CSS class-based enter/leave transitions on a

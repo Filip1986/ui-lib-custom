@@ -1,25 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  computed,
-  contentChild,
-  effect,
-  inject,
-  input,
-  NgZone,
-  output,
-  PLATFORM_ID,
-  signal,
-  TemplateRef,
-  viewChild,
-  ViewEncapsulation,
-  ElementRef,
-} from '@angular/core';
 import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
-import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   AfterViewChecked,
   AfterViewInit,
@@ -30,6 +9,35 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  contentChild,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  NgZone,
+  output,
+  PLATFORM_ID,
+  signal,
+  TemplateRef,
+  viewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+
+import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import {
+  ScrollerContentDirective,
+  ScrollerItemDirective,
+  ScrollerLoaderDirective,
+  ScrollerLoaderIconDirective,
+} from './virtual-scroller.directives';
 import type {
   VirtualScrollerContentOptions,
   VirtualScrollerItemOptions,
@@ -40,12 +48,6 @@ import type {
   VirtualScrollerScrollIndexChangeEvent,
   VirtualScrollerToType,
 } from './virtual-scroller.types';
-import {
-  ScrollerContentDirective,
-  ScrollerItemDirective,
-  ScrollerLoaderDirective,
-  ScrollerLoaderIconDirective,
-} from './virtual-scroller.directives';
 
 /** Internal type for first/last index — scalar for 1-D, object for 2-D ('both'). */
 type GridIndex = { rows: number; cols: number };

@@ -5,13 +5,15 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { RadioButton } from './radio-button';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+
 import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { RadioButton } from './radio-button';
 
 // ── Host component ────────────────────────────────────────────────────────────
 

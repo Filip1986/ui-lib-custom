@@ -1,6 +1,6 @@
 .demo-page {
-  max-width: 860px;
   margin: 0 auto;
+  max-width: 860px;
   padding: 2rem 1.5rem 4rem;
 }
 
@@ -8,36 +8,36 @@
   margin-bottom: 2.5rem;
 
   &__title {
+    color: var(--uilib-page-fg);
     font-size: 2rem;
     font-weight: 700;
     margin: 0 0 0.5rem;
-    color: var(--uilib-page-fg);
   }
 
   &__subtitle {
-    font-size: 1.0625rem;
     color: var(--uilib-muted);
-    margin: 0;
+    font-size: 1.0625rem;
     line-height: 1.6;
+    margin: 0;
   }
 }
 
 .demo-result-banner {
-  display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
   background: var(--uilib-surface-alt);
   border: 1px solid var(--uilib-border);
   border-radius: var(--uilib-radius-md, 6px);
-  margin-bottom: 2rem;
+  display: flex;
   font-size: 0.9375rem;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 0.75rem 1rem;
 }
 
 .demo-result-label {
-  font-weight: 600;
   color: var(--uilib-muted);
   flex-shrink: 0;
+  font-weight: 600;
 }
 
 .demo-result-value {
@@ -48,66 +48,66 @@
   margin-bottom: 2.5rem;
 
   &__title {
+    color: var(--uilib-page-fg);
     font-size: 1.125rem;
     font-weight: 600;
     margin: 0 0 0.375rem;
-    color: var(--uilib-page-fg);
   }
 
   &__desc {
-    font-size: 0.9375rem;
     color: var(--uilib-muted);
-    margin: 0 0 1rem;
+    font-size: 0.9375rem;
     line-height: 1.6;
+    margin: 0 0 1rem;
 
     code {
-      font-family: var(--uilib-font-mono, monospace);
-      font-size: 0.875em;
       background: var(--uilib-surface-alt);
-      padding: 0.125em 0.375em;
       border-radius: 4px;
       color: var(--uilib-page-fg);
+      font-family: var(--uilib-font-mono, monospace);
+      font-size: 0.875em;
+      padding: 0.125em 0.375em;
     }
   }
 
   &--api {
+    border-top: 1px solid var(--uilib-border);
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid var(--uilib-border);
   }
 }
 
 .demo-card {
-  padding: 1.5rem;
+  align-items: center;
   background: var(--uilib-surface);
   border: 1px solid var(--uilib-border);
   border-radius: var(--uilib-radius-md, 8px);
   display: flex;
-  align-items: center;
+  padding: 1.5rem;
 
   &--row {
-    gap: 0.75rem;
     flex-wrap: wrap;
+    gap: 0.75rem;
   }
 }
 
 .demo-btn {
-  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.125rem;
+  background: var(--uilib-color-primary-600, #4f46e5);
   border: 1px solid transparent;
+  border-color: var(--uilib-color-primary-600, #4f46e5);
   border-radius: var(--uilib-radius-md, 6px);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
   font-family: var(--uilib-font-ui, inherit);
   font-size: 0.9375rem;
   font-weight: 500;
-  cursor: pointer;
+  gap: 0.5rem;
+  padding: 0.5rem 1.125rem;
   transition:
     background 120ms ease,
     border-color 120ms ease;
-  background: var(--uilib-color-primary-600, #4f46e5);
-  color: #fff;
-  border-color: var(--uilib-color-primary-600, #4f46e5);
 
   &:hover {
     background: var(--uilib-color-primary-700, #4338ca);
@@ -126,38 +126,44 @@
 }
 
 .demo-api__subtitle {
+  color: var(--uilib-page-fg);
   font-size: 1rem;
   font-weight: 600;
   margin: 1.5rem 0 0.75rem;
-  color: var(--uilib-page-fg);
 }
 
 .demo-api-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  width: 100%;
 
   th,
   td {
+    border-bottom: 1px solid var(--uilib-border);
+    color: var(--uilib-page-fg);
     padding: 0.625rem 0.875rem;
     text-align: left;
-    border-bottom: 1px solid var(--uilib-border);
     vertical-align: top;
-    color: var(--uilib-page-fg);
   }
 
   th {
-    font-weight: 600;
-    color: var(--uilib-muted);
     background: var(--uilib-surface-alt);
+    color: var(--uilib-muted);
+    font-weight: 600;
     white-space: nowrap;
   }
 
   td code {
+    background: var(--uilib-surface-alt);
+    border-radius: 3px;
     font-family: var(--uilib-font-mono, monospace);
     font-size: 0.8125rem;
-    background: var(--uilib-surface-alt);
     padding: 0.1em 0.35em;
-    border-radius: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-btn {
+    /* TODO: set transition / animation to none */
   }
 }

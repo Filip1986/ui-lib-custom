@@ -1,4 +1,4 @@
-export { PanelMenu, PANEL_MENU_DEFAULT_ARIA_LABEL } from './panel-menu';
+export { PANEL_MENU_DEFAULT_ARIA_LABEL, PanelMenu } from './panel-menu';
 export type {
   PanelMenuCommandEvent,
   PanelMenuItem,

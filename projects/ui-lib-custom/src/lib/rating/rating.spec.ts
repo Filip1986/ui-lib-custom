@@ -1,17 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  type DebugElement,
   signal,
   type WritableSignal,
-  type DebugElement,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { Rating } from './rating';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { SHARED_SIZE_OPTIONS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
 import type { RatingChangeEvent, RatingRateEvent, RatingSize, RatingVariant } from './rating';
+import { Rating } from './rating';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 

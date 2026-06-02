@@ -13,7 +13,7 @@
   (keydown)="onGridKeydown($event)"
 >
   <!-- ── Header ─────────────────────────────────────────────────────── -->
-  <div class="ui-lib-data-grid__header-row" role="row" aria-rowindex="1">
+  <div aria-rowindex="1" class="ui-lib-data-grid__header-row" role="row">
     <!-- Checkbox select-all -->
     @if (selectionMode() === 'checkbox') {
       <div
@@ -22,10 +22,10 @@
         tabindex="0"
       >
         <input
-          type="checkbox"
           class="ui-lib-data-grid__checkbox"
-          [checked]="areAllRowsSelected()"
+          type="checkbox"
           [attr.aria-label]="i18n.translate('data-grid.select-all')"
+          [checked]="areAllRowsSelected()"
           (change)="onSelectAllChange($event)"
         />
       </div>
@@ -37,8 +37,6 @@
         class="ui-lib-data-grid__cell ui-lib-data-grid__cell--header ui-lib-data-grid__cell--frozen-start"
         role="columnheader"
         tabindex="0"
-        [ngClass]="col.styleClass()"
-        [ngStyle]="columnStyle(col)"
         [attr.aria-sort]="
           col.sortable()
             ? sortField() === (col.sortField() ?? col.field())
@@ -50,6 +48,8 @@
               : 'none'
             : null
         "
+        [ngClass]="col.styleClass()"
+        [ngStyle]="columnStyle(col)"
         (click)="onHeaderClick($event, col)"
         (keydown.enter)="col.sortable() ? onHeaderClick($any($event), col) : null"
         (keydown.space)="col.sortable() ? onHeaderClick($any($event), col) : null"
@@ -63,19 +63,19 @@
         </span>
         @if (col.sortable()) {
           <span
+            aria-hidden="true"
             class="ui-lib-data-grid__sort-icon ui-lib-data-grid__sort-icon--{{
               sortIconFor(col.sortField() ?? col.field())
             }}"
-            aria-hidden="true"
           ></span>
           @if (sortPriorityFor(col.sortField() ?? col.field()); as priority) {
-            <span class="ui-lib-data-grid__sort-badge" aria-hidden="true">{{ priority }}</span>
+            <span aria-hidden="true" class="ui-lib-data-grid__sort-badge">{{ priority }}</span>
           }
         }
         @if (isColumnResizable(col)) {
           <span
-            class="ui-lib-data-grid__resize-handle"
             aria-hidden="true"
+            class="ui-lib-data-grid__resize-handle"
             (mousedown)="onResizeHandleMousedown($event, col)"
           ></span>
         }
@@ -88,8 +88,6 @@
         class="ui-lib-data-grid__cell ui-lib-data-grid__cell--header"
         role="columnheader"
         tabindex="0"
-        [ngClass]="col.styleClass()"
-        [ngStyle]="columnStyle(col)"
         [attr.aria-sort]="
           col.sortable()
             ? sortField() === (col.sortField() ?? col.field())
@@ -101,6 +99,8 @@
               : 'none'
             : null
         "
+        [ngClass]="col.styleClass()"
+        [ngStyle]="columnStyle(col)"
         (click)="onHeaderClick($event, col)"
         (keydown.enter)="col.sortable() ? onHeaderClick($any($event), col) : null"
         (keydown.space)="col.sortable() ? onHeaderClick($any($event), col) : null"
@@ -114,16 +114,16 @@
         </span>
         @if (col.sortable()) {
           <span
+            aria-hidden="true"
             class="ui-lib-data-grid__sort-icon ui-lib-data-grid__sort-icon--{{
               sortIconFor(col.sortField() ?? col.field())
             }}"
-            aria-hidden="true"
           ></span>
         }
         @if (isColumnResizable(col)) {
           <span
-            class="ui-lib-data-grid__resize-handle"
             aria-hidden="true"
+            class="ui-lib-data-grid__resize-handle"
             (mousedown)="onResizeHandleMousedown($event, col)"
           ></span>
         }
@@ -136,8 +136,6 @@
         class="ui-lib-data-grid__cell ui-lib-data-grid__cell--header ui-lib-data-grid__cell--frozen-end"
         role="columnheader"
         tabindex="0"
-        [ngClass]="col.styleClass()"
-        [ngStyle]="columnStyle(col)"
         [attr.aria-sort]="
           col.sortable()
             ? sortField() === (col.sortField() ?? col.field())
@@ -149,6 +147,8 @@
               : 'none'
             : null
         "
+        [ngClass]="col.styleClass()"
+        [ngStyle]="columnStyle(col)"
         (click)="onHeaderClick($event, col)"
         (keydown.enter)="col.sortable() ? onHeaderClick($any($event), col) : null"
         (keydown.space)="col.sortable() ? onHeaderClick($any($event), col) : null"
@@ -162,16 +162,16 @@
         </span>
         @if (col.sortable()) {
           <span
+            aria-hidden="true"
             class="ui-lib-data-grid__sort-icon ui-lib-data-grid__sort-icon--{{
               sortIconFor(col.sortField() ?? col.field())
             }}"
-            aria-hidden="true"
           ></span>
         }
         @if (isColumnResizable(col)) {
           <span
-            class="ui-lib-data-grid__resize-handle"
             aria-hidden="true"
+            class="ui-lib-data-grid__resize-handle"
             (mousedown)="onResizeHandleMousedown($event, col)"
           ></span>
         }
@@ -199,15 +199,15 @@
               <ng-container *ngTemplateOutlet="col.filterTemplate()!" />
             } @else {
               <input
-                type="text"
                 class="ui-lib-data-grid__filter-input"
+                type="text"
+                [attr.aria-label]="
+                  i18n.translate('data-grid.filter-column', { column: col.header() })
+                "
                 [placeholder]="
                   col.filterPlaceholder() || i18n.translate('data-grid.filter-placeholder')
                 "
                 [value]="columnFilters()[col.field()] ?? ''"
-                [attr.aria-label]="
-                  i18n.translate('data-grid.filter-column', { column: col.header() })
-                "
                 (input)="onColumnFilterInput(col.field(), $any($event.target).value)"
               />
             }
@@ -225,15 +225,15 @@
               <ng-container *ngTemplateOutlet="col.filterTemplate()!" />
             } @else {
               <input
-                type="text"
                 class="ui-lib-data-grid__filter-input"
+                type="text"
+                [attr.aria-label]="
+                  i18n.translate('data-grid.filter-column', { column: col.header() })
+                "
                 [placeholder]="
                   col.filterPlaceholder() || i18n.translate('data-grid.filter-placeholder')
                 "
                 [value]="columnFilters()[col.field()] ?? ''"
-                [attr.aria-label]="
-                  i18n.translate('data-grid.filter-column', { column: col.header() })
-                "
                 (input)="onColumnFilterInput(col.field(), $any($event.target).value)"
               />
             }
@@ -251,15 +251,15 @@
               <ng-container *ngTemplateOutlet="col.filterTemplate()!" />
             } @else {
               <input
-                type="text"
                 class="ui-lib-data-grid__filter-input"
+                type="text"
+                [attr.aria-label]="
+                  i18n.translate('data-grid.filter-column', { column: col.header() })
+                "
                 [placeholder]="
                   col.filterPlaceholder() || i18n.translate('data-grid.filter-placeholder')
                 "
                 [value]="columnFilters()[col.field()] ?? ''"
-                [attr.aria-label]="
-                  i18n.translate('data-grid.filter-column', { column: col.header() })
-                "
                 (input)="onColumnFilterInput(col.field(), $any($event.target).value)"
               />
             }
@@ -274,9 +274,9 @@
     <!-- Virtual scroll spacer: sets total scrollable height -->
     @if (virtualScroll()) {
       <div
+        aria-hidden="true"
         class="ui-lib-data-grid__virtual-spacer"
         [style.block-size.px]="virtualTotalHeight()"
-        aria-hidden="true"
       ></div>
     }
 
@@ -308,9 +308,9 @@
             tabindex="-1"
             [attr.aria-rowindex]="rowIndex + virtualStart() + 2"
             [attr.aria-selected]="selectionMode() !== null ? isRowSelected(row) : null"
-            [class.ui-lib-data-grid__row--selected]="isRowSelected(row)"
             [class.ui-lib-data-grid__row--even]="(rowIndex + virtualStart()) % 2 === 0"
             [class.ui-lib-data-grid__row--odd]="(rowIndex + virtualStart()) % 2 !== 0"
+            [class.ui-lib-data-grid__row--selected]="isRowSelected(row)"
             [style.block-size.px]="virtualScroll() ? rowHeight() : null"
             (click)="onRowClick($event, row, rowIndex + virtualStart())"
             (keydown.enter)="onRowClick($any($event), row, rowIndex + virtualStart())"
@@ -324,12 +324,12 @@
                 tabindex="-1"
               >
                 <input
-                  type="checkbox"
                   class="ui-lib-data-grid__checkbox"
-                  [checked]="isRowSelected(row)"
+                  type="checkbox"
                   [attr.aria-label]="
                     i18n.translate('data-grid.select-row', { index: rowIndex + virtualStart() + 1 })
                   "
+                  [checked]="isRowSelected(row)"
                   (change)="onCheckboxChange($event, row, rowIndex + virtualStart())"
                   (click)="$event.stopPropagation()"
                 />
@@ -340,15 +340,15 @@
             @for (col of frozenStartColumns(); track col.field()) {
               <div
                 class="ui-lib-data-grid__cell ui-lib-data-grid__cell--frozen-start"
+                role="gridcell"
+                tabindex="-1"
+                [attr.aria-colindex]="frozenStartColumns().indexOf(col) + 1"
                 [class.ui-lib-data-grid__cell--editable]="editMode() === 'cell' && col.editable()"
                 [class.ui-lib-data-grid__cell--editing]="
                   editingCell() === col.field() + ':' + (rowIndex + virtualStart())
                 "
-                role="gridcell"
-                tabindex="-1"
                 [ngClass]="col.styleClass()"
                 [ngStyle]="columnStyle(col)"
-                [attr.aria-colindex]="frozenStartColumns().indexOf(col) + 1"
                 (click)="onCellClick($event, row, rowIndex + virtualStart(), col)"
                 (keydown.enter)="onCellClick($any($event), row, rowIndex + virtualStart(), col)"
                 (keydown.space)="onCellClick($any($event), row, rowIndex + virtualStart(), col)"
@@ -366,12 +366,12 @@
                     />
                   } @else {
                     <input
-                      type="text"
                       class="ui-lib-data-grid__cell-editor"
-                      [value]="getCellValue(row, col.field())"
+                      type="text"
                       [attr.aria-label]="
                         i18n.translate('data-grid.edit-cell', { column: col.header() })
                       "
+                      [value]="getCellValue(row, col.field())"
                       (keydown)="onCellEditorKeydown($event, row, rowIndex + virtualStart(), col)"
                     />
                   }
@@ -394,17 +394,17 @@
             @for (col of scrollableColumns(); track col.field()) {
               <div
                 class="ui-lib-data-grid__cell"
+                role="gridcell"
+                tabindex="-1"
+                [attr.aria-colindex]="
+                  frozenStartColumns().length + scrollableColumns().indexOf(col) + 1
+                "
                 [class.ui-lib-data-grid__cell--editable]="editMode() === 'cell' && col.editable()"
                 [class.ui-lib-data-grid__cell--editing]="
                   editingCell() === col.field() + ':' + (rowIndex + virtualStart())
                 "
-                role="gridcell"
-                tabindex="-1"
                 [ngClass]="col.styleClass()"
                 [ngStyle]="columnStyle(col)"
-                [attr.aria-colindex]="
-                  frozenStartColumns().length + scrollableColumns().indexOf(col) + 1
-                "
                 (click)="onCellClick($event, row, rowIndex + virtualStart(), col)"
                 (keydown.enter)="onCellClick($any($event), row, rowIndex + virtualStart(), col)"
                 (keydown.space)="onCellClick($any($event), row, rowIndex + virtualStart(), col)"
@@ -422,12 +422,12 @@
                     />
                   } @else {
                     <input
-                      type="text"
                       class="ui-lib-data-grid__cell-editor"
-                      [value]="getCellValue(row, col.field())"
+                      type="text"
                       [attr.aria-label]="
                         i18n.translate('data-grid.edit-cell', { column: col.header() })
                       "
+                      [value]="getCellValue(row, col.field())"
                       (keydown)="onCellEditorKeydown($event, row, rowIndex + virtualStart(), col)"
                     />
                   }
@@ -450,20 +450,20 @@
             @for (col of frozenEndColumns(); track col.field()) {
               <div
                 class="ui-lib-data-grid__cell ui-lib-data-grid__cell--frozen-end"
-                [class.ui-lib-data-grid__cell--editable]="editMode() === 'cell' && col.editable()"
-                [class.ui-lib-data-grid__cell--editing]="
-                  editingCell() === col.field() + ':' + (rowIndex + virtualStart())
-                "
                 role="gridcell"
                 tabindex="-1"
-                [ngClass]="col.styleClass()"
-                [ngStyle]="columnStyle(col)"
                 [attr.aria-colindex]="
                   frozenStartColumns().length +
                   scrollableColumns().length +
                   frozenEndColumns().indexOf(col) +
                   1
                 "
+                [class.ui-lib-data-grid__cell--editable]="editMode() === 'cell' && col.editable()"
+                [class.ui-lib-data-grid__cell--editing]="
+                  editingCell() === col.field() + ':' + (rowIndex + virtualStart())
+                "
+                [ngClass]="col.styleClass()"
+                [ngStyle]="columnStyle(col)"
                 (click)="onCellClick($event, row, rowIndex + virtualStart(), col)"
                 (keydown.enter)="onCellClick($any($event), row, rowIndex + virtualStart(), col)"
                 (keydown.space)="onCellClick($any($event), row, rowIndex + virtualStart(), col)"
@@ -481,12 +481,12 @@
                     />
                   } @else {
                     <input
-                      type="text"
                       class="ui-lib-data-grid__cell-editor"
-                      [value]="getCellValue(row, col.field())"
+                      type="text"
                       [attr.aria-label]="
                         i18n.translate('data-grid.edit-cell', { column: col.header() })
                       "
+                      [value]="getCellValue(row, col.field())"
                       (keydown)="onCellEditorKeydown($event, row, rowIndex + virtualStart(), col)"
                     />
                   }
@@ -570,8 +570,8 @@
   <ui-lib-paginator
     [first]="first()"
     [rows]="rows()"
-    [totalRecords]="effectiveTotalRecords()"
     [rowsPerPageOptions]="rowsPerPageOptions()"
+    [totalRecords]="effectiveTotalRecords()"
     (pageChange)="onPageChange($event)"
   />
 }

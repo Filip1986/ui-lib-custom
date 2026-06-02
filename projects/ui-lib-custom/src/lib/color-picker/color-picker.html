@@ -1,34 +1,34 @@
 @if (!inline()) {
   <button
     #triggerButton
-    type="button"
+    aria-haspopup="dialog"
     class="ui-lib-colorpicker__trigger"
-    [attr.id]="triggerId()"
-    [style.background-color]="displayColor()"
-    [disabled]="isDisabled()"
+    type="button"
+    [attr.aria-controls]="panelVisible() ? panelId() : null"
+    [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
     [attr.aria-label]="resolvedTriggerAriaLabel()"
     [attr.aria-labelledby]="ariaLabelledBy()"
-    aria-haspopup="dialog"
-    [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
-    [attr.aria-controls]="panelVisible() ? panelId() : null"
+    [attr.id]="triggerId()"
     [attr.tabindex]="tabindex()"
+    [disabled]="isDisabled()"
+    [style.background-color]="displayColor()"
     (click)="onTriggerClick($event)"
     (keydown)="onTriggerKeydown($event)"
   ></button>
 }
 
-<input type="hidden" [id]="resolvedInputId()" [value]="displayColor()" [disabled]="isDisabled()" />
+<input type="hidden" [disabled]="isDisabled()" [id]="resolvedInputId()" [value]="displayColor()" />
 
 @defer (on immediate) {
   @if (inline() || panelVisible()) {
     <div
       #panelElement
-      role="dialog"
-      [attr.aria-label]="i18n.translate('colorpicker.panel')"
       aria-modal="false"
       class="ui-lib-colorpicker__panel"
-      [attr.id]="panelId()"
+      role="dialog"
+      [attr.aria-label]="i18n.translate('colorpicker.panel')"
       [attr.data-placement]="panelPlacement()"
+      [attr.id]="panelId()"
       [attr.tabindex]="isDisabled() ? -1 : 0"
       (click)="$event.stopPropagation()"
       (keydown)="onPanelKeydown($event)"
@@ -36,13 +36,13 @@
       <div class="ui-lib-colorpicker__controls">
         <div
           #colorAreaElement
-          class="ui-lib-colorpicker__color-area"
           aria-hidden="true"
+          class="ui-lib-colorpicker__color-area"
           tabindex="-1"
           [style.background-color]="hueOnlyColor()"
+          (keydown)="onColorAreaKeydown($event)"
           (mousedown)="onColorAreaMouseDown($event)"
           (touchstart)="onColorAreaTouchStart($event)"
-          (keydown)="onColorAreaKeydown($event)"
         >
           <div class="ui-lib-colorpicker__color-area-gradient"></div>
           <div
@@ -54,17 +54,17 @@
 
         <div
           #hueElement
+          aria-valuemax="359"
+          aria-valuemin="0"
           class="ui-lib-colorpicker__hue"
           role="slider"
           [attr.aria-label]="i18n.translate('colorpicker.hue')"
-          aria-valuemin="0"
-          aria-valuemax="359"
           [attr.aria-valuenow]="hue()"
           [attr.aria-valuetext]="hue() + ' degrees'"
           [attr.tabindex]="isDisabled() ? -1 : 0"
+          (keydown)="onHueKeydown($event)"
           (mousedown)="onHueMouseDown($event)"
           (touchstart)="onHueTouchStart($event)"
-          (keydown)="onHueKeydown($event)"
         >
           <div class="ui-lib-colorpicker__hue-handle" [style.top.%]="hueHandleTop()"></div>
         </div>
@@ -72,61 +72,61 @@
 
       <div class="ui-lib-colorpicker__inputs">
         <div class="ui-lib-colorpicker__input-group ui-lib-colorpicker__input-group--hex">
-          <label [attr.for]="hexInputId()" class="ui-lib-colorpicker__input-label">{{
+          <label class="ui-lib-colorpicker__input-label" [attr.for]="hexInputId()">{{
             i18n.translate('colorpicker.label.hex')
           }}</label>
           <input
-            [attr.id]="hexInputId()"
-            type="text"
             class="ui-lib-colorpicker__text-input"
-            [value]="hexDisplayValue()"
+            type="text"
+            [attr.id]="hexInputId()"
             [disabled]="isDisabled()"
+            [value]="hexDisplayValue()"
             (change)="onHexInputChange($event)"
           />
         </div>
         <div class="ui-lib-colorpicker__input-row">
           <div class="ui-lib-colorpicker__input-group">
-            <label [attr.for]="hueInputId()" class="ui-lib-colorpicker__input-label">{{
+            <label class="ui-lib-colorpicker__input-label" [attr.for]="hueInputId()">{{
               i18n.translate('colorpicker.label.h')
             }}</label>
             <input
-              [attr.id]="hueInputId()"
-              type="number"
               class="ui-lib-colorpicker__number-input"
-              [value]="hue()"
-              min="0"
               max="359"
+              min="0"
+              type="number"
+              [attr.id]="hueInputId()"
               [disabled]="isDisabled()"
+              [value]="hue()"
               (change)="onHueInputChange($event)"
             />
           </div>
           <div class="ui-lib-colorpicker__input-group">
-            <label [attr.for]="satInputId()" class="ui-lib-colorpicker__input-label">{{
+            <label class="ui-lib-colorpicker__input-label" [attr.for]="satInputId()">{{
               i18n.translate('colorpicker.label.s')
             }}</label>
             <input
-              [attr.id]="satInputId()"
-              type="number"
               class="ui-lib-colorpicker__number-input"
-              [value]="saturation()"
-              min="0"
               max="100"
+              min="0"
+              type="number"
+              [attr.id]="satInputId()"
               [disabled]="isDisabled()"
+              [value]="saturation()"
               (change)="onSatInputChange($event)"
             />
           </div>
           <div class="ui-lib-colorpicker__input-group">
-            <label [attr.for]="brightInputId()" class="ui-lib-colorpicker__input-label">{{
+            <label class="ui-lib-colorpicker__input-label" [attr.for]="brightInputId()">{{
               i18n.translate('colorpicker.label.b')
             }}</label>
             <input
-              [attr.id]="brightInputId()"
-              type="number"
               class="ui-lib-colorpicker__number-input"
-              [value]="brightness()"
-              min="0"
               max="100"
+              min="0"
+              type="number"
+              [attr.id]="brightInputId()"
               [disabled]="isDisabled()"
+              [value]="brightness()"
               (change)="onBrightInputChange($event)"
             />
           </div>

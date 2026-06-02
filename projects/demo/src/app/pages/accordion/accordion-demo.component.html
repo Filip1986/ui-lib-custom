@@ -1,36 +1,36 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Expand and collapse content panels with accessible keyboard navigation, variants, and signal inputs."
     docHeader
     title="Accordion"
     [importCode]="importCode"
-    description="Expand and collapse content panels with accessible keyboard navigation, variants, and signal inputs."
   />
 
   <app-accordion-basic-example />
   <app-doc-code-example
     [html]="accordionExampleHtml"
-    [typescript]="accordionExampleTs"
     [showLineNumbers]="true"
+    [typescript]="accordionExampleTs"
   />
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="playground" label="Playground" />
-      <ui-lib-tab value="variants" label="Variants" />
-      <ui-lib-tab value="sizes" label="Sizes" />
-      <ui-lib-tab value="controlled" label="Controlled" />
-      <ui-lib-tab value="custom-headers" label="Custom Headers" />
-      <ui-lib-tab value="disabled" label="Disabled" />
-      <ui-lib-tab value="icons" label="Icons" />
-      <ui-lib-tab value="toggle-icons" label="Toggle Icons" />
-      <ui-lib-tab value="animations" label="Animations" />
-      <ui-lib-tab value="api-reference" label="API Reference" />
-      <ui-lib-tab value="accessibility" label="Accessibility" />
+      <ui-lib-tab label="Playground" value="playground" />
+      <ui-lib-tab label="Variants" value="variants" />
+      <ui-lib-tab label="Sizes" value="sizes" />
+      <ui-lib-tab label="Controlled" value="controlled" />
+      <ui-lib-tab label="Custom Headers" value="custom-headers" />
+      <ui-lib-tab label="Disabled" value="disabled" />
+      <ui-lib-tab label="Icons" value="icons" />
+      <ui-lib-tab label="Toggle Icons" value="toggle-icons" />
+      <ui-lib-tab label="Animations" value="animations" />
+      <ui-lib-tab label="API Reference" value="api-reference" />
+      <ui-lib-tab label="Accessibility" value="accessibility" />
     </ui-lib-tabs>
   </div>
 
@@ -46,10 +46,10 @@
               @for (v of variants; track v) {
                 <ui-lib-button
                   class="control-chip"
+                  color="primary"
                   size="sm"
                   variant="minimal"
                   [appearance]="variant() === v ? 'solid' : 'ghost'"
-                  color="primary"
                   (click)="setVariant(v)"
                   >{{ v }}</ui-lib-button
                 >
@@ -63,10 +63,10 @@
               @for (s of sizes; track s) {
                 <ui-lib-button
                   class="control-chip"
+                  color="primary"
                   size="sm"
                   variant="minimal"
                   [appearance]="size() === s ? 'solid' : 'ghost'"
-                  color="primary"
                   (click)="setSize(s)"
                   >{{ s }}</ui-lib-button
                 >
@@ -80,10 +80,10 @@
               @for (mode of expandModes; track mode) {
                 <ui-lib-button
                   class="control-chip"
+                  color="primary"
                   size="sm"
                   variant="minimal"
                   [appearance]="expandMode() === mode ? 'solid' : 'ghost'"
-                  color="primary"
                   (click)="setExpandMode(mode)"
                   >{{ mode }}</ui-lib-button
                 >
@@ -99,7 +99,7 @@
 
       <app-doc-demo-viewport>
         <div class="doc-demo" [appThemeScope]="appliedTheme()">
-          <ui-lib-accordion [variant]="variant()" [size]="size()" [expandMode]="expandMode()">
+          <ui-lib-accordion [expandMode]="expandMode()" [size]="size()" [variant]="variant()">
             @for (item of faqItems; track item.value) {
               <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
                 {{ item.content }}
@@ -148,7 +148,7 @@
       </app-variant-comparison>
     </ui-lib-panel>
 
-    <div class="demo-grid" id="variants" data-doc-anchor>
+    <div class="demo-grid" data-doc-anchor id="variants">
       @for (variant of variantExamples; track variant) {
         <ui-lib-panel variant="minimal">
           <app-doc-demo-viewport>
@@ -168,7 +168,7 @@
   }
 
   @if (activeTab() === 'sizes') {
-    <div class="demo-grid" id="sizes" data-doc-anchor>
+    <div class="demo-grid" data-doc-anchor id="sizes">
       @for (size of sizeExamples; track size) {
         <ui-lib-panel variant="minimal">
           <app-doc-demo-viewport>
@@ -232,7 +232,7 @@
       </p>
       <app-doc-demo-viewport>
         <div class="doc-demo">
-          <ui-lib-button size="sm" variant="minimal" appearance="ghost" (click)="resetControlled()"
+          <ui-lib-button appearance="ghost" size="sm" variant="minimal" (click)="resetControlled()"
             >Reset</ui-lib-button
           >
           <ui-lib-accordion
@@ -251,7 +251,7 @@
           </div>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet [code]="controlledTs" language="typescript" [showLineNumbers]="true" />
+      <ui-lib-code-snippet language="typescript" [code]="controlledTs" [showLineNumbers]="true" />
     </ui-lib-panel>
   }
 
@@ -275,8 +275,8 @@
       </app-doc-demo-viewport>
       <app-doc-code-example
         [html]="customHeaderHtml"
-        [typescript]="customHeaderTs"
         [showLineNumbers]="true"
+        [typescript]="customHeaderTs"
       />
     </ui-lib-panel>
   }
@@ -289,9 +289,9 @@
           <ui-lib-accordion>
             @for (item of disabledItems; track item.value) {
               <ui-lib-accordion-panel
+                [disabled]="!!item.disabled"
                 [header]="item.header"
                 [value]="item.value"
-                [disabled]="!!item.disabled"
               >
                 {{ item.content }}
               </ui-lib-accordion-panel>
@@ -309,16 +309,16 @@
         <div class="doc-demo">
           <ui-lib-accordion>
             <ui-lib-accordion-panel
-              header="Using Plus/Minus"
-              expandIcon="minus"
               collapseIcon="plus"
+              expandIcon="minus"
+              header="Using Plus/Minus"
             >
               Shows plus when collapsed and minus when expanded.
             </ui-lib-accordion-panel>
             <ui-lib-accordion-panel
-              header="Arrow Icons"
-              expandIcon="arrow-up"
               collapseIcon="arrow-down"
+              expandIcon="arrow-up"
+              header="Arrow Icons"
             >
               Swap arrow icon names per state.
             </ui-lib-accordion-panel>
@@ -345,19 +345,19 @@
       </app-doc-demo-viewport>
       <app-doc-code-example
         [html]="customIconsHtml"
-        [typescript]="customIconsTs"
         [showLineNumbers]="true"
+        [typescript]="customIconsTs"
       />
       <app-doc-code-example
         [html]="iconPositionHtml"
-        [typescript]="iconPositionTs"
         [showLineNumbers]="true"
+        [typescript]="iconPositionTs"
       />
     </ui-lib-panel>
   }
 
   @if (activeTab() === 'toggle-icons') {
-    <div class="demo-grid" id="toggle-icons" data-doc-anchor>
+    <div class="demo-grid" data-doc-anchor id="toggle-icons">
       <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
@@ -375,8 +375,8 @@
         </app-doc-demo-viewport>
         <app-doc-code-example
           [html]="toggleTemplateHtml"
-          [typescript]="toggleTemplateTs"
           [showLineNumbers]="true"
+          [typescript]="toggleTemplateTs"
         />
       </ui-lib-panel>
 
@@ -386,15 +386,15 @@
             <ui-lib-accordion>
               <ui-lib-accordion-panel header="Rotating Indicator">
                 <ng-template accordionToggleIcon let-expanded>
-                  <ui-lib-icon [name]="expanded ? 'loader' : 'loader-2'" class="indicator-rotate" />
+                  <ui-lib-icon class="indicator-rotate" [name]="expanded ? 'loader' : 'loader-2'" />
                 </ng-template>
                 Uses a rotating icon animation.
               </ui-lib-accordion-panel>
               <ui-lib-accordion-panel header="Pulsing Indicator">
                 <ng-template accordionToggleIcon let-expanded>
                   <ui-lib-icon
-                    [name]="expanded ? 'circle-dot' : 'circle'"
                     class="indicator-pulse"
+                    [name]="expanded ? 'circle-dot' : 'circle'"
                   />
                 </ng-template>
                 Pulses the icon when expanded.
@@ -425,7 +425,7 @@
   }
 
   @if (activeTab() === 'animations') {
-    <div class="demo-grid" id="animations" data-doc-anchor>
+    <div class="demo-grid" data-doc-anchor id="animations">
       <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
@@ -442,9 +442,9 @@
 
       <ui-lib-panel variant="minimal">
         <ui-lib-button
+          appearance="ghost"
           size="sm"
           variant="minimal"
-          appearance="ghost"
           (click)="toggleReducedMotion()"
         >
           {{ reduceMotionDemo() ? 'Disable' : 'Enable' }} reduced motion
@@ -494,7 +494,7 @@
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
       <app-doc-api-reference [rows]="apiRows" />
-      <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" [showLineNumbers]="true" />
+      <app-doc-code-example [html]="basicHtml" [showLineNumbers]="true" [typescript]="basicTs" />
     </ui-lib-panel>
   }
 
@@ -526,9 +526,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -537,8 +537,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

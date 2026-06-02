@@ -1,13 +1,13 @@
 <!-- Toast containers — one per position used in the demo -->
 <ui-lib-toast [position]="selectedPosition()" [variant]="selectedVariant()" />
-<ui-lib-toast position="bottom-left" key="secondary" />
+<ui-lib-toast key="secondary" position="bottom-left" />
 
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="The Toast component provides a lightweight notification overlay driven by an injectable <code>ToastService</code>. Place one <code>&lt;ui-lib-toast /&gt;</code> in your app shell and call <code>toastService.add()</code> from anywhere in the application."
     docHeader
     title="Toast"
     [importCode]="importCode"
-    description="The Toast component provides a lightweight notification overlay driven by an injectable <code>ToastService</code>. Place one <code>&lt;ui-lib-toast /&gt;</code> in your app shell and call <code>toastService.add()</code> from anywhere in the application."
   />
 
   <!-- ─── Section: Severities ───────────────────────────────────────────────── -->
@@ -70,10 +70,10 @@
         <div class="toast-demo__chip-row">
           @for (pos of positions; track pos) {
             <ui-lib-button
-              type="button"
-              [appearance]="selectedPosition() === pos ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="selectedPosition() === pos ? 'solid' : 'outline'"
               (click)="selectedPosition.set(pos)"
               >{{ pos }}</ui-lib-button
             >
@@ -86,10 +86,10 @@
         <div class="toast-demo__chip-row">
           @for (v of variants; track v) {
             <ui-lib-button
-              type="button"
-              [appearance]="selectedVariant() === v ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="selectedVariant() === v ? 'solid' : 'outline'"
               (click)="selectedVariant.set(v)"
               >{{ v }}</ui-lib-button
             >
@@ -139,9 +139,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -150,8 +150,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

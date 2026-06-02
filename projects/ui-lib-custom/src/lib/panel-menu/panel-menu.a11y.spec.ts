@@ -5,9 +5,11 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { PANEL_MENU_DEFAULT_ARIA_LABEL, PanelMenu } from './panel-menu';
 import type { PanelMenuItem } from './panel-menu.types';

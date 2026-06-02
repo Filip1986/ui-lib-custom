@@ -1,47 +1,49 @@
 import { DOCUMENT } from '@angular/common';
+import type {
+  EffectRef,
+  ElementRef,
+  InputSignal,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  DestroyRef,
-  ViewChild,
-  ViewEncapsulation,
-  afterNextRender,
   computed,
   contentChild,
+  DestroyRef,
   effect,
   forwardRef,
   inject,
   input,
   output,
   signal,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import type {
-  ElementRef,
-  InputSignal,
-  OutputEmitterRef,
-  Signal,
-  WritableSignal,
-  EffectRef,
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import type { ThemeVariant } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import {
   EDITOR_CSS_CLASSES,
   EDITOR_DEFAULTS,
   EDITOR_TOOLBAR_ARIA_LABELS,
 } from './editor.constants';
-import { sanitizeHtml, stripHtmlTags } from './editor-sanitizer';
-import { EditorToolbarDirective } from './editor-toolbar.directive';
 import type {
   EditorCommand,
   EditorSelectionChangeEvent,
   EditorTextChangeEvent,
   EditorToolbarState,
 } from './editor.types';
+import { sanitizeHtml, stripHtmlTags } from './editor-sanitizer';
+import { EditorToolbarDirective } from './editor-toolbar.directive';
 
 const INITIAL_TOOLBAR_STATE: EditorToolbarState = {
   bold: false,

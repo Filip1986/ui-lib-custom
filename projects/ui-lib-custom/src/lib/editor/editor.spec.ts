@@ -3,10 +3,11 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { EditorComponent } from './editor';
-import { EditorToolbarDirective } from './editor-toolbar.directive';
 import type { EditorTextChangeEvent } from './editor.types';
 import * as editorSanitizer from './editor-sanitizer';
+import { EditorToolbarDirective } from './editor-toolbar.directive';
 
 jest.mock('./editor-sanitizer', (): typeof editorSanitizer => {
   const actual: typeof editorSanitizer =

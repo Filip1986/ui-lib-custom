@@ -2,14 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
+  type Signal,
   signal,
   viewChild,
-  type Signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
-import { TieredMenu, TIERED_MENU_DEFAULT_ARIA_LABEL } from './tiered-menu';
+import { TIERED_MENU_DEFAULT_ARIA_LABEL, TieredMenu } from './tiered-menu';
 import type { TieredMenuItem } from './tiered-menu.types';
 
 /**

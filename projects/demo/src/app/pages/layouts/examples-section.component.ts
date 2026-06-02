@@ -1,14 +1,16 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+
 import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 
 /**

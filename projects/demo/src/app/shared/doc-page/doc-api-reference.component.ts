@@ -1,3 +1,4 @@
+import type { InputSignal, Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,11 +6,11 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, Signal } from '@angular/core';
+
 import {
-  TableComponent,
-  TableColumnComponent,
   TableColumnBodyDirective,
+  TableColumnComponent,
+  TableComponent,
 } from 'ui-lib-custom/table';
 
 export type ApiPropKind = 'input' | 'output' | 'property' | 'name';

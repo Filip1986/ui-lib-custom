@@ -1,41 +1,44 @@
+import type { Signal, WritableSignal } from '@angular/core';
 import {
-  Component,
   ChangeDetectionStrategy,
-  ViewChild,
-  signal,
+  Component,
   computed,
-  inject,
   effect,
+  inject,
+  signal,
+  ViewChild,
   viewChild,
 } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
-import { Card } from 'ui-lib-custom/card';
-import type { CardVariant, CardElevation } from 'ui-lib-custom/card';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { FormsModule } from '@angular/forms';
+
 import { Button } from 'ui-lib-custom/button';
-import { SHADOWS } from 'ui-lib-custom/tokens';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { CardElevation, CardVariant } from 'ui-lib-custom/card';
+import { Card } from 'ui-lib-custom/card';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { SHADOWS } from 'ui-lib-custom/tokens';
+
+import { CardBasicExampleComponent } from '@demo/examples/card-basic-example.component';
+import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { FormsModule } from '@angular/forms';
-import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
-import { CardBasicExampleComponent } from '@demo/examples/card-basic-example.component';
-import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-import { cardExampleHtml, cardExampleTs, usageTs } from './snippets.generated';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
+
+import { cardExampleHtml, cardExampleTs, usageTs } from './snippets.generated';
 
 type ShadowKey = string;
 const SHADOW_MAP: Record<string, string> = SHADOWS as Record<string, string>;

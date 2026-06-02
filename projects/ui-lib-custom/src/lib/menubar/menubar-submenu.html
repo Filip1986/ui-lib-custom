@@ -1,30 +1,30 @@
-<ul class="ui-lib-menubar__sub-list" role="menu" aria-orientation="vertical">
+<ul aria-orientation="vertical" class="ui-lib-menubar__sub-list" role="menu">
   @for (item of visibleItems(); track $index) {
     @if (item.separator) {
-      <li class="ui-lib-menubar__sub-separator" role="separator" aria-hidden="true"></li>
+      <li aria-hidden="true" class="ui-lib-menubar__sub-separator" role="separator"></li>
     } @else {
       <li
-        [class]="getSubItemClasses(item, $index)"
         role="none"
+        [class]="getSubItemClasses(item, $index)"
         (mouseenter)="onItemMouseEnter($index, item)"
       >
         @if (item.url && !item.items?.length) {
           <a
             class="ui-lib-menubar__sub-link"
-            [href]="item.url"
-            [attr.target]="item.target || null"
             role="menuitem"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
-            [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
             [attr.aria-expanded]="
               item.items?.length ? (activeIndex() === $index ? 'true' : 'false') : null
             "
+            [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
             [attr.tabindex]="item.disabled ? '-1' : '0'"
+            [attr.target]="item.target || null"
+            [href]="item.url"
             (click)="onItemClick($event, item, $index)"
             (keydown)="onItemKeyDown($event, item, $index)"
           >
             @if (item.icon) {
-              <span class="ui-lib-menubar__sub-icon {{ item.icon }}" aria-hidden="true"></span>
+              <span aria-hidden="true" class="ui-lib-menubar__sub-icon {{ item.icon }}"></span>
             }
             @if (item.label) {
               <span class="ui-lib-menubar__sub-label">{{ item.label }}</span>
@@ -35,22 +35,22 @@
             class="ui-lib-menubar__sub-link"
             role="menuitem"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
-            [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
             [attr.aria-expanded]="
               item.items?.length ? (activeIndex() === $index ? 'true' : 'false') : null
             "
+            [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
             [attr.tabindex]="item.disabled ? '-1' : '0'"
             (click)="onItemClick($event, item, $index)"
             (keydown)="onItemKeyDown($event, item, $index)"
           >
             @if (item.icon) {
-              <span class="ui-lib-menubar__sub-icon {{ item.icon }}" aria-hidden="true"></span>
+              <span aria-hidden="true" class="ui-lib-menubar__sub-icon {{ item.icon }}"></span>
             }
             @if (item.label) {
               <span class="ui-lib-menubar__sub-label">{{ item.label }}</span>
             }
             @if (item.items?.length) {
-              <span class="ui-lib-menubar__sub-caret" aria-hidden="true"></span>
+              <span aria-hidden="true" class="ui-lib-menubar__sub-caret"></span>
             }
           </a>
         }
@@ -60,8 +60,8 @@
             <ui-lib-menubar-sub
               [items]="item.items!"
               [level]="level() + 1"
-              (itemActivated)="itemActivated.emit($event)"
               (escapePanel)="activeIndex.set(-1)"
+              (itemActivated)="itemActivated.emit($event)"
             />
           </div>
         }

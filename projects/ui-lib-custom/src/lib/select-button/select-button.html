@@ -1,15 +1,15 @@
 @for (option of options(); track trackOption($index, option)) {
   <ui-lib-button
     class="ui-lib-select-button__item"
-    [class.ui-lib-select-button__item--selected]="isSelected(option)"
-    [variant]="effectiveVariant()"
-    [size]="size()"
     [appearance]="isSelected(option) ? 'solid' : 'outline'"
+    [ariaChecked]="optionAriaChecked(option) === 'true'"
+    [class.ui-lib-select-button__item--selected]="isSelected(option)"
     [disabled]="isDisabled() || isOptionDisabled(option)"
     [fullWidth]="fluid()"
     [role]="itemRole()"
-    [ariaChecked]="optionAriaChecked(option) === 'true'"
+    [size]="size()"
     [tabIndex]="tabIndexFor($index)"
+    [variant]="effectiveVariant()"
     (click)="onOptionClick(option, $index, $event)"
   >
     @if (itemTemplate()) {

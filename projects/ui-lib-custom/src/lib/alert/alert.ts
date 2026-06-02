@@ -2,18 +2,20 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  input,
-  output,
   inject,
-  ViewEncapsulation,
+  input,
   type InputSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { Icon } from 'ui-lib-custom/icon';
-import type { StatusIcon } from 'ui-lib-custom/icon';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import type { StatusIcon } from 'ui-lib-custom/icon';
+import { Icon } from 'ui-lib-custom/icon';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { AlertSeverity, AlertVariant } from './alert.types';
 
 export type { AlertSeverity, AlertVariant } from './alert.types';

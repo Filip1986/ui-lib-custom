@@ -1,16 +1,16 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Segmented button group for single or multiple selection, with size, variant, and template customization support."
     docHeader
     title="SelectButton"
     [importCode]="importCode"
-    description="Segmented button group for single or multiple selection, with size, variant, and template customization support."
   />
 
   <app-select-button-basic-example />
   <app-doc-code-example
     [html]="selectButtonExampleHtml"
-    [typescript]="selectButtonExampleTs"
     [showLineNumbers]="true"
+    [typescript]="selectButtonExampleTs"
   />
 
   <div class="examples">
@@ -25,8 +25,8 @@
       <h3>Multiple Selection</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-select-button
-          [options]="multipleOptions"
           [multiple]="true"
+          [options]="multipleOptions"
           [(value)]="multipleValue"
         />
       </ui-lib-panel>
@@ -38,7 +38,7 @@
         <ui-lib-select-button [options]="justifyOptions" [(value)]="justifyValue">
           <ng-template #item let-option>
             <ui-lib-inline align="center" [gap]="2">
-              <ui-lib-icon [name]="option.icon" library="lucide" />
+              <ui-lib-icon library="lucide" [name]="option.icon" />
               <span class="icon-label">{{ option.label }}</span>
             </ui-lib-inline>
           </ng-template>
@@ -60,7 +60,7 @@
     <section id="fluid">
       <h3>Fluid</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-select-button [options]="fluidOptions" [fluid]="true" [(value)]="fluidValue" />
+        <ui-lib-select-button [fluid]="true" [options]="fluidOptions" [(value)]="fluidValue" />
       </ui-lib-panel>
     </section>
 
@@ -69,7 +69,7 @@
       <ui-lib-grid minColumnWidth="260px" [spacing]="4">
         <ui-lib-panel variant="minimal">
           <p class="section-label">Component Disabled</p>
-          <ui-lib-select-button [options]="basicOptions" [disabled]="true" [(value)]="basicValue" />
+          <ui-lib-select-button [disabled]="true" [options]="basicOptions" [(value)]="basicValue" />
         </ui-lib-panel>
         <ui-lib-panel variant="minimal">
           <p class="section-label">Per-Option Disabled</p>
@@ -83,11 +83,11 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="2">
           <ui-lib-select-button
+            [invalid]="invalidTouched && !invalidValue"
             [options]="invalidOptions"
             [(value)]="invalidValue"
-            [invalid]="invalidTouched && !invalidValue"
           />
-          <ui-lib-inline [gap]="2" align="center">
+          <ui-lib-inline align="center" [gap]="2">
             <ui-lib-button size="sm" (click)="markInvalidTouched()">Mark Touched</ui-lib-button>
             <span class="hint">Select a value to clear invalid state.</span>
           </ui-lib-inline>
@@ -101,24 +101,24 @@
         <app-variant-comparison>
           <div material>
             <ui-lib-select-button
-              [options]="variantOptions"
               variant="material"
+              [options]="variantOptions"
               [(value)]="materialValue"
             />
           </div>
 
           <div bootstrap>
             <ui-lib-select-button
-              [options]="variantOptions"
               variant="bootstrap"
+              [options]="variantOptions"
               [(value)]="bootstrapValue"
             />
           </div>
 
           <div minimal>
             <ui-lib-select-button
-              [options]="variantOptions"
               variant="minimal"
+              [options]="variantOptions"
               [(value)]="minimalValue"
             />
           </div>
@@ -129,24 +129,24 @@
         <ui-lib-panel variant="minimal">
           <p class="section-label">Material</p>
           <ui-lib-select-button
-            [options]="variantOptions"
             variant="material"
+            [options]="variantOptions"
             [(value)]="materialValue"
           />
         </ui-lib-panel>
         <ui-lib-panel variant="minimal">
           <p class="section-label">Bootstrap</p>
           <ui-lib-select-button
-            [options]="variantOptions"
             variant="bootstrap"
+            [options]="variantOptions"
             [(value)]="bootstrapValue"
           />
         </ui-lib-panel>
         <ui-lib-panel variant="minimal">
           <p class="section-label">Minimal</p>
           <ui-lib-select-button
-            [options]="variantOptions"
             variant="minimal"
+            [options]="variantOptions"
             [(value)]="minimalValue"
           />
         </ui-lib-panel>
@@ -164,7 +164,7 @@
         <ui-lib-panel variant="minimal">
           <p class="section-label">Reactive</p>
           <form [formGroup]="form">
-            <ui-lib-select-button [options]="formOptions" formControlName="selection" />
+            <ui-lib-select-button formControlName="selection" [options]="formOptions" />
           </form>
           <p class="hint">Value: {{ form.controls.selection.value }}</p>
         </ui-lib-panel>
@@ -175,7 +175,7 @@
       <h3>API Reference</h3>
       <ui-lib-panel variant="minimal">
         <app-doc-api-reference [rows]="apiInputRows" />
-        <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
+        <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
       </ui-lib-panel>
     </section>
   </div>
@@ -187,9 +187,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -197,8 +197,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

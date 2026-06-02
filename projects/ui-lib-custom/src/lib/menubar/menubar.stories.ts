@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { Menubar } from './menubar';
-import type { MenubarItem, MenubarSize, MenubarVariant } from './menubar.types';
+
 import {
   SHARED_DEFAULTS,
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
+
+import { Menubar } from './menubar';
+import type { MenubarItem, MenubarSize, MenubarVariant } from './menubar.types';
 
 type MenubarStoryArgs = {
   variant: MenubarVariant | null;

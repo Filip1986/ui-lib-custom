@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A content slider with support for multiple visible items, responsive breakpoints, autoplay, circular mode, touch/swipe navigation, and three design variants."
     docHeader
     title="Carousel"
     [importCode]="importCode"
-    description="A content slider with support for multiple visible items, responsive breakpoints, autoplay, circular mode, touch/swipe navigation, and three design variants."
   />
 
   <div class="demo-page-header__preview">
@@ -33,7 +33,7 @@
   <!-- ─── Multiple visible items ─────────────────────────────────────────── -->
   <app-doc-section id="multiple-items" title="Multiple Items Visible">
     <p class="demo-section__description">3 products visible, scroll 1 at a time.</p>
-    <ui-lib-carousel [value]="products" [numVisible]="3" [numScroll]="1">
+    <ui-lib-carousel [numScroll]="1" [numVisible]="3" [value]="products">
       <ng-template #carouselItem let-product>
         <div class="demo-product-card">
           <div class="demo-product-card__image">{{ product.image }}</div>
@@ -53,11 +53,11 @@
       Wraps from last item back to first; auto-advances every 3 seconds.
     </p>
     <ui-lib-carousel
-      [value]="products"
-      [numVisible]="3"
-      [numScroll]="1"
-      [circular]="true"
       [autoplayInterval]="3000"
+      [circular]="true"
+      [numScroll]="1"
+      [numVisible]="3"
+      [value]="products"
     >
       <ng-template #carouselItem let-product>
         <div class="demo-product-card">
@@ -78,10 +78,10 @@
       Resize the window: 3 items above 1400 px, 2 from 1024 px, 1 below 640 px.
     </p>
     <ui-lib-carousel
-      [value]="products"
-      [numVisible]="4"
       [numScroll]="2"
+      [numVisible]="4"
       [responsiveOptions]="responsiveOptions"
+      [value]="products"
     >
       <ng-template #carouselItem let-product>
         <div class="demo-product-card">
@@ -99,11 +99,11 @@
   <app-doc-section id="vertical" title="Vertical">
     <p class="demo-section__description">Slides vertically with 3 items visible.</p>
     <ui-lib-carousel
-      [value]="slides"
       orientation="vertical"
       verticalViewportHeight="280px"
-      [numVisible]="3"
       [numScroll]="1"
+      [numVisible]="3"
+      [value]="slides"
     >
       <ng-template #carouselItem let-slide>
         <div class="demo-slide demo-slide--vertical">
@@ -119,7 +119,7 @@
       Custom header and footer slots via <code>#carouselHeader</code> and
       <code>#carouselFooter</code>.
     </p>
-    <ui-lib-carousel [value]="products" [numVisible]="3" [numScroll]="1">
+    <ui-lib-carousel [numScroll]="1" [numVisible]="3" [value]="products">
       <ng-template #carouselHeader>
         <div class="demo-header">
           <h3>Featured Products</h3>
@@ -158,7 +158,7 @@
 
   <!-- ─── Bootstrap variant ─────────────────────────────────────────────── -->
   <app-doc-section id="bootstrap-variant" title="Bootstrap Variant">
-    <ui-lib-carousel [value]="products" variant="bootstrap" [numVisible]="3" [numScroll]="1">
+    <ui-lib-carousel variant="bootstrap" [numScroll]="1" [numVisible]="3" [value]="products">
       <ng-template #carouselItem let-product>
         <div class="demo-product-card demo-product-card--bootstrap">
           <div class="demo-product-card__image">{{ product.image }}</div>
@@ -173,7 +173,7 @@
 
   <!-- ─── Minimal variant ───────────────────────────────────────────────── -->
   <app-doc-section id="minimal-variant" title="Minimal Variant">
-    <ui-lib-carousel [value]="products" variant="minimal" [numVisible]="3" [numScroll]="1">
+    <ui-lib-carousel variant="minimal" [numScroll]="1" [numVisible]="3" [value]="products">
       <ng-template #carouselItem let-product>
         <div class="demo-product-card demo-product-card--minimal">
           <div class="demo-product-card__image">{{ product.image }}</div>
@@ -191,7 +191,7 @@
     <div class="demo-size-row">
       <div>
         <p><code>sm</code></p>
-        <ui-lib-carousel [value]="slides" size="sm">
+        <ui-lib-carousel size="sm" [value]="slides">
           <ng-template #carouselItem let-slide>
             <div class="demo-slide demo-slide--sm">
               <span>{{ slide }}</span>
@@ -201,7 +201,7 @@
       </div>
       <div>
         <p><code>md</code> (default)</p>
-        <ui-lib-carousel [value]="slides" size="md">
+        <ui-lib-carousel size="md" [value]="slides">
           <ng-template #carouselItem let-slide>
             <div class="demo-slide demo-slide--basic">
               <span>{{ slide }}</span>
@@ -211,7 +211,7 @@
       </div>
       <div>
         <p><code>lg</code></p>
-        <ui-lib-carousel [value]="slides" size="lg">
+        <ui-lib-carousel size="lg" [value]="slides">
           <ng-template #carouselItem let-slide>
             <div class="demo-slide demo-slide--lg">
               <span>{{ slide }}</span>
@@ -227,7 +227,7 @@
     <p class="demo-section__description">
       Navigation buttons and indicator dots are both hidden. Swipe on touch devices.
     </p>
-    <ui-lib-carousel [value]="slides" [showNavigators]="false" [showIndicators]="false">
+    <ui-lib-carousel [showIndicators]="false" [showNavigators]="false" [value]="slides">
       <ng-template #carouselItem let-slide>
         <div class="demo-slide">
           <span>{{ slide }}</span>
@@ -255,9 +255,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -266,8 +266,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -1,9 +1,9 @@
 @layer uilib.components {
   .ui-lib-icon-field {
-    position: relative;
     display: inline-flex;
-    width: 100%;
     min-width: 0;
+    position: relative;
+    width: 100%;
 
     > input,
     > ui-lib-input,
@@ -25,15 +25,15 @@
   }
 
   .ui-lib-icon-field--left .ui-lib-input-icon {
-    position: absolute;
     inset-inline-start: var(--uilib-icon-field-icon-margin, 0.75rem);
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
   }
 
   .ui-lib-icon-field--right .ui-lib-input-icon {
-    position: absolute;
     inset-inline-end: var(--uilib-icon-field-icon-margin, 0.75rem);
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
   }

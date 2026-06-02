@@ -6,8 +6,8 @@
   }
 
   ui-lib-button-group .ui-lib-button-group__group {
-    display: inline-flex;
     align-items: stretch;
+    display: inline-flex;
     gap: var(--uilib-button-group-gap);
     width: auto;
   }
@@ -40,15 +40,15 @@
 
   ui-lib-button-group .ui-lib-button-group__group > ui-lib-button:not(:first-child) button,
   ui-lib-button-group .ui-lib-button-group__group > ui-lib-button:not(:first-child) .ui-lib-button {
-    border-start-start-radius: 0;
     border-end-start-radius: 0;
+    border-start-start-radius: 0;
     margin-inline-start: var(--uilib-button-group-connected-border-overlap);
   }
 
   ui-lib-button-group .ui-lib-button-group__group > ui-lib-button:not(:last-child) button,
   ui-lib-button-group .ui-lib-button-group__group > ui-lib-button:not(:last-child) .ui-lib-button {
-    border-start-end-radius: 0;
     border-end-end-radius: 0;
+    border-start-end-radius: 0;
   }
 
   ui-lib-button-group.ui-lib-button-group--vertical
@@ -59,8 +59,8 @@
     .ui-lib-button-group__group
     > ui-lib-button:not(:first-child)
     .ui-lib-button {
-    border-start-start-radius: 0;
     border-start-end-radius: 0;
+    border-start-start-radius: 0;
     margin-block-start: var(--uilib-button-group-connected-border-overlap);
     margin-inline-start: 0;
   }
@@ -73,8 +73,8 @@
     .ui-lib-button-group__group
     > ui-lib-button:not(:last-child)
     .ui-lib-button {
-    border-end-start-radius: 0;
     border-end-end-radius: 0;
+    border-end-start-radius: 0;
   }
 
   ui-lib-button-group.ui-lib-button-group--material

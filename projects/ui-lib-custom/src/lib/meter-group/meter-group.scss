@@ -34,32 +34,32 @@
 
   // ---- Host element ------------------------------------------------
   .ui-lib-meter-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--uilib-meter-group-label-gap);
-    width: 100%;
-    font-family: var(--uilib-font-ui, inherit);
     animation: uilib-meter-group-mount var(--uilib-transition-duration-fast, 0.15s)
       var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--uilib-font-ui, inherit);
+    gap: var(--uilib-meter-group-label-gap);
+    width: 100%;
 
     // ---- Meter bar container -----------------------------------------
     &__meters {
+      background-color: var(--uilib-meter-group-bg);
+      border-radius: var(--uilib-meter-group-border-radius);
       display: flex;
       flex-direction: row;
-      overflow: hidden;
-      border-radius: var(--uilib-meter-group-border-radius);
-      background-color: var(--uilib-meter-group-bg);
-      height: var(--uilib-meter-group-height);
-      width: 100%;
       gap: var(--uilib-meter-group-segment-gap);
+      height: var(--uilib-meter-group-height);
+      overflow: hidden;
+      width: 100%;
     }
 
     // ---- Individual segment ------------------------------------------
     &__meter {
-      transition: var(--uilib-meter-group-transition);
+      flex-shrink: 0;
       height: 100%;
       min-width: 0;
-      flex-shrink: 0;
+      transition: var(--uilib-meter-group-transition);
 
       &:first-child {
         border-radius: var(--uilib-meter-group-border-radius) 0 0
@@ -88,23 +88,23 @@
     }
 
     &__label-item {
-      display: flex;
       align-items: center;
-      gap: var(--uilib-meter-group-label-item-gap);
-      font-size: var(--uilib-meter-group-label-font-size);
       color: var(--uilib-meter-group-label-color);
+      display: flex;
+      font-size: var(--uilib-meter-group-label-font-size);
+      gap: var(--uilib-meter-group-label-item-gap);
     }
 
     &__label-swatch {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      width: var(--uilib-meter-group-swatch-size);
-      height: var(--uilib-meter-group-swatch-size);
       border-radius: var(--uilib-meter-group-swatch-border-radius);
-      font-size: var(--uilib-meter-group-swatch-font-size);
       color: var(--uilib-meter-group-swatch-fg);
+      display: inline-flex;
+      flex-shrink: 0;
+      font-size: var(--uilib-meter-group-swatch-font-size);
+      height: var(--uilib-meter-group-swatch-size);
+      justify-content: center;
+      width: var(--uilib-meter-group-swatch-size);
     }
 
     &__label-text {
@@ -117,15 +117,15 @@
     }
 
     &__sr-total {
-      position: absolute;
-      width: 1px;
+      border: 0;
+      clip: rect(0 0 0 0);
       height: 1px;
       margin: -1px;
-      border: 0;
-      padding: 0;
-      clip: rect(0 0 0 0);
       overflow: hidden;
+      padding: 0;
+      position: absolute;
       white-space: nowrap;
+      width: 1px;
     }
 
     // ---- Size: sm ---------------------------------------------------
@@ -146,20 +146,20 @@
 
     // ---- Orientation: vertical --------------------------------------
     &--orientation-vertical {
-      flex-direction: row;
       align-items: flex-end;
+      flex-direction: row;
       width: auto;
 
       .ui-lib-meter-group__meters {
         flex-direction: column-reverse;
-        width: var(--uilib-meter-group-width-vertical);
         height: var(--uilib-meter-group-height-vertical);
+        width: var(--uilib-meter-group-width-vertical);
       }
 
       .ui-lib-meter-group__meter {
-        width: 100%;
-        height: auto;
         flex-shrink: 0;
+        height: auto;
+        width: 100%;
 
         &:first-child {
           border-radius: 0 0 var(--uilib-meter-group-border-radius)

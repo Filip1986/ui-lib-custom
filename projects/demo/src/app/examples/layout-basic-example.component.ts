@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Stack } from 'ui-lib-custom/layout';
+
 import { Card } from 'ui-lib-custom/card';
+import { Stack } from 'ui-lib-custom/layout';
 
 /**
  * Basic layout example.

@@ -11,27 +11,27 @@
     <!-- Autoplay pause/resume button (only shown when autoplay is configured) -->
     @if (autoplayInterval() > 0) {
       <button
-        type="button"
         class="uilib-carousel-autoplay-button"
+        type="button"
         [attr.aria-label]="autoplayButtonLabel()"
         (click)="toggleAutoplay()"
       >
         @if (playing()) {
           <svg
-            class="uilib-carousel-nav-icon"
-            viewBox="0 0 24 24"
-            fill="currentColor"
             aria-hidden="true"
+            class="uilib-carousel-nav-icon"
+            fill="currentColor"
+            viewBox="0 0 24 24"
           >
-            <rect x="6" y="4" width="4" height="16" />
-            <rect x="14" y="4" width="4" height="16" />
+            <rect height="16" width="4" x="6" y="4" />
+            <rect height="16" width="4" x="14" y="4" />
           </svg>
         } @else {
           <svg
-            class="uilib-carousel-nav-icon"
-            viewBox="0 0 24 24"
-            fill="currentColor"
             aria-hidden="true"
+            class="uilib-carousel-nav-icon"
+            fill="currentColor"
+            viewBox="0 0 24 24"
           >
             <polygon points="5,3 19,12 5,21" />
           </svg>
@@ -40,18 +40,18 @@
     }
 
     <div
+      aria-atomic="false"
       class="uilib-carousel-content"
       [attr.aria-live]="autoplayInterval() > 0 ? 'polite' : 'off'"
-      aria-atomic="false"
     >
       <!-- Previous button -->
       @if (showNavigators()) {
         <button
-          type="button"
           class="uilib-carousel-prev-button"
+          type="button"
+          [attr.aria-label]="resolvedPrevAriaLabel()"
           [class.uilib-carousel-nav-disabled]="isBackwardDisabled()"
           [disabled]="isBackwardDisabled()"
-          [attr.aria-label]="resolvedPrevAriaLabel()"
           (click)="navigateBackward($event)"
         >
           @if (prevIconTemplate()) {
@@ -59,23 +59,23 @@
           } @else {
             @if (isVertical()) {
               <svg
+                aria-hidden="true"
                 class="uilib-carousel-nav-icon"
-                viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
-                aria-hidden="true"
+                viewBox="0 0 24 24"
               >
                 <polyline points="18 15 12 9 6 15" />
               </svg>
             } @else {
               <svg
+                aria-hidden="true"
                 class="uilib-carousel-nav-icon"
-                viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
-                aria-hidden="true"
+                viewBox="0 0 24 24"
               >
                 <polyline points="15 18 9 12 15 6" />
               </svg>
@@ -88,21 +88,21 @@
       <div
         class="uilib-carousel-viewport"
         [ngStyle]="viewportStyle()"
-        (touchstart)="onTouchStart($event)"
-        (touchmove)="onTouchMove($event)"
         (touchend)="onTouchEnd($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchstart)="onTouchStart($event)"
       >
         <div #itemsContainer class="uilib-carousel-item-list" (transitionend)="onTransitionEnd()">
           <!-- Cloned items at start (for circular wrap-around) -->
           @for (item of clonedItemsForStarting; track $index) {
             <div
               class="uilib-carousel-item uilib-carousel-item-clone"
-              [class.uilib-carousel-item-active]="totalShiftedItems() * -1 === value().length"
-              [class.uilib-carousel-item-start]="$index === 0"
-              [class.uilib-carousel-item-end]="$index === clonedItemsForStarting.length - 1"
-              [attr.aria-hidden]="true"
               role="group"
+              [attr.aria-hidden]="true"
               [attr.aria-roledescription]="'slide'"
+              [class.uilib-carousel-item-active]="totalShiftedItems() * -1 === value().length"
+              [class.uilib-carousel-item-end]="$index === clonedItemsForStarting.length - 1"
+              [class.uilib-carousel-item-start]="$index === 0"
             >
               @if (itemTemplate()) {
                 <ng-container
@@ -117,13 +117,13 @@
           @for (item of value(); track $index) {
             <div
               class="uilib-carousel-item"
-              [class.uilib-carousel-item-active]="isItemActive($index)"
-              [class.uilib-carousel-item-start]="isItemFirst($index)"
-              [class.uilib-carousel-item-end]="isItemLast($index)"
+              role="group"
               [attr.aria-hidden]="!isItemActive($index)"
               [attr.aria-label]="ariaSlideNumber($index)"
-              role="group"
               [attr.aria-roledescription]="'slide'"
+              [class.uilib-carousel-item-active]="isItemActive($index)"
+              [class.uilib-carousel-item-end]="isItemLast($index)"
+              [class.uilib-carousel-item-start]="isItemFirst($index)"
             >
               @if (itemTemplate()) {
                 <ng-container
@@ -138,12 +138,12 @@
           @for (item of clonedItemsForFinishing; track $index) {
             <div
               class="uilib-carousel-item uilib-carousel-item-clone"
-              [class.uilib-carousel-item-active]="totalShiftedItems() === 0"
-              [class.uilib-carousel-item-start]="$index === 0"
-              [class.uilib-carousel-item-end]="$index === clonedItemsForFinishing.length - 1"
-              [attr.aria-hidden]="true"
               role="group"
+              [attr.aria-hidden]="true"
               [attr.aria-roledescription]="'slide'"
+              [class.uilib-carousel-item-active]="totalShiftedItems() === 0"
+              [class.uilib-carousel-item-end]="$index === clonedItemsForFinishing.length - 1"
+              [class.uilib-carousel-item-start]="$index === 0"
             >
               @if (itemTemplate()) {
                 <ng-container
@@ -159,11 +159,11 @@
       <!-- Next button -->
       @if (showNavigators()) {
         <button
-          type="button"
           class="uilib-carousel-next-button"
+          type="button"
+          [attr.aria-label]="resolvedNextAriaLabel()"
           [class.uilib-carousel-nav-disabled]="isForwardDisabled()"
           [disabled]="isForwardDisabled()"
-          [attr.aria-label]="resolvedNextAriaLabel()"
           (click)="navigateForward($event)"
         >
           @if (nextIconTemplate()) {
@@ -171,23 +171,23 @@
           } @else {
             @if (isVertical()) {
               <svg
+                aria-hidden="true"
                 class="uilib-carousel-nav-icon"
-                viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
-                aria-hidden="true"
+                viewBox="0 0 24 24"
               >
                 <polyline points="6 9 12 15 18 9" />
               </svg>
             } @else {
               <svg
+                aria-hidden="true"
                 class="uilib-carousel-nav-icon"
-                viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
-                aria-hidden="true"
+                viewBox="0 0 24 24"
               >
                 <polyline points="9 18 15 12 9 6" />
               </svg>
@@ -202,9 +202,9 @@
       <ol
         #indicatorContainer
         class="uilib-carousel-indicator-list"
+        tabindex="0"
         [attr.aria-label]="i18n.translate('carousel.indicators-label')"
         (keydown)="onIndicatorKeydown($event)"
-        tabindex="0"
       >
         @for (dot of dotsArray(); track dot) {
           <li
@@ -212,11 +212,11 @@
             [class.uilib-carousel-indicator-active]="currentPage() === dot"
           >
             <button
-              type="button"
               class="uilib-carousel-indicator-button"
-              [attr.tabindex]="currentPage() === dot ? 0 : -1"
-              [attr.aria-label]="ariaPageLabel(dot)"
+              type="button"
               [attr.aria-current]="currentPage() === dot ? 'true' : null"
+              [attr.aria-label]="ariaPageLabel(dot)"
+              [attr.tabindex]="currentPage() === dot ? 0 : -1"
               (click)="navigateToPage($event, dot)"
             ></button>
           </li>

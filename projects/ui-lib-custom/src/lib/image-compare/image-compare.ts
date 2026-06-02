@@ -1,24 +1,26 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
-  ViewEncapsulation,
   computed,
+  DestroyRef,
+  type ElementRef,
   inject,
   input,
-  model,
-  output,
-  signal,
-  viewChild,
-  type ElementRef,
   type InputSignal,
+  model,
   type ModelSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  viewChild,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import {
   IMAGE_COMPARE_DEFAULT_VALUE,
   IMAGE_COMPARE_KEYBOARD_LARGE_STEP,

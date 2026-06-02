@@ -1,31 +1,33 @@
-import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import { Icon, SEMANTIC_ICONS } from 'ui-lib-custom/icon';
-import type { SemanticIcon } from 'ui-lib-custom/icon';
-import type { IconSize } from 'ui-lib-custom/core';
-import { Button } from 'ui-lib-custom/button';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import type { TabsValue } from 'ui-lib-custom/tabs';
-import { IconButton, Alert } from 'ui-lib-custom';
-import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
-import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { IconBasicExampleComponent } from '@demo/examples/icon-basic-example.component';
+import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { Alert, IconButton } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
+import type { IconSize } from 'ui-lib-custom/core';
+import type { SemanticIcon } from 'ui-lib-custom/icon';
+import { Icon, SEMANTIC_ICONS } from 'ui-lib-custom/icon';
 import { Panel } from 'ui-lib-custom/panel';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-import { iconExampleHtml, iconExampleTs, usageHtml, usageTs } from './snippets.generated';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+
+import { IconBasicExampleComponent } from '@demo/examples/icon-basic-example.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
+import { iconExampleHtml, iconExampleTs, usageHtml, usageTs } from './snippets.generated';
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
 
 /**

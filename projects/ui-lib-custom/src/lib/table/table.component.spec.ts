@@ -1,14 +1,16 @@
+import type { DebugElement, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { DebugElement, WritableSignal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { TableComponent } from './table.component';
+import type { TableSortMeta } from './table.types';
 import { TableColumnComponent } from './table-column.component';
 import {
   TableCaptionDirective,
@@ -16,7 +18,6 @@ import {
   TableEmptyDirective,
   TableExpansionDirective,
 } from './table-templates.directive';
-import type { TableSortMeta } from './table.types';
 
 // ---------------------------------------------------------------------------
 // Shared test data

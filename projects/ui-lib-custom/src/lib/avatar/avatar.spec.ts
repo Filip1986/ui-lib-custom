@@ -1,9 +1,10 @@
-import { TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
-import { Component, ChangeDetectionStrategy, provideZonelessChangeDetection } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+
 import { Avatar } from './avatar';
+import type { AvatarShape, AvatarSize, AvatarVariant } from './avatar.types';
 import { AvatarGroup } from './avatar-group';
-import type { AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,

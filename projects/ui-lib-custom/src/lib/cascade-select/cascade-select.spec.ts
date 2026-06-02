@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { DebugElement } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideZonelessChangeDetection } from '@angular/core';
+
 import {
   CascadeSelectDropdownIconDirective,
   CascadeSelectFooterDirective,

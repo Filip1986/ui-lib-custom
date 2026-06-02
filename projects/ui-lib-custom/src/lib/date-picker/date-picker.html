@@ -4,31 +4,31 @@
       <input
         #inputElement
         class="ui-lib-datepicker__input"
-        type="text"
         role="combobox"
-        [id]="resolvedInputId()"
-        [name]="name() || resolvedInputId()"
-        [value]="formattedValue()"
-        [placeholder]="placeholder()"
-        [disabled]="isDisabled()"
-        [attr.tabindex]="isDisabled() ? -1 : tabindex()"
+        type="text"
+        [attr.aria-controls]="panelVisible() ? resolvedInputId() + '-panel' : null"
+        [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
+        [attr.aria-haspopup]="'dialog'"
         [attr.aria-label]="
           ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('datepicker.input.label'))
         "
         [attr.aria-labelledby]="ariaLabelledBy()"
-        [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
-        [attr.aria-controls]="panelVisible() ? resolvedInputId() + '-panel' : null"
-        [attr.aria-haspopup]="'dialog'"
-        (focus)="onInputFocusEvent($event)"
+        [attr.tabindex]="isDisabled() ? -1 : tabindex()"
+        [disabled]="isDisabled()"
+        [id]="resolvedInputId()"
+        [name]="name() || resolvedInputId()"
+        [placeholder]="placeholder()"
+        [value]="formattedValue()"
         (blur)="onInputBlurEvent($event)"
-        (keydown)="onInputKeydown($event)"
+        (focus)="onInputFocusEvent($event)"
         (input)="onInputChange($any($event.target).value)"
+        (keydown)="onInputKeydown($event)"
       />
 
       @if (showClear() && formattedValue() && !isDisabled()) {
         <button
-          type="button"
           class="ui-lib-datepicker__clear-button"
+          type="button"
           [attr.aria-label]="i18n.translate('datepicker.clear')"
           (click)="clearValue($event)"
         >
@@ -39,18 +39,18 @@
       @if (showIcon()) {
         @if (iconDisplay() === 'button') {
           <button
-            type="button"
             class="ui-lib-datepicker__trigger"
-            [disabled]="isDisabled()"
-            [attr.aria-label]="i18n.translate('datepicker.toggle')"
-            [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
+            type="button"
             [attr.aria-controls]="panelVisible() ? resolvedInputId() + '-panel' : null"
+            [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
+            [attr.aria-label]="i18n.translate('datepicker.toggle')"
+            [disabled]="isDisabled()"
             (click)="onTriggerClick($event)"
           >
             📅
           </button>
         } @else {
-          <span class="ui-lib-datepicker__input-icon" aria-hidden="true">📅</span>
+          <span aria-hidden="true" class="ui-lib-datepicker__input-icon">📅</span>
         }
       }
     </div>
@@ -60,23 +60,23 @@
     <div
       #panelElement
       class="ui-lib-datepicker__panel"
-      [attr.id]="resolvedInputId() + '-panel'"
       role="dialog"
-      [attr.aria-modal]="inline() ? 'false' : 'true'"
       [attr.aria-label]="ariaLabel() || i18n.translate('datepicker.panel.label')"
-      (keydown)="onPanelKeydown($event)"
+      [attr.aria-modal]="inline() ? 'false' : 'true'"
+      [attr.id]="resolvedInputId() + '-panel'"
       (click)="$event.stopPropagation()"
+      (keydown)="onPanelKeydown($event)"
     >
       <div class="ui-lib-datepicker__calendar-layout">
         @if (!timeOnly()) {
           <div class="ui-lib-datepicker__header">
             <button
-              type="button"
               class="ui-lib-datepicker__prev-button"
-              [disabled]="isDisabled() || !canNavigatePrev()"
+              type="button"
               [attr.aria-label]="
                 i18n.translate('datepicker.prev.month.label', { month: prevMonthLabel() })
               "
+              [disabled]="isDisabled() || !canNavigatePrev()"
               (click)="navigateMonth(-1)"
             >
               ‹
@@ -91,15 +91,15 @@
                   (change)="onMonthNavigatorChange($event)"
                 >
                   @for (monthOption of monthOptions(); track monthOption.month) {
-                    <option [value]="monthOption.month" [disabled]="monthOption.disabled">
+                    <option [disabled]="monthOption.disabled" [value]="monthOption.month">
                       {{ locale().monthNames[monthOption.month] }}
                     </option>
                   }
                 </select>
               } @else {
                 <button
-                  type="button"
                   class="ui-lib-datepicker__month-label"
+                  type="button"
                   [disabled]="isDisabled()"
                   (click)="onMonthLabelClick()"
                 >
@@ -120,8 +120,8 @@
                 </select>
               } @else {
                 <button
-                  type="button"
                   class="ui-lib-datepicker__year-label"
+                  type="button"
                   [disabled]="isDisabled()"
                   (click)="onYearLabelClick()"
                 >
@@ -131,12 +131,12 @@
             </div>
 
             <button
-              type="button"
               class="ui-lib-datepicker__next-button"
-              [disabled]="isDisabled() || !canNavigateNext()"
+              type="button"
               [attr.aria-label]="
                 i18n.translate('datepicker.next.month.label', { month: nextMonthLabel() })
               "
+              [disabled]="isDisabled() || !canNavigateNext()"
               (click)="navigateMonth(1)"
             >
               ›
@@ -166,8 +166,8 @@
                           @if (showWeek()) {
                             <th
                               class="ui-lib-datepicker__week-header"
-                              scope="col"
                               role="columnheader"
+                              scope="col"
                             >
                               Wk
                             </th>
@@ -178,8 +178,8 @@
                           ) {
                             <th
                               class="ui-lib-datepicker__week-day"
-                              scope="col"
                               role="columnheader"
+                              scope="col"
                               [attr.abbr]="weekDayFullLabels()[$index]"
                               [attr.aria-label]="weekDayFullLabels()[$index]"
                             >
@@ -213,17 +213,17 @@
                               <td
                                 class="ui-lib-datepicker__day-cell"
                                 role="gridcell"
-                                [attr.aria-selected]="dateMeta.selected ? 'true' : 'false'"
                                 [attr.aria-disabled]="dateMeta.disabled ? 'true' : 'false'"
+                                [attr.aria-selected]="dateMeta.selected ? 'true' : 'false'"
                               >
                                 <button
-                                  type="button"
                                   class="{{ getDateCellClasses(dateMeta) }}"
-                                  [attr.id]="getDateCellId(monthIndex, dateMeta)"
+                                  type="button"
+                                  [attr.aria-label]="getDateAriaLabel(dateMeta)"
                                   [attr.data-date-key]="
                                     dateMeta.year + '-' + dateMeta.month + '-' + dateMeta.day
                                   "
-                                  [attr.aria-label]="getDateAriaLabel(dateMeta)"
+                                  [attr.id]="getDateCellId(monthIndex, dateMeta)"
                                   [attr.tabindex]="isDateFocused(dateMeta) ? 0 : -1"
                                   [disabled]="isDisabled() || dateMeta.disabled"
                                   (click)="onDateSelect($event, dateMeta)"
@@ -241,7 +241,7 @@
                                   } @else if (!dateMeta.otherMonth || showOtherMonths()) {
                                     {{ dateMeta.day }}
                                   } @else {
-                                    <span class="ui-lib-datepicker__day-empty" aria-hidden="true"
+                                    <span aria-hidden="true" class="ui-lib-datepicker__day-empty"
                                       >&nbsp;</span
                                     >
                                   }
@@ -269,15 +269,15 @@
                   track monthOption.month
                 ) {
                   <button
-                    type="button"
                     class="ui-lib-datepicker__month-cell"
-                    [class.ui-lib-datepicker__month-cell--selected]="monthOption.selected"
-                    [class.ui-lib-datepicker__month-cell--disabled]="monthOption.disabled"
+                    type="button"
+                    [attr.aria-disabled]="monthOption.disabled ? 'true' : 'false'"
                     [attr.aria-label]="locale().monthNames[monthOption.month]"
                     [attr.aria-selected]="monthOption.selected ? 'true' : 'false'"
-                    [attr.aria-disabled]="monthOption.disabled ? 'true' : 'false'"
                     [attr.data-month-index]="monthIndex"
                     [attr.tabindex]="focusedMonthIndex() === monthIndex ? 0 : -1"
+                    [class.ui-lib-datepicker__month-cell--disabled]="monthOption.disabled"
+                    [class.ui-lib-datepicker__month-cell--selected]="monthOption.selected"
                     [disabled]="isDisabled() || monthOption.disabled"
                     (click)="onMonthSelect($event, monthIndex)"
                     (keydown)="onMonthCellKeydown($event, monthIndex)"
@@ -291,10 +291,10 @@
             @case ('year') {
               <div class="ui-lib-datepicker__year-header">
                 <button
-                  type="button"
                   class="ui-lib-datepicker__prev-button"
-                  [disabled]="isDisabled()"
+                  type="button"
                   [attr.aria-label]="i18n.translate('datepicker.prev.decade')"
+                  [disabled]="isDisabled()"
                   (click)="navigateDecade(-1)"
                 >
                   ‹
@@ -303,10 +303,10 @@
                   {{ currentDecadeStart() }} - {{ currentDecadeStart() + 11 }}
                 </div>
                 <button
-                  type="button"
                   class="ui-lib-datepicker__next-button"
-                  [disabled]="isDisabled()"
+                  type="button"
                   [attr.aria-label]="i18n.translate('datepicker.next.decade')"
+                  [disabled]="isDisabled()"
                   (click)="navigateDecade(1)"
                 >
                   ›
@@ -320,15 +320,15 @@
               >
                 @for (yearOption of yearOptions(); let yearIndex = $index; track yearOption.year) {
                   <button
-                    type="button"
                     class="ui-lib-datepicker__year-cell"
-                    [class.ui-lib-datepicker__year-cell--selected]="yearOption.selected"
-                    [class.ui-lib-datepicker__year-cell--disabled]="yearOption.disabled"
+                    type="button"
+                    [attr.aria-disabled]="yearOption.disabled ? 'true' : 'false'"
                     [attr.aria-label]="'' + yearOption.year"
                     [attr.aria-selected]="yearOption.selected ? 'true' : 'false'"
-                    [attr.aria-disabled]="yearOption.disabled ? 'true' : 'false'"
                     [attr.data-year-index]="yearIndex"
                     [attr.tabindex]="focusedYearIndex() === yearIndex ? 0 : -1"
+                    [class.ui-lib-datepicker__year-cell--disabled]="yearOption.disabled"
+                    [class.ui-lib-datepicker__year-cell--selected]="yearOption.selected"
                     [disabled]="isDisabled() || yearOption.disabled"
                     (click)="onYearSelect($event, yearIndex)"
                     (keydown)="onYearCellKeydown($event, yearIndex)"
@@ -353,41 +353,41 @@
               [attr.aria-label]="i18n.translate('datepicker.time.hour')"
             >
               <button
-                type="button"
                 class="ui-lib-datepicker__time-action"
-                [disabled]="isDisabled()"
+                type="button"
                 [attr.aria-label]="i18n.translate('datepicker.time.inc.hour')"
+                [disabled]="isDisabled()"
                 (click)="incrementHour()"
               >
                 ▲
               </button>
               <input
                 class="ui-lib-datepicker__time-input"
-                type="text"
                 inputmode="numeric"
                 role="spinbutton"
+                type="text"
+                [attr.aria-label]="i18n.translate('datepicker.time.hour')"
+                [attr.aria-valuemax]="getHourSpinMax()"
+                [attr.aria-valuemin]="getHourSpinMin()"
+                [attr.aria-valuenow]="getHourDisplayValue()"
                 [disabled]="isDisabled()"
                 [value]="getHourInputValue()"
-                [attr.aria-valuemin]="getHourSpinMin()"
-                [attr.aria-valuemax]="getHourSpinMax()"
-                [attr.aria-valuenow]="getHourDisplayValue()"
-                [attr.aria-label]="i18n.translate('datepicker.time.hour')"
-                (input)="onTimeInputChange('hour', $any($event.target).value)"
                 (blur)="onTimeInputBlur('hour')"
+                (input)="onTimeInputChange('hour', $any($event.target).value)"
                 (keydown)="onTimeInputKeydown($event, 'hour')"
               />
               <button
-                type="button"
                 class="ui-lib-datepicker__time-action"
-                [disabled]="isDisabled()"
+                type="button"
                 [attr.aria-label]="i18n.translate('datepicker.time.dec.hour')"
+                [disabled]="isDisabled()"
                 (click)="decrementHour()"
               >
                 ▼
               </button>
             </div>
 
-            <span class="ui-lib-datepicker__time-separator" aria-hidden="true">:</span>
+            <span aria-hidden="true" class="ui-lib-datepicker__time-separator">:</span>
 
             <div
               class="ui-lib-datepicker__time-group"
@@ -395,34 +395,34 @@
               [attr.aria-label]="i18n.translate('datepicker.time.minute')"
             >
               <button
-                type="button"
                 class="ui-lib-datepicker__time-action"
-                [disabled]="isDisabled()"
+                type="button"
                 [attr.aria-label]="i18n.translate('datepicker.time.inc.minute')"
+                [disabled]="isDisabled()"
                 (click)="incrementMinute()"
               >
                 ▲
               </button>
               <input
                 class="ui-lib-datepicker__time-input"
-                type="text"
                 inputmode="numeric"
                 role="spinbutton"
+                type="text"
+                [attr.aria-label]="i18n.translate('datepicker.time.minute')"
+                [attr.aria-valuemax]="59"
+                [attr.aria-valuemin]="0"
+                [attr.aria-valuenow]="currentMinute()"
                 [disabled]="isDisabled()"
                 [value]="getMinuteInputValue()"
-                [attr.aria-valuemin]="0"
-                [attr.aria-valuemax]="59"
-                [attr.aria-valuenow]="currentMinute()"
-                [attr.aria-label]="i18n.translate('datepicker.time.minute')"
-                (input)="onTimeInputChange('minute', $any($event.target).value)"
                 (blur)="onTimeInputBlur('minute')"
+                (input)="onTimeInputChange('minute', $any($event.target).value)"
                 (keydown)="onTimeInputKeydown($event, 'minute')"
               />
               <button
-                type="button"
                 class="ui-lib-datepicker__time-action"
-                [disabled]="isDisabled()"
+                type="button"
                 [attr.aria-label]="i18n.translate('datepicker.time.dec.minute')"
+                [disabled]="isDisabled()"
                 (click)="decrementMinute()"
               >
                 ▼
@@ -430,7 +430,7 @@
             </div>
 
             @if (showSeconds()) {
-              <span class="ui-lib-datepicker__time-separator" aria-hidden="true">:</span>
+              <span aria-hidden="true" class="ui-lib-datepicker__time-separator">:</span>
 
               <div
                 class="ui-lib-datepicker__time-group"
@@ -438,34 +438,34 @@
                 [attr.aria-label]="i18n.translate('datepicker.time.second')"
               >
                 <button
-                  type="button"
                   class="ui-lib-datepicker__time-action"
-                  [disabled]="isDisabled()"
+                  type="button"
                   [attr.aria-label]="i18n.translate('datepicker.time.inc.second')"
+                  [disabled]="isDisabled()"
                   (click)="incrementSecond()"
                 >
                   ▲
                 </button>
                 <input
                   class="ui-lib-datepicker__time-input"
-                  type="text"
                   inputmode="numeric"
                   role="spinbutton"
+                  type="text"
+                  [attr.aria-label]="i18n.translate('datepicker.time.second')"
+                  [attr.aria-valuemax]="59"
+                  [attr.aria-valuemin]="0"
+                  [attr.aria-valuenow]="currentSecond()"
                   [disabled]="isDisabled()"
                   [value]="getSecondInputValue()"
-                  [attr.aria-valuemin]="0"
-                  [attr.aria-valuemax]="59"
-                  [attr.aria-valuenow]="currentSecond()"
-                  [attr.aria-label]="i18n.translate('datepicker.time.second')"
-                  (input)="onTimeInputChange('second', $any($event.target).value)"
                   (blur)="onTimeInputBlur('second')"
+                  (input)="onTimeInputChange('second', $any($event.target).value)"
                   (keydown)="onTimeInputKeydown($event, 'second')"
                 />
                 <button
-                  type="button"
                   class="ui-lib-datepicker__time-action"
-                  [disabled]="isDisabled()"
+                  type="button"
                   [attr.aria-label]="i18n.translate('datepicker.time.dec.second')"
+                  [disabled]="isDisabled()"
                   (click)="decrementSecond()"
                 >
                   ▼
@@ -475,13 +475,13 @@
 
             @if (hourFormat() === '12') {
               <button
-                type="button"
                 class="ui-lib-datepicker__ampm-toggle"
-                [disabled]="isDisabled()"
+                type="button"
                 [attr.aria-label]="
                   i18n.translate('datepicker.ampm.toggle', { value: currentAmPm() })
                 "
                 [attr.aria-pressed]="currentAmPm() === 'PM' ? 'true' : 'false'"
+                [disabled]="isDisabled()"
                 (click)="toggleAmPm()"
               >
                 {{ currentAmPm() }}
@@ -495,16 +495,16 @@
         <div class="ui-lib-datepicker__button-bar">
           <ng-content select="[datePickerButtonBar]" />
           <button
-            type="button"
             class="ui-lib-datepicker__today-button"
+            type="button"
             [disabled]="isDisabled()"
             (click)="onTodayButtonClick($event)"
           >
             {{ resolvedTodayLabel() }}
           </button>
           <button
-            type="button"
             class="ui-lib-datepicker__clear-button"
+            type="button"
             [disabled]="isDisabled()"
             (click)="onClearButtonClick($event)"
           >
@@ -514,10 +514,10 @@
       }
 
       <div
-        [attr.id]="liveRegionId()"
-        class="ui-lib-datepicker__live-region"
-        aria-live="polite"
         aria-atomic="true"
+        aria-live="polite"
+        class="ui-lib-datepicker__live-region"
+        [attr.id]="liveRegionId()"
       >
         {{ currentMonthYearLabel() }}
       </div>

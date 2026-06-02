@@ -1,17 +1,18 @@
+import type { WritableSignal } from '@angular/core';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import type { WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideZonelessChangeDetection } from '@angular/core';
+
+import { SelectButton } from './select-button';
 import type {
   SelectButtonChangeEvent,
   SelectButtonOption,
   SelectButtonSize,
-  SelectButtonVariant,
   SelectButtonValue,
+  SelectButtonVariant,
 } from './select-button.types';
-import { SelectButton } from './select-button';
 
 const defaultOptions: SelectButtonOption[] = [
   { label: 'Option 1', value: 'opt1' },

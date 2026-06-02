@@ -36,11 +36,11 @@
       calc(var(--uilib-select-button-padding-x-base) * var(--uilib-density, 1));
     --uilib-select-button-font-size-resolved: var(--uilib-select-button-medium-font-size, 1rem);
     --uilib-select-button-min-height-resolved: var(--uilib-select-button-medium-min-height, 2.5rem);
+    align-items: stretch;
+    border-radius: var(--uilib-select-button-border-radius-resolved);
 
     display: inline-flex;
-    align-items: stretch;
     gap: var(--uilib-select-button-gap-resolved);
-    border-radius: var(--uilib-select-button-border-radius-resolved);
     overflow: hidden;
   }
 
@@ -58,15 +58,15 @@
   }
 
   ui-lib-select-button .ui-lib-select-button__item .ui-lib-button {
-    width: 100%;
+    border-radius: calc(var(--uilib-shape-base, 6px) * 0);
+    box-shadow: var(--uilib-select-button-shadow-resolved);
     min-height: var(--uilib-select-button-min-height-resolved);
+    width: 100%;
     --uilib-button-padding: var(--uilib-select-button-padding-resolved);
     --uilib-button-font-size: var(--uilib-select-button-font-size-resolved);
     --uilib-button-bg: var(--uilib-select-button-bg-resolved);
     --uilib-button-border: var(--uilib-select-button-border-resolved);
     --uilib-button-fg: var(--uilib-select-button-fg, var(--uilib-page-fg));
-    box-shadow: var(--uilib-select-button-shadow-resolved);
-    border-radius: calc(var(--uilib-shape-base, 6px) * 0);
   }
 
   ui-lib-select-button .ui-lib-select-button__item .ui-lib-button:focus-visible {
@@ -87,13 +87,13 @@
   }
 
   ui-lib-select-button .ui-lib-select-button__item:first-child .ui-lib-button {
-    border-start-start-radius: var(--uilib-shape-base, 6px);
     border-end-start-radius: var(--uilib-shape-base, 6px);
+    border-start-start-radius: var(--uilib-shape-base, 6px);
   }
 
   ui-lib-select-button .ui-lib-select-button__item:last-child .ui-lib-button {
-    border-start-end-radius: var(--uilib-shape-base, 6px);
     border-end-end-radius: var(--uilib-shape-base, 6px);
+    border-start-end-radius: var(--uilib-shape-base, 6px);
   }
 
   ui-lib-select-button .ui-lib-select-button__item:not(:first-child) .ui-lib-button {

@@ -2,14 +2,14 @@
 @if (globalFilter()) {
   <div class="uilib-tree-table-global-filter">
     <input
-      type="text"
       class="uilib-tree-table-filter-input"
+      type="text"
+      [attr.aria-label]="i18n.translate('tree-table.filter')"
       [placeholder]="resolvedFilterPlaceholder()"
       [value]="globalFilterText()"
-      [attr.aria-label]="i18n.translate('tree-table.filter')"
       (input)="onGlobalFilterInput($event)"
     />
-    <span class="uilib-tree-table-filter-icon pi pi-search" aria-hidden="true"></span>
+    <span aria-hidden="true" class="uilib-tree-table-filter-icon pi pi-search"></span>
   </div>
 }
 
@@ -39,16 +39,16 @@
     <thead class="uilib-tree-table-thead">
       <tr>
         @if (selectionMode() === 'checkbox') {
-          <th scope="col" class="uilib-tree-table-th uilib-tree-table-th-selection">
+          <th class="uilib-tree-table-th uilib-tree-table-th-selection" scope="col">
             <span class="uilib-tree-table-sr-only">Select all rows</span>
             <span
               class="uilib-tree-table-checkbox"
+              role="checkbox"
+              tabindex="0"
+              [attr.aria-checked]="isSomeSelected() ? 'mixed' : isAllSelected()"
+              [attr.aria-label]="i18n.translate('tree-table.select-all')"
               [class.uilib-tree-table-checkbox--checked]="isAllSelected()"
               [class.uilib-tree-table-checkbox--partial]="isSomeSelected()"
-              role="checkbox"
-              [attr.aria-label]="i18n.translate('tree-table.select-all')"
-              [attr.aria-checked]="isSomeSelected() ? 'mixed' : isAllSelected()"
-              tabindex="0"
               (click)="handleSelectAll($event)"
               (keydown.enter)="handleSelectAll($event)"
               (keydown.space)="$event.preventDefault(); handleSelectAll($event)"
@@ -57,12 +57,8 @@
         }
         @for (column of columns(); track column.field()) {
           <th
-            scope="col"
             class="uilib-tree-table-th"
-            [class.uilib-tree-table-th-sortable]="column.sortable()"
-            [class.uilib-tree-table-th-sorted]="sortField() === column.field() && sortOrder() !== 0"
-            [class.uilib-tree-table-th-frozen]="column.frozen()"
-            [class]="column.styleClass() ?? ''"
+            scope="col"
             [attr.aria-sort]="
               column.sortable()
                 ? sortField() === column.field()
@@ -72,9 +68,13 @@
                   : 'none'
                 : null
             "
+            [attr.tabindex]="column.sortable() ? '0' : null"
+            [class]="column.styleClass() ?? ''"
+            [class.uilib-tree-table-th-frozen]="column.frozen()"
+            [class.uilib-tree-table-th-sortable]="column.sortable()"
+            [class.uilib-tree-table-th-sorted]="sortField() === column.field() && sortOrder() !== 0"
             (click)="column.sortable() ? handleSort(column.field()) : null"
             (keydown.enter)="column.sortable() ? handleSort(column.field()) : null"
-            [attr.tabindex]="column.sortable() ? '0' : null"
           >
             @if (column.headerTemplate(); as headerTpl) {
               <ng-container [ngTemplateOutlet]="headerTpl" />
@@ -82,9 +82,9 @@
               <span class="uilib-tree-table-th-content">{{ column.header() }}</span>
               @if (column.sortable()) {
                 <span
+                  aria-hidden="true"
                   class="uilib-tree-table-sort-icon"
                   [class]="getSortIconClass(column.field())"
-                  aria-hidden="true"
                 ></span>
               }
             }
@@ -98,24 +98,24 @@
       @for (flatNode of flatVisibleNodes(); track flatNode.node.key; let rowIndex = $index) {
         <tr
           class="uilib-tree-table-row"
-          [class.uilib-tree-table-row--selected]="isSelected(flatNode.node)"
+          role="row"
+          tabindex="0"
+          [attr.aria-expanded]="hasChildren(flatNode.node) ? isExpanded(flatNode.node) : null"
+          [attr.aria-level]="flatNode.depth + 1"
+          [attr.aria-posinset]="flatNode.posinset"
+          [attr.aria-rowindex]="rowIndex + 2"
+          [attr.aria-selected]="
+            selectionMode() && selectionMode() !== 'checkbox' ? isSelected(flatNode.node) : null
+          "
+          [attr.aria-setsize]="flatNode.setsize"
+          [attr.data-key]="flatNode.node.key"
+          [class]="flatNode.node.styleClass ?? ''"
           [class.uilib-tree-table-row--selectable]="
             selectionMode() !== null &&
             selectionMode() !== 'checkbox' &&
             flatNode.node.selectable !== false
           "
-          [class]="flatNode.node.styleClass ?? ''"
-          [attr.aria-selected]="
-            selectionMode() && selectionMode() !== 'checkbox' ? isSelected(flatNode.node) : null
-          "
-          [attr.aria-expanded]="hasChildren(flatNode.node) ? isExpanded(flatNode.node) : null"
-          [attr.aria-level]="flatNode.depth + 1"
-          [attr.aria-setsize]="flatNode.setsize"
-          [attr.aria-posinset]="flatNode.posinset"
-          [attr.aria-rowindex]="rowIndex + 2"
-          [attr.data-key]="flatNode.node.key"
-          role="row"
-          tabindex="0"
+          [class.uilib-tree-table-row--selected]="isSelected(flatNode.node)"
           (click)="handleRowClick($event, flatNode.node)"
           (keydown.enter)="handleRowClick($event, flatNode.node)"
           (keydown.space)="$event.preventDefault(); handleRowClick($event, flatNode.node)"
@@ -129,14 +129,14 @@
             >
               <span
                 class="uilib-tree-table-checkbox"
-                [class.uilib-tree-table-checkbox--checked]="isSelected(flatNode.node)"
-                [class.uilib-tree-table-checkbox--partial]="isPartiallySelected(flatNode.node)"
                 role="checkbox"
-                [attr.aria-label]="i18n.translate('tree-table.select-row')"
+                tabindex="-1"
                 [attr.aria-checked]="
                   isPartiallySelected(flatNode.node) ? 'mixed' : isSelected(flatNode.node)
                 "
-                tabindex="-1"
+                [attr.aria-label]="i18n.translate('tree-table.select-row')"
+                [class.uilib-tree-table-checkbox--checked]="isSelected(flatNode.node)"
+                [class.uilib-tree-table-checkbox--partial]="isPartiallySelected(flatNode.node)"
                 (click)="handleCheckboxToggle($event, flatNode.node)"
                 (keydown.enter)="handleCheckboxToggle($event, flatNode.node)"
                 (keydown.space)="
@@ -150,31 +150,31 @@
           @for (column of columns(); track column.field(); let colIndex = $index) {
             <td
               class="uilib-tree-table-td"
-              [class.uilib-tree-table-td-frozen]="column.frozen()"
-              [class]="column.styleClass() ?? ''"
-              [attr.role]="colIndex === expanderColumnIndex() ? 'rowheader' : 'gridcell'"
               [attr.aria-colindex]="selectionMode() === 'checkbox' ? colIndex + 2 : colIndex + 1"
+              [attr.role]="colIndex === expanderColumnIndex() ? 'rowheader' : 'gridcell'"
+              [class]="column.styleClass() ?? ''"
+              [class.uilib-tree-table-td-frozen]="column.frozen()"
             >
               <!-- Expander cell: indent + toggle button -->
               @if (colIndex === expanderColumnIndex()) {
                 <span
+                  aria-hidden="true"
                   class="uilib-tree-table-indent"
                   [style.width.rem]="flatNode.depth * 1.5"
-                  aria-hidden="true"
                 ></span>
                 @if (hasChildren(flatNode.node)) {
                   <button
-                    type="button"
                     class="uilib-tree-table-toggle"
-                    [class.uilib-tree-table-toggle--expanded]="isExpanded(flatNode.node)"
-                    [attr.aria-label]="isExpanded(flatNode.node) ? 'Collapse row' : 'Expand row'"
                     tabindex="-1"
+                    type="button"
+                    [attr.aria-label]="isExpanded(flatNode.node) ? 'Collapse row' : 'Expand row'"
+                    [class.uilib-tree-table-toggle--expanded]="isExpanded(flatNode.node)"
                     (click)="handleToggle($event, flatNode.node)"
                   >
-                    <span class="uilib-tree-table-toggle-icon" aria-hidden="true"></span>
+                    <span aria-hidden="true" class="uilib-tree-table-toggle-icon"></span>
                   </button>
                 } @else {
-                  <span class="uilib-tree-table-leaf-spacer" aria-hidden="true"></span>
+                  <span aria-hidden="true" class="uilib-tree-table-leaf-spacer"></span>
                 }
               }
 

@@ -1,3 +1,4 @@
+import type { Signal, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,12 +6,12 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import { Stepper } from './stepper';
-import { StepperPanel } from './stepper-panel';
 import type { StepChangeEvent, StepperOrientation, StepperVariant } from './stepper.types';
+import { StepperPanel } from './stepper-panel';
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 

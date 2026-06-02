@@ -1,42 +1,44 @@
 import {
-  type AfterRenderRef,
   afterRenderEffect,
+  type AfterRenderRef,
+  type AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
-  forwardRef,
-  input,
-  output,
-  model,
-  inject,
-  signal,
-  viewChild,
-  type AfterViewInit,
   type ElementRef,
+  forwardRef,
+  inject,
+  input,
   type InputSignal,
+  model,
   type ModelSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  viewChild,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
-import type {
-  CheckboxVariant,
-  CheckboxSize,
-  CheckboxChangeEvent,
-  CheckboxAppearance,
-} from './checkbox.types';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type {
+  CheckboxAppearance,
+  CheckboxChangeEvent,
+  CheckboxSize,
+  CheckboxVariant,
+} from './checkbox.types';
 
 export type {
-  CheckboxVariant,
-  CheckboxSize,
-  CheckboxChangeEvent,
   CheckboxAppearance,
+  CheckboxChangeEvent,
+  CheckboxSize,
+  CheckboxVariant,
 } from './checkbox.types';
 
 let nextCheckboxId: number = 0;

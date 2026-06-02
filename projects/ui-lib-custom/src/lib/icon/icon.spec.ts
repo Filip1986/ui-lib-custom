@@ -1,8 +1,10 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { provideZonelessChangeDetection } from '@angular/core';
+
 import { provideIcons } from '@ng-icons/core';
 import { lucideAlertCircle, lucideAlignHorizontalSpaceAround } from '@ng-icons/lucide';
+
 import { Icon } from 'ui-lib-custom/icon';
 
 describe('Icon', (): void => {

@@ -30,15 +30,15 @@
     --uilib-dialog-enter-start-translate-y: -8px;
     --uilib-dialog-backdrop-enter-duration: 150ms;
     --uilib-dialog-backdrop-enter-easing: ease-out;
-
-    position: fixed;
-    inset: 0;
-    display: none;
-    z-index: var(--uilib-dialog-z-index);
-    pointer-events: none;
     align-items: center;
+    display: none;
+    inset: 0;
     justify-content: center;
     padding: var(--uilib-space-4, 1rem);
+    pointer-events: none;
+
+    position: fixed;
+    z-index: var(--uilib-dialog-z-index);
   }
 
   ui-lib-dialog.ui-lib-dialog--visible {
@@ -90,35 +90,35 @@
   }
 
   ui-lib-dialog .ui-lib-dialog-backdrop {
-    position: fixed;
-    inset: 0;
+    animation: dialog-backdrop-enter var(--uilib-dialog-backdrop-enter-duration)
+      var(--uilib-dialog-backdrop-enter-easing);
     background: color-mix(
       in srgb,
       var(--uilib-overlay-backdrop-bg, var(--uilib-color-neutral-900))
         calc(var(--uilib-overlay-backdrop-opacity, 0.5) * 100%),
       transparent
     );
-    z-index: var(--uilib-z-backdrop, 1040);
+    inset: 0;
     pointer-events: auto;
-    animation: dialog-backdrop-enter var(--uilib-dialog-backdrop-enter-duration)
-      var(--uilib-dialog-backdrop-enter-easing);
+    position: fixed;
+    z-index: var(--uilib-z-backdrop, 1040);
   }
 
   ui-lib-dialog .ui-lib-dialog-panel {
-    position: relative;
-    z-index: calc(var(--uilib-z-backdrop, 1040) + 1);
+    animation: dialog-panel-enter var(--uilib-dialog-enter-duration)
+      var(--uilib-dialog-enter-easing);
+    background: var(--uilib-dialog-bg);
+    border: var(--uilib-dialog-border);
+    border-radius: var(--uilib-dialog-border-radius);
+    box-shadow: var(--uilib-dialog-shadow);
     display: flex;
     flex-direction: column;
     inline-size: min(100%, 40rem);
     max-block-size: 100%;
     overflow: hidden;
-    background: var(--uilib-dialog-bg);
-    border-radius: var(--uilib-dialog-border-radius);
-    border: var(--uilib-dialog-border);
-    box-shadow: var(--uilib-dialog-shadow);
     pointer-events: auto;
-    animation: dialog-panel-enter var(--uilib-dialog-enter-duration)
-      var(--uilib-dialog-enter-easing);
+    position: relative;
+    z-index: calc(var(--uilib-z-backdrop, 1040) + 1);
   }
 
   ui-lib-dialog .ui-lib-dialog-panel.ui-lib-dialog-panel--draggable .ui-lib-dialog-header {
@@ -132,26 +132,26 @@
   }
 
   ui-lib-dialog .ui-lib-dialog-panel.ui-lib-dialog-panel--maximized {
-    inline-size: 100vw;
     block-size: 100vh;
-    max-inline-size: none;
-    max-block-size: none;
-    margin: var(--uilib-dialog-maximized-margin, 0);
-    position: fixed;
+    border-radius: 0;
+    inline-size: 100vw;
     inset-block-start: 0;
     inset-inline-start: 0;
+    margin: var(--uilib-dialog-maximized-margin, 0);
+    max-block-size: none;
+    max-inline-size: none;
+    position: fixed;
     transform: none;
-    border-radius: 0;
   }
 
   ui-lib-dialog .ui-lib-dialog-header {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--uilib-space-2, 0.5rem);
-    padding: var(--uilib-dialog-header-padding);
     background: var(--uilib-dialog-header-bg);
     color: var(--uilib-dialog-header-color);
+    display: flex;
+    gap: var(--uilib-space-2, 0.5rem);
+    justify-content: space-between;
+    padding: var(--uilib-dialog-header-padding);
   }
 
   ui-lib-dialog .ui-lib-dialog-title {
@@ -161,22 +161,22 @@
   }
 
   ui-lib-dialog .ui-lib-dialog-header-actions {
-    display: inline-flex;
     align-items: center;
+    display: inline-flex;
     gap: var(--uilib-space-2, 0.5rem);
   }
 
   ui-lib-dialog .ui-lib-dialog-close-btn,
   ui-lib-dialog .ui-lib-dialog-maximize-btn {
-    inline-size: var(--uilib-dialog-close-btn-size);
+    align-items: center;
+    background: transparent;
     block-size: var(--uilib-dialog-close-btn-size);
     border: 0;
-    background: transparent;
-    color: var(--uilib-dialog-close-btn-color);
     border-radius: var(--uilib-radius-sm, 2px);
+    color: var(--uilib-dialog-close-btn-color);
     cursor: pointer;
     display: inline-flex;
-    align-items: center;
+    inline-size: var(--uilib-dialog-close-btn-size);
     justify-content: center;
     transition: background-color var(--uilib-dialog-close-btn-transition);
   }
@@ -202,17 +202,17 @@
   }
 
   ui-lib-dialog .ui-lib-dialog-content {
-    padding: var(--uilib-dialog-content-padding);
-    overflow-y: auto;
     flex: 1 1 auto;
+    overflow-y: auto;
+    padding: var(--uilib-dialog-content-padding);
   }
 
   ui-lib-dialog .ui-lib-dialog-footer {
-    display: flex;
     align-items: center;
+    border-block-start: var(--uilib-dialog-footer-border-top);
+    display: flex;
     gap: var(--uilib-space-2, 0.5rem);
     padding: var(--uilib-dialog-footer-padding);
-    border-block-start: var(--uilib-dialog-footer-border-top);
   }
 
   ui-lib-dialog .ui-lib-dialog-footer:empty {

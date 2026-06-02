@@ -2,8 +2,8 @@
   <div editorToolbar>
     <select
       [value]="editor.toolbarState().blockFormat"
-      (mousedown)="$event.preventDefault()"
       (change)="onCustomHeadingChange(editor, $event)"
+      (mousedown)="$event.preventDefault()"
     >
       <option value="p">Normal</option>
       <option value="h1">Heading 1</option>
@@ -13,8 +13,8 @@
     <button
       type="button"
       [attr.aria-pressed]="editor.toolbarState().bold"
-      (mousedown)="$event.preventDefault()"
       (click)="editor.executeCommand('bold')"
+      (mousedown)="$event.preventDefault()"
     >
       B
     </button>

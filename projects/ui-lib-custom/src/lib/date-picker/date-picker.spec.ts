@@ -6,15 +6,17 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+
 import type { ThemeVariant } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { DatePickerComponent } from './date-picker';
 import type { DatePickerDateMeta, DatePickerValue } from './date-picker.types';
 import { createDate } from './date-utils';
-import { By } from '@angular/platform-browser';
 
 @Component({
   standalone: true,

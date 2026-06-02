@@ -1,9 +1,9 @@
 <ui-lib-autocomplete
-  [suggestions]="virtualSuggestions"
   optionLabel="label"
   optionValue="value"
+  scrollHeight="240px"
+  [suggestions]="virtualSuggestions"
   [virtualScroll]="true"
   [virtualScrollItemSize]="44"
-  scrollHeight="240px"
   (completeMethod)="onVirtualComplete($event)"
 />

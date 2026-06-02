@@ -93,9 +93,9 @@
     // Host layout
     // ==========================================================================
     display: block;
-    width: var(--uilib-listbox-width);
     font-family: var(--uilib-font-body, inherit);
     font-size: var(--uilib-listbox-item-font-size);
+    width: var(--uilib-listbox-width);
   }
 
   // =============================================================================
@@ -127,13 +127,13 @@
   // =============================================================================
 
   .ui-lib-listbox__wrapper {
+    background: var(--uilib-listbox-bg);
+    border: var(--uilib-listbox-border);
+    border-radius: var(--uilib-listbox-border-radius);
+    box-shadow: var(--uilib-listbox-shadow);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: var(--uilib-listbox-border);
-    border-radius: var(--uilib-listbox-border-radius);
-    background: var(--uilib-listbox-bg);
-    box-shadow: var(--uilib-listbox-shadow);
   }
 
   // =============================================================================
@@ -141,39 +141,39 @@
   // =============================================================================
 
   .ui-lib-listbox__filter-container {
-    display: flex;
     align-items: center;
+    background: var(--uilib-listbox-filter-bg);
+    border-bottom: var(--uilib-listbox-filter-border-bottom);
+    display: flex;
     gap: 0.5rem;
     padding: var(--uilib-listbox-filter-padding);
-    border-bottom: var(--uilib-listbox-filter-border-bottom);
-    background: var(--uilib-listbox-filter-bg);
   }
 
   .ui-lib-listbox__filter-icon {
-    display: flex;
     align-items: center;
     color: var(--uilib-listbox-filter-icon-color);
+    display: flex;
     flex-shrink: 0;
   }
 
   .ui-lib-listbox__filter-input {
-    flex: 1;
-    border: none;
-    outline: none;
     background: transparent;
-    font-size: var(--uilib-listbox-item-font-size);
-    font-family: inherit;
+    border: none;
     color: var(--uilib-listbox-filter-input-color);
+    flex: 1;
+    font-family: inherit;
+    font-size: var(--uilib-listbox-item-font-size);
     min-width: 0;
+    outline: none;
 
     &::placeholder {
       color: var(--uilib-listbox-filter-input-placeholder-color);
     }
 
     &:focus-visible {
+      box-shadow: var(--uilib-listbox-filter-focus-ring);
       outline: 2px solid var(--uilib-color-primary, var(--uilib-primary-color));
       outline-offset: 2px;
-      box-shadow: var(--uilib-listbox-filter-focus-ring);
     }
   }
 
@@ -182,23 +182,23 @@
   // =============================================================================
 
   .ui-lib-listbox__header {
-    padding: var(--uilib-listbox-header-padding);
-    border-bottom: var(--uilib-listbox-header-border-bottom);
     background: var(--uilib-listbox-header-bg);
+    border-bottom: var(--uilib-listbox-header-border-bottom);
+    padding: var(--uilib-listbox-header-padding);
   }
 
   .ui-lib-listbox__toggle-all {
-    display: flex;
     align-items: center;
-    gap: 0.5rem;
     cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
     user-select: none;
   }
 
   .ui-lib-listbox__toggle-all-label {
+    color: var(--uilib-listbox-item-color);
     font-size: var(--uilib-listbox-item-font-size);
     font-weight: 500;
-    color: var(--uilib-listbox-item-color);
   }
 
   // =============================================================================
@@ -206,26 +206,26 @@
   // =============================================================================
 
   .ui-lib-listbox__list-container {
-    overflow-y: auto;
-    outline: none;
     flex: 1;
+    outline: none;
+    overflow-y: auto;
 
     &:focus-visible {
-      outline: none;
       box-shadow: var(--uilib-listbox-focus-ring);
+      outline: none;
     }
   }
 
   .ui-lib-listbox__sr-live {
-    position: absolute;
-    width: 1px;
+    border: 0;
+    clip: rect(0 0 0 0);
     height: 1px;
     margin: -1px;
-    padding: 0;
-    border: 0;
     overflow: hidden;
-    clip: rect(0 0 0 0);
+    padding: 0;
+    position: absolute;
     white-space: nowrap;
+    width: 1px;
   }
 
   .ui-lib-listbox__list {
@@ -239,12 +239,12 @@
   // =============================================================================
 
   .ui-lib-listbox__group-header {
-    padding: var(--uilib-listbox-group-padding);
+    color: var(--uilib-listbox-group-color);
     font-size: var(--uilib-listbox-group-font-size);
     font-weight: var(--uilib-listbox-group-font-weight);
-    color: var(--uilib-listbox-group-color);
-    text-transform: var(--uilib-listbox-group-text-transform);
     letter-spacing: var(--uilib-listbox-group-letter-spacing);
+    padding: var(--uilib-listbox-group-padding);
+    text-transform: var(--uilib-listbox-group-text-transform);
     user-select: none;
   }
 
@@ -253,15 +253,15 @@
   // =============================================================================
 
   .ui-lib-listbox__item {
-    display: flex;
     align-items: center;
-    gap: var(--uilib-listbox-item-gap);
-    padding: var(--uilib-listbox-item-padding);
-    cursor: pointer;
-    transition: var(--uilib-listbox-transition);
-    color: var(--uilib-listbox-item-color);
     background: var(--uilib-listbox-item-bg);
     border-radius: var(--uilib-listbox-item-border-radius);
+    color: var(--uilib-listbox-item-color);
+    cursor: pointer;
+    display: flex;
+    gap: var(--uilib-listbox-item-gap);
+    padding: var(--uilib-listbox-item-padding);
+    transition: var(--uilib-listbox-transition);
     user-select: none;
     word-break: break-word;
 
@@ -323,22 +323,22 @@
   // =============================================================================
 
   .ui-lib-listbox__checkbox-wrap {
-    display: flex;
     align-items: center;
+    display: flex;
     flex-shrink: 0;
   }
 
   .ui-lib-listbox__checkbox {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    width: var(--uilib-listbox-checkbox-size);
-    height: var(--uilib-listbox-checkbox-size);
+    background: transparent;
     border: var(--uilib-listbox-checkbox-border);
     border-radius: var(--uilib-listbox-checkbox-border-radius);
-    background: transparent;
-    transition: var(--uilib-listbox-transition);
+    display: flex;
     flex-shrink: 0;
+    height: var(--uilib-listbox-checkbox-size);
+    justify-content: center;
+    transition: var(--uilib-listbox-transition);
+    width: var(--uilib-listbox-checkbox-size);
 
     &--checked {
       background: var(--uilib-listbox-checkbox-bg-checked);
@@ -348,10 +348,10 @@
 
     // Native checkbox inside toggle-all header
     &[type='checkbox'] {
-      width: var(--uilib-listbox-checkbox-size);
-      height: var(--uilib-listbox-checkbox-size);
-      cursor: pointer;
       accent-color: var(--uilib-primary-color, #3b82f6);
+      cursor: pointer;
+      height: var(--uilib-listbox-checkbox-size);
+      width: var(--uilib-listbox-checkbox-size);
 
       &:focus-visible {
         outline: 2px solid var(--uilib-color-primary, var(--uilib-primary-color));
@@ -365,10 +365,10 @@
   // =============================================================================
 
   .ui-lib-listbox__empty {
-    padding: var(--uilib-listbox-empty-padding);
-    text-align: center;
     color: var(--uilib-listbox-empty-color);
     font-size: var(--uilib-listbox-empty-font-size);
+    padding: var(--uilib-listbox-empty-padding);
+    text-align: center;
   }
 
   // =============================================================================
@@ -433,15 +433,15 @@
     --uilib-listbox-bg: transparent;
 
     .ui-lib-listbox__wrapper {
+      background: transparent;
       border: none;
       box-shadow: none;
-      background: transparent;
     }
 
     .ui-lib-listbox__item--selected {
-      font-weight: 600;
-      color: var(--uilib-primary-color, #3b82f6);
       background: transparent;
+      color: var(--uilib-primary-color, #3b82f6);
+      font-weight: 600;
 
       &:hover {
         background: transparent;
@@ -450,8 +450,8 @@
 
     .ui-lib-listbox__item--focused:not(.ui-lib-listbox__item--selected) {
       background: transparent;
-      text-decoration: underline;
       outline: none;
+      text-decoration: underline;
     }
   }
 

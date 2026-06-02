@@ -34,63 +34,63 @@
       0 10px 15px -3px rgb(0 0 0 / 0.12),
       0 4px 6px -4px rgb(0 0 0 / 0.1)
     );
-
-    // Container layout
-    position: fixed;
-    z-index: var(--uilib-toast-z-index);
     display: flex;
     flex-direction: column;
     gap: var(--uilib-toast-gap);
-    width: var(--uilib-toast-width);
     max-width: calc(100vw - 2 * var(--uilib-toast-offset));
     pointer-events: none; // Clicks pass through the transparent container gaps
+
+    // Container layout
+    position: fixed;
+    width: var(--uilib-toast-width);
+    z-index: var(--uilib-toast-z-index);
   }
 
   // ─── Position modifiers ───────────────────────────────────────────────────────
 
   ui-lib-toast.ui-lib-toast--top-right {
-    top: var(--uilib-toast-offset);
     inset-inline-end: var(--uilib-toast-offset);
+    top: var(--uilib-toast-offset);
     --uilib-toast-slide-x: 1rem;
     --uilib-toast-slide-y: 0rem;
   }
 
   ui-lib-toast.ui-lib-toast--top-left {
-    top: var(--uilib-toast-offset);
     inset-inline-start: var(--uilib-toast-offset);
+    top: var(--uilib-toast-offset);
     --uilib-toast-slide-x: -1rem;
     --uilib-toast-slide-y: 0rem;
   }
 
   ui-lib-toast.ui-lib-toast--top-center {
-    top: var(--uilib-toast-offset);
     left: 50%;
+    top: var(--uilib-toast-offset);
     transform: translateX(-50%);
     --uilib-toast-slide-x: 0rem;
     --uilib-toast-slide-y: -1rem;
   }
 
   ui-lib-toast.ui-lib-toast--bottom-right {
-    bottom: var(--uilib-toast-offset);
-    inset-inline-end: var(--uilib-toast-offset);
     flex-direction: column-reverse;
+    inset-inline-end: var(--uilib-toast-offset);
+    bottom: var(--uilib-toast-offset);
     --uilib-toast-slide-x: 1rem;
     --uilib-toast-slide-y: 0rem;
   }
 
   ui-lib-toast.ui-lib-toast--bottom-left {
-    bottom: var(--uilib-toast-offset);
-    inset-inline-start: var(--uilib-toast-offset);
     flex-direction: column-reverse;
+    inset-inline-start: var(--uilib-toast-offset);
+    bottom: var(--uilib-toast-offset);
     --uilib-toast-slide-x: -1rem;
     --uilib-toast-slide-y: 0rem;
   }
 
   ui-lib-toast.ui-lib-toast--bottom-center {
     bottom: var(--uilib-toast-offset);
+    flex-direction: column-reverse;
     left: 50%;
     transform: translateX(-50%);
-    flex-direction: column-reverse;
     --uilib-toast-slide-x: 0rem;
     --uilib-toast-slide-y: 1rem;
   }
@@ -111,39 +111,39 @@
 
   @keyframes uilib-toast-exit {
     from {
-      opacity: 1;
-      transform: translate(0, 0);
-      max-height: 20rem;
       margin-bottom: 0;
+      max-height: 20rem;
+      opacity: 1;
       padding-block: 0.875rem;
+      transform: translate(0, 0);
     }
 
     to {
-      opacity: 0;
-      transform: translate(var(--uilib-toast-slide-x), var(--uilib-toast-slide-y));
-      max-height: 0;
       margin-bottom: 0;
+      max-height: 0;
+      opacity: 0;
       padding-block: 0;
+      transform: translate(var(--uilib-toast-slide-x), var(--uilib-toast-slide-y));
     }
   }
 
   // ─── Individual toast item ────────────────────────────────────────────────────
 
   ui-lib-toast .ui-lib-toast__item {
-    display: flex;
     align-items: flex-start;
-    gap: var(--uilib-toast-item-gap);
-    padding: var(--uilib-toast-item-padding);
-    border-radius: var(--uilib-toast-item-radius);
-    border: var(--uilib-toast-item-border-width) solid var(--uilib-toast-item-border-color);
-    background-color: var(--uilib-toast-item-bg);
-    color: var(--uilib-toast-item-fg);
-    box-shadow: var(--uilib-toast-item-shadow);
-    font-size: var(--uilib-toast-item-font-size);
-    line-height: 1.5;
-    pointer-events: all;
-    overflow: hidden;
     animation: uilib-toast-enter var(--uilib-toast-animation-duration) ease both;
+    background-color: var(--uilib-toast-item-bg);
+    border: var(--uilib-toast-item-border-width) solid var(--uilib-toast-item-border-color);
+    border-radius: var(--uilib-toast-item-radius);
+    box-shadow: var(--uilib-toast-item-shadow);
+    color: var(--uilib-toast-item-fg);
+    display: flex;
+    font-size: var(--uilib-toast-item-font-size);
+    gap: var(--uilib-toast-item-gap);
+    line-height: 1.5;
+    overflow: hidden;
+    padding: var(--uilib-toast-item-padding);
+    pointer-events: all;
 
     &.ui-lib-toast__item--closing {
       animation: uilib-toast-exit var(--uilib-toast-animation-duration) ease both;
@@ -154,9 +154,9 @@
   // ─── Item inner elements ──────────────────────────────────────────────────────
 
   ui-lib-toast .ui-lib-toast__icon {
+    color: var(--uilib-toast-item-icon-color);
     flex-shrink: 0;
     margin-top: 0.1em; // Optical alignment with first text line
-    color: var(--uilib-toast-item-icon-color);
   }
 
   ui-lib-toast .ui-lib-toast__content {
@@ -171,34 +171,34 @@
 
   ui-lib-toast .ui-lib-toast__detail {
     font-size: var(--uilib-toast-detail-font-size);
-    opacity: 0.85;
     line-height: 1.5;
     margin-top: 0.25rem;
+    opacity: 0.85;
   }
 
   ui-lib-toast .ui-lib-toast__close {
-    flex-shrink: 0;
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
     background: none;
     border: none;
-    padding: 0;
-    cursor: pointer;
-    color: var(--uilib-toast-item-close-color);
-    opacity: 0.7;
     border-radius: var(--uilib-radius-sm, 0.25rem);
-    transition: opacity 0.15s ease;
+    color: var(--uilib-toast-item-close-color);
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    justify-content: center;
     margin-top: 0.05em; // Slight optical alignment
+    opacity: 0.7;
+    padding: 0;
+    transition: opacity 0.15s ease;
 
     &:hover {
       opacity: 1;
     }
 
     &:focus-visible {
+      opacity: 1;
       outline: 2px solid currentColor;
       outline-offset: 2px;
-      opacity: 1;
     }
   }
 
@@ -275,8 +275,8 @@
   // Minimal — no background, only a coloured left accent border
   ui-lib-toast.ui-lib-toast--minimal .ui-lib-toast__item {
     --uilib-toast-item-bg: var(--uilib-surface, #ffffff);
-    border-inline-start-width: 3px;
     border-inline-start-style: solid;
+    border-inline-start-width: 3px;
     border-radius: 0;
   }
 

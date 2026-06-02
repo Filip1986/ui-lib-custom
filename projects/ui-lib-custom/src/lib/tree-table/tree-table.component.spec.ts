@@ -1,15 +1,16 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+
 import { TreeTableComponent } from './tree-table.component';
-import { TreeTableColumnComponent } from './tree-table-column.component';
 import type { TreeTableNode, TreeTableSelectionMode, TreeTableVariant } from './tree-table.types';
+import { TreeTableColumnComponent } from './tree-table-column.component';
 
 // ---------------------------------------------------------------------------
 // Helpers

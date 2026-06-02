@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 /**

@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { Tooltip } from './tooltip';
-import type { TooltipEvent, TooltipPosition, TooltipVariant } from './tooltip.types';
+
 import { Button } from 'ui-lib-custom/button';
 import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
+import { Tooltip } from './tooltip';
+import type { TooltipEvent, TooltipPosition, TooltipVariant } from './tooltip.types';
 
 type TooltipStoryArgs = {
   uiLibTooltip: string;

@@ -1,22 +1,4 @@
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  ElementRef,
-  HostListener,
-  ViewEncapsulation,
-  afterNextRender,
-  computed,
-  contentChild,
-  forwardRef,
-  inject,
-  input,
-  output,
-  signal,
-  TemplateRef,
-  viewChild,
-} from '@angular/core';
 import type {
   AfterViewChecked,
   InputSignal,
@@ -25,16 +7,36 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import type { ControlValueAccessor } from '@angular/forms';
 import {
-  KEYBOARD_KEYS,
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  contentChild,
+  DestroyRef,
+  ElementRef,
+  forwardRef,
+  HostListener,
+  inject,
+  input,
+  output,
+  signal,
+  TemplateRef,
+  viewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+import type { ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import {
   claimOverlayZIndex,
+  KEYBOARD_KEYS,
   releaseOverlayZIndex,
   resolveOverlayAppendTarget,
 } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import {
   CASCADE_SELECT_CLASSNAMES,
   CASCADE_SELECT_DEFAULTS,

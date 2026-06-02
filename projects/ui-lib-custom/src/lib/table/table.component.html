@@ -1,8 +1,8 @@
 <div class="ui-lib-table__wrapper">
-  <span class="ui-lib-table__sr-only" aria-live="polite" aria-atomic="true">
+  <span aria-atomic="true" aria-live="polite" class="ui-lib-table__sr-only">
     {{ sortAnnouncement() }}
   </span>
-  <span class="ui-lib-table__sr-only" aria-live="polite" aria-atomic="true">
+  <span aria-atomic="true" aria-live="polite" class="ui-lib-table__sr-only">
     {{ paginationAnnouncement() }}
   </span>
 
@@ -23,14 +23,14 @@
     [style.max-height]="scrollable() ? scrollHeight() : null"
   >
     <table
-      [id]="tableId"
       class="ui-lib-table__table"
-      [attr.role]="tableRole()"
+      [attr.aria-disabled]="disabled() ? 'true' : null"
       [attr.aria-label]="ariaLabel()"
       [attr.aria-labelledby]="tableAriaLabelledBy()"
-      [attr.aria-rowcount]="ariaRowCount()"
       [attr.aria-multiselectable]="gridAriaMultiselectable()"
-      [attr.aria-disabled]="disabled() ? 'true' : null"
+      [attr.aria-rowcount]="ariaRowCount()"
+      [attr.role]="tableRole()"
+      [id]="tableId"
     >
       <!-- THEAD -->
       <thead class="ui-lib-table__thead" role="rowgroup">
@@ -48,14 +48,14 @@
             @if (expansionTemplate()) {
               <th
                 class="ui-lib-table__th ui-lib-table__th--expander"
-                scope="col"
+                data-grid-col="0"
+                data-grid-row="0"
                 role="columnheader"
-                [attr.aria-label]="i18n.translate('table.expand-row')"
+                scope="col"
                 [attr.aria-colindex]="ariaColumnIndex(0)"
                 [attr.aria-disabled]="disabled() ? 'true' : null"
+                [attr.aria-label]="i18n.translate('table.expand-row')"
                 [attr.tabindex]="gridCellTabIndex(0, 0)"
-                data-grid-row="0"
-                data-grid-col="0"
                 (focus)="onGridCellFocus(0, 0)"
                 (keydown)="onGridCellKeydown($event, 0, 0)"
               >
@@ -66,31 +66,42 @@
             @if (selectionMode() === 'checkbox') {
               <th
                 class="ui-lib-table__th ui-lib-table__th--checkbox"
-                scope="col"
                 role="columnheader"
+                scope="col"
                 [attr.aria-colindex]="ariaColumnIndex(expansionTemplate() ? 1 : 0)"
                 [attr.aria-disabled]="disabled() ? 'true' : null"
-                [attr.tabindex]="gridCellTabIndex(0, expansionTemplate() ? 1 : 0)"
-                [attr.data-grid-row]="0"
                 [attr.data-grid-col]="expansionTemplate() ? 1 : 0"
+                [attr.data-grid-row]="0"
+                [attr.tabindex]="gridCellTabIndex(0, expansionTemplate() ? 1 : 0)"
                 (focus)="onGridCellFocus(0, expansionTemplate() ? 1 : 0)"
                 (keydown)="onGridCellKeydown($event, 0, expansionTemplate() ? 1 : 0)"
               >
                 <input
-                  type="checkbox"
                   class="ui-lib-table__checkbox"
-                  [checked]="allRowsSelected()"
-                  [indeterminate]="someRowsSelected()"
-                  [disabled]="disabled()"
-                  [attr.tabindex]="tableRole() === 'grid' ? '-1' : null"
-                  (change)="onHeaderCheckboxChange($event)"
+                  type="checkbox"
                   [attr.aria-label]="i18n.translate('table.select-all')"
+                  [attr.tabindex]="tableRole() === 'grid' ? '-1' : null"
+                  [checked]="allRowsSelected()"
+                  [disabled]="disabled()"
+                  [indeterminate]="someRowsSelected()"
+                  (change)="onHeaderCheckboxChange($event)"
                 />
               </th>
             }
             <!-- Column headers -->
             @for (column of columns(); track column.field(); let columnIndex = $index) {
               <th
+                role="columnheader"
+                scope="col"
+                [attr.aria-colindex]="ariaColumnIndex(dataColumnIndex(columnIndex))"
+                [attr.aria-disabled]="disabled() ? 'true' : null"
+                [attr.aria-label]="column.sortable() ? sortableColumnAriaLabel(column) : null"
+                [attr.aria-sort]="
+                  column.sortable() ? ariaSortValue(column.sortField() ?? column.field()) : null
+                "
+                [attr.data-grid-col]="dataColumnIndex(columnIndex)"
+                [attr.data-grid-row]="0"
+                [attr.tabindex]="gridCellTabIndex(0, dataColumnIndex(columnIndex))"
                 [class]="
                   'ui-lib-table__th' +
                   (column.sortable() ? ' ui-lib-table__th--sortable' : '') +
@@ -101,22 +112,11 @@
                   (column.styleClass() ? ' ' + column.styleClass() : '')
                 "
                 [style.width]="column.width()"
-                scope="col"
-                role="columnheader"
-                [attr.aria-sort]="
-                  column.sortable() ? ariaSortValue(column.sortField() ?? column.field()) : null
-                "
-                [attr.aria-colindex]="ariaColumnIndex(dataColumnIndex(columnIndex))"
-                [attr.aria-label]="column.sortable() ? sortableColumnAriaLabel(column) : null"
-                [attr.aria-disabled]="disabled() ? 'true' : null"
-                [attr.tabindex]="gridCellTabIndex(0, dataColumnIndex(columnIndex))"
-                [attr.data-grid-row]="0"
-                [attr.data-grid-col]="dataColumnIndex(columnIndex)"
                 (click)="column.sortable() ? onSortClick($event, column) : null"
-                (keydown.enter)="column.sortable() ? onSortClick($any($event), column) : null"
-                (keydown.space)="column.sortable() ? onSortClick($any($event), column) : null"
                 (focus)="onGridCellFocus(0, dataColumnIndex(columnIndex))"
                 (keydown)="onGridCellKeydown($event, 0, dataColumnIndex(columnIndex))"
+                (keydown.enter)="column.sortable() ? onSortClick($any($event), column) : null"
+                (keydown.space)="column.sortable() ? onSortClick($any($event), column) : null"
               >
                 @if (column.headerTemplate()) {
                   <ng-container [ngTemplateOutlet]="column.headerTemplate()!" />
@@ -124,16 +124,16 @@
                   <span class="ui-lib-table__th-label">{{ column.header() }}</span>
                 }
                 @if (column.sortable()) {
-                  <span class="ui-lib-table__sort-icon" aria-hidden="true">
+                  <span aria-hidden="true" class="ui-lib-table__sort-icon">
                     @if (
                       sortField() === (column.sortField() ?? column.field()) && sortOrder() === 1
                     ) {
                       <svg
-                        viewBox="0 0 24 24"
+                        class="ui-lib-table__sort-svg"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="2"
-                        class="ui-lib-table__sort-svg"
+                        viewBox="0 0 24 24"
                       >
                         <path d="M12 19V5M5 12l7-7 7 7" />
                       </svg>
@@ -141,21 +141,21 @@
                       sortField() === (column.sortField() ?? column.field()) && sortOrder() === -1
                     ) {
                       <svg
-                        viewBox="0 0 24 24"
+                        class="ui-lib-table__sort-svg"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="2"
-                        class="ui-lib-table__sort-svg"
+                        viewBox="0 0 24 24"
                       >
                         <path d="M12 5v14M5 12l7 7 7-7" />
                       </svg>
                     } @else {
                       <svg
-                        viewBox="0 0 24 24"
+                        class="ui-lib-table__sort-svg ui-lib-table__sort-svg--inactive"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="2"
-                        class="ui-lib-table__sort-svg ui-lib-table__sort-svg--inactive"
+                        viewBox="0 0 24 24"
                       >
                         <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
                       </svg>
@@ -206,12 +206,12 @@
                       <ng-container [ngTemplateOutlet]="column.filterTemplate()!" />
                     } @else {
                       <input
-                        type="text"
                         class="ui-lib-table__filter-input"
-                        [placeholder]="column.filterPlaceholder()"
-                        [disabled]="disabled()"
-                        (input)="onColumnFilterInput($event, column)"
+                        type="text"
                         [attr.aria-label]="'Filter by ' + column.header()"
+                        [disabled]="disabled()"
+                        [placeholder]="column.filterPlaceholder()"
+                        (input)="onColumnFilterInput($event, column)"
                       />
                     }
                   }
@@ -235,15 +235,15 @@
           <tr class="ui-lib-table__empty-row" role="row">
             <td
               class="ui-lib-table__empty-cell"
-              [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
               [attr.aria-colindex]="1"
               [attr.colspan]="
                 columns().length +
                 (selectionMode() === 'checkbox' ? 1 : 0) +
                 (expansionTemplate() ? 1 : 0)
               "
+              [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
             >
-              <div class="ui-lib-table__empty-status" role="status" aria-live="polite">
+              <div aria-live="polite" class="ui-lib-table__empty-status" role="status">
                 @if (emptyTemplate()) {
                   <ng-container
                     [ngTemplateOutlet]="emptyTemplate()!"
@@ -259,13 +259,13 @@
           @for (row of displayedRows(); track trackRow($index, row); let rowIndex = $index) {
             <!-- Data row -->
             <tr
-              [class]="resolveRowClass(row, rowIndex)"
               role="row"
+              [attr.aria-disabled]="disabled() ? 'true' : null"
               [attr.aria-rowindex]="bodyAriaRowIndex(rowIndex)"
               [attr.aria-selected]="
                 selectionMode() ? (isRowSelected(row) ? 'true' : 'false') : null
               "
-              [attr.aria-disabled]="disabled() ? 'true' : null"
+              [class]="resolveRowClass(row, rowIndex)"
               (click)="onRowClick($event, row, rowIndex)"
               (keydown.enter)="onRowClick($any($event), row, rowIndex)"
               (keydown.space)="onRowClick($any($event), row, rowIndex)"
@@ -274,31 +274,31 @@
               @if (expansionTemplate()) {
                 <td
                   class="ui-lib-table__td ui-lib-table__td--expander"
-                  [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
+                  data-grid-col="0"
                   [attr.aria-colindex]="ariaColumnIndex(0)"
                   [attr.aria-disabled]="disabled() ? 'true' : null"
-                  [attr.tabindex]="gridCellTabIndex(bodyGridRowIndex(rowIndex), 0)"
                   [attr.data-grid-row]="bodyGridRowIndex(rowIndex)"
-                  data-grid-col="0"
+                  [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
+                  [attr.tabindex]="gridCellTabIndex(bodyGridRowIndex(rowIndex), 0)"
                   (focus)="onGridCellFocus(bodyGridRowIndex(rowIndex), 0)"
                   (keydown)="onGridCellKeydown($event, bodyGridRowIndex(rowIndex), 0)"
                 >
                   <button
-                    type="button"
                     class="ui-lib-table__expander-btn"
-                    [class.ui-lib-table__expander-btn--expanded]="isRowExpanded(row)"
-                    (click)="onExpansionToggle($event, row, rowIndex)"
-                    [attr.aria-expanded]="isRowExpanded(row)"
+                    type="button"
                     [attr.aria-controls]="getExpandedRowId(rowIndex)"
+                    [attr.aria-expanded]="isRowExpanded(row)"
                     [attr.aria-label]="expansionToggleAriaLabel(row, rowIndex)"
                     [attr.tabindex]="tableRole() === 'grid' ? '-1' : null"
+                    [class.ui-lib-table__expander-btn--expanded]="isRowExpanded(row)"
+                    (click)="onExpansionToggle($event, row, rowIndex)"
                   >
                     <svg
-                      viewBox="0 0 24 24"
+                      class="ui-lib-table__expander-icon"
                       fill="none"
                       stroke="currentColor"
                       stroke-width="2"
-                      class="ui-lib-table__expander-icon"
+                      viewBox="0 0 24 24"
                     >
                       @if (isRowExpanded(row)) {
                         <path d="M6 9l6 6 6-6" />
@@ -314,14 +314,14 @@
               @if (selectionMode() === 'checkbox') {
                 <td
                   class="ui-lib-table__td ui-lib-table__td--checkbox"
-                  [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
                   [attr.aria-colindex]="ariaColumnIndex(expansionTemplate() ? 1 : 0)"
                   [attr.aria-disabled]="disabled() ? 'true' : null"
+                  [attr.data-grid-col]="expansionTemplate() ? 1 : 0"
+                  [attr.data-grid-row]="bodyGridRowIndex(rowIndex)"
+                  [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
                   [attr.tabindex]="
                     gridCellTabIndex(bodyGridRowIndex(rowIndex), expansionTemplate() ? 1 : 0)
                   "
-                  [attr.data-grid-row]="bodyGridRowIndex(rowIndex)"
-                  [attr.data-grid-col]="expansionTemplate() ? 1 : 0"
                   (focus)="onGridCellFocus(bodyGridRowIndex(rowIndex), expansionTemplate() ? 1 : 0)"
                   (keydown)="
                     onGridCellKeydown(
@@ -332,13 +332,13 @@
                   "
                 >
                   <input
-                    type="checkbox"
                     class="ui-lib-table__checkbox"
+                    type="checkbox"
+                    [attr.aria-label]="'Select row ' + (rowIndex + 1)"
+                    [attr.tabindex]="tableRole() === 'grid' ? '-1' : null"
                     [checked]="isRowSelected(row)"
                     [disabled]="disabled()"
-                    [attr.tabindex]="tableRole() === 'grid' ? '-1' : null"
                     (change)="onRowCheckboxChange($event, row, rowIndex)"
-                    [attr.aria-label]="'Select row ' + (rowIndex + 1)"
                   />
                 </td>
               }
@@ -346,20 +346,20 @@
               <!-- Data cells -->
               @for (column of columns(); track column.field(); let columnIndex = $index) {
                 <td
+                  [attr.aria-colindex]="ariaColumnIndex(dataColumnIndex(columnIndex))"
+                  [attr.aria-disabled]="disabled() ? 'true' : null"
+                  [attr.data-grid-col]="dataColumnIndex(columnIndex)"
+                  [attr.data-grid-row]="bodyGridRowIndex(rowIndex)"
+                  [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
+                  [attr.tabindex]="
+                    gridCellTabIndex(bodyGridRowIndex(rowIndex), dataColumnIndex(columnIndex))
+                  "
                   [class]="
                     'ui-lib-table__td' +
                     (column.frozen() ? ' ui-lib-table__td--frozen' : '') +
                     (column.styleClass() ? ' ' + column.styleClass() : '')
                   "
                   [style.width]="column.width()"
-                  [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
-                  [attr.aria-colindex]="ariaColumnIndex(dataColumnIndex(columnIndex))"
-                  [attr.aria-disabled]="disabled() ? 'true' : null"
-                  [attr.tabindex]="
-                    gridCellTabIndex(bodyGridRowIndex(rowIndex), dataColumnIndex(columnIndex))
-                  "
-                  [attr.data-grid-row]="bodyGridRowIndex(rowIndex)"
-                  [attr.data-grid-col]="dataColumnIndex(columnIndex)"
                   (focus)="
                     onGridCellFocus(bodyGridRowIndex(rowIndex), dataColumnIndex(columnIndex))
                   "
@@ -392,9 +392,9 @@
               >
                 <td
                   class="ui-lib-table__expansion-cell"
-                  [attr.role]="tableRole() === 'grid' ? 'presentation' : 'cell'"
                   [attr.aria-colindex]="tableRole() === 'grid' ? null : 1"
                   [attr.colspan]="columns().length + (selectionMode() === 'checkbox' ? 1 : 0) + 1"
+                  [attr.role]="tableRole() === 'grid' ? 'presentation' : 'cell'"
                 >
                   <ng-container
                     [ngTemplateOutlet]="expansionTemplate()!"
@@ -449,13 +449,13 @@
   @if (paginator()) {
     <ui-lib-paginator
       class="ui-lib-table__paginator"
-      [totalRecords]="totalRecords()"
-      [(rows)]="rows"
-      [(first)]="first"
-      [rowsPerPageOptions]="rowsPerPageOptions()"
       [currentPageReportTemplate]="currentPageReportTemplate()"
+      [rowsPerPageOptions]="rowsPerPageOptions()"
       [showCurrentPageReport]="true"
+      [totalRecords]="totalRecords()"
       [variant]="resolvedVariant()"
+      [(first)]="first"
+      [(rows)]="rows"
       (pageChanged)="onPageChange($any($event))"
     />
   }

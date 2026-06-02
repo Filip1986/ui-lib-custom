@@ -23,11 +23,11 @@
 
   // ─── Container ────────────────────────────────────────────────────────────────
   .uilib-image-compare__container {
-    position: relative;
-    display: block;
-    overflow: hidden;
     border-radius: var(--uilib-image-compare-radius);
+    display: block;
     line-height: 0;
+    overflow: hidden;
+    position: relative;
     user-select: none;
 
     .ui-lib-image-compare--disabled & {
@@ -42,10 +42,10 @@
   // ─── Images ───────────────────────────────────────────────────────────────────
   .uilib-image-compare__img {
     display: block;
-    width: 100%;
     height: 100%;
     object-fit: cover;
     pointer-events: none;
+    width: 100%;
 
     &--left {
       position: relative;
@@ -53,54 +53,54 @@
     }
 
     &--right {
-      position: absolute;
       inset: 0;
+      position: absolute;
       z-index: 1;
     }
   }
 
   // ─── Divider line ─────────────────────────────────────────────────────────────
   .uilib-image-compare__divider {
+    background-color: var(--uilib-image-compare-divider-color);
+    bottom: 0;
+    pointer-events: none;
     position: absolute;
     top: 0;
-    bottom: 0;
-    z-index: 2;
-    width: var(--uilib-image-compare-divider-width);
-    background-color: var(--uilib-image-compare-divider-color);
     transform: translateX(-50%);
-    pointer-events: none;
+    width: var(--uilib-image-compare-divider-width);
+    z-index: 2;
   }
 
   // ─── Handle ───────────────────────────────────────────────────────────────────
   .uilib-image-compare__handle {
+    align-items: center;
+    background-color: var(--uilib-image-compare-handle-bg);
+    border-radius: 50%;
+    box-shadow: var(--uilib-image-compare-handle-shadow);
+    color: var(--uilib-image-compare-handle-color);
+    cursor: ew-resize;
+    display: flex;
+    justify-content: center;
     position: absolute;
     top: 50%;
-    z-index: 3;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: var(--uilib-image-compare-handle-bg);
-    color: var(--uilib-image-compare-handle-color);
-    box-shadow: var(--uilib-image-compare-handle-shadow);
-    cursor: ew-resize;
     touch-action: none;
+    transform: translate(-50%, -50%);
     transition: box-shadow 0.15s ease;
+    z-index: 3;
 
     .ui-lib-image-compare--size-sm & {
-      width: var(--uilib-image-compare-handle-size-sm);
       height: var(--uilib-image-compare-handle-size-sm);
+      width: var(--uilib-image-compare-handle-size-sm);
     }
 
     .ui-lib-image-compare--size-md & {
-      width: var(--uilib-image-compare-handle-size-md);
       height: var(--uilib-image-compare-handle-size-md);
+      width: var(--uilib-image-compare-handle-size-md);
     }
 
     .ui-lib-image-compare--size-lg & {
-      width: var(--uilib-image-compare-handle-size-lg);
       height: var(--uilib-image-compare-handle-size-lg);
+      width: var(--uilib-image-compare-handle-size-lg);
     }
 
     .ui-lib-image-compare--disabled & {
@@ -115,8 +115,8 @@
     }
 
     &:focus-visible {
-      outline: none;
       box-shadow: var(--uilib-image-compare-focus-ring);
+      outline: none;
     }
 
     .ui-lib-image-compare--focused & {
@@ -129,18 +129,18 @@
     flex-shrink: 0;
 
     .ui-lib-image-compare--size-sm & {
-      width: var(--uilib-image-compare-handle-icon-size-sm);
       height: var(--uilib-image-compare-handle-icon-size-sm);
+      width: var(--uilib-image-compare-handle-icon-size-sm);
     }
 
     .ui-lib-image-compare--size-md & {
-      width: var(--uilib-image-compare-handle-icon-size-md);
       height: var(--uilib-image-compare-handle-icon-size-md);
+      width: var(--uilib-image-compare-handle-icon-size-md);
     }
 
     .ui-lib-image-compare--size-lg & {
-      width: var(--uilib-image-compare-handle-icon-size-lg);
       height: var(--uilib-image-compare-handle-icon-size-lg);
+      width: var(--uilib-image-compare-handle-icon-size-lg);
     }
   }
 
@@ -158,8 +158,8 @@
   // ─── Variant: bootstrap ───────────────────────────────────────────────────────
   .ui-lib-image-compare--variant-bootstrap {
     .uilib-image-compare__container {
-      border-radius: var(--uilib-radius-sm, 4px);
       border: 1px solid var(--uilib-color-border, #dee2e6);
+      border-radius: var(--uilib-radius-sm, 4px);
     }
 
     .uilib-image-compare__handle {

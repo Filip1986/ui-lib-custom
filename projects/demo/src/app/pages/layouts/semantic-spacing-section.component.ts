@@ -1,27 +1,28 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  signal,
   type Signal,
+  signal,
   type WritableSignal,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { Button } from 'ui-lib-custom/button';
 import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
-import { INSET_TOKENS, INLINE_TOKENS, STACK_TOKENS } from 'ui-lib-custom/tokens';
-import type { InsetToken, InlineToken, StackToken } from 'ui-lib-custom/tokens';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Panel } from 'ui-lib-custom/panel';
 import { UiLibSelect } from 'ui-lib-custom/select';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+import type { InlineToken, InsetToken, StackToken } from 'ui-lib-custom/tokens';
+import { INLINE_TOKENS, INSET_TOKENS, STACK_TOKENS } from 'ui-lib-custom/tokens';
+
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-
-import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for semantic spacing tokens.
  */

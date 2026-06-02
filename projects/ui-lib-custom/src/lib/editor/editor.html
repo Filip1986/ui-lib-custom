@@ -1,21 +1,21 @@
 <div
   class="ui-lib-editor-toolbar"
   role="toolbar"
-  [attr.aria-label]="i18n.translate('editor.toolbar')"
   [attr.aria-disabled]="isDisabled() || readonly() || null"
+  [attr.aria-label]="i18n.translate('editor.toolbar')"
 >
-  <span editorToolbar hidden aria-hidden="true"></span>
+  <span aria-hidden="true" editorToolbar hidden></span>
   <ng-content select="[editorToolbar]" />
 
   @if (!hasCustomToolbar()) {
     <span class="ui-lib-editor-toolbar-group">
       <select
         class="ui-lib-editor-toolbar-select"
-        [value]="toolbarState().blockFormat"
-        [disabled]="isDisabled() || readonly()"
-        (mousedown)="onToolbarMouseDown($event)"
-        (change)="onHeadingChange($event)"
         [attr.aria-label]="toolbarAriaLabels.heading"
+        [disabled]="isDisabled() || readonly()"
+        [value]="toolbarState().blockFormat"
+        (change)="onHeadingChange($event)"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         <option value="p">Normal</option>
         <option value="h1">Heading 1</option>
@@ -25,228 +25,228 @@
       </select>
     </span>
 
-    <span class="ui-lib-editor-toolbar-separator" aria-hidden="true"></span>
+    <span aria-hidden="true" class="ui-lib-editor-toolbar-separator"></span>
 
     <span class="ui-lib-editor-toolbar-group">
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
+        type="button"
+        [attr.aria-label]="toolbarAriaLabels.bold"
+        [attr.aria-pressed]="toolbarState().bold"
         [class.ui-lib-editor-toolbar-button--active]="toolbarState().bold"
         [disabled]="isDisabled() || readonly()"
-        [attr.aria-pressed]="toolbarState().bold"
-        [attr.aria-label]="toolbarAriaLabels.bold"
-        (mousedown)="onToolbarMouseDown($event)"
         (click)="onToolbarButtonClick($event, 'bold')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         <b>B</b>
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
+        type="button"
+        [attr.aria-label]="toolbarAriaLabels.italic"
+        [attr.aria-pressed]="toolbarState().italic"
         [class.ui-lib-editor-toolbar-button--active]="toolbarState().italic"
         [disabled]="isDisabled() || readonly()"
-        [attr.aria-pressed]="toolbarState().italic"
-        [attr.aria-label]="toolbarAriaLabels.italic"
-        (mousedown)="onToolbarMouseDown($event)"
         (click)="onToolbarButtonClick($event, 'italic')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         <i>I</i>
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
+        type="button"
+        [attr.aria-label]="toolbarAriaLabels.underline"
+        [attr.aria-pressed]="toolbarState().underline"
         [class.ui-lib-editor-toolbar-button--active]="toolbarState().underline"
         [disabled]="isDisabled() || readonly()"
-        [attr.aria-pressed]="toolbarState().underline"
-        [attr.aria-label]="toolbarAriaLabels.underline"
-        (mousedown)="onToolbarMouseDown($event)"
         (click)="onToolbarButtonClick($event, 'underline')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         <u>U</u>
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
+        type="button"
+        [attr.aria-label]="toolbarAriaLabels.strikeThrough"
+        [attr.aria-pressed]="toolbarState().strikeThrough"
         [class.ui-lib-editor-toolbar-button--active]="toolbarState().strikeThrough"
         [disabled]="isDisabled() || readonly()"
-        [attr.aria-pressed]="toolbarState().strikeThrough"
-        [attr.aria-label]="toolbarAriaLabels.strikeThrough"
-        (mousedown)="onToolbarMouseDown($event)"
         (click)="onToolbarButtonClick($event, 'strikeThrough')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         <s>S</s>
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
-        [disabled]="isDisabled() || readonly()"
+        type="button"
         [attr.aria-label]="toolbarAriaLabels.textColor"
-        (mousedown)="onToolbarMouseDown($event)"
+        [disabled]="isDisabled() || readonly()"
         (click)="onTextColorClick()"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         A
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
-        [disabled]="isDisabled() || readonly()"
+        type="button"
         [attr.aria-label]="toolbarAriaLabels.backgroundColor"
-        (mousedown)="onToolbarMouseDown($event)"
+        [disabled]="isDisabled() || readonly()"
         (click)="onBackgroundColorClick()"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         BG
       </button>
     </span>
 
-    <span class="ui-lib-editor-toolbar-separator" aria-hidden="true"></span>
+    <span aria-hidden="true" class="ui-lib-editor-toolbar-separator"></span>
 
     <span class="ui-lib-editor-toolbar-group">
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
+        type="button"
+        [attr.aria-label]="toolbarAriaLabels.orderedList"
+        [attr.aria-pressed]="toolbarState().orderedList"
         [class.ui-lib-editor-toolbar-button--active]="toolbarState().orderedList"
         [disabled]="isDisabled() || readonly()"
-        [attr.aria-pressed]="toolbarState().orderedList"
-        [attr.aria-label]="toolbarAriaLabels.orderedList"
-        (mousedown)="onToolbarMouseDown($event)"
         (click)="onToolbarButtonClick($event, 'insertOrderedList')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         OL
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
+        type="button"
+        [attr.aria-label]="toolbarAriaLabels.unorderedList"
+        [attr.aria-pressed]="toolbarState().unorderedList"
         [class.ui-lib-editor-toolbar-button--active]="toolbarState().unorderedList"
         [disabled]="isDisabled() || readonly()"
-        [attr.aria-pressed]="toolbarState().unorderedList"
-        [attr.aria-label]="toolbarAriaLabels.unorderedList"
-        (mousedown)="onToolbarMouseDown($event)"
         (click)="onToolbarButtonClick($event, 'insertUnorderedList')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         UL
       </button>
     </span>
 
-    <span class="ui-lib-editor-toolbar-separator" aria-hidden="true"></span>
+    <span aria-hidden="true" class="ui-lib-editor-toolbar-separator"></span>
 
     <span class="ui-lib-editor-toolbar-group">
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
+        type="button"
+        [attr.aria-label]="toolbarAriaLabels.alignLeft"
+        [attr.aria-pressed]="toolbarState().alignLeft"
         [class.ui-lib-editor-toolbar-button--active]="toolbarState().alignLeft"
         [disabled]="isDisabled() || readonly()"
-        [attr.aria-pressed]="toolbarState().alignLeft"
-        [attr.aria-label]="toolbarAriaLabels.alignLeft"
-        (mousedown)="onToolbarMouseDown($event)"
         (click)="onToolbarButtonClick($event, 'justifyLeft')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         L
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
+        type="button"
+        [attr.aria-label]="toolbarAriaLabels.alignCenter"
+        [attr.aria-pressed]="toolbarState().alignCenter"
         [class.ui-lib-editor-toolbar-button--active]="toolbarState().alignCenter"
         [disabled]="isDisabled() || readonly()"
-        [attr.aria-pressed]="toolbarState().alignCenter"
-        [attr.aria-label]="toolbarAriaLabels.alignCenter"
-        (mousedown)="onToolbarMouseDown($event)"
         (click)="onToolbarButtonClick($event, 'justifyCenter')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         C
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
+        type="button"
+        [attr.aria-label]="toolbarAriaLabels.alignRight"
+        [attr.aria-pressed]="toolbarState().alignRight"
         [class.ui-lib-editor-toolbar-button--active]="toolbarState().alignRight"
         [disabled]="isDisabled() || readonly()"
-        [attr.aria-pressed]="toolbarState().alignRight"
-        [attr.aria-label]="toolbarAriaLabels.alignRight"
-        (mousedown)="onToolbarMouseDown($event)"
         (click)="onToolbarButtonClick($event, 'justifyRight')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         R
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
+        type="button"
+        [attr.aria-label]="toolbarAriaLabels.alignJustify"
+        [attr.aria-pressed]="toolbarState().alignJustify"
         [class.ui-lib-editor-toolbar-button--active]="toolbarState().alignJustify"
         [disabled]="isDisabled() || readonly()"
-        [attr.aria-pressed]="toolbarState().alignJustify"
-        [attr.aria-label]="toolbarAriaLabels.alignJustify"
-        (mousedown)="onToolbarMouseDown($event)"
         (click)="onToolbarButtonClick($event, 'justifyFull')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         J
       </button>
     </span>
 
-    <span class="ui-lib-editor-toolbar-separator" aria-hidden="true"></span>
+    <span aria-hidden="true" class="ui-lib-editor-toolbar-separator"></span>
 
     <span class="ui-lib-editor-toolbar-group">
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
-        [disabled]="isDisabled() || readonly()"
+        type="button"
         [attr.aria-label]="toolbarAriaLabels.createLink"
-        (mousedown)="onToolbarMouseDown($event)"
+        [disabled]="isDisabled() || readonly()"
         (click)="onInsertLink()"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         Link
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
-        [disabled]="isDisabled() || readonly()"
+        type="button"
         [attr.aria-label]="toolbarAriaLabels.unlink"
-        (mousedown)="onToolbarMouseDown($event)"
+        [disabled]="isDisabled() || readonly()"
         (click)="onToolbarButtonClick($event, 'unlink')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         Unlink
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
-        [disabled]="isDisabled() || readonly()"
+        type="button"
         [attr.aria-label]="toolbarAriaLabels.insertImage"
-        (mousedown)="onToolbarMouseDown($event)"
+        [disabled]="isDisabled() || readonly()"
         (click)="onInsertImage()"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         Image
       </button>
 
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
-        [disabled]="isDisabled() || readonly()"
+        type="button"
         [attr.aria-label]="toolbarAriaLabels.codeBlock"
-        (mousedown)="onToolbarMouseDown($event)"
+        [disabled]="isDisabled() || readonly()"
         (click)="onToolbarButtonClick($event, 'insertHTML', '<pre><code></code></pre>')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         Code
       </button>
     </span>
 
-    <span class="ui-lib-editor-toolbar-separator" aria-hidden="true"></span>
+    <span aria-hidden="true" class="ui-lib-editor-toolbar-separator"></span>
 
     <span class="ui-lib-editor-toolbar-group">
       <button
-        type="button"
         class="ui-lib-editor-toolbar-button"
-        [disabled]="isDisabled() || readonly()"
+        type="button"
         [attr.aria-label]="toolbarAriaLabels.removeFormat"
-        (mousedown)="onToolbarMouseDown($event)"
+        [disabled]="isDisabled() || readonly()"
         (click)="onToolbarButtonClick($event, 'removeFormat')"
+        (mousedown)="onToolbarMouseDown($event)"
       >
         Clear
       </button>
@@ -257,14 +257,14 @@
 <div
   #editorContent
   class="ui-lib-editor-content"
-  [attr.contenteditable]="!isDisabled() && !readonly()"
-  [attr.role]="'textbox'"
-  [attr.aria-multiline]="'true'"
+  [attr.aria-disabled]="isDisabled() || null"
   [attr.aria-label]="
     ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('editor.content.label'))
   "
   [attr.aria-labelledby]="ariaLabelledBy()"
+  [attr.aria-multiline]="'true'"
   [attr.aria-readonly]="readonly() || null"
-  [attr.aria-disabled]="isDisabled() || null"
+  [attr.contenteditable]="!isDisabled() && !readonly()"
   [attr.data-placeholder]="placeholder()"
+  [attr.role]="'textbox'"
 ></div>

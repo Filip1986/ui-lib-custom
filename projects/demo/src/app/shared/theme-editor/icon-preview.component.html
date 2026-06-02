@@ -3,7 +3,7 @@
     <h4>Icon Library Comparison</h4>
     <select aria-label="Icon preview selection" (change)="onIconSelect($event)">
       @for (icon of semanticIcons; track icon) {
-        <option [value]="icon" [selected]="icon === selectedIcon()">{{ icon }}</option>
+        <option [selected]="icon === selectedIcon()" [value]="icon">{{ icon }}</option>
       }
     </select>
   </div>
@@ -12,7 +12,7 @@
     @for (lib of libraries; track lib) {
       <div class="library-preview">
         <span class="library-name">{{ lib }}</span>
-        <ui-lib-icon [name]="selectedIcon()" [library]="lib" size="xl" />
+        <ui-lib-icon size="xl" [library]="lib" [name]="selectedIcon()" />
       </div>
     }
   </div>

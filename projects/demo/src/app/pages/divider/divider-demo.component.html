@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A visual separator that divides content horizontally or vertically. Supports solid, dashed, and dotted lines, optional projected label content, flexible alignment, and three design variants."
     docHeader
     title="Divider"
     [importCode]="importCode"
-    description="A visual separator that divides content horizontally or vertically. Supports solid, dashed, and dotted lines, optional projected label content, flexible alignment, and three design variants."
   />
 
   <div class="demo-page-header__preview">
@@ -104,7 +104,7 @@
       <div class="demo-variant-group">
         <h3 class="demo-variant-group__label">{{ variant }}</h3>
         <ui-lib-divider [variant]="variant">{{ variant }}</ui-lib-divider>
-        <ui-lib-divider [variant]="variant" type="dashed" />
+        <ui-lib-divider type="dashed" [variant]="variant" />
       </div>
     }
   </app-doc-section>
@@ -120,17 +120,17 @@
             <p>Content above</p>
             @if (playgroundHasContent()) {
               <ui-lib-divider
+                [align]="playgroundAlign()"
                 [orientation]="playgroundOrientation()"
                 [type]="playgroundType()"
-                [align]="playgroundAlign()"
                 [variant]="playgroundVariant()"
                 >Label</ui-lib-divider
               >
             } @else {
               <ui-lib-divider
+                [align]="playgroundAlign()"
                 [orientation]="playgroundOrientation()"
                 [type]="playgroundType()"
-                [align]="playgroundAlign()"
                 [variant]="playgroundVariant()"
               />
             }
@@ -141,17 +141,17 @@
             <div class="demo-playground__v-panel">Left</div>
             @if (playgroundHasContent()) {
               <ui-lib-divider
+                [align]="playgroundAlign()"
                 [orientation]="playgroundOrientation()"
                 [type]="playgroundType()"
-                [align]="playgroundAlign()"
                 [variant]="playgroundVariant()"
                 >OR</ui-lib-divider
               >
             } @else {
               <ui-lib-divider
+                [align]="playgroundAlign()"
                 [orientation]="playgroundOrientation()"
                 [type]="playgroundType()"
-                [align]="playgroundAlign()"
                 [variant]="playgroundVariant()"
               />
             }
@@ -166,18 +166,18 @@
           <span class="demo-control__label">Orientation</span>
           <div class="demo-control__buttons">
             <ui-lib-button
-              type="button"
-              [appearance]="playgroundOrientation() === 'horizontal' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="playgroundOrientation() === 'horizontal' ? 'solid' : 'outline'"
               (click)="setOrientation('horizontal')"
               >horizontal</ui-lib-button
             >
             <ui-lib-button
-              type="button"
-              [appearance]="playgroundOrientation() === 'vertical' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
+              type="button"
+              [appearance]="playgroundOrientation() === 'vertical' ? 'solid' : 'outline'"
               (click)="setOrientation('vertical')"
               >vertical</ui-lib-button
             >
@@ -190,10 +190,10 @@
           <div class="demo-control__buttons">
             @for (type of types; track type) {
               <ui-lib-button
-                type="button"
-                [appearance]="playgroundType() === type ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="playgroundType() === type ? 'solid' : 'outline'"
                 (click)="setType(type)"
                 >{{ type }}</ui-lib-button
               >
@@ -208,10 +208,10 @@
             @if (playgroundOrientation() === 'horizontal') {
               @for (align of horizontalAligns; track align) {
                 <ui-lib-button
-                  type="button"
-                  [appearance]="playgroundAlign() === align ? 'solid' : 'outline'"
                   severity="primary"
                   size="sm"
+                  type="button"
+                  [appearance]="playgroundAlign() === align ? 'solid' : 'outline'"
                   (click)="setAlign(align)"
                   >{{ align }}</ui-lib-button
                 >
@@ -219,10 +219,10 @@
             } @else {
               @for (align of verticalAligns; track align) {
                 <ui-lib-button
-                  type="button"
-                  [appearance]="playgroundAlign() === align ? 'solid' : 'outline'"
                   severity="primary"
                   size="sm"
+                  type="button"
+                  [appearance]="playgroundAlign() === align ? 'solid' : 'outline'"
                   (click)="setAlign(align)"
                   >{{ align }}</ui-lib-button
                 >
@@ -237,10 +237,10 @@
           <div class="demo-control__buttons">
             @for (variant of variants; track variant) {
               <ui-lib-button
-                type="button"
-                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
+                type="button"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 (click)="setVariant(variant)"
                 >{{ variant }}</ui-lib-button
               >
@@ -252,10 +252,10 @@
         <div class="demo-control">
           <span class="demo-control__label">Label</span>
           <ui-lib-button
-            type="button"
-            [appearance]="playgroundHasContent() ? 'solid' : 'outline'"
             severity="primary"
             size="sm"
+            type="button"
+            [appearance]="playgroundHasContent() ? 'solid' : 'outline'"
             (click)="toggleContent()"
             >{{ playgroundHasContent() ? 'On' : 'Off' }}</ui-lib-button
           >
@@ -279,9 +279,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -290,8 +290,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

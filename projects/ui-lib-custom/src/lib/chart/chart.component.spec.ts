@@ -9,9 +9,10 @@ import {
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import type { ChartComponent as ChartComponentType } from './chart.component';
-import { ChartThemeService } from './chart-theme.service';
 import type { ChartClickEvent, ChartData, ChartOptions, ChartType } from './chart.types';
+import { ChartThemeService } from './chart-theme.service';
 
 jest.mock('chart.js', (): { Chart: jest.Mock } => ({
   Chart: jest.fn(),

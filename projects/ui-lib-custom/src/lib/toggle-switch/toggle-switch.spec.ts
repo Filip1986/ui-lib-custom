@@ -5,15 +5,16 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ToggleSwitch } from './toggle-switch';
+
 import type {
   ToggleSwitchChangeEvent,
   ToggleSwitchSize,
   ToggleSwitchVariant,
 } from './toggle-switch';
+import { ToggleSwitch } from './toggle-switch';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

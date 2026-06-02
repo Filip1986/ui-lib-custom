@@ -9,23 +9,23 @@
   margin-bottom: 2.5rem;
 
   h1 {
+    color: var(--uilib-page-fg, #0f172a);
     font-size: 2rem;
     font-weight: 700;
-    color: var(--uilib-page-fg, #0f172a);
-    margin: 0;
     line-height: 1.2;
+    margin: 0;
   }
 
   .doc-description {
-    font-size: 1.0625rem;
     color: var(--uilib-muted, #6b7280);
+    font-size: 1.0625rem;
     line-height: 1.75;
     margin: 0;
   }
 
   .doc-lead {
-    font-size: 1.0625rem;
     color: var(--uilib-muted, #6b7280);
+    font-size: 1.0625rem;
     line-height: 1.75;
     margin: 0;
   }

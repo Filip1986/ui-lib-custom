@@ -1,20 +1,20 @@
 .demo-pl-row {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 0.5rem;
-  width: 100%;
   min-width: 0;
+  width: 100%;
 }
 
 .demo-pl-code {
-  font-family: var(--uilib-font-mono, monospace);
-  font-size: 0.75rem;
-  color: var(--uilib-color-text-muted, #6b7280);
-  min-width: 2.5rem;
-  text-align: center;
   background: var(--uilib-surface-subtle, #f3f4f6);
   border-radius: var(--uilib-radius-sm, 4px);
+  color: var(--uilib-color-text-muted, #6b7280);
+  font-family: var(--uilib-font-mono, monospace);
+  font-size: 0.75rem;
+  min-width: 2.5rem;
   padding: 0.1rem 0.35rem;
+  text-align: center;
 }
 
 .demo-pl-name {
@@ -26,18 +26,18 @@
 }
 
 .demo-pl-region {
-  font-size: 0.75rem;
   color: var(--uilib-color-text-muted, #6b7280);
+  font-size: 0.75rem;
   white-space: nowrap;
 }
 
 .demo-event-log {
-  font-size: 0.875rem;
   color: var(--uilib-color-text-muted, #6b7280);
+  font-size: 0.875rem;
   margin: 0;
 
   code {
-    font-family: var(--uilib-font-mono, monospace);
     color: var(--uilib-color-text, inherit);
+    font-family: var(--uilib-font-mono, monospace);
   }
 }

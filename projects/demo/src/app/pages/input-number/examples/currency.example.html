@@ -1,20 +1,20 @@
-<ui-lib-input-number [(ngModel)]="currencyValues.usd" mode="currency" currency="USD" />
+<ui-lib-input-number currency="USD" mode="currency" [(ngModel)]="currencyValues.usd" />
 <ui-lib-input-number
-  [(ngModel)]="currencyValues.eur"
-  mode="currency"
   currency="EUR"
   locale="de-DE"
+  mode="currency"
+  [(ngModel)]="currencyValues.eur"
 />
 <ui-lib-input-number
-  [(ngModel)]="currencyValues.inr"
-  mode="currency"
   currency="INR"
   currencyDisplay="code"
   locale="en-IN"
+  mode="currency"
+  [(ngModel)]="currencyValues.inr"
 />
 <ui-lib-input-number
-  [(ngModel)]="currencyValues.jpy"
-  mode="currency"
   currency="JPY"
   locale="ja-JP"
+  mode="currency"
+  [(ngModel)]="currencyValues.jpy"
 />

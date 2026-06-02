@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import type { DebugElement } from '@angular/core';
-import { BottomSheet } from './bottom-sheet';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { BottomSheet } from './bottom-sheet';
 
 // ── Host component for a11y tests ─────────────────────────────────────────
 

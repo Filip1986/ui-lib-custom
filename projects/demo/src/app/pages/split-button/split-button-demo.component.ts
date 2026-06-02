@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import type { Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,53 +7,55 @@ import {
   viewChild,
   type WritableSignal,
 } from '@angular/core';
-import type { Signal } from '@angular/core';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
-import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
 import { Icon } from 'ui-lib-custom/icon';
-import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { Panel } from 'ui-lib-custom/panel';
 import type {
   SplitButtonItem,
   SplitButtonItemCommandEvent,
   SplitButtonSeverity,
 } from 'ui-lib-custom/split-button';
+import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
+
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
 import {
   basicHtml,
   basicTs,
-  iconsHtml,
-  iconsTs,
-  severityHtml,
-  severityTs,
   disabledHtml,
   disabledTs,
+  iconsHtml,
+  iconsTs,
+  outlinedHtml,
+  outlinedTs,
   raisedHtml,
+  raisedTextHtml,
+  raisedTextTs,
   raisedTs,
   roundedHtml,
   roundedTs,
-  textHtml,
-  textTs,
-  raisedTextHtml,
-  raisedTextTs,
-  outlinedHtml,
-  outlinedTs,
+  severityHtml,
+  severityTs,
   sizesHtml,
   sizesTs,
   templateHtml,
   templateTs,
+  textHtml,
+  textTs,
 } from './snippets.generated';
-import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 /**
  * Demo page for SplitButton variants, states, templating, and accessibility guidance.

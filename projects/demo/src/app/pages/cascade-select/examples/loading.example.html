@@ -1,9 +1,9 @@
 <ui-lib-cascade-select
-  [(ngModel)]="loadingCode"
-  [options]="countries"
-  [loading]="loading"
   optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
   optionLabel="cname"
   optionValue="code"
+  [loading]="loading"
+  [optionGroupChildren]="['states', 'cities']"
+  [options]="countries"
+  [(ngModel)]="loadingCode"
 />

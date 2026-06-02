@@ -1,20 +1,20 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Use t-shirt sized spacing tokens across layout primitives for consistent gaps and padding."
     docHeader
     title="Semantic Spacing"
-    description="Use t-shirt sized spacing tokens across layout primitives for consistent gaps and padding."
   />
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="demo" label="Demo" />
-      <ui-lib-tab value="usage" label="Usage" />
-      <ui-lib-tab value="api" label="API Reference" />
+      <ui-lib-tab label="Demo" value="demo" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="API Reference" value="api" />
     </ui-lib-tabs>
   </div>
 
@@ -22,7 +22,7 @@
     <ui-lib-panel variant="minimal">
       <p>Use t-shirt sizes to pull semantic spacing tokens without hardcoding gaps or padding.</p>
       <div class="doc-demo-group spacing-playground">
-        <ui-lib-stack spacing="lg" class="spacing-stack">
+        <ui-lib-stack class="spacing-stack" spacing="lg">
           <div class="control-panel">
             <ui-lib-stack spacing="md">
               <div class="panel-title">
@@ -34,26 +34,26 @@
               <div class="control-grid">
                 <ui-lib-select
                   label="Stack spacing"
-                  [options]="stackOptions"
                   [ngModel]="stackSpacing()"
+                  [options]="stackOptions"
                   (ngModelChange)="setStackSpacing($event)"
                 />
                 <ui-lib-select
                   label="Inline spacing"
-                  [options]="inlineOptions"
                   [ngModel]="inlineSpacing()"
+                  [options]="inlineOptions"
                   (ngModelChange)="setInlineSpacing($event)"
                 />
                 <ui-lib-select
                   label="Grid spacing"
-                  [options]="stackOptions"
                   [ngModel]="gridSpacing()"
+                  [options]="stackOptions"
                   (ngModelChange)="setGridSpacing($event)"
                 />
                 <ui-lib-select
                   label="Container inset"
-                  [options]="insetOptions"
                   [ngModel]="inset()"
+                  [options]="insetOptions"
                   (ngModelChange)="setInset($event)"
                 />
               </div>
@@ -69,8 +69,8 @@
 
           <app-doc-demo-viewport>
             <div class="doc-demo spacing-preview">
-              <ui-lib-grid spacing="md" [columns]="2" class="preview-grid">
-                <ui-lib-stack spacing="sm" class="preview-block">
+              <ui-lib-grid class="preview-grid" spacing="md" [columns]="2">
+                <ui-lib-stack class="preview-block" spacing="sm">
                   <h4>Stack spacing="{{ stackSpacing() }}"</h4>
                   <ui-lib-stack [spacing]="stackSpacing()">
                     <div class="demo-box">Item 1</div>
@@ -79,7 +79,7 @@
                   </ui-lib-stack>
                 </ui-lib-stack>
 
-                <ui-lib-stack spacing="sm" class="preview-block">
+                <ui-lib-stack class="preview-block" spacing="sm">
                   <h4>Inline spacing="{{ inlineSpacing() }}"</h4>
                   <ui-lib-inline [spacing]="inlineSpacing()">
                     <span class="demo-tag">One</span>
@@ -89,7 +89,7 @@
                   </ui-lib-inline>
                 </ui-lib-stack>
 
-                <ui-lib-stack spacing="sm" class="preview-block">
+                <ui-lib-stack class="preview-block" spacing="sm">
                   <h4>Grid spacing="{{ gridSpacing() }}"</h4>
                   <ui-lib-grid [columns]="3" [spacing]="gridSpacing()">
                     <div class="demo-grid-cell">A</div>
@@ -101,9 +101,9 @@
                   </ui-lib-grid>
                 </ui-lib-stack>
 
-                <ui-lib-stack spacing="sm" class="preview-block">
+                <ui-lib-stack class="preview-block" spacing="sm">
                   <h4>Container inset="{{ inset() }}"</h4>
-                  <ui-lib-container [inset]="inset()" style="background: #f5f5f5">
+                  <ui-lib-container style="background: #f5f5f5" [inset]="inset()">
                     <p class="no-margin">Inset padding comes from the semantic inset token.</p>
                   </ui-lib-container>
                 </ui-lib-stack>
@@ -119,8 +119,8 @@
     <ui-lib-panel variant="minimal">
       <app-doc-code-example
         [html]="usageSnippet"
-        [typescript]="usageSnippetTs"
         [showLineNumbers]="true"
+        [typescript]="usageSnippetTs"
       />
     </ui-lib-panel>
   }

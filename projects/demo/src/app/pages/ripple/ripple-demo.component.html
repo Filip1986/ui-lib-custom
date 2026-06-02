@@ -1,11 +1,10 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A directive that adds a Material-style circular wave effect to any element on click. Apply &lt;code&gt;[uiLibRipple]&lt;/code&gt; to any host — button, card, list item, or custom element. Purely decorative: it does not alter ARIA semantics or keyboard behaviour."
     docHeader
     title="Ripple"
     [importCode]="importCode"
-    description="A directive that adds a Material-style circular wave effect to any element on click. Apply &lt;code&gt;[uiLibRipple]&lt;/code&gt; to any host — button, card, list item, or custom element. Purely decorative: it does not alter ARIA semantics or keyboard behaviour."
-  >
-  </app-doc-page-header>
+  />
 
   <!-- ---- Basic ---------------------------------------------------- -->
   <app-doc-section id="basic" title="Basic">
@@ -19,8 +18,8 @@
       <ui-lib-button severity="danger" uiLibRipple>Danger Button</ui-lib-button>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Basic"
+      language="html"
       [code]="snippets.basic"
       [showLineNumbers]="true"
     />
@@ -41,8 +40,8 @@
       </div>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Dark ripple"
+      language="html"
       [code]="snippets.darkRipple"
       [showLineNumbers]="true"
     />
@@ -64,8 +63,8 @@
       >
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Custom duration"
+      language="html"
       [code]="snippets.customDuration"
       [showLineNumbers]="true"
     />
@@ -90,8 +89,8 @@
       </ui-lib-button>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Disabled"
+      language="html"
       [code]="snippets.disabled"
       [showLineNumbers]="true"
     />
@@ -118,8 +117,8 @@
       </ul>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Any element"
+      language="html"
       [code]="snippets.anyElement"
       [showLineNumbers]="true"
     />
@@ -127,13 +126,13 @@
 
   <!-- ---- API ------------------------------------------------------ -->
   <app-doc-section id="api" title="API Reference">
-    <div id="api-inputs" data-doc-anchor>
+    <div data-doc-anchor id="api-inputs">
       <h3 class="demo-section__subtitle">Inputs</h3>
       <p class="demo-section__description">Selector: <code>[uiLibRipple]</code></p>
       <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
-    <div id="api-css" data-doc-anchor>
+    <div data-doc-anchor id="api-css">
       <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
       <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
@@ -141,7 +140,7 @@
 
   <!-- ---- Accessibility -------------------------------------------- -->
   <app-doc-section id="accessibility" title="Accessibility">
-    <div id="a11y-aria" data-doc-anchor>
+    <div data-doc-anchor id="a11y-aria">
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <app-doc-aria-table [rows]="ariaRows" />
     </div>
@@ -176,9 +175,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -187,8 +186,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

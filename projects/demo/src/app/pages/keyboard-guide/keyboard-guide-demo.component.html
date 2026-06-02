@@ -1,12 +1,12 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Complete Windows keyboard support including Function keys and Navigation clusters. Perfectly mapped for advanced grid interactions and accessibility workflows. Press any key to see it highlighted in real time."
     docHeader
     title="Extended Navigation"
-    description="Complete Windows keyboard support including Function keys and Navigation clusters. Perfectly mapped for advanced grid interactions and accessibility workflows. Press any key to see it highlighted in real time."
   />
 
   <!-- Section: Keyboard layout -->
-  <section class="demo-section" id="keyboard" data-doc-anchor>
+  <section class="demo-section" data-doc-anchor id="keyboard">
     <h2 class="demo-section__title">Keyboard Layout</h2>
     <p class="demo-section__description">
       Full 104-key standard PC layout. Press any key on your keyboard to see it activate below.
@@ -243,7 +243,7 @@
             Ctrl
           </div>
           <div class="kb-key kb-key--muted kb-key--win" [class.kb-key--active]="isActive('win')">
-            <svg class="kb-win-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <svg aria-hidden="true" class="kb-win-icon" fill="currentColor" viewBox="0 0 24 24">
               <path
                 d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"
               />
@@ -265,7 +265,7 @@
             Alt
           </div>
           <div class="kb-key kb-key--muted kb-key--win" [class.kb-key--active]="isActive('win')">
-            <svg class="kb-win-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <svg aria-hidden="true" class="kb-win-icon" fill="currentColor" viewBox="0 0 24 24">
               <path
                 d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"
               />
@@ -344,7 +344,7 @@
   </section>
 
   <!-- Section: Shortcut reference cards -->
-  <section class="demo-section" id="shortcuts" data-doc-anchor>
+  <section class="demo-section" data-doc-anchor id="shortcuts">
     <h2 class="demo-section__title">Shortcut Reference</h2>
     <p class="demo-section__description">
       Common keyboard shortcuts organised by workflow — form navigation, list &amp; data, and
@@ -356,11 +356,11 @@
       <div class="kb-card">
         <div class="kb-card__icon kb-card__icon--sky">
           <svg
-            viewBox="0 0 24 24"
+            aria-hidden="true"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            aria-hidden="true"
+            viewBox="0 0 24 24"
           >
             <path d="M4 5h16M4 12h16M4 19h7" />
             <path d="M15 15l3 3 3-3" />
@@ -392,18 +392,18 @@
       <div class="kb-card">
         <div class="kb-card__icon kb-card__icon--emerald">
           <svg
-            viewBox="0 0 24 24"
+            aria-hidden="true"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            aria-hidden="true"
+            viewBox="0 0 24 24"
           >
-            <line x1="8" y1="6" x2="21" y2="6" />
-            <line x1="8" y1="12" x2="21" y2="12" />
-            <line x1="8" y1="18" x2="21" y2="18" />
-            <line x1="3" y1="6" x2="3.01" y2="6" />
-            <line x1="3" y1="12" x2="3.01" y2="12" />
-            <line x1="3" y1="18" x2="3.01" y2="18" />
+            <line x1="8" x2="21" y1="6" y2="6" />
+            <line x1="8" x2="21" y1="12" y2="12" />
+            <line x1="8" x2="21" y1="18" y2="18" />
+            <line x1="3" x2="3.01" y1="6" y2="6" />
+            <line x1="3" x2="3.01" y1="12" y2="12" />
+            <line x1="3" x2="3.01" y1="18" y2="18" />
           </svg>
         </div>
         <h3 class="kb-card__title">List &amp; Data</h3>
@@ -430,11 +430,11 @@
       <div class="kb-card">
         <div class="kb-card__icon kb-card__icon--amber">
           <svg
-            viewBox="0 0 24 24"
+            aria-hidden="true"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            aria-hidden="true"
+            viewBox="0 0 24 24"
           >
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
           </svg>
@@ -471,8 +471,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

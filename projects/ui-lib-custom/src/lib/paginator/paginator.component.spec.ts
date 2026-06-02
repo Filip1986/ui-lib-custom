@@ -1,14 +1,15 @@
+import type { DebugElement, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { DebugElement, WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { PaginatorComponent, PAGINATOR_DEFAULTS } from './paginator.component';
+
+import { PAGINATOR_DEFAULTS, PaginatorComponent } from './paginator.component';
 import type { PaginatorPageEvent, PaginatorSize, PaginatorVariant } from './paginator.types';
 @Component({
   selector: 'test-host',

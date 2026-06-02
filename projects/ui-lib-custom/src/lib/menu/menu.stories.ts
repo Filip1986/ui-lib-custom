@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { Menu } from './menu';
-import type { MenuItem, MenuSize, MenuVariant } from './menu.types';
+
 import {
   SHARED_DEFAULTS,
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
+
+import { Menu } from './menu';
+import type { MenuItem, MenuSize, MenuVariant } from './menu.types';
 
 type MenuStoryArgs = {
   variant: MenuVariant | null;

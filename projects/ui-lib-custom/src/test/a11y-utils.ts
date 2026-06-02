@@ -1,4 +1,5 @@
 import type { ComponentFixture } from '@angular/core/testing';
+
 import { axe } from 'jest-axe';
 
 interface A11yTestOptions {

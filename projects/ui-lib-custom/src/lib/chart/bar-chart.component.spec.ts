@@ -8,6 +8,7 @@ import {
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { BarChartComponent } from './bar-chart.component';
 import { ChartComponent } from './chart.component';
 import type { ChartData, ChartOptions } from './chart.types';

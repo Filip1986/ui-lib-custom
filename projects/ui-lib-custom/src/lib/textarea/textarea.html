@@ -3,7 +3,7 @@
     <label class="ui-lib-textarea__label" [attr.for]="controlId()">
       {{ label() }}
       @if (required()) {
-        <span class="ui-lib-textarea__required" aria-hidden="true">*</span>
+        <span aria-hidden="true" class="ui-lib-textarea__required">*</span>
       }
     </label>
   }
@@ -12,27 +12,27 @@
     <textarea
       #textareaRef
       class="ui-lib-textarea__control"
+      [attr.aria-describedby]="ariaDescribedBy()"
+      [attr.aria-disabled]="isDisabled() ? 'true' : null"
+      [attr.aria-invalid]="isInvalid() ? 'true' : null"
+      [attr.aria-label]="ariaLabel() || null"
+      [attr.aria-labelledby]="ariaLabelledBy() || null"
+      [attr.aria-readonly]="readonly() ? 'true' : null"
+      [attr.aria-required]="required() ? 'true' : null"
+      [attr.cols]="cols() ?? null"
+      [attr.maxlength]="maxLength() ?? null"
+      [disabled]="isDisabled()"
       [id]="controlId()"
       [name]="name() ?? controlId()"
       [placeholder]="placeholder()"
-      [rows]="rows()"
-      [attr.cols]="cols() ?? null"
-      [attr.maxlength]="maxLength() ?? null"
-      [attr.aria-label]="ariaLabel() || null"
-      [attr.aria-labelledby]="ariaLabelledBy() || null"
-      [attr.aria-invalid]="isInvalid() ? 'true' : null"
-      [attr.aria-required]="required() ? 'true' : null"
-      [attr.aria-describedby]="ariaDescribedBy()"
-      [attr.aria-readonly]="readonly() ? 'true' : null"
-      [attr.aria-disabled]="isDisabled() ? 'true' : null"
-      [disabled]="isDisabled()"
       [readOnly]="readonly()"
       [required]="required() || null"
+      [rows]="rows()"
       [style.resize]="nativeResize()"
       [value]="value()"
-      (input)="handleInput($event)"
-      (focus)="handleFocus($event)"
       (blur)="handleBlur($event)"
+      (focus)="handleFocus($event)"
+      (input)="handleInput($event)"
     ></textarea>
   </div>
 
@@ -40,8 +40,8 @@
     <div class="ui-lib-textarea__messages">
       <div
         class="ui-lib-textarea__hint"
-        [id]="hintId()"
         [class.ui-lib-textarea__message--hidden]="!showHintRegion()"
+        [id]="hintId()"
       >
         @if (hint() && !hasProjectedHint()) {
           {{ hint() }}
@@ -51,9 +51,9 @@
 
       <div
         class="ui-lib-textarea__error"
-        [id]="errorId()"
         [attr.role]="showErrorRegion() ? 'alert' : null"
         [class.ui-lib-textarea__message--hidden]="!showErrorRegion()"
+        [id]="errorId()"
       >
         @if (error() && !hasProjectedError()) {
           {{ error() }}

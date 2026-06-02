@@ -1,13 +1,13 @@
 <button
   #triggerBtn
-  type="button"
   class="ui-lib-speed-dial__button"
+  type="button"
+  [attr.aria-controls]="listId"
+  [attr.aria-disabled]="disabled() ? 'true' : null"
   [attr.aria-expanded]="visible() ? 'true' : 'false'"
   [attr.aria-haspopup]="'true'"
-  [attr.aria-controls]="listId"
   [attr.aria-label]="triggerAriaLabel()"
   [attr.aria-labelledby]="ariaLabelledBy()"
-  [attr.aria-disabled]="disabled() ? 'true' : null"
   [disabled]="disabled()"
   [tabindex]="tabindex()"
   (click)="toggle($event)"
@@ -33,23 +33,23 @@
 <ul
   #listElement
   class="ui-lib-speed-dial__list"
-  [id]="listId"
   role="menu"
-  [hidden]="!visible()"
   [attr.aria-hidden]="!visible()"
+  [hidden]="!visible()"
+  [id]="listId"
 >
   @for (item of visibleItems(); track $index; let i = $index) {
-    <li role="none" class="ui-lib-speed-dial__item">
+    <li class="ui-lib-speed-dial__item" role="none">
       <button
         #itemAction
-        type="button"
         class="ui-lib-speed-dial__action"
         role="menuitem"
-        [attr.id]="itemId(i)"
-        [attr.aria-label]="item.label ?? null"
+        type="button"
         [attr.aria-disabled]="item.disabled === true ? 'true' : null"
-        [attr.title]="item.tooltip ?? null"
+        [attr.aria-label]="item.label ?? null"
+        [attr.id]="itemId(i)"
         [attr.tabindex]="visible() ? 0 : -1"
+        [attr.title]="item.tooltip ?? null"
         [disabled]="item.disabled === true"
         [style.transform]="itemTransform()[i]"
         [style.transition-delay]="itemTransitionDelay()[i]"
@@ -77,7 +77,7 @@
 @if (mask() && visible()) {
   <div
     class="ui-lib-speed-dial__mask"
-    (click)="onMaskClick($event)"
     [attr.aria-hidden]="true"
+    (click)="onMaskClick($event)"
   ></div>
 }

@@ -1,8 +1,8 @@
 .doc-page {
   --doc-max-width: 1200px;
   --doc-anchor-offset: 96px;
-  max-width: var(--doc-max-width);
   margin: 0 auto;
+  max-width: var(--doc-max-width);
   padding-bottom: 2rem;
 
   [data-doc-anchor] {
@@ -17,15 +17,15 @@
   background: #f8f9fa;
   border: 1px solid #dee2e6;
   border-radius: 6px;
-  padding: 2rem;
   margin-bottom: 1.5rem;
+  padding: 2rem;
 
   &.centered {
-    display: flex;
-    justify-content: center;
     align-items: center;
+    display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    justify-content: center;
   }
 
   &.stacked {
@@ -45,40 +45,40 @@
 
 .doc-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .doc-table,
 .doc-properties {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
-  margin-top: 1rem;
   margin-bottom: 1rem;
+  margin-top: 1rem;
+  width: 100%;
 
   th {
-    text-align: left;
-    padding: 0.5rem 0.75rem;
     background: var(--uilib-surface-100, #f8f9fa);
     border-bottom: 2px solid var(--uilib-color-border, #dee2e6);
-    font-weight: 600;
     color: var(--uilib-page-fg, #0f172a);
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
   }
 
   td {
-    padding: 0.5rem 0.75rem;
     border-bottom: 1px solid var(--uilib-color-border, #dee2e6);
-    vertical-align: top;
     color: var(--uilib-muted, #4b5563);
+    padding: 0.5rem 0.75rem;
+    vertical-align: top;
   }
 
   code,
   kbd {
     background: var(--uilib-surface-100, #f1f3f5);
-    padding: 0.125rem 0.375rem;
     border-radius: 3px;
     font-size: 0.8125rem;
+    padding: 0.125rem 0.375rem;
   }
 }
 
@@ -87,13 +87,13 @@
 
   pre {
     background: #282c34;
-    color: #abb2bf;
     border-radius: 6px;
-    padding: 1.5rem;
-    overflow-x: auto;
-    margin: 0;
+    color: #abb2bf;
     font-size: 0.875rem;
     line-height: 1.5;
+    margin: 0;
+    overflow-x: auto;
+    padding: 1.5rem;
 
     code {
       font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
@@ -102,48 +102,48 @@
 }
 
 .doc-tabs {
+  border-bottom: 2px solid #dee2e6;
   display: flex;
   gap: 0.5rem;
-  border-bottom: 2px solid #dee2e6;
   margin-bottom: 1.5rem;
 }
 
 .doc-tab {
-  padding: 0.75rem 1.5rem;
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
   color: #6c757d;
-  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  font-weight: 500;
   margin-bottom: -2px;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s;
 
   &:hover {
     color: #007bff;
   }
 
   &.active {
-    color: #007bff;
     border-bottom-color: #007bff;
+    color: #007bff;
   }
 }
 
 /* .doc-properties is extended by the shared block above — no separate definition needed */
 
 .button-group {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  align-items: center;
 }
 
 .doc-list {
-  margin: 0 0 1rem;
-  padding-left: 1.5rem;
   color: var(--uilib-muted, #6b7280);
   font-size: 0.9rem;
   line-height: 1.7;
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
 
   li {
     margin-bottom: 0.5rem;
@@ -156,23 +156,23 @@
 }
 
 .doc-code-block {
+  background: #ffffff;
   border: 1px solid #dee2e6;
   border-radius: 8px;
-  background: #ffffff;
-  overflow: hidden;
   margin-top: 1rem;
+  overflow: hidden;
 
   .doc-code-header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 1rem;
     background: #f8f9fa;
     border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
 
     .doc-code-title {
-      font-weight: 600;
       color: #495057;
+      font-weight: 600;
     }
   }
 
@@ -182,13 +182,13 @@
 }
 
 .doc-copy {
-  border: 1px solid #dee2e6;
   background: #ffffff;
-  color: #495057;
-  padding: 0.35rem 0.75rem;
+  border: 1px solid #dee2e6;
   border-radius: 4px;
-  font-size: 0.875rem;
+  color: #495057;
   cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0.35rem 0.75rem;
   transition:
     background 0.15s ease,
     border-color 0.15s ease,
@@ -206,10 +206,10 @@
 }
 
 .doc-controls {
+  align-items: start;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  align-items: start;
   margin: 1rem 0 1.5rem;
 
   .control-group {
@@ -217,21 +217,21 @@
   }
 
   .control-group__header {
-    display: flex;
-    justify-content: space-between;
     align-items: flex-start;
+    display: flex;
     gap: 0.5rem;
+    justify-content: space-between;
   }
 
   .control-group__title {
-    font-weight: 700;
     color: #0f172a;
+    font-weight: 700;
   }
 
   .control-group__description {
-    margin: 0;
-    font-size: 0.9rem;
     color: #6b7280;
+    font-size: 0.9rem;
+    margin: 0;
   }
 
   .control-group__grid {
@@ -271,17 +271,17 @@
   gap: 0.5rem;
 
   label {
-    font-weight: 600;
     color: #495057;
+    font-weight: 600;
   }
 
   input,
   textarea {
-    width: 100%;
-    padding: 0.5rem 0.75rem;
     border: 1px solid #d0d5dc;
     border-radius: 6px;
     font: inherit;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
   }
 }
 
@@ -292,11 +292,11 @@
 }
 
 .inline-toggle {
-  display: flex;
   align-items: center;
-  gap: 0.45rem;
-  font-weight: 500;
   color: #4b5563;
+  display: flex;
+  font-weight: 500;
+  gap: 0.45rem;
 }
 
 .chips {
@@ -315,31 +315,31 @@
 
 .toggles {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 0.35rem 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 
   label {
-    display: flex;
     align-items: center;
-    gap: 0.45rem;
     color: #4b5563;
+    display: flex;
     font-weight: 500;
+    gap: 0.45rem;
   }
 }
 
 .theme-overrides {
-  display: grid;
-  gap: 0.75rem;
   background: #f8fafc;
   border: 1px dashed #cbd5e1;
   border-radius: 8px;
+  display: grid;
+  gap: 0.75rem;
   padding: 0.75rem;
 }
 
 .viewport-control-stack {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   margin: 0 0 1rem;
 }
 
@@ -349,19 +349,19 @@
 }
 
 .viewport-controls {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 0.75rem;
+  display: flex;
   flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
 }
 
 .density-controls {
-  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  display: inline-flex;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 // Responsive
@@ -390,47 +390,47 @@
 // ---- Page header ---------------------------------------------------------
 
 .demo-page-header {
+  border-bottom: 1px solid var(--uilib-surface-200, #e5e7eb);
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--uilib-surface-200, #e5e7eb);
 
   &__meta {
+    align-items: baseline;
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
     gap: 1rem;
     margin-bottom: 0.625rem;
   }
 
   h1 {
+    color: var(--uilib-page-fg, #0f172a);
     font-size: 2rem;
     font-weight: 700;
-    color: var(--uilib-page-fg, #0f172a);
     margin: 0;
   }
 
   &__import {
+    background: var(--uilib-surface-100, #f3f4f6);
+    border-radius: 0.25em;
+    color: var(--uilib-muted, #6b7280);
     display: inline-block;
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
     font-size: 0.8rem;
-    color: var(--uilib-muted, #6b7280);
-    background: var(--uilib-surface-100, #f3f4f6);
     padding: 0.2em 0.55em;
-    border-radius: 0.25em;
   }
 
   &__description {
-    margin: 0 0 1.25rem;
-    font-size: 1rem;
     color: var(--uilib-muted, #6b7280);
+    font-size: 1rem;
     line-height: 1.7;
+    margin: 0 0 1.25rem;
     max-width: 640px;
   }
 
   &__preview {
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     gap: 0.5rem;
   }
 }
@@ -443,16 +443,16 @@
   }
 
   &__title {
+    color: var(--uilib-page-fg, #0f172a);
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--uilib-page-fg, #0f172a);
     margin: 0 0 0.375rem;
   }
 
   &__subtitle {
+    color: var(--uilib-page-fg, #0f172a);
     font-size: 1rem;
     font-weight: 600;
-    color: var(--uilib-page-fg, #0f172a);
     margin: 2rem 0 0.5rem;
 
     &:first-child {
@@ -461,32 +461,32 @@
   }
 
   &__description {
-    font-size: 0.9rem;
     color: var(--uilib-muted, #6b7280);
+    font-size: 0.9rem;
     line-height: 1.6;
     margin: 0 0 1rem;
 
     code {
+      background: var(--uilib-surface-100, #f3f4f6);
+      border-radius: 3px;
       font-size: 0.85em;
       padding: 0.1em 0.35em;
-      border-radius: 3px;
-      background: var(--uilib-surface-100, #f3f4f6);
     }
   }
 
   &__preview {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    padding: 1.5rem;
     background: var(--uilib-surface-50, #f9fafb);
     border: 1px solid var(--uilib-surface-200, #e5e7eb);
     border-radius: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
     margin-bottom: 0.75rem;
+    padding: 1.5rem;
 
     &--center {
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
 
     &--column {
@@ -498,10 +498,10 @@
 // ---- Component rows ------------------------------------------------------
 
 .demo-row {
+  align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  align-items: flex-start;
 
   &--center {
     align-items: center;
@@ -516,59 +516,59 @@
   }
 
   &__label {
+    color: var(--uilib-muted, #6b7280);
     font-size: 0.75rem;
     font-weight: 600;
-    text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--uilib-muted, #6b7280);
     margin: 0 0 0.5rem;
+    text-transform: uppercase;
   }
 }
 
 // ---- Playground ----------------------------------------------------------
 
 .demo-playground {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
   align-items: flex-start;
-  padding: 1.5rem;
   background: var(--uilib-surface-50, #f9fafb);
   border: 1px solid var(--uilib-surface-200, #e5e7eb);
   border-radius: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 1.5rem;
 
   &__preview {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    flex: 1 0 160px;
-    min-height: 80px;
-    padding: 1.5rem;
     background: var(--uilib-surface-0, #fff);
     border: 1px dashed var(--uilib-surface-300, #d1d5db);
     border-radius: 0.375rem;
+    display: flex;
+    flex: 1 0 160px;
+    justify-content: center;
+    min-height: 80px;
+    padding: 1.5rem;
   }
 
   &__controls {
     display: flex;
+    flex: 0 0 auto;
     flex-direction: column;
     gap: 1rem;
-    flex: 0 0 auto;
   }
 }
 
 .demo-control {
-  display: flex;
   align-items: center;
-  gap: 0.75rem;
+  display: flex;
   flex-wrap: wrap;
+  gap: 0.75rem;
 
   &__label {
-    min-width: 5.5rem;
-    font-size: 0.8rem;
-    font-weight: 600;
     color: var(--uilib-muted, #6b7280);
     flex-shrink: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-width: 5.5rem;
   }
 
   &__buttons {
@@ -591,9 +591,9 @@
 // ---- Page wrapper --------------------------------------------------------
 
 .demo-page {
-  padding: 2rem;
-  max-width: 900px;
   margin: 0 auto;
+  max-width: 900px;
+  padding: 2rem;
 }
 
 .demo-page__title {
@@ -604,9 +604,9 @@
 
 .demo-page__description {
   color: var(--uilib-muted, #6b7280);
-  margin-bottom: 2rem;
   font-size: 1rem;
   line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
 // ---- Preview modifier: narrow --------------------------------------------
@@ -631,11 +631,11 @@
 }
 
 .demo-control-label {
+  color: var(--uilib-muted, #6b7280);
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--uilib-muted, #6b7280);
-  text-transform: uppercase;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .demo-control-buttons {
@@ -646,41 +646,41 @@
 // ---- Event log -----------------------------------------------------------
 
 .demo-event-log {
-  margin-top: 0.75rem;
   margin-bottom: 0.75rem;
+  margin-top: 0.75rem;
 }
 
 .demo-event-log__empty {
-  font-size: 0.875rem;
   color: var(--uilib-muted, #6b7280);
+  font-size: 0.875rem;
   font-style: italic;
 }
 
 .demo-event-log__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .demo-event-log__entry {
+  background: var(--uilib-surface-100, #f8f9fa);
+  border-left: 3px solid var(--uilib-color-primary, #6366f1);
+  border-radius: 4px;
   font-size: 0.875rem;
   padding: 0.25rem 0.5rem;
-  background: var(--uilib-surface-100, #f8f9fa);
-  border-radius: 4px;
-  border-left: 3px solid var(--uilib-color-primary, #6366f1);
 }
 
 // ---- Plain-text bullet list ----------------------------------------------
 
 .demo-list {
-  margin: 0 0 1rem;
-  padding-left: 1.5rem;
   color: var(--uilib-muted, #6b7280);
   font-size: 0.9rem;
   line-height: 1.7;
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
 
   li {
     margin-bottom: 0.5rem;
@@ -695,31 +695,31 @@
 // ---- API table -----------------------------------------------------------
 
 .demo-api-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
   margin-bottom: 1rem;
+  width: 100%;
 
   th {
-    text-align: left;
-    padding: 0.5rem 0.75rem;
     background: var(--uilib-surface-100, #f8f9fa);
     border-bottom: 2px solid var(--uilib-color-border, #dee2e6);
     font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
   }
 
   td {
-    padding: 0.5rem 0.75rem;
     border-bottom: 1px solid var(--uilib-color-border, #dee2e6);
+    padding: 0.5rem 0.75rem;
     vertical-align: top;
   }
 
   code,
   kbd {
     background: var(--uilib-surface-100, #f1f3f5);
-    padding: 0.125rem 0.375rem;
     border-radius: 3px;
     font-size: 0.8125rem;
+    padding: 0.125rem 0.375rem;
   }
 }
 
@@ -729,17 +729,27 @@
   margin-bottom: 1.5rem;
 
   kbd {
-    display: inline-block;
-    padding: 0.1em 0.4em;
     background: var(--uilib-surface-100, #f3f4f6);
     border: 1px solid var(--uilib-color-border, #dee2e6);
     border-radius: 3px;
-    font-size: 0.8125rem;
+    display: inline-block;
     font-family: inherit;
+    font-size: 0.8125rem;
+    padding: 0.1em 0.4em;
     white-space: nowrap;
   }
 
   code {
     font-size: 0.8125rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doc-tab {
+    /* TODO: set transition / animation to none */
+  }
+
+  .doc-copy {
+    /* TODO: set transition / animation to none */
   }
 }

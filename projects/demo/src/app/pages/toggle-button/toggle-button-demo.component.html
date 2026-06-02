@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A button that switches between two states — on and off — with distinct labels, icons, and full Angular forms support."
     docHeader
     title="ToggleButton"
     [importCode]="importCode"
-    description="A button that switches between two states — on and off — with distinct labels, icons, and full Angular forms support."
   />
 
   <app-doc-demo-viewport [autoHeight]="true">
@@ -17,7 +17,7 @@
         </p>
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
-            <ui-lib-toggle-button [(checked)]="basicChecked" ariaLabel="Toggle" />
+            <ui-lib-toggle-button ariaLabel="Toggle" [(checked)]="basicChecked" />
             <span class="value-text">Value: {{ basicChecked() }}</span>
           </div>
         </ui-lib-panel>
@@ -34,19 +34,19 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-toggle-button
-              onLabel="Active"
               offLabel="Inactive"
+              onLabel="Active"
               [(checked)]="labelsChecked"
             />
             <ui-lib-toggle-button
-              onLabel="Enabled"
               offLabel="Disabled"
+              onLabel="Enabled"
               variant="bootstrap"
               [(checked)]="labelsChecked"
             />
             <ui-lib-toggle-button
-              onLabel="On"
               offLabel="Off"
+              onLabel="On"
               variant="minimal"
               [(checked)]="labelsChecked"
             />
@@ -65,26 +65,26 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-toggle-button
-              onLabel="Muted"
+              iconPos="left"
+              offIcon="volumeHigh"
               offLabel="Sound"
               onIcon="volumeOff"
-              offIcon="volumeHigh"
-              iconPos="left"
+              onLabel="Muted"
               [(checked)]="iconLeftChecked"
             />
             <ui-lib-toggle-button
-              onLabel="Muted"
+              iconPos="right"
+              offIcon="volumeHigh"
               offLabel="Sound"
               onIcon="volumeOff"
-              offIcon="volumeHigh"
-              iconPos="right"
+              onLabel="Muted"
               [(checked)]="iconRightChecked"
             />
             <ui-lib-toggle-button
-              onLabel="Bookmarked"
+              offIcon="bookmark"
               offLabel="Bookmark"
               onIcon="bookmarkFill"
-              offIcon="bookmark"
+              onLabel="Bookmarked"
               [(checked)]="iconLeftChecked"
             />
           </div>
@@ -102,21 +102,21 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row demo-row--align-center">
             <ui-lib-toggle-button
-              size="sm"
-              onLabel="On"
               offLabel="Off"
+              onLabel="On"
+              size="sm"
               [(checked)]="sizeSmChecked"
             />
             <ui-lib-toggle-button
-              size="md"
-              onLabel="On"
               offLabel="Off"
+              onLabel="On"
+              size="md"
               [(checked)]="sizeMdChecked"
             />
             <ui-lib-toggle-button
-              size="lg"
-              onLabel="On"
               offLabel="Off"
+              onLabel="On"
+              size="lg"
               [(checked)]="sizeLgChecked"
             />
           </div>
@@ -138,29 +138,29 @@
               <div class="demo-grid-row">
                 <span class="variant-label">{{ variant }}</span>
                 <ui-lib-toggle-button
-                  [variant]="variant"
-                  onLabel="On"
                   offLabel="Off"
+                  onLabel="On"
+                  [variant]="variant"
                   [(checked)]="materialChecked"
                 />
                 <ui-lib-toggle-button
-                  [variant]="variant"
-                  onLabel="On"
                   offLabel="Off"
+                  onLabel="On"
                   [checked]="true"
+                  [variant]="variant"
                 />
                 <ui-lib-toggle-button
-                  [variant]="variant"
-                  onLabel="On"
                   offLabel="Off"
+                  onLabel="On"
                   [disabled]="true"
+                  [variant]="variant"
                 />
                 <ui-lib-toggle-button
-                  [variant]="variant"
-                  onLabel="On"
                   offLabel="Off"
+                  onLabel="On"
                   [checked]="true"
                   [disabled]="true"
+                  [variant]="variant"
                 />
               </div>
             }
@@ -179,9 +179,9 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-toggle-button
-              [allowEmpty]="false"
-              onLabel="Confirmed"
               offLabel="Confirm"
+              onLabel="Confirmed"
+              [allowEmpty]="false"
               [(checked)]="allowEmptyChecked"
             />
             <span class="value-text"
@@ -201,8 +201,8 @@
         </p>
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
-            <ui-lib-toggle-button [disabled]="true" onLabel="On" offLabel="Off" />
-            <ui-lib-toggle-button [disabled]="true" [checked]="true" onLabel="On" offLabel="Off" />
+            <ui-lib-toggle-button offLabel="Off" onLabel="On" [disabled]="true" />
+            <ui-lib-toggle-button offLabel="Off" onLabel="On" [checked]="true" [disabled]="true" />
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
@@ -219,8 +219,8 @@
           <h4 class="subsection-label">ngModel</h4>
           <div class="demo-row">
             <ui-lib-toggle-button
-              onLabel="Subscribed"
               offLabel="Subscribe"
+              onLabel="Subscribed"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="ngModelValue"
             />
@@ -231,19 +231,19 @@
 
         <ui-lib-panel variant="minimal">
           <h4 class="subsection-label">Reactive Forms</h4>
-          <form [formGroup]="reactiveForm" class="demo-form">
+          <form class="demo-form" [formGroup]="reactiveForm">
             <label class="form-row">
               <span>Notifications</span>
-              <ui-lib-toggle-button formControlName="notifications" onLabel="On" offLabel="Off" />
+              <ui-lib-toggle-button formControlName="notifications" offLabel="Off" onLabel="On" />
             </label>
             <label class="form-row">
               <span>Dark Mode</span>
               <ui-lib-toggle-button
                 formControlName="darkMode"
-                onLabel="Dark"
+                offIcon="sun"
                 offLabel="Light"
                 onIcon="moon"
-                offIcon="sun"
+                onLabel="Dark"
               />
             </label>
             <div class="form-value">Form value: {{ reactiveForm.value | json }}</div>
@@ -262,11 +262,11 @@
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-toggle-button
-              onLabel="On"
               offLabel="Off"
+              onLabel="On"
               (toggleButtonChange)="onEventChange($event)"
             />
-            <ui-lib-button size="sm" appearance="ghost" (click)="clearEventLog()">
+            <ui-lib-button appearance="ghost" size="sm" (click)="clearEventLog()">
               Clear
             </ui-lib-button>
           </div>
@@ -301,9 +301,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -311,8 +311,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

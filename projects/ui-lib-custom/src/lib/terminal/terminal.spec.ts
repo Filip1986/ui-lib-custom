@@ -1,3 +1,4 @@
+import type { DebugElement, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,10 +7,10 @@ import {
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal, DebugElement } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { Terminal } from './terminal';
 import { TerminalService } from './terminal.service';
 import type { TerminalCommand, TerminalVariant } from './terminal.types';

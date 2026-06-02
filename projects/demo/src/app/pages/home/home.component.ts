@@ -1,16 +1,17 @@
-import { Component, ChangeDetectionStrategy, viewChild } from '@angular/core';
-import type { Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { Button } from 'ui-lib-custom/button';
-import { Badge } from 'ui-lib-custom/badge';
-import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 
+import { Badge } from 'ui-lib-custom/badge';
+import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Panel } from 'ui-lib-custom/panel';
+
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 /**
  * Demo home page entry for the component library.
  */

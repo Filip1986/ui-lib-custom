@@ -1,12 +1,14 @@
+import type { WritableSignal } from '@angular/core';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import type { WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideZonelessChangeDetection } from '@angular/core';
-import { UiLibSelect } from './select';
-import type { SelectOption, SelectVariant } from './select';
+
 import { SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
+import type { SelectOption, SelectVariant } from './select';
+import { UiLibSelect } from './select';
 
 function getRequiredItem<T>(items: T[], index: number, label: string): T {
   const item: T | undefined = items[index];

@@ -26,22 +26,22 @@
 
   // ---- Host element ------------------------------------------------
   .ui-lib-inplace {
+    color: inherit;
     display: inline-block;
     font-family: var(--uilib-font-ui, inherit);
     font-size: inherit;
-    color: inherit;
 
     // ---- Display slot ------------------------------------------------
     &__display {
-      display: inline-flex;
       align-items: center;
-      padding: var(--uilib-inplace-display-padding);
-      border-radius: var(--uilib-inplace-display-border-radius);
       border: var(--uilib-inplace-display-border);
+      border-radius: var(--uilib-inplace-display-border-radius);
       cursor: var(--uilib-inplace-display-cursor);
+      display: inline-flex;
+      line-height: inherit;
+      padding: var(--uilib-inplace-display-padding);
       transition: var(--uilib-inplace-display-transition);
       user-select: none;
-      line-height: inherit;
 
       &:hover {
         background: var(--uilib-inplace-display-bg-hover);
@@ -60,8 +60,8 @@
 
     // ---- Content slot ------------------------------------------------
     &__content {
-      display: inline-flex;
       align-items: center;
+      display: inline-flex;
       gap: var(--uilib-inplace-content-gap);
 
       &--hidden {
@@ -71,19 +71,19 @@
 
     // ---- Close button ------------------------------------------------
     &__close-button {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      width: var(--uilib-inplace-close-button-size);
-      height: var(--uilib-inplace-close-button-size);
-      padding: 0;
+      background: var(--uilib-inplace-close-button-bg);
       border: none;
       border-radius: var(--uilib-inplace-close-button-border-radius);
-      background: var(--uilib-inplace-close-button-bg);
       color: var(--uilib-inplace-close-button-color);
       cursor: pointer;
+      display: inline-flex;
+      flex-shrink: 0;
+      height: var(--uilib-inplace-close-button-size);
+      justify-content: center;
+      padding: 0;
       transition: background-color 0.15s ease;
+      width: var(--uilib-inplace-close-button-size);
 
       &:hover {
         background: var(--uilib-inplace-close-button-bg-hover);

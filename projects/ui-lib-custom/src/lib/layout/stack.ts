@@ -1,21 +1,23 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  input,
+  Component,
   computed,
-  ViewEncapsulation,
+  input,
   type InputSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
+
 import {
   SPACING_TOKENS,
   type SpacingToken,
   STACK_TOKENS,
   type StackToken,
 } from 'ui-lib-custom/tokens';
-import type { StackDirection, StackAlign, StackJustify, StackTag, StackWrap } from './stack.types';
 
-export type { StackDirection, StackAlign, StackJustify, StackTag, StackWrap } from './stack.types';
+import type { StackAlign, StackDirection, StackJustify, StackTag, StackWrap } from './stack.types';
+
+export type { StackAlign, StackDirection, StackJustify, StackTag, StackWrap } from './stack.types';
 
 const stackVar: (token: StackToken) => string = (token: StackToken): string =>
   `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;

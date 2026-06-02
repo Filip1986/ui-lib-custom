@@ -1,27 +1,27 @@
 m
 @if (showFab() && !embedded()) {
-  <ui-lib-button class="theme-editor-fab" size="sm" appearance="solid" (click)="togglePanel()">
+  <ui-lib-button appearance="solid" class="theme-editor-fab" size="sm" (click)="togglePanel()">
     ⚙
   </ui-lib-button>
 }
 
 <div
   class="theme-editor-shell"
-  [class.is-open]="panelOpen()"
-  [class.embedded]="embedded()"
   data-theme="light"
+  [class.embedded]="embedded()"
+  [class.is-open]="panelOpen()"
 >
   @if (!embedded()) {
     <div class="theme-editor-backdrop" (click)="closePanel()"></div>
   }
 
-  <aside class="theme-editor-panel" role="dialog" aria-label="Theme editor">
+  <aside aria-label="Theme editor" class="theme-editor-panel" role="dialog">
     <div class="theme-editor-header">
       <div>
         <div class="title">Theme Editor</div>
         <div class="subtitle">Live customize demo theme</div>
       </div>
-      <ui-lib-button size="sm" appearance="ghost" (click)="closePanel()">Close</ui-lib-button>
+      <ui-lib-button appearance="ghost" size="sm" (click)="closePanel()">Close</ui-lib-button>
     </div>
 
     <section class="theme-editor-section">
@@ -29,11 +29,11 @@ m
       <div class="pill-group">
         @for (opt of variants; track opt.value) {
           <ui-lib-button
+            class="pill"
             size="sm"
             [appearance]="variant() === opt.value ? 'solid' : 'outline'"
-            (click)="setVariant(opt.value)"
-            class="pill"
             [style.--uilib-button-radius]="'9999px'"
+            (click)="setVariant(opt.value)"
           >
             {{ opt.label }}
           </ui-lib-button>
@@ -46,11 +46,11 @@ m
       <div class="pill-group">
         @for (opt of shapes; track opt.value) {
           <ui-lib-button
+            class="pill"
             size="sm"
             [appearance]="shape() === opt.value ? 'solid' : 'outline'"
-            (click)="setShape(opt.value)"
-            class="pill"
             [style.--uilib-button-radius]="'9999px'"
+            (click)="setShape(opt.value)"
           >
             <span class="shape-icon" [attr.data-shape]="opt.value"></span>
             {{ opt.label }}
@@ -64,11 +64,11 @@ m
       <div class="pill-group">
         @for (opt of densities; track opt.value) {
           <ui-lib-button
+            class="pill"
             size="sm"
             [appearance]="density() === opt.value ? 'solid' : 'outline'"
-            (click)="setDensity(opt.value)"
-            class="pill"
             [style.--uilib-button-radius]="'9999px'"
+            (click)="setDensity(opt.value)"
           >
             {{ opt.label }}
           </ui-lib-button>
@@ -81,11 +81,11 @@ m
       <div class="pill-group">
         @for (opt of modes; track opt.value) {
           <ui-lib-button
+            class="pill"
             size="sm"
             [appearance]="mode() === opt.value ? 'solid' : 'outline'"
-            (click)="setMode(opt.value)"
-            class="pill"
             [style.--uilib-button-radius]="'9999px'"
+            (click)="setMode(opt.value)"
           >
             {{ opt.label }}
           </ui-lib-button>
@@ -101,28 +101,28 @@ m
             <button
               class="color-swatch"
               type="button"
-              [style.background]="colorValues()[color.key]"
               [attr.aria-label]="'Select ' + color.label + ' color'"
+              [style.background]="colorValues()[color.key]"
               (click)="swatchInput.click()"
             ></button>
             <div class="color-meta">
               <div class="color-label">{{ color.label }}</div>
               <ui-lib-input
+                placeholder="#000000"
                 size="sm"
                 [ngModel]="colorValues()[color.key]"
                 (ngModelChange)="onHexChange(color.key, $event)"
-                placeholder="#000000"
               />
             </div>
-            <ui-lib-button size="sm" appearance="ghost" (click)="resetColor(color.key)">
+            <ui-lib-button appearance="ghost" size="sm" (click)="resetColor(color.key)">
               Reset
             </ui-lib-button>
             <input
               #swatchInput
               class="color-input"
               type="color"
-              [value]="colorValues()[color.key]"
               [attr.aria-label]="color.label + ' color value'"
+              [value]="colorValues()[color.key]"
               (input)="onSwatchChange(color.key, $event.target.value)"
             />
           </div>
@@ -135,21 +135,21 @@ m
       <div class="type-row">
         <ui-lib-input
           label="Heading Font"
+          placeholder="'Inter', sans-serif"
           size="sm"
           [ngModel]="headingFont()"
-          (ngModelChange)="headingFont.set($event)"
           (blur)="onHeadingBlur(headingFont())"
-          placeholder="'Inter', sans-serif"
+          (ngModelChange)="headingFont.set($event)"
         />
       </div>
       <div class="type-row">
         <ui-lib-input
           label="Body Font"
+          placeholder="'Inter', sans-serif"
           size="sm"
           [ngModel]="bodyFont()"
-          (ngModelChange)="bodyFont.set($event)"
           (blur)="onBodyBlur(bodyFont())"
-          placeholder="'Inter', sans-serif"
+          (ngModelChange)="bodyFont.set($event)"
         />
       </div>
     </section>
@@ -157,7 +157,7 @@ m
     <section class="theme-editor-section">
       <div class="section-title">Presets</div>
       <div class="preset-actions">
-        <ui-lib-button size="sm" appearance="solid" (click)="savePreset()">
+        <ui-lib-button appearance="solid" size="sm" (click)="savePreset()">
           Save current as preset
         </ui-lib-button>
       </div>
@@ -166,10 +166,10 @@ m
           <div class="preset-row">
             <span class="preset-name">{{ preset.name }}</span>
             <div class="preset-buttons">
-              <ui-lib-button size="sm" appearance="outline" (click)="applyPreset(preset)">
+              <ui-lib-button appearance="outline" size="sm" (click)="applyPreset(preset)">
                 Apply
               </ui-lib-button>
-              <ui-lib-button size="sm" appearance="ghost" (click)="deletePreset(preset.id)">
+              <ui-lib-button appearance="ghost" size="sm" (click)="deletePreset(preset.id)">
                 Delete
               </ui-lib-button>
             </div>
@@ -184,10 +184,10 @@ m
     <section class="theme-editor-section">
       <div class="section-title">Export</div>
       <div class="export-actions">
-        <ui-lib-button size="sm" appearance="outline" (click)="exportJson()">
+        <ui-lib-button appearance="outline" size="sm" (click)="exportJson()">
           Export JSON
         </ui-lib-button>
-        <ui-lib-button size="sm" appearance="outline" (click)="copyCss()"> Copy CSS </ui-lib-button>
+        <ui-lib-button appearance="outline" size="sm" (click)="copyCss()"> Copy CSS </ui-lib-button>
       </div>
     </section>
   </aside>

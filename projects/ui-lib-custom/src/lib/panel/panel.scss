@@ -24,24 +24,24 @@
 
   // ---- Base host -----------------------------------------------------------
   .ui-lib-panel {
-    display: block;
     border: 1px solid var(--uilib-panel-border-color);
     border-radius: var(--uilib-panel-border-radius);
+    display: block;
     overflow: hidden;
 
     // ---- Header area -------------------------------------------------------
     &__header {
-      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: var(--uilib-panel-header-padding);
-      color: var(--uilib-panel-header-color);
-      font-size: var(--uilib-panel-header-font-size);
-      font-weight: var(--uilib-panel-header-font-weight);
-      font-family: var(--uilib-font-ui, inherit);
       background: var(--uilib-panel-header-bg);
       border-bottom: 1px solid var(--uilib-panel-border-color);
+      color: var(--uilib-panel-header-color);
+      display: flex;
+      font-family: var(--uilib-font-ui, inherit);
+      font-size: var(--uilib-panel-header-font-size);
+      font-weight: var(--uilib-panel-header-font-weight);
+      gap: 0.5rem;
       line-height: 1.5;
+      padding: var(--uilib-panel-header-padding);
       user-select: none;
 
       &--hidden {
@@ -56,29 +56,29 @@
 
     // ---- Header actions (icons + toggle button) ----------------------------
     &__header-actions {
-      display: flex;
       align-items: center;
-      gap: 0.25rem;
+      display: flex;
       flex-shrink: 0;
+      gap: 0.25rem;
       margin-inline-start: auto;
     }
 
     // ---- Toggle button -----------------------------------------------------
     &__toggle-button {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: var(--uilib-panel-toggle-size);
-      height: var(--uilib-panel-toggle-size);
-      padding: 0;
+      background: transparent;
       border: none;
       border-radius: calc(var(--uilib-panel-border-radius) / 2);
-      background: transparent;
       color: var(--uilib-panel-toggle-color);
       cursor: pointer;
+      display: inline-flex;
+      height: var(--uilib-panel-toggle-size);
+      justify-content: center;
+      padding: 0;
       transition:
         background-color var(--uilib-panel-transition),
         color var(--uilib-panel-transition);
+      width: var(--uilib-panel-toggle-size);
 
       &:hover {
         background-color: var(--uilib-panel-toggle-hover-bg);
@@ -92,22 +92,22 @@
 
     // ---- Toggle icon (chevron) ---------------------------------------------
     &__toggle-icon {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 1rem;
+      display: inline-flex;
       height: 1rem;
+      justify-content: center;
       transition: transform var(--uilib-panel-transition);
+      width: 1rem;
 
       &::before {
-        content: '';
-        display: block;
-        width: 0.45rem;
-        height: 0.45rem;
         border-inline-end: 2px solid currentColor;
         border-bottom: 2px solid currentColor;
+        content: '';
+        display: block;
+        height: 0.45rem;
         transform: rotate(45deg) translateY(-2px);
         transition: transform var(--uilib-panel-transition);
+        width: 0.45rem;
       }
 
       &--collapsed::before {
@@ -129,8 +129,8 @@
 
     // Layer 2: overflow clip (min-height:0 lets grid shrink past content)
     &__content-inner {
-      overflow: hidden;
       min-height: 0;
+      overflow: hidden;
       padding: var(--uilib-panel-content-padding);
     }
 
@@ -139,8 +139,8 @@
       background: var(--uilib-panel-footer-bg);
 
       &:not(:empty) {
-        padding: var(--uilib-panel-footer-padding);
         border-top: 1px solid var(--uilib-panel-border-color);
+        padding: var(--uilib-panel-footer-padding);
       }
     }
 

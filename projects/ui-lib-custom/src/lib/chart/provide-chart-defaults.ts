@@ -8,15 +8,15 @@ import {
   DoughnutController,
   Filler,
   Legend,
+  LinearScale,
   LineController,
   LineElement,
-  LinearScale,
   PieController,
   PointElement,
   PolarAreaController,
-  ScatterController,
   RadarController,
   RadialLinearScale,
+  ScatterController,
   Tooltip,
 } from 'chart.js';
 

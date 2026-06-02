@@ -1,15 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   type DebugElement,
+  signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+
 import { provideIcons } from '@ng-icons/core';
 import { lucideAlertCircle } from '@ng-icons/lucide';
+
 import { Dock, DOCK_DEFAULT_MAGNIFICATION_LEVEL, DOCK_MAGNIFICATION_SPREAD } from './dock';
 import type {
   DockItem,

@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Overlay dialog demonstrations for modal and non-modal workflows, projection slots, positioning, drag, maximize, responsive behavior, and variant styling."
     docHeader
     title="Dialog"
     [importCode]="importCode"
-    description="Overlay dialog demonstrations for modal and non-modal workflows, projection slots, positioning, drag, maximize, responsive behavior, and variant styling."
   />
 
   <div class="examples">
@@ -12,18 +12,18 @@
       <p>Simple modal dialog with header text and body content.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-button
-          (click)="basicVisible.set(true)"
-          [attr.aria-expanded]="basicVisible()"
           aria-controls="dialog-basic-content"
+          [attr.aria-expanded]="basicVisible()"
+          (click)="basicVisible.set(true)"
         >
           Open Basic Dialog
         </ui-lib-button>
 
         <ui-lib-dialog
-          [visible]="basicVisible()"
-          (visibleChange)="basicVisible.set($event)"
           header="Edit Profile"
           [modal]="true"
+          [visible]="basicVisible()"
+          (visibleChange)="basicVisible.set($event)"
         >
           <div id="dialog-basic-content">
             <p>Update profile details and save changes when finished.</p>
@@ -37,20 +37,20 @@
       <p>Projected header and footer content with custom actions.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-button
-          (click)="customVisible.set(true)"
-          [attr.aria-expanded]="customVisible()"
           aria-controls="dialog-custom-content"
+          [attr.aria-expanded]="customVisible()"
+          (click)="customVisible.set(true)"
         >
           Open Custom Dialog
         </ui-lib-button>
 
         <ui-lib-dialog
+          [closable]="true"
+          [modal]="true"
           [visible]="customVisible()"
           (visibleChange)="customVisible.set($event)"
-          [modal]="true"
-          [closable]="true"
         >
-          <div uiLibDialogHeader class="custom-header">
+          <div class="custom-header" uiLibDialogHeader>
             <ui-lib-icon name="settings" />
             <span>Project Settings</span>
           </div>
@@ -59,8 +59,8 @@
             <p>Configure project-level options and review defaults before saving.</p>
           </div>
 
-          <div uiLibDialogFooter class="footer-actions">
-            <ui-lib-button variant="minimal" appearance="ghost" (click)="customVisible.set(false)">
+          <div class="footer-actions" uiLibDialogFooter>
+            <ui-lib-button appearance="ghost" variant="minimal" (click)="customVisible.set(false)">
               Cancel
             </ui-lib-button>
             <ui-lib-button color="primary" (click)="customVisible.set(false)">Save</ui-lib-button>
@@ -76,21 +76,21 @@
         <div class="position-grid">
           @for (position of positions; track position) {
             <ui-lib-button
-              variant="minimal"
               appearance="outline"
               class="position-trigger"
-              (click)="openPosition(position)"
-              [attr.aria-expanded]="positionVisible[position]"
+              variant="minimal"
               [attr.aria-controls]="'dialog-position-content-' + position"
+              [attr.aria-expanded]="positionVisible[position]"
+              (click)="openPosition(position)"
             >
               {{ position }}
             </ui-lib-button>
 
             <ui-lib-dialog
-              [(visible)]="positionVisible[position]"
-              [position]="position"
-              [modal]="true"
               [header]="'Position: ' + position"
+              [modal]="true"
+              [position]="position"
+              [(visible)]="positionVisible[position]"
             >
               <div [id]="'dialog-position-content-' + position">
                 <p>
@@ -109,19 +109,19 @@
       <p>Enable maximize/minimize action in the dialog header.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-button
-          (click)="maximizableVisible.set(true)"
-          [attr.aria-expanded]="maximizableVisible()"
           aria-controls="dialog-maximizable-content"
+          [attr.aria-expanded]="maximizableVisible()"
+          (click)="maximizableVisible.set(true)"
         >
           Open Maximizable Dialog
         </ui-lib-button>
 
         <ui-lib-dialog
+          header="Review Dashboard"
+          [maximizable]="true"
+          [modal]="true"
           [visible]="maximizableVisible()"
           (visibleChange)="maximizableVisible.set($event)"
-          [modal]="true"
-          [maximizable]="true"
-          header="Review Dashboard"
         >
           <div id="dialog-maximizable-content">
             <p>Use the maximize button to expand this dialog to full viewport size.</p>
@@ -135,20 +135,20 @@
       <p>Demonstrates internal scrolling for long dialog body content.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-button
-          (click)="longContentVisible.set(true)"
-          [attr.aria-expanded]="longContentVisible()"
           aria-controls="dialog-long-content"
+          [attr.aria-expanded]="longContentVisible()"
+          (click)="longContentVisible.set(true)"
         >
           Open Long Content Dialog
         </ui-lib-button>
 
         <ui-lib-dialog
+          header="Release Notes"
+          [modal]="true"
           [visible]="longContentVisible()"
           (visibleChange)="longContentVisible.set($event)"
-          [modal]="true"
-          header="Release Notes"
         >
-          <div id="dialog-long-content" class="long-content">
+          <div class="long-content" id="dialog-long-content">
             @for (paragraph of longParagraphs; track paragraph) {
               <p>{{ paragraph }}</p>
             }
@@ -162,18 +162,18 @@
       <p>Dialog without backdrop for non-blocking secondary interactions.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-button
-          (click)="nonModalVisible.set(true)"
-          [attr.aria-expanded]="nonModalVisible()"
           aria-controls="dialog-non-modal-content"
+          [attr.aria-expanded]="nonModalVisible()"
+          (click)="nonModalVisible.set(true)"
         >
           Open Non-Modal Dialog
         </ui-lib-button>
 
         <ui-lib-dialog
+          header="Quick Notes"
+          [modal]="false"
           [visible]="nonModalVisible()"
           (visibleChange)="nonModalVisible.set($event)"
-          [modal]="false"
-          header="Quick Notes"
         >
           <div id="dialog-non-modal-content">
             <p>This dialog keeps background context visible and interactive.</p>
@@ -187,19 +187,19 @@
       <p>Uses breakpoints to adapt width based on viewport size.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-button
-          (click)="responsiveVisible.set(true)"
-          [attr.aria-expanded]="responsiveVisible()"
           aria-controls="dialog-responsive-content"
+          [attr.aria-expanded]="responsiveVisible()"
+          (click)="responsiveVisible.set(true)"
         >
           Open Responsive Dialog
         </ui-lib-button>
 
         <ui-lib-dialog
+          header="Responsive Layout"
+          [breakpoints]="responsiveBreakpoints"
+          [modal]="true"
           [visible]="responsiveVisible()"
           (visibleChange)="responsiveVisible.set($event)"
-          [modal]="true"
-          [breakpoints]="responsiveBreakpoints"
-          header="Responsive Layout"
         >
           <div id="dialog-responsive-content">
             <p>Resize the browser window to observe width changes at configured breakpoints.</p>
@@ -213,19 +213,19 @@
       <p>Drag the dialog by its header area.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-button
-          (click)="draggableVisible.set(true)"
-          [attr.aria-expanded]="draggableVisible()"
           aria-controls="dialog-draggable-content"
+          [attr.aria-expanded]="draggableVisible()"
+          (click)="draggableVisible.set(true)"
         >
           Open Draggable Dialog
         </ui-lib-button>
 
         <ui-lib-dialog
+          header="Move Me"
+          [draggable]="true"
+          [modal]="false"
           [visible]="draggableVisible()"
           (visibleChange)="draggableVisible.set($event)"
-          [modal]="false"
-          [draggable]="true"
-          header="Move Me"
         >
           <div id="dialog-draggable-content">
             <p>Click and drag from the header to reposition this dialog.</p>
@@ -239,26 +239,26 @@
       <p>Fully custom dialog chrome using the headless projection slot.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-button
-          (click)="headlessVisible.set(true)"
-          [attr.aria-expanded]="headlessVisible()"
           aria-controls="dialog-headless-content"
+          [attr.aria-expanded]="headlessVisible()"
+          (click)="headlessVisible.set(true)"
         >
           Open Headless Dialog
         </ui-lib-button>
 
         <ui-lib-dialog
-          [visible]="headlessVisible()"
-          (visibleChange)="headlessVisible.set($event)"
           [headless]="true"
           [modal]="true"
+          [visible]="headlessVisible()"
+          (visibleChange)="headlessVisible.set($event)"
         >
           <app-doc-section id="dialog-headless-content" title="Dialog Headless Content">
             <header class="headless-shell__header">
               <h4 id="dialog-headless-title">Custom Design Review</h4>
               <ui-lib-button
+                appearance="ghost"
                 size="sm"
                 variant="minimal"
-                appearance="ghost"
                 (click)="headlessVisible.set(false)"
               >
                 Close
@@ -273,8 +273,8 @@
 
             <footer class="headless-shell__footer">
               <ui-lib-button
-                variant="minimal"
                 appearance="outline"
+                variant="minimal"
                 (click)="headlessVisible.set(false)"
               >
                 Later
@@ -327,20 +327,20 @@
         </p>
 
         <ui-lib-button
-          color="primary"
-          (click)="variantVisible.set(true)"
-          [attr.aria-expanded]="variantVisible()"
           aria-controls="dialog-variant-content"
+          color="primary"
+          [attr.aria-expanded]="variantVisible()"
+          (click)="variantVisible.set(true)"
         >
           Open Selected Variant Dialog
         </ui-lib-button>
 
         <ui-lib-dialog
-          [visible]="variantVisible()"
-          (visibleChange)="variantVisible.set($event)"
+          header="Variant Preview"
           [modal]="true"
           [variant]="selectedVariant"
-          header="Variant Preview"
+          [visible]="variantVisible()"
+          (visibleChange)="variantVisible.set($event)"
         >
           <div id="dialog-variant-content">
             <p>
@@ -354,18 +354,18 @@
         <app-variant-comparison>
           <div material>
             <ui-lib-button
-              size="sm"
-              (click)="variantCompareVisible.material = true"
-              [attr.aria-expanded]="variantCompareVisible.material"
               aria-controls="dialog-variant-material-content"
+              size="sm"
+              [attr.aria-expanded]="variantCompareVisible.material"
+              (click)="variantCompareVisible.material = true"
             >
               Open Material
             </ui-lib-button>
             <ui-lib-dialog
-              [(visible)]="variantCompareVisible.material"
-              [variant]="'material'"
-              [modal]="true"
               header="Material Variant"
+              [modal]="true"
+              [variant]="'material'"
+              [(visible)]="variantCompareVisible.material"
             >
               <div id="dialog-variant-material-content">Material variant dialog preview.</div>
             </ui-lib-dialog>
@@ -373,18 +373,18 @@
 
           <div bootstrap>
             <ui-lib-button
-              size="sm"
-              (click)="variantCompareVisible.bootstrap = true"
-              [attr.aria-expanded]="variantCompareVisible.bootstrap"
               aria-controls="dialog-variant-bootstrap-content"
+              size="sm"
+              [attr.aria-expanded]="variantCompareVisible.bootstrap"
+              (click)="variantCompareVisible.bootstrap = true"
             >
               Open Bootstrap
             </ui-lib-button>
             <ui-lib-dialog
-              [(visible)]="variantCompareVisible.bootstrap"
-              [variant]="'bootstrap'"
-              [modal]="true"
               header="Bootstrap Variant"
+              [modal]="true"
+              [variant]="'bootstrap'"
+              [(visible)]="variantCompareVisible.bootstrap"
             >
               <div id="dialog-variant-bootstrap-content">Bootstrap variant dialog preview.</div>
             </ui-lib-dialog>
@@ -392,18 +392,18 @@
 
           <div minimal>
             <ui-lib-button
-              size="sm"
-              (click)="variantCompareVisible.minimal = true"
-              [attr.aria-expanded]="variantCompareVisible.minimal"
               aria-controls="dialog-variant-minimal-content"
+              size="sm"
+              [attr.aria-expanded]="variantCompareVisible.minimal"
+              (click)="variantCompareVisible.minimal = true"
             >
               Open Minimal
             </ui-lib-button>
             <ui-lib-dialog
-              [(visible)]="variantCompareVisible.minimal"
-              [variant]="'minimal'"
-              [modal]="true"
               header="Minimal Variant"
+              [modal]="true"
+              [variant]="'minimal'"
+              [(visible)]="variantCompareVisible.minimal"
             >
               <div id="dialog-variant-minimal-content">Minimal variant dialog preview.</div>
             </ui-lib-dialog>
@@ -432,9 +432,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -443,8 +443,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -490,23 +490,26 @@ readonly step = input<number | null>(null);
 
 Rules enforced automatically via `eslint.config.mjs`:
 
-| Rule                                                    | Enforces                           | Severity |
-| ------------------------------------------------------- | ---------------------------------- | -------- |
-| `@angular-eslint/template/alt-text`                     | Alt text on images                 | error    |
-| `@angular-eslint/template/elements-content`             | Non-empty interactive elements     | error    |
-| `@angular-eslint/template/label-has-associated-control` | Label/input association            | error    |
-| `@angular-eslint/template/no-positive-tabindex`         | No `tabindex > 0`                  | error    |
-| `@angular-eslint/template/valid-aria`                   | Valid ARIA attributes              | error    |
-| `@angular-eslint/template/role-has-required-aria`       | ARIA roles have required props     | error    |
-| `@angular-eslint/template/prefer-control-flow`          | `@if`/`@for` over `*ngIf`/`*ngFor` | error    |
-| `@angular-eslint/template/click-events-have-key-events` | Click → keyboard equivalent        | warn     |
-| `@angular-eslint/template/mouse-events-have-key-events` | Mouse → keyboard equivalent        | warn     |
-| `@angular-eslint/template/interactive-supports-focus`   | Interactive elements are focusable | warn     |
-| `@angular-eslint/template/no-autofocus`                 | No autofocus attribute             | warn     |
-| `@angular-eslint/template/use-track-by-function`        | `@for` has `track`                 | warn     |
-| `@angular-eslint/template/prefer-self-closing-tags`     | Self-closing tag syntax            | warn     |
+| Rule                                                    | Enforces                             | Severity |
+| ------------------------------------------------------- | ------------------------------------ | -------- |
+| `@angular-eslint/template/alt-text`                     | Alt text on images                   | error    |
+| `@angular-eslint/template/elements-content`             | Non-empty interactive elements       | error    |
+| `@angular-eslint/template/label-has-associated-control` | Label/input association              | error    |
+| `@angular-eslint/template/no-positive-tabindex`         | No `tabindex > 0`                    | error    |
+| `@angular-eslint/template/valid-aria`                   | Valid ARIA attributes                | error    |
+| `@angular-eslint/template/role-has-required-aria`       | ARIA roles have required props       | error    |
+| `@angular-eslint/template/prefer-control-flow`          | `@if`/`@for` over `*ngIf`/`*ngFor`   | error    |
+| `@angular-eslint/template/click-events-have-key-events` | Click → keyboard equivalent          | warn     |
+| `@angular-eslint/template/mouse-events-have-key-events` | Mouse → keyboard equivalent          | warn     |
+| `@angular-eslint/template/interactive-supports-focus`   | Interactive elements are focusable   | warn     |
+| `@angular-eslint/template/no-autofocus`                 | No autofocus attribute               | warn     |
+| `@angular-eslint/template/use-track-by-function`        | `@for` has `track`                   | warn     |
+| `@angular-eslint/template/prefer-self-closing-tags`     | Self-closing tag syntax              | warn     |
+| `@angular-eslint/template/attributes-order`             | Attribute / binding order (auto-fix) | error    |
 
-Run: `npm run lint` to check all templates.
+Import order, lifecycle order, and SCSS property order: [`CODE-ORGANIZATION.md`](./CODE-ORGANIZATION.md).
+
+Run: `npm run lint` to check all templates. Auto-fix layout rules: `npm run lint:organization:fix`.
 
 ---
 

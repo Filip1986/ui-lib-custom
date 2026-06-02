@@ -1,14 +1,14 @@
 <span
   class="ui-lib-skeleton__content"
-  [class.ui-lib-skeleton__content--hidden]="loading()"
   [attr.aria-hidden]="loading() ? 'true' : null"
   [attr.inert]="loading() ? '' : null"
+  [class.ui-lib-skeleton__content--hidden]="loading()"
 >
   <ng-content />
 </span>
 
 @if (loading()) {
-  <span class="ui-lib-skeleton__placeholder" aria-hidden="true">
-    <span class="ui-lib-skeleton__shimmer" aria-hidden="true"></span>
+  <span aria-hidden="true" class="ui-lib-skeleton__placeholder">
+    <span aria-hidden="true" class="ui-lib-skeleton__shimmer"></span>
   </span>
 }

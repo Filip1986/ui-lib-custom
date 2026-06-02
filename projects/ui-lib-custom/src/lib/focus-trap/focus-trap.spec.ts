@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import type { DebugElement } from '@angular/core';
-import { provideZonelessChangeDetection, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { provideZonelessChangeDetection, signal } from '@angular/core';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
 import { FocusTrapDirective } from './focus-trap';
 
 // effect() is asynchronous in zoneless mode — flush after detectChanges.

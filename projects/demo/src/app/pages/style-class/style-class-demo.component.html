@@ -16,7 +16,7 @@
 
     <div class="demo-card">
       <div class="demo-card__preview">
-        <ui-lib-button [uiLibStyleClass]="'@next'" toggleClass="sc-panel--open" type="button">
+        <ui-lib-button toggleClass="sc-panel--open" type="button" [uiLibStyleClass]="'@next'">
           Toggle Panel
         </ui-lib-button>
         <div class="sc-panel">
@@ -28,9 +28,9 @@
       <div class="demo-card__code">
         <ui-lib-code-snippet
           language="html"
-          [showLineNumbers]="true"
           size="sm"
           [code]="snippetToggleMode"
+          [showLineNumbers]="true"
         />
       </div>
     </div>
@@ -46,13 +46,13 @@
     <div class="demo-card">
       <div class="demo-card__preview">
         <ui-lib-button
-          [uiLibStyleClass]="'@next'"
-          enterFromClass="sc-fade--hidden"
           enterActiveClass="sc-fade-in"
+          enterFromClass="sc-fade--hidden"
           leaveActiveClass="sc-fade-out"
           leaveToClass="sc-fade--hidden"
-          [hideOnOutsideClick]="true"
           type="button"
+          [hideOnOutsideClick]="true"
+          [uiLibStyleClass]="'@next'"
         >
           Show Panel (click outside to hide)
         </ui-lib-button>
@@ -65,9 +65,9 @@
       <div class="demo-card__code">
         <ui-lib-code-snippet
           language="html"
-          [showLineNumbers]="true"
           size="sm"
           [code]="snippetFadeAnimation"
+          [showLineNumbers]="true"
         />
       </div>
     </div>
@@ -83,13 +83,13 @@
     <div class="demo-card">
       <div class="demo-card__preview">
         <ui-lib-button
-          [uiLibStyleClass]="'@next'"
-          enterFromClass="sc-slide--hidden"
           enterActiveClass="sc-slide-down"
           enterDoneClass="sc-slide--open"
+          enterFromClass="sc-slide--hidden"
           leaveActiveClass="sc-slide-up"
           leaveDoneClass="sc-slide--hidden"
           type="button"
+          [uiLibStyleClass]="'@next'"
         >
           Toggle Slide
         </ui-lib-button>
@@ -102,9 +102,9 @@
       <div class="demo-card__code">
         <ui-lib-code-snippet
           language="html"
-          [showLineNumbers]="true"
           size="sm"
           [code]="snippetSlideAnimation"
+          [showLineNumbers]="true"
         />
       </div>
     </div>
@@ -124,9 +124,9 @@
           <div class="sc-badge sc-badge--prev">@prev target</div>
           <ui-lib-button
             size="sm"
-            [uiLibStyleClass]="'@prev'"
             toggleClass="sc-badge--active"
             type="button"
+            [uiLibStyleClass]="'@prev'"
           >
             Toggle @prev
           </ui-lib-button>
@@ -137,9 +137,9 @@
           <span class="sc-badge sc-badge--parent">@parent wrapper</span>
           <ui-lib-button
             size="sm"
-            [uiLibStyleClass]="'@parent'"
             toggleClass="sc-parent--active"
             type="button"
+            [uiLibStyleClass]="'@parent'"
           >
             Toggle @parent
           </ui-lib-button>
@@ -149,9 +149,9 @@
       <div class="demo-card__code">
         <ui-lib-code-snippet
           language="html"
-          [showLineNumbers]="true"
           size="sm"
           [code]="snippetSpecialSelectors"
+          [showLineNumbers]="true"
         />
       </div>
     </div>
@@ -166,13 +166,13 @@
     <div class="demo-card">
       <div class="demo-card__preview">
         <ui-lib-button
-          [uiLibStyleClass]="'#sc-remote-panel'"
           toggleClass="sc-panel--open"
           type="button"
+          [uiLibStyleClass]="'#sc-remote-panel'"
         >
           Toggle Remote Panel
         </ui-lib-button>
-        <div id="sc-remote-panel" class="sc-panel sc-panel--remote">
+        <div class="sc-panel sc-panel--remote" id="sc-remote-panel">
           <p>This panel is targeted by <code>#sc-remote-panel</code> CSS selector.</p>
         </div>
       </div>
@@ -180,9 +180,9 @@
       <div class="demo-card__code">
         <ui-lib-code-snippet
           language="html"
-          [showLineNumbers]="true"
           size="sm"
           [code]="snippetCssSelector"
+          [showLineNumbers]="true"
         />
       </div>
     </div>
@@ -219,8 +219,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

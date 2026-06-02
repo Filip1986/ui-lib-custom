@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Native rich-text editing with optional projected toolbar controls, forms integration, and token-driven variants."
     docHeader
     title="Editor"
     [importCode]="importCode"
-    description="Native rich-text editing with optional projected toolbar controls, forms integration, and token-driven variants."
   />
 
   <app-doc-demo-viewport [autoHeight]="true">
@@ -14,9 +14,9 @@
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
             <ui-lib-editor
-              [(ngModel)]="basicContent"
               placeholder="Write something with bold, lists, and links..."
-            ></ui-lib-editor>
+              [(ngModel)]="basicContent"
+            />
             <pre class="value-pre">{{ basicHtml }}</pre>
           </div>
         </ui-lib-panel>
@@ -27,7 +27,7 @@
         <h3>b. ReadOnly</h3>
         <p class="section-text">Pre-populated editor content in readonly mode.</p>
         <ui-lib-panel variant="minimal">
-          <ui-lib-editor [readonly]="true" [ngModel]="readonlyContent"></ui-lib-editor>
+          <ui-lib-editor [ngModel]="readonlyContent" [readonly]="true" />
         </ui-lib-panel>
         <app-doc-code-example [html]="readonlyHtml" [typescript]="readonlyTs" />
       </app-doc-section>
@@ -40,13 +40,13 @@
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
             <ui-lib-editor #editor [(ngModel)]="customToolbarContent">
-              <div editorToolbar class="custom-toolbar">
+              <div class="custom-toolbar" editorToolbar>
                 <select
+                  aria-label="Heading level"
                   class="custom-toolbar-select"
                   [value]="editor.toolbarState().blockFormat"
-                  aria-label="Heading level"
-                  (mousedown)="onToolbarMouseDown($event)"
                   (change)="onCustomHeadingChange(editor, $event)"
+                  (mousedown)="onToolbarMouseDown($event)"
                 >
                   <option value="p">Normal</option>
                   <option value="h1">Heading 1</option>
@@ -55,34 +55,34 @@
                 </select>
 
                 <button
-                  type="button"
-                  class="custom-toolbar-button"
                   aria-label="Bold"
+                  class="custom-toolbar-button"
+                  type="button"
                   [attr.aria-pressed]="editor.toolbarState().bold"
-                  (mousedown)="onToolbarMouseDown($event)"
                   (click)="editor.executeCommand('bold')"
+                  (mousedown)="onToolbarMouseDown($event)"
                 >
                   B
                 </button>
 
                 <button
-                  type="button"
-                  class="custom-toolbar-button"
                   aria-label="Italic"
+                  class="custom-toolbar-button"
+                  type="button"
                   [attr.aria-pressed]="editor.toolbarState().italic"
-                  (mousedown)="onToolbarMouseDown($event)"
                   (click)="editor.executeCommand('italic')"
+                  (mousedown)="onToolbarMouseDown($event)"
                 >
                   I
                 </button>
 
                 <button
-                  type="button"
-                  class="custom-toolbar-button"
                   aria-label="Underline"
+                  class="custom-toolbar-button"
+                  type="button"
                   [attr.aria-pressed]="editor.toolbarState().underline"
-                  (mousedown)="onToolbarMouseDown($event)"
                   (click)="editor.executeCommand('underline')"
+                  (mousedown)="onToolbarMouseDown($event)"
                 >
                   U
                 </button>
@@ -100,17 +100,17 @@
         <ui-lib-panel variant="minimal">
           <form
             #templateForm="ngForm"
-            (ngSubmit)="submitTemplateDriven(templateForm)"
             class="stack-md"
+            (ngSubmit)="submitTemplateDriven(templateForm)"
           >
             <ui-lib-editor
               name="templateContent"
+              placeholder="Required content..."
               required
               [(ngModel)]="templateDrivenContent"
-              placeholder="Required content..."
-            ></ui-lib-editor>
+            />
             <div class="row-inline">
-              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+              <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
               <span class="value-text">Valid: {{ templateForm.valid }}</span>
               <span class="value-text">Touched: {{ templateForm.touched }}</span>
             </div>
@@ -124,13 +124,10 @@
         <h3>e. Reactive Form</h3>
         <p class="section-text">Reactive control binding with required validation.</p>
         <ui-lib-panel variant="minimal">
-          <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
-            <ui-lib-editor
-              formControlName="content"
-              placeholder="Required content..."
-            ></ui-lib-editor>
+          <form class="stack-md" [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
+            <ui-lib-editor formControlName="content" placeholder="Required content..." />
             <div class="row-inline">
-              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+              <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
               <span class="value-text">Valid: {{ reactiveForm.valid }}</span>
               <span class="value-text">Touched: {{ reactiveForm.touched }}</span>
             </div>
@@ -147,21 +144,15 @@
           <div class="row-3">
             <div class="variant-column">
               <p class="variant-title">Material</p>
-              <ui-lib-editor
-                variant="material"
-                [(ngModel)]="variantValues.material"
-              ></ui-lib-editor>
+              <ui-lib-editor variant="material" [(ngModel)]="variantValues.material" />
             </div>
             <div class="variant-column">
               <p class="variant-title">Bootstrap</p>
-              <ui-lib-editor
-                variant="bootstrap"
-                [(ngModel)]="variantValues.bootstrap"
-              ></ui-lib-editor>
+              <ui-lib-editor variant="bootstrap" [(ngModel)]="variantValues.bootstrap" />
             </div>
             <div class="variant-column">
               <p class="variant-title">Minimal</p>
-              <ui-lib-editor variant="minimal" [(ngModel)]="variantValues.minimal"></ui-lib-editor>
+              <ui-lib-editor variant="minimal" [(ngModel)]="variantValues.minimal" />
             </div>
           </div>
         </ui-lib-panel>
@@ -175,15 +166,15 @@
           <div class="row-3">
             <div class="variant-column">
               <p class="variant-title">sm</p>
-              <ui-lib-editor size="sm" [(ngModel)]="sizeValues.sm"></ui-lib-editor>
+              <ui-lib-editor size="sm" [(ngModel)]="sizeValues.sm" />
             </div>
             <div class="variant-column">
               <p class="variant-title">md</p>
-              <ui-lib-editor size="md" [(ngModel)]="sizeValues.md"></ui-lib-editor>
+              <ui-lib-editor size="md" [(ngModel)]="sizeValues.md" />
             </div>
             <div class="variant-column">
               <p class="variant-title">lg</p>
-              <ui-lib-editor size="lg" [(ngModel)]="sizeValues.lg"></ui-lib-editor>
+              <ui-lib-editor size="lg" [(ngModel)]="sizeValues.lg" />
             </div>
           </div>
         </ui-lib-panel>
@@ -194,7 +185,7 @@
         <h3>h. Filled</h3>
         <p class="section-text">Filled editor style useful on elevated backgrounds.</p>
         <ui-lib-panel variant="minimal">
-          <ui-lib-editor [filled]="true" [(ngModel)]="filledContent"></ui-lib-editor>
+          <ui-lib-editor [filled]="true" [(ngModel)]="filledContent" />
         </ui-lib-panel>
         <app-doc-code-example [html]="filledHtml" [typescript]="filledTs" />
       </app-doc-section>
@@ -203,7 +194,7 @@
         <h3>i. Disabled</h3>
         <p class="section-text">Non-interactive state with preloaded content.</p>
         <ui-lib-panel variant="minimal">
-          <ui-lib-editor [disabled]="true" [ngModel]="disabledContent"></ui-lib-editor>
+          <ui-lib-editor [disabled]="true" [ngModel]="disabledContent" />
         </ui-lib-panel>
         <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
       </app-doc-section>
@@ -215,15 +206,15 @@
           <div class="stack-md">
             <ui-lib-editor
               [(ngModel)]="eventsContent"
-              (textChange)="onTextChange($event)"
               (selectionChange)="onSelectionChange($event)"
-            ></ui-lib-editor>
+              (textChange)="onTextChange($event)"
+            />
             <div class="row-inline">
-              <ui-lib-button type="button" color="secondary" (click)="clearEventLog()"
+              <ui-lib-button color="secondary" type="button" (click)="clearEventLog()"
                 >Clear Log</ui-lib-button
               >
             </div>
-            <div class="event-log" aria-live="polite">
+            <div aria-live="polite" class="event-log">
               @if (eventLog.length === 0) {
                 <p class="event-log-empty">No events yet.</p>
               }
@@ -249,9 +240,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -270,8 +261,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

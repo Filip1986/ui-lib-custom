@@ -1,6 +1,6 @@
 .style-class-demo {
-  max-width: 900px;
   margin: 0 auto;
+  max-width: 900px;
   padding: 2rem 1.5rem;
 }
 
@@ -18,26 +18,26 @@
   }
 
   &__description {
-    font-size: 1.05rem;
     color: var(--uilib-color-text-secondary, #555);
+    font-size: 1.05rem;
     margin: 0 0 1rem;
     max-width: 640px;
   }
 
   &__badges {
     display: flex;
-    gap: 0.5rem;
     flex-wrap: wrap;
+    gap: 0.5rem;
   }
 }
 
 .badge {
-  display: inline-block;
-  padding: 0.2rem 0.65rem;
   border-radius: 1rem;
+  display: inline-block;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.02em;
+  padding: 0.2rem 0.65rem;
 
   &--directive {
     background: #e0edff;
@@ -59,10 +59,10 @@
   margin-bottom: 3rem;
 
   &__title {
+    border-bottom: 2px solid var(--uilib-color-border, #e2e8f0);
     font-size: 1.4rem;
     font-weight: 600;
     margin: 0 0 0.5rem;
-    border-bottom: 2px solid var(--uilib-color-border, #e2e8f0);
     padding-bottom: 0.5rem;
   }
 
@@ -73,15 +73,15 @@
   }
 
   &__description {
-    font-size: 0.95rem;
     color: var(--uilib-color-text-secondary, #555);
+    font-size: 0.95rem;
     margin: 0 0 1.25rem;
 
     code {
       background: #f1f5f9;
-      padding: 0.1em 0.35em;
       border-radius: 3px;
       font-size: 0.9em;
+      padding: 0.1em 0.35em;
     }
   }
 }
@@ -96,26 +96,26 @@
   overflow: hidden;
 
   &__preview {
-    padding: 1.5rem;
     background: var(--uilib-surface-ground, #f8fafc);
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding: 1.5rem;
   }
 
   &__code {
-    border-top: 1px solid var(--uilib-color-border, #e2e8f0);
     background: #1e293b;
+    border-top: 1px solid var(--uilib-color-border, #e2e8f0);
 
     pre {
       margin: 0;
-      padding: 1rem 1.25rem;
       overflow-x: auto;
+      padding: 1rem 1.25rem;
 
       code {
+        color: #e2e8f0;
         font-family: 'Fira Code', 'Cascadia Code', monospace;
         font-size: 0.82rem;
-        color: #e2e8f0;
         line-height: 1.6;
       }
     }
@@ -127,21 +127,21 @@
 // ---------------------------------------------------------------------------
 
 .sc-btn {
-  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1.1rem;
+  align-self: flex-start;
   background: var(--uilib-color-primary, #4f46e5);
-  color: #fff;
   border: none;
   border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
   font-size: 0.9rem;
   font-weight: 500;
-  cursor: pointer;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
   transition:
     background 0.15s,
     transform 0.1s;
-  align-self: flex-start;
 
   &:hover {
     background: var(--uilib-color-primary-hover, #4338ca);
@@ -152,8 +152,8 @@
   }
 
   &--sm {
-    padding: 0.3rem 0.8rem;
     font-size: 0.82rem;
+    padding: 0.3rem 0.8rem;
   }
 }
 
@@ -162,11 +162,11 @@
 // ---------------------------------------------------------------------------
 
 .sc-panel {
+  background: #fff;
   border: 1px solid var(--uilib-color-border, #e2e8f0);
   border-radius: 6px;
-  padding: 1rem 1.25rem;
-  background: #fff;
   display: none;
+  padding: 1rem 1.25rem;
 
   &--open {
     display: block;
@@ -181,9 +181,9 @@
 
     code {
       background: #f1f5f9;
-      padding: 0.1em 0.3em;
       border-radius: 3px;
       font-size: 0.88em;
+      padding: 0.1em 0.3em;
     }
   }
 
@@ -240,15 +240,15 @@
 }
 
 .sc-fade--hidden {
-  visibility: hidden;
-  pointer-events: none;
   opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .sc-fade-in {
-  visibility: visible;
-  pointer-events: auto;
   animation: sc-fade-in-anim 200ms ease forwards;
+  pointer-events: auto;
+  visibility: visible;
 }
 
 .sc-fade-out {
@@ -290,8 +290,8 @@
 }
 
 .sc-slide-down {
-  display: block;
   animation: sc-slide-down-anim 250ms ease forwards;
+  display: block;
 }
 
 .sc-slide-up {
@@ -307,17 +307,17 @@
 }
 
 .sc-selector-row {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 1rem;
 }
 
 .sc-badge {
-  padding: 0.35rem 0.75rem;
+  border: 2px solid transparent;
   border-radius: 4px;
   font-size: 0.82rem;
   font-weight: 500;
-  border: 2px solid transparent;
+  padding: 0.35rem 0.75rem;
   transition:
     border-color 0.2s,
     background 0.2s;
@@ -327,8 +327,8 @@
     color: #713f12;
 
     &.sc-badge--active {
-      border-color: #ca8a04;
       background: #fef08a;
+      border-color: #ca8a04;
     }
   }
 
@@ -347,8 +347,8 @@
     background 0.2s;
 
   &.sc-parent--active {
-    border-color: #16a34a;
     background: #dcfce7;
+    border-color: #16a34a;
   }
 }
 
@@ -357,31 +357,31 @@
 // ---------------------------------------------------------------------------
 
 .api-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.88rem;
+  width: 100%;
 
   th {
-    text-align: left;
-    padding: 0.6rem 1rem;
     background: #f1f5f9;
     border-bottom: 2px solid var(--uilib-color-border, #e2e8f0);
-    font-weight: 600;
     color: #374151;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    text-align: left;
   }
 
   td {
-    padding: 0.6rem 1rem;
     border-bottom: 1px solid var(--uilib-color-border, #e2e8f0);
     color: #374151;
+    padding: 0.6rem 1rem;
     vertical-align: top;
 
     code {
       background: #f1f5f9;
-      padding: 0.1em 0.4em;
       border-radius: 3px;
-      font-size: 0.9em;
       font-family: monospace;
+      font-size: 0.9em;
+      padding: 0.1em 0.4em;
     }
 
     em {
@@ -391,5 +391,35 @@
 
   tr:last-child td {
     border-bottom: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-btn {
+    /* TODO: set transition / animation to none */
+  }
+
+  .sc-fade-in {
+    /* TODO: set transition / animation to none */
+  }
+
+  .sc-fade-out {
+    /* TODO: set transition / animation to none */
+  }
+
+  .sc-slide-down {
+    /* TODO: set transition / animation to none */
+  }
+
+  .sc-slide-up {
+    /* TODO: set transition / animation to none */
+  }
+
+  .sc-badge {
+    /* TODO: set transition / animation to none */
+  }
+
+  .sc-parent-wrapper {
+    /* TODO: set transition / animation to none */
   }
 }

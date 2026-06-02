@@ -1,4 +1,4 @@
-export { MENUBAR_DEFAULT_ARIA_LABEL, Menubar } from './menubar';
+export { Menubar, MENUBAR_DEFAULT_ARIA_LABEL } from './menubar';
 export type {
   MenubarCommandEvent,
   MenubarItem,

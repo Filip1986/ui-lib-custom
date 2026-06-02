@@ -1,20 +1,20 @@
 export { TreeTableComponent } from './tree-table.component';
-export { TreeTableColumnComponent } from './tree-table-column.component';
-export {
-  TreeTableColumnHeaderDirective,
-  TreeTableColumnBodyDirective,
-  TreeTableColumnFooterDirective,
-} from './tree-table-templates.directive';
 export { TREE_TABLE_DEFAULTS } from './tree-table.constants';
 export type {
-  TreeTableNode,
-  TreeTableVariant,
-  TreeTableSize,
-  TreeTableSelectionMode,
-  TreeTableSortOrder,
   TreeTableFlatNode,
-  TreeTableNodeExpandEvent,
+  TreeTableNode,
   TreeTableNodeCollapseEvent,
+  TreeTableNodeExpandEvent,
   TreeTableNodeSelectEvent,
+  TreeTableSelectionMode,
+  TreeTableSize,
   TreeTableSortEvent,
+  TreeTableSortOrder,
+  TreeTableVariant,
 } from './tree-table.types';
+export { TreeTableColumnComponent } from './tree-table-column.component';
+export {
+  TreeTableColumnBodyDirective,
+  TreeTableColumnFooterDirective,
+  TreeTableColumnHeaderDirective,
+} from './tree-table-templates.directive';

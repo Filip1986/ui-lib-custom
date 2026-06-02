@@ -5,8 +5,13 @@
     position: relative;
 
     label {
-      position: absolute;
+      color: var(--uilib-float-label-color, var(--uilib-text-secondary-color, #6b7280));
+      font-size: var(--uilib-float-label-font-size, 1rem);
+      font-weight: var(--uilib-float-label-font-weight, normal);
+      inset-inline-start: var(--uilib-float-label-position-x, 0.75rem);
+      line-height: 1;
       pointer-events: none;
+      position: absolute;
       top: 50%;
       transform: translateY(-50%);
       transition:
@@ -15,11 +20,6 @@
         color var(--uilib-float-label-transition, 0.2s ease),
         font-size var(--uilib-float-label-transition, 0.2s ease),
         background-color var(--uilib-float-label-transition, 0.2s ease);
-      line-height: 1;
-      inset-inline-start: var(--uilib-float-label-position-x, 0.75rem);
-      color: var(--uilib-float-label-color, var(--uilib-text-secondary-color, #6b7280));
-      font-size: var(--uilib-float-label-font-size, 1rem);
-      font-weight: var(--uilib-float-label-font-weight, normal);
     }
   }
 
@@ -36,10 +36,10 @@
     &:has(.uilib-inputwrapper-focus) label,
     &:has(.uilib-inputwrapper-filled) label,
     &:has(.uilib-filled) label {
-      inset-block-start: var(--uilib-float-label-over-active-top, 0);
-      transform: translateY(-50%);
       font-size: var(--uilib-float-label-active-font-size, 0.75rem);
       font-weight: var(--uilib-float-label-active-font-weight, normal);
+      inset-block-start: var(--uilib-float-label-over-active-top, 0);
+      transform: translateY(-50%);
     }
   }
 
@@ -47,8 +47,8 @@
     .uilib-input-element,
     input,
     textarea {
-      padding-block-start: var(--uilib-float-label-in-input-padding-top, 1.5rem);
       padding-block-end: var(--uilib-float-label-in-input-padding-bottom, 0.5rem);
+      padding-block-start: var(--uilib-float-label-in-input-padding-top, 1.5rem);
     }
 
     &:focus-within label,
@@ -58,10 +58,10 @@
     &:has(.uilib-inputwrapper-focus) label,
     &:has(.uilib-inputwrapper-filled) label,
     &:has(.uilib-filled) label {
-      inset-block-start: var(--uilib-float-label-in-active-top, 0.25rem);
-      transform: translateY(0);
       font-size: var(--uilib-float-label-active-font-size, 0.75rem);
       font-weight: var(--uilib-float-label-active-font-weight, normal);
+      inset-block-start: var(--uilib-float-label-in-active-top, 0.25rem);
+      transform: translateY(0);
     }
   }
 
@@ -73,19 +73,19 @@
     &:has(.uilib-inputwrapper-focus) label,
     &:has(.uilib-inputwrapper-filled) label,
     &:has(.uilib-filled) label {
-      inset-block-start: 0;
-      transform: translateY(-50%);
-      font-size: var(--uilib-float-label-active-font-size, 0.75rem);
-      font-weight: var(--uilib-float-label-active-font-weight, normal);
-      border-radius: var(
-        --uilib-float-label-on-border-radius,
-        var(--uilib-input-radius, var(--uilib-shape-base, 6px))
-      );
       background: var(
         --uilib-float-label-on-active-background,
         var(--uilib-surface-ground, #ffffff)
       );
+      border-radius: var(
+        --uilib-float-label-on-border-radius,
+        var(--uilib-input-radius, var(--uilib-shape-base, 6px))
+      );
+      font-size: var(--uilib-float-label-active-font-size, 0.75rem);
+      font-weight: var(--uilib-float-label-active-font-weight, normal);
+      inset-block-start: 0;
       padding: var(--uilib-float-label-on-active-padding, 0 0.25rem);
+      transform: translateY(-50%);
     }
   }
 

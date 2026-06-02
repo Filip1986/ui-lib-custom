@@ -1,23 +1,20 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  signal,
   type Signal,
+  signal,
   type WritableSignal,
 } from '@angular/core';
-import { Container, Grid, Stack, Inline } from 'ui-lib-custom/layout';
+import { FormsModule } from '@angular/forms';
+
 import { Button } from 'ui-lib-custom/button';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
+import { Panel } from 'ui-lib-custom/panel';
 import { UiLibSelect } from 'ui-lib-custom/select';
-import {
-  CONTAINER_MAX_WIDTHS,
-  GRID_COLUMNS,
-  INLINE_TOKENS,
-  INSET_TOKENS,
-  STACK_TOKENS,
-} from 'ui-lib-custom/tokens';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
 import type {
   ContainerSize,
   GridColumns,
@@ -25,12 +22,16 @@ import type {
   InsetToken,
   StackToken,
 } from 'ui-lib-custom/tokens';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {
+  CONTAINER_MAX_WIDTHS,
+  GRID_COLUMNS,
+  INLINE_TOKENS,
+  INSET_TOKENS,
+  STACK_TOKENS,
+} from 'ui-lib-custom/tokens';
+
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-
-import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for themed layout examples.
  */

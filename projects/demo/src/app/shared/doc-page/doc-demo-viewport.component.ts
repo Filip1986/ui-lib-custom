@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy, input, signal, ViewChild } from '@angular/core';
-import type { InputSignal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { InputSignal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
 import { ViewportPreviewComponent } from '../viewport-preview/viewport-preview.component';
 
 interface ViewportPreset {

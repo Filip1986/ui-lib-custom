@@ -3,10 +3,10 @@
 }
 
 .demo-card--two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
   align-items: start;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
 }
 
 .demo-row {
@@ -16,21 +16,21 @@
 }
 
 .demo-label {
+  color: var(--uilib-text-muted-color, #6c757d);
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--uilib-text-muted-color, #6c757d);
-  text-transform: uppercase;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .demo-value {
-  font-size: 0.8125rem;
   color: var(--uilib-text-muted-color, #6c757d);
+  font-size: 0.8125rem;
   margin: 0;
 
   code {
-    font-family: var(--uilib-font-mono, monospace);
     color: var(--uilib-primary-color, #3b82f6);
+    font-family: var(--uilib-font-mono, monospace);
     word-break: break-all;
   }
 }
@@ -51,17 +51,17 @@
   gap: 0.5rem;
 
   h3 {
-    margin: 0 0 0.25rem;
     font-size: 1.1rem;
     font-weight: 600;
+    margin: 0 0 0.25rem;
   }
 }
 
 .section-text {
-  margin: 0 0 0.75rem;
-  font-size: 0.9rem;
   color: var(--uilib-text-muted-color, #6c757d);
+  font-size: 0.9rem;
   line-height: 1.6;
+  margin: 0 0 0.75rem;
 }
 
 @media (max-width: 640px) {

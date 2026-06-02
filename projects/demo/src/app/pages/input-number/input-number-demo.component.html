@@ -1,16 +1,16 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Locale-aware numeric input demos covering formatting, currencies, spinner layouts, sizing, states, float labels, and reactive forms."
     docHeader
     title="InputNumber"
     [importCode]="importCode"
-    description="Locale-aware numeric input demos covering formatting, currencies, spinner layouts, sizing, states, float labels, and reactive forms."
   />
 
   <div class="examples">
     <app-doc-section id="numerals" title="Numerals">
       <h3>1. Numerals</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-input-number [(ngModel)]="quantity" placeholder="Enter quantity" />
+        <ui-lib-input-number placeholder="Enter quantity" [(ngModel)]="quantity" />
       </ui-lib-panel>
       <app-doc-code-example [html]="numeralsHtml" [typescript]="numeralsTsTs" />
     </app-doc-section>
@@ -19,10 +19,10 @@
       <h3>2. Decimal</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-input-number
-          [(ngModel)]="decimalValue"
-          [minFractionDigits]="2"
-          [maxFractionDigits]="4"
           placeholder="0.00"
+          [maxFractionDigits]="4"
+          [minFractionDigits]="2"
+          [(ngModel)]="decimalValue"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="decimalHtml" [typescript]="decimalTsTs" />
@@ -34,19 +34,19 @@
         <div class="row-4">
           <div>
             <label class="field-label">en-US</label>
-            <ui-lib-input-number [(ngModel)]="localeValues.enUS" locale="en-US" />
+            <ui-lib-input-number locale="en-US" [(ngModel)]="localeValues.enUS" />
           </div>
           <div>
             <label class="field-label">de-DE</label>
-            <ui-lib-input-number [(ngModel)]="localeValues.deDE" locale="de-DE" />
+            <ui-lib-input-number locale="de-DE" [(ngModel)]="localeValues.deDE" />
           </div>
           <div>
             <label class="field-label">en-IN</label>
-            <ui-lib-input-number [(ngModel)]="localeValues.enIN" locale="en-IN" />
+            <ui-lib-input-number locale="en-IN" [(ngModel)]="localeValues.enIN" />
           </div>
           <div>
             <label class="field-label">jp-JP</label>
-            <ui-lib-input-number [(ngModel)]="localeValues.jpJP" locale="jp-JP" />
+            <ui-lib-input-number locale="jp-JP" [(ngModel)]="localeValues.jpJP" />
           </div>
         </div>
       </ui-lib-panel>
@@ -57,25 +57,25 @@
       <h3>4. Currency</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-2">
-          <ui-lib-input-number [(ngModel)]="currencyValues.usd" mode="currency" currency="USD" />
+          <ui-lib-input-number currency="USD" mode="currency" [(ngModel)]="currencyValues.usd" />
           <ui-lib-input-number
-            [(ngModel)]="currencyValues.eur"
-            mode="currency"
             currency="EUR"
             locale="de-DE"
+            mode="currency"
+            [(ngModel)]="currencyValues.eur"
           />
           <ui-lib-input-number
-            [(ngModel)]="currencyValues.inr"
-            mode="currency"
             currency="INR"
             currencyDisplay="code"
             locale="en-IN"
+            mode="currency"
+            [(ngModel)]="currencyValues.inr"
           />
           <ui-lib-input-number
-            [(ngModel)]="currencyValues.jpy"
-            mode="currency"
             currency="JPY"
             locale="ja-JP"
+            mode="currency"
+            [(ngModel)]="currencyValues.jpy"
           />
         </div>
       </ui-lib-panel>
@@ -86,10 +86,10 @@
       <h3>5. Prefix &amp; Suffix</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-2">
-          <ui-lib-input-number [(ngModel)]="distanceMiles" suffix=" mi" />
-          <ui-lib-input-number [(ngModel)]="completionPercent" suffix=" %" />
-          <ui-lib-input-number [(ngModel)]="expiresInDays" prefix="Expires in " suffix=" days" />
-          <ui-lib-input-number [(ngModel)]="temperature" suffix=" °C" />
+          <ui-lib-input-number suffix=" mi" [(ngModel)]="distanceMiles" />
+          <ui-lib-input-number suffix=" %" [(ngModel)]="completionPercent" />
+          <ui-lib-input-number prefix="Expires in " suffix=" days" [(ngModel)]="expiresInDays" />
+          <ui-lib-input-number suffix=" °C" [(ngModel)]="temperature" />
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="prefixSuffixHtml" [typescript]="prefixSuffixTsTs" />
@@ -99,10 +99,10 @@
       <h3>6. Buttons Stacked</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-input-number
-          [(ngModel)]="stackedAmount"
-          mode="currency"
           currency="USD"
+          mode="currency"
           [showButtons]="true"
+          [(ngModel)]="stackedAmount"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="buttonsStackedHtml" [typescript]="buttonsStackedTsTs" />
@@ -112,12 +112,12 @@
       <h3>7. Buttons Horizontal</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-input-number
-          [(ngModel)]="horizontalAmount"
-          mode="currency"
+          buttonLayout="horizontal"
           currency="EUR"
           locale="de-DE"
+          mode="currency"
           [showButtons]="true"
-          buttonLayout="horizontal"
+          [(ngModel)]="horizontalAmount"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="buttonsHorizontalHtml" [typescript]="buttonsHorizontalTsTs" />
@@ -127,9 +127,9 @@
       <h3>8. Buttons Vertical</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-input-number
-          [(ngModel)]="verticalAmount"
-          [showButtons]="true"
           buttonLayout="vertical"
+          [showButtons]="true"
+          [(ngModel)]="verticalAmount"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="buttonsVerticalHtml" [typescript]="buttonsVerticalTsTs" />
@@ -138,7 +138,7 @@
     <app-doc-section id="step" title="Step">
       <h3>9. Step</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-input-number [(ngModel)]="stepValue" [step]="0.25" [showButtons]="true" />
+        <ui-lib-input-number [showButtons]="true" [step]="0.25" [(ngModel)]="stepValue" />
       </ui-lib-panel>
       <app-doc-code-example [html]="stepHtml" [typescript]="stepTsTs" />
     </app-doc-section>
@@ -147,10 +147,10 @@
       <h3>10. Min &amp; Max</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-input-number
-          [(ngModel)]="boundedValue"
-          [min]="0"
           [max]="100"
+          [min]="0"
           [showButtons]="true"
+          [(ngModel)]="boundedValue"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="minMaxHtml" [typescript]="minMaxTsTs" />
@@ -161,15 +161,15 @@
       <ui-lib-panel variant="minimal">
         <div class="row-3">
           <ui-lib-float-label variant="over">
-            <ui-lib-input-number [(ngModel)]="floatValues.over" inputId="input-number-over" />
+            <ui-lib-input-number inputId="input-number-over" [(ngModel)]="floatValues.over" />
             <label for="input-number-over">Amount (over)</label>
           </ui-lib-float-label>
           <ui-lib-float-label variant="in">
-            <ui-lib-input-number [(ngModel)]="floatValues.in" inputId="input-number-in" />
+            <ui-lib-input-number inputId="input-number-in" [(ngModel)]="floatValues.in" />
             <label for="input-number-in">Amount (in)</label>
           </ui-lib-float-label>
           <ui-lib-float-label variant="on">
-            <ui-lib-input-number [(ngModel)]="floatValues.on" inputId="input-number-on" />
+            <ui-lib-input-number inputId="input-number-on" [(ngModel)]="floatValues.on" />
             <label for="input-number-on">Amount (on)</label>
           </ui-lib-float-label>
         </div>
@@ -180,7 +180,7 @@
     <app-doc-section id="clear-icon" title="Clear Icon">
       <h3>12. Clear Icon</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-input-number [(ngModel)]="clearableValue" [showClear]="true" [showButtons]="true" />
+        <ui-lib-input-number [showButtons]="true" [showClear]="true" [(ngModel)]="clearableValue" />
       </ui-lib-panel>
       <app-doc-code-example [html]="clearIconHtml" [typescript]="clearIconTsTs" />
     </app-doc-section>
@@ -189,9 +189,9 @@
       <h3>13. Sizes</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-3">
-          <ui-lib-input-number [(ngModel)]="sizeValues.sm" size="sm" placeholder="Small" />
-          <ui-lib-input-number [(ngModel)]="sizeValues.md" size="md" placeholder="Medium" />
-          <ui-lib-input-number [(ngModel)]="sizeValues.lg" size="lg" placeholder="Large" />
+          <ui-lib-input-number placeholder="Small" size="sm" [(ngModel)]="sizeValues.sm" />
+          <ui-lib-input-number placeholder="Medium" size="md" [(ngModel)]="sizeValues.md" />
+          <ui-lib-input-number placeholder="Large" size="lg" [(ngModel)]="sizeValues.lg" />
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTsTs" />
@@ -201,8 +201,8 @@
       <h3>14. Disabled &amp; Invalid</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-2">
-          <ui-lib-input-number [(ngModel)]="disabledValue" [disabled]="true" />
-          <ui-lib-input-number [(ngModel)]="invalidValue" [invalid]="true" />
+          <ui-lib-input-number [disabled]="true" [(ngModel)]="disabledValue" />
+          <ui-lib-input-number [invalid]="true" [(ngModel)]="invalidValue" />
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="disabledInvalidHtml" [typescript]="disabledInvalidTsTs" />
@@ -211,7 +211,7 @@
     <app-doc-section id="filled" title="Filled">
       <h3>15. Filled</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-input-number [(ngModel)]="filledValue" [filled]="true" [showClear]="true" />
+        <ui-lib-input-number [filled]="true" [showClear]="true" [(ngModel)]="filledValue" />
       </ui-lib-panel>
       <app-doc-code-example [html]="filledHtml" [typescript]="filledTsTs" />
     </app-doc-section>
@@ -221,10 +221,10 @@
       <ui-lib-panel variant="minimal">
         <div class="fluid-wrap">
           <ui-lib-input-number
-            [(ngModel)]="fluidValue"
+            buttonLayout="horizontal"
             [fluid]="true"
             [showButtons]="true"
-            buttonLayout="horizontal"
+            [(ngModel)]="fluidValue"
           />
         </div>
       </ui-lib-panel>
@@ -234,14 +234,14 @@
     <app-doc-section id="reactive-forms" title="Reactive Forms">
       <h3>17. Reactive Forms</h3>
       <ui-lib-panel variant="minimal">
-        <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
+        <form class="form-stack" [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
           <ui-lib-input-number
             formControlName="amount"
-            [min]="0"
             [max]="1000"
+            [min]="0"
             [showButtons]="true"
           />
-          <ui-lib-button type="submit" color="primary">Validate</ui-lib-button>
+          <ui-lib-button color="primary" type="submit">Validate</ui-lib-button>
           @if (amountControl().touched && amountControl().invalid) {
             <p class="error-text">Amount is required and must be between 0 and 1000.</p>
           }
@@ -273,9 +273,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -283,8 +283,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -23,17 +23,17 @@
     <div class="af-demo-card">
       <label class="af-label" for="basic-input">Name</label>
       <input
-        id="basic-input"
         class="af-input"
-        type="text"
+        id="basic-input"
         placeholder="This input is focused on load"
+        type="text"
         uiLibAutoFocus
       />
     </div>
     <app-doc-code-example
       [html]="basicUsageHtml"
-      [typescript]="basicUsageTs"
       [showLineNumbers]="true"
+      [typescript]="basicUsageTs"
     />
   </app-doc-section>
 
@@ -56,10 +56,10 @@
         <div class="af-conditional">
           <label class="af-label" for="conditional-input">Search</label>
           <input
-            id="conditional-input"
             class="af-input"
-            type="search"
+            id="conditional-input"
             placeholder="Focused as soon as it appears"
+            type="search"
             uiLibAutoFocus
           />
         </div>
@@ -67,8 +67,8 @@
     </div>
     <app-doc-code-example
       [html]="conditionalHtml"
-      [typescript]="conditionalTs"
       [showLineNumbers]="true"
+      [typescript]="conditionalTs"
     />
   </app-doc-section>
 
@@ -84,18 +84,18 @@
       </ui-lib-button>
       <label class="af-label" for="toggle-input">Email</label>
       <input
-        id="toggle-input"
         class="af-input"
-        type="email"
+        id="toggle-input"
         placeholder="Reload or toggle to see the effect"
+        type="email"
         uiLibAutoFocus
         [disabled]="!enableFocus()"
       />
     </div>
     <app-doc-code-example
       [html]="disabledHtml"
-      [typescript]="disabledTs"
       [showLineNumbers]="true"
+      [typescript]="disabledTs"
     />
   </app-doc-section>
 
@@ -104,15 +104,15 @@
     <h3 class="af-sub-title">Directive selector</h3>
     <ui-lib-code-snippet
       language="typescript"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetImport"
+      [showLineNumbers]="true"
     />
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetSelector"
+      [showLineNumbers]="true"
     />
 
     <h3 class="demo-section__subtitle">Inputs</h3>
@@ -144,8 +144,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

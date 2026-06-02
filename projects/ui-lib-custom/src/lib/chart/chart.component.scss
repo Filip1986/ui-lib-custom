@@ -40,28 +40,28 @@
   }
 
   .ui-lib-chart .ui-lib-chart__container {
+    min-height: var(--uilib-chart-min-height);
     position: relative;
     width: 100%;
-    min-height: var(--uilib-chart-min-height);
   }
 
   .ui-lib-chart .ui-lib-chart__container canvas {
     display: block;
-    width: 100% !important;
     height: 100%;
+    width: 100% !important;
   }
 
   // Visually-hidden accessible data table
   .ui-lib-chart .ui-lib-chart__sr-table {
-    position: absolute;
-    width: 1px;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
     height: 1px;
-    padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    padding: 0;
+    position: absolute;
     white-space: nowrap;
-    border: 0;
+    width: 1px;
   }
 
   .ui-lib-variant-material .ui-lib-chart {
@@ -136,8 +136,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .ui-lib-chart .ui-lib-chart__container canvas {
-      transition: none;
       animation: none;
+      transition: none;
     }
   }
 } // end @layer uilib.components

@@ -6,7 +6,7 @@
     <span class="ui-lib-select__label" [id]="labelId()">{{ label() }}</span>
   }
 
-  <div class="ui-lib-select__control" #controlEl>
+  <div #controlEl class="ui-lib-select__control">
     <div class="ui-lib-select__value" [class.ui-lib-select__placeholder]="!displayValue()">
       @if (displayValue()) {
         {{ displayValue() }}
@@ -17,23 +17,23 @@
     <div class="ui-lib-select__actions">
       @if (loading()) {
         <!-- aria-hidden: spinner is decorative; loading state communicated via aria-disabled on host -->
-        <span class="ui-lib-select__spinner" aria-hidden="true"></span>
+        <span aria-hidden="true" class="ui-lib-select__spinner"></span>
       }
       @if (displayValue()) {
         <button
-          type="button"
           class="ui-lib-select__clear"
-          (click)="clear()"
+          type="button"
           [attr.aria-label]="i18n.translate('select.clear')"
+          (click)="clear()"
         >
           <!-- Inline SVG X — same path as Dialog/Drawer close buttons; no raw Unicode characters -->
           <svg
+            aria-hidden="true"
             class="ui-lib-select__clear-icon"
+            focusable="false"
+            height="14"
             viewBox="0 0 24 24"
             width="14"
-            height="14"
-            aria-hidden="true"
-            focusable="false"
           >
             <path
               d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6L17.6 19l1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"
@@ -43,7 +43,7 @@
         </button>
       }
       <!-- aria-hidden: ▾ is decorative; expanded state communicated via aria-expanded on host -->
-      <span class="ui-lib-select__arrow" aria-hidden="true">&#9662;</span>
+      <span aria-hidden="true" class="ui-lib-select__arrow">&#9662;</span>
     </div>
   </div>
 
@@ -52,7 +52,7 @@
     Lives outside @if(open()) so the browser can track content changes across open/close cycles.
   -->
   @if (searchable()) {
-    <div class="ui-lib-select__sr-live" aria-live="polite" aria-atomic="true">
+    <div aria-atomic="true" aria-live="polite" class="ui-lib-select__sr-live">
       {{ filteredResultsAnnouncement() }}
     </div>
   }
@@ -68,24 +68,24 @@
         <div class="ui-lib-select__search">
           <input
             #inputEl
+            aria-autocomplete="list"
             type="text"
+            [attr.aria-controls]="listboxId()"
+            [attr.aria-label]="i18n.translate('select.search.aria')"
+            [attr.placeholder]="i18n.translate('select.search.placeholder')"
             [value]="filter()"
             (input)="onFilter($any($event.target).value)"
-            [attr.placeholder]="i18n.translate('select.search.placeholder')"
-            [attr.aria-label]="i18n.translate('select.search.aria')"
-            aria-autocomplete="list"
-            [attr.aria-controls]="listboxId()"
           />
         </div>
       }
 
       <div
-        class="ui-lib-select__panel"
         #panel
-        [id]="listboxId()"
-        [attr.role]="listboxRole"
+        class="ui-lib-select__panel"
         [attr.aria-label]="resolvedPlaceholder()"
         [attr.aria-multiselectable]="multiple() ? 'true' : null"
+        [attr.role]="listboxRole"
+        [id]="listboxId()"
       >
         @for (groupKey of groupKeys(); track groupKey) {
           @if (groupKey !== ungroupedKey) {
@@ -94,26 +94,26 @@
               The visual group label is rendered via CSS content: attr(aria-label) on ::before,
               keeping the DOM clean (no extra divs inside the listbox or group).
             -->
-            <div role="group" [attr.aria-label]="groupKey" class="ui-lib-select__group-container">
+            <div class="ui-lib-select__group-container" role="group" [attr.aria-label]="groupKey">
               @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
                 <!-- Keyboard handled via aria-activedescendant on the host combobox (APG Combobox §3.1).
                      Options are not independently focusable — focus stays on the host. -->
                 <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
                 <div
                   class="ui-lib-select__option"
-                  [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
+                  role="option"
+                  [attr.aria-disabled]="opt.disabled ? 'true' : null"
+                  [attr.aria-posinset]="(optionIndexMap().get(opt) ?? -1) + 1"
+                  [attr.aria-selected]="selectedValues().has(opt.value) ? 'true' : 'false'"
+                  [attr.aria-setsize]="filteredOptions().length"
                   [class.ui-lib-select__option--active]="
                     (optionIndexMap().get(opt) ?? -1) === focusedIndex()
                   "
-                  [class.ui-lib-select__option--selected]="selectedValues().has(opt.value)"
                   [class.ui-lib-select__option--disabled]="opt.disabled"
+                  [class.ui-lib-select__option--selected]="selectedValues().has(opt.value)"
+                  [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
                   (click)="selectOption(opt)"
                   (mouseenter)="setActiveIndex(optionIndexMap().get(opt) ?? -1)"
-                  role="option"
-                  [attr.aria-selected]="selectedValues().has(opt.value) ? 'true' : 'false'"
-                  [attr.aria-disabled]="opt.disabled ? 'true' : null"
-                  [attr.aria-setsize]="filteredOptions().length"
-                  [attr.aria-posinset]="(optionIndexMap().get(opt) ?? -1) + 1"
                 >
                   @if (optionTemplate(); as tpl) {
                     <ng-container
@@ -136,19 +136,19 @@
               <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
               <div
                 class="ui-lib-select__option"
-                [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
+                role="option"
+                [attr.aria-disabled]="opt.disabled ? 'true' : null"
+                [attr.aria-posinset]="(optionIndexMap().get(opt) ?? -1) + 1"
+                [attr.aria-selected]="selectedValues().has(opt.value) ? 'true' : 'false'"
+                [attr.aria-setsize]="filteredOptions().length"
                 [class.ui-lib-select__option--active]="
                   (optionIndexMap().get(opt) ?? -1) === focusedIndex()
                 "
-                [class.ui-lib-select__option--selected]="selectedValues().has(opt.value)"
                 [class.ui-lib-select__option--disabled]="opt.disabled"
+                [class.ui-lib-select__option--selected]="selectedValues().has(opt.value)"
+                [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
                 (click)="selectOption(opt)"
                 (mouseenter)="setActiveIndex(optionIndexMap().get(opt) ?? -1)"
-                role="option"
-                [attr.aria-selected]="selectedValues().has(opt.value) ? 'true' : 'false'"
-                [attr.aria-disabled]="opt.disabled ? 'true' : null"
-                [attr.aria-setsize]="filteredOptions().length"
-                [attr.aria-posinset]="(optionIndexMap().get(opt) ?? -1) + 1"
               >
                 @if (optionTemplate(); as tpl) {
                   <ng-container

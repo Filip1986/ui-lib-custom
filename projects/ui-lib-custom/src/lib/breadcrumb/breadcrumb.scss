@@ -23,20 +23,20 @@
     --uilib-breadcrumb-separator-content: '/';
     --uilib-breadcrumb-separator-font-size: 0.875em;
     --uilib-breadcrumb-item-icon-font-size: 0.9em;
+    align-items: center;
 
     display: flex;
-    align-items: center;
     font-size: var(--uilib-breadcrumb-font-size);
   }
 
   // ── List ──────────────────────────────────────────────────────────────────────
 
   ui-lib-breadcrumb .ui-lib-breadcrumb__list {
-    list-style: none;
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     gap: 0;
+    list-style: none;
     margin: 0;
     padding: 0;
   }
@@ -44,24 +44,24 @@
   // ── Item ──────────────────────────────────────────────────────────────────────
 
   ui-lib-breadcrumb .ui-lib-breadcrumb__item {
-    display: inline-flex;
     align-items: center;
+    display: inline-flex;
     gap: var(--uilib-breadcrumb-gap);
   }
 
   // ── Link / button ─────────────────────────────────────────────────────────────
 
   ui-lib-breadcrumb .ui-lib-breadcrumb__link {
-    display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    color: var(--uilib-breadcrumb-link-color);
-    text-decoration: none;
-    cursor: pointer;
-    outline: none;
     border-radius: 2px;
-    transition: color 0.15s ease;
+    color: var(--uilib-breadcrumb-link-color);
+    cursor: pointer;
+    display: inline-flex;
+    gap: 0.25rem;
+    outline: none;
     padding: 0.125rem 0.25rem;
+    text-decoration: none;
+    transition: color 0.15s ease;
     -webkit-user-select: none;
     user-select: none;
   }
@@ -69,10 +69,10 @@
   ui-lib-breadcrumb .ui-lib-breadcrumb__link--button {
     background: none;
     border: none;
-    font-size: inherit;
     font-family: inherit;
-    padding: 0.125rem 0.25rem;
+    font-size: inherit;
     line-height: inherit;
+    padding: 0.125rem 0.25rem;
   }
 
   ui-lib-breadcrumb .ui-lib-breadcrumb__link:hover {
@@ -87,12 +87,12 @@
   // ── Current / active item ─────────────────────────────────────────────────────
 
   ui-lib-breadcrumb .ui-lib-breadcrumb__current {
-    display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
     color: var(--uilib-breadcrumb-current-color);
-    font-weight: 500;
     cursor: default;
+    display: inline-flex;
+    font-weight: 500;
+    gap: 0.25rem;
     padding: 0.125rem 0.25rem;
   }
 
@@ -105,14 +105,14 @@
   // ── Separator ─────────────────────────────────────────────────────────────────
 
   ui-lib-breadcrumb .ui-lib-breadcrumb__separator {
-    display: inline-flex;
     align-items: center;
-    padding: 0 var(--uilib-breadcrumb-gap);
     color: var(--uilib-breadcrumb-separator-color);
+    display: inline-flex;
     font-size: var(--uilib-breadcrumb-separator-font-size);
-    user-select: none;
-    -webkit-user-select: none;
     line-height: 1;
+    padding: 0 var(--uilib-breadcrumb-gap);
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   // Default separator glyph via ::before when no template is projected
@@ -123,10 +123,10 @@
   // ── Icon placement ────────────────────────────────────────────────────────────
 
   ui-lib-breadcrumb .ui-lib-breadcrumb__item-icon {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    display: inline-flex;
     font-size: var(--uilib-breadcrumb-item-icon-font-size);
+    justify-content: center;
     line-height: 1;
   }
 
@@ -134,8 +134,8 @@
 
   ui-lib-breadcrumb .ui-lib-breadcrumb__link[aria-disabled='true'] {
     color: var(--uilib-breadcrumb-disabled-color);
-    pointer-events: none;
     cursor: default;
+    pointer-events: none;
     text-decoration: none;
   }
 
@@ -161,8 +161,8 @@
   }
 
   ui-lib-breadcrumb.ui-lib-breadcrumb--variant-material .ui-lib-breadcrumb__link {
-    text-decoration: none;
     font-weight: 400;
+    text-decoration: none;
   }
 
   ui-lib-breadcrumb.ui-lib-breadcrumb--variant-material .ui-lib-breadcrumb__link:hover {
@@ -196,13 +196,13 @@
   }
 
   ui-lib-breadcrumb.ui-lib-breadcrumb--variant-minimal .ui-lib-breadcrumb__link {
-    text-decoration: none;
     border-radius: 0;
+    text-decoration: none;
   }
 
   ui-lib-breadcrumb.ui-lib-breadcrumb--variant-minimal .ui-lib-breadcrumb__link:hover {
-    text-decoration: none;
     color: var(--uilib-breadcrumb-link-color-hover);
+    text-decoration: none;
   }
   @media (prefers-reduced-motion: reduce) {
     ui-lib-breadcrumb .ui-lib-breadcrumb__link {

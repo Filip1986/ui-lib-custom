@@ -1,15 +1,16 @@
+import { NgTemplateOutlet } from '@angular/common';
+import type { InputSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   inject,
   input,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
-import { TREE_CONTEXT } from './tree-context';
-import type { TreeContext } from './tree-context';
+
 import type { TreeNode } from './tree.types';
+import type { TreeContext } from './tree-context';
+import { TREE_CONTEXT } from './tree-context';
 
 /**
  * Internal recursive component that renders a single tree node and its children.

@@ -2,28 +2,30 @@ import { DOCUMENT, isPlatformBrowser, NgStyle, NgTemplateOutlet } from '@angular
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  NgZone,
-  PLATFORM_ID,
-  ViewEncapsulation,
   computed,
   contentChild,
   effect,
+  ElementRef,
   inject,
   input,
-  model,
-  signal,
-  viewChild,
   type InputSignal,
+  model,
   type ModelSignal,
+  NgZone,
   type OnDestroy,
+  PLATFORM_ID,
   type Signal,
+  signal,
   type TemplateRef,
+  viewChild,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
+
 import { FocusTrap } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import {
   GALLERIA_DEFAULT_NUM_SCROLL,
   GALLERIA_DEFAULT_NUM_VISIBLE,
@@ -31,8 +33,8 @@ import {
 } from './galleria.constants';
 import type {
   GalleriaIndicatorsPosition,
-  GalleriaResponsiveOption,
   GalleriaItem,
+  GalleriaResponsiveOption,
   GalleriaSize,
   GalleriaThumbnailsPosition,
   GalleriaVariant,

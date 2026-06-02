@@ -1,14 +1,14 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
-  Directive,
-  booleanAttribute,
   computed,
+  Directive,
   input,
-  ViewEncapsulation,
   type InputSignal,
   type InputSignalWithTransform,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
 
 /**

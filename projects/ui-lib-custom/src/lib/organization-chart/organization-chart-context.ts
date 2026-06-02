@@ -1,5 +1,6 @@
 import type { Signal, TemplateRef } from '@angular/core';
 import { InjectionToken } from '@angular/core';
+
 import type {
   OrganizationChartNode,
   OrganizationChartSelectionMode,

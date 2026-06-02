@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Overlay a mask over any section to prevent user interaction — ideal for loading states, disabled form sections, and confirmation flows. Wrap content in <code>&lt;ui-lib-block-ui&gt;</code> and bind <code>[(blocked)]</code> to toggle the mask. Blocked content receives the <code>inert</code> attribute, making all descendants non-focusable by keyboard."
     docHeader
     title="BlockUI"
     [importCode]="importCode"
-    description="Overlay a mask over any section to prevent user interaction — ideal for loading states, disabled form sections, and confirmation flows. Wrap content in <code>&lt;ui-lib-block-ui&gt;</code> and bind <code>[(blocked)]</code> to toggle the mask. Blocked content receives the <code>inert</code> attribute, making all descendants non-focusable by keyboard."
   />
 
   <div class="demo-page-header__preview">
@@ -26,7 +26,7 @@
       <ui-lib-button (click)="toggleBasic()">
         {{ basicBlocked() ? 'Unblock' : 'Block' }} content
       </ui-lib-button>
-      <ui-lib-block-ui [blocked]="basicBlocked()" styleClass="demo-block-rounded">
+      <ui-lib-block-ui styleClass="demo-block-rounded" [blocked]="basicBlocked()">
         <div class="demo-block-panel">
           <h3>Panel Content</h3>
           <p>
@@ -38,8 +38,8 @@
       </ui-lib-block-ui>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Basic"
+      language="html"
       [code]="snippets.basic"
       [showLineNumbers]="true"
     />
@@ -57,21 +57,21 @@
       <ui-lib-button (click)="toggleSpinner()">
         {{ spinnerBlocked() ? 'Unblock' : 'Block' }} with spinner
       </ui-lib-button>
-      <ui-lib-block-ui [blocked]="spinnerBlocked()" styleClass="demo-block-rounded">
+      <ui-lib-block-ui styleClass="demo-block-rounded" [blocked]="spinnerBlocked()">
         <div class="demo-block-panel">
           <h3>Form Section</h3>
           <p>Submitting this form will block the section while processing.</p>
           <ui-lib-button severity="secondary">Submit</ui-lib-button>
         </div>
         <div blockTemplate class="demo-block-spinner-content">
-          <div class="demo-block-spinner" role="img" aria-label="Loading"></div>
+          <div aria-label="Loading" class="demo-block-spinner" role="img"></div>
           <span class="demo-block-spinner-label">Processing…</span>
         </div>
       </ui-lib-block-ui>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Custom mask"
+      language="html"
       [code]="snippets.customMask"
       [showLineNumbers]="true"
     />
@@ -91,9 +91,9 @@
           {{ materialBlocked() ? 'Unblock' : 'Block' }}
         </ui-lib-button>
         <ui-lib-block-ui
+          styleClass="demo-block-rounded"
           variant="material"
           [blocked]="materialBlocked()"
-          styleClass="demo-block-rounded"
         >
           <div class="demo-block-mini-panel">Material-style content</div>
           <span blockTemplate class="demo-block-mask-label">Blocked</span>
@@ -106,9 +106,9 @@
           {{ bootstrapBlocked() ? 'Unblock' : 'Block' }}
         </ui-lib-button>
         <ui-lib-block-ui
+          styleClass="demo-block-rounded"
           variant="bootstrap"
           [blocked]="bootstrapBlocked()"
-          styleClass="demo-block-rounded"
         >
           <div class="demo-block-mini-panel">Bootstrap-style content</div>
           <span blockTemplate class="demo-block-mask-label">Blocked</span>
@@ -121,9 +121,9 @@
           {{ minimalBlocked() ? 'Unblock' : 'Block' }}
         </ui-lib-button>
         <ui-lib-block-ui
+          styleClass="demo-block-rounded"
           variant="minimal"
           [blocked]="minimalBlocked()"
-          styleClass="demo-block-rounded"
         >
           <div class="demo-block-mini-panel">Minimal-style content</div>
           <span blockTemplate class="demo-block-mask-label">Blocked</span>
@@ -131,8 +131,8 @@
       </div>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Variants"
+      language="html"
       [code]="snippets.variants"
       [showLineNumbers]="true"
     />
@@ -140,17 +140,17 @@
 
   <!-- ---- API ------------------------------------------------------ -->
   <app-doc-section id="api" title="API Reference">
-    <div id="api-inputs" data-doc-anchor>
+    <div data-doc-anchor id="api-inputs">
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
-    <div id="api-slots" data-doc-anchor>
+    <div data-doc-anchor id="api-slots">
       <h3 class="demo-section__subtitle">Content Slots</h3>
       <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
     </div>
 
-    <div id="api-css" data-doc-anchor>
+    <div data-doc-anchor id="api-css">
       <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
       <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
@@ -158,7 +158,7 @@
 
   <!-- ---- Accessibility -------------------------------------------- -->
   <app-doc-section id="accessibility" title="Accessibility">
-    <div id="a11y-aria" data-doc-anchor>
+    <div data-doc-anchor id="a11y-aria">
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <app-doc-aria-table [rows]="ariaRows" />
     </div>
@@ -196,9 +196,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -207,8 +207,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

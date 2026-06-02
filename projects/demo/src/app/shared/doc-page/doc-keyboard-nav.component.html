@@ -1,4 +1,4 @@
-<table class="doc-keyboard-nav" role="table" aria-label="Keyboard navigation shortcuts">
+<table aria-label="Keyboard navigation shortcuts" class="doc-keyboard-nav" role="table">
   <thead>
     <tr>
       <th class="doc-keyboard-nav__th doc-keyboard-nav__th--key" scope="col">Key</th>
@@ -15,12 +15,12 @@
           <span class="doc-keyboard-nav__keys">
             @for (alt of row.alternatives; track $index) {
               @if ($index > 0) {
-                <span class="doc-keyboard-nav__alt-sep" aria-hidden="true">/</span>
+                <span aria-hidden="true" class="doc-keyboard-nav__alt-sep">/</span>
               }
               <span class="doc-keyboard-nav__combo">
                 @for (part of alt.parts; track $index) {
                   @if ($index > 0) {
-                    <span class="doc-keyboard-nav__combo-plus" aria-hidden="true">+</span>
+                    <span aria-hidden="true" class="doc-keyboard-nav__combo-plus">+</span>
                   }
                   <kbd class="doc-keyboard-nav__key">{{ part }}</kbd>
                 }

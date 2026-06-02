@@ -1,6 +1,6 @@
-import { PLATFORM_ID, Directive, ElementRef, NgZone, inject, input } from '@angular/core';
-import type { InputSignal, OnDestroy, OnInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import type { InputSignal, OnDestroy, OnInit } from '@angular/core';
+import { Directive, ElementRef, inject, input, NgZone, PLATFORM_ID } from '@angular/core';
 
 /**
  * Ripple directive — adds a Material-style circular ripple effect to any element on click.

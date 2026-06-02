@@ -1,11 +1,11 @@
 <form [formGroup]="reactiveForm">
   <ui-lib-cascade-select
     formControlName="city"
-    [invalid]="cityControl().invalid && cityControl().touched"
-    [options]="countries"
     optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
     optionLabel="cname"
     optionValue="code"
+    [invalid]="cityControl().invalid && cityControl().touched"
+    [optionGroupChildren]="['states', 'cities']"
+    [options]="countries"
   />
 </form>

@@ -2,23 +2,25 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   contentChild,
   inject,
   input,
-  output,
-  signal,
   type InputSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
   type TemplateRef,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { Icon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
+
 import type {
   DockItem,
   DockItemCommandEvent,

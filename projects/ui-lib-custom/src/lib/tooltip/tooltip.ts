@@ -1,7 +1,9 @@
-import { Directive, ElementRef, inject, input, NgZone } from '@angular/core';
-import type { InputSignal, OnDestroy, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import type { InputSignal, OnDestroy, OnInit } from '@angular/core';
+import { Directive, ElementRef, inject, input, NgZone } from '@angular/core';
+
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { TooltipEvent, TooltipPosition, TooltipVariant } from './tooltip.types';
 
 let tooltipIdCounter: number = 0;

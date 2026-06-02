@@ -5,23 +5,26 @@ import {
   signal,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { provideIcons } from '@ng-icons/core';
 import {
-  lucideArrowUp,
   lucideArrowDown,
+  lucideArrowUp,
   lucideChevronsLeft,
   lucideChevronsRight,
 } from '@ng-icons/lucide';
+
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
+
 import { PickListComponent } from './pick-list.component';
 import type {
-  PickListMoveToTargetEvent,
-  PickListMoveToSourceEvent,
-  PickListMoveAllToTargetEvent,
   PickListMoveAllToSourceEvent,
+  PickListMoveAllToTargetEvent,
+  PickListMoveToSourceEvent,
+  PickListMoveToTargetEvent,
   PickListReorderEvent,
   PickListSelectionChangeEvent,
   PickListSize,

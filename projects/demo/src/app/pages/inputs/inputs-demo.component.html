@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Configure variant, type, and helpers to see the live input preview."
     docHeader
     title="Input"
     [importCode]="importCode"
-    description="Configure variant, type, and helpers to see the live input preview."
   />
 
   <app-input-basic-example />
@@ -11,17 +11,17 @@
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
-      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
-      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
-      <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
-      <ui-lib-tab value="performance" label="Performance"></ui-lib-tab>
-      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
+      <ui-lib-tab label="Playground" value="playground" />
+      <ui-lib-tab label="Variants" value="variants" />
+      <ui-lib-tab label="API Reference" value="api-reference" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="Performance" value="performance" />
+      <ui-lib-tab label="Accessibility" value="accessibility" />
     </ui-lib-tabs>
   </div>
 
@@ -37,10 +37,10 @@
               @for (v of variants; track v) {
                 <ui-lib-button
                   class="control-chip"
-                  size="sm"
-                  [variant]="'minimal'"
-                  [appearance]="variant() === v ? 'solid' : 'ghost'"
                   color="primary"
+                  size="sm"
+                  [appearance]="variant() === v ? 'solid' : 'ghost'"
+                  [variant]="'minimal'"
                   (click)="setVariant(v)"
                   >{{ v }}</ui-lib-button
                 >
@@ -62,10 +62,10 @@
               @for (t of types; track t) {
                 <ui-lib-button
                   class="control-chip"
-                  size="sm"
-                  [variant]="'minimal'"
-                  [appearance]="inputType() === t ? 'solid' : 'ghost'"
                   color="primary"
+                  size="sm"
+                  [appearance]="inputType() === t ? 'solid' : 'ghost'"
+                  [variant]="'minimal'"
                   (click)="setType(t)"
                   >{{ t }}</ui-lib-button
                 >
@@ -79,10 +79,10 @@
               @for (lf of labelFloats; track lf) {
                 <ui-lib-button
                   class="control-chip"
-                  size="sm"
-                  [variant]="'minimal'"
-                  [appearance]="labelFloat() === lf ? 'solid' : 'ghost'"
                   color="primary"
+                  size="sm"
+                  [appearance]="labelFloat() === lf ? 'solid' : 'ghost'"
+                  [variant]="'minimal'"
                   (click)="setLabelFloat(lf)"
                   >{{ lf }}</ui-lib-button
                 >
@@ -137,8 +137,8 @@
         <div class="control">
           <label>Label</label>
           <input
-            type="text"
             aria-label="Input label"
+            type="text"
             [value]="label()"
             (input)="label.set($any($event.target).value)"
           />
@@ -147,8 +147,8 @@
         <div class="control">
           <label>Placeholder</label>
           <input
-            type="text"
             aria-label="Input placeholder"
+            type="text"
             [value]="placeholder()"
             (input)="placeholder.set($any($event.target).value)"
           />
@@ -161,28 +161,28 @@
         <div class="viewport-controls">
           <div class="preset-buttons">
             @for (preset of viewportPresets; track preset.key) {
-              <ui-lib-button size="sm" appearance="ghost" (click)="setViewportPreset(preset)">{{
+              <ui-lib-button appearance="ghost" size="sm" (click)="setViewportPreset(preset)">{{
                 preset.label
               }}</ui-lib-button>
             }
             <div class="custom">
               <label>Custom</label>
               <input
-                type="number"
                 aria-label="Custom viewport width"
-                min="200"
                 max="2000"
+                min="200"
+                type="number"
                 [ngModel]="viewportCustomWidth()"
                 (ngModelChange)="setViewportCustomWidth($event)"
               />
-              <ui-lib-button size="sm" appearance="ghost" (click)="applyViewportCustom()"
+              <ui-lib-button appearance="ghost" size="sm" (click)="applyViewportCustom()"
                 >Apply</ui-lib-button
               >
             </div>
           </div>
           <div class="controls">
             <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-            <ui-lib-button size="sm" appearance="ghost" (click)="rotateViewport()"
+            <ui-lib-button appearance="ghost" size="sm" (click)="rotateViewport()"
               >Rotate</ui-lib-button
             >
           </div>
@@ -192,24 +192,24 @@
       <ui-lib-panel variant="minimal">
         <div class="density-controls">
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('default')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'default'"
+            (click)="setViewportDensity('default')"
             >Default</ui-lib-button
           >
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('comfortable')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'comfortable'"
+            (click)="setViewportDensity('comfortable')"
             >Comfortable</ui-lib-button
           >
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('compact')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'compact'"
+            (click)="setViewportDensity('compact')"
             >Compact</ui-lib-button
           >
         </div>
@@ -221,47 +221,47 @@
         <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
           <form #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)">
             <ui-lib-input
-              [variant]="variant()"
-              [type]="inputType()"
+              name="demoInput"
+              [error]="error()"
               [label]="label()"
               [labelFloat]="labelFloat()"
+              [maxLength]="80"
+              [ngModel]="value()"
               [placeholder]="placeholder()"
               [required]="required()"
-              [showCounter]="showCounter()"
-              [maxLength]="80"
               [showClear]="showClear()"
-              [error]="error()"
-              [ngModel]="value()"
+              [showCounter]="showCounter()"
+              [type]="inputType()"
+              [variant]="variant()"
               (ngModelChange)="value.set($event)"
-              name="demoInput"
             >
-              <span prefix class="pi pi-envelope"></span>
-              <span suffix class="pi pi-check"></span>
+              <span class="pi pi-envelope" prefix></span>
+              <span class="pi pi-check" suffix></span>
             </ui-lib-input>
 
             @if (inputType() === 'password') {
               <ui-lib-input
-                [variant]="variant()"
-                type="password"
                 label="Password"
-                [labelFloat]="labelFloat()"
-                placeholder="Enter password"
-                [showTogglePassword]="showToggle()"
-                [showClear]="showClear()"
-                [required]="required()"
                 name="demoPassword"
+                placeholder="Enter password"
+                type="password"
+                [labelFloat]="labelFloat()"
                 [ngModel]="password()"
+                [required]="required()"
+                [showClear]="showClear()"
+                [showTogglePassword]="showToggle()"
+                [variant]="variant()"
                 (ngModelChange)="password.set($event)"
               >
-                <span prefix class="pi pi-lock"></span>
+                <span class="pi pi-lock" prefix></span>
               </ui-lib-input>
             }
 
             <div class="actions">
-              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+              <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
               <ui-lib-button
-                type="button"
                 appearance="ghost"
+                type="button"
                 (click)="demoForm.resetForm(); value.set(''); password.set(''); error.set('')"
                 >Reset</ui-lib-button
               >
@@ -280,30 +280,30 @@
         <div material>
           <ui-lib-input
             variant="material"
-            [type]="inputType()"
-            [labelFloat]="labelFloat()"
             [label]="label()"
+            [labelFloat]="labelFloat()"
             [placeholder]="placeholder()"
+            [type]="inputType()"
           />
         </div>
 
         <div bootstrap>
           <ui-lib-input
             variant="bootstrap"
-            [type]="inputType()"
-            [labelFloat]="labelFloat()"
             [label]="label()"
+            [labelFloat]="labelFloat()"
             [placeholder]="placeholder()"
+            [type]="inputType()"
           />
         </div>
 
         <div minimal>
           <ui-lib-input
             variant="minimal"
-            [type]="inputType()"
-            [labelFloat]="labelFloat()"
             [label]="label()"
+            [labelFloat]="labelFloat()"
             [placeholder]="placeholder()"
+            [type]="inputType()"
           />
         </div>
       </app-variant-comparison>
@@ -364,9 +364,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -374,8 +374,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

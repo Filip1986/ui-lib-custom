@@ -18,44 +18,44 @@
 }
 
 .viewport-controls {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
   gap: 0.75rem;
+  justify-content: space-between;
   padding: 0.5rem 0.75rem;
 }
 
 .preset-buttons {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  align-items: center;
 
   .custom {
-    display: inline-flex;
     align-items: center;
+    display: inline-flex;
     gap: 0.35rem;
 
     input {
-      width: 5rem;
       padding: 0.25rem 0.35rem;
+      width: 5rem;
     }
   }
 }
 
 .controls {
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
   gap: 0.5rem;
 
   .dims {
-    font-size: 0.9rem;
     color: var(--uilib-muted, #5f6c80);
+    font-size: 0.9rem;
   }
 }
 
 .density-controls {
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
   gap: 0.5rem;
 }

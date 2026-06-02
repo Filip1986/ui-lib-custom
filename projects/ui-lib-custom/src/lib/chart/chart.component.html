@@ -2,13 +2,13 @@
   <canvas
     #chartCanvas
     role="img"
-    [attr.aria-label]="effectiveAriaLabel()"
     [attr.aria-describedby]="showDataTable() ? tableId : null"
+    [attr.aria-label]="effectiveAriaLabel()"
   ></canvas>
 </div>
 
 @if (showDataTable() && data()) {
-  <table [id]="tableId" class="ui-lib-chart__sr-table">
+  <table class="ui-lib-chart__sr-table" [id]="tableId">
     <caption>
       {{
         effectiveAriaLabel()

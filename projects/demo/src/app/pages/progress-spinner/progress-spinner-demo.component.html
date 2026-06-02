@@ -1,11 +1,10 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description='An animated circular spinner that signals an indeterminate loading state. Uses a CSS &lt;code&gt;stroke-dashoffset&lt;/code&gt; animation on an SVG circle combined with a continuous rotation to produce the characteristic "arc chase" effect. Three design variants, three sizes, and full CSS-variable theming.'
     docHeader
     title="ProgressSpinner"
     [importCode]="importCode"
-    description='An animated circular spinner that signals an indeterminate loading state. Uses a CSS &lt;code&gt;stroke-dashoffset&lt;/code&gt; animation on an SVG circle combined with a continuous rotation to produce the characteristic "arc chase" effect. Three design variants, three sizes, and full CSS-variable theming.'
-  >
-  </app-doc-page-header>
+  />
 
   <!-- Section 1: Basic -->
   <app-doc-section id="basic" title="Basic">
@@ -16,7 +15,7 @@
     <div class="ps-row">
       <ui-lib-progress-spinner />
     </div>
-    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetBasic" />
+    <ui-lib-code-snippet language="html" size="sm" [code]="snippetBasic" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- Section 2: Sizes -->
@@ -30,7 +29,7 @@
       <ui-lib-progress-spinner size="md" />
       <ui-lib-progress-spinner size="lg" />
     </div>
-    <ui-lib-code-snippet language="html" [showLineNumbers]="true" size="sm" [code]="snippetSizes" />
+    <ui-lib-code-snippet language="html" size="sm" [code]="snippetSizes" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- Section 3: Variants -->
@@ -42,23 +41,23 @@
     </p>
     <div class="ps-row ps-row--gap-lg">
       <div class="ps-variant-card">
-        <ui-lib-progress-spinner variant="material" size="lg" />
+        <ui-lib-progress-spinner size="lg" variant="material" />
         <span class="ps-variant-card__label">material</span>
       </div>
       <div class="ps-variant-card">
-        <ui-lib-progress-spinner variant="bootstrap" size="lg" />
+        <ui-lib-progress-spinner size="lg" variant="bootstrap" />
         <span class="ps-variant-card__label">bootstrap</span>
       </div>
       <div class="ps-variant-card">
-        <ui-lib-progress-spinner variant="minimal" size="lg" />
+        <ui-lib-progress-spinner size="lg" variant="minimal" />
         <span class="ps-variant-card__label">minimal</span>
       </div>
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetVariants"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -84,9 +83,9 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetAnimationDuration"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -98,30 +97,30 @@
     </p>
     <div class="ps-row ps-row--align-center">
       <ui-lib-progress-spinner
+        ariaLabel="Thin spinner"
+        size="lg"
         strokeWidth="1"
         variant="bootstrap"
-        size="lg"
-        ariaLabel="Thin spinner"
       />
       <ui-lib-progress-spinner
+        ariaLabel="Thick spinner"
+        size="lg"
         strokeWidth="4"
         variant="bootstrap"
-        size="lg"
-        ariaLabel="Thick spinner"
       />
       <ui-lib-progress-spinner
-        strokeWidth="6"
-        fill="#e0e7ff"
-        variant="bootstrap"
-        size="lg"
         ariaLabel="Filled spinner"
+        fill="#e0e7ff"
+        size="lg"
+        strokeWidth="6"
+        variant="bootstrap"
       />
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetStrokeWidth"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -136,15 +135,15 @@
         <p>Content that is loading…</p>
         <p>More content here.</p>
       </div>
-      <div class="ps-overlay-example__mask" aria-hidden="true">
+      <div aria-hidden="true" class="ps-overlay-example__mask">
         <ui-lib-progress-spinner size="lg" variant="material" />
       </div>
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetLoadingOverlay"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -155,10 +154,10 @@
     <div class="ps-playground">
       <div class="ps-playground__preview">
         <ui-lib-progress-spinner
-          [size]="interactiveSize()"
-          [variant]="interactiveVariant()"
           [animationDuration]="interactiveDuration()"
+          [size]="interactiveSize()"
           [strokeWidth]="interactiveStrokeWidth()"
+          [variant]="interactiveVariant()"
         />
       </div>
 
@@ -168,26 +167,26 @@
           <span class="ps-control__label">size</span>
           <div class="ps-control__buttons">
             <ui-lib-button
-              [appearance]="interactiveSize() === 'sm' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveSize() === 'sm' ? 'solid' : 'outline'"
               (click)="setSize('sm')"
               >sm</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="interactiveSize() === 'md' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveSize() === 'md' ? 'solid' : 'outline'"
               (click)="setSize('md')"
               >md</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="interactiveSize() === 'lg' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveSize() === 'lg' ? 'solid' : 'outline'"
               (click)="setSize('lg')"
               >lg</ui-lib-button
             >
@@ -199,26 +198,26 @@
           <span class="ps-control__label">variant</span>
           <div class="ps-control__buttons">
             <ui-lib-button
-              [appearance]="interactiveVariant() === 'material' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveVariant() === 'material' ? 'solid' : 'outline'"
               (click)="setVariant('material')"
               >material</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="interactiveVariant() === 'bootstrap' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveVariant() === 'bootstrap' ? 'solid' : 'outline'"
               (click)="setVariant('bootstrap')"
               >bootstrap</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="interactiveVariant() === 'minimal' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveVariant() === 'minimal' ? 'solid' : 'outline'"
               (click)="setVariant('minimal')"
               >minimal</ui-lib-button
             >
@@ -230,26 +229,26 @@
           <span class="ps-control__label">animationDuration</span>
           <div class="ps-control__buttons">
             <ui-lib-button
-              [appearance]="interactiveDuration() === '4s' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveDuration() === '4s' ? 'solid' : 'outline'"
               (click)="setDuration('4s')"
               >4s</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="interactiveDuration() === '2s' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveDuration() === '2s' ? 'solid' : 'outline'"
               (click)="setDuration('2s')"
               >2s</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="interactiveDuration() === '750ms' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveDuration() === '750ms' ? 'solid' : 'outline'"
               (click)="setDuration('750ms')"
               >750ms</ui-lib-button
             >
@@ -261,34 +260,34 @@
           <span class="ps-control__label">strokeWidth</span>
           <div class="ps-control__buttons">
             <ui-lib-button
-              [appearance]="interactiveStrokeWidth() === '1' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveStrokeWidth() === '1' ? 'solid' : 'outline'"
               (click)="setStrokeWidth('1')"
               >1</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="interactiveStrokeWidth() === '2' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveStrokeWidth() === '2' ? 'solid' : 'outline'"
               (click)="setStrokeWidth('2')"
               >2</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="interactiveStrokeWidth() === '4' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveStrokeWidth() === '4' ? 'solid' : 'outline'"
               (click)="setStrokeWidth('4')"
               >4</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="interactiveStrokeWidth() === '6' ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="interactiveStrokeWidth() === '6' ? 'solid' : 'outline'"
               (click)="setStrokeWidth('6')"
               >6</ui-lib-button
             >
@@ -314,9 +313,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -325,8 +324,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

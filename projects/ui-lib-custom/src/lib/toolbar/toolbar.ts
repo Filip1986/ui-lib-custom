@@ -6,14 +6,16 @@ import {
   ElementRef,
   inject,
   input,
-  ViewEncapsulation,
   type InputSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import type { ToolbarVariant, ToolbarSize } from './toolbar.types';
 
-export type { ToolbarVariant, ToolbarSize } from './toolbar.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { ToolbarSize, ToolbarVariant } from './toolbar.types';
+
+export type { ToolbarSize, ToolbarVariant } from './toolbar.types';
 
 let nextToolbarId: number = 0;
 

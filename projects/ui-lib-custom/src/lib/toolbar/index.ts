@@ -1,2 +1,2 @@
 export { Toolbar } from './toolbar';
-export type { ToolbarVariant, ToolbarSize } from './toolbar.types';
+export type { ToolbarSize, ToolbarVariant } from './toolbar.types';

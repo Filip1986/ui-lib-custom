@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Interactive color picking with popup and inline modes, format switching, forms integration, and visual variants."
     docHeader
     title="ColorPicker"
     [importCode]="importCode"
-    description="Interactive color picking with popup and inline modes, format switching, forms integration, and visual variants."
   />
 
   <app-doc-demo-viewport [autoHeight]="true">
@@ -15,7 +15,7 @@
         </p>
         <ui-lib-panel variant="minimal">
           <div class="row-inline">
-            <ui-lib-color-picker [(ngModel)]="basicHex" format="hex" />
+            <ui-lib-color-picker format="hex" [(ngModel)]="basicHex" />
             <span class="value-text">Selected HEX {{ displayHexValue(basicHex) }}</span>
           </div>
         </ui-lib-panel>
@@ -26,7 +26,7 @@
         <h3>b. Inline</h3>
         <p class="section-text">Permanently visible picker panel embedded in content flow.</p>
         <ui-lib-panel variant="minimal">
-          <ui-lib-color-picker [inline]="true" [(ngModel)]="inlineHex" format="hex" />
+          <ui-lib-color-picker format="hex" [inline]="true" [(ngModel)]="inlineHex" />
         </ui-lib-panel>
         <app-doc-code-example [html]="inlineHtml" [typescript]="inlineTs" />
       </app-doc-section>
@@ -37,15 +37,15 @@
         <ui-lib-panel variant="minimal">
           <div class="row-3">
             <div class="format-column">
-              <ui-lib-color-picker [(ngModel)]="hexValue" format="hex" />
+              <ui-lib-color-picker format="hex" [(ngModel)]="hexValue" />
               <span class="value-text">HEX {{ displayHexValue(hexValue) }}</span>
             </div>
             <div class="format-column">
-              <ui-lib-color-picker [(ngModel)]="rgbValue" format="rgb" />
+              <ui-lib-color-picker format="rgb" [(ngModel)]="rgbValue" />
               <span class="value-text">{{ displayRgbValue(rgbValue) }}</span>
             </div>
             <div class="format-column">
-              <ui-lib-color-picker [(ngModel)]="hsbValue" format="hsb" />
+              <ui-lib-color-picker format="hsb" [(ngModel)]="hsbValue" />
               <span class="value-text">{{ displayHsbValue(hsbValue) }}</span>
             </div>
           </div>
@@ -57,13 +57,13 @@
         <h3>d. Template Driven Form</h3>
         <p class="section-text">Template-driven form submit flow with selected color output.</p>
         <ui-lib-panel variant="minimal">
-          <form (ngSubmit)="submitTemplateDriven()" class="form-stack">
+          <form class="form-stack" (ngSubmit)="submitTemplateDriven()">
             <ui-lib-color-picker
+              format="hex"
               name="templateColor"
               [(ngModel)]="templateDrivenValue"
-              format="hex"
             />
-            <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+            <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
             @if (templateDrivenSubmittedValue !== null) {
               <p class="value-text">
                 Submitted: {{ displaySubmittedValue(templateDrivenSubmittedValue) }}
@@ -78,9 +78,9 @@
         <h3>e. Reactive Form</h3>
         <p class="section-text">Reactive form control with submit output and validation trigger.</p>
         <ui-lib-panel variant="minimal">
-          <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
+          <form class="form-stack" [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
             <ui-lib-color-picker formControlName="color" format="hex" />
-            <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+            <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
             @if (reactiveSubmittedValue !== null) {
               <p class="value-text">
                 Submitted: {{ displaySubmittedValue(reactiveSubmittedValue) }}
@@ -96,7 +96,7 @@
         <p class="section-text">Disabled picker demonstrating non-interactive state.</p>
         <ui-lib-panel variant="minimal">
           <div class="row-inline">
-            <ui-lib-color-picker [disabled]="true" [(ngModel)]="disabledValue" format="hex" />
+            <ui-lib-color-picker format="hex" [disabled]="true" [(ngModel)]="disabledValue" />
             <span class="value-text">Disabled value {{ displayHexValue(disabledValue) }}</span>
           </div>
         </ui-lib-panel>
@@ -133,7 +133,7 @@
         </p>
         <ui-lib-panel variant="minimal">
           <div class="clipping-card">
-            <ui-lib-color-picker [(ngModel)]="clippingValue" format="hex" />
+            <ui-lib-color-picker format="hex" [(ngModel)]="clippingValue" />
             <p class="value-text clipping-note">Selected {{ displayHexValue(clippingValue) }}</p>
           </div>
         </ui-lib-panel>
@@ -161,9 +161,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -172,8 +172,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

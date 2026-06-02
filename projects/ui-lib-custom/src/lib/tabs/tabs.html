@@ -1,10 +1,10 @@
 @if (shouldShowScrollButtons()) {
   <button
-    type="button"
     class="ui-lib-tabs__scroll ui-lib-tabs__scroll--prev"
+    type="button"
     [attr.aria-controls]="tabListDomId()"
-    [attr.aria-label]="scrollPrevLabel()"
     [attr.aria-disabled]="!canScrollPrevTab() ? true : null"
+    [attr.aria-label]="scrollPrevLabel()"
     [attr.tabindex]="canScrollPrevTab() ? 0 : -1"
     [disabled]="!canScrollPrevTab()"
     (click)="onScrollPrev()"
@@ -14,13 +14,13 @@
 }
 
 <nav
-  [class]="'ui-lib-tabs__list ' + tabsClasses()"
+  #tabList
   role="tablist"
   [attr.aria-label]="ariaLabel()"
   [attr.aria-orientation]="orientation()"
+  [class]="'ui-lib-tabs__list ' + tabsClasses()"
   [id]="tabListDomId()"
   (scroll)="onTabListScrolled()"
-  #tabList
 >
   @for (tab of tabContexts(); track tab.index) {
     <div
@@ -29,16 +29,16 @@
     >
       <button
         #tabButton
-        type="button"
         class="ui-lib-tabs__trigger"
-        [class.ui-lib-tabs__trigger--active]="isActive(tab.index)"
-        [class.ui-lib-tabs__trigger--disabled]="tab.disabled || disabled()"
         role="tab"
-        [id]="tabId(tab.index)"
-        [attr.aria-selected]="isActive(tab.index) ? 'true' : 'false'"
+        type="button"
         [attr.aria-controls]="!isNavigation() ? panelId(tab.index) : null"
         [attr.aria-disabled]="tab.disabled || disabled() ? 'true' : 'false'"
+        [attr.aria-selected]="isActive(tab.index) ? 'true' : 'false'"
         [attr.tabindex]="tabTabIndex(tab.index, tab.disabled)"
+        [class.ui-lib-tabs__trigger--active]="isActive(tab.index)"
+        [class.ui-lib-tabs__trigger--disabled]="tab.disabled || disabled()"
+        [id]="tabId(tab.index)"
         (click)="onSelect(tab)"
         (focus)="onFocus(tab)"
         (keydown)="onKeydown($event, tab.index)"
@@ -56,9 +56,9 @@
       </button>
       @if (tab.closable) {
         <button
-          type="button"
           class="ui-lib-tabs__close"
           tabindex="-1"
+          type="button"
           [attr.aria-label]="i18n.translate('tabs.close')"
           (click)="onClose(tab, $event)"
         >
@@ -79,11 +79,11 @@
 
 @if (shouldShowScrollButtons()) {
   <button
-    type="button"
     class="ui-lib-tabs__scroll ui-lib-tabs__scroll--next"
+    type="button"
     [attr.aria-controls]="tabListDomId()"
-    [attr.aria-label]="scrollNextLabel()"
     [attr.aria-disabled]="!canScrollNextTab() ? true : null"
+    [attr.aria-label]="scrollNextLabel()"
     [attr.tabindex]="canScrollNextTab() ? 0 : -1"
     [disabled]="!canScrollNextTab()"
     (click)="onScrollNext()"
@@ -98,9 +98,9 @@
       @if (shouldRenderPanel(tab)) {
         <ui-lib-tab-panel
           class="ui-lib-tabs__panel-host"
+          [active]="isActive(tab.index)"
           [id]="panelId(tab.index)"
           [labelId]="tabId(tab.index)"
-          [active]="isActive(tab.index)"
         >
           @if (tab.contentTemplate) {
             <ng-container [ngTemplateOutlet]="tab.contentTemplate" />

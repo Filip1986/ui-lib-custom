@@ -1,3 +1,4 @@
+import type { EnvironmentProviders, Provider } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,24 +8,26 @@ import {
 } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import type { EnvironmentProviders, Provider } from '@angular/core';
 import { By } from '@angular/platform-browser';
+
 import { provideIcons } from '@ng-icons/core';
 import {
-  lucideArrowUp,
   lucideArrowDown,
-  lucideChevronUp,
+  lucideArrowUp,
   lucideChevronDown,
   lucideChevronLeft,
   lucideChevronRight,
   lucideChevronsLeft,
   lucideChevronsRight,
+  lucideChevronUp,
 } from '@ng-icons/lucide';
+
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { PickListComponent } from './pick-list.component';
-import { PickListItemDirective } from './pick-list-templates.directive';
 import type { PickListVariant } from './pick-list.types';
+import { PickListItemDirective } from './pick-list-templates.directive';
 
 // ---------------------------------------------------------------------------
 // Helpers / types

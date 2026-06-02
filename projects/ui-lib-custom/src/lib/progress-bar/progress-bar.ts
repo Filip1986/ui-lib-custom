@@ -1,18 +1,20 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
   computed,
+  ContentChild,
   inject,
   input,
-  ViewEncapsulation,
   type InputSignal,
   type Signal,
   type TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   ProgressBarLabelContext,
   ProgressBarMode,

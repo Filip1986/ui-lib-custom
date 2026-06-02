@@ -1,7 +1,14 @@
+import type {
+  ElementRef,
+  InputSignal,
+  ModelSignal,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   effect,
   forwardRef,
@@ -12,19 +19,14 @@ import {
   signal,
   untracked,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import type {
-  ElementRef,
-  InputSignal,
-  ModelSignal,
-  OutputEmitterRef,
-  Signal,
-  WritableSignal,
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import {
   INPUT_NUMBER_DEFAULTS,
   type InputNumberButtonLayout,
@@ -32,7 +34,7 @@ import {
   type InputNumberLocaleMatcher,
   type InputNumberMode,
 } from './input-number.types';
-import { NumberFormatService, type NumberFormatConfig } from './number-format.service';
+import { type NumberFormatConfig, NumberFormatService } from './number-format.service';
 
 let inputNumberIdCounter: number = 0;
 

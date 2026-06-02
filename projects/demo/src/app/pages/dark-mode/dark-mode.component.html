@@ -1,8 +1,8 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Complete dark mode support with system preference detection."
     docHeader
     title="Dark Mode"
-    description="Complete dark mode support with system preference detection."
   />
 
   <ui-lib-panel variant="minimal">
@@ -77,11 +77,11 @@
         <h3>Form Controls</h3>
         <div class="showcase-form">
           <ui-lib-input label="Email" placeholder="Enter email" />
-          <ui-lib-input label="Password" type="password" placeholder="Enter password" />
+          <ui-lib-input label="Password" placeholder="Enter password" type="password" />
           <ui-lib-select
-            [options]="selectOptions"
-            placeholder="Select option"
             ariaLabel="Example option"
+            placeholder="Select option"
+            [options]="selectOptions"
           />
           <ui-lib-checkbox label="Remember me" />
         </div>
@@ -102,8 +102,8 @@
       <section class="showcase-section">
         <h3>Tabs</h3>
         <ui-lib-tabs>
-          <ui-lib-tab value="tab1" label="Tab 1"> Tab 1 content in dark mode. </ui-lib-tab>
-          <ui-lib-tab value="tab2" label="Tab 2"> Tab 2 content in dark mode. </ui-lib-tab>
+          <ui-lib-tab label="Tab 1" value="tab1"> Tab 1 content in dark mode. </ui-lib-tab>
+          <ui-lib-tab label="Tab 2" value="tab2"> Tab 2 content in dark mode. </ui-lib-tab>
         </ui-lib-tabs>
       </section>
 
@@ -123,11 +123,11 @@
 
   <ui-lib-panel variant="minimal">
     <h4>Using Theme Mode</h4>
-    <ui-lib-code-snippet [code]="usageCode" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="usageCode" [showLineNumbers]="true" />
 
     <h4>CSS Variables</h4>
     <p>All components automatically adapt to dark mode via CSS custom properties.</p>
-    <ui-lib-code-snippet [code]="cssCode" language="css" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="css" [code]="cssCode" [showLineNumbers]="true" />
 
     <h4>System Preference</h4>
     <p>Set mode to 'auto' to follow the user's system preference.</p>
@@ -136,8 +136,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

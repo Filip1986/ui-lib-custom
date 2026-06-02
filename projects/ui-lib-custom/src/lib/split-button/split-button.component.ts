@@ -2,32 +2,30 @@ import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  HostListener,
-  ViewEncapsulation,
   computed,
   contentChild,
+  ElementRef,
+  HostListener,
   inject,
   input,
+  type InputSignal,
   output,
+  type OutputEmitterRef,
+  type Signal,
   signal,
   TemplateRef,
   viewChild,
-  type InputSignal,
-  type OutputEmitterRef,
-  type Signal,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { Icon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
+
 import { splitButtonId } from './split-button.constants';
-import {
-  SplitButtonContentDirective,
-  SplitButtonDropdownIconDirective,
-} from './split-button-templates.directive';
 import type {
   SplitButtonClickEvent,
   SplitButtonItem,
@@ -38,6 +36,10 @@ import type {
   SplitButtonSize,
   SplitButtonVariant,
 } from './split-button.types';
+import {
+  SplitButtonContentDirective,
+  SplitButtonDropdownIconDirective,
+} from './split-button-templates.directive';
 
 let nextSplitButtonId: number = 0;
 

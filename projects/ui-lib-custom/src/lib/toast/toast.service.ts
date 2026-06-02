@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+
 import type { ToastMessage } from './toast.types';
 
 /** Auto-incrementing counter for generating unique toast IDs. */

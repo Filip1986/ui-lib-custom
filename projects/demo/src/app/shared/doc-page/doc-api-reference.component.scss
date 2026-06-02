@@ -1,35 +1,35 @@
 .doc-api-reference__title {
+  color: var(--uilib-color-text-primary, #111827);
   font-size: 0.9375rem;
   font-weight: 600;
   margin: 1.25rem 0 0.5rem;
-  color: var(--uilib-color-text-primary, #111827);
 }
 
 .doc-api-reference__table {
-  width: 100%;
   margin-bottom: 1rem;
+  width: 100%;
 
   // Code cells
   code {
-    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-    font-size: 0.8125rem;
     background: var(--uilib-surface-muted, rgba(0, 0, 0, 0.04));
     border-radius: 3px;
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    font-size: 0.8125rem;
     padding: 1px 5px;
     word-break: break-all;
   }
 }
 
 .doc-api-reference__name-cell {
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
   gap: 4px;
 }
 
 .doc-api-reference__required {
   color: var(--uilib-color-danger, #ef4444);
-  font-weight: 700;
   font-size: 0.9375rem;
+  font-weight: 700;
   line-height: 1;
 }
 

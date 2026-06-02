@@ -7,9 +7,11 @@ import {
 } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { ThemeVariant } from 'ui-lib-custom/core';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { InputNumberComponent } from './input-number.component';
 
 // ── Mock ThemeConfigService ────────────────────────────────────────────────

@@ -22,14 +22,14 @@
       position: static;
 
       .ui-lib-tiered-menu__panel--popup {
-        position: fixed;
         opacity: 0;
         pointer-events: none;
+        position: fixed;
 
         &.ui-lib-tiered-menu__panel--positioned {
+          animation: uilib-tiered-menu-in var(--uilib-transition-fast, 0.12s ease-out) both;
           opacity: 1;
           pointer-events: auto;
-          animation: uilib-tiered-menu-in var(--uilib-transition-fast, 0.12s ease-out) both;
         }
       }
     }
@@ -45,9 +45,9 @@
       --uilib-tiered-menu-panel-shadow,
       var(--uilib-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.12))
     );
-    z-index: var(--uilib-z-overlay, 1000);
     min-width: var(--uilib-tiered-menu-min-width, 12rem);
     overflow: visible;
+    z-index: var(--uilib-z-overlay, 1000);
 
     // Root list rendered directly inside the panel has no extra padding
     > ui-lib-tiered-menu-sub > .ui-lib-tiered-menu__list {

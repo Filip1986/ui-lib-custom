@@ -1,43 +1,45 @@
 import {
+  type AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  ViewEncapsulation,
   computed,
   effect,
+  ElementRef,
   forwardRef,
   inject,
   input,
+  type InputSignal,
   isDevMode,
   model,
-  output,
-  signal,
-  type AfterViewInit,
-  type InputSignal,
   type ModelSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
-import { Icon } from 'ui-lib-custom/icon';
-import type { SemanticIcon } from 'ui-lib-custom/icon';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import type { SemanticIcon } from 'ui-lib-custom/icon';
+import { Icon } from 'ui-lib-custom/icon';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
-  ToggleButtonVariant,
-  ToggleButtonSize,
-  ToggleButtonIconPos,
   ToggleButtonChangeEvent,
+  ToggleButtonIconPos,
+  ToggleButtonSize,
+  ToggleButtonVariant,
 } from './toggle-button.types';
 
 export type {
-  ToggleButtonVariant,
-  ToggleButtonSize,
-  ToggleButtonIconPos,
   ToggleButtonChangeEvent,
+  ToggleButtonIconPos,
+  ToggleButtonSize,
+  ToggleButtonVariant,
 } from './toggle-button.types';
 
 let toggleButtonIdCounter: number = 0;

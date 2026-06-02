@@ -1,4 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
+import type { AccordionExpandMode, AccordionSize, AccordionVariant } from 'ui-lib-custom/accordion';
+import { AccordionHeader, AccordionPanel } from 'ui-lib-custom/accordion';
 // noinspection JSUnusedGlobalSymbols
 import {
   SHARED_DEFAULTS,
@@ -6,9 +9,8 @@ import {
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
+
 import { Accordion } from './accordion';
-import { AccordionPanel, AccordionHeader } from 'ui-lib-custom/accordion';
-import type { AccordionVariant, AccordionSize, AccordionExpandMode } from 'ui-lib-custom/accordion';
 
 type AccordionStoryArgs = {
   variant: AccordionVariant | null;

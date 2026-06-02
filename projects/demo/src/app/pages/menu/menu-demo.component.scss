@@ -3,10 +3,10 @@
 // ---- Variant / size grids ---------------------------------------------------
 
 .demo-menu-variant-grid {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
   align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
   margin-bottom: 1.5rem;
 }
 
@@ -15,10 +15,10 @@
 }
 
 .demo-menu-size-grid {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
   align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
   margin-bottom: 1.5rem;
 }
 
@@ -27,10 +27,10 @@
 }
 
 .demo-menu-variant-label {
+  color: var(--uilib-muted, #6b7280);
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--uilib-muted, #6b7280);
   margin: 0 0 0.5rem;
+  text-transform: uppercase;
 }

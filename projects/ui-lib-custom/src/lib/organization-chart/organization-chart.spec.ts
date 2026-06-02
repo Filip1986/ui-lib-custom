@@ -1,20 +1,21 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+
 import { OrganizationChart } from './organization-chart';
-import { OrgChartNodeTemplateDirective } from './organization-chart-template-directives';
 import type {
   OrganizationChartNode,
   OrganizationChartNodeExpandEvent,
   OrganizationChartNodeSelectEvent,
   OrganizationChartSelectionMode,
 } from './organization-chart.types';
+import { OrgChartNodeTemplateDirective } from './organization-chart-template-directives';
 
 // ─── Test data ────────────────────────────────────────────────────────────────
 

@@ -1,15 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  type DebugElement,
   provideZonelessChangeDetection,
   signal,
-  type DebugElement,
   type WritableSignal,
 } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+
 import { SpeedDialComponent } from './speed-dial.component';
 import type {
   SpeedDialClickEvent,

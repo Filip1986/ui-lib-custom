@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { DebugElement } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { ColorPicker } from './index';
+
 import type { ColorPickerValue, HsbColor, RgbColor } from './index';
+import { ColorPicker } from './index';
 
 type ChangeEventPayload = { originalEvent: Event; value: ColorPickerValue };
 

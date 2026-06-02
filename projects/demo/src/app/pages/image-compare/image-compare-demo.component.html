@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description='Displays two images overlaid with a draggable divider, allowing the user to compare a "before" and "after" image by sliding the handle horizontally. Supports keyboard navigation, two-way value binding, three design variants, and three size tokens.'
     docHeader
     title="ImageCompare"
     [importCode]="importCode"
-    description='Displays two images overlaid with a draggable divider, allowing the user to compare a "before" and "after" image by sliding the handle horizontally. Supports keyboard navigation, two-way value binding, three design variants, and three size tokens.'
   />
 
   <!-- ── a. Basic ────────────────────────────────────────────────────────── -->
@@ -16,10 +16,10 @@
     <ui-lib-panel variant="minimal">
       <div class="demo-compare-wrapper">
         <ui-lib-image-compare
-          leftImage="https://picsum.photos/seed/before1/800/400"
           leftAlt="Before"
-          rightImage="https://picsum.photos/seed/after1/800/400"
+          leftImage="https://picsum.photos/seed/before1/800/400"
           rightAlt="After"
+          rightImage="https://picsum.photos/seed/after1/800/400"
         />
       </div>
     </ui-lib-panel>
@@ -34,10 +34,10 @@
     <ui-lib-panel variant="minimal">
       <div class="demo-compare-wrapper">
         <ui-lib-image-compare
-          leftImage="https://picsum.photos/seed/before2/800/400"
           leftAlt="Before"
-          rightImage="https://picsum.photos/seed/after2/800/400"
+          leftImage="https://picsum.photos/seed/before2/800/400"
           rightAlt="After"
+          rightImage="https://picsum.photos/seed/after2/800/400"
           [(value)]="position"
         />
       </div>
@@ -60,10 +60,10 @@
           <span class="size-label">sm</span>
           <div class="demo-compare-wrapper demo-compare-wrapper--sm">
             <ui-lib-image-compare
-              leftImage="https://picsum.photos/seed/before3/800/300"
               leftAlt="Before"
-              rightImage="https://picsum.photos/seed/after3/800/300"
+              leftImage="https://picsum.photos/seed/before3/800/300"
               rightAlt="After"
+              rightImage="https://picsum.photos/seed/after3/800/300"
               size="sm"
             />
           </div>
@@ -72,10 +72,10 @@
           <span class="size-label">md</span>
           <div class="demo-compare-wrapper demo-compare-wrapper--sm">
             <ui-lib-image-compare
-              leftImage="https://picsum.photos/seed/before4/800/300"
               leftAlt="Before"
-              rightImage="https://picsum.photos/seed/after4/800/300"
+              leftImage="https://picsum.photos/seed/before4/800/300"
               rightAlt="After"
+              rightImage="https://picsum.photos/seed/after4/800/300"
               size="md"
             />
           </div>
@@ -84,10 +84,10 @@
           <span class="size-label">lg</span>
           <div class="demo-compare-wrapper demo-compare-wrapper--sm">
             <ui-lib-image-compare
-              leftImage="https://picsum.photos/seed/before5/800/300"
               leftAlt="Before"
-              rightImage="https://picsum.photos/seed/after5/800/300"
+              leftImage="https://picsum.photos/seed/before5/800/300"
               rightAlt="After"
+              rightImage="https://picsum.photos/seed/after5/800/300"
               size="lg"
             />
           </div>
@@ -110,10 +110,10 @@
           <span class="size-label">material</span>
           <div class="demo-compare-wrapper demo-compare-wrapper--sm">
             <ui-lib-image-compare
-              leftImage="https://picsum.photos/seed/before6/800/300"
               leftAlt="Before"
-              rightImage="https://picsum.photos/seed/after6/800/300"
+              leftImage="https://picsum.photos/seed/before6/800/300"
               rightAlt="After"
+              rightImage="https://picsum.photos/seed/after6/800/300"
               variant="material"
             />
           </div>
@@ -122,10 +122,10 @@
           <span class="size-label">bootstrap</span>
           <div class="demo-compare-wrapper demo-compare-wrapper--sm">
             <ui-lib-image-compare
-              leftImage="https://picsum.photos/seed/before7/800/300"
               leftAlt="Before"
-              rightImage="https://picsum.photos/seed/after7/800/300"
+              leftImage="https://picsum.photos/seed/before7/800/300"
               rightAlt="After"
+              rightImage="https://picsum.photos/seed/after7/800/300"
               variant="bootstrap"
             />
           </div>
@@ -134,10 +134,10 @@
           <span class="size-label">minimal</span>
           <div class="demo-compare-wrapper demo-compare-wrapper--sm">
             <ui-lib-image-compare
-              leftImage="https://picsum.photos/seed/before8/800/300"
               leftAlt="Before"
-              rightImage="https://picsum.photos/seed/after8/800/300"
+              leftImage="https://picsum.photos/seed/before8/800/300"
               rightAlt="After"
+              rightImage="https://picsum.photos/seed/after8/800/300"
               variant="minimal"
             />
           </div>
@@ -155,10 +155,10 @@
     <ui-lib-panel variant="minimal">
       <div class="demo-compare-wrapper">
         <ui-lib-image-compare
-          leftImage="https://picsum.photos/seed/before9/800/400"
           leftAlt="Before"
-          rightImage="https://picsum.photos/seed/after9/800/400"
+          leftImage="https://picsum.photos/seed/before9/800/400"
           rightAlt="After"
+          rightImage="https://picsum.photos/seed/after9/800/400"
           [disabled]="true"
         />
       </div>
@@ -175,11 +175,11 @@
     <ui-lib-panel variant="minimal">
       <div class="demo-compare-wrapper">
         <ui-lib-image-compare
-          leftImage="https://picsum.photos/seed/before10/800/400"
-          leftAlt="Original photo"
-          rightImage="https://picsum.photos/seed/after10/800/400"
-          rightAlt="Photo with filter applied"
           ariaLabel="Compare photo filters"
+          leftAlt="Original photo"
+          leftImage="https://picsum.photos/seed/before10/800/400"
+          rightAlt="Photo with filter applied"
+          rightImage="https://picsum.photos/seed/after10/800/400"
         />
       </div>
     </ui-lib-panel>
@@ -189,7 +189,7 @@
   <!-- ── API Table ─────────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API">
     <app-doc-api-reference [rows]="apiInputRows" />
-    <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
   </app-doc-section>
 
   <!-- ── Accessibility ─────────────────────────────────────────── -->
@@ -202,9 +202,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -213,8 +213,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

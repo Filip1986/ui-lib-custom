@@ -70,25 +70,25 @@
 
   // ---- Host element ------------------------------------------------
   .ui-lib-tag {
-    display: inline-flex;
     align-items: center;
-    gap: var(--uilib-tag-gap);
-    padding: var(--uilib-tag-padding-y) var(--uilib-tag-padding-x);
     border-radius: var(--uilib-tag-border-radius);
+    display: inline-flex;
+    font-family: var(--uilib-font-ui, inherit);
     font-size: var(--uilib-tag-font-size);
     font-weight: var(--uilib-tag-font-weight);
-    font-family: var(--uilib-font-ui, inherit);
+    gap: var(--uilib-tag-gap);
     letter-spacing: var(--uilib-tag-letter-spacing);
     line-height: var(--uilib-tag-line-height);
-    white-space: nowrap;
+    padding: var(--uilib-tag-padding-y) var(--uilib-tag-padding-x);
+    transition: var(--uilib-tag-transition);
     user-select: none;
     vertical-align: middle;
-    transition: var(--uilib-tag-transition);
+    white-space: nowrap;
 
     // ---- Parts -------------------------------------------------------
     &__icon {
-      font-size: var(--uilib-tag-icon-font-size);
       flex-shrink: 0;
+      font-size: var(--uilib-tag-icon-font-size);
       line-height: 1;
     }
 
@@ -97,20 +97,20 @@
     }
 
     &__remove-button {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: var(--uilib-tag-remove-button-size);
-      height: var(--uilib-tag-remove-button-size);
-      padding: 0;
+      background: var(--uilib-tag-remove-button-bg);
       border: none;
       border-radius: 50%;
-      background: var(--uilib-tag-remove-button-bg);
       color: var(--uilib-tag-remove-button-color);
       cursor: pointer;
-      line-height: 1;
+      display: inline-flex;
       flex-shrink: 0;
+      height: var(--uilib-tag-remove-button-size);
+      justify-content: center;
+      line-height: 1;
+      padding: 0;
       transition: var(--uilib-tag-remove-button-transition);
+      width: var(--uilib-tag-remove-button-size);
 
       &:hover {
         background: var(--uilib-tag-remove-button-bg-hover);
@@ -134,13 +134,13 @@
 
     // ---- Sizes -------------------------------------------------------
     &--size-sm {
-      padding: var(--uilib-tag-padding-y-sm) var(--uilib-tag-padding-x-sm);
       font-size: var(--uilib-tag-font-size-sm);
+      padding: var(--uilib-tag-padding-y-sm) var(--uilib-tag-padding-x-sm);
     }
 
     &--size-lg {
-      padding: var(--uilib-tag-padding-y-lg) var(--uilib-tag-padding-x-lg);
       font-size: var(--uilib-tag-font-size-lg);
+      padding: var(--uilib-tag-padding-y-lg) var(--uilib-tag-padding-x-lg);
     }
 
     // ---- Severity colours -------------------------------------------

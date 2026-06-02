@@ -56,13 +56,13 @@
 
   // Popup-mode host: zero-size anchor so the panel can escape the flow
   ui-lib-menu.ui-lib-menu--popup {
-    position: fixed;
-    top: 0;
-    inset-inline-start: 0;
-    width: 0;
     height: 0;
+    inset-inline-start: 0;
     overflow: visible;
     pointer-events: none;
+    position: fixed;
+    top: 0;
+    width: 0;
     z-index: var(--uilib-menu-z-index);
   }
 
@@ -72,25 +72,25 @@
     background: var(--uilib-menu-bg);
     border: var(--uilib-menu-border);
     border-radius: var(--uilib-menu-radius);
-    padding: var(--uilib-menu-padding) 0;
     font-size: var(--uilib-menu-font-size);
     min-width: var(--uilib-menu-min-width);
     outline: none;
+    padding: var(--uilib-menu-padding) 0;
   }
 
   // Popup panel gets shadow + fixed positioning
   ui-lib-menu .ui-lib-menu__panel--popup {
-    position: fixed;
-    z-index: var(--uilib-menu-z-index);
     box-shadow: var(--uilib-menu-shadow);
-    pointer-events: auto;
 
     // Hidden until position is adjusted to prevent a one-frame flash
     opacity: 0;
+    pointer-events: auto;
+    position: fixed;
     transform: translateY(-4px);
     transition:
       opacity 0.1s ease,
       transform 0.1s ease;
+    z-index: var(--uilib-menu-z-index);
   }
 
   ui-lib-menu .ui-lib-menu__panel--positioned {
@@ -124,14 +124,14 @@
   }
 
   ui-lib-menu .ui-lib-menu__group-label {
-    padding: var(--uilib-menu-group-label-padding-y) var(--uilib-menu-group-label-padding-x);
-    padding-bottom: calc(var(--uilib-menu-group-label-padding-y) * 0.5);
     color: var(--uilib-menu-group-label-color);
     font-size: var(--uilib-menu-group-label-font-size);
     font-weight: var(--uilib-menu-group-label-font-weight);
-    text-transform: var(--uilib-menu-group-label-text-transform);
     letter-spacing: var(--uilib-menu-group-label-letter-spacing);
     line-height: 1.4;
+    padding: var(--uilib-menu-group-label-padding-y) var(--uilib-menu-group-label-padding-x);
+    padding-bottom: calc(var(--uilib-menu-group-label-padding-y) * 0.5);
+    text-transform: var(--uilib-menu-group-label-text-transform);
     -webkit-user-select: none;
     user-select: none;
   }
@@ -139,19 +139,19 @@
   // ── Link ────────────────────────────────────────────────────────────────────
 
   ui-lib-menu .ui-lib-menu__link {
-    display: flex;
     align-items: center;
-    gap: var(--uilib-menu-icon-gap);
-    padding: var(--uilib-menu-item-padding-y) var(--uilib-menu-item-padding-x);
     color: var(--uilib-menu-item-color);
-    text-decoration: none;
     cursor: pointer;
+    display: flex;
+    gap: var(--uilib-menu-icon-gap);
     outline: none;
-    -webkit-user-select: none;
-    user-select: none;
+    padding: var(--uilib-menu-item-padding-y) var(--uilib-menu-item-padding-x);
+    text-decoration: none;
     transition:
       background-color 0.12s ease,
       color 0.12s ease;
+    -webkit-user-select: none;
+    user-select: none;
     white-space: nowrap;
   }
 
@@ -161,28 +161,28 @@
   }
 
   ui-lib-menu .ui-lib-menu__link:focus-visible {
-    outline: none;
-    box-shadow: var(--uilib-menu-focus-shadow);
     background-color: var(--uilib-menu-item-bg-hover);
+    box-shadow: var(--uilib-menu-focus-shadow);
     color: var(--uilib-menu-item-color-hover);
+    outline: none;
   }
 
   ui-lib-menu .ui-lib-menu__link[aria-disabled='true'] {
     color: var(--uilib-menu-item-color-disabled);
-    pointer-events: none;
     cursor: default;
     opacity: 0.6;
+    pointer-events: none;
   }
 
   // ── Icon ────────────────────────────────────────────────────────────────────
 
   ui-lib-menu .ui-lib-menu__item-icon {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    font-size: var(--uilib-menu-icon-size);
-    line-height: 1;
+    display: inline-flex;
     flex-shrink: 0;
+    font-size: var(--uilib-menu-icon-size);
+    justify-content: center;
+    line-height: 1;
   }
 
   // ── Label ────────────────────────────────────────────────────────────────────
@@ -194,8 +194,8 @@
   // ── Separator ────────────────────────────────────────────────────────────────
 
   ui-lib-menu .ui-lib-menu__separator {
-    height: 1px;
     background-color: var(--uilib-menu-separator-color);
+    height: 1px;
     margin: var(--uilib-menu-separator-my) 0;
   }
 

@@ -1,5 +1,5 @@
-import { Directive, ElementRef, Renderer2, effect, inject, input } from '@angular/core';
 import type { InputSignal } from '@angular/core';
+import { Directive, effect, ElementRef, inject, input, Renderer2 } from '@angular/core';
 /**
  * Bind directive — dynamically applies a record of key-value pairs as DOM
  * properties on the host element.

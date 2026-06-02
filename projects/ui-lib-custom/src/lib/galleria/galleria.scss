@@ -66,11 +66,11 @@
   // ─── Base host ───────────────────────────────────────────────────────────────
 
   .ui-lib-galleria {
+    animation: var(--uilib-galleria-mount-animation);
     display: block;
     position: relative;
     /* Promote to compositor layer for GPU-accelerated mount animation */
     will-change: transform, opacity;
-    animation: var(--uilib-galleria-mount-animation);
   }
 
   // ─── Container ───────────────────────────────────────────────────────────────
@@ -78,8 +78,8 @@
   .uilib-galleria__container {
     display: flex;
     flex-direction: column;
-    position: relative;
     overflow: hidden;
+    position: relative;
 
     &--hidden {
       display: none;
@@ -90,9 +90,9 @@
 
   .uilib-galleria__content {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: var(--uilib-galleria-gap);
-    flex: 1;
 
     &--vertical {
       flex-direction: row;
@@ -109,13 +109,13 @@
   // ─── Item wrapper ─────────────────────────────────────────────────────────────
 
   .uilib-galleria__item-wrapper {
-    position: relative;
-    flex: 1;
-    display: flex;
     align-items: center;
+    background: var(--uilib-galleria-item-bg);
+    display: flex;
+    flex: 1;
     justify-content: center;
     overflow: hidden;
-    background: var(--uilib-galleria-item-bg);
+    position: relative;
 
     &:hover .uilib-galleria__item-nav {
       opacity: 1;
@@ -125,39 +125,39 @@
   // ─── Active item ─────────────────────────────────────────────────────────────
 
   .uilib-galleria__item {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    inline-size: 100%;
     block-size: 100%;
+    display: flex;
+    inline-size: 100%;
+    justify-content: center;
 
     img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
       display: block;
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
     }
   }
 
   // ─── Item navigation arrows ──────────────────────────────────────────────────
 
   .uilib-galleria__item-nav {
+    align-items: center;
+    background: var(--uilib-galleria-nav-bg);
+    block-size: var(--uilib-galleria-nav-size);
+    border: none;
+    border-radius: var(--uilib-galleria-nav-radius);
+    color: var(--uilib-galleria-nav-color);
+    cursor: pointer;
+    display: flex;
+    inline-size: var(--uilib-galleria-nav-size);
+    justify-content: center;
+    opacity: 0.85;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    inline-size: var(--uilib-galleria-nav-size);
-    block-size: var(--uilib-galleria-nav-size);
-    border-radius: var(--uilib-galleria-nav-radius);
-    background: var(--uilib-galleria-nav-bg);
-    color: var(--uilib-galleria-nav-color);
-    border: none;
-    cursor: pointer;
     transition: background var(--uilib-galleria-transition);
-    opacity: 0.85;
+    z-index: 1;
 
     &:hover:not(:disabled) {
       background: var(--uilib-galleria-nav-bg-hover);
@@ -174,8 +174,8 @@
 
     &--disabled,
     &:disabled {
-      opacity: 0.3;
       cursor: default;
+      opacity: 0.3;
       pointer-events: none;
     }
   }
@@ -189,32 +189,32 @@
   // ─── Caption overlay ─────────────────────────────────────────────────────────
 
   .uilib-galleria__caption {
-    position: absolute;
-    inset-block-end: 0;
-    inset-inline-start: 0;
-    inset-inline-end: 0;
     background: var(--uilib-galleria-caption-bg);
     color: var(--uilib-galleria-caption-color);
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     padding: var(--uilib-galleria-caption-padding);
+    position: absolute;
   }
 
   // ─── Indicators ──────────────────────────────────────────────────────────────
 
   .uilib-galleria__indicators {
+    align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
     gap: var(--uilib-galleria-indicator-gap);
+    justify-content: center;
     padding: var(--uilib-galleria-indicator-padding);
 
     &--on-item {
-      position: absolute;
-      bottom: 0;
-      inset-inline-start: 0;
-      inset-inline-end: 0;
       background: transparent;
+      inset-inline-end: 0;
+      inset-inline-start: 0;
+      bottom: 0;
       padding: 0.4rem;
+      position: absolute;
     }
 
     &--top {
@@ -223,14 +223,14 @@
   }
 
   .uilib-galleria__indicator-btn {
-    display: flex;
     align-items: center;
-    justify-content: center;
     background: transparent;
     border: none;
-    padding: 0.25rem;
-    cursor: pointer;
     border-radius: var(--uilib-radius-full, 9999px);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 0.25rem;
     transition: transform var(--uilib-galleria-transition);
 
     &:hover {
@@ -244,11 +244,11 @@
   }
 
   .uilib-galleria__indicator-dot {
-    display: block;
-    inline-size: var(--uilib-galleria-indicator-dot-size);
+    background: var(--uilib-galleria-indicator-dot-bg);
     block-size: var(--uilib-galleria-indicator-dot-size);
     border-radius: var(--uilib-radius-full, 9999px);
-    background: var(--uilib-galleria-indicator-dot-bg);
+    display: block;
+    inline-size: var(--uilib-galleria-indicator-dot-size);
     transition:
       background var(--uilib-galleria-transition),
       transform var(--uilib-galleria-transition);
@@ -257,9 +257,9 @@
   // ─── Thumbnail wrapper ───────────────────────────────────────────────────────
 
   .uilib-galleria__thumbnail-wrapper {
+    align-items: center;
     display: flex;
     flex-direction: row;
-    align-items: center;
     gap: 0.25rem;
 
     &--vertical {
@@ -269,13 +269,13 @@
 
   .uilib-galleria__thumbnail-items {
     display: flex;
+    flex: 1;
     flex-direction: row;
     gap: var(--uilib-galleria-thumbnail-gap);
-    overflow: hidden;
-    flex: 1;
-    margin: 0;
-    padding: 0;
     list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
 
     &--vertical {
       flex-direction: column;
@@ -287,20 +287,20 @@
   }
 
   .uilib-galleria__thumbnail-item {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    background: transparent;
     border: var(--uilib-galleria-thumbnail-item-border);
     border-radius: 2px;
-    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
     opacity: var(--uilib-galleria-thumbnail-item-opacity-inactive);
-    background: transparent;
+    outline: none;
+    overflow: hidden;
     padding: 0;
     transition:
       border-color var(--uilib-galleria-transition),
       opacity var(--uilib-galleria-transition);
-    outline: none;
 
     &:hover,
     &:focus-visible {
@@ -316,48 +316,48 @@
 
     img {
       display: block;
+      height: 100%;
       object-fit: cover;
       width: 100%;
-      height: 100%;
     }
   }
 
   .uilib-galleria__thumbnail-index {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    inline-size: var(--uilib-galleria-thumbnail-size-md);
     block-size: var(--uilib-galleria-thumbnail-size-md);
-    font-size: var(--uilib-galleria-thumbnail-index-font-size);
     color: var(--uilib-page-text-muted, #9ca3af);
+    display: flex;
+    font-size: var(--uilib-galleria-thumbnail-index-font-size);
+    inline-size: var(--uilib-galleria-thumbnail-size-md);
+    justify-content: center;
   }
 
   // ─── Size variants — thumbnail size ──────────────────────────────────────────
 
   .ui-lib-galleria--size-sm .uilib-galleria__thumbnail-index {
-    inline-size: var(--uilib-galleria-thumbnail-size-sm);
     block-size: var(--uilib-galleria-thumbnail-size-sm);
+    inline-size: var(--uilib-galleria-thumbnail-size-sm);
   }
 
   .ui-lib-galleria--size-lg .uilib-galleria__thumbnail-index {
-    inline-size: var(--uilib-galleria-thumbnail-size-lg);
     block-size: var(--uilib-galleria-thumbnail-size-lg);
+    inline-size: var(--uilib-galleria-thumbnail-size-lg);
   }
 
   // ─── Thumbnail navigation arrows ────────────────────────────────────────────
 
   .uilib-galleria__thumbnail-nav {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    inline-size: var(--uilib-galleria-thumbnail-nav-size);
-    block-size: var(--uilib-galleria-thumbnail-nav-size);
-    border-radius: var(--uilib-radius-full, 9999px);
     background: var(--uilib-galleria-thumbnail-nav-bg);
-    color: var(--uilib-galleria-thumbnail-nav-color);
+    block-size: var(--uilib-galleria-thumbnail-nav-size);
     border: none;
+    border-radius: var(--uilib-radius-full, 9999px);
+    color: var(--uilib-galleria-thumbnail-nav-color);
     cursor: pointer;
+    display: flex;
     flex-shrink: 0;
+    inline-size: var(--uilib-galleria-thumbnail-nav-size);
+    justify-content: center;
     transition: background var(--uilib-galleria-transition);
 
     &:hover:not(:disabled) {
@@ -366,8 +366,8 @@
 
     &--disabled,
     &:disabled {
-      opacity: 0.3;
       cursor: default;
+      opacity: 0.3;
       pointer-events: none;
     }
   }
@@ -375,34 +375,34 @@
   // ─── SVG icon helpers ────────────────────────────────────────────────────────
 
   .uilib-galleria__icon {
-    inline-size: 1.5rem;
     block-size: 1.5rem;
+    inline-size: 1.5rem;
 
     &--sm {
-      inline-size: 1rem;
       block-size: 1rem;
+      inline-size: 1rem;
     }
   }
 
   // ─── Fullscreen open button ───────────────────────────────────────────────────
 
   .uilib-galleria__fullscreen-btn {
-    position: absolute;
+    align-items: center;
+    background: var(--uilib-galleria-fullscreen-btn-bg);
+    block-size: var(--uilib-galleria-fullscreen-btn-size);
+    border: none;
+    border-radius: var(--uilib-radius-full, 9999px);
+    color: var(--uilib-galleria-fullscreen-btn-color);
+    cursor: pointer;
+    display: flex;
+    inline-size: var(--uilib-galleria-fullscreen-btn-size);
     inset-block-start: 0.5rem;
     inset-inline-end: 0.5rem;
-    z-index: 2;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    inline-size: var(--uilib-galleria-fullscreen-btn-size);
-    block-size: var(--uilib-galleria-fullscreen-btn-size);
-    border-radius: var(--uilib-radius-full, 9999px);
-    background: var(--uilib-galleria-fullscreen-btn-bg);
-    color: var(--uilib-galleria-fullscreen-btn-color);
-    border: none;
-    cursor: pointer;
-    transition: background var(--uilib-galleria-transition);
     opacity: 0.8;
+    position: absolute;
+    transition: background var(--uilib-galleria-transition);
+    z-index: 2;
 
     &:hover {
       background: var(--uilib-galleria-fullscreen-btn-bg-hover);
@@ -413,45 +413,45 @@
   // ─── Fullscreen mask + container ─────────────────────────────────────────────
 
   .uilib-galleria__mask {
-    position: fixed;
-    inset: 0;
-    z-index: var(--uilib-z-overlay, 1100);
+    align-items: center;
     background: var(--uilib-galleria-mask-bg);
     display: flex;
-    align-items: center;
+    inset: 0;
     justify-content: center;
+    position: fixed;
+    z-index: var(--uilib-z-overlay, 1100);
   }
 
   .uilib-galleria__fullscreen-container {
-    position: relative;
-    inline-size: 100vw;
     block-size: 100vh;
     display: flex;
     flex-direction: column;
+    inline-size: 100vw;
     overflow: hidden;
+    position: relative;
 
     .uilib-galleria__item-wrapper {
-      flex: 1;
       background: transparent;
+      flex: 1;
     }
   }
 
   .uilib-galleria__close-btn {
-    position: absolute;
+    align-items: center;
+    background: var(--uilib-galleria-close-btn-bg);
+    block-size: var(--uilib-galleria-close-btn-size);
+    border: none;
+    border-radius: var(--uilib-radius-full, 9999px);
+    color: var(--uilib-galleria-close-btn-color);
+    cursor: pointer;
+    display: flex;
+    inline-size: var(--uilib-galleria-close-btn-size);
     inset-block-start: 0.75rem;
     inset-inline-end: 0.75rem;
-    z-index: 3;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    inline-size: var(--uilib-galleria-close-btn-size);
-    block-size: var(--uilib-galleria-close-btn-size);
-    border-radius: var(--uilib-radius-full, 9999px);
-    background: var(--uilib-galleria-close-btn-bg);
-    color: var(--uilib-galleria-close-btn-color);
-    border: none;
-    cursor: pointer;
+    position: absolute;
     transition: background var(--uilib-galleria-transition);
+    z-index: 3;
 
     &:hover {
       background: var(--uilib-galleria-close-btn-bg-hover);
@@ -483,18 +483,18 @@
     --uilib-galleria-indicator-dot-bg-active: var(--uilib-color-primary, #0d6efd);
 
     .uilib-galleria__item-nav {
-      border-radius: 2px;
       border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
     }
 
     .uilib-galleria__item-nav--prev {
-      inset-inline-start: 0;
       border-radius: 0 2px 2px 0;
+      inset-inline-start: 0;
     }
 
     .uilib-galleria__item-nav--next {
-      inset-inline-end: 0;
       border-radius: 2px 0 0 2px;
+      inset-inline-end: 0;
     }
   }
 
@@ -509,8 +509,8 @@
     --uilib-galleria-indicator-dot-bg-active: currentColor;
 
     .uilib-galleria__item-nav {
-      color: currentColor;
       border-radius: 2px;
+      color: currentColor;
     }
   }
 

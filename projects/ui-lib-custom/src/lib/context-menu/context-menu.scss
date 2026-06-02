@@ -46,41 +46,41 @@
     --uilib-context-menu-submenu-offset: 2px;
     --uilib-context-menu-focus-shadow: 0 0 0 2px
       color-mix(in srgb, var(--uilib-color-primary-500, #3b82f6) 35%, transparent);
+    height: 0;
+    inset-inline-start: 0;
+    overflow: visible;
+    pointer-events: none;
 
     // ── Host positioning ──────────────────────────────────────────────────────
     // Host is a zero-size anchor; the panel uses fixed positioning
 
     position: fixed;
     top: 0;
-    inset-inline-start: 0;
     width: 0;
-    height: 0;
-    overflow: visible;
-    pointer-events: none;
     z-index: var(--uilib-context-menu-z-index);
   }
 
   // ── Panel ──────────────────────────────────────────────────────────────────
 
   ui-lib-context-menu .ui-lib-context-menu__panel {
-    position: fixed;
-    z-index: var(--uilib-context-menu-z-index);
-    min-width: var(--uilib-context-menu-min-width);
     background: var(--uilib-context-menu-bg);
     border: var(--uilib-context-menu-border);
     border-radius: var(--uilib-context-menu-radius);
     box-shadow: var(--uilib-context-menu-shadow);
-    padding: var(--uilib-context-menu-padding) 0;
-    pointer-events: auto;
     font-size: var(--uilib-context-menu-font-size);
-    outline: none;
+    min-width: var(--uilib-context-menu-min-width);
 
     // Hidden until position is adjusted (prevents 1-frame flash at wrong location)
     opacity: 0;
+    outline: none;
+    padding: var(--uilib-context-menu-padding) 0;
+    pointer-events: auto;
+    position: fixed;
     transform: translateY(2px);
     transition:
       opacity 0.12s ease,
       transform 0.12s ease;
+    z-index: var(--uilib-context-menu-z-index);
   }
 
   ui-lib-context-menu .ui-lib-context-menu__panel--positioned {
@@ -105,20 +105,20 @@
   // ── Link ────────────────────────────────────────────────────────────────────
 
   ui-lib-context-menu .ui-lib-context-menu__link {
-    display: flex;
     align-items: center;
-    gap: var(--uilib-context-menu-icon-gap);
-    padding: var(--uilib-context-menu-item-padding-y) var(--uilib-context-menu-item-padding-x);
-    color: var(--uilib-context-menu-item-color);
-    text-decoration: none;
-    cursor: pointer;
-    outline: none;
     border-radius: 0;
-    -webkit-user-select: none;
-    user-select: none;
+    color: var(--uilib-context-menu-item-color);
+    cursor: pointer;
+    display: flex;
+    gap: var(--uilib-context-menu-icon-gap);
+    outline: none;
+    padding: var(--uilib-context-menu-item-padding-y) var(--uilib-context-menu-item-padding-x);
+    text-decoration: none;
     transition:
       background-color 0.12s ease,
       color 0.12s ease;
+    -webkit-user-select: none;
+    user-select: none;
     white-space: nowrap;
   }
 
@@ -129,28 +129,28 @@
   }
 
   ui-lib-context-menu .ui-lib-context-menu__link:focus-visible {
-    outline: none;
-    box-shadow: var(--uilib-context-menu-focus-shadow);
     background-color: var(--uilib-context-menu-item-bg-hover);
+    box-shadow: var(--uilib-context-menu-focus-shadow);
     color: var(--uilib-context-menu-item-color-hover);
+    outline: none;
   }
 
   ui-lib-context-menu .ui-lib-context-menu__link[aria-disabled='true'] {
     color: var(--uilib-context-menu-item-color-disabled);
-    pointer-events: none;
     cursor: not-allowed;
     opacity: 0.6;
+    pointer-events: none;
   }
 
   // ── Icon ────────────────────────────────────────────────────────────────────
 
   ui-lib-context-menu .ui-lib-context-menu__item-icon {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    font-size: var(--uilib-context-menu-icon-size);
-    line-height: 1;
+    display: inline-flex;
     flex-shrink: 0;
+    font-size: var(--uilib-context-menu-icon-size);
+    justify-content: center;
+    line-height: 1;
   }
 
   // ── Label ────────────────────────────────────────────────────────────────────
@@ -162,11 +162,11 @@
   // ── Submenu chevron ──────────────────────────────────────────────────────────
 
   ui-lib-context-menu .ui-lib-context-menu__submenu-icon {
-    margin-inline-start: auto;
-    padding-inline-start: var(--uilib-spacing-3, 0.75rem);
     font-size: inherit;
-    opacity: 0.6;
     line-height: 1;
+    margin-inline-start: auto;
+    opacity: 0.6;
+    padding-inline-start: var(--uilib-spacing-3, 0.75rem);
     transition: transform 0.12s ease;
   }
 
@@ -180,25 +180,25 @@
   // ── Separator ────────────────────────────────────────────────────────────────
 
   ui-lib-context-menu .ui-lib-context-menu__separator {
-    height: 1px;
     background-color: var(--uilib-context-menu-separator-color);
+    height: 1px;
     margin: var(--uilib-context-menu-separator-my) 0;
   }
 
   // ── Submenu panel ────────────────────────────────────────────────────────────
 
   ui-lib-context-menu .ui-lib-context-menu__submenu {
-    position: absolute;
-    inset-inline-start: 100%;
-    top: calc(-1 * var(--uilib-context-menu-padding));
-    min-width: var(--uilib-context-menu-min-width);
     background: var(--uilib-context-menu-bg);
     border: var(--uilib-context-menu-border);
     border-radius: var(--uilib-context-menu-radius);
     box-shadow: var(--uilib-context-menu-shadow);
-    padding: var(--uilib-context-menu-padding) 0;
+    inset-inline-start: 100%;
     list-style: none;
     margin: 0;
+    min-width: var(--uilib-context-menu-min-width);
+    padding: var(--uilib-context-menu-padding) 0;
+    position: absolute;
+    top: calc(-1 * var(--uilib-context-menu-padding));
     z-index: 1;
   }
 
@@ -269,9 +269,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     ui-lib-context-menu .ui-lib-context-menu__panel {
-      transition: none;
       animation: none;
       transform: none;
+      transition: none;
     }
 
     ui-lib-context-menu .ui-lib-context-menu__submenu-icon {

@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Attribute directive that restricts keyboard input on any native input element to characters matching a built-in preset or a custom regular expression. Supports paste and drag-and-drop filtering, modifier-key pass-through, and a runtime bypass toggle."
     docHeader
     title="KeyFilter"
     [importCode]="importCode"
-    description="Attribute directive that restricts keyboard input on any native input element to characters matching a built-in preset or a custom regular expression. Supports paste and drag-and-drop filtering, modifier-key pass-through, and a runtime bypass toggle."
   />
 
   <app-doc-demo-viewport [autoHeight]="true">
@@ -16,9 +16,9 @@
         <ui-lib-panel variant="minimal">
           <input
             class="demo-input"
-            [uilibKeyFilter]="'alphanum'"
             hintText="Letters and numbers only"
             placeholder="Enter account ID"
+            [uilibKeyFilter]="'alphanum'"
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="alphanumHtml" [typescript]="alphanumTs" />
@@ -28,7 +28,7 @@
         <h3>b. Alpha</h3>
         <p class="section-text">Letters only — digits and symbols are blocked.</p>
         <ui-lib-panel variant="minimal">
-          <input class="demo-input" [uilibKeyFilter]="'alpha'" placeholder="Letters only" />
+          <input class="demo-input" placeholder="Letters only" [uilibKeyFilter]="'alpha'" />
         </ui-lib-panel>
         <app-doc-code-example [html]="alphaHtml" [typescript]="alphaTs" />
       </app-doc-section>
@@ -39,8 +39,8 @@
         <ui-lib-panel variant="minimal">
           <input
             class="demo-input"
-            [uilibKeyFilter]="'pint'"
             placeholder="Positive integers only"
+            [uilibKeyFilter]="'pint'"
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="pintHtml" [typescript]="pintTs" />
@@ -50,7 +50,7 @@
         <h3>d. Integer</h3>
         <p class="section-text">Digits and minus sign — use for signed whole numbers.</p>
         <ui-lib-panel variant="minimal">
-          <input class="demo-input" [uilibKeyFilter]="'int'" placeholder="Integers (with minus)" />
+          <input class="demo-input" placeholder="Integers (with minus)" [uilibKeyFilter]="'int'" />
         </ui-lib-panel>
         <app-doc-code-example [html]="intHtml" [typescript]="intTs" />
       </app-doc-section>
@@ -63,8 +63,8 @@
         <ui-lib-panel variant="minimal">
           <input
             class="demo-input"
-            [uilibKeyFilter]="'num'"
             placeholder="Numbers (decimal, minus)"
+            [uilibKeyFilter]="'num'"
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="numHtml" [typescript]="numTs" />
@@ -74,7 +74,7 @@
         <h3>f. Hexadecimal</h3>
         <p class="section-text">Digits 0–9 and letters a–f (case-insensitive).</p>
         <ui-lib-panel variant="minimal">
-          <input class="demo-input" [uilibKeyFilter]="'hex'" placeholder="Hex digits (0-9, a-f)" />
+          <input class="demo-input" placeholder="Hex digits (0-9, a-f)" [uilibKeyFilter]="'hex'" />
         </ui-lib-panel>
         <app-doc-code-example [html]="hexHtml" [typescript]="hexTs" />
       </app-doc-section>
@@ -85,8 +85,8 @@
         <ui-lib-panel variant="minimal">
           <input
             class="demo-input"
-            [uilibKeyFilter]="'money'"
             placeholder="Money (digits, - . ,)"
+            [uilibKeyFilter]="'money'"
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="moneyHtml" [typescript]="moneyTs" />
@@ -98,7 +98,7 @@
           Characters valid in email addresses per RFC 5321 local-part and domain rules.
         </p>
         <ui-lib-panel variant="minimal">
-          <input class="demo-input" [uilibKeyFilter]="'email'" placeholder="Email characters" />
+          <input class="demo-input" placeholder="Email characters" [uilibKeyFilter]="'email'" />
         </ui-lib-panel>
         <app-doc-code-example [html]="emailHtml" [typescript]="emailTs" />
       </app-doc-section>
@@ -112,8 +112,8 @@
         <ui-lib-panel variant="minimal">
           <input
             class="demo-input"
-            [uilibKeyFilter]="vowelPattern"
             placeholder="Vowels only (a e i o u)"
+            [uilibKeyFilter]="vowelPattern"
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="customHtml" [typescript]="customTs" />
@@ -137,9 +137,9 @@
             </label>
             <input
               class="demo-input"
-              [uilibKeyFilter]="'pint'"
-              [keyFilterBypass]="bypassEnabled"
               placeholder="Positive integers (bypass toggleable)"
+              [keyFilterBypass]="bypassEnabled"
+              [uilibKeyFilter]="'pint'"
             />
           </div>
         </ui-lib-panel>
@@ -180,8 +180,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

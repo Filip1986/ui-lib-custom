@@ -1,16 +1,18 @@
+import type { WritableSignal } from '@angular/core';
+import type { DebugElement } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import type { DebugElement } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Chip } from './chip';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+
+import { Chip } from './chip';
 import type { ChipSize, ChipVariant } from './chip.types';
 
 // ---- Minimal test host ------------------------------------------------

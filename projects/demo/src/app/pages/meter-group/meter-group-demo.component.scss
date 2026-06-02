@@ -8,12 +8,12 @@
   gap: 0.5rem;
 
   &__label {
+    color: var(--uilib-muted, #6b7280);
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--uilib-muted, #6b7280);
-    text-transform: uppercase;
     letter-spacing: 0.04em;
     margin: 0;
+    text-transform: uppercase;
   }
 }
 

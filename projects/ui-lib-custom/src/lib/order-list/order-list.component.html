@@ -1,37 +1,37 @@
 <!-- Controls column / row -->
 <div class="ui-lib-order-list__controls">
   <button
-    type="button"
     class="ui-lib-order-list__control-btn"
-    [disabled]="isMoveUpDisabled()"
+    type="button"
     [attr.aria-label]="effectiveMoveTopAriaLabel()"
+    [disabled]="isMoveUpDisabled()"
     (click)="moveTop()"
   >
     <ui-lib-icon name="arrow-up" />
   </button>
   <button
-    type="button"
     class="ui-lib-order-list__control-btn"
-    [disabled]="isMoveUpDisabled()"
+    type="button"
     [attr.aria-label]="effectiveMoveUpAriaLabel()"
+    [disabled]="isMoveUpDisabled()"
     (click)="moveUp()"
   >
     <ui-lib-icon name="chevron-up" />
   </button>
   <button
-    type="button"
     class="ui-lib-order-list__control-btn"
-    [disabled]="isMoveDownDisabled()"
+    type="button"
     [attr.aria-label]="effectiveMoveDownAriaLabel()"
+    [disabled]="isMoveDownDisabled()"
     (click)="moveDown()"
   >
     <ui-lib-icon name="chevron-down" />
   </button>
   <button
-    type="button"
     class="ui-lib-order-list__control-btn"
-    [disabled]="isMoveDownDisabled()"
+    type="button"
     [attr.aria-label]="effectiveMoveBottomAriaLabel()"
+    [disabled]="isMoveDownDisabled()"
     (click)="moveBottom()"
   >
     <ui-lib-icon name="arrow-down" />
@@ -56,13 +56,13 @@
         <ng-container [ngTemplateOutlet]="filterTemplate()!" />
       } @else {
         <input
-          type="text"
           class="ui-lib-order-list__filter-input"
+          type="text"
+          [attr.aria-label]="effectiveFilterPlaceholder()"
+          [disabled]="disabled() || null"
           [placeholder]="effectiveFilterPlaceholder()"
           [value]="filterQuery()"
           (input)="onFilterInput($event)"
-          [attr.aria-label]="effectiveFilterPlaceholder()"
-          [disabled]="disabled() || null"
         />
       }
     </div>
@@ -71,40 +71,40 @@
   <!-- List -->
   <ul
     #listboxEl
-    role="listbox"
+    aria-multiselectable="true"
     class="ui-lib-order-list__list"
+    role="listbox"
+    tabindex="0"
     [attr.aria-label]="ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('orderlist.label'))"
     [attr.aria-labelledby]="ariaLabelledBy()"
-    aria-multiselectable="true"
     [attr.id]="componentId + '-list'"
-    tabindex="0"
-    (keydown)="onListKeydown($event)"
     (dragleave)="onDragLeave($event)"
+    (keydown)="onListKeydown($event)"
   >
     @for (item of displayItems(); track trackByFn($index, item)) {
       <!-- Keyboard navigation handled by parent listbox (keydown); click selects via pointer -->
       <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events -->
       <li
-        role="option"
         class="ui-lib-order-list__item"
-        [class.ui-lib-order-list__item--selected]="isSelected(item)"
+        role="option"
+        [attr.aria-selected]="isSelected(item)"
+        [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
+        [attr.id]="itemId($index)"
         [class.ui-lib-order-list__item--dragging]="draggedIndex() === getValueIndex($index)"
-        [class.ui-lib-order-list__item--drop-before]="
-          dragOverIndex() === $index && dragPosition() === 'before'
-        "
         [class.ui-lib-order-list__item--drop-after]="
           dragOverIndex() === $index && dragPosition() === 'after'
         "
-        [attr.aria-selected]="isSelected(item)"
-        [attr.id]="itemId($index)"
+        [class.ui-lib-order-list__item--drop-before]="
+          dragOverIndex() === $index && dragPosition() === 'before'
+        "
+        [class.ui-lib-order-list__item--selected]="isSelected(item)"
         [tabindex]="focusedIndex() === $index ? 0 : -1"
-        [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
         (click)="onItemClick($event, item, $index)"
-        (focus)="onItemFocus($event, $index)"
-        (dragstart)="onDragStart($event, $index)"
-        (dragover)="onDragOver($event, $index)"
-        (drop)="onDrop($event, $index)"
         (dragend)="onDragEnd($event)"
+        (dragover)="onDragOver($event, $index)"
+        (dragstart)="onDragStart($event, $index)"
+        (drop)="onDrop($event, $index)"
+        (focus)="onItemFocus($event, $index)"
       >
         @if (itemTemplate()) {
           <ng-container
@@ -132,7 +132,7 @@
         />
       </div>
     } @else {
-      <p class="ui-lib-order-list__empty" aria-live="polite">
+      <p aria-live="polite" class="ui-lib-order-list__empty">
         @if (isEmptyDueToFilter()) {
           No items match the filter
         } @else {

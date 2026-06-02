@@ -1,8 +1,8 @@
 <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
   <ui-lib-input-mask
-    mask="(999) 999-9999"
     formControlName="phone"
+    mask="(999) 999-9999"
     [invalid]="reactiveForm.controls.phone.invalid && reactiveForm.controls.phone.touched"
   />
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+  <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
 </form>

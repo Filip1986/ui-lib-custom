@@ -1,11 +1,14 @@
+import { inject } from '@angular/core';
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig } from '@storybook/angular';
-import { inject } from '@angular/core';
+
+import { Button } from 'ui-lib-custom/button';
+import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
 import { Toast } from './toast';
 import { ToastService } from './toast.service';
 import type { ToastPosition, ToastSeverity, ToastVariant } from './toast.types';
-import { Button } from 'ui-lib-custom/button';
-import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
 
 type ToastStoryArgs = {
   position: ToastPosition;

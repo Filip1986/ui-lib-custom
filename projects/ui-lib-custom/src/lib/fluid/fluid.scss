@@ -15,15 +15,15 @@
     input,
     textarea,
     select {
-      width: 100%;
       box-sizing: border-box;
+      width: 100%;
     }
 
     // Standalone native buttons (e.g. <button type="submit">)
     // Exclude small utility buttons such as remove / clear / toggle icons.
     button:not(.ui-lib-chip__remove-button):not(.ui-lib-input__toggle):not([class*='__icon']) {
-      width: 100%;
       box-sizing: border-box;
+      width: 100%;
     }
 
     // ── Library component host elements ──────────────────────────────────────
@@ -35,25 +35,25 @@
     // Buttons
     ui-lib-button,
     .ui-lib-button {
-      width: 100%;
-      display: flex;
       box-sizing: border-box;
+      display: flex;
+      width: 100%;
     }
 
     // Text inputs
     ui-lib-input,
     .ui-lib-input {
-      width: 100%;
-      display: block;
       box-sizing: border-box;
+      display: block;
+      width: 100%;
     }
 
     // Textarea
     ui-lib-textarea,
     .ui-lib-textarea {
-      width: 100%;
-      display: block;
       box-sizing: border-box;
+      display: block;
+      width: 100%;
     }
 
     // Select / Listbox / TreeSelect
@@ -63,9 +63,9 @@
     .ui-lib-listbox,
     ui-lib-tree-select,
     .ui-lib-tree-select {
-      width: 100%;
-      display: block;
       box-sizing: border-box;
+      display: block;
+      width: 100%;
     }
 
     // Date-picker / Color-picker
@@ -73,17 +73,17 @@
     .ui-lib-date-picker,
     ui-lib-color-picker,
     .ui-lib-color-picker {
-      width: 100%;
-      display: block;
       box-sizing: border-box;
+      display: block;
+      width: 100%;
     }
 
     // Password
     ui-lib-password,
     .ui-lib-password {
-      width: 100%;
-      display: block;
       box-sizing: border-box;
+      display: block;
+      width: 100%;
     }
 
     // Input-group / Icon-field wrappers (should also stretch)
@@ -91,17 +91,17 @@
     .ui-lib-input-group,
     ui-lib-icon-field,
     .ui-lib-icon-field {
-      width: 100%;
-      display: block;
       box-sizing: border-box;
+      display: block;
+      width: 100%;
     }
 
     // Float-label wrapper
     ui-lib-float-label,
     .ui-lib-float-label {
-      width: 100%;
-      display: block;
       box-sizing: border-box;
+      display: block;
+      width: 100%;
     }
 
     // Input-number / Input-mask / Input-otp
@@ -109,9 +109,9 @@
     .ui-lib-input-number,
     ui-lib-input-mask,
     .ui-lib-input-mask {
-      width: 100%;
-      display: block;
       box-sizing: border-box;
+      display: block;
+      width: 100%;
     }
 
     // Toggle-button / Select-button
@@ -119,17 +119,17 @@
     .ui-lib-toggle-button,
     ui-lib-select-button,
     .ui-lib-select-button {
-      width: 100%;
-      display: flex;
       box-sizing: border-box;
+      display: flex;
+      width: 100%;
     }
 
     // Split-button
     ui-lib-split-button,
     .ui-lib-split-button {
-      width: 100%;
-      display: flex;
       box-sizing: border-box;
+      display: flex;
+      width: 100%;
     }
 
     // Cascading-select / Autocomplete
@@ -137,9 +137,9 @@
     .ui-lib-cascade-select,
     ui-lib-autocomplete,
     .ui-lib-autocomplete {
-      width: 100%;
-      display: block;
       box-sizing: border-box;
+      display: block;
+      width: 100%;
     }
   }
 } // end @layer uilib.components

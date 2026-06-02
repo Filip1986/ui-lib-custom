@@ -1,21 +1,22 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  HostAttributeToken,
-  input,
+  Component,
   computed,
+  HostAttributeToken,
   inject,
-  ViewEncapsulation,
+  input,
   type InputSignal,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
+
 import {
   CONTAINER_MAX_WIDTHS,
   type ContainerSize,
-  SPACING_TOKENS,
-  type SpacingToken,
   INSET_TOKENS,
   type InsetToken,
+  SPACING_TOKENS,
+  type SpacingToken,
 } from 'ui-lib-custom/tokens';
 
 const spaceVar: (token: SpacingToken) => string = (token: SpacingToken): string =>

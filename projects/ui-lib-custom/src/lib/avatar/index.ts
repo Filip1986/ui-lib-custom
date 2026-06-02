@@ -1,3 +1,3 @@
 export * from './avatar';
+export type { AvatarFallbackContext, AvatarShape, AvatarSize, AvatarVariant } from './avatar.types';
 export * from './avatar-group';
-export type { AvatarSize, AvatarShape, AvatarVariant, AvatarFallbackContext } from './avatar.types';

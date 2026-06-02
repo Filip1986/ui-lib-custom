@@ -1,21 +1,21 @@
 <button
   #btnEl
-  [ngClass]="buttonClasses()"
-  [attr.type]="type()"
-  [disabled]="isDisabled()"
-  [attr.aria-disabled]="ariaDisabled()"
   [attr.aria-busy]="loading() ? true : null"
+  [attr.aria-checked]="ariaChecked() === null ? null : ariaChecked()"
+  [attr.aria-disabled]="ariaDisabled()"
   [attr.aria-label]="ariaLabelResolved()"
+  [attr.aria-pressed]="ariaPressed() === null ? null : ariaPressed()"
   [attr.role]="role()"
   [attr.tabindex]="tabIndex()"
-  [attr.aria-pressed]="ariaPressed() === null ? null : ariaPressed()"
-  [attr.aria-checked]="ariaChecked() === null ? null : ariaChecked()"
+  [attr.type]="type()"
+  [disabled]="isDisabled()"
+  [ngClass]="buttonClasses()"
   [style.--uilib-button-shadow]="shadow()"
   [style.--uilib-button-shadow-hover]="shadow()"
   [style.pointer-events]="isDisabled() ? 'none' : null"
-  (focus)="setFocused(true)"
   (blur)="setFocused(false)"
   (click)="onButtonClick($event)"
+  (focus)="setFocused(true)"
 >
   @if ((iconPosition() === 'left' || iconPosition() === 'top') && icon()) {
     <ui-lib-icon
@@ -54,9 +54,9 @@
     <span class="ui-lib-button__badge-wrapper" [ngClass]="badgeClass()">
       <ui-lib-badge
         class="ui-lib-button__badge"
-        [color]="badgeColorResolved()"
         size="sm"
         variant="solid"
+        [color]="badgeColorResolved()"
         [pill]="true"
       >
         {{ badge() }}

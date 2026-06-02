@@ -1,6 +1,7 @@
 import { Component, signal, type WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy, provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import {
   FormControl,
   FormGroup,
@@ -8,15 +9,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
-import { Checkbox } from './checkbox';
+
 import { SHARED_SIZE_OPTIONS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
 import type {
   CheckboxAppearance,
   CheckboxChangeEvent,
   CheckboxSize,
   CheckboxVariant,
 } from './checkbox';
+import { Checkbox } from './checkbox';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

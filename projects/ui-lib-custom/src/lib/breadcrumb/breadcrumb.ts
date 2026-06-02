@@ -2,20 +2,22 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   contentChild,
   inject,
   input,
-  output,
   type InputSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
   type TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   BreadcrumbItem,
   BreadcrumbItemClickEvent,

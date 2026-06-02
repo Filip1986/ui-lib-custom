@@ -6,40 +6,40 @@
   @if (showSourceControls()) {
     <div class="ui-lib-pick-list__controls">
       <button
-        type="button"
         class="ui-lib-pick-list__control-btn"
-        [disabled]="isSourceMoveUpDisabled()"
+        type="button"
         [attr.aria-label]="sourceMoveTopAriaLabel()"
+        [disabled]="isSourceMoveUpDisabled()"
         (click)="moveSourceTop()"
       >
-        <ui-lib-icon name="arrow-up" aria-hidden="true" />
+        <ui-lib-icon aria-hidden="true" name="arrow-up" />
       </button>
       <button
-        type="button"
         class="ui-lib-pick-list__control-btn"
-        [disabled]="isSourceMoveUpDisabled()"
+        type="button"
         [attr.aria-label]="sourceMoveUpAriaLabel()"
+        [disabled]="isSourceMoveUpDisabled()"
         (click)="moveSourceUp()"
       >
-        <ui-lib-icon name="chevron-up" aria-hidden="true" />
+        <ui-lib-icon aria-hidden="true" name="chevron-up" />
       </button>
       <button
-        type="button"
         class="ui-lib-pick-list__control-btn"
-        [disabled]="isSourceMoveDownDisabled()"
+        type="button"
         [attr.aria-label]="sourceMoveDownAriaLabel()"
+        [disabled]="isSourceMoveDownDisabled()"
         (click)="moveSourceDown()"
       >
-        <ui-lib-icon name="chevron-down" aria-hidden="true" />
+        <ui-lib-icon aria-hidden="true" name="chevron-down" />
       </button>
       <button
-        type="button"
         class="ui-lib-pick-list__control-btn"
-        [disabled]="isSourceMoveDownDisabled()"
+        type="button"
         [attr.aria-label]="sourceMoveBottomAriaLabel()"
+        [disabled]="isSourceMoveDownDisabled()"
         (click)="moveSourceBottom()"
       >
-        <ui-lib-icon name="arrow-down" aria-hidden="true" />
+        <ui-lib-icon aria-hidden="true" name="arrow-down" />
       </button>
     </div>
   }
@@ -59,13 +59,13 @@
     @if (filterBy()) {
       <div class="ui-lib-pick-list__filter">
         <input
-          type="text"
           class="ui-lib-pick-list__filter-input"
+          type="text"
+          [attr.aria-label]="sourceFilterPlaceholder()"
+          [disabled]="disabled() || null"
           [placeholder]="sourceFilterPlaceholder()"
           [value]="sourceFilterQuery()"
           (input)="onSourceFilterInput($event)"
-          [attr.aria-label]="sourceFilterPlaceholder()"
-          [disabled]="disabled() || null"
         />
       </div>
     }
@@ -73,39 +73,39 @@
     <!-- Source listbox -->
     <ul
       #sourceListEl
-      role="listbox"
-      class="ui-lib-pick-list__list"
-      [attr.aria-label]="sourceAriaLabel() ?? i18n.translate('picklist.source')"
       aria-multiselectable="true"
-      [attr.id]="componentId + '-source-list'"
+      class="ui-lib-pick-list__list"
+      role="listbox"
       tabindex="0"
-      (keydown)="onSourceListKeydown($event)"
+      [attr.aria-label]="sourceAriaLabel() ?? i18n.translate('picklist.source')"
+      [attr.id]="componentId + '-source-list'"
       (dragleave)="onListDragLeave($event, 'source')"
+      (keydown)="onSourceListKeydown($event)"
     >
       @for (item of displaySourceItems(); track trackByFn($index, item)) {
         <li
-          role="option"
           class="ui-lib-pick-list__item"
-          [class.ui-lib-pick-list__item--selected]="isSourceSelected(item)"
+          role="option"
+          [attr.aria-selected]="isSourceSelected(item)"
+          [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
+          [attr.id]="itemId('source', $index)"
           [class.ui-lib-pick-list__item--dragging]="
             dragOriginList() === 'source' && draggedValueIndex() === getValueIndex('source', $index)
-          "
-          [class.ui-lib-pick-list__item--drop-before]="
-            dragOverList() === 'source' && dragOverIndex() === $index && dragPosition() === 'before'
           "
           [class.ui-lib-pick-list__item--drop-after]="
             dragOverList() === 'source' && dragOverIndex() === $index && dragPosition() === 'after'
           "
-          [attr.aria-selected]="isSourceSelected(item)"
-          [attr.id]="itemId('source', $index)"
+          [class.ui-lib-pick-list__item--drop-before]="
+            dragOverList() === 'source' && dragOverIndex() === $index && dragPosition() === 'before'
+          "
+          [class.ui-lib-pick-list__item--selected]="isSourceSelected(item)"
           [tabindex]="sourceFocusedIndex() === $index ? 0 : -1"
-          [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
           (click)="onSourceItemClick($event, item, $index)"
-          (focus)="onSourceItemFocus($event, $index)"
-          (dragstart)="onDragStart($event, 'source', $index)"
-          (dragover)="onDragOver($event, 'source', $index)"
-          (drop)="onDrop($event, 'source', $index)"
           (dragend)="onDragEnd($event)"
+          (dragover)="onDragOver($event, 'source', $index)"
+          (dragstart)="onDragStart($event, 'source', $index)"
+          (drop)="onDrop($event, 'source', $index)"
+          (focus)="onSourceItemFocus($event, $index)"
         >
           @if (itemTemplate()) {
             <ng-container
@@ -133,7 +133,7 @@
           />
         </div>
       } @else {
-        <p class="ui-lib-pick-list__empty" aria-live="polite">
+        <p aria-live="polite" class="ui-lib-pick-list__empty">
           @if (isSourceEmptyDueToFilter()) {
             No items match the filter
           } @else {
@@ -150,40 +150,40 @@
 ========================================================================== -->
 <div class="ui-lib-pick-list__transfer-controls">
   <button
-    type="button"
     class="ui-lib-pick-list__transfer-btn"
-    [disabled]="isMoveAllToTargetDisabled()"
+    type="button"
     [attr.aria-label]="moveAllToTargetAriaLabel()"
+    [disabled]="isMoveAllToTargetDisabled()"
     (click)="moveAllToTarget()"
   >
-    <ui-lib-icon name="chevrons-right" aria-hidden="true" />
+    <ui-lib-icon aria-hidden="true" name="chevrons-right" />
   </button>
   <button
-    type="button"
     class="ui-lib-pick-list__transfer-btn"
-    [disabled]="isMoveToTargetDisabled()"
+    type="button"
     [attr.aria-label]="moveToTargetAriaLabel()"
+    [disabled]="isMoveToTargetDisabled()"
     (click)="moveToTarget()"
   >
-    <ui-lib-icon name="chevron-right" aria-hidden="true" />
+    <ui-lib-icon aria-hidden="true" name="chevron-right" />
   </button>
   <button
-    type="button"
     class="ui-lib-pick-list__transfer-btn"
-    [disabled]="isMoveToSourceDisabled()"
+    type="button"
     [attr.aria-label]="moveToSourceAriaLabel()"
+    [disabled]="isMoveToSourceDisabled()"
     (click)="moveToSource()"
   >
-    <ui-lib-icon name="chevron-left" aria-hidden="true" />
+    <ui-lib-icon aria-hidden="true" name="chevron-left" />
   </button>
   <button
-    type="button"
     class="ui-lib-pick-list__transfer-btn"
-    [disabled]="isMoveAllToSourceDisabled()"
+    type="button"
     [attr.aria-label]="moveAllToSourceAriaLabel()"
+    [disabled]="isMoveAllToSourceDisabled()"
     (click)="moveAllToSource()"
   >
-    <ui-lib-icon name="chevrons-left" aria-hidden="true" />
+    <ui-lib-icon aria-hidden="true" name="chevrons-left" />
   </button>
 </div>
 
@@ -195,40 +195,40 @@
   @if (showTargetControls()) {
     <div class="ui-lib-pick-list__controls">
       <button
-        type="button"
         class="ui-lib-pick-list__control-btn"
-        [disabled]="isTargetMoveUpDisabled()"
+        type="button"
         [attr.aria-label]="targetMoveTopAriaLabel()"
+        [disabled]="isTargetMoveUpDisabled()"
         (click)="moveTargetTop()"
       >
-        <ui-lib-icon name="arrow-up" aria-hidden="true" />
+        <ui-lib-icon aria-hidden="true" name="arrow-up" />
       </button>
       <button
-        type="button"
         class="ui-lib-pick-list__control-btn"
-        [disabled]="isTargetMoveUpDisabled()"
+        type="button"
         [attr.aria-label]="targetMoveUpAriaLabel()"
+        [disabled]="isTargetMoveUpDisabled()"
         (click)="moveTargetUp()"
       >
-        <ui-lib-icon name="chevron-up" aria-hidden="true" />
+        <ui-lib-icon aria-hidden="true" name="chevron-up" />
       </button>
       <button
-        type="button"
         class="ui-lib-pick-list__control-btn"
-        [disabled]="isTargetMoveDownDisabled()"
+        type="button"
         [attr.aria-label]="targetMoveDownAriaLabel()"
+        [disabled]="isTargetMoveDownDisabled()"
         (click)="moveTargetDown()"
       >
-        <ui-lib-icon name="chevron-down" aria-hidden="true" />
+        <ui-lib-icon aria-hidden="true" name="chevron-down" />
       </button>
       <button
-        type="button"
         class="ui-lib-pick-list__control-btn"
-        [disabled]="isTargetMoveDownDisabled()"
+        type="button"
         [attr.aria-label]="targetMoveBottomAriaLabel()"
+        [disabled]="isTargetMoveDownDisabled()"
         (click)="moveTargetBottom()"
       >
-        <ui-lib-icon name="arrow-down" aria-hidden="true" />
+        <ui-lib-icon aria-hidden="true" name="arrow-down" />
       </button>
     </div>
   }
@@ -248,13 +248,13 @@
     @if (filterBy()) {
       <div class="ui-lib-pick-list__filter">
         <input
-          type="text"
           class="ui-lib-pick-list__filter-input"
+          type="text"
+          [attr.aria-label]="targetFilterPlaceholder()"
+          [disabled]="disabled() || null"
           [placeholder]="targetFilterPlaceholder()"
           [value]="targetFilterQuery()"
           (input)="onTargetFilterInput($event)"
-          [attr.aria-label]="targetFilterPlaceholder()"
-          [disabled]="disabled() || null"
         />
       </div>
     }
@@ -262,39 +262,39 @@
     <!-- Target listbox -->
     <ul
       #targetListEl
-      role="listbox"
-      class="ui-lib-pick-list__list"
-      [attr.aria-label]="targetAriaLabel() ?? i18n.translate('picklist.target')"
       aria-multiselectable="true"
-      [attr.id]="componentId + '-target-list'"
+      class="ui-lib-pick-list__list"
+      role="listbox"
       tabindex="0"
-      (keydown)="onTargetListKeydown($event)"
+      [attr.aria-label]="targetAriaLabel() ?? i18n.translate('picklist.target')"
+      [attr.id]="componentId + '-target-list'"
       (dragleave)="onListDragLeave($event, 'target')"
+      (keydown)="onTargetListKeydown($event)"
     >
       @for (item of displayTargetItems(); track trackByFn($index, item)) {
         <li
-          role="option"
           class="ui-lib-pick-list__item"
-          [class.ui-lib-pick-list__item--selected]="isTargetSelected(item)"
+          role="option"
+          [attr.aria-selected]="isTargetSelected(item)"
+          [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
+          [attr.id]="itemId('target', $index)"
           [class.ui-lib-pick-list__item--dragging]="
             dragOriginList() === 'target' && draggedValueIndex() === getValueIndex('target', $index)
-          "
-          [class.ui-lib-pick-list__item--drop-before]="
-            dragOverList() === 'target' && dragOverIndex() === $index && dragPosition() === 'before'
           "
           [class.ui-lib-pick-list__item--drop-after]="
             dragOverList() === 'target' && dragOverIndex() === $index && dragPosition() === 'after'
           "
-          [attr.aria-selected]="isTargetSelected(item)"
-          [attr.id]="itemId('target', $index)"
+          [class.ui-lib-pick-list__item--drop-before]="
+            dragOverList() === 'target' && dragOverIndex() === $index && dragPosition() === 'before'
+          "
+          [class.ui-lib-pick-list__item--selected]="isTargetSelected(item)"
           [tabindex]="targetFocusedIndex() === $index ? 0 : -1"
-          [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
           (click)="onTargetItemClick($event, item, $index)"
-          (focus)="onTargetItemFocus($event, $index)"
-          (dragstart)="onDragStart($event, 'target', $index)"
-          (dragover)="onDragOver($event, 'target', $index)"
-          (drop)="onDrop($event, 'target', $index)"
           (dragend)="onDragEnd($event)"
+          (dragover)="onDragOver($event, 'target', $index)"
+          (dragstart)="onDragStart($event, 'target', $index)"
+          (drop)="onDrop($event, 'target', $index)"
+          (focus)="onTargetItemFocus($event, $index)"
         >
           @if (itemTemplate()) {
             <ng-container
@@ -322,7 +322,7 @@
           />
         </div>
       } @else {
-        <p class="ui-lib-pick-list__empty" aria-live="polite">
+        <p aria-live="polite" class="ui-lib-pick-list__empty">
           @if (isTargetEmptyDueToFilter()) {
             No items match the filter
           } @else {

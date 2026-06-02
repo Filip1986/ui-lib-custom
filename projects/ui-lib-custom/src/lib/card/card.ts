@@ -1,31 +1,33 @@
+import { NgClass } from '@angular/common';
 import {
-  Component,
   ChangeDetectionStrategy,
-  input,
+  Component,
   computed,
-  output,
-  ViewEncapsulation,
+  effect,
   ElementRef,
   inject,
-  effect,
+  input,
   type InputSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import { NgClass } from '@angular/common';
-import { Icon } from 'ui-lib-custom/icon';
+
+import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import type { SemanticIcon } from 'ui-lib-custom/icon';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { Icon } from 'ui-lib-custom/icon';
 import type {
-  ThemeScopeInput,
   ThemePreset,
   ThemePresetColors,
+  ThemeScopeInput,
   ThemeVariant,
 } from 'ui-lib-custom/theme';
-import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import type { CardVariant, CardElevation } from './card.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
-export type { CardVariant, CardElevation } from './card.types';
+import type { CardElevation, CardVariant } from './card.types';
+
+export type { CardElevation, CardVariant } from './card.types';
 
 let nextCardId: number = 0;
 

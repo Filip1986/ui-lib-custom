@@ -1,17 +1,17 @@
 <div
-  class="ui-lib-terminal__content"
   #terminalContent
+  class="ui-lib-terminal__content"
+  role="presentation"
+  tabindex="-1"
   (click)="focusInput()"
   (keydown.enter)="focusInput()"
-  tabindex="-1"
-  role="presentation"
 >
   <div
+    aria-atomic="false"
     class="ui-lib-terminal__output"
     role="log"
-    [attr.id]="outputId"
     [attr.aria-label]="i18n.translate('terminal.output')"
-    aria-atomic="false"
+    [attr.id]="outputId"
   >
     @if (welcomeMessage()) {
       <div class="ui-lib-terminal__welcome">{{ welcomeMessage() }}</div>
@@ -19,7 +19,7 @@
     @for (item of history(); track $index) {
       <div class="ui-lib-terminal__history-item">
         <div class="ui-lib-terminal__command-row">
-          <span class="ui-lib-terminal__prompt" aria-hidden="true">{{ prompt() }}</span>
+          <span aria-hidden="true" class="ui-lib-terminal__prompt">{{ prompt() }}</span>
           <span class="ui-lib-terminal__command-text">{{ item.command }}</span>
         </div>
         @if (item.response !== null) {
@@ -29,18 +29,18 @@
     }
   </div>
   <div class="ui-lib-terminal__input-row">
-    <span class="ui-lib-terminal__prompt" aria-hidden="true">{{ prompt() }}</span>
+    <span aria-hidden="true" class="ui-lib-terminal__prompt">{{ prompt() }}</span>
     <input
       #commandInput
+      aria-autocomplete="none"
+      autocomplete="off"
       class="ui-lib-terminal__input"
+      spellcheck="false"
       type="text"
+      [attr.aria-label]="i18n.translate('terminal.input')"
       [value]="currentCommand()"
       (input)="onInputChange($event)"
       (keydown)="handleKeydown($event)"
-      autocomplete="off"
-      spellcheck="false"
-      [attr.aria-label]="i18n.translate('terminal.input')"
-      aria-autocomplete="none"
     />
   </div>
 </div>

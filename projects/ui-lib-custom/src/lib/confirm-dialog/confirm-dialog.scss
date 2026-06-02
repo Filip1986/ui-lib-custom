@@ -38,15 +38,15 @@
     --uilib-confirm-dialog-backdrop-enter-duration: 150ms;
     --uilib-confirm-dialog-backdrop-enter-easing: ease-out;
     --uilib-confirm-dialog-interactive-transition-duration: 120ms;
-
-    position: fixed;
-    inset: 0;
-    display: none;
-    z-index: var(--uilib-confirm-dialog-z-index);
-    pointer-events: none;
     align-items: center;
+    display: none;
+    inset: 0;
     justify-content: center;
     padding: var(--uilib-space-4, 1rem);
+    pointer-events: none;
+
+    position: fixed;
+    z-index: var(--uilib-confirm-dialog-z-index);
   }
 
   ui-lib-confirm-dialog.ui-lib-confirm-dialog--visible {
@@ -72,50 +72,50 @@
 
   // Backdrop
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__backdrop {
-    position: fixed;
-    inset: 0;
+    animation: confirm-dialog-backdrop-enter var(--uilib-confirm-dialog-backdrop-enter-duration)
+      var(--uilib-confirm-dialog-backdrop-enter-easing);
     background: color-mix(
       in srgb,
       var(--uilib-overlay-backdrop-bg, var(--uilib-color-neutral-900))
         calc(var(--uilib-overlay-backdrop-opacity, 0.5) * 100%),
       transparent
     );
-    z-index: var(--uilib-z-backdrop, 1040);
+    inset: 0;
     pointer-events: auto;
-    animation: confirm-dialog-backdrop-enter var(--uilib-confirm-dialog-backdrop-enter-duration)
-      var(--uilib-confirm-dialog-backdrop-enter-easing);
+    position: fixed;
+    z-index: var(--uilib-z-backdrop, 1040);
   }
 
   // Panel
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__panel {
-    position: relative;
-    z-index: calc(var(--uilib-z-backdrop, 1040) + 1);
+    animation: confirm-dialog-panel-enter var(--uilib-confirm-dialog-enter-duration)
+      var(--uilib-confirm-dialog-enter-easing);
+    background: var(--uilib-confirm-dialog-bg);
+    border: var(--uilib-confirm-dialog-border);
+    border-radius: var(--uilib-confirm-dialog-border-radius);
+    box-shadow: var(--uilib-confirm-dialog-shadow);
     display: flex;
     flex-direction: column;
     inline-size: var(--uilib-confirm-dialog-width);
     max-block-size: calc(100vh - var(--uilib-space-8, 2rem));
     overflow: hidden;
-    background: var(--uilib-confirm-dialog-bg);
-    border-radius: var(--uilib-confirm-dialog-border-radius);
-    border: var(--uilib-confirm-dialog-border);
-    box-shadow: var(--uilib-confirm-dialog-shadow);
     pointer-events: auto;
+    position: relative;
     /* Promote panel to compositor layer — GPU-accelerates the enter/exit keyframe animation */
     will-change: transform, opacity;
-    animation: confirm-dialog-panel-enter var(--uilib-confirm-dialog-enter-duration)
-      var(--uilib-confirm-dialog-enter-easing);
+    z-index: calc(var(--uilib-z-backdrop, 1040) + 1);
   }
 
   // Header
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__header {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--uilib-space-2, 0.5rem);
-    padding: var(--uilib-confirm-dialog-header-padding);
     background: var(--uilib-confirm-dialog-header-bg);
     color: var(--uilib-confirm-dialog-header-color);
+    display: flex;
     flex-shrink: 0;
+    gap: var(--uilib-space-2, 0.5rem);
+    justify-content: space-between;
+    padding: var(--uilib-confirm-dialog-header-padding);
   }
 
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__title {
@@ -126,16 +126,16 @@
   }
 
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__close-btn {
-    inline-size: var(--uilib-confirm-dialog-close-btn-size);
-    block-size: var(--uilib-confirm-dialog-close-btn-size);
-    flex-shrink: 0;
-    border: 0;
+    align-items: center;
     background: transparent;
-    color: var(--uilib-confirm-dialog-close-btn-color);
+    block-size: var(--uilib-confirm-dialog-close-btn-size);
+    border: 0;
     border-radius: var(--uilib-radius-sm, 2px);
+    color: var(--uilib-confirm-dialog-close-btn-color);
     cursor: pointer;
     display: inline-flex;
-    align-items: center;
+    flex-shrink: 0;
+    inline-size: var(--uilib-confirm-dialog-close-btn-size);
     justify-content: center;
     transition:
       background-color var(--uilib-confirm-dialog-interactive-transition-duration) ease,
@@ -157,54 +157,54 @@
 
   // Content
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__content {
-    display: flex;
     align-items: flex-start;
-    gap: var(--uilib-space-4, 1rem);
-    padding: var(--uilib-confirm-dialog-content-padding);
+    display: flex;
     flex: 1 1 auto;
+    gap: var(--uilib-space-4, 1rem);
     overflow-y: auto;
+    padding: var(--uilib-confirm-dialog-content-padding);
   }
 
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__icon {
-    font-size: var(--uilib-confirm-dialog-icon-size);
     color: var(--uilib-confirm-dialog-icon-color);
     flex-shrink: 0;
+    font-size: var(--uilib-confirm-dialog-icon-size);
     line-height: 1;
   }
 
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__message {
-    margin: 0;
+    align-self: center;
     color: var(--uilib-page-fg);
     font-size: var(--uilib-font-size-base, 1rem);
     line-height: 1.6;
-    align-self: center;
+    margin: 0;
   }
 
   // Footer
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__footer {
-    display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: var(--uilib-confirm-dialog-footer-gap);
-    padding: var(--uilib-confirm-dialog-footer-padding);
     border-block-start: var(--uilib-confirm-dialog-footer-border-top);
+    display: flex;
     flex-shrink: 0;
+    gap: var(--uilib-confirm-dialog-footer-gap);
+    justify-content: flex-end;
+    padding: var(--uilib-confirm-dialog-footer-padding);
   }
 
   // Base button styles (shared by accept and reject)
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__accept-btn,
   ui-lib-confirm-dialog .ui-lib-confirm-dialog__reject-btn {
-    display: inline-flex;
     align-items: center;
-    gap: var(--uilib-space-2, 0.5rem);
-    padding: var(--uilib-confirm-dialog-btn-padding);
     border: 1px solid transparent;
     border-radius: var(--uilib-confirm-dialog-btn-radius);
+    cursor: pointer;
+    display: inline-flex;
     font-family: var(--uilib-font-ui, inherit);
     font-size: var(--uilib-confirm-dialog-btn-font-size);
     font-weight: var(--uilib-confirm-dialog-btn-font-weight);
+    gap: var(--uilib-space-2, 0.5rem);
     line-height: 1.5;
-    cursor: pointer;
+    padding: var(--uilib-confirm-dialog-btn-padding);
     transition:
       background-color var(--uilib-confirm-dialog-interactive-transition-duration) ease,
       border-color var(--uilib-confirm-dialog-interactive-transition-duration) ease,

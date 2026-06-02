@@ -1,17 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  computed,
-  contentChildren,
-  inject,
-  input,
-  model,
-  output,
-  signal,
-} from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import type {
   InputSignal,
   ModelSignal,
@@ -19,12 +6,25 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  contentChildren,
+  ElementRef,
+  inject,
+  input,
+  model,
+  output,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
 
-import { NgTemplateOutlet } from '@angular/common';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import { TreeTableColumnComponent } from './tree-table-column.component';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { TREE_TABLE_DEFAULTS } from './tree-table.constants';
 import type {
   TreeTableFlatNode,
@@ -38,6 +38,7 @@ import type {
   TreeTableSortOrder,
   TreeTableVariant,
 } from './tree-table.types';
+import { TreeTableColumnComponent } from './tree-table-column.component';
 
 /** Module-level counter — ensures each `TreeTableComponent` instance gets a unique numeric ID. */
 let nextTreeTableId: number = 0;

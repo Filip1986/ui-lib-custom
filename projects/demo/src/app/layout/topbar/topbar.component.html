@@ -1,9 +1,9 @@
 ﻿<div class="topbar">
   <div class="topbar-left">
-    <button class="menu-button" (click)="onMenuButtonClick()" aria-label="Toggle sidebar">
+    <button aria-label="Toggle sidebar" class="menu-button" (click)="onMenuButtonClick()">
       <i class="pi pi-bars"></i>
     </button>
-    <a routerLink="/" class="logo">
+    <a class="logo" routerLink="/">
       <i class="pi pi-box"></i>
       <span class="logo-text">UI Components</span>
     </a>
@@ -13,138 +13,138 @@
     <div class="topbar-select">
       <select
         aria-label="Select saved theme"
-        (change)="onLoadTheme($any($event.target).value)"
         [value]="''"
+        (change)="onLoadTheme($any($event.target).value)"
       >
-        <option value="" disabled>Select saved theme</option>
+        <option disabled value="">Select saved theme</option>
         @for (themeName of savedThemes(); track themeName) {
           <option [value]="themeName">{{ themeName }}</option>
         }
       </select>
     </div>
 
-    <div class="theme-indicator" aria-live="polite">
+    <div aria-live="polite" class="theme-indicator">
       <span class="theme-name">{{ themeName() }}</span>
       <span class="theme-variant">{{ themeVariant() }}</span>
     </div>
 
-    <div class="variant-switcher" role="group" aria-label="Component variant">
+    <div aria-label="Component variant" class="variant-switcher" role="group">
       <ui-lib-button
-        size="sm"
         appearance="ghost"
+        size="sm"
+        [attr.aria-pressed]="variant() === 'material'"
         [class.active]="variant() === 'material'"
         (click)="setVariant('material')"
-        [attr.aria-pressed]="variant() === 'material'"
       >
         Material
       </ui-lib-button>
       <ui-lib-button
-        size="sm"
         appearance="ghost"
+        size="sm"
+        [attr.aria-pressed]="variant() === 'bootstrap'"
         [class.active]="variant() === 'bootstrap'"
         (click)="setVariant('bootstrap')"
-        [attr.aria-pressed]="variant() === 'bootstrap'"
       >
         Bootstrap
       </ui-lib-button>
       <ui-lib-button
-        size="sm"
         appearance="ghost"
+        size="sm"
+        [attr.aria-pressed]="variant() === 'minimal'"
         [class.active]="variant() === 'minimal'"
         (click)="setVariant('minimal')"
-        [attr.aria-pressed]="variant() === 'minimal'"
       >
         Minimal
       </ui-lib-button>
     </div>
 
-    <div class="shape-switcher" role="group" aria-label="Component shape">
+    <div aria-label="Component shape" class="shape-switcher" role="group">
       <ui-lib-button
-        size="sm"
         appearance="ghost"
+        size="sm"
+        [attr.aria-pressed]="shape() === 'sharp'"
         [class.active]="shape() === 'sharp'"
         (click)="setShape('sharp')"
-        [attr.aria-pressed]="shape() === 'sharp'"
       >
         Sharp
       </ui-lib-button>
       <ui-lib-button
-        size="sm"
         appearance="ghost"
+        size="sm"
+        [attr.aria-pressed]="shape() === 'rounded'"
         [class.active]="shape() === 'rounded'"
         (click)="setShape('rounded')"
-        [attr.aria-pressed]="shape() === 'rounded'"
       >
         Rounded
       </ui-lib-button>
       <ui-lib-button
-        size="sm"
         appearance="ghost"
+        size="sm"
+        [attr.aria-pressed]="shape() === 'soft'"
         [class.active]="shape() === 'soft'"
         (click)="setShape('soft')"
-        [attr.aria-pressed]="shape() === 'soft'"
       >
         Soft
       </ui-lib-button>
       <ui-lib-button
-        size="sm"
         appearance="ghost"
+        size="sm"
+        [attr.aria-pressed]="shape() === 'pill'"
         [class.active]="shape() === 'pill'"
         (click)="setShape('pill')"
-        [attr.aria-pressed]="shape() === 'pill'"
       >
         Pill
       </ui-lib-button>
     </div>
 
-    <div class="density-switcher" role="group" aria-label="Component density">
+    <div aria-label="Component density" class="density-switcher" role="group">
       <ui-lib-button
-        size="sm"
         appearance="ghost"
+        size="sm"
+        [attr.aria-pressed]="density() === 'compact'"
         [class.active]="density() === 'compact'"
         (click)="setDensity('compact')"
-        [attr.aria-pressed]="density() === 'compact'"
       >
         Compact
       </ui-lib-button>
       <ui-lib-button
-        size="sm"
         appearance="ghost"
+        size="sm"
+        [attr.aria-pressed]="density() === 'default'"
         [class.active]="density() === 'default'"
         (click)="setDensity('default')"
-        [attr.aria-pressed]="density() === 'default'"
       >
         Default
       </ui-lib-button>
       <ui-lib-button
-        size="sm"
         appearance="ghost"
+        size="sm"
+        [attr.aria-pressed]="density() === 'comfortable'"
         [class.active]="density() === 'comfortable'"
         (click)="setDensity('comfortable')"
-        [attr.aria-pressed]="density() === 'comfortable'"
       >
         Comfortable
       </ui-lib-button>
     </div>
 
     <a
+      aria-label="GitHub"
+      class="topbar-link"
       href="https://github.com"
       target="_blank"
-      class="topbar-link"
       title="GitHub"
-      aria-label="GitHub"
     >
       <i class="pi pi-github"></i>
     </a>
-    <a href="#" class="topbar-link" title="Documentation" aria-label="Documentation">
+    <a aria-label="Documentation" class="topbar-link" href="#" title="Documentation">
       <i class="pi pi-book"></i>
     </a>
     <ui-lib-button
-      variant="minimal"
-      size="sm"
       appearance="ghost"
-      (click)="onThemeToggle()"
       aria-label="Toggle dark mode"
+      size="sm"
+      variant="minimal"
+      (click)="onThemeToggle()"
     >
       {{ mode() === 'dark' ? 'Light mode' : 'Dark mode' }}
     </ui-lib-button>

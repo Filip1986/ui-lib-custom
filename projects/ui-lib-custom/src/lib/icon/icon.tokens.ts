@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+
 import type { IconConfig } from './icon.types';
 import { DEFAULT_ICON_CONFIG } from './icon.types';
 

@@ -19,8 +19,8 @@
       <ui-lib-chip label="Thriller" />
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Basic"
+      language="html"
       [code]="snippets.basic"
       [showLineNumbers]="true"
     />
@@ -33,13 +33,13 @@
       icon. The icon is decorative and hidden from assistive technology.
     </p>
     <div class="demo-section__preview">
-      <ui-lib-chip label="Angular" icon="pi pi-bolt" />
-      <ui-lib-chip label="Verified" icon="pi pi-check-circle" />
-      <ui-lib-chip label="Starred" icon="pi pi-star" />
+      <ui-lib-chip icon="pi pi-bolt" label="Angular" />
+      <ui-lib-chip icon="pi pi-check-circle" label="Verified" />
+      <ui-lib-chip icon="pi pi-star" label="Starred" />
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Icon"
+      language="html"
       [code]="snippets.icon"
       [showLineNumbers]="true"
     />
@@ -54,24 +54,24 @@
     </p>
     <div class="demo-section__preview">
       <ui-lib-chip
-        label="Amy"
         image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
         imageAlt="Amy Elsner"
+        label="Amy"
       />
       <ui-lib-chip
-        label="Asiya"
         image="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png"
         imageAlt="Asiya Javayant"
+        label="Asiya"
       />
       <ui-lib-chip
-        label="Onyama"
         image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png"
         imageAlt="Onyama Limba"
+        label="Onyama"
       />
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Image"
+      language="html"
       [code]="snippets.image"
       [showLineNumbers]="true"
     />
@@ -101,8 +101,8 @@
       </div>
     }
     <ui-lib-code-snippet
-      language="html"
       filename="Removable"
+      language="html"
       [code]="snippets.removable"
       [showLineNumbers]="true"
     />
@@ -117,10 +117,10 @@
       correctly.
     </p>
     <div
-      class="demo-section__preview"
-      role="listbox"
       aria-label="Frameworks"
       aria-multiselectable="true"
+      class="demo-section__preview"
+      role="listbox"
     >
       @for (item of demoFilter; track item.label) {
         <ui-lib-chip
@@ -132,23 +132,23 @@
       }
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Selectable"
+      language="html"
       [code]="snippets.selectable"
       [showLineNumbers]="true"
     />
   </app-doc-section>
 
   <!-- ---- Sizes -------------------------------------------------------- -->
-  <app-doc-section id="sizes" title="Sizes" description="Three sizes: sm, md (default), and lg.">
+  <app-doc-section description="Three sizes: sm, md (default), and lg." id="sizes" title="Sizes">
     <div class="demo-section__preview demo-section__preview--center">
       @for (size of sizes; track size) {
-        <ui-lib-chip [label]="size" [size]="size" icon="pi pi-tag" />
+        <ui-lib-chip icon="pi pi-tag" [label]="size" [size]="size" />
       }
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Sizes"
+      language="html"
       [code]="snippets.sizes"
       [showLineNumbers]="true"
     />
@@ -167,14 +167,14 @@
         <p class="demo-variant-group__label">{{ variant }}</p>
         <div class="demo-row">
           <ui-lib-chip label="Label only" [variant]="variant" />
-          <ui-lib-chip label="With icon" icon="pi pi-star" [variant]="variant" />
+          <ui-lib-chip icon="pi pi-star" label="With icon" [variant]="variant" />
           <ui-lib-chip label="Removable" [removable]="true" [variant]="variant" />
         </div>
       </div>
     }
     <ui-lib-code-snippet
-      language="html"
       filename="Variants"
+      language="html"
       [code]="snippets.variants"
       [showLineNumbers]="true"
     />
@@ -182,20 +182,20 @@
 
   <!-- ---- Playground --------------------------------------------------- -->
   <app-doc-section
+    description="Adjust the controls to see the chip update live."
     id="playground"
     title="Playground"
-    description="Adjust the controls to see the chip update live."
   >
     <div class="demo-playground">
       <div class="demo-playground__preview">
         <ui-lib-chip
           label="Angular"
           [icon]="playgroundIcon()"
-          [size]="playgroundSize()"
-          [variant]="playgroundVariant()"
           [removable]="playgroundRemovable()"
           [selectable]="playgroundSelectable()"
           [selected]="playgroundSelected()"
+          [size]="playgroundSize()"
+          [variant]="playgroundVariant()"
           (selectedChange)="setPlaygroundSelected($event)"
         />
       </div>
@@ -205,10 +205,10 @@
           <div class="demo-control__buttons">
             @for (size of sizes; track size) {
               <ui-lib-button
-                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
                 (click)="setSize(size)"
                 >{{ size }}</ui-lib-button
               >
@@ -220,10 +220,10 @@
           <div class="demo-control__buttons">
             @for (variant of variants; track variant) {
               <ui-lib-button
-                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 (click)="setVariant(variant)"
                 >{{ variant }}</ui-lib-button
               >
@@ -234,26 +234,26 @@
           <span class="demo-control__label">Options</span>
           <div class="demo-control__buttons">
             <ui-lib-button
-              [appearance]="playgroundRemovable() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="playgroundRemovable() ? 'solid' : 'outline'"
               (click)="toggleRemovable()"
               >removable</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="playgroundSelectable() ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="playgroundSelectable() ? 'solid' : 'outline'"
               (click)="toggleSelectable()"
               >selectable</ui-lib-button
             >
             <ui-lib-button
-              [appearance]="playgroundIcon() !== null ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="playgroundIcon() !== null ? 'solid' : 'outline'"
               (click)="toggleIcon()"
               >icon</ui-lib-button
             >
@@ -273,9 +273,9 @@
 
   <!-- ---- CSS Custom Properties ---------------------------------------- -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the chip without touching component internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the chip without touching component internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -312,8 +312,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

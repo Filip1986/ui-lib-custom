@@ -1,8 +1,8 @@
 <ui-lib-pick-list
-  [(source)]="source"
-  [(target)]="target"
   trackBy="code"
   [dragDrop]="true"
-  (movedToTarget)="onMoveToTarget($event)"
+  [(source)]="source"
+  [(target)]="target"
   (movedToSource)="onMoveToSource($event)"
+  (movedToTarget)="onMoveToTarget($event)"
 />

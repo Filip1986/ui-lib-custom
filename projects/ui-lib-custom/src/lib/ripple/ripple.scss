@@ -19,9 +19,9 @@
 
     /** Timing function for the expand phase. */
     --uilib-ripple-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 
     position: relative;
-    overflow: hidden;
     // Prevent text / child elements from blocking the pointer event
     user-select: none;
 
@@ -30,14 +30,14 @@
     // ---------------------------------------------------------------------------
 
     .ui-lib-ripple-wave {
-      position: absolute;
-      border-radius: var(--uilib-radius-full, 9999px);
-      background-color: var(--uilib-ripple-color);
-      pointer-events: none;
-      transform: scale(0);
-      opacity: 1;
       animation: ui-lib-ripple-expand var(--uilib-ripple-duration) var(--uilib-ripple-easing)
         forwards;
+      background-color: var(--uilib-ripple-color);
+      border-radius: var(--uilib-radius-full, 9999px);
+      opacity: 1;
+      pointer-events: none;
+      position: absolute;
+      transform: scale(0);
     }
   }
 
@@ -47,18 +47,18 @@
 
   @keyframes ui-lib-ripple-expand {
     0% {
-      transform: scale(0);
       opacity: 0.7;
+      transform: scale(0);
     }
 
     80% {
-      transform: scale(2.5);
       opacity: 0.2;
+      transform: scale(2.5);
     }
 
     100% {
-      transform: scale(3);
       opacity: 0;
+      transform: scale(3);
     }
   }
 

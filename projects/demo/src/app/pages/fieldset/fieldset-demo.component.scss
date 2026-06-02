@@ -1,6 +1,6 @@
 .demo-page {
-  max-width: 860px;
   margin: 0 auto;
+  max-width: 860px;
   padding: 2rem 1.5rem 4rem;
 }
 
@@ -14,10 +14,10 @@
   }
 
   &__description {
-    font-size: 1.0625rem;
     color: #6b7280;
-    margin: 0 0 1rem;
+    font-size: 1.0625rem;
     line-height: 1.6;
+    margin: 0 0 1rem;
   }
 
   &__import {
@@ -27,8 +27,8 @@
       background: #f3f4f6;
       border: 1px solid #e5e7eb;
       border-radius: 6px;
-      padding: 0.35rem 0.75rem;
       font-size: 0.875rem;
+      padding: 0.35rem 0.75rem;
     }
   }
 }
@@ -37,24 +37,24 @@
   margin-bottom: 3rem;
 
   &__title {
+    border-bottom: 1px solid #e5e7eb;
     font-size: 1.375rem;
     font-weight: 600;
     margin: 0 0 0.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid #e5e7eb;
   }
 
   &__description {
-    font-size: 0.9375rem;
     color: #6b7280;
-    margin: 0.5rem 0 1rem;
+    font-size: 0.9375rem;
     line-height: 1.6;
+    margin: 0.5rem 0 1rem;
 
     code {
       background: #f3f4f6;
       border-radius: 4px;
-      padding: 0.1em 0.4em;
       font-size: 0.875em;
+      padding: 0.1em 0.4em;
     }
   }
 }
@@ -63,8 +63,8 @@
   background: #f9fafb;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  padding: 1.5rem;
   margin-bottom: 0.75rem;
+  padding: 1.5rem;
 
   &--column {
     display: flex;
@@ -74,20 +74,20 @@
 }
 
 .demo-state-label {
-  margin: 1rem 0 0;
-  font-size: 0.875rem;
   color: #6b7280;
+  font-size: 0.875rem;
+  margin: 1rem 0 0;
 }
 
 .demo-code {
   background: #1e1e2e;
-  color: #cdd6f4;
   border-radius: 8px;
-  padding: 1rem 1.25rem;
+  color: #cdd6f4;
   font-size: 0.8125rem;
   line-height: 1.6;
-  overflow-x: auto;
   margin: 0;
+  overflow-x: auto;
+  padding: 1rem 1.25rem;
 
   code {
     font-family: 'Fira Code', 'Cascadia Code', monospace;
@@ -96,8 +96,8 @@
 
 .demo-form-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
 .demo-field {
@@ -107,19 +107,19 @@
 }
 
 .demo-label {
+  color: #374151;
   font-size: 0.8125rem;
   font-weight: 500;
-  color: #374151;
 }
 
 .demo-input {
-  padding: 0.5rem 0.75rem;
+  background: #ffffff;
   border: 1px solid #d1d5db;
   border-radius: 6px;
-  font-size: 0.9375rem;
-  background: #ffffff;
   color: #111827;
+  font-size: 0.9375rem;
   outline: none;
+  padding: 0.5rem 0.75rem;
 
   &:focus {
     border-color: #6366f1;
@@ -128,52 +128,52 @@
 }
 
 .demo-paragraph {
-  margin: 0;
-  line-height: 1.6;
   color: #374151;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .demo-custom-legend {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 0.5rem;
 }
 
 .demo-legend-icon {
-  font-size: 0.9rem;
   color: #6366f1;
+  font-size: 0.9rem;
 }
 
 .demo-api__subtitle {
+  color: #374151;
   font-size: 1rem;
   font-weight: 600;
   margin: 1.5rem 0 0.75rem;
-  color: #374151;
 }
 
 .demo-api-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  width: 100%;
 
   th,
   td {
-    text-align: left;
-    padding: 0.625rem 0.875rem;
     border-bottom: 1px solid #e5e7eb;
+    padding: 0.625rem 0.875rem;
+    text-align: left;
   }
 
   th {
-    font-weight: 600;
-    color: #374151;
     background: #f9fafb;
+    color: #374151;
+    font-weight: 600;
   }
 
   td code {
     background: #f3f4f6;
     border-radius: 4px;
-    padding: 0.1em 0.4em;
     font-size: 0.875em;
+    padding: 0.1em 0.4em;
   }
 
   tr:last-child td {

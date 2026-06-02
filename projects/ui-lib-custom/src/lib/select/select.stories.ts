@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 import {
   SHARED_DEFAULTS,
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
-import type { SelectOption, SelectVariant, SelectSize } from './select';
+
+import type { SelectOption, SelectSize, SelectVariant } from './select';
 import { UiLibSelect } from './select';
 
 type SelectStoryArgs = {

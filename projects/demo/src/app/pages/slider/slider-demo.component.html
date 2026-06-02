@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A linear track control for selecting a numeric value or range. Supports drag interaction, click-to-jump, keyboard navigation, single and range modes, horizontal/vertical orientations, ngModel and reactive forms integration, three size tokens, three design variants, and full CSS-variable theming."
     docHeader
     title="Slider"
     [importCode]="importCode"
-    description="A linear track control for selecting a numeric value or range. Supports drag interaction, click-to-jump, keyboard navigation, single and range modes, horizontal/vertical orientations, ngModel and reactive forms integration, three size tokens, three design variants, and full CSS-variable theming."
   />
 
   <app-doc-demo-viewport [autoHeight]="true">
@@ -17,9 +17,9 @@
         <ui-lib-panel variant="minimal">
           <div class="slider-row">
             <ui-lib-slider
+              ariaLabel="Basic slider"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="basicValue"
-              ariaLabel="Basic slider"
             />
             <span class="slider-caption">Value: {{ basicValue }}</span>
           </div>
@@ -37,10 +37,10 @@
         <ui-lib-panel variant="minimal">
           <div class="slider-row">
             <ui-lib-slider
-              [range]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="rangeValue"
               ariaLabel="Range slider"
+              [ngModelOptions]="{ standalone: true }"
+              [range]="true"
+              [(ngModel)]="rangeValue"
             />
             <span class="slider-caption"
               >Range: {{ rangeValue[0] }} &ndash; {{ rangeValue[1] }}</span
@@ -60,10 +60,10 @@
         <ui-lib-panel variant="minimal">
           <div class="slider-row">
             <ui-lib-slider
-              [step]="25"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="stepValue"
               ariaLabel="Step slider"
+              [ngModelOptions]="{ standalone: true }"
+              [step]="25"
+              [(ngModel)]="stepValue"
             />
             <span class="slider-caption">step=25 &middot; value={{ stepValue }}</span>
           </div>
@@ -80,12 +80,12 @@
         <ui-lib-panel variant="minimal">
           <div class="slider-row">
             <ui-lib-slider
-              [min]="-50"
-              [max]="50"
-              [step]="10"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="minmaxValue"
               ariaLabel="Min max slider"
+              [max]="50"
+              [min]="-50"
+              [ngModelOptions]="{ standalone: true }"
+              [step]="10"
+              [(ngModel)]="minmaxValue"
             />
             <span class="slider-caption">value={{ minmaxValue }}</span>
           </div>
@@ -102,10 +102,10 @@
         <ui-lib-panel variant="minimal">
           <div class="slider-vertical-row">
             <ui-lib-slider
+              ariaLabel="Vertical slider"
               orientation="vertical"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="verticalValue"
-              ariaLabel="Vertical slider"
             />
             <span class="slider-caption">value={{ verticalValue }}</span>
           </div>
@@ -124,28 +124,28 @@
             <div class="slider-size-row">
               <span class="size-label">sm</span>
               <ui-lib-slider
+                ariaLabel="Small slider"
                 size="sm"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizesValue"
-                ariaLabel="Small slider"
               />
             </div>
             <div class="slider-size-row">
               <span class="size-label">md</span>
               <ui-lib-slider
+                ariaLabel="Medium slider"
                 size="md"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizesValue"
-                ariaLabel="Medium slider"
               />
             </div>
             <div class="slider-size-row">
               <span class="size-label">lg</span>
               <ui-lib-slider
+                ariaLabel="Large slider"
                 size="lg"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizesValue"
-                ariaLabel="Large slider"
               />
             </div>
           </div>
@@ -163,10 +163,10 @@
         <ui-lib-panel variant="minimal">
           <div class="slider-row">
             <ui-lib-slider
+              ariaLabel="Animated slider"
               [animate]="true"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="animateValue"
-              ariaLabel="Animated slider"
             />
             <span class="slider-caption">value={{ animateValue }}</span>
           </div>
@@ -181,10 +181,10 @@
         <ui-lib-panel variant="minimal">
           <div class="slider-row">
             <ui-lib-slider
+              ariaLabel="Disabled slider"
               [disabled]="true"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="disabledValue"
-              ariaLabel="Disabled slider"
             />
             <span class="slider-caption">disabled</span>
           </div>
@@ -201,10 +201,10 @@
         <ui-lib-panel variant="minimal">
           <div class="slider-row">
             <ui-lib-slider
-              [readonly]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="readonlyValue"
               ariaLabel="Readonly slider"
+              [ngModelOptions]="{ standalone: true }"
+              [readonly]="true"
+              [(ngModel)]="readonlyValue"
             />
             <span class="slider-caption">readonly</span>
           </div>
@@ -221,12 +221,12 @@
             <div class="slider-sizes">
               <div class="slider-size-row">
                 <span class="size-label">Volume</span>
-                <ui-lib-slider formControlName="volume" ariaLabel="Volume" />
+                <ui-lib-slider ariaLabel="Volume" formControlName="volume" />
                 <span class="slider-caption">{{ volumeControl.value }}</span>
               </div>
               <div class="slider-size-row">
                 <span class="size-label">Brightness</span>
-                <ui-lib-slider formControlName="brightness" ariaLabel="Brightness" />
+                <ui-lib-slider ariaLabel="Brightness" formControlName="brightness" />
                 <span class="slider-caption">{{ brightnessControl.value }}</span>
               </div>
             </div>
@@ -256,9 +256,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -267,8 +267,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -1,9 +1,9 @@
 @layer uilib.components {
   .ui-lib-input-icon {
-    display: inline-flex;
     align-items: center;
+    display: inline-flex;
+    font-size: var(--uilib-icon-field-icon-size, 1rem);
     justify-content: center;
     line-height: 1;
-    font-size: var(--uilib-icon-field-icon-size, 1rem);
   }
 } // end @layer uilib.components

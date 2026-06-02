@@ -3,32 +3,32 @@
 // ---- Events preview: side-by-side menu + log --------------------------------
 
 .demo-panel-menu-events-preview {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
   align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 // ---- Variant / size grids ---------------------------------------------------
 
 .demo-panel-menu-variant-grid {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
   align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
   margin-bottom: 1.5rem;
 }
 
 .demo-panel-menu-variant-col {
-  min-width: 200px;
   flex: 1 1 200px;
+  min-width: 200px;
 }
 
 .demo-panel-menu-variant-label {
+  color: var(--uilib-muted, #6b7280);
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--uilib-muted, #6b7280);
   margin: 0 0 0.5rem;
+  text-transform: uppercase;
 }

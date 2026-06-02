@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import type { InputSignal, OutputEmitterRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+
 import type { DocSection } from './doc-section.model';
 
 /**

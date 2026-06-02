@@ -1,8 +1,7 @@
+import type { DebugElement } from '@angular/core';
 import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import type { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import {
   FormControl,
   FormGroup,
@@ -10,10 +9,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+
+import { UiLibInput } from 'ui-lib-custom/input';
+import { UiLibSelect } from 'ui-lib-custom/select';
+
 import { FloatLabelComponent } from './float-label';
 import type { FloatLabelVariant } from './float-label.types';
-import { UiLibSelect } from 'ui-lib-custom/select';
-import { UiLibInput } from 'ui-lib-custom/input';
 
 declare const require: (moduleName: string) => unknown;
 

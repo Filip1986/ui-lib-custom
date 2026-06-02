@@ -1,8 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/angular';
 import { signal, type WritableSignal } from '@angular/core';
-import { DialogComponent } from './dialog.component';
+
+import type { Meta, StoryObj } from '@storybook/angular';
+
 import { Button } from 'ui-lib-custom/button';
 import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
+import { DialogComponent } from './dialog.component';
 import type { DialogPosition, DialogVariant } from './dialog.types';
 
 type DialogStoryArgs = {

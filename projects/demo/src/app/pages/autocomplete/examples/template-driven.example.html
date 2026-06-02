@@ -1,8 +1,8 @@
 <ui-lib-autocomplete
-  [(ngModel)]="templateModel"
-  [ngModelOptions]="{ standalone: true }"
-  [suggestions]="countrySuggestions"
   optionLabel="name"
   optionValue="code"
+  [ngModelOptions]="{ standalone: true }"
+  [suggestions]="countrySuggestions"
+  [(ngModel)]="templateModel"
   (completeMethod)="onCountryComplete($event)"
 />

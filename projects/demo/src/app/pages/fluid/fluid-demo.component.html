@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A layout wrapper that stretches all descendant form controls — inputs, textareas, selects, and buttons — to 100&nbsp;% of the available width. Available as both a component (<code>&lt;ui-lib-fluid&gt;</code>) and an attribute directive (<code>[uiLibFluid]</code>) for zero-wrapper usage."
     docHeader
     title="Fluid"
     [importCode]="importCode"
-    description="A layout wrapper that stretches all descendant form controls — inputs, textareas, selects, and buttons — to 100&nbsp;% of the available width. Available as both a component (<code>&lt;ui-lib-fluid&gt;</code>) and an attribute directive (<code>[uiLibFluid]</code>) for zero-wrapper usage."
   />
 
   <div class="demo-page-header__preview">
@@ -26,10 +26,10 @@
         <div class="fd-field">
           <label class="fd-label" for="c-name">Full Name</label>
           <input
-            id="c-name"
             class="fd-input"
-            type="text"
+            id="c-name"
             placeholder="Enter your name"
+            type="text"
             [value]="name()"
             (input)="onNameChange($event)"
           />
@@ -37,10 +37,10 @@
         <div class="fd-field">
           <label class="fd-label" for="c-email">Email Address</label>
           <input
-            id="c-email"
             class="fd-input"
-            type="email"
+            id="c-email"
             placeholder="Enter your email"
+            type="email"
             [value]="email()"
             (input)="onEmailChange($event)"
           />
@@ -48,10 +48,10 @@
         <div class="fd-field">
           <label class="fd-label" for="c-bio">Bio</label>
           <textarea
-            id="c-bio"
             class="fd-input"
-            rows="3"
+            id="c-bio"
             placeholder="Tell us about yourself"
+            rows="3"
           ></textarea>
         </div>
         <ui-lib-button severity="primary" type="button">Submit</ui-lib-button>
@@ -70,11 +70,11 @@
       <form uiLibFluid>
         <div class="fd-field">
           <label class="fd-label" for="d-username">Username</label>
-          <input id="d-username" class="fd-input" type="text" placeholder="Choose a username" />
+          <input class="fd-input" id="d-username" placeholder="Choose a username" type="text" />
         </div>
         <div class="fd-field">
           <label class="fd-label" for="d-password">Password</label>
-          <input id="d-password" class="fd-input" type="password" placeholder="Choose a password" />
+          <input class="fd-input" id="d-password" placeholder="Choose a password" type="password" />
         </div>
         <div style="display: flex; gap: 0.75rem">
           <ui-lib-button severity="primary" type="submit">Sign Up</ui-lib-button>
@@ -91,13 +91,13 @@
       <code>false</code>, inputs and buttons revert to their natural intrinsic sizes.
     </p>
     <div class="fd-demo-card">
-      <span class="fd-status" [class.fd-status--on]="isFluid()" [class.fd-status--off]="!isFluid()">
+      <span class="fd-status" [class.fd-status--off]="!isFluid()" [class.fd-status--on]="isFluid()">
         Fluid: {{ isFluid() ? 'ON' : 'OFF' }}
       </span>
       <div [uiLibFluid]="isFluid()">
         <div class="fd-field">
           <label class="fd-label" for="t-search">Search</label>
-          <input id="t-search" class="fd-input" type="search" placeholder="Search for something…" />
+          <input class="fd-input" id="t-search" placeholder="Search for something…" type="search" />
         </div>
         <ui-lib-button severity="primary" type="button">Search</ui-lib-button>
       </div>
@@ -120,7 +120,7 @@
       <div uiLibFluid>
         <div class="fd-field">
           <label class="fd-label" for="a-topic">Topic</label>
-          <input id="a-topic" class="fd-input" type="text" placeholder="Enter a topic" />
+          <input class="fd-input" id="a-topic" placeholder="Enter a topic" type="text" />
         </div>
         <ui-lib-button severity="primary" type="button">Go</ui-lib-button>
       </div>
@@ -166,8 +166,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

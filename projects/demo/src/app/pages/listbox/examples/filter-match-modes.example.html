@@ -1,10 +1,10 @@
 <!-- starts with -->
 <ui-lib-listbox
-  [options]="cities"
-  [filter]="true"
   filterMatchMode="startsWith"
+  [filter]="true"
+  [options]="cities"
   [(ngModel)]="value"
 />
 
 <!-- ends with -->
-<ui-lib-listbox [options]="cities" [filter]="true" filterMatchMode="endsWith" [(ngModel)]="value" />
+<ui-lib-listbox filterMatchMode="endsWith" [filter]="true" [options]="cities" [(ngModel)]="value" />

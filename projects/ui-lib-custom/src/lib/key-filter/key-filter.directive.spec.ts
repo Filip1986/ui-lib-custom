@@ -1,16 +1,18 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import type { DebugElement } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
 import type { AriaLivePoliteness } from 'ui-lib-custom/a11y';
+import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+
 import { KeyFilterDirective } from './key-filter.directive';
-import { KEY_FILTER_PRESET_PATTERNS, KEY_FILTER_DEFAULTS } from './key-filter.types';
-import type { KeyFilterPreset } from './key-filter.types';
 import { makeKeydownEvent, makePasteEvent } from './key-filter.test-utils';
+import type { KeyFilterPreset } from './key-filter.types';
+import { KEY_FILTER_DEFAULTS, KEY_FILTER_PRESET_PATTERNS } from './key-filter.types';
 
 // ---------------------------------------------------------------------------
 // Test host

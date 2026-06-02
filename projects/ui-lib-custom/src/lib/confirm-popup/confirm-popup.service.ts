@@ -1,5 +1,6 @@
-import { Injectable, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
+
 import type { ConfirmPopupConfig } from './confirm-popup.types';
 
 /**

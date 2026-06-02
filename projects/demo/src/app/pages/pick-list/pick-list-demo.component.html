@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Transfers items between a source list and a target list with reorder controls, optional filter inputs, drag-and-drop support, and full keyboard accessibility."
     docHeader
     title="PickList"
     [importCode]="importCode"
-    description="Transfers items between a source list and a target list with reorder controls, optional filter inputs, drag-and-drop support, and full keyboard accessibility."
   />
 
   <!-- 1. Basic -->
@@ -14,16 +14,16 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-pick-list
-        [source]="basicSource()"
-        (sourceChange)="basicSource.set($any($event))"
-        [target]="basicTarget()"
-        (targetChange)="basicTarget.set($any($event))"
-        trackBy="name"
         sourceHeader="Available"
         targetHeader="Selected"
+        trackBy="name"
+        [source]="basicSource()"
+        [target]="basicTarget()"
+        (sourceChange)="basicSource.set($any($event))"
+        (targetChange)="basicTarget.set($any($event))"
       />
     </ui-lib-panel>
-    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" [showLineNumbers]="true" />
+    <app-doc-code-example [html]="basicHtml" [showLineNumbers]="true" [typescript]="basicTs" />
   </app-doc-section>
 
   <!-- 2. Filter -->
@@ -34,17 +34,17 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-pick-list
-        [source]="filterSource()"
-        (sourceChange)="filterSource.set($any($event))"
-        [target]="filterTarget()"
-        (targetChange)="filterTarget.set($any($event))"
-        trackBy="name"
         filterBy="name"
         sourceFilterPlaceholder="Search available…"
         targetFilterPlaceholder="Search selected…"
+        trackBy="name"
+        [source]="filterSource()"
+        [target]="filterTarget()"
+        (sourceChange)="filterSource.set($any($event))"
+        (targetChange)="filterTarget.set($any($event))"
       />
     </ui-lib-panel>
-    <app-doc-code-example [html]="filterHtml" [typescript]="filterTs" [showLineNumbers]="true" />
+    <app-doc-code-example [html]="filterHtml" [showLineNumbers]="true" [typescript]="filterTs" />
   </app-doc-section>
 
   <!-- 3. Custom Templates -->
@@ -56,11 +56,11 @@
     </p>
     <ui-lib-panel variant="minimal">
       <ui-lib-pick-list
-        [source]="templateSource()"
-        (sourceChange)="templateSource.set($any($event))"
-        [target]="templateTarget()"
-        (targetChange)="templateTarget.set($any($event))"
         trackBy="code"
+        [source]="templateSource()"
+        [target]="templateTarget()"
+        (sourceChange)="templateSource.set($any($event))"
+        (targetChange)="templateTarget.set($any($event))"
       >
         <ng-template uiPickListSourceHeader>
           <span>Available countries ({{ templateSource().length }})</span>
@@ -68,7 +68,7 @@
         <ng-template uiPickListTargetHeader>
           <span>Selected countries ({{ templateTarget().length }})</span>
         </ng-template>
-        <ng-template uiPickListItem let-country>
+        <ng-template let-country uiPickListItem>
           <div class="demo-pl-row">
             <span class="demo-pl-code">{{ country.code }}</span>
             <span class="demo-pl-name">{{ country.name }}</span>
@@ -82,8 +82,8 @@
     </ui-lib-panel>
     <app-doc-code-example
       [html]="templatesHtml"
-      [typescript]="templatesTs"
       [showLineNumbers]="true"
+      [typescript]="templatesTs"
     />
   </app-doc-section>
 
@@ -96,17 +96,17 @@
     <ui-lib-panel variant="minimal">
       <ui-lib-stack [gap]="3">
         <ui-lib-pick-list
-          [source]="dragSource()"
-          (sourceChange)="dragSource.set($any($event))"
-          [target]="dragTarget()"
-          (targetChange)="dragTarget.set($any($event))"
-          trackBy="code"
-          [dragDrop]="true"
           sourceHeader="Source"
           targetHeader="Target"
-          (movedToTarget)="onMoveToTarget($event)"
+          trackBy="code"
+          [dragDrop]="true"
+          [source]="dragSource()"
+          [target]="dragTarget()"
           (movedToSource)="onMoveToSource($event)"
+          (movedToTarget)="onMoveToTarget($event)"
           (reordered)="onReorder($event)"
+          (sourceChange)="dragSource.set($any($event))"
+          (targetChange)="dragTarget.set($any($event))"
         />
         <p class="demo-event-log">
           Last action: <code>{{ lastEventLog() }}</code>
@@ -115,8 +115,8 @@
     </ui-lib-panel>
     <app-doc-code-example
       [html]="dragDropHtml"
-      [typescript]="dragDropTs"
       [showLineNumbers]="true"
+      [typescript]="dragDropTs"
     />
   </app-doc-section>
 
@@ -133,8 +133,8 @@
     <app-doc-api-reference [rows]="apiInputRows" />
     <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     <app-doc-api-reference
-      title="Template Slots"
       kind="name"
+      title="Template Slots"
       [rows]="apiSlotRows"
       [showDefault]="false"
     />
@@ -142,9 +142,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -153,8 +153,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

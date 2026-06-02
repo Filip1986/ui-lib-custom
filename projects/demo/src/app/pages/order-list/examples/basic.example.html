@@ -1,5 +1,5 @@
 <ui-lib-order-list [value]="products" [(selection)]="selection">
-  <ng-template uiOrderListItem let-item>
+  <ng-template let-item uiOrderListItem>
     <div class="demo-ol-row">
       <span class="demo-ol-name">{{ item.name }}</span>
       <span class="demo-ol-price">{{ formatPrice(item.price) }}</span>

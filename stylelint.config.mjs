@@ -18,6 +18,7 @@ export default {
     'stylelint-scss',
     'stylelint-declaration-strict-value',
     'stylelint-high-performance-animation',
+    'stylelint-order',
     './stylelint-plugin/no-unprefixed-motion.mjs',
   ],
 
@@ -155,6 +156,17 @@ export default {
       },
     ],
 
+    // ── Declaration order (auto-fix) ───────────────────────────────────────────
+    // Alphabetical within each rule block — library + demo. See CODE-ORGANIZATION.md.
+    'order/properties-alphabetical-order': [
+      true,
+      {
+        severity: 'error',
+        fix: true,
+        ignore: ['custom-properties'],
+      },
+    ],
+
     // ── SCSS quality ──────────────────────────────────────────────────────────
     'scss/no-duplicate-dollar-variables': [
       true,
@@ -183,6 +195,15 @@ export default {
     {
       // Reset / normalise files legitimately use element selectors and physical properties
       files: ['**/styles/_reset.scss', '**/styles/_base.scss', '**/styles/_normalize.scss'],
+      rules: {
+        'scale-unlimited/declaration-strict-value': null,
+        'property-disallowed-list': null,
+        'declaration-no-important': null,
+      },
+    },
+    {
+      // High-contrast overrides use raw system colors and !important by design
+      files: ['**/high-contrast.scss'],
       rules: {
         'scale-unlimited/declaration-strict-value': null,
         'property-disallowed-list': null,

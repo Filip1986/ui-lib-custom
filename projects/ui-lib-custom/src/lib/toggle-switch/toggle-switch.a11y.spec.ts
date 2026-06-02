@@ -1,17 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  type Provider,
   provideZonelessChangeDetection,
   signal,
-  type Provider,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
+
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { ToggleSwitch } from './toggle-switch';
 

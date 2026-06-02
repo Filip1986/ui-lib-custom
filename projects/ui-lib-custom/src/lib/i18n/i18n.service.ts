@@ -1,12 +1,13 @@
 import type { Signal } from '@angular/core';
-import { Injectable, signal, computed, inject, LOCALE_ID } from '@angular/core';
-import type {
-  UiLibTranslationKey,
-  UiLibPartialBundle,
-  UiLibLocale,
-  UiLibTranslateParams,
-} from './i18n.types';
+import { computed, inject, Injectable, LOCALE_ID, signal } from '@angular/core';
+
 import { UI_LIB_EN } from './en';
+import type {
+  UiLibLocale,
+  UiLibPartialBundle,
+  UiLibTranslateParams,
+  UiLibTranslationKey,
+} from './i18n.types';
 
 /**
  * Signal-based i18n service for ui-lib-custom.

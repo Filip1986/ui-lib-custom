@@ -1,13 +1,13 @@
 <app-doc-page-layout [sections]="sections">
   <!-- ── Header ──────────────────────────────────────────────────────────── -->
   <app-doc-page-header
+    description="The strategic north star for ui-lib-custom — why it exists, what it stands for, and where it is going. Every decision in this library traces back to this document."
     docHeader
     title="Vision"
-    description="The strategic north star for ui-lib-custom — why it exists, what it stands for, and where it is going. Every decision in this library traces back to this document."
   />
 
   <!-- ── Vision Statement ──────────────────────────────────────────────── -->
-  <section id="vision-statement" data-doc-anchor class="vision-section">
+  <section class="vision-section" data-doc-anchor id="vision-statement">
     <h2 class="section-title">Vision Statement</h2>
 
     <div class="vision-hero">
@@ -32,30 +32,30 @@
 
     <div class="vision-pillars">
       <div class="vision-pillar">
-        <span class="vision-pillar__icon" aria-hidden="true">🧠</span>
+        <span aria-hidden="true" class="vision-pillar__icon">🧠</span>
         <span class="vision-pillar__text">APIs that feel intelligent</span>
       </div>
       <div class="vision-pillar">
-        <span class="vision-pillar__icon" aria-hidden="true">✨</span>
+        <span aria-hidden="true" class="vision-pillar__icon">✨</span>
         <span class="vision-pillar__text">Components that feel effortless</span>
       </div>
       <div class="vision-pillar">
-        <span class="vision-pillar__icon" aria-hidden="true">📚</span>
+        <span aria-hidden="true" class="vision-pillar__icon">📚</span>
         <span class="vision-pillar__text">Documentation that feels magical</span>
       </div>
       <div class="vision-pillar">
-        <span class="vision-pillar__icon" aria-hidden="true">⚡</span>
+        <span aria-hidden="true" class="vision-pillar__icon">⚡</span>
         <span class="vision-pillar__text">Performance that feels invisible</span>
       </div>
       <div class="vision-pillar">
-        <span class="vision-pillar__icon" aria-hidden="true">🚀</span>
+        <span aria-hidden="true" class="vision-pillar__icon">🚀</span>
         <span class="vision-pillar__text">An experience years ahead of the Angular ecosystem</span>
       </div>
     </div>
 
     <div class="vision-emotional">
       <h3 class="vision-emotional__title">How developers should feel using it</h3>
-      <div class="vision-emotional__tags" role="list" aria-label="Emotional goals">
+      <div aria-label="Emotional goals" class="vision-emotional__tags" role="list">
         @for (goal of emotionalGoals; track trackByString($index, goal)) {
           <span class="emotion-tag" role="listitem">{{ goal }}</span>
         }
@@ -80,7 +80,7 @@
   </section>
 
   <!-- ── Core Philosophy ───────────────────────────────────────────────── -->
-  <section id="core-philosophy" data-doc-anchor class="vision-section">
+  <section class="vision-section" data-doc-anchor id="core-philosophy">
     <h2 class="section-title">Core Philosophy</h2>
     <p class="section-subtitle">
       Five foundational principles. Every architectural and API decision must trace back to at least
@@ -95,7 +95,7 @@
             <h3 class="principle-title">{{ principle.title }}</h3>
           </div>
           <p class="principle-tagline">"{{ principle.tagline }}"</p>
-          <ul class="principle-bullets" aria-label="{{ principle.title }} principles">
+          <ul aria-label="{{ principle.title }} principles" class="principle-bullets">
             @for (bullet of principle.bullets; track trackByString($index, bullet)) {
               <li class="principle-bullet">{{ bullet }}</li>
             }
@@ -106,7 +106,7 @@
   </section>
 
   <!-- ── The Wow Factor ─────────────────────────────────────────────────── -->
-  <section id="wow-factor" data-doc-anchor class="vision-section">
+  <section class="vision-section" data-doc-anchor id="wow-factor">
     <h2 class="section-title">The Wow Factor</h2>
     <p class="section-subtitle">
       Legendary libraries commit to one undeniable strength first, then build the next, and the
@@ -118,8 +118,8 @@
       @for (wow of wowFactors; track trackByNumber($index, wow)) {
         <div
           class="wow-card"
-          [class.wow-card--committed]="wow.committed"
           [class.wow-card--achieved]="wow.status === 'achieved'"
+          [class.wow-card--committed]="wow.committed"
           [class.wow-card--queued]="wow.status === 'queued'"
         >
           <div class="wow-card__header">
@@ -148,7 +148,7 @@
   </section>
 
   <!-- ── Technical Identity ─────────────────────────────────────────────── -->
-  <section id="technical-identity" data-doc-anchor class="vision-section">
+  <section class="vision-section" data-doc-anchor id="technical-identity">
     <h2 class="section-title">Technical Identity</h2>
     <p class="section-subtitle">
       The architectural principles that define how the library is built.
@@ -157,10 +157,10 @@
     <div class="tech-grid">
       <div class="tech-card">
         <h3 class="tech-card__title">Architectural Principles</h3>
-        <ul class="tech-list" aria-label="Architectural principles">
+        <ul aria-label="Architectural principles" class="tech-list">
           @for (principle of architecturalPrinciples; track trackByString($index, principle)) {
             <li class="tech-list__item">
-              <span class="tech-check" aria-hidden="true">✓</span>
+              <span aria-hidden="true" class="tech-check">✓</span>
               {{ principle }}
             </li>
           }
@@ -172,27 +172,27 @@
         <p class="tech-card__intro">
           Theming should feel effortless — and become one of the library's signature features.
         </p>
-        <ul class="tech-list" aria-label="Theming requirements">
+        <ul aria-label="Theming requirements" class="tech-list">
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Dark mode by default
+            <span aria-hidden="true" class="tech-check">✓</span> Dark mode by default
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Runtime theme switching
+            <span aria-hidden="true" class="tech-check">✓</span> Runtime theme switching
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Design token system
+            <span aria-hidden="true" class="tech-check">✓</span> Design token system
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Minimal CSS specificity conflicts
+            <span aria-hidden="true" class="tech-check">✓</span> Minimal CSS specificity conflicts
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Easy brand customization
+            <span aria-hidden="true" class="tech-check">✓</span> Easy brand customization
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> CSS variable driven
+            <span aria-hidden="true" class="tech-check">✓</span> CSS variable driven
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Global + local theming support
+            <span aria-hidden="true" class="tech-check">✓</span> Global + local theming support
           </li>
         </ul>
       </div>
@@ -203,28 +203,28 @@
           Documentation is not support material.
           <strong>Documentation is part of the product experience.</strong>
         </p>
-        <ul class="tech-list" aria-label="Documentation requirements">
+        <ul aria-label="Documentation requirements" class="tech-list">
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Live playgrounds
+            <span aria-hidden="true" class="tech-check">✓</span> Live playgrounds
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Copy-paste examples
+            <span aria-hidden="true" class="tech-check">✓</span> Copy-paste examples
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Interactive demos
+            <span aria-hidden="true" class="tech-check">✓</span> Interactive demos
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Accessibility explanations per
+            <span aria-hidden="true" class="tech-check">✓</span> Accessibility explanations per
             component
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Performance notes
+            <span aria-hidden="true" class="tech-check">✓</span> Performance notes
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Migration guides
+            <span aria-hidden="true" class="tech-check">✓</span> Migration guides
           </li>
           <li class="tech-list__item">
-            <span class="tech-check" aria-hidden="true">✓</span> Real-world examples
+            <span aria-hidden="true" class="tech-check">✓</span> Real-world examples
           </li>
         </ul>
         <p class="tech-card__result">
@@ -235,7 +235,7 @@
   </section>
 
   <!-- ── Component Philosophy ──────────────────────────────────────────── -->
-  <section id="component-philosophy" data-doc-anchor class="vision-section">
+  <section class="vision-section" data-doc-anchor id="component-philosophy">
     <h2 class="section-title">Component Philosophy</h2>
     <p class="section-subtitle">
       Do not chase component quantity.
@@ -249,12 +249,12 @@
         Every component evolves through these layers. Most libraries stop at layer 1 or 2.
         <strong>The goal is layer 11.</strong>
       </p>
-      <div class="quality-layers" role="list" aria-label="Quality layer model">
+      <div aria-label="Quality layer model" class="quality-layers" role="list">
         @for (layer of qualityLayers; track trackByString($index, layer)) {
           <div class="quality-layer" role="listitem">
             <span class="quality-layer__number">{{ $index + 1 }}</span>
             <span class="quality-layer__name">{{ layer }}</span>
-            <span class="quality-layer__connector" aria-hidden="true">→</span>
+            <span aria-hidden="true" class="quality-layer__connector">→</span>
           </div>
         }
       </div>
@@ -266,7 +266,7 @@
         Before a component ships, it must score ≥&nbsp;8 across all 10 quality dimensions. This
         scorecard is what separates a component library from a legendary UI ecosystem.
       </p>
-      <div class="scorecard-dimensions" role="list" aria-label="Quality scorecard dimensions">
+      <div aria-label="Quality scorecard dimensions" class="scorecard-dimensions" role="list">
         @for (
           dim of [
             'API Clarity',
@@ -292,7 +292,7 @@
   </section>
 
   <!-- ── Long-Term Vision ──────────────────────────────────────────────── -->
-  <section id="long-term-vision" data-doc-anchor class="vision-section">
+  <section class="vision-section" data-doc-anchor id="long-term-vision">
     <h2 class="section-title">Long-Term Vision</h2>
     <p class="section-subtitle">
       The project evolves from a component library to a full design system platform, then to an
@@ -302,10 +302,10 @@
     <div class="evolution-path">
       @for (stage of longTermPath; track trackByString($index, stage)) {
         <div class="evolution-stage">
-          <span class="evolution-stage__dot" aria-hidden="true"></span>
+          <span aria-hidden="true" class="evolution-stage__dot"></span>
           <span class="evolution-stage__label">{{ stage }}</span>
           @if ($index < longTermPath.length - 1) {
-            <span class="evolution-stage__arrow" aria-hidden="true">↓</span>
+            <span aria-hidden="true" class="evolution-stage__arrow">↓</span>
           }
         </div>
       }
@@ -313,7 +313,7 @@
 
     <div class="horizon-features">
       <h3 class="horizon-features__title">Potential Future Layers</h3>
-      <div class="horizon-grid" role="list" aria-label="Potential future features">
+      <div aria-label="Potential future features" class="horizon-grid" role="list">
         @for (
           feature of [
             'Premium data grid',
@@ -329,7 +329,7 @@
           track trackByString($index, feature)
         ) {
           <div class="horizon-item" role="listitem">
-            <span class="horizon-item__dot" aria-hidden="true">◆</span>
+            <span aria-hidden="true" class="horizon-item__dot">◆</span>
             {{ feature }}
           </div>
         }
@@ -354,7 +354,7 @@
   </section>
 
   <!-- ── Business Model ─────────────────────────────────────────────────── -->
-  <section id="business-model" data-doc-anchor class="vision-section">
+  <section class="vision-section" data-doc-anchor id="business-model">
     <h2 class="section-title">Business Model</h2>
     <p class="section-subtitle">
       The library is free. That is not a temporary state — it is a permanent strategic commitment.
@@ -369,7 +369,7 @@
       <p class="model-principle__attribution">Proven by PrimeTek (PrimeNG), AG Grid, and others.</p>
     </div>
 
-    <div class="revenue-streams" role="list" aria-label="Revenue streams">
+    <div aria-label="Revenue streams" class="revenue-streams" role="list">
       @for (stream of revenueStreams; track trackByRank($index, stream)) {
         <div class="revenue-card" role="listitem">
           <div class="revenue-card__header">
@@ -384,10 +384,10 @@
 
     <div class="never-do">
       <h3 class="never-do__title">What to Never Do</h3>
-      <ul class="never-do__list" aria-label="Things to never do">
+      <ul aria-label="Things to never do" class="never-do__list">
         @for (rule of neverDo; track trackByString($index, rule)) {
           <li class="never-do__item">
-            <span class="never-do__icon" aria-hidden="true">✗</span>
+            <span aria-hidden="true" class="never-do__icon">✗</span>
             {{ rule }}
           </li>
         }
@@ -396,17 +396,17 @@
   </section>
 
   <!-- ── Non-Negotiables ────────────────────────────────────────────────── -->
-  <section id="non-negotiables" data-doc-anchor class="vision-section">
+  <section class="vision-section" data-doc-anchor id="non-negotiables">
     <h2 class="section-title">Non-Negotiable Standards</h2>
     <p class="section-subtitle">
       Every release must preserve these standards.
       <strong>Never sacrifice long-term trust for short-term velocity.</strong>
     </p>
 
-    <div class="non-negotiables-grid" role="list" aria-label="Non-negotiable standards">
+    <div aria-label="Non-negotiable standards" class="non-negotiables-grid" role="list">
       @for (standard of nonNegotiables; track trackByString($index, standard)) {
         <div class="non-neg-card" role="listitem">
-          <span class="non-neg-icon" aria-hidden="true">🔒</span>
+          <span aria-hidden="true" class="non-neg-icon">🔒</span>
           <span class="non-neg-label">{{ standard }}</span>
         </div>
       }
@@ -431,8 +431,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

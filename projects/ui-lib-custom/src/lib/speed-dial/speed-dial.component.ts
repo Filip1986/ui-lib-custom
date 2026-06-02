@@ -1,37 +1,33 @@
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  HostListener,
-  TemplateRef,
-  ViewEncapsulation,
   computed,
   contentChild,
   effect,
+  ElementRef,
+  HostListener,
   inject,
   input,
-  model,
-  output,
-  signal,
-  viewChild,
-  viewChildren,
   type InputSignal,
+  model,
   type ModelSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  TemplateRef,
+  viewChild,
+  viewChildren,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
-import { Icon } from 'ui-lib-custom/icon';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { Icon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import {
-  SpeedDialButtonDirective,
-  SpeedDialIconDirective,
-  SpeedDialItemDirective,
-} from './speed-dial-templates.directive';
-import { computeSpeedDialLayout } from './speed-dial-layout';
+
 import type {
   SpeedDialClickEvent,
   SpeedDialDirection,
@@ -44,6 +40,12 @@ import type {
   SpeedDialVariant,
   SpeedDialVisibleChangeEvent,
 } from './speed-dial.types';
+import { computeSpeedDialLayout } from './speed-dial-layout';
+import {
+  SpeedDialButtonDirective,
+  SpeedDialIconDirective,
+  SpeedDialItemDirective,
+} from './speed-dial-templates.directive';
 
 /**
  * SpeedDial scaffold component with public API signals and projection slots.

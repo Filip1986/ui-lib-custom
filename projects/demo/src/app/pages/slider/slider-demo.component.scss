@@ -13,15 +13,15 @@
 }
 
 .section-text {
-  margin: 0;
   color: var(--uilib-color-text-secondary, #6b7280);
   font-size: 0.9rem;
+  margin: 0;
 
   code {
     background: var(--uilib-surface-100, #f3f4f6);
     border-radius: 3px;
-    padding: 1px 5px;
     font-size: 0.85em;
+    padding: 1px 5px;
   }
 }
 
@@ -37,8 +37,8 @@
 }
 
 .slider-vertical-row {
-  display: flex;
   align-items: flex-start;
+  display: flex;
   gap: 1.5rem;
   padding: 1rem;
 }
@@ -51,8 +51,8 @@
 }
 
 .slider-size-row {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 1rem;
 
   ui-lib-slider {
@@ -61,16 +61,16 @@
 }
 
 .size-label {
-  width: 6rem;
-  font-size: 0.85rem;
-  font-weight: 500;
   color: var(--uilib-color-text-secondary, #6b7280);
   flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  width: 6rem;
 }
 
 .slider-caption {
-  font-size: 0.85rem;
   color: var(--uilib-color-text-secondary, #6b7280);
+  font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }

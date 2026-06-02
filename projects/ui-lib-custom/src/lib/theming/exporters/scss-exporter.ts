@@ -1,5 +1,6 @@
-import type { ThemePreset } from '../theme-preset.interface';
 import { SHAPE_TOKENS } from 'ui-lib-custom/tokens';
+
+import type { ThemePreset } from '../theme-preset.interface';
 
 export interface ScssExportOptions {
   includeComments?: boolean;

@@ -48,13 +48,13 @@
   // ---------------------------------------------------------------------------
 
   ui-lib-textarea .ui-lib-textarea__label {
-    display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    font-weight: 600;
     color: var(--uilib-textarea-label-color);
-    font-size: var(--uilib-textarea-font-size);
     cursor: default;
+    display: inline-flex;
+    font-size: var(--uilib-textarea-font-size);
+    font-weight: 600;
+    gap: 0.25rem;
   }
 
   ui-lib-textarea .ui-lib-textarea__required {
@@ -66,10 +66,10 @@
   // ---------------------------------------------------------------------------
 
   ui-lib-textarea .ui-lib-textarea__field {
-    position: relative;
     background: var(--uilib-textarea-bg);
     border: 1px solid var(--uilib-textarea-border);
     border-radius: var(--uilib-textarea-radius);
+    position: relative;
     transition: var(--uilib-textarea-transition);
 
     &:focus-within {
@@ -83,21 +83,25 @@
   // ---------------------------------------------------------------------------
 
   ui-lib-textarea .ui-lib-textarea__control {
-    display: block;
-    width: 100%;
-    padding: var(--uilib-textarea-padding-y) var(--uilib-textarea-padding-x);
-    font: inherit;
-    font-size: var(--uilib-textarea-font-size);
-    color: var(--uilib-textarea-text);
     background: transparent;
     border: none;
-    outline: none;
-    box-sizing: border-box;
     border-radius: var(--uilib-textarea-radius);
+    box-sizing: border-box;
+    color: var(--uilib-textarea-text);
+    display: block;
+    font: inherit;
+    font-size: var(--uilib-textarea-font-size);
+    line-height: 1.5;
     min-height: calc(
       var(--uilib-textarea-font-size) * 1.5 * 3 + var(--uilib-textarea-padding-y) * 2
     );
-    line-height: 1.5;
+    outline: none;
+
+    // Disable the browser resize handle when auto-resize is active (applied via [style.resize] binding)
+    // The binding handles this; this just ensures the field clip doesn't show the handle peeking.
+    overflow: hidden;
+    padding: var(--uilib-textarea-padding-y) var(--uilib-textarea-padding-x);
+    width: 100%;
 
     &::placeholder {
       color: var(--uilib-textarea-placeholder);
@@ -112,10 +116,6 @@
       background-color: color-mix(in srgb, var(--uilib-textarea-resize-color) 55%, transparent);
       border-radius: 2px;
     }
-
-    // Disable the browser resize handle when auto-resize is active (applied via [style.resize] binding)
-    // The binding handles this; this just ensures the field clip doesn't show the handle peeking.
-    overflow: hidden;
   }
 
   // Expose overflow when resize is enabled (user may drag to reveal scrollbar intentionally)
@@ -128,18 +128,18 @@
   // ---------------------------------------------------------------------------
 
   ui-lib-textarea .ui-lib-textarea__meta {
-    display: flex;
-    justify-content: space-between;
     align-items: flex-start;
-    gap: 0.5rem;
-    min-height: 1.25rem;
+    display: flex;
     font-size: calc(var(--uilib-textarea-font-size) * 0.875);
+    gap: 0.5rem;
+    justify-content: space-between;
+    min-height: 1.25rem;
   }
 
   ui-lib-textarea .ui-lib-textarea__messages {
     display: grid;
-    gap: 0.25rem;
     flex: 1;
+    gap: 0.25rem;
   }
 
   ui-lib-textarea .ui-lib-textarea__hint {
@@ -156,8 +156,8 @@
 
   ui-lib-textarea .ui-lib-textarea__counter {
     color: var(--uilib-textarea-counter-color);
-    white-space: nowrap;
     margin-inline-start: auto;
+    white-space: nowrap;
   }
 
   // ---------------------------------------------------------------------------
@@ -189,9 +189,9 @@
   // ---------------------------------------------------------------------------
 
   ui-lib-textarea.ui-lib-textarea--disabled {
+    cursor: not-allowed;
     opacity: var(--uilib-textarea-disabled-opacity);
     pointer-events: none;
-    cursor: not-allowed;
   }
 
   // ---------------------------------------------------------------------------
@@ -237,8 +237,8 @@
     box-shadow: none;
 
     &:focus-within {
-      box-shadow: none;
       border-color: var(--uilib-textarea-border-focus);
+      box-shadow: none;
     }
   }
 
@@ -247,8 +247,8 @@
   // ---------------------------------------------------------------------------
 
   ui-lib-textarea.ui-lib-textarea--variant-material .ui-lib-textarea__field {
-    border-radius: var(--uilib-textarea-radius);
     background: color-mix(in srgb, var(--uilib-textarea-bg) 80%, var(--uilib-muted) 20%);
+    border-radius: var(--uilib-textarea-radius);
 
     &:focus-within {
       background: var(--uilib-textarea-bg);

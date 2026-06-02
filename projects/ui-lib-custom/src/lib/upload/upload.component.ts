@@ -1,17 +1,4 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  TemplateRef,
-  ViewEncapsulation,
-  computed,
-  contentChild,
-  inject,
-  input,
-  output,
-  signal,
-  viewChild,
-} from '@angular/core';
 import type {
   ElementRef,
   InputSignal,
@@ -20,6 +7,35 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  contentChild,
+  inject,
+  input,
+  output,
+  signal,
+  TemplateRef,
+  viewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import {
+  UPLOAD_DEFAULT_PREVIEW_WIDTH,
+  UPLOAD_INVALID_FILE_LIMIT_MESSAGE,
+  UPLOAD_INVALID_FILE_SIZE_MESSAGE,
+  UPLOAD_INVALID_FILE_TYPE_MESSAGE,
+} from './upload.constants';
+import {
+  UploadContentDirective,
+  UploadEmptyDirective,
+  UploadFileDirective,
+  UploadHeaderDirective,
+} from './upload.template-directives';
 import type {
   UploadFileItem,
   UploadHandlerEvent,
@@ -29,20 +45,6 @@ import type {
   UploadValidationMessage,
   UploadVariant,
 } from './upload.types';
-import {
-  UploadContentDirective,
-  UploadEmptyDirective,
-  UploadFileDirective,
-  UploadHeaderDirective,
-} from './upload.template-directives';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import {
-  UPLOAD_DEFAULT_PREVIEW_WIDTH,
-  UPLOAD_INVALID_FILE_LIMIT_MESSAGE,
-  UPLOAD_INVALID_FILE_SIZE_MESSAGE,
-  UPLOAD_INVALID_FILE_TYPE_MESSAGE,
-} from './upload.constants';
 
 let nextUploadId: number = 0;
 

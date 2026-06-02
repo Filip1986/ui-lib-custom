@@ -1,13 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  type DebugElement,
   provideZonelessChangeDetection,
   signal,
-  type DebugElement,
   type WritableSignal,
 } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { SpeedDialComponent } from './speed-dial.component';
 import type { SpeedDialDirection, SpeedDialItem, SpeedDialVariant } from './speed-dial.types';

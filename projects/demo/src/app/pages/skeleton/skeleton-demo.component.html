@@ -1,11 +1,10 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Content placeholder displayed while real content is loading. Combine shapes to mock realistic page layouts."
     docHeader
     title="Skeleton"
     [importCode]="importCode"
-    description="Content placeholder displayed while real content is loading. Combine shapes to mock realistic page layouts."
-  >
-  </app-doc-page-header>
+  />
 
   <!-- Basic shapes -->
   <app-doc-section id="shapes" title="Shapes">
@@ -14,9 +13,9 @@
     </p>
     <div class="demo-card">
       <div class="shapes-row">
-        <ui-lib-skeleton width="100%" height="2rem" />
-        <ui-lib-skeleton width="100%" height="2rem" />
-        <ui-lib-skeleton width="60%" height="2rem" />
+        <ui-lib-skeleton height="2rem" width="100%" />
+        <ui-lib-skeleton height="2rem" width="100%" />
+        <ui-lib-skeleton height="2rem" width="60%" />
         <div class="shapes-inline">
           <ui-lib-skeleton shape="circle" size="4rem" />
           <ui-lib-skeleton shape="circle" size="4rem" />
@@ -33,18 +32,18 @@
     </p>
     <div class="demo-card">
       <div class="card-placeholder">
-        <ui-lib-skeleton width="100%" height="10rem" styleClass="card-placeholder__image" />
+        <ui-lib-skeleton height="10rem" styleClass="card-placeholder__image" width="100%" />
         <div class="card-placeholder__body">
           <div class="card-placeholder__header">
             <ui-lib-skeleton shape="circle" size="3rem" />
             <div class="card-placeholder__meta">
-              <ui-lib-skeleton width="8rem" height="1rem" />
-              <ui-lib-skeleton width="5rem" height="0.75rem" />
+              <ui-lib-skeleton height="1rem" width="8rem" />
+              <ui-lib-skeleton height="0.75rem" width="5rem" />
             </div>
           </div>
-          <ui-lib-skeleton width="100%" height="1rem" />
-          <ui-lib-skeleton width="100%" height="1rem" />
-          <ui-lib-skeleton width="75%" height="1rem" />
+          <ui-lib-skeleton height="1rem" width="100%" />
+          <ui-lib-skeleton height="1rem" width="100%" />
+          <ui-lib-skeleton height="1rem" width="75%" />
         </div>
       </div>
     </div>
@@ -59,8 +58,8 @@
           <div class="list-placeholder__row">
             <ui-lib-skeleton shape="circle" size="2.5rem" />
             <div class="list-placeholder__lines">
-              <ui-lib-skeleton width="12rem" height="0.875rem" />
-              <ui-lib-skeleton width="8rem" height="0.75rem" />
+              <ui-lib-skeleton height="0.875rem" width="12rem" />
+              <ui-lib-skeleton height="0.75rem" width="8rem" />
             </div>
           </div>
         }
@@ -77,13 +76,13 @@
       @for (variant of variants; track variant) {
         <div class="demo-card">
           <p class="variant-label">{{ variant }}</p>
-          <ui-lib-skeleton [variant]="variant" width="100%" height="1.5rem" />
-          <ui-lib-skeleton [variant]="variant" width="80%" height="1rem" />
-          <ui-lib-skeleton [variant]="variant" width="60%" height="1rem" />
+          <ui-lib-skeleton height="1.5rem" width="100%" [variant]="variant" />
+          <ui-lib-skeleton height="1rem" width="80%" [variant]="variant" />
+          <ui-lib-skeleton height="1rem" width="60%" [variant]="variant" />
           <div class="variant-circles">
-            <ui-lib-skeleton [variant]="variant" shape="circle" size="3rem" />
-            <ui-lib-skeleton [variant]="variant" shape="circle" size="3rem" />
-            <ui-lib-skeleton [variant]="variant" shape="circle" size="3rem" />
+            <ui-lib-skeleton shape="circle" size="3rem" [variant]="variant" />
+            <ui-lib-skeleton shape="circle" size="3rem" [variant]="variant" />
+            <ui-lib-skeleton shape="circle" size="3rem" [variant]="variant" />
           </div>
         </div>
       }
@@ -99,13 +98,13 @@
     <div class="demo-card demo-card--row">
       <div class="animation-col">
         <p class="demo-label">wave (default)</p>
-        <ui-lib-skeleton width="100%" height="1.5rem" animation="wave" />
-        <ui-lib-skeleton width="80%" height="1rem" animation="wave" />
+        <ui-lib-skeleton animation="wave" height="1.5rem" width="100%" />
+        <ui-lib-skeleton animation="wave" height="1rem" width="80%" />
       </div>
       <div class="animation-col">
         <p class="demo-label">none</p>
-        <ui-lib-skeleton width="100%" height="1.5rem" animation="none" />
-        <ui-lib-skeleton width="80%" height="1rem" animation="none" />
+        <ui-lib-skeleton animation="none" height="1.5rem" width="100%" />
+        <ui-lib-skeleton animation="none" height="1rem" width="80%" />
       </div>
     </div>
   </app-doc-section>
@@ -118,9 +117,9 @@
     </p>
     <div class="demo-card">
       <div class="sizes-row">
-        <ui-lib-skeleton width="4rem" height="4rem" />
-        <ui-lib-skeleton width="8rem" height="4rem" />
-        <ui-lib-skeleton width="12rem" height="4rem" />
+        <ui-lib-skeleton height="4rem" width="4rem" />
+        <ui-lib-skeleton height="4rem" width="8rem" />
+        <ui-lib-skeleton height="4rem" width="12rem" />
         <ui-lib-skeleton shape="circle" size="2rem" />
         <ui-lib-skeleton shape="circle" size="4rem" />
         <ui-lib-skeleton shape="circle" size="6rem" />
@@ -135,9 +134,9 @@
     </p>
     <div class="demo-card">
       <div class="shapes-row">
-        <ui-lib-skeleton width="100%" height="2rem" borderRadius="0" />
-        <ui-lib-skeleton width="100%" height="2rem" borderRadius="0.5rem" />
-        <ui-lib-skeleton width="100%" height="2rem" borderRadius="9999px" />
+        <ui-lib-skeleton borderRadius="0" height="2rem" width="100%" />
+        <ui-lib-skeleton borderRadius="0.5rem" height="2rem" width="100%" />
+        <ui-lib-skeleton borderRadius="9999px" height="2rem" width="100%" />
       </div>
     </div>
   </app-doc-section>
@@ -157,9 +156,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -168,8 +167,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

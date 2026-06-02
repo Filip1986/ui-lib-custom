@@ -4,12 +4,12 @@
     @for (segment of meterSegments(); track trackSegment($index, segment)) {
       <li class="ui-lib-meter-group__label-item">
         <span
+          aria-hidden="true"
           class="ui-lib-meter-group__label-swatch"
           [style.background-color]="segment.color"
-          aria-hidden="true"
         >
           @if (segment.icon) {
-            <span [class]="segment.icon" aria-hidden="true"></span>
+            <span aria-hidden="true" [class]="segment.icon"></span>
           }
         </span>
         <span class="ui-lib-meter-group__label-text">{{ segment.label }}</span>
@@ -25,18 +25,18 @@
     <div
       class="ui-lib-meter-group__meter"
       role="meter"
-      [attr.aria-valuenow]="segment.value"
-      [attr.aria-valuemin]="min()"
-      [attr.aria-valuemax]="max()"
       [attr.aria-label]="getSegmentAriaLabel(segment, $index)"
+      [attr.aria-valuemax]="max()"
+      [attr.aria-valuemin]="min()"
+      [attr.aria-valuenow]="segment.value"
       [style.background-color]="segment.color"
-      [style.width]="orientation() === 'horizontal' ? segment.percentage + '%' : '100%'"
       [style.height]="orientation() === 'vertical' ? segment.percentage + '%' : '100%'"
+      [style.width]="orientation() === 'horizontal' ? segment.percentage + '%' : '100%'"
     ></div>
   }
 </div>
 
-<span class="ui-lib-meter-group__sr-total" aria-live="polite" aria-atomic="true">
+<span aria-atomic="true" aria-live="polite" class="ui-lib-meter-group__sr-total">
   {{ totalAnnouncement() }}
 </span>
 
@@ -46,12 +46,12 @@
     @for (segment of meterSegments(); track trackSegment($index, segment)) {
       <li class="ui-lib-meter-group__label-item">
         <span
+          aria-hidden="true"
           class="ui-lib-meter-group__label-swatch"
           [style.background-color]="segment.color"
-          aria-hidden="true"
         >
           @if (segment.icon) {
-            <span [class]="segment.icon" aria-hidden="true"></span>
+            <span aria-hidden="true" [class]="segment.icon"></span>
           }
         </span>
         <span class="ui-lib-meter-group__label-text">{{ segment.label }}</span>

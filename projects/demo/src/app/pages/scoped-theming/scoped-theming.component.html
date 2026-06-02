@@ -1,8 +1,8 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Apply different themes to specific components or sections."
     docHeader
     title="Scoped Theming"
-    description="Apply different themes to specific components or sections."
   />
 
   <ui-lib-panel variant="minimal">
@@ -26,14 +26,14 @@
 
   <ui-lib-panel variant="minimal">
     <div class="demo-row">
-      <div [uiLibTheme]="'dark'" class="theme-section">
+      <div class="theme-section" [uiLibTheme]="'dark'">
         <h4>Dark Section (directive)</h4>
         <ui-lib-button color="primary">Primary</ui-lib-button>
         <ui-lib-button color="secondary">Secondary</ui-lib-button>
         <ui-lib-badge color="success">Badge</ui-lib-badge>
       </div>
 
-      <div [uiLibDarkTheme]="true" class="theme-section">
+      <div class="theme-section" [uiLibDarkTheme]="true">
         <h4>Dark (shorthand)</h4>
         <ui-lib-input label="Input" placeholder="Type here" />
         <ui-lib-checkbox label="Checkbox" />
@@ -43,13 +43,13 @@
 
   <ui-lib-panel variant="minimal">
     <div class="demo-row">
-      <div [uiLibTheme]="customBlueTheme" class="theme-section">
+      <div class="theme-section" [uiLibTheme]="customBlueTheme">
         <h4>Blue Theme</h4>
         <ui-lib-button color="primary">Primary</ui-lib-button>
         <ui-lib-button color="secondary">Secondary</ui-lib-button>
       </div>
 
-      <div [uiLibTheme]="customWarmTheme" class="theme-section">
+      <div class="theme-section" [uiLibTheme]="customWarmTheme">
         <h4>Warm Theme</h4>
         <ui-lib-button color="primary">Primary</ui-lib-button>
         <ui-lib-panel variant="minimal">
@@ -60,15 +60,15 @@
   </ui-lib-panel>
 
   <ui-lib-panel variant="minimal">
-    <div [uiLibDarkTheme]="true" class="theme-section">
+    <div class="theme-section" [uiLibDarkTheme]="true">
       <h4>Dark Outer Scope</h4>
       <ui-lib-button>Dark Button</ui-lib-button>
 
-      <div [uiLibLightTheme]="true" class="theme-section nested">
+      <div class="theme-section nested" [uiLibLightTheme]="true">
         <h4>Light Inner Scope</h4>
         <ui-lib-button>Light Button</ui-lib-button>
 
-        <div [uiLibDarkTheme]="true" class="theme-section nested">
+        <div class="theme-section nested" [uiLibDarkTheme]="true">
           <h4>Dark Again</h4>
           <ui-lib-button>Dark Again</ui-lib-button>
         </div>
@@ -84,14 +84,14 @@
     <app-doc-code-example [html]="directiveCodeHtml" [typescript]="directiveCodeTs" />
 
     <h4>Custom Colors</h4>
-    <ui-lib-code-snippet [code]="customColorsCode" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="customColorsCode" [showLineNumbers]="true" />
   </ui-lib-panel>
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

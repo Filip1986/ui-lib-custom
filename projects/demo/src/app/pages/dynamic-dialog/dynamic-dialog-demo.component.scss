@@ -1,6 +1,6 @@
 .dynamic-dialog-demo {
-  max-width: 900px;
   margin: 0 auto;
+  max-width: 900px;
   padding: 2rem;
 }
 
@@ -14,16 +14,16 @@
   }
 
   &__lead {
-    font-size: 1.125rem;
     color: var(--uilib-page-fg-muted, #6c757d);
+    font-size: 1.125rem;
     line-height: 1.6;
     margin: 0;
 
     code {
-      font-size: 0.9em;
       background: var(--uilib-surface-alt, #f3f4f6);
-      padding: 0.1em 0.35em;
       border-radius: 4px;
+      font-size: 0.9em;
+      padding: 0.1em 0.35em;
     }
   }
 }
@@ -32,24 +32,24 @@
   margin-bottom: 3rem;
 
   &__title {
+    border-bottom: 1px solid var(--uilib-surface-border, #e9ecef);
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0 0 0.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--uilib-surface-border, #e9ecef);
   }
 
   &__desc {
     color: var(--uilib-page-fg-muted, #6c757d);
-    margin: 0 0 1rem;
     line-height: 1.6;
+    margin: 0 0 1rem;
 
     code {
-      font-size: 0.875em;
       background: var(--uilib-surface-alt, #f3f4f6);
-      padding: 0.1em 0.35em;
       border-radius: 4px;
       color: var(--uilib-page-fg, #212121);
+      font-size: 0.875em;
+      padding: 0.1em 0.35em;
     }
   }
 }
@@ -60,15 +60,15 @@
   overflow: hidden;
 
   &__preview {
-    padding: 1.5rem;
+    align-items: center;
     background: var(--uilib-surface-alt, #f8f9fa);
     display: flex;
     gap: 0.75rem;
-    align-items: center;
+    padding: 1.5rem;
 
     &--col {
-      flex-direction: column;
       align-items: flex-start;
+      flex-direction: column;
     }
 
     &--row {
@@ -77,20 +77,20 @@
 
     &--grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
       gap: 0.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     }
   }
 
   &__code {
-    margin: 0;
-    padding: 1rem 1.25rem;
     background: var(--uilib-surface, #fff);
     border-top: 1px solid var(--uilib-surface-border, #e9ecef);
-    overflow-x: auto;
+    color: var(--uilib-page-fg, #212121);
     font-size: 0.8125rem;
     line-height: 1.6;
-    color: var(--uilib-page-fg, #212121);
+    margin: 0;
+    overflow-x: auto;
+    padding: 1rem 1.25rem;
 
     code {
       font-family: var(--uilib-font-mono, 'Fira Code', monospace);
@@ -99,22 +99,22 @@
 }
 
 .demo-result {
-  margin: 0;
-  padding: 0.5rem 0.75rem;
   background: var(--uilib-color-success-light, #d1fae5);
   border-radius: 4px;
-  font-size: 0.875rem;
   color: var(--uilib-color-success-fg, #065f46);
+  font-size: 0.875rem;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
 }
 
 .demo-btn {
-  padding: 0.5rem 1.25rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-family: inherit;
   font-size: 0.875rem;
   font-weight: 500;
-  font-family: inherit;
+  padding: 0.5rem 1.25rem;
   transition:
     background-color 0.15s ease,
     box-shadow 0.15s ease;
@@ -150,44 +150,44 @@
 
 .dialog-data-list {
   display: grid;
-  grid-template-columns: auto 1fr;
   gap: 0.5rem 1.5rem;
+  grid-template-columns: auto 1fr;
   margin: 0;
 
   dt {
-    font-weight: 600;
     color: var(--uilib-page-fg-muted, #6c757d);
     font-size: 0.875rem;
+    font-weight: 600;
   }
 
   dd {
-    margin: 0;
     color: var(--uilib-page-fg, #212121);
+    margin: 0;
   }
 }
 
 .demo-api-table-wrapper {
-  overflow-x: auto;
   border: 1px solid var(--uilib-surface-border, #e9ecef);
   border-radius: 8px;
+  overflow-x: auto;
 }
 
 .demo-api-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  width: 100%;
 
   th,
   td {
+    border-bottom: 1px solid var(--uilib-surface-border, #e9ecef);
     padding: 0.625rem 1rem;
     text-align: left;
-    border-bottom: 1px solid var(--uilib-surface-border, #e9ecef);
   }
 
   th {
     background: var(--uilib-surface-alt, #f8f9fa);
-    font-weight: 600;
     color: var(--uilib-page-fg-muted, #6c757d);
+    font-weight: 600;
     white-space: nowrap;
   }
 
@@ -196,10 +196,16 @@
   }
 
   code {
+    background: var(--uilib-surface-alt, #f3f4f6);
+    border-radius: 3px;
     font-family: var(--uilib-font-mono, monospace);
     font-size: 0.8125rem;
-    background: var(--uilib-surface-alt, #f3f4f6);
     padding: 0.1em 0.35em;
-    border-radius: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-btn {
+    /* TODO: set transition / animation to none */
   }
 }

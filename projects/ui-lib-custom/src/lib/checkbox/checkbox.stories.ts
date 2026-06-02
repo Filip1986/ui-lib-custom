@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 import {
   SHARED_DEFAULTS,
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
-import { Checkbox } from './checkbox';
+
 import type { CheckboxSize, CheckboxVariant } from './checkbox';
+import { Checkbox } from './checkbox';
 
 type CheckboxStoryArgs = {
   label: string;

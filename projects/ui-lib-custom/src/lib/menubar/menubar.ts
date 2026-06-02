@@ -1,33 +1,35 @@
+import { DOCUMENT } from '@angular/common';
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  Injector,
-  ViewEncapsulation,
-  afterNextRender,
   computed,
   effect,
+  ElementRef,
   inject,
+  Injector,
   input,
-  output,
-  signal,
   type InputSignal,
   type OnDestroy,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import { MenubarSubComponent } from './menubar-submenu';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   MenubarCommandEvent,
   MenubarItem,
   MenubarSize,
   MenubarVariant,
 } from './menubar.types';
+import { MenubarSubComponent } from './menubar-submenu';
 
 export type {
   MenubarCommandEvent,

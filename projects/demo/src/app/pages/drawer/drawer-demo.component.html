@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A panel that slides in from the edge of the viewport. Supports four positions, three design variants, and flexible content projection."
     docHeader
     title="Drawer"
     [importCode]="importCode"
-    description="A panel that slides in from the edge of the viewport. Supports four positions, three design variants, and flexible content projection."
   />
 
   <!-- Basic -->
@@ -15,7 +15,7 @@
       <ui-lib-button type="button" (click)="basicOpen.set(true)">Open Drawer</ui-lib-button>
     </div>
 
-    <ui-lib-drawer [(visible)]="basicOpen" header="Basic Drawer">
+    <ui-lib-drawer header="Basic Drawer" [(visible)]="basicOpen">
       <p>
         This is the default drawer sliding in from the right. Use <code>[(visible)]</code> to
         control open state.
@@ -37,9 +37,9 @@
     </div>
 
     <ui-lib-drawer
-      [(visible)]="positionOpen"
       [header]="currentPosition() | titlecase"
       [position]="currentPosition()"
+      [(visible)]="positionOpen"
     >
       <p>
         Drawer is sliding in from the <strong>{{ currentPosition() }}</strong
@@ -55,21 +55,21 @@
       <code>bootstrap</code>, and <code>minimal</code>.
     </p>
     <div class="demo-section__content demo-section__content--row">
-      <ui-lib-button variant="material" type="button" (click)="openVariant('material')"
+      <ui-lib-button type="button" variant="material" (click)="openVariant('material')"
         >Material</ui-lib-button
       >
-      <ui-lib-button variant="bootstrap" type="button" (click)="openVariant('bootstrap')"
+      <ui-lib-button type="button" variant="bootstrap" (click)="openVariant('bootstrap')"
         >Bootstrap</ui-lib-button
       >
-      <ui-lib-button variant="minimal" type="button" (click)="openVariant('minimal')"
+      <ui-lib-button type="button" variant="minimal" (click)="openVariant('minimal')"
         >Minimal</ui-lib-button
       >
     </div>
 
     <ui-lib-drawer
-      [(visible)]="variantOpen"
-      [variant]="currentVariant()"
       [header]="currentVariant() + ' Variant'"
+      [variant]="currentVariant()"
+      [(visible)]="variantOpen"
     >
       <p>
         This drawer uses the <strong>{{ currentVariant() }}</strong> design variant.
@@ -89,7 +89,7 @@
       >
     </div>
 
-    <ui-lib-drawer [(visible)]="noBackdropOpen" header="No Backdrop" [modal]="false">
+    <ui-lib-drawer header="No Backdrop" [modal]="false" [(visible)]="noBackdropOpen">
       <p>The page behind this drawer remains scrollable and interactive.</p>
       <ui-lib-button size="sm" type="button" (click)="noBackdropOpen.set(false)"
         >Close</ui-lib-button
@@ -106,7 +106,7 @@
       <ui-lib-button type="button" (click)="footerOpen.set(true)">Open with Footer</ui-lib-button>
     </div>
 
-    <ui-lib-drawer [(visible)]="footerOpen" header="Settings" size="380px">
+    <ui-lib-drawer header="Settings" size="380px" [(visible)]="footerOpen">
       <div class="demo-settings">
         <label class="demo-settings__row">
           <span>Notifications</span>
@@ -121,7 +121,7 @@
           <input type="checkbox" />
         </label>
       </div>
-      <div drawerFooter class="demo-footer-actions">
+      <div class="demo-footer-actions" drawerFooter>
         <ui-lib-button appearance="ghost" type="button" (click)="footerOpen.set(false)"
           >Cancel</ui-lib-button
         >
@@ -141,7 +141,7 @@
       >
     </div>
 
-    <ui-lib-drawer [(visible)]="fullScreenOpen" header="Full Screen Drawer" size="100vw">
+    <ui-lib-drawer header="Full Screen Drawer" size="100vw" [(visible)]="fullScreenOpen">
       <p>This drawer spans the full viewport width.</p>
       <ui-lib-button type="button" (click)="fullScreenOpen.set(false)">Close</ui-lib-button>
     </ui-lib-drawer>
@@ -169,9 +169,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -179,8 +179,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

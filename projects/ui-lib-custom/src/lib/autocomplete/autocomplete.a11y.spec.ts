@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { DebugElement, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { provideZonelessChangeDetection } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { UiLibAutoComplete } from './autocomplete';
+
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { UiLibAutoComplete } from './autocomplete';
 
 // ── Shared option fixtures ────────────────────────────────────────────────────
 

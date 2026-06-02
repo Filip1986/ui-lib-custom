@@ -1,13 +1,15 @@
+import type { InputSignal, OutputEmitterRef, Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   input,
   output,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, OutputEmitterRef, Signal } from '@angular/core';
+
 import type { Chart, Plugin } from 'chart.js';
+
 import { ChartComponent } from './chart.component';
 import type { ChartClickEvent, ChartData, ChartOptions, ChartSize } from './chart.types';
 

@@ -1,3 +1,12 @@
+import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
+import type {
+  ElementRef,
+  InputSignal,
+  ModelSignal,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,18 +19,16 @@ import {
   PLATFORM_ID,
   signal,
   TemplateRef,
-  ViewEncapsulation,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
-import type {
-  ElementRef,
-  InputSignal,
-  ModelSignal,
-  OutputEmitterRef,
-  Signal,
-  WritableSignal,
-} from '@angular/core';
+
+import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { Icon } from 'ui-lib-custom/icon';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   PickListEmptyContext,
   PickListFilterEvent,
@@ -41,11 +48,6 @@ import {
   PickListSourceHeaderDirective,
   PickListTargetHeaderDirective,
 } from './pick-list-templates.directive';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { Icon } from 'ui-lib-custom/icon';
-import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
-import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 
 /** Monotonic counter for unique element IDs. */
 let pickListIdCounter: number = 0;

@@ -2,34 +2,34 @@
   <!-- Filter input -->
   @if (filter()) {
     <div class="ui-lib-listbox__filter-container">
-      <span class="ui-lib-listbox__filter-icon" aria-hidden="true">
+      <span aria-hidden="true" class="ui-lib-listbox__filter-icon">
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          width="14"
-          height="14"
           aria-hidden="true"
+          fill="currentColor"
           focusable="false"
+          height="14"
+          viewBox="0 0 16 16"
+          width="14"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            fill-rule="evenodd"
-            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
             clip-rule="evenodd"
+            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+            fill-rule="evenodd"
           />
         </svg>
       </span>
       <input
         #filterInput
-        class="ui-lib-listbox__filter-input"
-        type="text"
-        role="searchbox"
-        [value]="filterValue()"
-        [placeholder]="resolvedFilterPlaceholder()"
-        [disabled]="isDisabled()"
-        [attr.aria-label]="resolvedFilterAriaLabel()"
-        (input)="onFilterInput($event)"
         autocomplete="off"
+        class="ui-lib-listbox__filter-input"
+        role="searchbox"
+        type="text"
+        [attr.aria-label]="resolvedFilterAriaLabel()"
+        [disabled]="isDisabled()"
+        [placeholder]="resolvedFilterPlaceholder()"
+        [value]="filterValue()"
+        (input)="onFilterInput($event)"
       />
     </div>
   }
@@ -39,12 +39,12 @@
     <div class="ui-lib-listbox__header">
       <label class="ui-lib-listbox__toggle-all">
         <input
-          type="checkbox"
           class="ui-lib-listbox__checkbox"
+          type="checkbox"
+          [attr.aria-label]="i18n.translate('listbox.select-all')"
           [checked]="allSelected()"
           [disabled]="isDisabled()"
           (change)="toggleAll($event)"
-          [attr.aria-label]="i18n.translate('listbox.select-all')"
         />
         <span class="ui-lib-listbox__toggle-all-label">{{
           i18n.translate('listbox.select-all')
@@ -54,26 +54,26 @@
   }
 
   <!-- Scrollable list -->
-  <div class="ui-lib-listbox__sr-live" aria-live="polite" aria-atomic="true">
+  <div aria-atomic="true" aria-live="polite" class="ui-lib-listbox__sr-live">
     {{ liveRegionMessage() }}
   </div>
 
   <div
     #listElement
     class="ui-lib-listbox__list-container"
-    [style.max-height]="scrollHeight()"
-    [attr.id]="listboxElementId()"
-    [attr.role]="'listbox'"
-    [attr.aria-multiselectable]="multiple() ? 'true' : 'false'"
-    [attr.aria-label]="ariaLabelledBy() ? null : resolvedAriaLabel()"
-    [attr.aria-labelledby]="ariaLabelledBy()"
+    tabindex="0"
     [attr.aria-activedescendant]="activeDescendantId()"
     [attr.aria-disabled]="isDisabled() ? 'true' : null"
+    [attr.aria-label]="ariaLabelledBy() ? null : resolvedAriaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
+    [attr.aria-multiselectable]="multiple() ? 'true' : 'false'"
     [attr.aria-readonly]="readonly() ? 'true' : null"
-    tabindex="0"
-    (keydown)="onListKeydown($event)"
-    (focus)="onListFocus()"
+    [attr.id]="listboxElementId()"
+    [attr.role]="'listbox'"
+    [style.max-height]="scrollHeight()"
     (blur)="onListBlur()"
+    (focus)="onListFocus()"
+    (keydown)="onListKeydown($event)"
   >
     @if (isEmpty()) {
       <div class="ui-lib-listbox__empty">
@@ -96,7 +96,7 @@
         @for (item of flatItems(); track trackByFlatItem(item, $index)) {
           @if (item.type === 'group') {
             <!-- Group header -->
-            <li class="ui-lib-listbox__group-header" role="presentation" aria-hidden="true">
+            <li aria-hidden="true" class="ui-lib-listbox__group-header" role="presentation">
               @if (groupTemplate) {
                 <ng-container
                   [ngTemplateOutlet]="groupTemplate"
@@ -110,40 +110,40 @@
             <!-- Option row -->
             <li
               class="ui-lib-listbox__item"
-              [class.ui-lib-listbox__item--selected]="isSelected(item.value)"
-              [class.ui-lib-listbox__item--focused]="focusedOptionIndex() === item.optionIndex"
-              [class.ui-lib-listbox__item--disabled]="item.disabled"
+              tabindex="-1"
+              [attr.aria-disabled]="item.disabled ? 'true' : null"
+              [attr.aria-posinset]="item.optionIndex + 1"
+              [attr.aria-selected]="isSelected(item.value) ? 'true' : 'false'"
+              [attr.aria-setsize]="optionRows().length"
               [attr.id]="optionId(item.optionIndex)"
               [attr.role]="'option'"
-              [attr.aria-selected]="isSelected(item.value) ? 'true' : 'false'"
-              [attr.aria-disabled]="item.disabled ? 'true' : null"
-              [attr.aria-setsize]="optionRows().length"
-              [attr.aria-posinset]="item.optionIndex + 1"
-              tabindex="-1"
+              [class.ui-lib-listbox__item--disabled]="item.disabled"
+              [class.ui-lib-listbox__item--focused]="focusedOptionIndex() === item.optionIndex"
+              [class.ui-lib-listbox__item--selected]="isSelected(item.value)"
               (click)="selectOption($event, item)"
               (keydown.enter)="selectOption($event, item)"
               (keydown.space)="$event.preventDefault(); selectOption($event, item)"
             >
               @if (multiple() && checkbox()) {
-                <span class="ui-lib-listbox__checkbox-wrap" aria-hidden="true">
+                <span aria-hidden="true" class="ui-lib-listbox__checkbox-wrap">
                   <span
                     class="ui-lib-listbox__checkbox"
                     [class.ui-lib-listbox__checkbox--checked]="isSelected(item.value)"
                   >
                     @if (isSelected(item.value)) {
                       <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 12 12"
-                        fill="currentColor"
-                        width="10"
-                        height="10"
                         aria-hidden="true"
+                        fill="currentColor"
                         focusable="false"
+                        height="10"
+                        viewBox="0 0 12 12"
+                        width="10"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          fill-rule="evenodd"
-                          d="M10.28 1.78a.75.75 0 0 0-1.06 0L5.25 5.72 2.78 3.25a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l4.5-4.5a.75.75 0 0 0 0-1.06Z"
                           clip-rule="evenodd"
+                          d="M10.28 1.78a.75.75 0 0 0-1.06 0L5.25 5.72 2.78 3.25a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l4.5-4.5a.75.75 0 0 0 0-1.06Z"
+                          fill-rule="evenodd"
                         />
                       </svg>
                     }

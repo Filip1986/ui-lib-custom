@@ -1,13 +1,14 @@
+import type { InputSignal, Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  Directive,
   contentChild,
+  Directive,
   input,
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, Signal } from '@angular/core';
+
 import type { DataGridFrozen } from './data-grid.types';
 
 // ---------------------------------------------------------------------------

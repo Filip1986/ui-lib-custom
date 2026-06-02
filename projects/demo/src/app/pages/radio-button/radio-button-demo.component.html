@@ -1,11 +1,10 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Accessible radio button that implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports arrow-key group navigation, three design variants, three sizes, and a filled appearance."
     docHeader
     title="RadioButton"
     [importCode]="importCode"
-    description="Accessible radio button that implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports arrow-key group navigation, three design variants, three sizes, and a filled appearance."
-  >
-  </app-doc-page-header>
+  />
 
   <!-- ---- Basic ---------------------------------------------------- -->
   <app-doc-section id="basic" title="Basic">
@@ -21,8 +20,8 @@
           @for (city of cities; track city.value) {
             <ui-lib-radio-button
               name="city"
-              [value]="city.value"
               [label]="city.label"
+              [value]="city.value"
               [(ngModel)]="selectedCity"
               (radioChange)="onCityChange($event)"
             />
@@ -37,8 +36,8 @@
       }
     </p>
     <ui-lib-code-snippet
-      language="html"
       filename="Basic"
+      language="html"
       [code]="snippets.basic"
       [showLineNumbers]="true"
     />
@@ -56,23 +55,23 @@
         <span class="demo-radio-variant-label">Material</span>
         <div class="demo-radio-group">
           <ui-lib-radio-button
+            label="Option A"
             name="v-material"
             value="a"
-            label="Option A"
             variant="material"
             [(ngModel)]="variantMaterialValue"
           />
           <ui-lib-radio-button
+            label="Option B"
             name="v-material"
             value="b"
-            label="Option B"
             variant="material"
             [(ngModel)]="variantMaterialValue"
           />
           <ui-lib-radio-button
+            label="Option C (pre-selected)"
             name="v-material"
             value="c"
-            label="Option C (pre-selected)"
             variant="material"
             [(ngModel)]="variantMaterialValue"
           />
@@ -82,23 +81,23 @@
         <span class="demo-radio-variant-label">Bootstrap</span>
         <div class="demo-radio-group">
           <ui-lib-radio-button
+            label="Option A"
             name="v-bootstrap"
             value="a"
-            label="Option A"
             variant="bootstrap"
             [(ngModel)]="variantBootstrapValue"
           />
           <ui-lib-radio-button
+            label="Option B"
             name="v-bootstrap"
             value="b"
-            label="Option B"
             variant="bootstrap"
             [(ngModel)]="variantBootstrapValue"
           />
           <ui-lib-radio-button
+            label="Option C (pre-selected)"
             name="v-bootstrap"
             value="c"
-            label="Option C (pre-selected)"
             variant="bootstrap"
             [(ngModel)]="variantBootstrapValue"
           />
@@ -108,23 +107,23 @@
         <span class="demo-radio-variant-label">Minimal</span>
         <div class="demo-radio-group">
           <ui-lib-radio-button
+            label="Option A"
             name="v-minimal"
             value="a"
-            label="Option A"
             variant="minimal"
             [(ngModel)]="variantMinimalValue"
           />
           <ui-lib-radio-button
+            label="Option B"
             name="v-minimal"
             value="b"
-            label="Option B"
             variant="minimal"
             [(ngModel)]="variantMinimalValue"
           />
           <ui-lib-radio-button
+            label="Option C (pre-selected)"
             name="v-minimal"
             value="c"
-            label="Option C (pre-selected)"
             variant="minimal"
             [(ngModel)]="variantMinimalValue"
           />
@@ -132,8 +131,8 @@
       </div>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Variants"
+      language="html"
       [code]="snippets.variants"
       [showLineNumbers]="true"
     />
@@ -146,14 +145,14 @@
     </p>
     <div class="demo-section__preview demo-section__preview--column">
       <div class="demo-radio-group">
-        <ui-lib-radio-button name="size-demo" value="sm" label="Small (sm)" size="sm" />
-        <ui-lib-radio-button name="size-demo" value="md" label="Medium (md)" size="md" />
-        <ui-lib-radio-button name="size-demo" value="lg" label="Large (lg)" size="lg" />
+        <ui-lib-radio-button label="Small (sm)" name="size-demo" size="sm" value="sm" />
+        <ui-lib-radio-button label="Medium (md)" name="size-demo" size="md" value="md" />
+        <ui-lib-radio-button label="Large (lg)" name="size-demo" size="lg" value="lg" />
       </div>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Sizes"
+      language="html"
       [code]="snippets.sizes"
       [showLineNumbers]="true"
     />
@@ -176,18 +175,18 @@
           track option.value
         ) {
           <ui-lib-radio-button
-            name="filled-demo"
-            [value]="option.value"
-            [label]="option.label"
             appearance="filled"
+            name="filled-demo"
+            [label]="option.label"
+            [value]="option.value"
             [(ngModel)]="filledValue"
           />
         }
       </div>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Filled"
+      language="html"
       [code]="snippets.filled"
       [showLineNumbers]="true"
     />
@@ -202,23 +201,23 @@
     <div class="demo-section__preview demo-section__preview--column">
       <div class="demo-radio-group">
         <ui-lib-radio-button
+          label="Option A (disabled, unchecked)"
           name="disabled-demo"
           value="option-a"
-          label="Option A (disabled, unchecked)"
           [disabled]="true"
         />
         <ui-lib-radio-button
+          label="Option B (disabled, checked)"
           name="disabled-demo"
           value="option-b"
-          label="Option B (disabled, checked)"
           [disabled]="true"
           [(ngModel)]="disabledValue"
         />
       </div>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Disabled"
+      language="html"
       [code]="snippets.disabled"
       [showLineNumbers]="true"
     />
@@ -237,8 +236,8 @@
           @for (fruit of fruits; track fruit.value) {
             <ui-lib-radio-button
               name="fruit"
-              [value]="fruit.value"
               [label]="fruit.label"
+              [value]="fruit.value"
               [(ngModel)]="selectedFruit"
             />
           }
@@ -249,8 +248,8 @@
       Selected fruit: <strong>{{ selectedFruit }}</strong>
     </p>
     <ui-lib-code-snippet
-      language="html"
       filename="With ngModel"
+      language="html"
       [code]="snippets.ngmodel"
       [showLineNumbers]="true"
     />
@@ -269,10 +268,10 @@
           <div class="demo-radio-group">
             @for (plan of plans; track plan.value) {
               <ui-lib-radio-button
-                name="plan"
-                [value]="plan.value"
-                [label]="plan.label"
                 formControlName="plan"
+                name="plan"
+                [label]="plan.label"
+                [value]="plan.value"
               />
             }
           </div>
@@ -283,8 +282,8 @@
       Form value: <strong>{{ planForm.value | json }}</strong>
     </p>
     <ui-lib-code-snippet
-      language="html"
       filename="Reactive forms"
+      language="html"
       [code]="snippets.reactiveForms"
       [showLineNumbers]="true"
     />
@@ -292,12 +291,12 @@
 
   <!-- ---- API ------------------------------------------------------ -->
   <app-doc-section id="api" title="API Reference">
-    <div id="api-inputs" data-doc-anchor>
+    <div data-doc-anchor id="api-inputs">
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
-    <div id="api-outputs" data-doc-anchor>
+    <div data-doc-anchor id="api-outputs">
       <h3 class="demo-section__subtitle">Outputs</h3>
       <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
@@ -310,7 +309,7 @@
 
   <!-- ---- Accessibility -------------------------------------------- -->
   <app-doc-section id="accessibility" title="Accessibility">
-    <div id="a11y-aria" data-doc-anchor>
+    <div data-doc-anchor id="a11y-aria">
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <app-doc-aria-table [rows]="ariaRows" />
       <p class="demo-section__description" style="margin-top: 1rem">
@@ -347,8 +346,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

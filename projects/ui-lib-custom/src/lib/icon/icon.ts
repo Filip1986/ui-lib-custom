@@ -5,20 +5,22 @@ import {
   effect,
   inject,
   input,
-  isDevMode,
-  ViewEncapsulation,
   type InputSignal,
+  isDevMode,
   type Signal,
+  ViewEncapsulation,
 } from '@angular/core';
+
 import { NgIcon } from '@ng-icons/core';
+
+import { SEMANTIC_ICONS, type SemanticIcon } from './icon.semantics';
 import { IconService } from './icon.service';
 import {
-  ICON_LIBRARY_PREFIX,
   type ComponentVariant,
+  ICON_LIBRARY_PREFIX,
   type IconLibrary,
   type IconSize,
 } from './icon.types';
-import { SEMANTIC_ICONS, type SemanticIcon } from './icon.semantics';
 
 const normalizeIconName: (value: string) => string = (value: string): string =>
   value

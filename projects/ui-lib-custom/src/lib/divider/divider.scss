@@ -42,11 +42,11 @@
 
     // ---- Content div --------------------------------------------------------
     &__content {
+      color: var(--uilib-divider-content-color);
+      flex-shrink: 0;
       font-family: var(--uilib-divider-content-font-family);
       font-size: var(--uilib-divider-content-font-size);
       font-weight: var(--uilib-divider-content-font-weight);
-      color: var(--uilib-divider-content-color);
-      flex-shrink: 0;
 
       // Hide the wrapper when no content is projected so the line renders seamlessly
       &:empty {
@@ -58,23 +58,23 @@
     // Horizontal orientation
     // =========================================================================
     &--horizontal {
-      display: flex;
       align-items: center;
-      width: 100%;
+      display: flex;
       margin-block: var(--uilib-divider-margin-v);
       margin-inline: 0;
+      width: 100%;
 
       &::before,
       &::after {
-        display: block;
-        height: 0;
         border-block-start: var(--uilib-divider-thickness) var(--uilib-divider-border-style)
           var(--uilib-divider-color);
+        display: block;
+        height: 0;
       }
 
       .ui-lib-divider__content {
-        display: flex;
         align-items: center;
+        display: flex;
         padding: 0 var(--uilib-divider-content-padding);
       }
 
@@ -93,25 +93,25 @@
     // Vertical orientation
     // =========================================================================
     &--vertical {
-      display: inline-flex;
-      flex-direction: column;
       align-items: center;
       align-self: stretch;
-      min-height: var(--uilib-divider-vertical-min-height);
+      display: inline-flex;
+      flex-direction: column;
       margin: 0 var(--uilib-divider-margin-h);
+      min-height: var(--uilib-divider-vertical-min-height);
 
       &::before,
       &::after {
-        display: block;
-        width: 0;
         border-inline-start: var(--uilib-divider-thickness) var(--uilib-divider-border-style)
           var(--uilib-divider-color);
+        display: block;
+        width: 0;
       }
 
       .ui-lib-divider__content {
+        align-items: center;
         display: flex;
         flex-direction: column;
-        align-items: center;
         padding: var(--uilib-divider-content-padding) 0;
       }
 
@@ -186,8 +186,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .ui-lib-divider {
-      transition: none;
       animation: none;
+      transition: none;
     }
   }
 } // end @layer uilib.components

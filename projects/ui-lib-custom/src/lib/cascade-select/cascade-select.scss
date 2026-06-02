@@ -66,32 +66,32 @@
     --uilib-cascade-select-panel-animation-duration: 0.16s;
     --uilib-cascade-select-level-animation-duration: 0.18s;
     --uilib-cascade-select-loading-size: 1rem;
+    color: var(--uilib-cascade-select-text);
 
     position: relative;
-    color: var(--uilib-cascade-select-text);
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__trigger {
-    display: grid;
-    grid-template-columns: 1fr auto;
     align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    min-height: var(--uilib-cascade-select-min-height);
-    padding: var(--uilib-cascade-select-padding-y) var(--uilib-cascade-select-padding-x);
+    background: var(--uilib-cascade-select-bg);
     border: 1px solid var(--uilib-cascade-select-border);
     border-radius: var(--uilib-cascade-select-radius);
-    background: var(--uilib-cascade-select-bg);
     color: inherit;
     cursor: pointer;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr auto;
+    min-height: var(--uilib-cascade-select-min-height);
+    padding: var(--uilib-cascade-select-padding-y) var(--uilib-cascade-select-padding-x);
     transition: var(--uilib-cascade-select-transition);
+    width: 100%;
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__trigger:focus-visible {
-    outline: none;
     border-color: var(--uilib-cascade-select-border-focus);
     box-shadow: 0 0 0 var(--uilib-cascade-select-focus-ring-width)
       color-mix(in srgb, var(--uilib-cascade-select-focus-ring-color) 25%, transparent);
+    outline: none;
   }
 
   ui-lib-cascade-select.ui-lib-cascade-select--open .ui-lib-cascade-select__trigger {
@@ -110,19 +110,19 @@
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__actions {
-    display: inline-flex;
     align-items: center;
+    display: inline-flex;
     gap: 0.35rem;
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__clear {
-    border: none;
     background: transparent;
-    color: var(--uilib-cascade-select-placeholder);
-    min-width: 2rem;
-    min-height: 2rem;
+    border: none;
     border-radius: 999rem;
+    color: var(--uilib-cascade-select-placeholder);
     cursor: pointer;
+    min-height: 2rem;
+    min-width: 2rem;
     transition: background-color 0.15s ease;
   }
 
@@ -131,29 +131,29 @@
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__dropdown-icon {
+    align-items: center;
     color: var(--uilib-cascade-select-placeholder);
     display: inline-flex;
-    align-items: center;
     justify-content: center;
     min-width: 1rem;
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__panel,
   .ui-lib-cascade-select__panel {
-    position: absolute;
-    inset-inline-start: 0;
-    top: calc(100% + 0.35rem);
-    z-index: var(--uilib-cascade-select-panel-z-index);
-    min-width: max(100%, var(--uilib-cascade-select-panel-min-width));
-    border: 1px solid var(--uilib-cascade-select-panel-border);
-    border-radius: var(--uilib-cascade-select-radius);
-    background: var(--uilib-cascade-select-panel-bg);
-    box-shadow: var(--uilib-cascade-select-panel-shadow);
-    overflow: hidden;
-    transform-origin: top center;
     animation: uilib-cascade-select-panel-in
       var(--uilib-transition-duration-fast, var(--uilib-cascade-select-panel-animation-duration))
       var(--uilib-transition-easing-enter, ease-out) both;
+    background: var(--uilib-cascade-select-panel-bg);
+    border: 1px solid var(--uilib-cascade-select-panel-border);
+    border-radius: var(--uilib-cascade-select-radius);
+    box-shadow: var(--uilib-cascade-select-panel-shadow);
+    inset-inline-start: 0;
+    min-width: max(100%, var(--uilib-cascade-select-panel-min-width));
+    overflow: hidden;
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    transform-origin: top center;
+    z-index: var(--uilib-cascade-select-panel-z-index);
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__panel.ui-lib-cascade-select__panel--overlay,
@@ -173,47 +173,47 @@
 
   ui-lib-cascade-select .ui-lib-cascade-select__loading,
   .ui-lib-cascade-select__loading {
-    display: flex;
     align-items: center;
-    gap: 0.5rem;
     color: var(--uilib-cascade-select-placeholder);
+    display: flex;
+    gap: 0.5rem;
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__loading::before,
   .ui-lib-cascade-select__loading::before {
-    content: '';
-    width: var(--uilib-cascade-select-loading-size);
-    height: var(--uilib-cascade-select-loading-size);
-    border: 0.125rem solid var(--uilib-cascade-select-placeholder);
-    border-top-color: transparent;
-    border-radius: 999rem;
     animation: uilib-cascade-select-spin 0.8s linear infinite;
+    border: 0.125rem solid var(--uilib-cascade-select-placeholder);
+    border-radius: 999rem;
+    border-top-color: transparent;
+    content: '';
+    height: var(--uilib-cascade-select-loading-size);
+    width: var(--uilib-cascade-select-loading-size);
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__columns,
   .ui-lib-cascade-select__columns {
-    position: relative;
-    display: inline-flex;
     align-items: stretch;
+    display: inline-flex;
     gap: var(--uilib-cascade-select-submenu-gap);
-    width: auto;
     min-width: 100%;
     overflow-x: auto;
     overscroll-behavior: contain;
+    position: relative;
+    width: auto;
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__level,
   .ui-lib-cascade-select__level {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    min-width: var(--uilib-cascade-select-panel-min-width);
-    max-height: var(--uilib-cascade-select-panel-max-height);
-    overflow: auto;
-    border-inline-end: 1px solid var(--uilib-cascade-select-separator-color);
     animation: uilib-cascade-select-level-in
       var(--uilib-transition-duration-fast, var(--uilib-cascade-select-level-animation-duration))
       var(--uilib-transition-easing-enter, ease-out) both;
+    border-inline-end: 1px solid var(--uilib-cascade-select-separator-color);
+    list-style: none;
+    margin: 0;
+    max-height: var(--uilib-cascade-select-panel-max-height);
+    min-width: var(--uilib-cascade-select-panel-min-width);
+    overflow: auto;
+    padding: 0;
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__level:last-child,
@@ -223,13 +223,13 @@
 
   ui-lib-cascade-select .ui-lib-cascade-select__option,
   .ui-lib-cascade-select__option {
-    display: grid;
-    grid-template-columns: 1fr auto;
     align-items: center;
+    cursor: pointer;
+    display: grid;
     gap: 0.5rem;
+    grid-template-columns: 1fr auto;
     min-height: 2.5rem;
     padding: var(--uilib-cascade-select-option-padding);
-    cursor: pointer;
     transition: background-color 0.15s ease;
   }
 
@@ -254,14 +254,14 @@
 
   ui-lib-cascade-select .ui-lib-cascade-select__option--disabled,
   .ui-lib-cascade-select__option--disabled {
-    opacity: var(--uilib-cascade-select-option-disabled-opacity);
     cursor: not-allowed;
+    opacity: var(--uilib-cascade-select-option-disabled-opacity);
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__option-group-icon,
   .ui-lib-cascade-select__option-group-icon {
-    font-size: var(--uilib-cascade-select-submenu-icon-size);
     color: var(--uilib-cascade-select-placeholder);
+    font-size: var(--uilib-cascade-select-submenu-icon-size);
   }
 
   ui-lib-cascade-select.ui-lib-cascade-select--filled {
@@ -395,10 +395,10 @@
 
     ui-lib-cascade-select .ui-lib-cascade-select__level,
     .ui-lib-cascade-select__level {
-      min-width: 100%;
-      max-height: none;
-      border-inline-end: none;
       border-block-end: 1px solid var(--uilib-cascade-select-separator-color);
+      border-inline-end: none;
+      max-height: none;
+      min-width: 100%;
     }
 
     ui-lib-cascade-select .ui-lib-cascade-select__level:last-child,

@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
 import { Icon } from './icon';
 
 type Story = StoryObj;

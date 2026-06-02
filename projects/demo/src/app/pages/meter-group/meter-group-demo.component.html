@@ -19,7 +19,7 @@
     <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-meter-group [values]="basicItems" />
     </div>
-    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" [showLineNumbers]="true" />
+    <app-doc-code-example [html]="basicHtml" [showLineNumbers]="true" [typescript]="basicTs" />
   </app-doc-section>
 
   <!-- ---- Label Position ------------------------------------------- -->
@@ -31,17 +31,17 @@
     <div class="demo-section__preview demo-section__preview--column">
       <div class="demo-meter-subsection">
         <p class="demo-meter-subsection__label">labelPosition="start"</p>
-        <ui-lib-meter-group [values]="storageItems" labelPosition="start" />
+        <ui-lib-meter-group labelPosition="start" [values]="storageItems" />
       </div>
       <div class="demo-meter-subsection">
         <p class="demo-meter-subsection__label">labelPosition="end" (default)</p>
-        <ui-lib-meter-group [values]="storageItems" labelPosition="end" />
+        <ui-lib-meter-group labelPosition="end" [values]="storageItems" />
       </div>
     </div>
     <app-doc-code-example
       [html]="labelPositionHtml"
-      [typescript]="labelPositionTs"
       [showLineNumbers]="true"
+      [typescript]="labelPositionTs"
     />
   </app-doc-section>
 
@@ -54,11 +54,11 @@
       @for (size of sizes; track size) {
         <div class="demo-meter-subsection">
           <p class="demo-meter-subsection__label">size="{{ size }}"</p>
-          <ui-lib-meter-group [values]="variantItems" [size]="size" [showLabels]="false" />
+          <ui-lib-meter-group [showLabels]="false" [size]="size" [values]="variantItems" />
         </div>
       }
     </div>
-    <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" [showLineNumbers]="true" />
+    <app-doc-code-example [html]="sizesHtml" [showLineNumbers]="true" [typescript]="sizesTs" />
   </app-doc-section>
 
   <!-- ---- Design Variants ------------------------------------------ -->
@@ -73,13 +73,13 @@
       @for (variant of variants; track variant) {
         <div class="demo-meter-subsection">
           <p class="demo-meter-subsection__label">variant="{{ variant }}"</p>
-          <ui-lib-meter-group [values]="variantItems" [variant]="variant" [showLabels]="false" />
+          <ui-lib-meter-group [showLabels]="false" [values]="variantItems" [variant]="variant" />
         </div>
       }
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Variants"
+      language="html"
       [code]="variantsHtml"
       [showLineNumbers]="true"
     />
@@ -94,16 +94,16 @@
     <div class="demo-section__preview">
       <div class="demo-meter-subsection">
         <p class="demo-meter-subsection__label">Legend end (right)</p>
-        <ui-lib-meter-group [values]="cpuItems" orientation="vertical" labelPosition="end" />
+        <ui-lib-meter-group labelPosition="end" orientation="vertical" [values]="cpuItems" />
       </div>
       <div class="demo-meter-subsection">
         <p class="demo-meter-subsection__label">Legend start (left)</p>
-        <ui-lib-meter-group [values]="cpuItems" orientation="vertical" labelPosition="start" />
+        <ui-lib-meter-group labelPosition="start" orientation="vertical" [values]="cpuItems" />
       </div>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Vertical"
+      language="html"
       [code]="verticalHtml"
       [showLineNumbers]="true"
     />
@@ -116,11 +116,11 @@
       inline indicator.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
-      <ui-lib-meter-group [values]="basicItems" [showLabels]="false" />
+      <ui-lib-meter-group [showLabels]="false" [values]="basicItems" />
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="No legend"
+      language="html"
       [code]="noLegendHtml"
       [showLineNumbers]="true"
     />
@@ -131,10 +131,10 @@
     <div class="demo-playground demo-playground--column">
       <div class="demo-playground__preview demo-playground__preview--full">
         <ui-lib-meter-group
-          [values]="playgroundItems()"
-          [orientation]="playgroundOrientation()"
           [labelPosition]="playgroundLabelPosition()"
+          [orientation]="playgroundOrientation()"
           [size]="playgroundSize()"
+          [values]="playgroundItems()"
           [variant]="playgroundVariant()"
         />
       </div>
@@ -144,10 +144,10 @@
           <div class="demo-control__buttons">
             @for (option of orientations; track option) {
               <ui-lib-button
-                [appearance]="playgroundOrientation() === option ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundOrientation() === option ? 'solid' : 'outline'"
                 (click)="setOrientation(option)"
                 >{{ option }}</ui-lib-button
               >
@@ -159,10 +159,10 @@
           <div class="demo-control__buttons">
             @for (option of labelPositions; track option) {
               <ui-lib-button
-                [appearance]="playgroundLabelPosition() === option ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundLabelPosition() === option ? 'solid' : 'outline'"
                 (click)="setLabelPosition(option)"
                 >{{ option }}</ui-lib-button
               >
@@ -174,10 +174,10 @@
           <div class="demo-control__buttons">
             @for (size of sizes; track size) {
               <ui-lib-button
-                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
                 (click)="setSize(size)"
                 >{{ size }}</ui-lib-button
               >
@@ -189,10 +189,10 @@
           <div class="demo-control__buttons">
             @for (variant of variants; track variant) {
               <ui-lib-button
-                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
                 (click)="setVariant(variant)"
                 >{{ variant }}</ui-lib-button
               >
@@ -205,14 +205,14 @@
 
   <!-- ---- API ------------------------------------------------------ -->
   <app-doc-section id="api" title="API Reference">
-    <div id="api-inputs" data-doc-anchor>
+    <div data-doc-anchor id="api-inputs">
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
-    <div id="api-meter-item" data-doc-anchor>
+    <div data-doc-anchor id="api-meter-item">
       <h3 class="demo-section__subtitle">MeterItem</h3>
-      <app-doc-api-reference [rows]="apiMeterItemRows" kind="property" [showDefault]="false" />
+      <app-doc-api-reference kind="property" [rows]="apiMeterItemRows" [showDefault]="false" />
     </div>
   </app-doc-section>
 
@@ -223,7 +223,7 @@
 
   <!-- ---- Accessibility -------------------------------------------- -->
   <app-doc-section id="accessibility" title="Accessibility">
-    <div id="a11y-aria" data-doc-anchor>
+    <div data-doc-anchor id="a11y-aria">
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <app-doc-aria-table [rows]="ariaRows" />
     </div>
@@ -260,8 +260,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

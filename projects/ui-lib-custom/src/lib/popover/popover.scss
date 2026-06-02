@@ -24,12 +24,12 @@
     --uilib-popover-enter-easing: cubic-bezier(0.16, 1, 0.3, 1);
 
     --uilib-popover-arrow-size: 8px;
+    display: none;
+    inset: 0;
+    pointer-events: none;
 
     position: fixed;
-    inset: 0;
-    display: none;
     z-index: var(--uilib-popover-z-index);
-    pointer-events: none;
   }
 
   ui-lib-popover.ui-lib-popover--open {
@@ -38,12 +38,12 @@
 
   // Transparent overlay — only captures clicks when dismissable
   ui-lib-popover .ui-lib-popover__overlay {
-    position: fixed;
-    inset: 0;
     background: transparent;
-    z-index: calc(var(--uilib-popover-z-index) - 1);
-    pointer-events: none;
     cursor: default;
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+    z-index: calc(var(--uilib-popover-z-index) - 1);
   }
 
   ui-lib-popover .ui-lib-popover__overlay--active {
@@ -52,22 +52,22 @@
 
   // Floating panel
   ui-lib-popover .ui-lib-popover__panel {
-    position: fixed;
-    z-index: var(--uilib-popover-z-index);
+    background: var(--uilib-popover-bg);
+    border: var(--uilib-popover-border);
+    border-radius: var(--uilib-popover-border-radius);
+    box-shadow: var(--uilib-popover-shadow);
     display: flex;
     flex-direction: column;
-    min-inline-size: var(--uilib-popover-min-width);
     max-inline-size: var(--uilib-popover-max-width);
-    background: var(--uilib-popover-bg);
-    border-radius: var(--uilib-popover-border-radius);
-    border: var(--uilib-popover-border);
-    box-shadow: var(--uilib-popover-shadow);
-    pointer-events: auto;
+    min-inline-size: var(--uilib-popover-min-width);
     opacity: 0;
+    pointer-events: auto;
+    position: fixed;
     transform: scale(0.96) translateY(4px);
     transition:
       opacity var(--uilib-popover-enter-duration) var(--uilib-popover-enter-easing),
       transform var(--uilib-popover-enter-duration) var(--uilib-popover-enter-easing);
+    z-index: var(--uilib-popover-z-index);
   }
 
   ui-lib-popover .ui-lib-popover__panel--visible {
@@ -77,64 +77,64 @@
 
   // Arrow
   ui-lib-popover .ui-lib-popover__arrow {
+    height: 0;
     position: absolute;
     width: 0;
-    height: 0;
   }
 
   // Arrow at bottom pointing down (panel is above target)
   ui-lib-popover .ui-lib-popover__panel--placement-above .ui-lib-popover__arrow {
+    border-inline-end: var(--uilib-popover-arrow-size) solid transparent;
+    border-inline-start: var(--uilib-popover-arrow-size) solid transparent;
+    border-top: var(--uilib-popover-arrow-size) solid var(--uilib-popover-bg);
     bottom: calc(-1 * var(--uilib-popover-arrow-size));
     margin-inline-start: calc(-1 * var(--uilib-popover-arrow-size));
-    border-inline-start: var(--uilib-popover-arrow-size) solid transparent;
-    border-inline-end: var(--uilib-popover-arrow-size) solid transparent;
-    border-top: var(--uilib-popover-arrow-size) solid var(--uilib-popover-bg);
   }
 
   // Arrow at top pointing up (panel is below target)
   ui-lib-popover .ui-lib-popover__panel--placement-below .ui-lib-popover__arrow {
-    top: calc(-1 * var(--uilib-popover-arrow-size));
-    margin-inline-start: calc(-1 * var(--uilib-popover-arrow-size));
-    border-inline-start: var(--uilib-popover-arrow-size) solid transparent;
     border-inline-end: var(--uilib-popover-arrow-size) solid transparent;
+    border-inline-start: var(--uilib-popover-arrow-size) solid transparent;
     border-bottom: var(--uilib-popover-arrow-size) solid var(--uilib-popover-bg);
+    margin-inline-start: calc(-1 * var(--uilib-popover-arrow-size));
+    top: calc(-1 * var(--uilib-popover-arrow-size));
   }
 
   // Header row
   ui-lib-popover .ui-lib-popover__header {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--uilib-space-2, 0.5rem);
-    padding: var(--uilib-popover-header-padding);
     border-block-end: var(--uilib-popover-header-border-bottom);
+    display: flex;
+    gap: var(--uilib-space-2, 0.5rem);
+    justify-content: space-between;
+    padding: var(--uilib-popover-header-padding);
   }
 
   ui-lib-popover .ui-lib-popover__title {
-    font-size: var(--uilib-popover-header-font-size);
-    font-weight: var(--uilib-popover-header-font-weight);
     color: var(--uilib-page-fg);
     flex: 1;
+    font-size: var(--uilib-popover-header-font-size);
+    font-weight: var(--uilib-popover-header-font-weight);
     min-width: 0;
   }
 
   // Close button
   ui-lib-popover .ui-lib-popover__close-btn {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: var(--uilib-popover-close-btn-size);
-    height: var(--uilib-popover-close-btn-size);
-    padding: 0;
+    background: transparent;
     border: none;
     border-radius: var(--uilib-radius-sm, 4px);
-    background: transparent;
     color: var(--uilib-popover-close-btn-color);
     cursor: pointer;
+    display: inline-flex;
     flex-shrink: 0;
+    height: var(--uilib-popover-close-btn-size);
+    justify-content: center;
+    padding: 0;
     transition:
       background-color 120ms ease,
       color 120ms ease;
+    width: var(--uilib-popover-close-btn-size);
 
     &:hover {
       background: var(--uilib-popover-close-btn-hover-bg);
@@ -149,10 +149,10 @@
 
   // Content area
   ui-lib-popover .ui-lib-popover__content {
-    padding: var(--uilib-popover-content-padding);
     color: var(--uilib-page-fg);
     font-size: var(--uilib-font-size-sm, 0.875rem);
     line-height: 1.6;
+    padding: var(--uilib-popover-content-padding);
   }
 
   // ---- Variant: material ----

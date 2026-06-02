@@ -6,7 +6,7 @@
       ARIA roles, and keyboard navigation.
     </p>
     <div class="demo-page-header__preview">
-      <ui-lib-code-snippet [code]="importTs" language="typescript" [showLineNumbers]="true" />
+      <ui-lib-code-snippet language="typescript" [code]="importTs" [showLineNumbers]="true" />
     </div>
   </app-doc-page-header>
 
@@ -41,7 +41,7 @@
       <ui-lib-tiered-menu [model]="basicItems" (itemClick)="onItemClick($event)" />
     </div>
     @if (lastEvent()) {
-      <div class="demo-event-log" aria-live="polite">
+      <div aria-live="polite" class="demo-event-log">
         <ul class="demo-event-log__list">
           <li class="demo-event-log__entry">{{ lastEvent() }}</li>
         </ul>
@@ -60,13 +60,13 @@
       <ui-lib-tiered-menu [model]="nestedItems" (itemClick)="onItemClick($event)" />
     </div>
     @if (lastEvent()) {
-      <div class="demo-event-log" aria-live="polite">
+      <div aria-live="polite" class="demo-event-log">
         <ul class="demo-event-log__list">
           <li class="demo-event-log__entry">{{ lastEvent() }}</li>
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="nestedTs" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="nestedTs" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
@@ -81,9 +81,9 @@
       <ui-lib-button
         severity="primary"
         type="button"
-        [attr.aria-haspopup]="'menu'"
-        [attr.aria-expanded]="popupMenu.isVisible()"
         [attr.aria-controls]="popupMenu.menuId"
+        [attr.aria-expanded]="popupMenu.isVisible()"
+        [attr.aria-haspopup]="'menu'"
         (click)="popupMenu.toggle($any($event.currentTarget))"
       >
         Open Menu &#9660;
@@ -96,7 +96,7 @@
       />
     </div>
     @if (lastEvent()) {
-      <div class="demo-event-log" aria-live="polite">
+      <div aria-live="polite" class="demo-event-log">
         <ul class="demo-event-log__list">
           <li class="demo-event-log__entry">{{ lastEvent() }}</li>
         </ul>
@@ -118,10 +118,10 @@
         <div class="demo-control-buttons">
           @for (v of ['material', 'bootstrap', 'minimal']; track v) {
             <ui-lib-button
-              [appearance]="variant() === v ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="variant() === v ? 'solid' : 'outline'"
               (click)="setVariant($any(v))"
               >{{ v }}</ui-lib-button
             >
@@ -147,10 +147,10 @@
         <div class="demo-control-buttons">
           @for (s of ['sm', 'md', 'lg']; track s) {
             <ui-lib-button
-              [appearance]="size() === s ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
               type="button"
+              [appearance]="size() === s ? 'solid' : 'outline'"
               (click)="setSize($any(s))"
               >{{ s }}</ui-lib-button
             >
@@ -175,13 +175,13 @@
       <ui-lib-tiered-menu [model]="stateItems" (itemClick)="onItemClick($event)" />
     </div>
     @if (lastEvent()) {
-      <div class="demo-event-log" aria-live="polite">
+      <div aria-live="polite" class="demo-event-log">
         <ul class="demo-event-log__list">
           <li class="demo-event-log__entry">{{ lastEvent() }}</li>
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="itemStatesTs" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="itemStatesTs" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
@@ -193,30 +193,30 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-tiered-menu [model]="urlItems" />
     </div>
-    <ui-lib-code-snippet [code]="urlItemsTs" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet language="typescript" [code]="urlItemsTs" [showLineNumbers]="true" />
   </app-doc-section>
 
   <!-- ── API ───────────────────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API">
-    <app-doc-api-reference title="Inputs" kind="input" [rows]="apiInputRows" />
+    <app-doc-api-reference kind="input" title="Inputs" [rows]="apiInputRows" />
 
     <app-doc-api-reference
-      title="Outputs"
       kind="output"
+      title="Outputs"
       [rows]="apiOutputRows"
       [showDefault]="false"
     />
 
     <app-doc-api-reference
-      title="Methods"
       kind="name"
+      title="Methods"
       [rows]="apiMethodRows"
       [showDefault]="false"
     />
 
     <app-doc-api-reference
-      title="TieredMenuItem"
       kind="property"
+      title="TieredMenuItem"
       [rows]="apiItemRows"
       [showDefault]="false"
     />
@@ -253,9 +253,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -263,8 +263,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="A utility directive that applies a dynamic record of key-value pairs as DOM properties on the host element — the Angular-first equivalent of PrimeNG&#39;s <code>pBind</code>."
     docHeader
     title="Bind"
     [importCode]="importCode"
-    description="A utility directive that applies a dynamic record of key-value pairs as DOM properties on the host element — the Angular-first equivalent of PrimeNG&#39;s <code>pBind</code>."
   />
 
   <div class="demo-page-header__preview">
@@ -30,9 +30,9 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetBasicUsage"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -49,10 +49,10 @@
           <div class="bd-btn-row">
             @for (preset of idPresets; track preset) {
               <ui-lib-button
-                [appearance]="activeIdPreset() === preset ? 'solid' : 'outline'"
                 severity="primary"
                 size="sm"
                 type="button"
+                [appearance]="activeIdPreset() === preset ? 'solid' : 'outline'"
                 (click)="setPreset(preset)"
               >
                 {{ preset }}
@@ -69,10 +69,10 @@
         <div class="bd-control-group">
           <span class="bd-control-label">tabIndex</span>
           <ui-lib-button
-            [appearance]="includeTabIndex() ? 'solid' : 'outline'"
             severity="primary"
             size="sm"
             type="button"
+            [appearance]="includeTabIndex() ? 'solid' : 'outline'"
             (click)="toggleTabIndex()"
           >
             @if (includeTabIndex()) {
@@ -114,9 +114,9 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetBooleanNumeric"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -125,18 +125,18 @@
     <h3 class="bd-sub-title">Selector</h3>
     <ui-lib-code-snippet
       language="html"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetSelector"
+      [showLineNumbers]="true"
     />
     <h3 class="bd-sub-title">Inputs</h3>
     <app-doc-api-reference [rows]="apiRows" />
     <h3 class="bd-sub-title">Host class</h3>
     <ui-lib-code-snippet
       language="text"
-      [showLineNumbers]="true"
       size="sm"
       [code]="snippetHostClass"
+      [showLineNumbers]="true"
     />
   </app-doc-section>
 
@@ -165,8 +165,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

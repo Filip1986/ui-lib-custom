@@ -1,24 +1,23 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   effect,
   inject,
   input,
-  output,
-  signal,
   type InputSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { PANEL_MENU_CONTEXT } from './panel-menu-context';
-import type { PanelMenuContext } from './panel-menu-context';
-import { PanelMenuSubComponent } from './panel-menu-sub';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   PanelMenuCommandEvent,
   PanelMenuItem,
@@ -26,6 +25,9 @@ import type {
   PanelMenuSize,
   PanelMenuVariant,
 } from './panel-menu.types';
+import type { PanelMenuContext } from './panel-menu-context';
+import { PANEL_MENU_CONTEXT } from './panel-menu-context';
+import { PanelMenuSubComponent } from './panel-menu-sub';
 
 export type {
   PanelMenuCommandEvent,

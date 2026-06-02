@@ -35,15 +35,15 @@
             <button
               class="ui-lib-data-view__paginator-page"
               type="button"
-              [attr.aria-label]="pageAriaLabel(pageNumber(pageItem))"
               [attr.aria-current]="pageNumber(pageItem) === currentPage() ? 'page' : null"
+              [attr.aria-label]="pageAriaLabel(pageNumber(pageItem))"
               [disabled]="pageNumber(pageItem) === currentPage()"
               (click)="onPageChange(pageNumber(pageItem))"
             >
               {{ pageNumber(pageItem) + 1 }}
             </button>
           } @else {
-            <span class="ui-lib-data-view__paginator-ellipsis" aria-hidden="true">...</span>
+            <span aria-hidden="true" class="ui-lib-data-view__paginator-ellipsis">...</span>
           }
         }
       </div>
@@ -115,10 +115,10 @@
     <span class="ui-lib-data-view__control-label">Filter</span>
     <input
       class="ui-lib-data-view__filter-input"
-      [id]="filterInputId"
       type="search"
-      [placeholder]="resolvedFilterPlaceholder()"
       [attr.aria-label]="resolvedFilterAriaLabel()"
+      [id]="filterInputId"
+      [placeholder]="resolvedFilterPlaceholder()"
       (input)="onFilterInput($event)"
     />
   </label>
@@ -127,9 +127,9 @@
     <span class="ui-lib-data-view__control-label">Sort</span>
     <select
       class="ui-lib-data-view__sort-select"
+      [attr.aria-label]="resolvedSortAriaLabel()"
       [id]="sortSelectId"
       [value]="sortOrder()"
-      [attr.aria-label]="resolvedSortAriaLabel()"
       (change)="onSortSelectChange($event)"
     >
       <option value="1">Ascending</option>
@@ -164,10 +164,10 @@
 </div>
 
 <span
+  aria-atomic="true"
+  aria-live="polite"
   class="ui-lib-data-view__sr-live"
   [id]="layoutLiveRegionId"
-  aria-live="polite"
-  aria-atomic="true"
 >
   {{ layoutLiveAnnouncement() }}
 </span>
@@ -194,11 +194,11 @@
   } @else {
     <div
       class="ui-lib-data-view__content"
-      [class.ui-lib-data-view__content--list]="layout() === 'list'"
+      role="list"
       [class.ui-lib-data-view__content--grid]="layout() === 'grid'"
+      [class.ui-lib-data-view__content--list]="layout() === 'list'"
       [style.--uilib-data-view-grid-columns]="gridColumns()"
       [style.--uilib-data-view-grid-gap]="gridGap()"
-      role="list"
     >
       @for (ctx of itemContexts(); track trackItem(ctx.index, ctx.$implicit)) {
         <div class="ui-lib-data-view__item" role="listitem">

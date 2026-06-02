@@ -1,2 +1,2 @@
 export * from './checkbox';
-export type { CheckboxVariant, CheckboxSize } from './checkbox.types';
+export type { CheckboxSize, CheckboxVariant } from './checkbox.types';

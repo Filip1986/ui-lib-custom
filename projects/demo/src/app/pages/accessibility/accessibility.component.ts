@@ -1,18 +1,19 @@
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
-import type { Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+
 import { Badge } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { UiLibInput } from 'ui-lib-custom/input';
-import { UiLibSelect } from 'ui-lib-custom/select';
+import { Panel } from 'ui-lib-custom/panel';
 import type { SelectOption } from 'ui-lib-custom/select';
+import { UiLibSelect } from 'ui-lib-custom/select';
+
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-
-import { Panel } from 'ui-lib-custom/panel';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 /**
  * Demo page for accessibility guidance and examples.
  */

@@ -1,6 +1,6 @@
 <div class="csd-page">
   <!-- ── Decorative background blobs ─────────────────────────────────── -->
-  <div class="csd-bg-decor" aria-hidden="true">
+  <div aria-hidden="true" class="csd-bg-decor">
     <div class="csd-bg-decor__blob csd-bg-decor__blob--tl"></div>
     <div class="csd-bg-decor__blob csd-bg-decor__blob--br"></div>
   </div>
@@ -9,7 +9,7 @@
   <header class="csd-header">
     <div class="csd-header__left">
       <div class="csd-badge">
-        <iconify-icon icon="lucide:zap"></iconify-icon>
+        <iconify-icon icon="lucide:zap" />
         <span>Beautiful Syntax Highlighting</span>
       </div>
       <h1 class="csd-title">
@@ -25,32 +25,32 @@
 
     <div class="csd-header__actions">
       <button class="csd-btn csd-btn--dark" type="button" (click)="toggleTheme()">
-        <iconify-icon [attr.icon]="isDarkMode() ? 'lucide:moon' : 'lucide:sun'"></iconify-icon>
+        <iconify-icon [attr.icon]="isDarkMode() ? 'lucide:moon' : 'lucide:sun'" />
         <span>{{ isDarkMode() ? 'Dark Mode' : 'Light Mode' }}</span>
       </button>
-      <a class="csd-btn csd-btn--outline" href="#" aria-label="View Repository">
-        <iconify-icon icon="lucide:github"></iconify-icon>
+      <a aria-label="View Repository" class="csd-btn csd-btn--outline" href="#">
+        <iconify-icon icon="lucide:github" />
         <span>Repository</span>
       </a>
     </div>
   </header>
 
   <!-- ── Snippet grid ─────────────────────────────────────────────────── -->
-  <main class="csd-main" aria-label="Code snippet examples">
+  <main aria-label="Code snippet examples" class="csd-main">
     <!-- Column 1 -->
     <div class="csd-col">
       <ui-lib-code-snippet
         class="csd-card"
-        language="javascript"
         filename="hello.js"
+        language="javascript"
         variant="material"
         [code]="jsCode"
         [showLineNumbers]="true"
       />
       <ui-lib-code-snippet
         class="csd-card"
-        language="html"
         filename="truncate.html"
+        language="html"
         variant="material"
         [code]="htmlCode"
         [showLineNumbers]="true"
@@ -61,16 +61,16 @@
     <div class="csd-col">
       <ui-lib-code-snippet
         class="csd-card"
-        language="css"
         filename="truncate.css"
+        language="css"
         variant="material"
         [code]="cssCode"
         [showLineNumbers]="true"
       />
       <ui-lib-code-snippet
         class="csd-card"
-        language="typescript"
         filename="types.ts"
+        language="typescript"
         variant="material"
         [code]="tsCode"
         [showLineNumbers]="true"
@@ -79,8 +79,8 @@
   </main>
 
   <!-- ── Multi-tab demo ─────────────────────────────────────────────── -->
-  <section class="csd-multitab-section" aria-labelledby="multitab-heading">
-    <h2 id="multitab-heading" class="csd-section-title">Multi-File Tabs</h2>
+  <section aria-labelledby="multitab-heading" class="csd-multitab-section">
+    <h2 class="csd-section-title" id="multitab-heading">Multi-File Tabs</h2>
     <p class="csd-section-desc">
       Pass a <code>[files]</code> array to get IDE-style tabs — click a tab to switch code, or use
       <kbd>←</kbd> / <kbd>→</kbd> arrow keys.
@@ -107,29 +107,29 @@
   <footer class="csd-footer">
     <div class="csd-footer__brand">
       <div class="csd-footer__logo">
-        <div class="csd-footer__logo-icon" aria-hidden="true">
-          <iconify-icon icon="lucide:code-2"></iconify-icon>
+        <div aria-hidden="true" class="csd-footer__logo-icon">
+          <iconify-icon icon="lucide:code-2" />
         </div>
         <span>SnippetBuilder</span>
       </div>
       <p class="csd-footer__copy">
         &copy; 2024 SnippetBuilder. Created with precision by
-        <a href="#" class="csd-footer__link">&#64;sachindotcom</a>
+        <a class="csd-footer__link" href="#">&#64;sachindotcom</a>
       </p>
     </div>
 
     <div class="csd-footer__right">
-      <nav class="csd-footer__nav" aria-label="Footer navigation">
-        <a href="#" class="csd-footer__nav-link">Terms</a>
-        <a href="#" class="csd-footer__nav-link">Privacy</a>
-        <a href="#" class="csd-footer__nav-link">Docs</a>
+      <nav aria-label="Footer navigation" class="csd-footer__nav">
+        <a class="csd-footer__nav-link" href="#">Terms</a>
+        <a class="csd-footer__nav-link" href="#">Privacy</a>
+        <a class="csd-footer__nav-link" href="#">Docs</a>
       </nav>
       <div class="csd-footer__social">
-        <a href="#" class="csd-footer__social-link" aria-label="Twitter">
-          <iconify-icon icon="lucide:twitter"></iconify-icon>
+        <a aria-label="Twitter" class="csd-footer__social-link" href="#">
+          <iconify-icon icon="lucide:twitter" />
         </a>
-        <a href="#" class="csd-footer__social-link" aria-label="GitHub">
-          <iconify-icon icon="lucide:github"></iconify-icon>
+        <a aria-label="GitHub" class="csd-footer__social-link" href="#">
+          <iconify-icon icon="lucide:github" />
         </a>
       </div>
     </div>

@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Star rating component that lets users select a value via click or keyboard. Implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports custom icon templates, inline styles, read-only display, and three design variants."
     docHeader
     title="Rating"
     [importCode]="importCode"
-    description="Star rating component that lets users select a value via click or keyboard. Implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports custom icon templates, inline styles, read-only display, and three design variants."
   />
 
   <!-- ---- Basic ---------------------------------------------------- -->
@@ -22,8 +22,8 @@
       }
     </p>
     <ui-lib-code-snippet
-      language="html"
       filename="Basic"
+      language="html"
       [code]="snippets.basic"
       [showLineNumbers]="true"
     />
@@ -41,8 +41,8 @@
       Value: <strong>{{ preselectedRating }}</strong>
     </p>
     <ui-lib-code-snippet
-      language="html"
       filename="Pre-selected"
+      language="html"
       [code]="snippets.preSelected"
       [showLineNumbers]="true"
     />
@@ -55,11 +55,11 @@
       (Delete / Backspace).
     </p>
     <div class="demo-section__preview demo-section__preview--center">
-      <ui-lib-rating [(ngModel)]="noCancelRating" [cancel]="false" />
+      <ui-lib-rating [cancel]="false" [(ngModel)]="noCancelRating" />
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="No cancel"
+      language="html"
       [code]="snippets.noCancel"
       [showLineNumbers]="true"
     />
@@ -75,20 +75,20 @@
     <div class="demo-section__preview demo-section__preview--column">
       <div class="demo-rating-label-row">
         <span class="demo-rating-label">Material</span>
-        <ui-lib-rating variant="material" [ngModel]="4" [cancel]="false" [readonly]="true" />
+        <ui-lib-rating variant="material" [cancel]="false" [ngModel]="4" [readonly]="true" />
       </div>
       <div class="demo-rating-label-row">
         <span class="demo-rating-label">Bootstrap</span>
-        <ui-lib-rating variant="bootstrap" [ngModel]="4" [cancel]="false" [readonly]="true" />
+        <ui-lib-rating variant="bootstrap" [cancel]="false" [ngModel]="4" [readonly]="true" />
       </div>
       <div class="demo-rating-label-row">
         <span class="demo-rating-label">Minimal</span>
-        <ui-lib-rating variant="minimal" [ngModel]="4" [cancel]="false" [readonly]="true" />
+        <ui-lib-rating variant="minimal" [cancel]="false" [ngModel]="4" [readonly]="true" />
       </div>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Variants"
+      language="html"
       [code]="snippets.variants"
       [showLineNumbers]="true"
     />
@@ -102,20 +102,20 @@
     <div class="demo-section__preview demo-section__preview--column">
       <div class="demo-rating-label-row">
         <span class="demo-rating-label">sm</span>
-        <ui-lib-rating size="sm" [ngModel]="3" [cancel]="false" [readonly]="true" />
+        <ui-lib-rating size="sm" [cancel]="false" [ngModel]="3" [readonly]="true" />
       </div>
       <div class="demo-rating-label-row">
         <span class="demo-rating-label">md</span>
-        <ui-lib-rating size="md" [ngModel]="3" [cancel]="false" [readonly]="true" />
+        <ui-lib-rating size="md" [cancel]="false" [ngModel]="3" [readonly]="true" />
       </div>
       <div class="demo-rating-label-row">
         <span class="demo-rating-label">lg</span>
-        <ui-lib-rating size="lg" [ngModel]="3" [cancel]="false" [readonly]="true" />
+        <ui-lib-rating size="lg" [cancel]="false" [ngModel]="3" [readonly]="true" />
       </div>
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Sizes"
+      language="html"
       [code]="snippets.sizes"
       [showLineNumbers]="true"
     />
@@ -133,8 +133,8 @@
       Value: <strong>{{ tenStarRating }}</strong>
     </p>
     <ui-lib-code-snippet
-      language="html"
       filename="Custom star count"
+      language="html"
       [code]="snippets.starCount"
       [showLineNumbers]="true"
     />
@@ -151,8 +151,8 @@
       <ui-lib-rating [readonly]="true" [(ngModel)]="readonlyRating" />
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Readonly"
+      language="html"
       [code]="snippets.readonly"
       [showLineNumbers]="true"
     />
@@ -168,8 +168,8 @@
       <ui-lib-rating [disabled]="true" [(ngModel)]="disabledRating" />
     </div>
     <ui-lib-code-snippet
-      language="html"
       filename="Disabled"
+      language="html"
       [code]="snippets.disabled"
       [showLineNumbers]="true"
     />
@@ -186,10 +186,10 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating
         [(ngModel)]="eventsRating"
-        (rate)="onRateEvent($event)"
         (cleared)="onCancelEvent()"
-        (ratingFocus)="onFocusEvent()"
+        (rate)="onRateEvent($event)"
         (ratingBlur)="onBlurEvent()"
+        (ratingFocus)="onFocusEvent()"
       />
     </div>
     <ul class="demo-rating-event-log">
@@ -202,8 +202,8 @@
       }
     </ul>
     <ui-lib-code-snippet
-      language="html"
       filename="Events"
+      language="html"
       [code]="snippets.events"
       [showLineNumbers]="true"
     />
@@ -217,7 +217,7 @@
       <code>#cancelicon</code> (cancel button icon).
     </p>
     <div class="demo-section__preview demo-section__preview--center">
-      <ui-lib-rating [(ngModel)]="customTemplateRating" [cancel]="false">
+      <ui-lib-rating [cancel]="false" [(ngModel)]="customTemplateRating">
         <ng-template #onicon>❤️</ng-template>
         <ng-template #officon>🤍</ng-template>
       </ui-lib-rating>
@@ -226,8 +226,8 @@
       Value: <strong>{{ customTemplateRating ?? 'none' }}</strong>
     </p>
     <ui-lib-code-snippet
-      language="html"
       filename="Custom templates"
+      language="html"
       [code]="snippets.customTemplates"
       [showLineNumbers]="true"
     />
@@ -241,18 +241,18 @@
     </p>
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating
-        [(ngModel)]="styledRating"
         [cancel]="false"
-        [iconOnStyle]="iconOnStyle"
         [iconOffStyle]="iconOffStyle"
+        [iconOnStyle]="iconOnStyle"
+        [(ngModel)]="styledRating"
       />
     </div>
     <p class="demo-rating-hint">
       Value: <strong>{{ styledRating ?? 'none' }}</strong>
     </p>
     <ui-lib-code-snippet
-      language="css"
       filename="Inline styles"
+      language="css"
       [code]="snippets.inlineStyles"
       [showLineNumbers]="true"
     />
@@ -280,8 +280,8 @@
       Form value: <strong>{{ reviewForm.value | json }}</strong>
     </p>
     <ui-lib-code-snippet
-      language="html"
       filename="Reactive forms"
+      language="html"
       [code]="snippets.reactiveForms"
       [showLineNumbers]="true"
     />
@@ -289,12 +289,12 @@
 
   <!-- ---- API ------------------------------------------------------ -->
   <app-doc-section id="api" title="API Reference">
-    <div id="api-inputs" data-doc-anchor>
+    <div data-doc-anchor id="api-inputs">
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
-    <div id="api-outputs" data-doc-anchor>
+    <div data-doc-anchor id="api-outputs">
       <h3 class="demo-section__subtitle">Outputs</h3>
       <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
@@ -307,7 +307,7 @@
 
   <!-- ---- Accessibility -------------------------------------------- -->
   <app-doc-section id="accessibility" title="Accessibility">
-    <div id="a11y-aria" data-doc-anchor>
+    <div data-doc-anchor id="a11y-aria">
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <app-doc-aria-table [rows]="ariaRows" />
     </div>
@@ -342,8 +342,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

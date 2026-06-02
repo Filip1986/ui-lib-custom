@@ -1,9 +1,9 @@
 @if (showImage()) {
-  <img class="ui-lib-avatar__image" [src]="image()" [alt]="resolvedImageAlt()" aria-hidden="true" />
+  <img aria-hidden="true" class="ui-lib-avatar__image" [alt]="resolvedImageAlt()" [src]="image()" />
 } @else if (showLabel()) {
-  <span class="ui-lib-avatar__label" aria-hidden="true">{{ label() }}</span>
+  <span aria-hidden="true" class="ui-lib-avatar__label">{{ label() }}</span>
 } @else if (showIcon()) {
-  <span class="ui-lib-avatar__icon" [class]="icon()!" aria-hidden="true"></span>
+  <span aria-hidden="true" class="ui-lib-avatar__icon" [class]="icon()!"></span>
 } @else if (fallbackTemplate(); as tpl) {
   <!-- Typed fallback slot — receives { size, shape, variant } context -->
   <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="fallbackContext()" />

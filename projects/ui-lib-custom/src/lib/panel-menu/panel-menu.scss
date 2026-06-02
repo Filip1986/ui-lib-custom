@@ -68,18 +68,18 @@
   // ── Root separator ──────────────────────────────────────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__separator {
-    height: 1px;
     background-color: var(--uilib-panel-menu-separator-color);
+    height: 1px;
     margin: var(--uilib-panel-menu-separator-my) 0;
   }
 
   // ── Root panel ─────────────────────────────────────────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__panel {
+    background: var(--uilib-panel-menu-bg);
     border: var(--uilib-panel-menu-border);
     border-radius: var(--uilib-panel-menu-radius);
     overflow: hidden;
-    background: var(--uilib-panel-menu-bg);
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__panel + .ui-lib-panel-menu__panel {
@@ -89,24 +89,24 @@
   // ── Root panel header ──────────────────────────────────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__header {
-    display: flex;
     align-items: center;
-    gap: var(--uilib-panel-menu-icon-gap);
-    width: 100%;
-    padding: var(--uilib-panel-menu-header-padding-y) var(--uilib-panel-menu-header-padding-x);
     background: var(--uilib-panel-menu-header-bg);
+    border: none;
     color: var(--uilib-panel-menu-header-color);
+    cursor: pointer;
+    display: flex;
     font-size: inherit;
     font-weight: var(--uilib-panel-menu-header-font-weight);
-    border: none;
-    cursor: pointer;
-    text-align: start;
+    gap: var(--uilib-panel-menu-icon-gap);
     outline: none;
+    padding: var(--uilib-panel-menu-header-padding-y) var(--uilib-panel-menu-header-padding-x);
+    text-align: start;
     transition:
       background-color var(--uilib-panel-menu-transition-duration) ease,
       color var(--uilib-panel-menu-transition-duration) ease;
     -webkit-user-select: none;
     user-select: none;
+    width: 100%;
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__header:hover:not([disabled]) {
@@ -115,8 +115,8 @@
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__header:focus-visible {
-    outline: none;
     box-shadow: inset var(--uilib-panel-menu-focus-shadow);
+    outline: none;
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__header[disabled] {
@@ -131,9 +131,9 @@
 
   ui-lib-panel-menu .ui-lib-panel-menu__root-link[aria-disabled='true'] {
     color: var(--uilib-panel-menu-item-color-disabled);
-    pointer-events: none;
     cursor: default;
     opacity: 0.6;
+    pointer-events: none;
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__header--expanded {
@@ -144,12 +144,12 @@
   // ── Header icon ─────────────────────────────────────────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__header-icon {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    font-size: var(--uilib-panel-menu-icon-size);
-    line-height: 1;
+    display: inline-flex;
     flex-shrink: 0;
+    font-size: var(--uilib-panel-menu-icon-size);
+    justify-content: center;
+    line-height: 1;
   }
 
   // ── Header label ───────────────────────────────────────────────────────────
@@ -162,24 +162,24 @@
   // ── Header toggle chevron ──────────────────────────────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__header-toggle {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    display: inline-flex;
     flex-shrink: 0;
-    width: 0.875em;
     height: 0.875em;
+    justify-content: center;
     margin-inline-start: auto;
     transition: transform var(--uilib-panel-menu-transition-duration) ease;
+    width: 0.875em;
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__header-toggle::before {
-    content: '';
-    display: block;
-    width: 0.45em;
-    height: 0.45em;
     border-inline-end: 0.125em solid currentColor;
     border-bottom: 0.125em solid currentColor;
+    content: '';
+    display: block;
+    height: 0.45em;
     transform: rotate(45deg) translate(-15%, -15%);
+    width: 0.45em;
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__header--expanded .ui-lib-panel-menu__header-toggle::before {
@@ -189,10 +189,10 @@
   // ── Panel content (CSS grid height animation) ──────────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__content {
+    background: var(--uilib-panel-menu-content-bg);
     display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows var(--uilib-panel-menu-transition-duration) ease;
-    background: var(--uilib-panel-menu-content-bg);
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__content--visible {
@@ -214,8 +214,8 @@
   // ── Sub separator ─────────────────────────────────────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-separator {
-    height: 1px;
     background-color: var(--uilib-panel-menu-separator-color);
+    height: 1px;
     margin: var(--uilib-panel-menu-separator-my) 0;
   }
 
@@ -228,27 +228,27 @@
   // ── Sub header (expandable group within content) ──────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-header {
-    display: flex;
     align-items: center;
+    background: transparent;
+    border: none;
+    color: var(--uilib-panel-menu-item-color);
+    cursor: pointer;
+    display: flex;
+    font-size: inherit;
+    font-weight: 500;
     gap: var(--uilib-panel-menu-icon-gap);
-    width: 100%;
+    outline: none;
     padding: var(--uilib-panel-menu-item-padding-y)
       calc(
         var(--pm-depth, 1) * var(--uilib-panel-menu-indent) + var(--uilib-panel-menu-item-padding-x)
       );
-    background: transparent;
-    color: var(--uilib-panel-menu-item-color);
-    font-size: inherit;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
     text-align: start;
-    outline: none;
     transition:
       background-color var(--uilib-panel-menu-transition-duration) ease,
       color var(--uilib-panel-menu-transition-duration) ease;
     -webkit-user-select: none;
     user-select: none;
+    width: 100%;
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-header:hover:not([disabled]) {
@@ -257,8 +257,8 @@
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-header:focus-visible {
-    outline: none;
     box-shadow: inset var(--uilib-panel-menu-focus-shadow);
+    outline: none;
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-header[disabled] {
@@ -270,17 +270,17 @@
   // ── Sub item link (leaf node) ──────────────────────────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-link {
-    display: flex;
     align-items: center;
+    color: var(--uilib-panel-menu-item-color);
+    cursor: pointer;
+    display: flex;
     gap: var(--uilib-panel-menu-icon-gap);
+    outline: none;
     padding: var(--uilib-panel-menu-item-padding-y)
       calc(
         var(--pm-depth, 1) * var(--uilib-panel-menu-indent) + var(--uilib-panel-menu-item-padding-x)
       );
-    color: var(--uilib-panel-menu-item-color);
     text-decoration: none;
-    cursor: pointer;
-    outline: none;
     transition:
       background-color var(--uilib-panel-menu-transition-duration) ease,
       color var(--uilib-panel-menu-transition-duration) ease;
@@ -295,28 +295,28 @@
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-link:focus-visible {
-    outline: none;
-    box-shadow: inset var(--uilib-panel-menu-focus-shadow);
     background: var(--uilib-panel-menu-item-bg-hover);
+    box-shadow: inset var(--uilib-panel-menu-focus-shadow);
     color: var(--uilib-panel-menu-item-color-hover);
+    outline: none;
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-link[aria-disabled='true'] {
     color: var(--uilib-panel-menu-item-color-disabled);
-    pointer-events: none;
     cursor: default;
     opacity: 0.6;
+    pointer-events: none;
   }
 
   // ── Sub icon ──────────────────────────────────────────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-icon {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    font-size: var(--uilib-panel-menu-icon-size);
-    line-height: 1;
+    display: inline-flex;
     flex-shrink: 0;
+    font-size: var(--uilib-panel-menu-icon-size);
+    justify-content: center;
+    line-height: 1;
   }
 
   // ── Sub label ─────────────────────────────────────────────────────────────
@@ -328,24 +328,24 @@
   // ── Sub toggle chevron ────────────────────────────────────────────────────
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-toggle {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    display: inline-flex;
     flex-shrink: 0;
-    width: 0.75em;
     height: 0.75em;
+    justify-content: center;
     margin-inline-start: auto;
     transition: transform var(--uilib-panel-menu-transition-duration) ease;
+    width: 0.75em;
   }
 
   ui-lib-panel-menu .ui-lib-panel-menu__sub-toggle::before {
-    content: '';
-    display: block;
-    width: 0.4em;
-    height: 0.4em;
     border-inline-end: 0.125em solid currentColor;
     border-bottom: 0.125em solid currentColor;
+    content: '';
+    display: block;
+    height: 0.4em;
     transform: rotate(45deg) translate(-15%, -15%);
+    width: 0.4em;
   }
 
   ui-lib-panel-menu
@@ -468,8 +468,8 @@
     ui-lib-panel-menu .ui-lib-panel-menu__sub-content,
     ui-lib-panel-menu .ui-lib-panel-menu__sub-toggle,
     ui-lib-panel-menu .ui-lib-panel-menu__sub-list {
-      transition: none;
       animation: none;
+      transition: none;
     }
   }
 } // end @layer uilib.components

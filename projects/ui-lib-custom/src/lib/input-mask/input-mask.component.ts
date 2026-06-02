@@ -1,17 +1,3 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  effect,
-  forwardRef,
-  inject,
-  input,
-  output,
-  signal,
-  viewChild,
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type {
   ElementRef,
   InputSignal,
@@ -20,11 +6,27 @@ import type {
   WritableSignal,
 } from '@angular/core';
 import type { AfterViewInit, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  forwardRef,
+  inject,
+  input,
+  output,
+  signal,
+  viewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { INPUT_MASK_DEFAULTS } from './input-mask.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type { Caret, InputMaskCompleteEvent, InputMaskSize } from './input-mask.types';
+import { INPUT_MASK_DEFAULTS } from './input-mask.types';
 import { MaskEngine } from './mask-engine';
 
 let nextInputMaskInstanceId: number = 0;

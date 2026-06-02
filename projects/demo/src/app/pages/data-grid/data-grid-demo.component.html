@@ -1,8 +1,8 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Signals-first data grid with virtual scroll, frozen columns, cell editing, and full WAI-ARIA grid keyboard navigation."
     docHeader
     title="Data Grid"
-    description="Signals-first data grid with virtual scroll, frozen columns, cell editing, and full WAI-ARIA grid keyboard navigation."
     [importCode]="importCode"
   />
 
@@ -33,7 +33,7 @@
         Variant
         <select (change)="activeVariant.set($any($event.target).value)">
           @for (variant of variants; track variant) {
-            <option [value]="variant" [selected]="variant === activeVariant()">
+            <option [selected]="variant === activeVariant()" [value]="variant">
               {{ variant }}
             </option>
           }
@@ -49,7 +49,7 @@
           "
         >
           @for (mode of selectionModes; track mode.value) {
-            <option [value]="mode.value ?? 'null'" [selected]="mode.value === selectionMode()">
+            <option [selected]="mode.value === selectionMode()" [value]="mode.value ?? 'null'">
               {{ mode.label }}
             </option>
           }
@@ -63,7 +63,7 @@
           "
         >
           @for (mode of editModes; track mode.value) {
-            <option [value]="mode.value ?? 'null'" [selected]="mode.value === editMode()">
+            <option [selected]="mode.value === editMode()" [value]="mode.value ?? 'null'">
               {{ mode.label }}
             </option>
           }
@@ -109,46 +109,46 @@
     </p>
 
     <ui-lib-data-grid
-      [value]="employees()"
+      caption="Employees"
       dataKey="id"
-      [variant]="activeVariant()"
-      [selectionMode]="selectionMode()"
       [editMode]="editMode()"
-      [(selection)]="selectedRows"
+      [multiSortMode]="true"
       [paginator]="paginatorEnabled()"
+      [resizableColumns]="true"
+      [rowHover]="rowHover()"
       [rows]="5"
       [rowsPerPageOptions]="[5, 10, 25]"
-      [stripedRows]="stripedRows()"
-      [rowHover]="rowHover()"
+      [selectionMode]="selectionMode()"
       [showGridlines]="showGridlines()"
-      [resizableColumns]="true"
-      [multiSortMode]="true"
-      caption="Employees"
+      [stripedRows]="stripedRows()"
+      [value]="employees()"
+      [variant]="activeVariant()"
+      [(selection)]="selectedRows"
       (sorted)="onSortChange($event)"
     >
-      <ui-lib-data-grid-column field="id" header="ID" [sortable]="true" width="70px" />
+      <ui-lib-data-grid-column field="id" header="ID" width="70px" [sortable]="true" />
       <ui-lib-data-grid-column
         field="name"
         header="Name"
-        [sortable]="true"
-        [filterable]="true"
-        [editable]="true"
         width="180px"
+        [editable]="true"
+        [filterable]="true"
+        [sortable]="true"
       />
       <ui-lib-data-grid-column
         field="department"
         header="Department"
-        [sortable]="true"
         [filterable]="true"
+        [sortable]="true"
       />
       <ui-lib-data-grid-column field="role" header="Role" [sortable]="true" />
       <ui-lib-data-grid-column field="salary" header="Salary" [sortable]="true">
-        <ng-template uiDataGridColumnBody let-row>
+        <ng-template let-row uiDataGridColumnBody>
           {{ formatSalary(row.salary) }}
         </ng-template>
       </ui-lib-data-grid-column>
       <ui-lib-data-grid-column field="status" header="Status">
-        <ng-template uiDataGridColumnBody let-row>
+        <ng-template let-row uiDataGridColumnBody>
           <span [class]="statusClass(row.status)">{{ statusLabel(row.status) }}</span>
         </ng-template>
       </ui-lib-data-grid-column>
@@ -166,21 +166,21 @@
     </p>
 
     <ui-lib-data-grid
-      [value]="largeDataset"
+      caption="2,000 employees (virtual scroll)"
       dataKey="id"
-      [virtualScroll]="true"
       scrollHeight="420px"
       [rowHeight]="48"
       [rowHover]="true"
       [stickyHeader]="true"
-      caption="2,000 employees (virtual scroll)"
+      [value]="largeDataset"
+      [virtualScroll]="true"
     >
       <ui-lib-data-grid-column field="id" header="#" width="70px" [sortable]="true" />
-      <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" width="200px" />
+      <ui-lib-data-grid-column field="name" header="Name" width="200px" [sortable]="true" />
       <ui-lib-data-grid-column field="department" header="Department" [sortable]="true" />
       <ui-lib-data-grid-column field="role" header="Role" [sortable]="true" />
       <ui-lib-data-grid-column field="salary" header="Salary" [sortable]="true">
-        <ng-template uiDataGridColumnBody let-row>
+        <ng-template let-row uiDataGridColumnBody>
           {{ formatSalary(row.salary) }}
         </ng-template>
       </ui-lib-data-grid-column>
@@ -197,16 +197,16 @@
     </p>
 
     <ui-lib-data-grid
-      [value]="employees()"
+      caption="Frozen start + end columns"
       dataKey="id"
       [rowHover]="true"
-      caption="Frozen start + end columns"
+      [value]="employees()"
     >
-      <ui-lib-data-grid-column field="id" header="ID" frozen="start" width="70px" />
+      <ui-lib-data-grid-column field="id" frozen="start" header="ID" width="70px" />
       <ui-lib-data-grid-column
         field="name"
-        header="Name"
         frozen="start"
+        header="Name"
         width="180px"
         [sortable]="true"
       />
@@ -214,13 +214,13 @@
       <ui-lib-data-grid-column field="role" header="Role" width="140px" />
       <ui-lib-data-grid-column field="joinDate" header="Join Date" width="130px" />
       <ui-lib-data-grid-column field="location" header="Location" width="140px" />
-      <ui-lib-data-grid-column field="salary" header="Salary" frozen="end" width="130px">
-        <ng-template uiDataGridColumnBody let-row>
+      <ui-lib-data-grid-column field="salary" frozen="end" header="Salary" width="130px">
+        <ng-template let-row uiDataGridColumnBody>
           {{ formatSalary(row.salary) }}
         </ng-template>
       </ui-lib-data-grid-column>
-      <ui-lib-data-grid-column field="status" header="Status" frozen="end" width="100px">
-        <ng-template uiDataGridColumnBody let-row>
+      <ui-lib-data-grid-column field="status" frozen="end" header="Status" width="100px">
+        <ng-template let-row uiDataGridColumnBody>
           <span [class]="statusClass(row.status)">{{ statusLabel(row.status) }}</span>
         </ng-template>
       </ui-lib-data-grid-column>
@@ -236,18 +236,18 @@
     </p>
 
     <ui-lib-data-grid
-      [value]="employees()"
+      caption="Click any Name or Department cell to edit"
       dataKey="id"
       editMode="cell"
       [rowHover]="true"
-      caption="Click any Name or Department cell to edit"
+      [value]="employees()"
     >
       <ui-lib-data-grid-column field="id" header="ID" width="70px" />
-      <ui-lib-data-grid-column field="name" header="Name" [editable]="true" width="200px" />
+      <ui-lib-data-grid-column field="name" header="Name" width="200px" [editable]="true" />
       <ui-lib-data-grid-column field="department" header="Department" [editable]="true" />
       <ui-lib-data-grid-column field="role" header="Role" />
       <ui-lib-data-grid-column field="salary" header="Salary">
-        <ng-template uiDataGridColumnBody let-row>
+        <ng-template let-row uiDataGridColumnBody>
           {{ formatSalary(row.salary) }}
         </ng-template>
       </ui-lib-data-grid-column>
@@ -263,27 +263,27 @@
     </p>
 
     @if (lazyLoading()) {
-      <p class="demo-status" aria-live="polite">Loading data…</p>
+      <p aria-live="polite" class="demo-status">Loading data…</p>
     }
 
     <ui-lib-data-grid
-      [value]="lazyRows()"
+      caption="Server-side: 500 employees"
       dataKey="id"
       [lazy]="true"
-      [totalRecords]="lazyTotal()"
       [paginator]="true"
+      [rowHover]="true"
       [rows]="10"
       [rowsPerPageOptions]="[10, 25, 50]"
-      [rowHover]="true"
+      [totalRecords]="lazyTotal()"
+      [value]="lazyRows()"
       (lazyLoad)="onLazyLoad($event)"
-      caption="Server-side: 500 employees"
     >
-      <ui-lib-data-grid-column field="id" header="#" [sortable]="true" width="70px" />
-      <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" width="200px" />
+      <ui-lib-data-grid-column field="id" header="#" width="70px" [sortable]="true" />
+      <ui-lib-data-grid-column field="name" header="Name" width="200px" [sortable]="true" />
       <ui-lib-data-grid-column field="department" header="Department" [sortable]="true" />
       <ui-lib-data-grid-column field="role" header="Role" [sortable]="true" />
       <ui-lib-data-grid-column field="salary" header="Salary" [sortable]="true">
-        <ng-template uiDataGridColumnBody let-row>
+        <ng-template let-row uiDataGridColumnBody>
           {{ formatSalary(row.salary) }}
         </ng-template>
       </ui-lib-data-grid-column>
@@ -312,8 +312,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

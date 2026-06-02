@@ -1,11 +1,14 @@
+import { inject } from '@angular/core';
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig } from '@storybook/angular';
-import { inject } from '@angular/core';
+
+import { Button } from 'ui-lib-custom/button';
+import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
 import { ConfirmPopup } from './confirm-popup';
 import { ConfirmPopupService } from './confirm-popup.service';
 import type { ConfirmPopupVariant } from './confirm-popup.types';
-import { Button } from 'ui-lib-custom/button';
-import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
 
 type ConfirmPopupStoryArgs = {
   message: string;

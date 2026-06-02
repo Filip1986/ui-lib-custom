@@ -1,3 +1,4 @@
+import type { InputSignal, OnDestroy, Signal, Type, WritableSignal } from '@angular/core';
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -6,14 +7,13 @@ import {
   DOCUMENT,
   ElementRef,
   inject,
-  input,
   Injector,
+  input,
   signal,
+  viewChild,
   ViewContainerRef,
   ViewEncapsulation,
-  viewChild,
 } from '@angular/core';
-import type { InputSignal, OnDestroy, Signal, Type, WritableSignal } from '@angular/core';
 
 // ---- Module-level ID counter (avoids static class field + prefer-readonly lint issue) ----
 let nextDynamicDialogId: number = 0;
@@ -29,15 +29,16 @@ function generateDynamicDialogId(): string {
   return `ui-lib-dynamic-dialog-${nextDynamicDialogId}`;
 }
 import { FocusTrap, KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { DynamicDialogRef } from './dynamic-dialog-ref';
-import { DYNAMIC_DIALOG_CONFIG } from './dynamic-dialog.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
   DynamicDialogConfig,
   DynamicDialogPosition,
   DynamicDialogVariant,
 } from './dynamic-dialog.types';
+import { DYNAMIC_DIALOG_CONFIG } from './dynamic-dialog.types';
+import { DynamicDialogRef } from './dynamic-dialog-ref';
 
 /**
  * Internal shell component rendered by DialogService.open().

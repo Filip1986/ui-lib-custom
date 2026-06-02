@@ -31,22 +31,22 @@
 
   // ---- Host element ------------------------------------------------
   .ui-lib-scroll-top {
-    // Default: fixed to the viewport (window target)
-    position: fixed;
-    bottom: var(--uilib-scroll-top-bottom);
     inset-inline-end: var(--uilib-scroll-top-right);
-    z-index: var(--uilib-scroll-top-z-index);
+    bottom: var(--uilib-scroll-top-bottom);
+
+    // Prevent the block-level host from interfering with surrounding layout
+    display: block;
+    height: var(--uilib-scroll-top-size);
 
     // Hidden by default — opacity + transform for smooth reveal
     opacity: 0;
     pointer-events: none;
+    // Default: fixed to the viewport (window target)
+    position: fixed;
     transform: translateY(0.75rem);
     transition: var(--uilib-scroll-top-transition);
-
-    // Prevent the block-level host from interfering with surrounding layout
-    display: block;
     width: var(--uilib-scroll-top-size);
-    height: var(--uilib-scroll-top-size);
+    z-index: var(--uilib-scroll-top-z-index);
 
     // ---- Visible state -----------------------------------------------
     &--visible {
@@ -57,31 +57,31 @@
 
     // ---- Target: parent (absolute inside scrollable container) -------
     &--target-parent {
-      position: absolute;
-      bottom: 1rem;
       inset-inline-end: 1rem;
+      bottom: 1rem;
+      position: absolute;
     }
 
     // ---- Button (the visual, clickable element) ----------------------
     &__button {
-      display: flex;
       align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      padding: 0;
+      background: var(--uilib-scroll-top-bg);
       border: var(--uilib-scroll-top-border);
       border-radius: var(--uilib-scroll-top-border-radius);
-      background: var(--uilib-scroll-top-bg);
-      color: var(--uilib-scroll-top-color);
       box-shadow: var(--uilib-scroll-top-shadow);
+      color: var(--uilib-scroll-top-color);
       cursor: pointer;
+      display: flex;
       font-size: var(--uilib-scroll-top-icon-size);
+      height: 100%;
+      justify-content: center;
+      outline: none;
+      padding: 0;
       transition:
         background-color 0.2s ease,
         box-shadow 0.2s ease,
         transform 0.15s ease;
-      outline: none;
+      width: 100%;
 
       &:hover {
         background: var(--uilib-scroll-top-bg-hover);
@@ -98,15 +98,15 @@
       }
 
       span {
-        pointer-events: none;
         line-height: 1;
+        pointer-events: none;
       }
     }
 
     // ---- Sizes -------------------------------------------------------
     &--size-sm {
-      width: var(--uilib-scroll-top-size-sm);
       height: var(--uilib-scroll-top-size-sm);
+      width: var(--uilib-scroll-top-size-sm);
 
       .ui-lib-scroll-top__button {
         font-size: var(--uilib-scroll-top-icon-size-sm);
@@ -114,8 +114,8 @@
     }
 
     &--size-lg {
-      width: var(--uilib-scroll-top-size-lg);
       height: var(--uilib-scroll-top-size-lg);
+      width: var(--uilib-scroll-top-size-lg);
 
       .ui-lib-scroll-top__button {
         font-size: var(--uilib-scroll-top-icon-size-lg);

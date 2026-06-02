@@ -1,15 +1,15 @@
 <div
   class="uilib-org-chart-node-cell"
+  role="treeitem"
+  [attr.aria-disabled]="node().selectable === false || null"
+  [attr.aria-expanded]="hasChildren() ? isExpanded() : null"
+  [attr.aria-level]="depth() + 1"
+  [attr.aria-posinset]="posinset()"
+  [attr.aria-selected]="ctx.selectionMode() ? isSelected() : null"
+  [attr.aria-setsize]="setsize()"
+  [class]="node().styleClass ?? ''"
   [class.uilib-org-chart-node-cell--selectable]="isSelectable()"
   [class.uilib-org-chart-node-cell--selected]="isSelected()"
-  [class]="node().styleClass ?? ''"
-  role="treeitem"
-  [attr.aria-level]="depth() + 1"
-  [attr.aria-setsize]="setsize()"
-  [attr.aria-posinset]="posinset()"
-  [attr.aria-expanded]="hasChildren() ? isExpanded() : null"
-  [attr.aria-selected]="ctx.selectionMode() ? isSelected() : null"
-  [attr.aria-disabled]="node().selectable === false || null"
   [tabindex]="tabIndex()"
   (click)="onNodeClick($event)"
   (keydown.enter)="onNodeKeydown($event)"
@@ -35,9 +35,9 @@
       (keydown.space)="onToggleKeydown($event)"
     >
       <span
+        aria-hidden="true"
         class="uilib-org-chart-toggle-icon"
         [class.uilib-org-chart-toggle-icon--expanded]="isExpanded()"
-        aria-hidden="true"
       >
         ▾
       </span>
@@ -46,22 +46,22 @@
 </div>
 
 @if (hasChildren() && isExpanded()) {
-  <div class="uilib-org-chart-connector-down" aria-hidden="true"></div>
+  <div aria-hidden="true" class="uilib-org-chart-connector-down"></div>
   <ul class="uilib-org-chart-children-row" role="group">
     @for (child of node().children; track child.key; let isFirst = $first; let isLast = $last) {
       <li
-        role="none"
         class="uilib-org-chart-child-col"
+        role="none"
         [class.uilib-org-chart-child-col--first]="isFirst"
         [class.uilib-org-chart-child-col--last]="isLast"
         [class.uilib-org-chart-child-col--only]="node().children!.length === 1"
       >
-        <div class="uilib-org-chart-connector-up" aria-hidden="true"></div>
+        <div aria-hidden="true" class="uilib-org-chart-connector-up"></div>
         <ui-lib-organization-chart-node
-          [node]="child"
           [depth]="depth() + 1"
-          [setsize]="node().children!.length"
+          [node]="child"
           [posinset]="$index + 1"
+          [setsize]="node().children!.length"
         />
       </li>
     }

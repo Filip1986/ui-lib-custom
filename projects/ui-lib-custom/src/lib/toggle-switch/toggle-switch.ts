@@ -1,38 +1,40 @@
 import {
+  type AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  ViewEncapsulation,
   computed,
+  ElementRef,
   forwardRef,
   inject,
   input,
+  type InputSignal,
   isDevMode,
   model,
-  output,
-  signal,
-  type AfterViewInit,
-  type InputSignal,
   type ModelSignal,
+  output,
   type OutputEmitterRef,
   type Signal,
+  signal,
+  ViewEncapsulation,
   type WritableSignal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import type {
-  ToggleSwitchVariant,
-  ToggleSwitchSize,
   ToggleSwitchChangeEvent,
+  ToggleSwitchSize,
+  ToggleSwitchVariant,
 } from './toggle-switch.types';
 
 export type {
-  ToggleSwitchVariant,
-  ToggleSwitchSize,
   ToggleSwitchChangeEvent,
+  ToggleSwitchSize,
+  ToggleSwitchVariant,
 } from './toggle-switch.types';
 
 let toggleSwitchIdCounter: number = 0;

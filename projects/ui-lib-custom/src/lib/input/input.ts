@@ -1,25 +1,27 @@
+import type { ElementRef, InputSignal, Signal, WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewChild,
-  ViewEncapsulation,
   computed,
+  effect,
   forwardRef,
+  inject,
   input,
   signal,
-  effect,
-  inject,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { ElementRef, InputSignal, WritableSignal, Signal } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
-import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { SHARED_DEFAULTS } from 'ui-lib-custom/core';
-import type { InputVariant, InputLabelFloat, InputType, InputSize } from './input.types';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export type { InputVariant, InputLabelFloat, InputType, InputSize } from './input.types';
+import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import { SHARED_DEFAULTS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+import type { InputLabelFloat, InputSize, InputType, InputVariant } from './input.types';
+
+export type { InputLabelFloat, InputSize, InputType, InputVariant } from './input.types';
 
 let nextInputId: number = 0;
 

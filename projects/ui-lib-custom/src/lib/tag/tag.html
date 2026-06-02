@@ -1,5 +1,5 @@
 @if (showIcon()) {
-  <span class="ui-lib-tag__icon" [class]="icon()!" aria-hidden="true"></span>
+  <span aria-hidden="true" class="ui-lib-tag__icon" [class]="icon()!"></span>
 }
 @if (value()) {
   <span class="ui-lib-tag__value">{{ value() }}</span>
@@ -7,11 +7,11 @@
 <ng-content />
 @if (dismissible()) {
   <button
-    type="button"
     class="ui-lib-tag__remove-button"
+    type="button"
     [attr.aria-label]="removeAriaLabel()"
     (click)="onRemoveClick($event)"
   >
-    <span [class]="removeIcon()" aria-hidden="true"></span>
+    <span aria-hidden="true" [class]="removeIcon()"></span>
   </button>
 }

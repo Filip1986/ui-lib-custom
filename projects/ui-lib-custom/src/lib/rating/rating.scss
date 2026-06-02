@@ -20,9 +20,9 @@
       color-mix(in srgb, var(--uilib-color-primary-500, #f59e0b) 40%, transparent);
     --uilib-rating-star-transition: color 0.15s ease, transform 0.1s ease;
     --uilib-rating-cancel-transition: color 0.15s ease, transform 0.1s ease;
+    align-items: center;
 
     display: inline-flex;
-    align-items: center;
     gap: var(--uilib-rating-gap);
     outline: none;
   }
@@ -30,18 +30,18 @@
   // ── Star element ─────────────────────────────────────────────────────────────
 
   ui-lib-rating .ui-lib-rating__star {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    outline: none;
     border-radius: 2px;
-    padding: 2px;
     color: var(--uilib-rating-star-off-color);
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    line-height: 1;
+    outline: none;
+    padding: 2px;
     transition: var(--uilib-rating-star-transition);
     -webkit-user-select: none;
     user-select: none;
-    line-height: 1;
   }
 
   // Star glyph via CSS content
@@ -68,26 +68,26 @@
 
   // Focus ring on individual star
   ui-lib-rating .ui-lib-rating__star:focus-visible {
-    box-shadow: var(--uilib-rating-focus-shadow);
     border-radius: 3px;
+    box-shadow: var(--uilib-rating-focus-shadow);
   }
 
   // ── Cancel button ─────────────────────────────────────────────────────────────
 
   ui-lib-rating .ui-lib-rating__cancel {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    outline: none;
     border-radius: 2px;
-    padding: 2px;
-    margin-inline-end: 0.25rem;
     color: var(--uilib-rating-cancel-color);
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    line-height: 1;
+    margin-inline-end: 0.25rem;
+    outline: none;
+    padding: 2px;
     transition: var(--uilib-rating-cancel-transition);
     -webkit-user-select: none;
     user-select: none;
-    line-height: 1;
   }
 
   ui-lib-rating .ui-lib-rating__cancel-icon {
@@ -106,15 +106,15 @@
   }
 
   ui-lib-rating .ui-lib-rating__cancel:focus-visible {
-    box-shadow: var(--uilib-rating-focus-shadow);
     border-radius: 3px;
+    box-shadow: var(--uilib-rating-focus-shadow);
   }
 
   // ── Disabled state ────────────────────────────────────────────────────────────
 
   ui-lib-rating.ui-lib-rating--disabled {
-    opacity: 0.6;
     cursor: not-allowed;
+    opacity: 0.6;
     pointer-events: none;
   }
 

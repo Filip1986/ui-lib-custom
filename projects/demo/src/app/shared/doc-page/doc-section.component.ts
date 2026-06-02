@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import type { InputSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 
 /**
  * Standard section wrapper for every component demo page.

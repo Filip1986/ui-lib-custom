@@ -1,37 +1,37 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Versatile card component with headers, footers, borders, and elevation. Use the controls to adjust the live card."
     docHeader
     title="Card"
     [importCode]="importCode"
-    description="Versatile card component with headers, footers, borders, and elevation. Use the controls to adjust the live card."
   />
 
   <app-card-basic-example />
   <app-doc-code-example
     [html]="cardExampleHtml"
-    [typescript]="cardExampleTs"
     [showLineNumbers]="true"
+    [typescript]="cardExampleTs"
   />
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
-      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
-      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
-      <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
-      <ui-lib-tab value="performance" label="Performance"></ui-lib-tab>
-      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
+      <ui-lib-tab label="Playground" value="playground" />
+      <ui-lib-tab label="Variants" value="variants" />
+      <ui-lib-tab label="API Reference" value="api-reference" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="Performance" value="performance" />
+      <ui-lib-tab label="Accessibility" value="accessibility" />
     </ui-lib-tabs>
   </div>
 
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
-      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+      <ui-lib-card class="doc-control-card" [showFooter]="false" [showHeader]="true">
         <div card-header>
           <div class="card-title">Style & surface</div>
           <p class="card-description">Variant, elevation, shadow, and surface colors.</p>
@@ -43,10 +43,10 @@
               @for (v of variants; track v) {
                 <ui-lib-button
                   class="control-chip"
-                  size="sm"
-                  [variant]="'minimal'"
-                  [appearance]="variant() === v ? 'solid' : 'ghost'"
                   color="primary"
+                  size="sm"
+                  [appearance]="variant() === v ? 'solid' : 'ghost'"
+                  [variant]="'minimal'"
                   (click)="selectVariant(v)"
                   >{{ v }}</ui-lib-button
                 >
@@ -68,10 +68,10 @@
               @for (e of elevations; track e) {
                 <ui-lib-button
                   class="control-chip"
-                  size="sm"
-                  [variant]="'minimal'"
-                  [appearance]="elevation() === e ? 'solid' : 'ghost'"
                   color="primary"
+                  size="sm"
+                  [appearance]="elevation() === e ? 'solid' : 'ghost'"
+                  [variant]="'minimal'"
                   (click)="elevation.set(e)"
                   >{{ e }}</ui-lib-button
                 >
@@ -96,15 +96,15 @@
             <div>
               <label>Header BG</label>
               <input
-                type="color"
                 aria-label="Header background color"
+                type="color"
                 [value]="headerBg() || '#ffffff'"
                 (input)="headerBg.set($any($event.target).value)"
               />
               <input
-                type="text"
                 aria-label="Header background value"
                 placeholder="#f5f7fb"
+                type="text"
                 [value]="headerBg()"
                 (input)="headerBg.set($any($event.target).value)"
               />
@@ -112,15 +112,15 @@
             <div>
               <label>Footer BG</label>
               <input
-                type="color"
                 aria-label="Footer background color"
+                type="color"
                 [value]="footerBg() || '#ffffff'"
                 (input)="footerBg.set($any($event.target).value)"
               />
               <input
-                type="text"
                 aria-label="Footer background value"
                 placeholder="#eef2ff"
+                type="text"
                 [value]="footerBg()"
                 (input)="footerBg.set($any($event.target).value)"
               />
@@ -129,7 +129,7 @@
         </div>
       </ui-lib-card>
 
-      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+      <ui-lib-card class="doc-control-card" [showFooter]="false" [showHeader]="true">
         <div card-header>
           <div class="card-title">Layout & borders</div>
           <p class="card-description">Toggle borders, hover, header, and footer.</p>
@@ -170,7 +170,7 @@
         </div>
       </ui-lib-card>
 
-      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+      <ui-lib-card class="doc-control-card" [showFooter]="false" [showHeader]="true">
         <div card-header>
           <div class="card-title">Content & theme</div>
           <p class="card-description">Edit text content or enable local theme overrides.</p>
@@ -178,8 +178,8 @@
         <div class="control">
           <label>Title</label>
           <input
-            type="text"
             aria-label="Title"
+            type="text"
             [value]="title()"
             (input)="title.set($any($event.target).value)"
           />
@@ -187,8 +187,8 @@
         <div class="control">
           <label>Body</label>
           <textarea
-            rows="3"
             aria-label="Body"
+            rows="3"
             [value]="body()"
             (input)="body.set($any($event.target).value)"
           ></textarea>
@@ -207,83 +207,83 @@
     </div>
 
     <div class="viewport-control-stack">
-      <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
+      <ui-lib-card class="viewport-width-card" [showFooter]="false" [showHeader]="true">
         <div card-header>Viewport width</div>
         <div class="viewport-controls">
           <div class="preset-buttons">
             @for (preset of viewportPresets; track preset.key) {
-              <ui-lib-button size="sm" appearance="ghost" (click)="setViewportPreset(preset)">{{
+              <ui-lib-button appearance="ghost" size="sm" (click)="setViewportPreset(preset)">{{
                 preset.label
               }}</ui-lib-button>
             }
             <div class="custom">
               <label>Custom</label>
               <input
-                type="number"
-                min="200"
-                max="2000"
                 aria-label="Custom viewport width in pixels"
+                max="2000"
+                min="200"
+                type="number"
                 [ngModel]="viewportCustomWidth()"
                 (ngModelChange)="setViewportCustomWidth($event)"
               />
-              <ui-lib-button size="sm" appearance="ghost" (click)="applyViewportCustom()"
+              <ui-lib-button appearance="ghost" size="sm" (click)="applyViewportCustom()"
                 >Apply</ui-lib-button
               >
             </div>
           </div>
           <div class="controls">
             <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-            <ui-lib-button size="sm" appearance="ghost" (click)="rotateViewport()"
+            <ui-lib-button appearance="ghost" size="sm" (click)="rotateViewport()"
               >Rotate</ui-lib-button
             >
           </div>
         </div>
       </ui-lib-card>
 
-      <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
+      <ui-lib-card class="viewport-density-card" [showFooter]="false" [showHeader]="true">
         <div card-header>Density</div>
         <div class="density-controls">
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('default')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'default'"
+            (click)="setViewportDensity('default')"
             >Default</ui-lib-button
           >
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('comfortable')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'comfortable'"
+            (click)="setViewportDensity('comfortable')"
             >Comfortable</ui-lib-button
           >
           <ui-lib-button
-            size="sm"
             appearance="ghost"
-            (click)="setViewportDensity('compact')"
+            size="sm"
             [class.active]="viewport?.densityValue() === 'compact'"
+            (click)="setViewportDensity('compact')"
             >Compact</ui-lib-button
           >
         </div>
       </ui-lib-card>
     </div>
 
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
+    <ui-lib-card data-doc-anchor id="playground" [showFooter]="false" [showHeader]="true">
       <div card-header>Playground</div>
       <p>Pick variant, elevation, borders, and content.</p>
 
       <app-doc-demo-viewport [shadow]="shadowValue()">
         <div class="card-grid" [appThemeScope]="appliedTheme()">
           <ui-lib-card
-            [variant]="variant()"
-            [elevation]="elevation()"
             [bordered]="bordered()"
-            [hoverable]="hoverable()"
-            [showHeader]="showHeader()"
-            [showFooter]="showFooter()"
-            [shadow]="shadowValue()"
-            [headerBg]="headerBg()"
+            [elevation]="elevation()"
             [footerBg]="footerBg()"
+            [headerBg]="headerBg()"
+            [hoverable]="hoverable()"
+            [shadow]="shadowValue()"
+            [showFooter]="showFooter()"
+            [showHeader]="showHeader()"
+            [variant]="variant()"
           >
             @if (showHeader()) {
               <div card-header>{{ title() || 'Card Title' }}</div>
@@ -291,10 +291,10 @@
             <p>{{ body() || 'Cards can host arbitrary content and actions.' }}</p>
             @if (showFooter()) {
               <div card-footer>
-                <ui-lib-button [variant]="variant()" color="primary" size="sm"
+                <ui-lib-button color="primary" size="sm" [variant]="variant()"
                   >Action</ui-lib-button
                 >
-                <ui-lib-button [variant]="variant()" appearance="ghost" color="secondary" size="sm"
+                <ui-lib-button appearance="ghost" color="secondary" size="sm" [variant]="variant()"
                   >Secondary</ui-lib-button
                 >
               </div>
@@ -306,7 +306,7 @@
   }
 
   @if (activeTab() === 'variants') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
+    <ui-lib-card data-doc-anchor id="variants" [showFooter]="false" [showHeader]="true">
       <div card-header>Variants</div>
       <p>Compare the three card variants using the same content and elevation.</p>
 
@@ -315,8 +315,8 @@
           <ui-lib-card
             variant="material"
             [elevation]="elevation()"
-            [showHeader]="showHeader()"
             [showFooter]="showFooter()"
+            [showHeader]="showHeader()"
           >
             <div card-header>Material</div>
             {{ body() }}
@@ -328,8 +328,8 @@
           <ui-lib-card
             variant="bootstrap"
             [elevation]="elevation()"
-            [showHeader]="showHeader()"
             [showFooter]="showFooter()"
+            [showHeader]="showHeader()"
           >
             <div card-header>Bootstrap</div>
             {{ body() }}
@@ -341,8 +341,8 @@
           <ui-lib-card
             variant="minimal"
             [elevation]="elevation()"
-            [showHeader]="showHeader()"
             [showFooter]="showFooter()"
+            [showHeader]="showHeader()"
           >
             <div card-header>Minimal</div>
             {{ body() }}
@@ -354,23 +354,23 @@
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
+    <ui-lib-card data-doc-anchor id="api-reference" [showFooter]="false" [showHeader]="true">
       <div card-header>API Reference</div>
-      <div id="properties" data-doc-anchor>
+      <div data-doc-anchor id="properties">
         <app-doc-api-reference [rows]="apiInputRows" />
       </div>
     </ui-lib-card>
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
+    <ui-lib-card data-doc-anchor id="usage" [showFooter]="false" [showHeader]="true">
       <div card-header>Usage</div>
-      <app-doc-code-example [typescript]="usageTs" [showLineNumbers]="true" />
+      <app-doc-code-example [showLineNumbers]="true" [typescript]="usageTs" />
     </ui-lib-card>
   }
 
   @if (activeTab() === 'performance') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="performance" data-doc-anchor>
+    <ui-lib-card data-doc-anchor id="performance" [showFooter]="false" [showHeader]="true">
       <div card-header>Performance Features</div>
       <ul class="doc-list">
         <li><strong>OnPush Change Detection</strong> - only re-renders when inputs change</li>
@@ -392,9 +392,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -403,8 +403,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

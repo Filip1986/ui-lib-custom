@@ -1,9 +1,9 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Switch between content sections with accessible, theme-aware tabs. Configure variant, size, orientation, alignment, and lazy behavior in the playground."
     docHeader
     title="Tabs"
     [importCode]="importCode"
-    description="Switch between content sections with accessible, theme-aware tabs. Configure variant, size, orientation, alignment, and lazy behavior in the playground."
   />
 
   <app-tabs-basic-example />
@@ -11,16 +11,16 @@
 
   <div class="doc-tabs">
     <ui-lib-tabs
-      variant="minimal"
       size="sm"
+      variant="minimal"
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
-      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
-      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
-      <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
-      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
+      <ui-lib-tab label="Playground" value="playground" />
+      <ui-lib-tab label="Variants" value="variants" />
+      <ui-lib-tab label="API Reference" value="api-reference" />
+      <ui-lib-tab label="Usage" value="usage" />
+      <ui-lib-tab label="Accessibility" value="accessibility" />
     </ui-lib-tabs>
   </div>
 
@@ -36,10 +36,10 @@
               @for (v of variants; track v) {
                 <ui-lib-button
                   class="control-chip"
+                  color="primary"
                   size="sm"
                   variant="minimal"
                   [appearance]="variant() === v ? 'solid' : 'ghost'"
-                  color="primary"
                   (click)="setVariant(v)"
                   >{{ v }}</ui-lib-button
                 >
@@ -53,10 +53,10 @@
               @for (s of sizes; track s) {
                 <ui-lib-button
                   class="control-chip"
+                  color="primary"
                   size="sm"
                   variant="minimal"
                   [appearance]="size() === s ? 'solid' : 'ghost'"
-                  color="primary"
                   (click)="setSize(s)"
                   >{{ s }}</ui-lib-button
                 >
@@ -70,10 +70,10 @@
               @for (o of orientations; track o) {
                 <ui-lib-button
                   class="control-chip"
+                  color="primary"
                   size="sm"
                   variant="minimal"
                   [appearance]="orientation() === o ? 'solid' : 'ghost'"
-                  color="primary"
                   (click)="setOrientation(o)"
                   >{{ o }}</ui-lib-button
                 >
@@ -87,10 +87,10 @@
               @for (a of aligns; track a) {
                 <ui-lib-button
                   class="control-chip"
+                  color="primary"
                   size="sm"
                   variant="minimal"
                   [appearance]="align() === a ? 'solid' : 'ghost'"
-                  color="primary"
                   (click)="setAlign(a)"
                   >{{ a }}</ui-lib-button
                 >
@@ -110,10 +110,10 @@
               @for (mode of lazyModes; track mode) {
                 <ui-lib-button
                   class="control-chip"
+                  color="primary"
                   size="sm"
                   variant="minimal"
                   [appearance]="lazy() === mode ? 'solid' : 'ghost'"
-                  color="primary"
                   (click)="setLazy(mode)"
                   >{{ mode === false ? 'off' : mode }}</ui-lib-button
                 >
@@ -143,8 +143,8 @@
             />
             <ui-lib-select
               label="Per-tab lazy"
-              [options]="perTabLazyOptions"
               [ngModel]="perTabLazy()"
+              [options]="perTabLazyOptions"
               (ngModelChange)="setPerTabLazy($event)"
             />
           </div>
@@ -158,23 +158,23 @@
       <app-doc-demo-viewport>
         <div class="doc-demo" [appThemeScope]="appliedTheme()">
           <ui-lib-tabs
-            [variant]="variant()"
-            [size]="size()"
-            [orientation]="orientation()"
             [align]="align()"
-            [lazy]="lazy()"
-            [scrollBehavior]="playgroundScrollBehavior()"
-            [mode]="playgroundMode()"
             [closable]="closable()"
             [disabled]="disabledAll()"
+            [lazy]="lazy()"
+            [mode]="playgroundMode()"
+            [orientation]="orientation()"
+            [scrollBehavior]="playgroundScrollBehavior()"
+            [size]="size()"
+            [variant]="variant()"
           >
             @for (tab of playgroundTabsResolved(); track tab.value) {
               <ui-lib-tab
-                [value]="tab.value"
-                [label]="tab.label"
-                [disabled]="!!tab.disabled"
                 [closable]="!!tab.closable"
+                [disabled]="!!tab.disabled"
+                [label]="tab.label"
                 [lazy]="tab.value === 'details' ? playgroundPerTabLazy() : undefined"
+                [value]="tab.value"
               >
                 {{ tab.content }}
               </ui-lib-tab>
@@ -202,7 +202,7 @@
           <div class="doc-demo scrollable-demo">
             <ui-lib-tabs scrollBehavior="arrows">
               @for (tab of scrollTabs; track tab.value) {
-                <ui-lib-tab [value]="tab.value" [label]="tab.label">
+                <ui-lib-tab [label]="tab.label" [value]="tab.value">
                   {{ tab.content }}
                 </ui-lib-tab>
               }
@@ -252,7 +252,7 @@
       <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
-            <ui-lib-tabs variant="material" iconPosition="top">
+            <ui-lib-tabs iconPosition="top" variant="material">
               @for (tab of iconTextTabs; track tab.value) {
                 <ui-lib-tab [value]="tab.value">
                   <ng-template uiLibTabLabel>
@@ -271,7 +271,7 @@
           <div class="doc-demo">
             <ui-lib-tabs orientation="vertical" size="sm">
               @for (tab of verticalTabs; track tab.value) {
-                <ui-lib-tab [value]="tab.value" [label]="tab.label">
+                <ui-lib-tab [label]="tab.label" [value]="tab.value">
                   {{ tab.content }}
                 </ui-lib-tab>
               }
@@ -285,15 +285,15 @@
           <div class="doc-demo">
             <ui-lib-tabs [closable]="true" (tabClose)="onCloseTab($event)">
               @for (tab of closableTabs(); track tab.value) {
-                <ui-lib-tab [value]="tab.value" [label]="tab.label" [closable]="!!tab.closable">
+                <ui-lib-tab [closable]="!!tab.closable" [label]="tab.label" [value]="tab.value">
                   {{ tab.content }}
                 </ui-lib-tab>
               }
             </ui-lib-tabs>
             <ui-lib-button
+              appearance="ghost"
               size="sm"
               variant="minimal"
-              appearance="ghost"
               (click)="resetClosableTabs()"
               >Reset tabs</ui-lib-button
             >
@@ -318,7 +318,7 @@
           <div class="doc-demo">
             <ui-lib-tabs lazy="keep-alive">
               @for (tab of lazyTabs; track tab.value) {
-                <ui-lib-tab [value]="tab.value" [label]="tab.label">
+                <ui-lib-tab [label]="tab.label" [value]="tab.value">
                   {{ tab.content }}
                 </ui-lib-tab>
               }
@@ -370,7 +370,7 @@
               (selectedChange)="onControlledChange($event)"
             >
               @for (tab of controlledTabs; track tab.value) {
-                <ui-lib-tab [value]="tab.value" [label]="tab.label">
+                <ui-lib-tab [label]="tab.label" [value]="tab.value">
                   {{ tab.content }}
                 </ui-lib-tab>
               }
@@ -461,9 +461,9 @@
       <section class="doc-demo rtl-demo" dir="rtl">
         <h3>RTL Mode</h3>
         <ui-lib-tabs>
-          <ui-lib-tab value="1" label="כרטיסייה 1">תוכן ראשון</ui-lib-tab>
-          <ui-lib-tab value="2" label="כרטיסייה 2">תוכן שני</ui-lib-tab>
-          <ui-lib-tab value="3" label="כרטיסייה 3">תוכן שלישי</ui-lib-tab>
+          <ui-lib-tab label="כרטיסייה 1" value="1">תוכן ראשון</ui-lib-tab>
+          <ui-lib-tab label="כרטיסייה 2" value="2">תוכן שני</ui-lib-tab>
+          <ui-lib-tab label="כרטיסייה 3" value="3">תוכן שלישי</ui-lib-tab>
         </ui-lib-tabs>
       </section>
     </app-doc-demo-viewport>
@@ -487,9 +487,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -497,8 +497,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

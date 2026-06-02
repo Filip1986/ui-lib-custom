@@ -4,23 +4,23 @@
     flex-direction: row;
   }
   .ui-lib-avatar-group {
+    align-items: center;
     display: inline-flex;
     flex-direction: row;
-    align-items: center;
   }
   .ui-lib-avatar-group__overflow {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    min-width: var(--uilib-avatar-size-md, 2.5rem);
-    height: var(--uilib-avatar-size-md, 2.5rem);
-    margin-inline-start: var(--uilib-avatar-group-overlap, -0.75rem);
-    padding: 0 0.5rem;
-    border-radius: 999px;
     background: var(--uilib-avatar-group-overflow-bg, var(--uilib-color-neutral-200, #e5e7eb));
+    border-radius: 999px;
     color: var(--uilib-avatar-group-overflow-fg, var(--uilib-color-neutral-900, #111827));
+    display: inline-flex;
     font-size: var(--uilib-avatar-font-size-sm, 0.75rem);
     font-weight: 600;
+    height: var(--uilib-avatar-size-md, 2.5rem);
+    justify-content: center;
+    margin-inline-start: var(--uilib-avatar-group-overlap, -0.75rem);
+    min-width: var(--uilib-avatar-size-md, 2.5rem);
+    padding: 0 0.5rem;
   }
   .ui-lib-avatar-group ui-lib-avatar + ui-lib-avatar {
     margin-inline-start: var(--uilib-avatar-group-overlap, -0.75rem);
@@ -28,8 +28,8 @@
   @media (prefers-reduced-motion: reduce) {
     .ui-lib-avatar-group,
     .ui-lib-avatar-group__overflow {
-      transition: none !important;
       animation: none !important;
+      transition: none !important;
     }
   }
 } // end @layer uilib.components

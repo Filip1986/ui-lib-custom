@@ -1,18 +1,18 @@
 <ui-lib-input-otp
-  [length]="4"
   size="sm"
+  [length]="4"
+  [ngModelOptions]="{ standalone: true }"
   [(ngModel)]="sizeValues.sm"
-  [ngModelOptions]="{ standalone: true }"
 />
 <ui-lib-input-otp
-  [length]="4"
   size="md"
-  [(ngModel)]="sizeValues.md"
+  [length]="4"
   [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="sizeValues.md"
 />
 <ui-lib-input-otp
-  [length]="4"
   size="lg"
-  [(ngModel)]="sizeValues.lg"
+  [length]="4"
   [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="sizeValues.lg"
 />

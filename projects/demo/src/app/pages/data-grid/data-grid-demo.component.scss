@@ -1,23 +1,23 @@
 .demo-controls {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: var(--uilib-spacing-3, 0.75rem);
-  align-items: center;
   margin-block-end: var(--uilib-spacing-4, 1rem);
 
   label {
-    display: flex;
     align-items: center;
-    gap: var(--uilib-spacing-2, 0.5rem);
+    display: flex;
     font-size: var(--uilib-font-size-sm, 0.875rem);
     font-weight: 500;
+    gap: var(--uilib-spacing-2, 0.5rem);
 
     select {
-      padding: var(--uilib-spacing-1, 0.25rem) var(--uilib-spacing-2, 0.5rem);
+      background: var(--uilib-surface-page, #fff);
       border: 1px solid var(--uilib-color-neutral-300, #d1d5db);
       border-radius: var(--uilib-radius-sm, 0.25rem);
-      background: var(--uilib-surface-page, #fff);
       font-size: var(--uilib-font-size-sm, 0.875rem);
+      padding: var(--uilib-spacing-1, 0.25rem) var(--uilib-spacing-2, 0.5rem);
     }
   }
 
@@ -27,19 +27,19 @@
 }
 
 .demo-status {
-  font-size: var(--uilib-font-size-sm, 0.875rem);
   color: var(--uilib-color-neutral-500, #6b7280);
+  font-size: var(--uilib-font-size-sm, 0.875rem);
   margin-block-end: var(--uilib-spacing-3, 0.75rem);
 }
 
 // Status badges used in body cell templates
 .badge {
-  display: inline-flex;
   align-items: center;
-  padding: 0.125rem 0.5rem;
   border-radius: 9999px;
+  display: inline-flex;
   font-size: var(--uilib-font-size-xs, 0.75rem);
   font-weight: 600;
+  padding: 0.125rem 0.5rem;
 
   &--success {
     background: var(--uilib-color-green-100, #dcfce7);

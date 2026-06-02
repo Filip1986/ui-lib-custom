@@ -1,33 +1,35 @@
-import { Component, ChangeDetectionStrategy, ViewChild, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewChild, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
+import type { BadgeColor, BadgeSize, BadgeVariant } from 'ui-lib-custom/badge';
 import { Badge } from 'ui-lib-custom/badge';
-import type { BadgeColor, BadgeVariant, BadgeSize } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import { Panel } from 'ui-lib-custom/panel';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
+
+import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.component';
+import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
-import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.component';
-
-import { Panel } from 'ui-lib-custom/panel';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-import { badgeExampleHtml, badgeExampleTs, usageHtml, usageTs } from './snippets.generated';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
+import { badgeExampleHtml, badgeExampleTs, usageHtml, usageTs } from './snippets.generated';
 type TabKey =
   | 'playground'
   | 'variants'

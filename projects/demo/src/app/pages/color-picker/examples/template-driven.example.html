@@ -1,4 +1,4 @@
 <form #f="ngForm" (ngSubmit)="submitTemplateDriven()">
-  <ui-lib-color-picker name="templateColor" [(ngModel)]="templateDrivenValue" format="hex" />
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+  <ui-lib-color-picker format="hex" name="templateColor" [(ngModel)]="templateDrivenValue" />
+  <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
 </form>

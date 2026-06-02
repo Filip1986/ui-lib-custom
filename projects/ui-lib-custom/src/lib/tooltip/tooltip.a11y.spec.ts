@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import type { DebugElement } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideZonelessChangeDetection } from '@angular/core';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
 import { axe } from 'jest-axe';
+
 import { SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 
 /** Axe rules to skip for tooltip axe checks.

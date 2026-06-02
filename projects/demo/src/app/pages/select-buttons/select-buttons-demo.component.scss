@@ -12,25 +12,25 @@ section {
 }
 
 h3 {
-  margin: 0;
   font-size: 1rem;
+  margin: 0;
 }
 
 .section-label {
-  margin: 0 0 0.75rem 0;
   font-weight: 600;
+  margin: 0 0 0.75rem;
 }
 
 .hint {
   color: var(--uilib-text-secondary, #6b7280);
   font-size: 0.875rem;
-  margin: 0.5rem 0 0 0;
+  margin: 0.5rem 0 0;
 }
 
 .api-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  width: 100%;
 }
 
 .api-table th,
@@ -45,13 +45,13 @@ h3 {
 }
 
 .icon-label {
-  position: absolute;
-  width: 1px;
+  border: 0;
+  clip: rect(0 0 0 0);
   height: 1px;
-  padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
+  padding: 0;
+  position: absolute;
   white-space: nowrap;
-  border: 0;
+  width: 1px;
 }

@@ -1,18 +1,21 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  type DebugElement,
   provideZonelessChangeDetection,
   signal,
   type WritableSignal,
-  type DebugElement,
 } from '@angular/core';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter, Router } from '@angular/router';
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
+
 import { provideIcons } from '@ng-icons/core';
 import { lucidePencil, lucideTrash } from '@ng-icons/lucide';
+
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
+
 import { SplitButtonComponent } from './split-button.component';
 import type {
   SplitButtonClickEvent,

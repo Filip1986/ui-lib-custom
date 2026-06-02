@@ -1,21 +1,21 @@
-<svg class="ui-lib-knob-svg" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+<svg aria-hidden="true" class="ui-lib-knob-svg" focusable="false" viewBox="0 0 100 100">
   <!-- Track: full 270° background arc -->
   <path
     class="ui-lib-knob-track"
-    [attr.d]="trackPath()"
     fill="none"
-    [attr.stroke-width]="strokeWidth()"
     stroke-linecap="round"
+    [attr.d]="trackPath()"
+    [attr.stroke-width]="strokeWidth()"
   />
 
   <!-- Range: partial arc representing the current value -->
   @if (normalizedValue() > 0) {
     <path
       class="ui-lib-knob-range"
-      [attr.d]="rangePath()"
       fill="none"
-      [attr.stroke-width]="strokeWidth()"
       stroke-linecap="round"
+      [attr.d]="rangePath()"
+      [attr.stroke-width]="strokeWidth()"
     />
   }
 
@@ -24,20 +24,20 @@
     <!-- Custom value-label slot — consumer provides SVG content (e.g. <tspan> elements) -->
     <text
       class="ui-lib-knob-value-label"
+      dominant-baseline="central"
+      text-anchor="middle"
       x="50"
       y="50"
-      text-anchor="middle"
-      dominant-baseline="central"
     >
       <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="valueLabelContext()" />
     </text>
   } @else if (showValue()) {
     <text
       class="ui-lib-knob-value-label"
+      dominant-baseline="central"
+      text-anchor="middle"
       x="50"
       y="50"
-      text-anchor="middle"
-      dominant-baseline="central"
     >
       {{ formattedValue() }}
     </text>

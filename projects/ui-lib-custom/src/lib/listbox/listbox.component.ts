@@ -1,18 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ContentChild,
-  PLATFORM_ID,
-  ViewEncapsulation,
-  computed,
-  forwardRef,
-  inject,
-  input,
-  model,
-  output,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
 import type {
   ElementRef,
   InputSignal,
@@ -22,12 +8,28 @@ import type {
   TemplateRef,
   WritableSignal,
 } from '@angular/core';
-import { NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ContentChild,
+  forwardRef,
+  inject,
+  input,
+  model,
+  output,
+  PLATFORM_ID,
+  signal,
+  viewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
 import { LISTBOX_DEFAULTS, LISTBOX_OPTION_ID_SEPARATOR } from './listbox.constants';
 import type {
   ListboxChangeEvent,
@@ -42,24 +44,24 @@ import type {
   ListboxVariant,
 } from './listbox.types';
 
-export type {
-  ListboxVariant,
-  ListboxSize,
-  ListboxFilterMatchMode,
-  ListboxOption,
-  ListboxOptionGroup,
-  ListboxChangeEvent,
-  ListboxFilterEvent,
-  ListboxItemContext,
-  ListboxGroupContext,
-} from './listbox.types';
 export {
   LISTBOX_DEFAULTS,
-  LISTBOX_OPTION_ID_SEPARATOR,
-  LISTBOX_ROLE,
-  LISTBOX_OPTION_ROLE,
   LISTBOX_GROUP_ROLE,
+  LISTBOX_OPTION_ID_SEPARATOR,
+  LISTBOX_OPTION_ROLE,
+  LISTBOX_ROLE,
 } from './listbox.constants';
+export type {
+  ListboxChangeEvent,
+  ListboxFilterEvent,
+  ListboxFilterMatchMode,
+  ListboxGroupContext,
+  ListboxItemContext,
+  ListboxOption,
+  ListboxOptionGroup,
+  ListboxSize,
+  ListboxVariant,
+} from './listbox.types';
 
 /** Monotonic counter for unique element IDs. */
 let listboxIdCounter: number = 0;

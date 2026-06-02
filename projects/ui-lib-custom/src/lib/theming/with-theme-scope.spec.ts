@@ -1,14 +1,15 @@
+import type { WritableSignal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
-import { WithThemeScopeMixin } from './with-theme-scope';
+import { TestBed } from '@angular/core/testing';
+
 import type { ThemeScopeInput } from './theme-scope.directive';
+import { WithThemeScopeMixin } from './with-theme-scope';
 
 // The mixin has no selector — it is consumed as a host directive. An inner
 // component adopts it and exposes the `theme` input; an outer host binds it.

@@ -1,12 +1,15 @@
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig } from '@storybook/angular';
-import { Component, inject, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+
 import { Button } from 'ui-lib-custom/button';
 import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
+
 import { DynamicDialog } from './dynamic-dialog';
 import { DialogService } from './dynamic-dialog.service';
-import { DynamicDialogRef } from './dynamic-dialog-ref';
 import type { DynamicDialogConfig, DynamicDialogVariant } from './dynamic-dialog.types';
+import { DynamicDialogRef } from './dynamic-dialog-ref';
 
 type DynamicDialogStoryArgs = {
   header: string;

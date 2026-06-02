@@ -1,15 +1,15 @@
 // Public types
 export type {
-  OrderListVariant,
-  OrderListSize,
   OrderListControlsPosition,
+  OrderListDragDropEvent,
+  OrderListEmptyContext,
+  OrderListFilterEvent,
   OrderListFilterMatchMode,
+  OrderListItemContext,
   OrderListReorderEvent,
   OrderListSelectionChangeEvent,
-  OrderListFilterEvent,
-  OrderListDragDropEvent,
-  OrderListItemContext,
-  OrderListEmptyContext,
+  OrderListSize,
+  OrderListVariant,
 } from './order-list.types';
 
 // Public constants
@@ -20,8 +20,8 @@ export { OrderListComponent } from './order-list.component';
 
 // Template directives
 export {
-  OrderListItemDirective,
-  OrderListHeaderDirective,
   OrderListEmptyDirective,
   OrderListFilterDirective,
+  OrderListHeaderDirective,
+  OrderListItemDirective,
 } from './order-list-templates.directive';

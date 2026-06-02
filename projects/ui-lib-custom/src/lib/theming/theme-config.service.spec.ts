@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+
 import { ThemeConfigService } from './theme-config.service';
 
 describe('ThemeConfigService shape', (): void => {

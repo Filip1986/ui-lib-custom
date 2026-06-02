@@ -2,7 +2,7 @@
   <ng-template uiOrderListHeader>
     <span>Products ({{ templateProducts().length }})</span>
   </ng-template>
-  <ng-template uiOrderListItem let-item>
+  <ng-template let-item uiOrderListItem>
     <div class="demo-ol-card-row">
       <span class="demo-ol-category-badge">{{ item.category }}</span>
       <strong class="demo-ol-name">{{ item.name }}</strong>

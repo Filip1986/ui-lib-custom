@@ -1,34 +1,34 @@
 <input
   #nativeInput
-  [class]="nativeInputClasses()"
   type="checkbox"
-  [id]="getNativeInputId()"
-  [name]="name()"
-  [value]="nativeInputValue()"
-  [checked]="checked()"
-  [required]="required()"
-  [readOnly]="readonly()"
-  [disabled]="isDisabled()"
-  [attr.tabindex]="hostTabIndex()"
+  [attr.aria-checked]="ariaChecked()"
+  [attr.aria-describedby]="ariaDescribedby()"
+  [attr.aria-disabled]="isDisabled() ? 'true' : null"
   [attr.aria-label]="ariaLabel()"
   [attr.aria-labelledby]="ariaLabelledby()"
-  [attr.aria-checked]="ariaChecked()"
   [attr.aria-required]="required() ? 'true' : null"
-  [attr.aria-disabled]="isDisabled() ? 'true' : null"
-  [attr.aria-describedby]="ariaDescribedby()"
+  [attr.tabindex]="hostTabIndex()"
+  [checked]="checked()"
+  [class]="nativeInputClasses()"
+  [disabled]="isDisabled()"
+  [id]="getNativeInputId()"
+  [name]="name()"
+  [readOnly]="readonly()"
+  [required]="required()"
+  [value]="nativeInputValue()"
+  (blur)="onNativeBlur($event)"
   (click)="onToggle($event)"
   (focus)="onFocusIn($event)"
-  (blur)="onNativeBlur($event)"
 />
-<div class="ui-lib-checkbox__box" role="presentation" aria-hidden="true">
-  <span [class]="checkIconClasses()" aria-hidden="true"></span>
+<div aria-hidden="true" class="ui-lib-checkbox__box" role="presentation">
+  <span aria-hidden="true" [class]="checkIconClasses()"></span>
   <span
-    class="ui-lib-checkbox__icon ui-lib-checkbox__icon--indeterminate"
     aria-hidden="true"
+    class="ui-lib-checkbox__icon ui-lib-checkbox__icon--indeterminate"
   ></span>
 </div>
 <div class="ui-lib-checkbox__content">
-  <label class="ui-lib-checkbox__label" [id]="labelElementId" [htmlFor]="getNativeInputId()">
+  <label class="ui-lib-checkbox__label" [htmlFor]="getNativeInputId()" [id]="labelElementId">
     @if (label()) {
       {{ label() }}
     }

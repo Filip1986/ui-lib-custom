@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import type { AfterViewInit, ElementRef, OnDestroy, Signal, WritableSignal } from '@angular/core';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  computed,
+  EventEmitter,
+  HostBinding,
   Input,
   Output,
-  EventEmitter,
   signal,
-  computed,
   ViewChild,
-  HostBinding,
 } from '@angular/core';
-import type { ElementRef, AfterViewInit, OnDestroy, Signal, WritableSignal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 interface ViewportPreset {
   key: string;

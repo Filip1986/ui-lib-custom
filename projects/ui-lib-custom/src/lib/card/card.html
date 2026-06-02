@@ -1,53 +1,53 @@
 <div
-  [ngClass]="cardClasses()"
-  [attr.role]="hoverable() ? 'button' : null"
-  [attr.tabindex]="hoverable() ? 0 : null"
   [attr.aria-label]="hoverable() ? ariaLabel() || null : null"
   [attr.aria-labelledby]="!hoverable() && headerVisible() ? titleId : null"
-  (keydown)="onKeydown($event)"
+  [attr.role]="hoverable() ? 'button' : null"
+  [attr.tabindex]="hoverable() ? 0 : null"
+  [ngClass]="cardClasses()"
+  [style.--uilib-card-footer-bg]="footerBg()"
+  [style.--uilib-card-header-bg]="headerBg()"
   [style.--uilib-card-shadow]="shadow()"
   [style.--uilib-card-shadow-hover]="shadow()"
-  [style.--uilib-card-header-bg]="headerBg()"
-  [style.--uilib-card-footer-bg]="footerBg()"
+  (keydown)="onKeydown($event)"
 >
   @if (headerVisible()) {
     <div class="ui-lib-card__header">
       @if (headerIcon()) {
         <ui-lib-icon
           class="ui-lib-card__header-icon"
+          size="lg"
           [name]="headerIcon()!"
           [variant]="effectiveVariant()"
-          size="lg"
         />
       }
       <div class="ui-lib-card__header-text">
         <div class="ui-lib-card__title" [id]="titleId">
-          <ng-content select="[card-header]"></ng-content>
+          <ng-content select="[card-header]" />
         </div>
-        <ng-content select="[card-subtitle]"></ng-content>
+        <ng-content select="[card-subtitle]" />
         @if (subtitle()) {
           <div class="ui-lib-card__subtitle">{{ subtitle() }}</div>
         }
       </div>
       @if (closable()) {
         <ui-lib-icon
+          ariaLabel="Close card"
           class="ui-lib-card__close-icon"
           name="close"
-          [variant]="effectiveVariant()"
           size="md"
           [clickable]="true"
-          ariaLabel="Close card"
+          [variant]="effectiveVariant()"
           (click)="onClose()"
         />
       }
     </div>
   }
   <div class="ui-lib-card__body">
-    <ng-content></ng-content>
+    <ng-content />
   </div>
   @if (footerVisible()) {
     <div class="ui-lib-card__footer">
-      <ng-content select="[card-footer]"></ng-content>
+      <ng-content select="[card-footer]" />
     </div>
   }
 </div>

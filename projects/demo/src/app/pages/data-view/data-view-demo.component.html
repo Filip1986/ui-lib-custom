@@ -1,23 +1,23 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="DataView demos for list and grid rendering, client/server pagination, external sorting controls, custom templates, loading/empty states, and theme-aware presentation."
     docHeader
     title="DataView"
     [importCode]="importCode"
-    description="DataView demos for list and grid rendering, client/server pagination, external sorting controls, custom templates, loading/empty states, and theme-aware presentation."
   />
 
   <div class="examples">
     <app-doc-section id="basic-list" title="Basic List">
       <h3>1. Basic List</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-data-view [value]="shortProducts" [trackBy]="trackByProduct">
-          <ng-template uiDataViewListItem let-item>
+        <ui-lib-data-view [trackBy]="trackByProduct" [value]="shortProducts">
+          <ng-template let-item uiDataViewListItem>
             <article class="demo-list-item">
               <img
                 class="demo-product-image"
-                [src]="item.imageUrl"
-                [alt]="item.name"
                 loading="lazy"
+                [alt]="item.name"
+                [src]="item.imageUrl"
               />
               <div class="demo-list-content">
                 <strong>{{ item.name }}</strong>
@@ -41,18 +41,18 @@
       <h3>2. Basic Grid</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
-          [value]="shortProducts"
           layout="grid"
           [gridColumns]="4"
           [trackBy]="trackByProduct"
+          [value]="shortProducts"
         >
-          <ng-template uiDataViewGridItem let-item>
+          <ng-template let-item uiDataViewGridItem>
             <article class="demo-grid-item">
               <img
                 class="demo-product-image"
-                [src]="item.imageUrl"
-                [alt]="item.name"
                 loading="lazy"
+                [alt]="item.name"
+                [src]="item.imageUrl"
               />
               <strong>{{ item.name }}</strong>
               <span>{{ formatPrice(item.price) }}</span>
@@ -67,13 +67,13 @@
       <h3>3. Layout Switching</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="3">
-          <ui-lib-inline [gap]="2" align="center">
+          <ui-lib-inline align="center" [gap]="2">
             <strong>Choose layout:</strong>
             <ui-lib-select-button [options]="layoutOptions" [(value)]="switchableLayout" />
           </ui-lib-inline>
 
-          <ui-lib-data-view [value]="shortProducts" [(layout)]="switchableLayout" [gridColumns]="3">
-            <ng-template uiDataViewListItem let-item>
+          <ui-lib-data-view [gridColumns]="3" [value]="shortProducts" [(layout)]="switchableLayout">
+            <ng-template let-item uiDataViewListItem>
               <article class="demo-list-item demo-list-item--compact">
                 <div class="demo-list-content">
                   <strong>{{ item.name }}</strong>
@@ -82,7 +82,7 @@
                 <span class="price">{{ formatPrice(item.price) }}</span>
               </article>
             </ng-template>
-            <ng-template uiDataViewGridItem let-item>
+            <ng-template let-item uiDataViewGridItem>
               <article class="demo-grid-item">
                 <strong>{{ item.name }}</strong>
                 <span>{{ item.category }}</span>
@@ -98,8 +98,8 @@
     <app-doc-section id="pagination-client" title="Pagination (Client-Side)">
       <h3>4. Pagination (Client-Side)</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-data-view [value]="products" [paginator]="true" [rows]="5">
-          <ng-template uiDataViewListItem let-item>
+        <ui-lib-data-view [paginator]="true" [rows]="5" [value]="products">
+          <ng-template let-item uiDataViewListItem>
             <article class="demo-list-item demo-list-item--compact">
               <strong>{{ item.name }}</strong>
               <span>{{ formatPrice(item.price) }}</span>
@@ -114,12 +114,12 @@
       <h3>5. Rows Per Page</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
-          [value]="products"
           [paginator]="true"
           [rows]="5"
           [rowsPerPageOptions]="[5, 10, 25]"
+          [value]="products"
         >
-          <ng-template uiDataViewListItem let-item>
+          <ng-template let-item uiDataViewListItem>
             <article class="demo-list-item demo-list-item--compact">
               <strong>{{ item.name }}</strong>
               <span>{{ item.inventoryCount }} units</span>
@@ -136,12 +136,12 @@
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Top</h4>
           <ui-lib-data-view
-            [value]="shortProducts"
+            paginatorPosition="top"
             [paginator]="true"
             [rows]="4"
-            paginatorPosition="top"
+            [value]="shortProducts"
           >
-            <ng-template uiDataViewListItem let-item>
+            <ng-template let-item uiDataViewListItem>
               <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -150,12 +150,12 @@
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Bottom</h4>
           <ui-lib-data-view
-            [value]="shortProducts"
+            paginatorPosition="bottom"
             [paginator]="true"
             [rows]="4"
-            paginatorPosition="bottom"
+            [value]="shortProducts"
           >
-            <ng-template uiDataViewListItem let-item>
+            <ng-template let-item uiDataViewListItem>
               <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -164,12 +164,12 @@
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Both</h4>
           <ui-lib-data-view
-            [value]="shortProducts"
+            paginatorPosition="both"
             [paginator]="true"
             [rows]="4"
-            paginatorPosition="both"
+            [value]="shortProducts"
           >
-            <ng-template uiDataViewListItem let-item>
+            <ng-template let-item uiDataViewListItem>
               <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -182,13 +182,13 @@
       <h3>7. Custom Page Report</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
-          [value]="products"
+          currentPageReportTemplate="Page {currentPage} of {totalPages} · showing {first}-{last} from {totalRecords}"
           [paginator]="true"
           [rows]="5"
           [showCurrentPageReport]="true"
-          currentPageReportTemplate="Page {currentPage} of {totalPages} · showing {first}-{last} from {totalRecords}"
+          [value]="products"
         >
-          <ng-template uiDataViewListItem let-item>
+          <ng-template let-item uiDataViewListItem>
             <article class="demo-list-item demo-list-item--compact">
               <strong>{{ item.name }}</strong>
               <span>{{ item.category }}</span>
@@ -207,16 +207,16 @@
       </p>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
-          [value]="serverProducts"
+          [first]="serverFirst"
           [loading]="serverLoading"
           [paginator]="true"
           [rows]="serverRows"
-          [first]="serverFirst"
-          [totalRecords]="serverTotalRecords"
           [rowsPerPageOptions]="[5, 10, 25]"
+          [totalRecords]="serverTotalRecords"
+          [value]="serverProducts"
           (pageChange)="onServerPageChange($event)"
         >
-          <ng-template uiDataViewListItem let-item>
+          <ng-template let-item uiDataViewListItem>
             <article class="demo-list-item">
               <div class="demo-list-content">
                 <strong>{{ item.name }}</strong>
@@ -237,19 +237,19 @@
       <h3>9. Sorting (External Controls)</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="3">
-          <ui-lib-inline [gap]="2" align="center">
+          <ui-lib-inline align="center" [gap]="2">
             <strong>Sort by:</strong>
             <ui-lib-select-button [options]="sortFieldOptions" [(value)]="sortField" />
             <ui-lib-select-button [options]="sortOrderOptions" [(value)]="sortOrder" />
           </ui-lib-inline>
 
           <ui-lib-data-view
-            [value]="sortedProducts()"
             [paginator]="true"
             [rows]="6"
             [trackBy]="trackByProduct"
+            [value]="sortedProducts()"
           >
-            <ng-template uiDataViewListItem let-item>
+            <ng-template let-item uiDataViewListItem>
               <article class="demo-list-item demo-list-item--compact">
                 <div class="demo-list-content">
                   <strong>{{ item.name }}</strong>
@@ -268,14 +268,14 @@
       <h3>10. Custom Templates</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
-          [value]="customTemplateProducts"
-          [(layout)]="customTemplateLayout"
+          [gridColumns]="3"
           [paginator]="true"
           [rows]="6"
-          [gridColumns]="3"
+          [value]="customTemplateProducts"
+          [(layout)]="customTemplateLayout"
         >
           <ng-template uiDataViewHeader>
-            <ui-lib-inline [gap]="2" align="center" justify="space-between" class="template-header">
+            <ui-lib-inline align="center" class="template-header" justify="space-between" [gap]="2">
               <div>
                 <strong>Featured Catalog</strong>
                 <p class="helper-text">Toggle layout from inside projected header content.</p>
@@ -284,13 +284,13 @@
             </ui-lib-inline>
           </ng-template>
 
-          <ng-template uiDataViewListItem let-item>
+          <ng-template let-item uiDataViewListItem>
             <article class="demo-list-item">
               <img
                 class="demo-product-image"
-                [src]="item.imageUrl"
-                [alt]="item.name"
                 loading="lazy"
+                [alt]="item.name"
+                [src]="item.imageUrl"
               />
               <div class="demo-list-content">
                 <strong>{{ item.name }}</strong>
@@ -305,17 +305,17 @@
             </article>
           </ng-template>
 
-          <ng-template uiDataViewGridItem let-item>
+          <ng-template let-item uiDataViewGridItem>
             <article class="demo-grid-item">
               <img
                 class="demo-product-image"
-                [src]="item.imageUrl"
-                [alt]="item.name"
                 loading="lazy"
+                [alt]="item.name"
+                [src]="item.imageUrl"
               />
               <strong>{{ item.name }}</strong>
               <span>{{ item.category }}</span>
-              <ui-lib-inline [gap]="1" align="center" justify="space-between">
+              <ui-lib-inline align="center" justify="space-between" [gap]="1">
                 <span class="price">{{ formatPrice(item.price) }}</span>
                 <span [class]="inventoryClass(item.inventoryStatus)">{{
                   inventoryLabel(item.inventoryStatus)
@@ -339,7 +339,7 @@
       <ui-lib-grid minColumnWidth="340px" [spacing]="4">
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Default Empty Message</h4>
-          <ui-lib-data-view [value]="[]" emptyMessage="No inventory records found." />
+          <ui-lib-data-view emptyMessage="No inventory records found." [value]="[]" />
         </ui-lib-panel>
 
         <ui-lib-panel variant="minimal">
@@ -362,12 +362,12 @@
       <ui-lib-grid minColumnWidth="340px" [spacing]="4">
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Default Loading</h4>
-          <ui-lib-data-view [value]="shortProducts" [loading]="true" />
+          <ui-lib-data-view [loading]="true" [value]="shortProducts" />
         </ui-lib-panel>
 
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Custom Loading Template</h4>
-          <ui-lib-data-view [value]="shortProducts" [loading]="true">
+          <ui-lib-data-view [loading]="true" [value]="shortProducts">
             <ng-template uiDataViewLoading>
               <div class="loading-template">Syncing catalog from warehouse API...</div>
             </ng-template>
@@ -379,11 +379,11 @@
 
     <app-doc-section id="sizes" title="Sizes">
       <h3>13. Sizes</h3>
-      <ui-lib-grid minColumnWidth="280px" [spacing]="4" class="size-grid">
+      <ui-lib-grid class="size-grid" minColumnWidth="280px" [spacing]="4">
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Small</h4>
-          <ui-lib-data-view [value]="miniProducts" size="sm">
-            <ng-template uiDataViewListItem let-item>
+          <ui-lib-data-view size="sm" [value]="miniProducts">
+            <ng-template let-item uiDataViewListItem>
               <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -391,8 +391,8 @@
 
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Medium</h4>
-          <ui-lib-data-view [value]="miniProducts" size="md">
-            <ng-template uiDataViewListItem let-item>
+          <ui-lib-data-view size="md" [value]="miniProducts">
+            <ng-template let-item uiDataViewListItem>
               <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -400,8 +400,8 @@
 
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Large</h4>
-          <ui-lib-data-view [value]="miniProducts" size="lg">
-            <ng-template uiDataViewListItem let-item>
+          <ui-lib-data-view size="lg" [value]="miniProducts">
+            <ng-template let-item uiDataViewListItem>
               <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -416,13 +416,13 @@
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">2 Columns</h4>
           <ui-lib-data-view
-            [value]="shortProducts"
             layout="grid"
             [gridColumns]="2"
             [paginator]="true"
             [rows]="4"
+            [value]="shortProducts"
           >
-            <ng-template uiDataViewGridItem let-item>
+            <ng-template let-item uiDataViewGridItem>
               <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -431,13 +431,13 @@
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">3 Columns</h4>
           <ui-lib-data-view
-            [value]="shortProducts"
             layout="grid"
             [gridColumns]="3"
             [paginator]="true"
             [rows]="6"
+            [value]="shortProducts"
           >
-            <ng-template uiDataViewGridItem let-item>
+            <ng-template let-item uiDataViewGridItem>
               <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -446,13 +446,13 @@
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">4 Columns</h4>
           <ui-lib-data-view
-            [value]="shortProducts"
             layout="grid"
             [gridColumns]="4"
             [paginator]="true"
             [rows]="8"
+            [value]="shortProducts"
           >
-            <ng-template uiDataViewGridItem let-item>
+            <ng-template let-item uiDataViewGridItem>
               <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -465,10 +465,10 @@
       <h3>15. Custom Paginator Slots</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
-          [value]="products"
           [paginator]="true"
           [rows]="5"
           [rowsPerPageOptions]="[5, 10, 25]"
+          [value]="products"
         >
           <ng-template uiDataViewPaginatorLeft>
             <span class="helper-text">Catalog controls</span>
@@ -478,7 +478,7 @@
             <ui-lib-button color="secondary" size="sm">Export CSV</ui-lib-button>
           </ng-template>
 
-          <ng-template uiDataViewListItem let-item>
+          <ng-template let-item uiDataViewListItem>
             <article class="demo-list-item demo-list-item--compact">
               <strong>{{ item.name }}</strong>
               <span>{{ item.sku }}</span>
@@ -494,11 +494,11 @@
 
     <app-doc-section id="theme-integration" title="Theme Integration">
       <h3>16. Theme Integration</h3>
-      <ui-lib-grid minColumnWidth="320px" [spacing]="4" class="theme-grid">
+      <ui-lib-grid class="theme-grid" minColumnWidth="320px" [spacing]="4">
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Material Profile</h4>
-          <ui-lib-data-view [value]="miniProducts" layout="grid" [gridColumns]="2">
-            <ng-template uiDataViewGridItem let-item>
+          <ui-lib-data-view layout="grid" [gridColumns]="2" [value]="miniProducts">
+            <ng-template let-item uiDataViewGridItem>
               <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -506,8 +506,8 @@
 
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Bootstrap Profile</h4>
-          <ui-lib-data-view [value]="miniProducts" layout="grid" [gridColumns]="2">
-            <ng-template uiDataViewGridItem let-item>
+          <ui-lib-data-view layout="grid" [gridColumns]="2" [value]="miniProducts">
+            <ng-template let-item uiDataViewGridItem>
               <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -515,8 +515,8 @@
 
         <ui-lib-panel variant="minimal">
           <h4 class="mini-heading">Minimal Profile</h4>
-          <ui-lib-data-view [value]="miniProducts" layout="grid" [gridColumns]="2">
-            <ng-template uiDataViewGridItem let-item>
+          <ui-lib-data-view layout="grid" [gridColumns]="2" [value]="miniProducts">
+            <ng-template let-item uiDataViewGridItem>
               <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
             </ng-template>
           </ui-lib-data-view>
@@ -545,9 +545,9 @@
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
     id="css-vars"
     title="CSS Custom Properties"
-    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
@@ -555,8 +555,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

@@ -1,13 +1,15 @@
-import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TopbarComponent } from './layout/topbar/topbar.component';
-import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
 import type { ThemeVariant } from 'ui-lib-custom/theme';
-import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.component';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Toast } from 'ui-lib-custom/toast';
+
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { TopbarComponent } from './layout/topbar/topbar.component';
+import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.component';
 
 /**
  * Demo app shell that wires layout and theme controls.

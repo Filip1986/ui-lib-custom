@@ -28,20 +28,20 @@
   }
 
   ui-lib-badge.ui-lib-badge {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--uilib-badge-gap-resolved);
-    padding: var(--uilib-badge-padding-y-resolved) var(--uilib-badge-padding-x-resolved);
-    border-radius: var(--uilib-badge-radius-resolved);
-    line-height: 1;
-    font-weight: 500;
-    font-size: var(--uilib-badge-font-size-resolved);
-    white-space: nowrap;
-    color: var(--uilib-badge-fg-resolved);
     background-color: var(--uilib-badge-bg-resolved);
     border: var(--uilib-badge-border-width-resolved) solid var(--uilib-badge-border-color-resolved);
+    border-radius: var(--uilib-badge-radius-resolved);
+    color: var(--uilib-badge-fg-resolved);
+    display: inline-flex;
+    font-size: var(--uilib-badge-font-size-resolved);
+    font-weight: 500;
+    gap: var(--uilib-badge-gap-resolved);
+    justify-content: center;
+    line-height: 1;
     min-width: auto;
+    padding: var(--uilib-badge-padding-y-resolved) var(--uilib-badge-padding-x-resolved);
+    white-space: nowrap;
   }
 
   /* Sizes */
@@ -201,11 +201,11 @@
     --uilib-badge-padding-x-resolved: 0;
     /* Component-scoped dot radius — set --uilib-badge-radius-dot to customise */
     --uilib-badge-radius-resolved: var(--uilib-badge-radius-dot, 50%);
-    width: var(--uilib-badge-dot-size, 0.75rem);
-    height: var(--uilib-badge-dot-size, 0.75rem);
-    min-width: var(--uilib-badge-dot-size, 0.75rem);
-    min-height: var(--uilib-badge-dot-size, 0.75rem);
     font-size: var(--uilib-badge-dot-font-size);
+    height: var(--uilib-badge-dot-size, 0.75rem);
+    min-height: var(--uilib-badge-dot-size, 0.75rem);
+    min-width: var(--uilib-badge-dot-size, 0.75rem);
+    width: var(--uilib-badge-dot-size, 0.75rem);
   }
 
   ui-lib-badge.ui-lib-badge--dot.ui-lib-badge--size-sm {
@@ -255,8 +255,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     ui-lib-badge.ui-lib-badge {
-      transition: none !important;
       animation: none !important;
+      transition: none !important;
     }
   }
 } // end @layer uilib.components

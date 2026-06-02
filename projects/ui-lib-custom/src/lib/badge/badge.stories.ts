@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 // noinspection JSUnusedGlobalSymbols
 import { SHARED_DEFAULTS, SHARED_SIZE_OPTIONS } from 'ui-lib-custom/core';
+
 import { Badge } from './badge';
 
 type BadgeStoryArgs = {

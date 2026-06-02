@@ -1,2 +1,2 @@
 export * from './input';
-export type { InputVariant, InputLabelFloat, InputType, InputSize } from './input.types';
+export type { InputLabelFloat, InputSize, InputType, InputVariant } from './input.types';

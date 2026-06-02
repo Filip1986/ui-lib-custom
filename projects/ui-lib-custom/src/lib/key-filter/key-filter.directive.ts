@@ -1,9 +1,11 @@
-import { Directive, ElementRef, Renderer2, effect, inject, input, isDevMode } from '@angular/core';
 import type { AfterViewInit, InputSignal, OnDestroy } from '@angular/core';
+import { Directive, effect, ElementRef, inject, input, isDevMode, Renderer2 } from '@angular/core';
+
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import { KEY_FILTER_DEFAULTS, KEY_FILTER_PRESET_PATTERNS } from './key-filter.types';
+
 import type { KeyFilterPreset } from './key-filter.types';
+import { KEY_FILTER_DEFAULTS, KEY_FILTER_PRESET_PATTERNS } from './key-filter.types';
 
 const VISUALLY_HIDDEN_STYLES: Readonly<Record<string, string>> = {
   position: 'absolute',

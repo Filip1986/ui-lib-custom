@@ -1,14 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
-import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
-import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+
 import { Button } from 'ui-lib-custom/button';
+import type { DataViewLayout, DataViewPageEvent, DataViewSortOrder } from 'ui-lib-custom/data-view';
 import {
   DataViewComponent,
   DataViewEmptyDirective,
@@ -20,57 +15,64 @@ import {
   DataViewPaginatorLeftDirective,
   DataViewPaginatorRightDirective,
 } from 'ui-lib-custom/data-view';
-import type { DataViewLayout, DataViewPageEvent, DataViewSortOrder } from 'ui-lib-custom/data-view';
 import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
-import { SelectButton } from 'ui-lib-custom/select-button';
-import type { SelectButtonOption } from 'ui-lib-custom/select-button';
-import { DATA_VIEW_DEMO_PRODUCTS } from './data-view-demo.data';
-import type { DemoInventoryStatus, DemoProduct } from './data-view-demo.data';
-
 import { Panel } from 'ui-lib-custom/panel';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { SelectButtonOption } from 'ui-lib-custom/select-button';
+import { SelectButton } from 'ui-lib-custom/select-button';
+
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+
+import type { DemoInventoryStatus, DemoProduct } from './data-view-demo.data';
+import { DATA_VIEW_DEMO_PRODUCTS } from './data-view-demo.data';
 import {
-  basicListHtml,
-  basicListTs,
   basicGridHtml,
   basicGridTs,
-  layoutSwitchingHtml,
-  layoutSwitchingTs,
-  paginationClientHtml,
-  paginationClientTs,
-  rowsPerPageHtml,
-  rowsPerPageTs,
-  paginationPositionHtml,
-  paginationPositionTs,
+  basicListHtml,
+  basicListTs,
   customPageReportHtml,
   customPageReportTs,
-  serverSidePaginationHtml,
-  serverSidePaginationTs,
-  sortingHtml,
-  sortingTs,
+  customPaginatorSlotsHtml,
+  customPaginatorSlotsTs,
   customTemplatesHtml,
   customTemplatesTs,
   emptyStateHtml,
   emptyStateTs,
-  loadingStateHtml,
-  loadingStateTs,
-  sizesHtml,
-  sizesTs,
   gridColumnsHtml,
   gridColumnsTs,
-  customPaginatorSlotsHtml,
-  customPaginatorSlotsTs,
+  layoutSwitchingHtml,
+  layoutSwitchingTs,
+  loadingStateHtml,
+  loadingStateTs,
+  paginationClientHtml,
+  paginationClientTs,
+  paginationPositionHtml,
+  paginationPositionTs,
+  rowsPerPageHtml,
+  rowsPerPageTs,
+  serverSidePaginationHtml,
+  serverSidePaginationTs,
+  sizesHtml,
+  sizesTs,
+  sortingHtml,
+  sortingTs,
   themeIntegrationHtml,
   themeIntegrationTs,
 } from './snippets.generated';
-import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
-import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 type DataViewSortField = 'name' | 'price' | 'rating';
 
 /**

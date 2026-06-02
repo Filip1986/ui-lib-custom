@@ -1,13 +1,14 @@
+import type { InputSignal, Signal } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
   computed,
   input,
+  ViewEncapsulation,
 } from '@angular/core';
-import type { InputSignal, Signal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+
 import type { CodeSnippetFile } from 'ui-lib-custom/code-snippet';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 /** Renders one or more code snippets as a tabbed block (HTML / TypeScript / SCSS). */
 @Component({

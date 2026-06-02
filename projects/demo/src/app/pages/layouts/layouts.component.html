@@ -1,8 +1,8 @@
 ﻿<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
+    description="Performance-first layout components using signals, OnPush change detection, and design tokens. Each component renders a single element with zero runtime overhead."
     docHeader
     title="Layout Primitives"
-    description="Performance-first layout components using signals, OnPush change detection, and design tokens. Each component renders a single element with zero runtime overhead."
   />
 
   <app-layout-basic-example />
@@ -13,27 +13,27 @@
       <div class="viewport-controls">
         <div class="preset-buttons">
           @for (preset of viewportPresets; track preset.key) {
-            <ui-lib-button size="sm" appearance="ghost" (click)="setViewportPreset(preset)">{{
+            <ui-lib-button appearance="ghost" size="sm" (click)="setViewportPreset(preset)">{{
               preset.label
             }}</ui-lib-button>
           }
           <div class="custom">
             <label>Custom</label>
             <input
-              type="number"
-              min="200"
               max="2000"
+              min="200"
+              type="number"
               [ngModel]="viewportCustomWidth()"
               (ngModelChange)="setViewportCustomWidth($event)"
             />
-            <ui-lib-button size="sm" appearance="ghost" (click)="applyViewportCustom()"
+            <ui-lib-button appearance="ghost" size="sm" (click)="applyViewportCustom()"
               >Apply</ui-lib-button
             >
           </div>
         </div>
         <div class="controls">
           <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-          <ui-lib-button size="sm" appearance="ghost" (click)="rotateViewport()"
+          <ui-lib-button appearance="ghost" size="sm" (click)="rotateViewport()"
             >Rotate</ui-lib-button
           >
         </div>
@@ -43,24 +43,24 @@
     <ui-lib-panel variant="minimal">
       <div class="density-controls">
         <ui-lib-button
-          size="sm"
           appearance="ghost"
-          (click)="setViewportDensity('default')"
+          size="sm"
           [class.active]="viewportDensity() === 'default'"
+          (click)="setViewportDensity('default')"
           >Default</ui-lib-button
         >
         <ui-lib-button
-          size="sm"
           appearance="ghost"
-          (click)="setViewportDensity('comfortable')"
+          size="sm"
           [class.active]="viewportDensity() === 'comfortable'"
+          (click)="setViewportDensity('comfortable')"
           >Comfortable</ui-lib-button
         >
         <ui-lib-button
-          size="sm"
           appearance="ghost"
-          (click)="setViewportDensity('compact')"
+          size="sm"
           [class.active]="viewportDensity() === 'compact'"
+          (click)="setViewportDensity('compact')"
           >Compact</ui-lib-button
         >
       </div>
@@ -80,8 +80,8 @@
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
-      [sections]="sections"
       [activeId]="layout()?.activeSectionId() ?? null"
+      [sections]="sections"
       (sectionSelected)="scrollTo($event)"
     />
   </div>

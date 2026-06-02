@@ -1,6 +1,7 @@
+import type { InputSignal } from '@angular/core';
 import { Directive, inject, input } from '@angular/core';
 import { TemplateRef } from '@angular/core';
-import type { InputSignal } from '@angular/core';
+
 import type { TreeNode } from './tree.types';
 
 /**

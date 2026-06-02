@@ -1,10 +1,12 @@
-import { TestBed } from '@angular/core/testing';
-import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { Badge } from './badge';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import { SHARED_SIZE_OPTIONS } from 'ui-lib-custom/core';
-import type { BadgeVariant, BadgeColor, BadgeSize } from './badge';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+
+import type { BadgeColor, BadgeSize, BadgeVariant } from './badge';
+import { Badge } from './badge';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,18 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { Button } from 'ui-lib-custom/button';
-import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
 import type { GridAlign, GridJustify } from 'ui-lib-custom/layout';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
+import { Panel } from 'ui-lib-custom/panel';
 import { UiLibSelect } from 'ui-lib-custom/select';
-import {
-  CONTAINER_MAX_WIDTHS,
-  GRID_COLUMNS,
-  INLINE_TOKENS,
-  INSET_TOKENS,
-  STACK_TOKENS,
-} from 'ui-lib-custom/tokens';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Tab, Tabs } from 'ui-lib-custom/tabs';
 import type {
   ContainerSize,
   GridColumns,
@@ -20,15 +17,20 @@ import type {
   InsetToken,
   StackToken,
 } from 'ui-lib-custom/tokens';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {
+  CONTAINER_MAX_WIDTHS,
+  GRID_COLUMNS,
+  INLINE_TOKENS,
+  INSET_TOKENS,
+  STACK_TOKENS,
+} from 'ui-lib-custom/tokens';
+
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
-import { Panel } from 'ui-lib-custom/panel';
 import { usageSnippetHtml, usageSnippetTs } from './snippets.generated';
 /**
  * Demo section for layout composition patterns.

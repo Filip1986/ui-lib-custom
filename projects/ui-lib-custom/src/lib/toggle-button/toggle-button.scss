@@ -58,11 +58,11 @@
     // --- Material checked shadow ------------------------------------
     --uilib-toggle-button-checked-shadow: 0 1px 3px 0
       color-mix(in srgb, var(--uilib-color-primary-500, #6366f1) 40%, transparent);
+    cursor: pointer;
 
     display: inline-flex;
-    position: relative;
     font-family: var(--uilib-toggle-button-font), sans-serif;
-    cursor: pointer;
+    position: relative;
     user-select: none;
   }
 
@@ -79,26 +79,26 @@
   // Inner <button> element
   // ----------------------------------------------------------------
   ui-lib-toggle-button .ui-lib-toggle-button__inner {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--uilib-toggle-button-gap);
-    padding-inline: var(--uilib-toggle-button-padding-x, var(--uilib-toggle-button-padding-x-md));
-    height: var(--uilib-toggle-button-height, var(--uilib-toggle-button-height-md));
-    font-size: var(--uilib-toggle-button-font-size, var(--uilib-toggle-button-font-size-md));
-    font-family: inherit;
-    font-weight: 500;
-    line-height: 1;
+    background-color: var(--uilib-toggle-button-bg);
     border: 1px solid var(--uilib-toggle-button-border);
     border-radius: var(--uilib-toggle-button-radius);
-    background-color: var(--uilib-toggle-button-bg);
+    box-sizing: border-box;
     color: var(--uilib-toggle-button-color);
     cursor: inherit;
+    display: inline-flex;
+    font-family: inherit;
+    font-size: var(--uilib-toggle-button-font-size, var(--uilib-toggle-button-font-size-md));
+    font-weight: 500;
+    gap: var(--uilib-toggle-button-gap);
+    height: var(--uilib-toggle-button-height, var(--uilib-toggle-button-height-md));
+    justify-content: center;
+    line-height: 1;
+    outline: none;
+    padding-inline: var(--uilib-toggle-button-padding-x, var(--uilib-toggle-button-padding-x-md));
     transition: var(--uilib-toggle-button-transition);
     white-space: nowrap;
-    outline: none;
     width: 100%;
-    box-sizing: border-box;
   }
 
   ui-lib-toggle-button:not(.ui-lib-toggle-button--disabled) .ui-lib-toggle-button__inner:hover {
@@ -143,10 +143,10 @@
   }
 
   ui-lib-toggle-button .ui-lib-toggle-button__icon {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    display: inline-flex;
     flex-shrink: 0;
+    justify-content: center;
   }
 
   // ----------------------------------------------------------------
