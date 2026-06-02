@@ -25,6 +25,7 @@
 4. [Accessibility — ARIA Patterns & Violations](#4-accessibility--aria-patterns--violations)
 5. [Demo App Patterns](#5-demo-app-patterns)
 6. [Library Architecture](#6-library-architecture)
+7. [i18n & Docs Tooling](#7-i18n--docs-tooling)
 
 ---
 
@@ -904,7 +905,57 @@ when indeterminate). New name-required components should follow this from the st
 
 ---
 
-_Last updated: 2026-06-02 — added: dialog NG0203 root-cause correction (1-E), unit-vs-e2e
+## 7. i18n & Docs Tooling
+
+---
+
+### 7-A · Counting translation keys with `grep -c "': '"` undercounts double-quoted values
+
+**Context:** Auditing the four locale bundles (`en/de/es/fr.ts`) for key drift.
+
+**Finding (2026-06-02):** `grep -c "': '"` reported en=322, de=321, es=322, **fr=299** — which
+*looks* like French is missing ~23 keys. It is not. All four bundles have an **identical 323-key
+set**. The pattern `': '` (quote-colon-space-quote) only matches a key whose value is **single**-
+quoted; French has 22 values that use **double** quotes to embed an apostrophe (`'global.error':
+"Une erreur s'est produite"`), so those lines read `": "` and are skipped. **Count keys by the key
+pattern, not the colon:** `grep -oE "^\s*'[^']+':"` (or just run the parity spec). A `grep -c`
+across mixed quoting silently lies about coverage. **Reference:** `i18n.bundles.spec.ts`.
+
+---
+
+### 7-B · Deriving a key union with `as const` forces an ESLint `typedef` disable
+
+**Context:** Making i18n keys type-safe — `UiLibTranslationKey = keyof typeof UI_LIB_EN`.
+
+**Finding (2026-06-02):** For `keyof typeof X` to yield the literal key union, `X` must be declared
+`as const` with **no type annotation** — an annotation (`: Record<string,string>`) widens the keys
+back to `string` and erases the union. But the repo's `@typescript-eslint/typedef` rule *requires*
+an annotation on every exported `const`. These are mutually exclusive, so the canonical bundle gets
+one scoped `// eslint-disable-next-line @typescript-eslint/typedef` with a rationale comment. Use
+`as const satisfies Record<string, string>` to keep value-type checking without losing the keys.
+The complete bundle type (`Record<UiLibTranslationKey, string>`) then makes a missing key in any
+other locale a **compile error**, and `translate(key: UiLibTranslationKey | (string & {}))` gives
+autocomplete on known keys while still accepting consumer-registered custom keys.
+
+---
+
+### 7-C · A Markdown-table generator must run its own output through Prettier
+
+**Context:** `scripts/generate-i18n-catalogue.mjs` writes a GFM table between markers in a doc.
+
+**Finding (2026-06-02):** A generator that emits a raw, unpadded Markdown table will *never* agree
+with the file on disk once `lint-staged`/Prettier runs, because Prettier re-aligns table columns to
+equal width. The `--check` (CI staleness) mode then always reports "stale". Fix: have the generator
+`import { format, resolveConfig } from 'prettier'` and pipe its spliced output through
+`format(..., { parser: 'markdown' })` **before** writing or comparing. Then write and `--check`
+both operate on the canonical Prettier form and are idempotent. Same applies to any committed
+generated `.md`. **Reference:** `npm run docs:i18n` / `docs:i18n:check`.
+
+---
+
+_Last updated: 2026-06-02 — added category 7 (i18n & docs tooling): key-count grep artifact (7-A),
+`as const` vs `typedef` for key unions (7-B), Prettier-aware Markdown generators (7-C). Earlier
+2026-06-02 additions: dialog NG0203 root-cause correction (1-E), unit-vs-e2e
 coverage limits (3-C/3-D), strict pre-push typecheck (3-E), coverage ratchet (3-F), the full ARIA
 violation set from the route-sweep remediation (4-E…4-I, 5-C/5-D), and the CI a11y gating strategy
 (2-H, 6-C/6-D). Sources: PRs #284, #285, #286, #295 (sweep 50→0 routes)._

@@ -1,7 +1,16 @@
-import type { UiLibTranslationBundle } from './i18n.types';
-
-/** Default English translation bundle. Keys follow the pattern: `<component>.<token>`. */
-export const UI_LIB_EN: UiLibTranslationBundle = {
+/**
+ * Default English translation bundle — the canonical source of truth.
+ *
+ * Keys follow the pattern `<component>.<token>`. Declared `as const` so that
+ * `UiLibTranslationKey` (in `i18n.types.ts`) can derive the exhaustive key union
+ * from it: add a key here and every other locale bundle is required to provide it
+ * at compile time (with `i18n.bundles.spec.ts` enforcing the same at runtime).
+ */
+// `as const` is mandatory here so `UiLibTranslationKey` can derive the literal key
+// union via `keyof typeof UI_LIB_EN`; a type annotation would widen keys back to
+// `string` and erase it. typedef is therefore disabled for this one declaration.
+// eslint-disable-next-line @typescript-eslint/typedef
+export const UI_LIB_EN = {
   // ── Global ────────────────────────────────────────────────────────────────
   'global.close': 'Close',
   'global.clear': 'Clear',
@@ -100,6 +109,7 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'paginator.rows.label': 'Rows per page',
   'paginator.page.report': 'Page {currentPage} of {totalPages}',
   'paginator.jump': 'Jump to page, press Enter to navigate',
+  'paginator.jump.placeholder': 'Page',
   'paginator.nav': 'Pagination',
 
   // ── Upload ────────────────────────────────────────────────────────────────
@@ -464,4 +474,4 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'orderlist.label': 'Reorderable list',
   'autocomplete.input.label': 'Search',
   'input-mask.input.label': 'Masked input',
-};
+} as const satisfies Record<string, string>;

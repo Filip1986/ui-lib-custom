@@ -89,7 +89,16 @@ ui-lib-color-picker {
 
 ## Internationalisation
 
-All ARIA labels are provided through `UiLibI18nService`. Override them by supplying a custom locale object via `provideUiLibI18n({ locale: { ... } })`.
+All ARIA labels are provided through `UiLibI18nService` (entry point `ui-lib-custom/i18n`). Override individual strings by injecting the service and calling `extend()`, or swap the whole bundle with `setBundle()`:
+
+```ts
+import { inject } from '@angular/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
+
+inject(UiLibI18nService).extend({ 'colorpicker.panel': 'Colour picker' });
+```
+
+See the [Internationalisation Guide](../../../../../docs/guides/I18N_GUIDE.md) for the full key catalogue and recipes.
 
 | String | Locale key | Default (en) |
 |--------|-----------|--------------|
