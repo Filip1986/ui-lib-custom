@@ -2,7 +2,7 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const basicHtml = `<ui-lib-editor [(ngModel)]="basicHtml" placeholder="Write something..."></ui-lib-editor>
+export const basicHtml = `<ui-lib-editor placeholder="Write something..." [(ngModel)]="basicHtml" />
 <pre>{{ basicHtml }}</pre>`;
 
 export const basicTs = `import { Component } from '@angular/core';
@@ -22,8 +22,8 @@ export const customToolbarHtml = `<ui-lib-editor #editor [(ngModel)]="customTool
   <div editorToolbar>
     <select
       [value]="editor.toolbarState().blockFormat"
-      (mousedown)="$event.preventDefault()"
       (change)="onCustomHeadingChange(editor, $event)"
+      (mousedown)="$event.preventDefault()"
     >
       <option value="p">Normal</option>
       <option value="h1">Heading 1</option>
@@ -33,8 +33,8 @@ export const customToolbarHtml = `<ui-lib-editor #editor [(ngModel)]="customTool
     <button
       type="button"
       [attr.aria-pressed]="editor.toolbarState().bold"
-      (mousedown)="$event.preventDefault()"
       (click)="editor.executeCommand('bold')"
+      (mousedown)="$event.preventDefault()"
     >
       B
     </button>
@@ -60,7 +60,7 @@ export class MyComponent {
   }
 }`;
 
-export const disabledHtml = `<ui-lib-editor [disabled]="true" [ngModel]="disabledHtml"></ui-lib-editor>`;
+export const disabledHtml = `<ui-lib-editor [disabled]="true" [ngModel]="disabledHtml" />`;
 
 export const disabledTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -77,9 +77,9 @@ export class MyComponent {
 
 export const eventsHtml = `<ui-lib-editor
   [(ngModel)]="eventsHtml"
-  (textChange)="onTextChange($event)"
   (selectionChange)="onSelectionChange($event)"
-></ui-lib-editor>`;
+  (textChange)="onTextChange($event)"
+/>`;
 
 export const eventsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -103,7 +103,7 @@ export class MyComponent {
   }
 }`;
 
-export const filledHtml = `<ui-lib-editor [filled]="true" [(ngModel)]="filledHtml"></ui-lib-editor>`;
+export const filledHtml = `<ui-lib-editor [filled]="true" [(ngModel)]="filledHtml" />`;
 
 export const filledTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -119,8 +119,8 @@ export class MyComponent {
 }`;
 
 export const reactiveHtml = `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
-  <ui-lib-editor formControlName="content"></ui-lib-editor>
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+  <ui-lib-editor formControlName="content" />
+  <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
 </form>`;
 
 export const reactiveTs = `import { Component } from '@angular/core';
@@ -139,7 +139,7 @@ export class MyComponent {
   });
 }`;
 
-export const readonlyHtml = `<ui-lib-editor [readonly]="true" [ngModel]="readonlyHtml"></ui-lib-editor>`;
+export const readonlyHtml = `<ui-lib-editor [ngModel]="readonlyHtml" [readonly]="true" />`;
 
 export const readonlyTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -154,9 +154,9 @@ export class MyComponent {
   public readonly readonlyHtml: string = '<h2>Readonly</h2><p><strong>Important</strong> details.</p>';
 }`;
 
-export const sizesHtml = `<ui-lib-editor size="sm" [(ngModel)]="sizeValues.sm"></ui-lib-editor>
-<ui-lib-editor size="md" [(ngModel)]="sizeValues.md"></ui-lib-editor>
-<ui-lib-editor size="lg" [(ngModel)]="sizeValues.lg"></ui-lib-editor>`;
+export const sizesHtml = `<ui-lib-editor size="sm" [(ngModel)]="sizeValues.sm" />
+<ui-lib-editor size="md" [(ngModel)]="sizeValues.md" />
+<ui-lib-editor size="lg" [(ngModel)]="sizeValues.lg" />`;
 
 export const sizesTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -176,12 +176,8 @@ export class MyComponent {
 }`;
 
 export const templateDrivenHtml = `<form #f="ngForm" (ngSubmit)="submitTemplateDriven(f)">
-  <ui-lib-editor
-    name="templateContent"
-    required
-    [(ngModel)]="templateDrivenHtml"
-  ></ui-lib-editor>
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+  <ui-lib-editor name="templateContent" required [(ngModel)]="templateDrivenHtml" />
+  <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
 </form>`;
 
 export const templateDrivenTs = `import { Component } from '@angular/core';
@@ -203,9 +199,9 @@ export class MyComponent {
   }
 }`;
 
-export const variantsHtml = `<ui-lib-editor variant="material" [(ngModel)]="variantValues.material"></ui-lib-editor>
-<ui-lib-editor variant="bootstrap" [(ngModel)]="variantValues.bootstrap"></ui-lib-editor>
-<ui-lib-editor variant="minimal" [(ngModel)]="variantValues.minimal"></ui-lib-editor>`;
+export const variantsHtml = `<ui-lib-editor variant="material" [(ngModel)]="variantValues.material" />
+<ui-lib-editor variant="bootstrap" [(ngModel)]="variantValues.bootstrap" />
+<ui-lib-editor variant="minimal" [(ngModel)]="variantValues.minimal" />`;
 
 export const variantsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';

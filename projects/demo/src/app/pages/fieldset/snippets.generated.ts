@@ -17,9 +17,7 @@ import { Fieldset } from 'ui-lib-custom/fieldset';
 export class MyComponent {}`;
 
 export const customLegendHtml = `<ui-lib-fieldset [toggleable]="true">
-  <span fieldsetLegend>
-    <i class="pi pi-user"></i> User <strong>Profile</strong>
-  </span>
+  <span fieldsetLegend> <i class="pi pi-user"></i> User <strong>Profile</strong> </span>
   <p>Body content</p>
 </ui-lib-fieldset>`;
 
@@ -33,11 +31,7 @@ import { Fieldset } from 'ui-lib-custom/fieldset';
 })
 export class MyComponent {}`;
 
-export const preCollapsedHtml = `<ui-lib-fieldset
-  legend="Hidden by Default"
-  [toggleable]="true"
-  [collapsed]="true"
->
+export const preCollapsedHtml = `<ui-lib-fieldset legend="Hidden by Default" [collapsed]="true" [toggleable]="true">
   <p>Revealed on click</p>
 </ui-lib-fieldset>`;
 
@@ -51,11 +45,7 @@ import { Fieldset } from 'ui-lib-custom/fieldset';
 })
 export class MyComponent {}`;
 
-export const toggleableHtml = `<ui-lib-fieldset
-  legend="Advanced Options"
-  [toggleable]="true"
-  [(collapsed)]="isCollapsed"
->
+export const toggleableHtml = `<ui-lib-fieldset legend="Advanced Options" [toggleable]="true" [(collapsed)]="isCollapsed">
   <!-- content -->
 </ui-lib-fieldset>`;
 
@@ -72,9 +62,9 @@ export class MyComponent {
   public readonly isCollapsed: WritableSignal<boolean> = signal<boolean>(false);
 }`;
 
-export const variantsHtml = `<ui-lib-fieldset variant="material" legend="Material" />
-<ui-lib-fieldset variant="bootstrap" legend="Bootstrap" />
-<ui-lib-fieldset variant="minimal" legend="Minimal" />`;
+export const variantsHtml = `<ui-lib-fieldset legend="Material" variant="material" />
+<ui-lib-fieldset legend="Bootstrap" variant="bootstrap" />
+<ui-lib-fieldset legend="Minimal" variant="minimal" />`;
 
 export const variantsTs = `import { Component } from '@angular/core';
 import { Fieldset } from 'ui-lib-custom/fieldset';

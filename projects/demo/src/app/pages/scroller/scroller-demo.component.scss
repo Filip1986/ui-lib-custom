@@ -251,10 +251,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .scroller-demo__btn {
-    /* TODO: set transition / animation to none */
-  }
-
-  %shimmer {
-    /* TODO: set transition / animation to none */
+    animation: none;
+    transition: none;
   }
 }

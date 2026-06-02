@@ -3,11 +3,11 @@
 // Do not edit manually.
 
 export const declarativeUsageHtml = `<ui-lib-confirm-popup
-  key="declarative"
-  [(visible)]="visible"
-  message="Proceed with this action?"
   acceptLabel="Yes, proceed"
+  key="declarative"
+  message="Proceed with this action?"
   rejectLabel="Cancel"
+  [(visible)]="visible"
   (accepted)="onAccepted()"
   (rejected)="onRejected()"
 />`;

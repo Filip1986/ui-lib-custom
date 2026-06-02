@@ -3,7 +3,7 @@
 // Do not edit manually.
 
 export const basicHtml = `<ui-lib-float-label>
-  <ui-lib-input placeholder=" " [(ngModel)]="basicValue" [label]="''" />
+  <ui-lib-input placeholder=" " [label]="''" [(ngModel)]="basicValue" />
   <label>Username</label>
 </ui-lib-float-label>`;
 
@@ -23,15 +23,15 @@ export class MyComponent {
 
 export const invalidHtml = `<form [formGroup]="invalidForm">
   <ui-lib-float-label variant="over">
-    <input placeholder=" " formControlName="over" />
+    <input formControlName="over" placeholder=" " />
     <label>Required (over)</label>
   </ui-lib-float-label>
   <ui-lib-float-label variant="in">
-    <input placeholder=" " formControlName="in" />
+    <input formControlName="in" placeholder=" " />
     <label>Required (in)</label>
   </ui-lib-float-label>
   <ui-lib-float-label variant="on">
-    <input placeholder=" " formControlName="on" />
+    <input formControlName="on" placeholder=" " />
     <label>Required (on)</label>
   </ui-lib-float-label>
 </form>`;
@@ -55,15 +55,15 @@ export class MyComponent {
 
 export const reactiveHtml = `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
   <ui-lib-float-label>
-    <input placeholder=" " formControlName="firstName" />
+    <input formControlName="firstName" placeholder=" " />
     <label>First name</label>
   </ui-lib-float-label>
   <ui-lib-float-label>
-    <ui-lib-select [options]="cityOptions" formControlName="city" />
+    <ui-lib-select formControlName="city" [options]="cityOptions" />
     <label>City</label>
   </ui-lib-float-label>
   <ui-lib-float-label variant="in">
-    <textarea placeholder=" " formControlName="bio"></textarea>
+    <textarea formControlName="bio" placeholder=" "></textarea>
     <label>Bio</label>
   </ui-lib-float-label>
 </form>`;
@@ -87,7 +87,7 @@ export class MyComponent {
 }`;
 
 export const selectHtml = `<ui-lib-float-label>
-  <ui-lib-select [(ngModel)]="selectedCity" [options]="cityOptions" />
+  <ui-lib-select [options]="cityOptions" [(ngModel)]="selectedCity" />
   <label>City</label>
 </ui-lib-float-label>`;
 

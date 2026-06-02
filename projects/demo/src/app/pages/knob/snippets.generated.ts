@@ -17,7 +17,7 @@ export class MyComponent {
   value: number = 40;
 }`;
 
-export const colorsHtml = `<ui-lib-knob valueColor="#f59e0b" textColor="#b45309" [(ngModel)]="value" />`;
+export const colorsHtml = `<ui-lib-knob textColor="#b45309" valueColor="#f59e0b" [(ngModel)]="value" />`;
 
 export const colorsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -48,7 +48,7 @@ export class MyComponent {
 }`;
 
 export const minmaxHtml = `<!-- -50 to +50, step 10 -->
-<ui-lib-knob [min]="-50" [max]="50" [step]="10" [(ngModel)]="value" />`;
+<ui-lib-knob [max]="50" [min]="-50" [step]="10" [(ngModel)]="value" />`;
 
 export const minmaxTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';

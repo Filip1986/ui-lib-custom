@@ -3,14 +3,10 @@
 // Do not edit manually.
 
 export const componentThemeCodeHtml = `<!-- String shorthand -->
-<ui-lib-card theme="dark">
-  Dark themed card
-</ui-lib-card>
+<ui-lib-card theme="dark"> Dark themed card </ui-lib-card>
 
 <!-- Full config -->
-<ui-lib-card [theme]="{ colorScheme: 'dark' }">
-  Dark themed card
-</ui-lib-card>`;
+<ui-lib-card [theme]="{ colorScheme: 'dark' }"> Dark themed card </ui-lib-card>`;
 
 export const componentThemeCodeTs = `import { Component } from '@angular/core';
 import { Card } from 'ui-lib-custom/card';

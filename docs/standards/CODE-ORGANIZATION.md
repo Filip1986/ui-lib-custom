@@ -69,9 +69,9 @@ npx eslint path/to/file.html --fix
 
 ## SCSS / CSS declarations
 
-**Tool:** `stylelint-order` → `order/properties-alphabetical-order` — **auto-fix** (custom properties excluded).
+**Tool:** `stylelint-order` → `order/properties-alphabetical-order` (custom properties excluded).
 
-Properties inside each rule are sorted **alphabetically**. Token and architecture rules (`scale-unlimited/declaration-strict-value`, logical properties, etc.) still apply.
+Properties inside each rule are sorted **alphabetically** (reported on CI; run `stylelint --fix` locally to apply — auto-fix is off in CI config because it can interact badly with nested BEM and the motion plugin). Token and architecture rules still apply. Demo SCSS uses `uilib/no-unprefixed-motion` as **warning** only (no auto-fix stubs).
 
 ```bash
 npm run lint:css:fix

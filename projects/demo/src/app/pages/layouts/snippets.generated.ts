@@ -2,10 +2,9 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const usageSnippetHtml = `
-<ui-lib-container size="lg" inset="lg">
+export const usageSnippetHtml = `<ui-lib-container inset="lg" size="lg">
   <ui-lib-stack spacing="lg">
-    <ui-lib-grid [columns]="3" spacing="md">
+    <ui-lib-grid spacing="md" [columns]="3">
       <div class="card">Card 1</div>
       <div class="card">Card 2</div>
       <div class="card">Card 3</div>

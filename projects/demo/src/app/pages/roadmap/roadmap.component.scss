@@ -1782,23 +1782,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stat-card {
-    /* TODO: set transition / animation to none */
-  }
-
-  &--pulse {
-    /* TODO: set transition / animation to none */
-  }
-
-  &__fill {
-    /* TODO: set transition / animation to none */
-  }
-
-  &__btn {
-    /* TODO: set transition / animation to none */
-  }
-
+  .stat-card,
+  .phase-icon--pulse,
+  .phase-progress__fill,
+  .category-filter__btn,
   .next-step-card {
-    /* TODO: set transition / animation to none */
+    animation: none;
+    transition: none;
   }
 }

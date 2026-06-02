@@ -17,10 +17,7 @@ import { Button } from 'ui-lib-custom/button';
 })
 export class BasicTooltipExample {}`;
 
-export const disabledHtml = `<ui-lib-button
-  uiLibTooltip="You will never see this"
-  [tooltipDisabled]="tooltipDisabled()"
->
+export const disabledHtml = `<ui-lib-button uiLibTooltip="You will never see this" [tooltipDisabled]="tooltipDisabled()">
   {{ tooltipDisabled() ? 'Tooltip disabled' : 'Tooltip enabled' }}
 </ui-lib-button>
 <ui-lib-button severity="secondary" (click)="tooltipDisabled.set(!tooltipDisabled())">
@@ -40,16 +37,8 @@ export class DisabledTooltipExample {
   readonly tooltipDisabled = signal(false);
 }`;
 
-export const focusEventHtml = `<input
-  placeholder="Tab to this field"
-  uiLibTooltip="Enter your full name"
-  tooltipEvent="focus"
-/>
-<input
-  placeholder="Hover or tab here"
-  uiLibTooltip="Accepts hover and focus"
-  tooltipEvent="both"
-/>`;
+export const focusEventHtml = `<input placeholder="Tab to this field" tooltipEvent="focus" uiLibTooltip="Enter your full name" />
+<input placeholder="Hover or tab here" tooltipEvent="both" uiLibTooltip="Accepts hover and focus" />`;
 
 export const focusEventTs = `import { Component } from '@angular/core';
 import { Tooltip } from 'ui-lib-custom/tooltip';
@@ -61,10 +50,10 @@ import { Tooltip } from 'ui-lib-custom/tooltip';
 })
 export class FocusEventTooltipExample {}`;
 
-export const positionsHtml = `<ui-lib-button uiLibTooltip="Top tooltip" tooltipPosition="top">Top</ui-lib-button>
-<ui-lib-button uiLibTooltip="Bottom tooltip" tooltipPosition="bottom">Bottom</ui-lib-button>
-<ui-lib-button uiLibTooltip="Left tooltip" tooltipPosition="left">Left</ui-lib-button>
-<ui-lib-button uiLibTooltip="Right tooltip" tooltipPosition="right">Right</ui-lib-button>`;
+export const positionsHtml = `<ui-lib-button tooltipPosition="top" uiLibTooltip="Top tooltip">Top</ui-lib-button>
+<ui-lib-button tooltipPosition="bottom" uiLibTooltip="Bottom tooltip">Bottom</ui-lib-button>
+<ui-lib-button tooltipPosition="left" uiLibTooltip="Left tooltip">Left</ui-lib-button>
+<ui-lib-button tooltipPosition="right" uiLibTooltip="Right tooltip">Right</ui-lib-button>`;
 
 export const positionsTs = `import { Component } from '@angular/core';
 import { Tooltip } from 'ui-lib-custom/tooltip';
@@ -83,7 +72,7 @@ export const showHideDelaysHtml = `<ui-lib-button uiLibTooltip="Appears after 40
 <ui-lib-button uiLibTooltip="Stays 600 ms after leaving" [hideDelay]="600">
   600 ms hide delay
 </ui-lib-button>
-<ui-lib-button uiLibTooltip="Both delays combined" [showDelay]="300" [hideDelay]="400">
+<ui-lib-button uiLibTooltip="Both delays combined" [hideDelay]="400" [showDelay]="300">
   Show 300 ms / Hide 400 ms
 </ui-lib-button>`;
 
@@ -99,23 +88,23 @@ import { Button } from 'ui-lib-custom/button';
 export class ShowHideDelaysTooltipExample {}`;
 
 export const variantsHtml = `<ui-lib-button
-  uiLibTooltip="Material — elevated shadow, large radius"
-  tooltipVariant="material"
   tooltipPosition="bottom"
+  tooltipVariant="material"
+  uiLibTooltip="Material — elevated shadow, large radius"
 >
   Material
 </ui-lib-button>
 <ui-lib-button
-  uiLibTooltip="Bootstrap — dark background, tight radius"
-  tooltipVariant="bootstrap"
   tooltipPosition="bottom"
+  tooltipVariant="bootstrap"
+  uiLibTooltip="Bootstrap — dark background, tight radius"
 >
   Bootstrap
 </ui-lib-button>
 <ui-lib-button
-  uiLibTooltip="Minimal — uses page foreground colour"
-  tooltipVariant="minimal"
   tooltipPosition="bottom"
+  tooltipVariant="minimal"
+  uiLibTooltip="Minimal — uses page foreground colour"
 >
   Minimal
 </ui-lib-button>`;

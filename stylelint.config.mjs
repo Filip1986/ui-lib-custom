@@ -162,7 +162,6 @@ export default {
       true,
       {
         severity: 'error',
-        fix: true,
         ignore: ['custom-properties'],
       },
     ],
@@ -208,6 +207,13 @@ export default {
         'scale-unlimited/declaration-strict-value': null,
         'property-disallowed-list': null,
         'declaration-no-important': null,
+      },
+    },
+    {
+      // Demo pages: motion rule reports only — auto-fix breaks nested BEM after property reorder
+      files: ['projects/demo/**/*.scss'],
+      rules: {
+        'uilib/no-unprefixed-motion': [true, { severity: 'warning' }],
       },
     },
   ],

@@ -31,7 +31,7 @@
     "build-storybook": "cross-env NODE_ENV=production ng run ui-lib-custom:build-storybook",
     "lint": "npx eslint",
     "lint:fix": "eslint . --fix",
-    "lint:organization:fix": "eslint \"projects/ui-lib-custom/**/*.{ts,html}\" \"projects/demo/**/*.{ts,html}\" --fix --no-warn-ignored",
+    "lint:organization:fix": "eslint \"projects/**/*.{ts,html}\" \"e2e/**/*.{ts,html}\" \".storybook/**/*.{ts,html}\" \"setup-a11y.ts\" --fix --no-warn-ignored",
     "lint:ci": "eslint . --max-warnings 0",
     "lint:css": "stylelint \"**/*.{scss,css}\" --allow-empty-input",
     "lint:css:fix": "stylelint \"**/*.{scss,css}\" --allow-empty-input --fix",

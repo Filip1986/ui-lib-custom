@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
-import type { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import type { Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 // Rules disabled globally across the sweep:
 //   color-contrast       — intentionally deferred; theming work is ongoing

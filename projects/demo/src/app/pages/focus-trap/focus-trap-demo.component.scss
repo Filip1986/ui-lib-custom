@@ -367,15 +367,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ft-input {
-    /* TODO: set transition / animation to none */
-  }
-
-  .ft-btn {
-    /* TODO: set transition / animation to none */
-  }
-
-  &__close {
-    /* TODO: set transition / animation to none */
+  .ft-input,
+  .ft-btn,
+  .ft-modal__close {
+    animation: none;
+    transition: none;
   }
 }

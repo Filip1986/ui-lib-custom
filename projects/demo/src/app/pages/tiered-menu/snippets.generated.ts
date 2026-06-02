@@ -58,9 +58,9 @@ export const nestedTs = `items: TieredMenuItem[] = [
 
 export const popupHtml = `<!-- trigger button wires aria-haspopup, aria-expanded, aria-controls -->
 <ui-lib-button
-  [attr.aria-haspopup]="'menu'"
-  [attr.aria-expanded]="popupMenu.isVisible()"
   [attr.aria-controls]="popupMenu.menuId"
+  [attr.aria-expanded]="popupMenu.isVisible()"
+  [attr.aria-haspopup]="'menu'"
   (click)="popupMenu.toggle($event)"
 >
   Open Menu ▾
@@ -86,9 +86,9 @@ export class MyComponent {
   ];
 }`;
 
-export const sizesHtml = `<ui-lib-tiered-menu [model]="items" size="sm" />
-<ui-lib-tiered-menu [model]="items" size="md" />
-<ui-lib-tiered-menu [model]="items" size="lg" />`;
+export const sizesHtml = `<ui-lib-tiered-menu size="sm" [model]="items" />
+<ui-lib-tiered-menu size="md" [model]="items" />
+<ui-lib-tiered-menu size="lg" [model]="items" />`;
 
 export const sizesTs = `import { Component } from '@angular/core';
 import { TieredMenu } from 'ui-lib-custom/tiered-menu';
@@ -114,9 +114,9 @@ export const urlItemsTs = `items: TieredMenuItem[] = [
   { label: 'No URL item' },
 ];`;
 
-export const variantsHtml = `<ui-lib-tiered-menu [model]="items" variant="material"  />
-<ui-lib-tiered-menu [model]="items" variant="bootstrap" />
-<ui-lib-tiered-menu [model]="items" variant="minimal"   />`;
+export const variantsHtml = `<ui-lib-tiered-menu variant="material" [model]="items" />
+<ui-lib-tiered-menu variant="bootstrap" [model]="items" />
+<ui-lib-tiered-menu variant="minimal" [model]="items" />`;
 
 export const variantsTs = `import { Component } from '@angular/core';
 import { TieredMenu } from 'ui-lib-custom/tiered-menu';

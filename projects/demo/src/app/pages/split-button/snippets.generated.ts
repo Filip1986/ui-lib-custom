@@ -24,9 +24,9 @@ export class MyComponent {
   }
 }`;
 
-export const disabledHtml = `<ui-lib-split-button label="Disabled" [model]="items" [disabled]="true" />
-<ui-lib-split-button label="Main disabled" [model]="items" [buttonDisabled]="true" />
-<ui-lib-split-button label="Menu disabled" [model]="items" [menuButtonDisabled]="true" />`;
+export const disabledHtml = `<ui-lib-split-button label="Disabled" [disabled]="true" [model]="items" />
+<ui-lib-split-button label="Main disabled" [buttonDisabled]="true" [model]="items" />
+<ui-lib-split-button label="Menu disabled" [menuButtonDisabled]="true" [model]="items" />`;
 
 export const disabledTs = `import { Component } from '@angular/core';
 import { SplitButtonComponent } from 'ui-lib-custom/split-button';
@@ -41,7 +41,7 @@ export class MyComponent {
   public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
 }`;
 
-export const iconsHtml = `<ui-lib-split-button label="Add" icon="plus" [model]="items" />`;
+export const iconsHtml = `<ui-lib-split-button icon="plus" label="Add" [model]="items" />`;
 
 export const iconsTs = `import { Component } from '@angular/core';
 import { SplitButtonComponent } from 'ui-lib-custom/split-button';
@@ -59,7 +59,7 @@ export class MyComponent {
   ];
 }`;
 
-export const outlinedHtml = `<ui-lib-split-button [label]="severity" [severity]="severity" [outlined]="true" [model]="items" />`;
+export const outlinedHtml = `<ui-lib-split-button [label]="severity" [model]="items" [outlined]="true" [severity]="severity" />`;
 
 export const outlinedTs = `import { Component } from '@angular/core';
 import { SplitButtonComponent } from 'ui-lib-custom/split-button';
@@ -75,7 +75,13 @@ export class MyComponent {
   public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
 }`;
 
-export const raisedTextHtml = `<ui-lib-split-button [label]="severity" [severity]="severity" [raised]="true" [text]="true" [model]="items" />`;
+export const raisedTextHtml = `<ui-lib-split-button
+  [label]="severity"
+  [model]="items"
+  [raised]="true"
+  [severity]="severity"
+  [text]="true"
+/>`;
 
 export const raisedTextTs = `import { Component } from '@angular/core';
 import { SplitButtonComponent } from 'ui-lib-custom/split-button';
@@ -91,7 +97,7 @@ export class MyComponent {
   public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
 }`;
 
-export const raisedHtml = `<ui-lib-split-button [label]="severity" [severity]="severity" [raised]="true" [model]="items" />`;
+export const raisedHtml = `<ui-lib-split-button [label]="severity" [model]="items" [raised]="true" [severity]="severity" />`;
 
 export const raisedTs = `import { Component } from '@angular/core';
 import { SplitButtonComponent } from 'ui-lib-custom/split-button';
@@ -107,7 +113,7 @@ export class MyComponent {
   public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
 }`;
 
-export const roundedHtml = `<ui-lib-split-button [label]="severity" [severity]="severity" [rounded]="true" [model]="items" />`;
+export const roundedHtml = `<ui-lib-split-button [label]="severity" [model]="items" [rounded]="true" [severity]="severity" />`;
 
 export const roundedTs = `import { Component } from '@angular/core';
 import { SplitButtonComponent } from 'ui-lib-custom/split-button';
@@ -123,11 +129,7 @@ export class MyComponent {
   public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
 }`;
 
-export const severityHtml = `<ui-lib-split-button
-  [label]="severity"
-  [severity]="severity"
-  [model]="items"
-/>`;
+export const severityHtml = `<ui-lib-split-button [label]="severity" [model]="items" [severity]="severity" />`;
 
 export const severityTs = `import { Component } from '@angular/core';
 import { SplitButtonComponent } from 'ui-lib-custom/split-button';
@@ -160,7 +162,7 @@ export class MyComponent {
   public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
 }`;
 
-export const templateHtml = `<ui-lib-split-button [model]="items" menuButtonAriaLabel="Template actions">
+export const templateHtml = `<ui-lib-split-button menuButtonAriaLabel="Template actions" [model]="items">
   <ng-template splitButtonContent>
     <ui-lib-icon name="save" />
     <span>Save Template</span>
@@ -181,7 +183,7 @@ export class MyComponent {
   public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
 }`;
 
-export const textHtml = `<ui-lib-split-button [label]="severity" [severity]="severity" [text]="true" [model]="items" />`;
+export const textHtml = `<ui-lib-split-button [label]="severity" [model]="items" [severity]="severity" [text]="true" />`;
 
 export const textTs = `import { Component } from '@angular/core';
 import { SplitButtonComponent } from 'ui-lib-custom/split-button';

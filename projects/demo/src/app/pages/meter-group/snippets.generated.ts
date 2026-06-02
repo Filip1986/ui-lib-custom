@@ -23,10 +23,10 @@ export class MyComponent {
 }`;
 
 export const labelPositionHtml = `<!-- legend above the bar -->
-<ui-lib-meter-group [values]="items" labelPosition="start" />
+<ui-lib-meter-group labelPosition="start" [values]="items" />
 
 <!-- legend below the bar (default) -->
-<ui-lib-meter-group [values]="items" labelPosition="end" />`;
+<ui-lib-meter-group labelPosition="end" [values]="items" />`;
 
 export const labelPositionTs = `import { Component } from '@angular/core';
 import { MeterGroup } from 'ui-lib-custom/meter-group';
@@ -46,11 +46,11 @@ export class MyComponent {
   ];
 }`;
 
-export const noLegendHtml = `<ui-lib-meter-group [values]="items" [showLabels]="false" />`;
+export const noLegendHtml = `<ui-lib-meter-group [showLabels]="false" [values]="items" />`;
 
-export const sizesHtml = `<ui-lib-meter-group [values]="items" size="sm" [showLabels]="false" />
-<ui-lib-meter-group [values]="items" size="md" [showLabels]="false" />
-<ui-lib-meter-group [values]="items" size="lg" [showLabels]="false" />`;
+export const sizesHtml = `<ui-lib-meter-group size="sm" [showLabels]="false" [values]="items" />
+<ui-lib-meter-group size="md" [showLabels]="false" [values]="items" />
+<ui-lib-meter-group size="lg" [showLabels]="false" [values]="items" />`;
 
 export const sizesTs = `import { Component } from '@angular/core';
 import { MeterGroup } from 'ui-lib-custom/meter-group';
@@ -69,12 +69,8 @@ export class MyComponent {
   ];
 }`;
 
-export const variantsHtml = `<ui-lib-meter-group [values]="items" variant="material"  [showLabels]="false" />
-<ui-lib-meter-group [values]="items" variant="bootstrap" [showLabels]="false" />
-<ui-lib-meter-group [values]="items" variant="minimal"   [showLabels]="false" />`;
+export const variantsHtml = `<ui-lib-meter-group variant="material" [showLabels]="false" [values]="items" />
+<ui-lib-meter-group variant="bootstrap" [showLabels]="false" [values]="items" />
+<ui-lib-meter-group variant="minimal" [showLabels]="false" [values]="items" />`;
 
-export const verticalHtml = `<ui-lib-meter-group
-  [values]="cpuItems"
-  orientation="vertical"
-  labelPosition="end"
-/>`;
+export const verticalHtml = `<ui-lib-meter-group labelPosition="end" orientation="vertical" [values]="cpuItems" />`;

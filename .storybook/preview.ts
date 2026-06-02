@@ -1,10 +1,12 @@
 import type { Preview } from '@storybook/angular';
 import type { IStory } from '@storybook/angular';
-import type { DecoratorFunction, StoryContext } from 'storybook/internal/types';
 import { moduleMetadata } from '@storybook/angular';
-import { ThemeWrapperComponent } from './theme-wrapper.component';
+import type { DecoratorFunction, StoryContext } from 'storybook/internal/types';
+
 import type { ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
 import type { ShapeToken } from 'ui-lib-custom/tokens';
+
+import { ThemeWrapperComponent } from './theme-wrapper.component';
 
 const withThemeWrapper: DecoratorFunction = (
   storyFn: () => IStory,

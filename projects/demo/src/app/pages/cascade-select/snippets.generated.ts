@@ -3,13 +3,13 @@
 // Do not edit manually.
 
 export const basicHtml = `<ui-lib-cascade-select
-  [(ngModel)]="cityCode"
-  [options]="countries"
   optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
   optionLabel="cname"
   optionValue="code"
   placeholder="Select city"
+  [optionGroupChildren]="['states', 'cities']"
+  [options]="countries"
+  [(ngModel)]="cityCode"
 />`;
 
 export const basicTs = `import { Component } from '@angular/core';
@@ -29,13 +29,13 @@ export class MyComponent {
 }`;
 
 export const clearHtml = `<ui-lib-cascade-select
-  [(ngModel)]="clearableCode"
-  [options]="countries"
-  [showClear]="true"
   optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
   optionLabel="cname"
   optionValue="code"
+  [optionGroupChildren]="['states', 'cities']"
+  [options]="countries"
+  [showClear]="true"
+  [(ngModel)]="clearableCode"
 />`;
 
 export const clearTs = `import { Component } from '@angular/core';
@@ -56,13 +56,13 @@ export class MyComponent {
 
 export const clippingHtml = `<div class="clipping-card">
   <ui-lib-cascade-select
-    [(ngModel)]="clippingCode"
-    [options]="countries"
     optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
     optionLabel="cname"
     optionValue="code"
     placeholder="Open inside clipped card"
+    [optionGroupChildren]="['states', 'cities']"
+    [options]="countries"
+    [(ngModel)]="clippingCode"
   />
 </div>`;
 
@@ -108,16 +108,16 @@ export class MyComponent {}`;
 
 export const formsHtml = `<form #f="ngForm">
   <ui-lib-cascade-select
-    name="city"
-    required
-    [(ngModel)]="templateDrivenCode"
     #cityModel="ngModel"
-    [invalid]="cityModel.invalid && cityModel.touched"
-    [options]="countries"
+    name="city"
     optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
     optionLabel="cname"
     optionValue="code"
+    required
+    [invalid]="cityModel.invalid && cityModel.touched"
+    [optionGroupChildren]="['states', 'cities']"
+    [options]="countries"
+    [(ngModel)]="templateDrivenCode"
   />
 </form>`;
 
@@ -138,13 +138,13 @@ export class MyComponent {
 }`;
 
 export const loadingHtml = `<ui-lib-cascade-select
-  [(ngModel)]="loadingCode"
-  [options]="countries"
-  [loading]="loading"
   optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
   optionLabel="cname"
   optionValue="code"
+  [loading]="loading"
+  [optionGroupChildren]="['states', 'cities']"
+  [options]="countries"
+  [(ngModel)]="loadingCode"
 />`;
 
 export const loadingTs = `import { Component } from '@angular/core';
@@ -167,12 +167,12 @@ export class MyComponent {
 export const reactiveHtml = `<form [formGroup]="reactiveForm">
   <ui-lib-cascade-select
     formControlName="city"
-    [invalid]="cityControl().invalid && cityControl().touched"
-    [options]="countries"
     optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
     optionLabel="cname"
     optionValue="code"
+    [invalid]="cityControl().invalid && cityControl().touched"
+    [optionGroupChildren]="['states', 'cities']"
+    [options]="countries"
   />
 </form>`;
 
@@ -227,14 +227,14 @@ import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
 export class MyComponent {}`;
 
 export const templateHtml = `<ui-lib-cascade-select
-  [(ngModel)]="templatedCode"
-  [options]="countries"
   optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
   optionLabel="cname"
   optionValue="code"
+  [optionGroupChildren]="['states', 'cities']"
+  [options]="countries"
+  [(ngModel)]="templatedCode"
 >
-  <ng-template uiCascadeSelectOption let-option>
+  <ng-template let-option uiCascadeSelectOption>
     <i [class]="resolveNodeIcon(option)"></i>
     <span>{{ resolveNodeLabel(option) }}</span>
   </ng-template>

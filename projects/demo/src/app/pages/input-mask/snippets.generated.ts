@@ -38,8 +38,8 @@ export class MyComponent {
 export const disabledHtml = `<ui-lib-input-mask
   mask="(999) 999-9999"
   [disabled]="true"
-  [(ngModel)]="disabledValue"
   [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="disabledValue"
 />`;
 
 export const filledTsTs = `import { Component } from '@angular/core';
@@ -58,8 +58,8 @@ export class MyComponent {
 export const filledHtml = `<ui-lib-input-mask
   mask="(999) 999-9999"
   [filled]="true"
-  [(ngModel)]="filledValue"
   [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="filledValue"
 />`;
 
 export const floatLabelTsTs = `import { Component } from '@angular/core';
@@ -79,8 +79,8 @@ export class MyComponent {
 export const floatLabelHtml = `<ui-lib-float-label>
   <ui-lib-input-mask
     mask="(999) 999-9999"
-    [(ngModel)]="floatValue"
     [ngModelOptions]="{ standalone: true }"
+    [(ngModel)]="floatValue"
   />
   <label>Phone</label>
 </ui-lib-float-label>`;
@@ -101,8 +101,8 @@ export class MyComponent {
 export const fluidHtml = `<ui-lib-input-mask
   mask="(999) 999-9999"
   [fluid]="true"
-  [(ngModel)]="fluidValue"
   [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="fluidValue"
 />`;
 
 export const formatsTsTs = `import { Component } from '@angular/core';
@@ -118,10 +118,26 @@ export class MyComponent {
   formatValues = { phone: null, date: null, ssn: null, serial: null };
 }`;
 
-export const formatsHtml = `<ui-lib-input-mask mask="(999) 999-9999" [(ngModel)]="formatValues.phone" [ngModelOptions]="{ standalone: true }" />
-<ui-lib-input-mask mask="99/99/9999" [(ngModel)]="formatValues.date" [ngModelOptions]="{ standalone: true }" />
-<ui-lib-input-mask mask="999-99-9999" [(ngModel)]="formatValues.ssn" [ngModelOptions]="{ standalone: true }" />
-<ui-lib-input-mask mask="a*-999-a999" [(ngModel)]="formatValues.serial" [ngModelOptions]="{ standalone: true }" />`;
+export const formatsHtml = `<ui-lib-input-mask
+  mask="(999) 999-9999"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="formatValues.phone"
+/>
+<ui-lib-input-mask
+  mask="99/99/9999"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="formatValues.date"
+/>
+<ui-lib-input-mask
+  mask="999-99-9999"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="formatValues.ssn"
+/>
+<ui-lib-input-mask
+  mask="a*-999-a999"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="formatValues.serial"
+/>`;
 
 export const iftaLabelTsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -140,8 +156,8 @@ export class MyComponent {
 export const iftaLabelHtml = `<ui-lib-float-label variant="in">
   <ui-lib-input-mask
     mask="(999) 999-9999"
-    [(ngModel)]="iftaValue"
     [ngModelOptions]="{ standalone: true }"
+    [(ngModel)]="iftaValue"
   />
   <label>Phone</label>
 </ui-lib-float-label>`;
@@ -162,8 +178,8 @@ export class MyComponent {
 export const invalidHtml = `<ui-lib-input-mask
   mask="(999) 999-9999"
   [invalid]="true"
-  [(ngModel)]="invalidValue"
   [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="invalidValue"
 />`;
 
 export const optionalTsTs = `import { Component } from '@angular/core';
@@ -183,8 +199,8 @@ export class MyComponent {
 export const optionalHtml = `<ui-lib-input-mask
   mask="(999) 999-9999? x99999"
   [autoClear]="optionalAutoClear"
-  [(ngModel)]="optionalValue"
   [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="optionalValue"
 />`;
 
 export const reactiveTsTs = `import { Component } from '@angular/core';
@@ -209,11 +225,11 @@ export class MyComponent {
 
 export const reactiveHtml = `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
   <ui-lib-input-mask
-    mask="(999) 999-9999"
     formControlName="phone"
+    mask="(999) 999-9999"
     [invalid]="reactiveForm.controls.phone.invalid && reactiveForm.controls.phone.touched"
   />
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+  <ui-lib-button color="primary" type="submit">Submit</ui-lib-button>
 </form>`;
 
 export const sizesTsTs = `import { Component } from '@angular/core';
@@ -229,9 +245,24 @@ export class MyComponent {
   sizeValues = { sm: null, md: null, lg: null };
 }`;
 
-export const sizesHtml = `<ui-lib-input-mask mask="(999) 999-9999" size="sm" [(ngModel)]="sizeValues.sm" [ngModelOptions]="{ standalone: true }" />
-<ui-lib-input-mask mask="(999) 999-9999" size="md" [(ngModel)]="sizeValues.md" [ngModelOptions]="{ standalone: true }" />
-<ui-lib-input-mask mask="(999) 999-9999" size="lg" [(ngModel)]="sizeValues.lg" [ngModelOptions]="{ standalone: true }" />`;
+export const sizesHtml = `<ui-lib-input-mask
+  mask="(999) 999-9999"
+  size="sm"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="sizeValues.sm"
+/>
+<ui-lib-input-mask
+  mask="(999) 999-9999"
+  size="md"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="sizeValues.md"
+/>
+<ui-lib-input-mask
+  mask="(999) 999-9999"
+  size="lg"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="sizeValues.lg"
+/>`;
 
 export const slotCharsTsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -246,9 +277,27 @@ export class MyComponent {
   slotValues = { underscore: null, hash: null, star: null };
 }`;
 
-export const slotCharsHtml = `<ui-lib-input-mask mask="999-999" slotChar="_" [keepBuffer]="true" [(ngModel)]="slotValues.underscore" [ngModelOptions]="{ standalone: true }" />
-<ui-lib-input-mask mask="999-999" slotChar="#" [keepBuffer]="true" [(ngModel)]="slotValues.hash" [ngModelOptions]="{ standalone: true }" />
-<ui-lib-input-mask mask="999-999" slotChar="*" [keepBuffer]="true" [(ngModel)]="slotValues.star" [ngModelOptions]="{ standalone: true }" />`;
+export const slotCharsHtml = `<ui-lib-input-mask
+  mask="999-999"
+  slotChar="_"
+  [keepBuffer]="true"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="slotValues.underscore"
+/>
+<ui-lib-input-mask
+  mask="999-999"
+  slotChar="#"
+  [keepBuffer]="true"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="slotValues.hash"
+/>
+<ui-lib-input-mask
+  mask="999-999"
+  slotChar="*"
+  [keepBuffer]="true"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="slotValues.star"
+/>`;
 
 export const unmaskTsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -264,5 +313,14 @@ export class MyComponent {
   unmaskedModel: string | null = null;
 }`;
 
-export const unmaskHtml = `<ui-lib-input-mask mask="(999) 999-9999" [(ngModel)]="maskedModel" [ngModelOptions]="{ standalone: true }" />
-<ui-lib-input-mask mask="(999) 999-9999" [unmask]="true" [(ngModel)]="unmaskedModel" [ngModelOptions]="{ standalone: true }" />`;
+export const unmaskHtml = `<ui-lib-input-mask
+  mask="(999) 999-9999"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="maskedModel"
+/>
+<ui-lib-input-mask
+  mask="(999) 999-9999"
+  [ngModelOptions]="{ standalone: true }"
+  [unmask]="true"
+  [(ngModel)]="unmaskedModel"
+/>`;

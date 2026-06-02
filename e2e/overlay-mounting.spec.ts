@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test';
 import type { Locator, Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 interface OverlayMountCheckArgs {
   panelSelector: string;

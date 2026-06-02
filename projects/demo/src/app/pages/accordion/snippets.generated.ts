@@ -21,7 +21,7 @@ import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
 })
 export class MyComponent {}`;
 
-export const basicHtml = `<ui-lib-accordion variant="material" expandMode="single">
+export const basicHtml = `<ui-lib-accordion expandMode="single" variant="material">
   <ui-lib-accordion-panel header="Shipping" value="shipping">
     Standard (5-7 days), express (2-3 days), and overnight shipping.
   </ui-lib-accordion-panel>
@@ -51,9 +51,7 @@ export const controlledTs = `<ui-lib-accordion
 
 export const customHeaderHtml = `<ui-lib-accordion>
   <ui-lib-accordion-panel value="faq-1">
-    <div accordionHeader class="header-row">
-      <ui-lib-icon name="help-circle" /> FAQ Item
-    </div>
+    <div accordionHeader class="header-row"><ui-lib-icon name="help-circle" /> FAQ Item</div>
     Content goes here.
   </ui-lib-accordion-panel>
 </ui-lib-accordion>`;
@@ -69,11 +67,7 @@ import { Icon } from 'ui-lib-custom/icon';
 })
 export class MyComponent {}`;
 
-export const customIconsHtml = `<ui-lib-accordion-panel
-  header="Using Plus/Minus"
-  expandIcon="minus"
-  collapseIcon="plus"
-/>`;
+export const customIconsHtml = `<ui-lib-accordion-panel collapseIcon="plus" expandIcon="minus" header="Using Plus/Minus" />`;
 
 export const customIconsTs = `import { Component } from '@angular/core';
 import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
@@ -85,10 +79,7 @@ import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
 })
 export class MyComponent {}`;
 
-export const iconPositionHtml = `<ui-lib-accordion-panel
-  iconPosition="start"
-  header="Icon at Start"
-/>`;
+export const iconPositionHtml = `<ui-lib-accordion-panel header="Icon at Start" iconPosition="start" />`;
 
 export const iconPositionTs = `import { Component } from '@angular/core';
 import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
