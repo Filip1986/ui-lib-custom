@@ -9,3 +9,6 @@ package-lock.json
 # Demo example snippet files — intentionally partial TypeScript (class members, fragments)
 # that Prettier cannot parse as standalone modules.
 **/examples/*.example.ts
+# Generated competitive-benchmark artifacts (scripts/competitive-*.mjs). Machine-written;
+# reformatting them only causes drift on the next regeneration.
+docs/_generated
