@@ -2,8 +2,10 @@
  * scripts/extract-primeng-api.mjs
  *
  * Competitive-benchmark support tool. Packs a pinned PrimeNG version, parses every
- * component/directive `.d.ts`, and emits the authoritative public binding surface
- * (selector + inputs + outputs) for each one.
+ * component/directive `.d.ts`, and emits the authoritative public surface for each one:
+ * selector, inputs, outputs, content-projection slots, template slots (query names),
+ * public imperative methods, implemented interfaces (e.g. ControlValueAccessor), and
+ * generic type params — i.e. the dimensions an input/output diff alone would miss.
  *
  * Why: the slow, error-prone step when filling docs/COMPETITIVE_BENCHMARKS.md is
  * enumerating the competitor's FULL API so no capability hides by simply not having a
@@ -12,8 +14,10 @@
  * human judgement.
  *
  * Source of truth: the Angular `ɵɵComponentDeclaration` / `ɵɵDirectiveDeclaration`
- * generic in each `.d.ts`. Generic arg 1 = selector(s), arg 3 = inputs map, arg 4 =
- * outputs map. We read the public aliases, which are exactly the consumer binding names.
+ * generic in each `.d.ts` (arg 1 = selector(s), 3 = inputs, 4 = outputs, 5 = query/template
+ * slots, 6 = ng-content selectors) plus the class declaration itself (public methods,
+ * `implements` clause, generic params). We read the public aliases, which are exactly the
+ * consumer-facing names.
  *
  * Usage:
  *   node scripts/extract-primeng-api.mjs                 # version 19, JSON + Markdown
@@ -102,7 +106,7 @@ function collectDtsFiles(dir, found = []) {
   return found;
 }
 
-/** Flatten a string-literal or union-of-string-literals type node into an array of strings. */
+/** Flatten a string-literal, union, or tuple of string literals into an array of strings. */
 function readStringLiterals(typeNode) {
   if (!typeNode) return [];
   if (ts.isLiteralTypeNode(typeNode) && ts.isStringLiteral(typeNode.literal)) {
@@ -111,7 +115,83 @@ function readStringLiterals(typeNode) {
   if (ts.isUnionTypeNode(typeNode)) {
     return typeNode.types.flatMap(readStringLiterals);
   }
+  if (ts.isTupleTypeNode(typeNode)) {
+    return typeNode.elements.flatMap(readStringLiterals);
+  }
   return [];
+}
+
+// Framework methods that are not part of a component's consumer-facing imperative API.
+const NON_API_METHODS = new Set([
+  // Lifecycle hooks
+  'ngOnInit',
+  'ngOnChanges',
+  'ngOnDestroy',
+  'ngDoCheck',
+  'ngAfterContentInit',
+  'ngAfterContentChecked',
+  'ngAfterViewInit',
+  'ngAfterViewChecked',
+  // ControlValueAccessor / Validator (captured via `implements` instead)
+  'writeValue',
+  'registerOnChange',
+  'registerOnTouched',
+  'setDisabledState',
+  'validate',
+  'registerOnValidatorChange',
+]);
+
+/** Read public, consumer-callable method names declared directly on a class. */
+function readPublicMethods(classNode) {
+  return classNode.members
+    .filter(ts.isMethodDeclaration)
+    .filter((member) => {
+      const modifiers = ts.getModifiers(member) ?? [];
+      const isHidden = modifiers.some(
+        (modifier) =>
+          modifier.kind === ts.SyntaxKind.PrivateKeyword ||
+          modifier.kind === ts.SyntaxKind.ProtectedKeyword ||
+          modifier.kind === ts.SyntaxKind.StaticKeyword,
+      );
+      return !isHidden;
+    })
+    .map((member) => (member.name && ts.isIdentifier(member.name) ? member.name.text : null))
+    .filter(
+      (name) =>
+        name && !name.startsWith('_') && !name.startsWith('ɵ') && !NON_API_METHODS.has(name),
+    )
+    .sort();
+}
+
+// Angular lifecycle interfaces carry no consumer-facing contract — drop them as noise so
+// meaningful contracts (ControlValueAccessor, Validator, …) stand out.
+const LIFECYCLE_INTERFACES = new Set([
+  'OnInit',
+  'OnChanges',
+  'OnDestroy',
+  'DoCheck',
+  'AfterContentInit',
+  'AfterContentChecked',
+  'AfterViewInit',
+  'AfterViewChecked',
+]);
+
+/** Read the names of meaningful interfaces a class implements (e.g. `ControlValueAccessor`). */
+function readImplementsNames(classNode, sourceFile) {
+  const clauses = classNode.heritageClauses ?? [];
+  const implementsClause = clauses.find(
+    (clause) => clause.token === ts.SyntaxKind.ImplementsKeyword,
+  );
+  if (!implementsClause) return [];
+  return implementsClause.types
+    .map((type) => type.expression.getText(sourceFile))
+    .filter((name) => !LIFECYCLE_INTERFACES.has(name))
+    .sort();
+}
+
+/** Read declared generic type-parameter names (e.g. `<T>` on a data component). */
+function readTypeParams(classNode) {
+  return (classNode.typeParameters ?? []).map((param) => param.name.text);
 }
 
 /** Read the public binding names (object-literal keys) from an inputs/outputs map type node. */
@@ -146,17 +226,22 @@ function extractFromSource(sourceFile) {
         if (!isComponent && !isDirective) continue;
 
         const typeArgs = member.type.typeArguments ?? [];
-        // Generic shape: <Type, Selector, ExportAs, Inputs, Outputs, Queries, …>
-        const selectors = readStringLiterals(typeArgs[1]);
-        const inputs = readBindingNames(typeArgs[3]).sort();
-        const outputs = readBindingNames(typeArgs[4]).sort();
-
+        // Generic shape:
+        // <Type, Selector, ExportAs, Inputs, Outputs, Queries, NgContentSelectors, Standalone, …>
         declarations.push({
           className,
           kind: isComponent ? 'component' : 'directive',
-          selectors,
-          inputs,
-          outputs,
+          selectors: readStringLiterals(typeArgs[1]),
+          inputs: readBindingNames(typeArgs[3]).sort(),
+          outputs: readBindingNames(typeArgs[4]).sort(),
+          // Query property names — @ContentChild/@ViewChild template slots (e.g. `iconTemplate`).
+          templateQueries: readStringLiterals(typeArgs[5]).sort(),
+          // ng-content projection selectors (`["*"]`, `["[pButtonIcon]"]`, …).
+          contentSlots: readStringLiterals(typeArgs[6]),
+          // Class-level surface that an input/output diff misses:
+          methods: readPublicMethods(node),
+          implements: readImplementsNames(node, sourceFile),
+          typeParams: readTypeParams(node),
         });
       }
     }
@@ -223,13 +308,18 @@ function main() {
       const decl = components[key];
       lines.push(`## \`${key}\` — ${decl.className} (${decl.kind})`);
       lines.push('');
-      lines.push(`- **Selectors:** ${decl.selectors.map((sel) => `\`${sel}\``).join(', ') || '—'}`);
+      const asCode = (items) =>
+        items.length ? items.map((item) => `\`${item}\``).join(', ') : '—';
+      lines.push(`- **Selectors:** ${asCode(decl.selectors)}`);
+      if (decl.typeParams.length) lines.push(`- **Generic:** \`<${decl.typeParams.join(', ')}>\``);
+      if (decl.implements.length) lines.push(`- **Implements:** ${asCode(decl.implements)}`);
+      lines.push(`- **Inputs (${decl.inputs.length}):** ${asCode(decl.inputs)}`);
+      lines.push(`- **Outputs (${decl.outputs.length}):** ${asCode(decl.outputs)}`);
+      lines.push(`- **Content slots (${decl.contentSlots.length}):** ${asCode(decl.contentSlots)}`);
       lines.push(
-        `- **Inputs (${decl.inputs.length}):** ${decl.inputs.map((input) => `\`${input}\``).join(', ') || '—'}`,
+        `- **Template slots (${decl.templateQueries.length}):** ${asCode(decl.templateQueries)}`,
       );
-      lines.push(
-        `- **Outputs (${decl.outputs.length}):** ${decl.outputs.map((output) => `\`${output}\``).join(', ') || '—'}`,
-      );
+      lines.push(`- **Public methods (${decl.methods.length}):** ${asCode(decl.methods)}`);
       lines.push('');
     }
     const mdPath = join(OUT_DIR, 'primeng-api-surface.md');

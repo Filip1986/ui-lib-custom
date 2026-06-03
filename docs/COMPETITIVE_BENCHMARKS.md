@@ -96,14 +96,25 @@ Entries are in alphabetical order within each category grouping.
 > never get a row. Always build rows from the competitor's _full_ surface, and stamp what you verified.
 > See `### Button` for the reference shape.
 
+Track the dimensions your own `SCORING_CRITERIA.md` rewards — not just props. Inputs/outputs are
+one slice of Category 1. Split the work into **mechanically extractable** (the generated file gives
+it for free) and **judgment** (must be audited by hand, scoped by tier).
+
 1. **Generate the PrimeNG ground truth first:** run `npm run competitive:primeng`, then open
-   [`_generated/primeng-api-surface.md`](_generated/primeng-api-surface.md) and find the component. This
-   is the authoritative input/output list — build a row for **every** input it exposes, so nothing hides.
+   [`_generated/primeng-api-surface.md`](_generated/primeng-api-surface.md) and find the component. It
+   lists the authoritative **inputs, outputs, content slots, template slots, public methods, implemented
+   interfaces (e.g. `ControlValueAccessor`), and generics** — build a row for **every** one, so nothing hides.
 2. Find the equivalent component in each other reference library (or note `N/A`). Read its full feature
    list, keyboard model, and ARIA implementation. For accessibility claims, verify against the shipped
    bundle/source — not the docs (the prior pass marked PrimeNG `aria-busy` ⚠️ when the bundle has none).
-3. For each row: mark ✅ ❌ ⚠️ 🚀 or N/A. Be honest. Include a **full input-surface audit** table that maps
-   every PrimeNG input to a verdict (match / 🚀 superset / `—` excluded-with-reason).
+3. Build these tables, marking ✅ ❌ ⚠️ 🚀 or N/A honestly:
+   - **Behaviour & accessibility** (Cat 1/2) + a **full input-surface audit** mapping every PrimeNG input
+     to a verdict (match / 🚀 superset / `—` excluded-with-reason).
+   - **Composability** (Cat 4) — content slots, template slots, imperative methods.
+   - **Behavioural & cross-cutting** (Cat 2/3/5) — keyboard model, ARIA state surface, focus management,
+     screen-reader announcements, reduced motion, theming surface, i18n. **Tag each row with its category.**
+   - Scope the judgment tables by tier: deep widgets get the full keyboard/ARIA audit; primitives get a
+     light pass. Don't re-litigate library-wide differentiators (signal API, zoneless, SSR) per component.
 4. Add a **Gaps** section listing every ❌ row and the decision: implement it or exclude it with a reason.
 5. Add a **Differentiators** section listing every 🚀 row with a one-sentence explanation.
 6. Record the reference URLs at the bottom of the entry.
@@ -117,9 +128,27 @@ Entries are in alphabetical order within each category grouping.
 ```markdown
 ### ComponentName
 
+> **Verification scope:** PrimeNG [version] — full surface vs `_generated/primeng-api-surface.json`.
+> Material [version] — [what was verified]. Radix/Ark — [verified / carried-over]. Checked [YYYY-MM-DD].
+
+#### Behaviour & accessibility — Cat 1/2
+
 | Feature / Behaviour | Angular Material | PrimeNG      | Radix UI     | Ark UI       | **ui-lib-custom** |
 | ------------------- | ---------------- | ------------ | ------------ | ------------ | ----------------- |
 | Feature description | ✅/❌/⚠️/N/A     | ✅/❌/⚠️/N/A | ✅/❌/⚠️/N/A | ✅/❌/⚠️/N/A | ✅/🚀/⚠️/❌       |
+
+#### Full PrimeNG input-surface audit (`p-…`, N inputs)
+
+| PrimeNG input | ui-lib equivalent | Verdict (match / 🚀 superset / — excluded) |
+| ------------- | ----------------- | ------------------------------------------ |
+
+#### Composability — Cat 4
+
+_Content slots, template slots, and imperative methods (from the generated surface)._
+
+#### Behavioural & cross-cutting dimensions
+
+_Keyboard, ARIA state, focus, screen reader, reduced motion, theming surface, i18n — each tagged with its Cat._
 
 #### Gaps (❌ rows — must be resolved before Category 11 passes)
 
@@ -217,6 +246,31 @@ Every public input PrimeNG exposes, mapped to a verdict — so no capability hid
 `<button>` (works on `<ui-lib-button>`). `onFocus` / `onBlur` → ⚠️ **gap**: native `focus`/`blur` do
 **not** bubble through the wrapper element, and ui-lib exposes no focus/blur output, so a consumer cannot
 react to focus changes on `<ui-lib-button>`.
+
+#### Composability — Cat 4
+
+PrimeNG ground truth (`p-button`, from the generated surface): content slot `["*"]`; template slots `contentTemplate`, `iconTemplate`, `loadingIconTemplate`. Neither button exposes a consumer-facing imperative method.
+
+| Capability                     | PrimeNG                  | ui-lib-custom                     | Verdict                                                                                                        |
+| ------------------------------ | ------------------------ | --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Default content projection     | ✅ `["*"]`               | ✅ `<ng-content />`               | ✅ match                                                                                                       |
+| Custom icon (arbitrary markup) | ✅ `iconTemplate`        | ⚠️ `icon` input (semantic/string) | — excluded: icon-as-input is the intended DX; revisit a projected icon slot if consumers need arbitrary markup |
+| Custom loading indicator       | ✅ `loadingIconTemplate` | ⚠️ `loadingIcon` input            | — excluded: same rationale as icon                                                                             |
+| Imperative API (`focus()`, …)  | none consumer-facing     | none (native button)              | ✅ parity                                                                                                      |
+
+#### Behavioural & cross-cutting dimensions
+
+Judgment rows — not mechanically extractable — each tagged with the scoring category it feeds. ui-lib cells verified from source; PrimeNG a11y verified from the 19.1.4 bundle; Material reduced-motion/focus cells are inferred from defaults, not re-verified this pass.
+
+| Dimension                                                  | Cat | Material         | PrimeNG            | ui-lib-custom | Notes                                                            |
+| ---------------------------------------------------------- | --- | ---------------- | ------------------ | ------------- | ---------------------------------------------------------------- |
+| Keyboard activation (Enter / Space)                        | 2   | ✅               | ✅                 | ✅            | Native `<button>`; `softDisabled` blocks via `preventDefault`    |
+| ARIA state surface (`aria-pressed/-checked/-busy`, `role`) | 2   | ⚠️               | ⚠️ (label only)    | 🚀            | ui-lib exposes `ariaPressed`, `ariaChecked`, `role`, `aria-busy` |
+| Focus management / `:focus-visible`                        | 2   | ✅               | ✅                 | ✅            | ui-lib tracks a `focused` signal for styling                     |
+| Screen-reader loading announcement                         | 2   | N/A (no loading) | ❌                 | 🚀            | `aria-busy` + i18n loading label                                 |
+| Reduced motion (`prefers-reduced-motion`)                  | 3   | ✅               | ✅                 | ✅            | Honoured in `button.scss`                                        |
+| Theming surface (CSS custom properties)                    | 5   | ⚠️ (MDC tokens)  | ⚠️ (preset tokens) | 🚀            | 111 `--uilib-button-*` tokens, overridable with no `::ng-deep`   |
+| Built-in i18n of a11y labels                               | 1/2 | ❌               | ❌                 | 🚀            | `button.loading` / `button.icon-only` via `UiLibI18nService`     |
 
 #### Gaps
 
