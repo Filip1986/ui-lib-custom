@@ -91,12 +91,24 @@ Entries are in alphabetical order within each category grouping.
 
 ### How to Fill In a New Entry
 
-1. Find the equivalent component in each reference library (or note `N/A`).
-2. Read its full feature list, input/output API, keyboard model, and ARIA implementation.
-3. For each row: mark ✅ ❌ ⚠️ 🚀 or N/A. Be honest.
+> **Anti-drift discipline (learned from the Button calibration, 2026-06-03):** the failure mode of a
+> hand-kept matrix is curating rows toward a flattering story, so real gaps (e.g. PrimeNG's `autofocus`)
+> never get a row. Always build rows from the competitor's _full_ surface, and stamp what you verified.
+> See `### Button` for the reference shape.
+
+1. **Generate the PrimeNG ground truth first:** run `npm run competitive:primeng`, then open
+   [`_generated/primeng-api-surface.md`](_generated/primeng-api-surface.md) and find the component. This
+   is the authoritative input/output list — build a row for **every** input it exposes, so nothing hides.
+2. Find the equivalent component in each other reference library (or note `N/A`). Read its full feature
+   list, keyboard model, and ARIA implementation. For accessibility claims, verify against the shipped
+   bundle/source — not the docs (the prior pass marked PrimeNG `aria-busy` ⚠️ when the bundle has none).
+3. For each row: mark ✅ ❌ ⚠️ 🚀 or N/A. Be honest. Include a **full input-surface audit** table that maps
+   every PrimeNG input to a verdict (match / 🚀 superset / `—` excluded-with-reason).
 4. Add a **Gaps** section listing every ❌ row and the decision: implement it or exclude it with a reason.
 5. Add a **Differentiators** section listing every 🚀 row with a one-sentence explanation.
 6. Record the reference URLs at the bottom of the entry.
+7. **Stamp a verification-scope note** at the top of the entry: which libraries/versions you actually
+   re-verified this pass, which marks are carried-over-unverified, and the date.
 
 ---
 
@@ -134,6 +146,15 @@ Entries are in alphabetical order within each category grouping.
 
 ### Button
 
+> **Verification scope (this pass):** PrimeNG **19.1.4** — _full_ input/output surface audited against
+> the generated ground truth in [`_generated/primeng-api-surface.json`](_generated/primeng-api-surface.json)
+> (`p-button`: 26 inputs, 3 outputs). Angular Material **19.x** — `loading`, `disabled`/`disabledInteractive`,
+> and `autofocus` verified from live docs. Radix/Ark marks are carried from the prior pass and **not**
+> re-verified — flagged for a future pass. ui-lib-custom verified against source (`button.ts`, `button.html`).
+> Checked 2026-06-03.
+
+#### Behaviour & accessibility
+
 | Feature / Behaviour                         | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
 | ------------------------------------------- | ---------------- | ------- | -------- | ------ | ----------------- |
 | Filled / solid variant                      | ✅               | ✅      | ✅       | ✅     | ✅                |
@@ -145,29 +166,76 @@ Entries are in alphabetical order within each category grouping.
 | Leading icon slot                           | ✅               | ✅      | ✅       | ✅     | ✅                |
 | Trailing icon slot                          | ✅               | ✅      | ✅       | ✅     | ✅                |
 | Loading / busy state                        | ❌               | ✅      | ❌       | ✅     | ✅                |
-| `aria-busy` on loading                      | ❌               | ⚠️      | ❌       | ⚠️     | 🚀                |
-| `aria-disabled` (not HTML `disabled`)       | ⚠️               | ⚠️      | ✅       | ✅     | ✅                |
+| `aria-busy` on loading                      | ❌               | ❌      | ❌       | ⚠️     | 🚀                |
+| `aria-disabled` (focusable disabled)        | ⚠️               | ❌      | ✅       | ✅     | ✅                |
 | Ripple effect                               | ✅               | ✅      | ❌       | ❌     | ✅                |
 | Danger / destructive severity               | ✅               | ✅      | ✅       | ✅     | ✅                |
 | Link-style button (`routerLink` compatible) | ✅               | ✅      | ✅       | ✅     | ✅                |
+| `autofocus` input                           | ✅               | ✅      | N/A      | N/A    | ❌                |
+| Focus / blur events exposed to consumer     | ✅               | ✅      | N/A      | N/A    | ⚠️                |
 | Signal-native API (`input()`)               | ❌               | ❌      | N/A      | N/A    | 🚀                |
 | Zoneless compatible                         | ❌               | ❌      | N/A      | N/A    | 🚀                |
 | Three runtime visual variants               | ❌               | ❌      | ❌       | ❌     | 🚀                |
 
+**Corrections from prior pass (verified against the 19.1.4 bundle):**
+
+- `aria-busy` — PrimeNG was marked ⚠️; the string `aria-busy` does **not** appear anywhere in
+  `primeng-button.mjs` (only in `blockui`/`progressspinner`). PrimeNG's loading spinner is `aria-hidden`
+  with no busy announcement → corrected to ❌. ui-lib's `button.html:3` sets `[attr.aria-busy]` on loading.
+- `aria-disabled` — PrimeNG was marked ⚠️; its button template emits only `aria-hidden` and `aria-label`
+  and disables via the native `disabled` attribute (no `aria-disabled`) → corrected to ❌. ui-lib exposes
+  the focusable-disabled pattern via `softDisabled` (`aria-disabled` without native `disabled`).
+
+#### Full PrimeNG input-surface audit (`p-button`, 26 inputs)
+
+Every public input PrimeNG exposes, mapped to a verdict — so no capability hides by lacking a row.
+
+| PrimeNG input                            | ui-lib equivalent                        | Verdict                                                                                  |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `type`                                   | `type`                                   | ✅ match                                                                                 |
+| `severity`                               | `severity` (9 vs PrimeNG's 8)            | 🚀 superset                                                                              |
+| `disabled`                               | `disabled`                               | ✅ match                                                                                 |
+| `loading` / `loadingIcon`                | `loading` / `loadingIcon`                | ✅ match                                                                                 |
+| `icon` / `iconPos`                       | `icon` / `iconPosition`                  | ✅ match (+top/bottom)                                                                   |
+| `label`                                  | `label`                                  | ✅ match                                                                                 |
+| `badge` / `badgeClass` / `badgeSeverity` | `badge` / `badgeClass` / `badgeSeverity` | ✅ match                                                                                 |
+| `raised`                                 | `raised`                                 | ✅ match                                                                                 |
+| `rounded`                                | `pill`                                   | ✅ match                                                                                 |
+| `outlined` / `text`                      | `appearance='outline' / 'ghost'`         | ✅ match                                                                                 |
+| `link`                                   | `appearance='link'`                      | ✅ match                                                                                 |
+| `fluid`                                  | `fullWidth`                              | ✅ match                                                                                 |
+| `size`                                   | `size`                                   | ✅ match                                                                                 |
+| `tabindex`                               | `tabIndex`                               | ✅ match                                                                                 |
+| `ariaLabel`                              | `ariaLabel`                              | ✅ match                                                                                 |
+| `variant`                                | `appearance` (13 vs PrimeNG's 2)         | 🚀 superset                                                                              |
+| `autofocus`                              | —                                        | ❌ **gap**                                                                               |
+| `plain`                                  | —                                        | — excluded (PrimeNG-deprecated; superseded by `variant`)                                 |
+| `buttonProps`                            | —                                        | — excluded (PrimeNG-deprecated prop passthrough)                                         |
+| `style` / `styleClass`                   | native binding                           | — excluded (framework-level binding, not a component API under `ViewEncapsulation.None`) |
+
+**Outputs (`p-button`: 3):** `onClick` → ✅ ui-lib relies on native `click` bubbling from the inner
+`<button>` (works on `<ui-lib-button>`). `onFocus` / `onBlur` → ⚠️ **gap**: native `focus`/`blur` do
+**not** bubble through the wrapper element, and ui-lib exposes no focus/blur output, so a consumer cannot
+react to focus changes on `<ui-lib-button>`.
+
 #### Gaps
 
-_None — all ❌ reference rows are matched or consciously excluded._
+| Gap                         | Decision      | Notes                                                                                                                                                             |
+| --------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `autofocus` input           | **Implement** | Forward an `autofocus` input to the inner `<button>`. Small, low-risk; consumers expect parity with native/PrimeNG buttons.                                       |
+| Focus / blur events exposed | **Implement** | Add `buttonFocus` / `buttonBlur` outputs via `focusin`/`focusout` (which _do_ bubble). Names avoid the blocked native `focus`/`blur` per the Output Naming Rules. |
 
 #### Differentiators
 
-- **`aria-busy` on loading**: Angular Material and PrimeNG set a visual spinner but do not set `aria-busy="true"` on the button element, so screen readers do not announce the busy state. This library sets it correctly.
+- **`aria-busy` on loading**: Material has no loading state at all; PrimeNG renders an `aria-hidden` spinner with **no** `aria-busy`. This library sets `aria-busy="true"` on the host button so screen readers announce the busy state — verified absent in all Angular references.
+- **Severity & appearance superset**: 9 severities and 13 appearances vs PrimeNG's 8 severities / 2 `variant` values — a strictly larger styled surface with no extra consumer wiring.
 - **Signal-native API**: Both Angular incumbents use `@Input()` decorators. This library uses `input()` / `model()` throughout, enabling signal composition with no adapter layer.
 - **Three runtime visual variants**: No other Angular library lets you switch between Material, Bootstrap, and Minimal aesthetics at runtime via a single CSS variable change.
 
 #### Reference URLs
 
-- Angular Material: https://material.angular.io/components/button/overview
-- PrimeNG: https://primeng.org/button
+- Angular Material: https://material.angular.dev/components/button/overview (loading still unsupported — angular/components#15982)
+- PrimeNG: https://primeng.org/button — surface verified from `primeng@19.1.4` `.d.ts`
 - Radix UI: https://www.radix-ui.com/primitives/docs/components/slot (no dedicated Button primitive — uses native `<button>`)
 - Ark UI: https://ark-ui.com — no dedicated Button primitive
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/
