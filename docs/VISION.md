@@ -1,5 +1,12 @@
 # Vision — ui-lib-custom
 
+> **⚠️ Superseded for active work (2026-06-03).**
+> Canonical product vision: **`platform/docs/VISION.md`**.
+> Canonical library craft and quality bar: **`platform/docs/LIBRARY-AMBITION.md`** (ten-layer model, depth over breadth, elite accessibility wow factor).
+> Continue porting **code** from this repo into `platform/libs/ui`; do not extend this document.
+>
+> The content below is **historical R&D canon** from the standalone library era.
+
 > **The modern Angular UI platform developers wished existed.**
 
 ---

@@ -388,9 +388,9 @@ Then update the table above and record the session in `AI_AGENT_CONTEXT.md`.
 
 ## Related Documents
 
-| Document                                                              | Relevance                                                         |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| [Hardening Prompt Index](prompts/HARDENING_PROMPT_INDEX.md)           | Tier 1 score reference + Tier 2 audit queue with priority order   |
-| [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md) | The 6-phase AI workflow + accumulated lessons from all hardenings |
-| [Vision — Component Philosophy](VISION.md#component-philosophy)       | The 10-layer quality model and ≥8 gate                            |
-| [Accessibility Guide](reference/systems/ACCESSIBILITY.md)             | Detail behind the A11y score category                             |
+| Document                                                                    | Relevance                                                                           |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [Hardening Prompt Index](prompts/HARDENING_PROMPT_INDEX.md)                 | Tier 1 score reference + Tier 2 audit queue with priority order                     |
+| [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)       | The 6-phase AI workflow + accumulated lessons from all hardenings                   |
+| [Library ambition — quality model](../../platform/docs/LIBRARY-AMBITION.md) | Canonical ten-layer model and ≥8 gate (supersedes `VISION.md#component-philosophy`) |
+| [Accessibility Guide](reference/systems/ACCESSIBILITY.md)                   | Detail behind the A11y score category                                               |

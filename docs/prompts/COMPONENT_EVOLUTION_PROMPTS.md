@@ -368,12 +368,12 @@ You are building this in the AI era, with modern Angular, after learning from 10
 
 ## Related Documents
 
-| Document                                                           | Relevance                                                                                                     |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| [Vision — Component Philosophy](../VISION.md#component-philosophy) | The 10-layer model and 8-step workflow these prompts are built on                                             |
-| [Hardening Prompt Index](HARDENING_PROMPT_INDEX.md)                | Index of all session prompts with queue order and key focus areas                                             |
-| [Scoring Criteria Audit Prompt](SCORING_CRITERIA_AUDIT_PROMPT.md)  | **Tier 2** — checkpoint-verified scoring against SCORING_CRITERIA.md (use after Tier 1 hardening is complete) |
-| [Component Creation Guide](../../COMPONENT_CREATION_GUIDE.md)      | End-to-end workflow for building new components                                                               |
-| [Library Conventions](../../LIBRARY_CONVENTIONS.md)                | Non-negotiable architectural rules — always provide to AI alongside these prompts                             |
-| [Accessibility Guide](../reference/systems/ACCESSIBILITY.md)       | Detailed a11y standards for Phase 3                                                                           |
-| [Performance Guide](../reference/systems/PERFORMANCE.md)           | Performance targets for Phase 4                                                                               |
+| Document                                                          | Relevance                                                                                                                                            |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Library ambition](../../platform/docs/LIBRARY-AMBITION.md)       | Canonical ten-layer model; platform [`component-evolution-prompts.md`](../../platform/docs/guides/component-evolution-prompts.md) for active prompts |
+| [Hardening Prompt Index](HARDENING_PROMPT_INDEX.md)               | Index of all session prompts with queue order and key focus areas                                                                                    |
+| [Scoring Criteria Audit Prompt](SCORING_CRITERIA_AUDIT_PROMPT.md) | **Tier 2** — checkpoint-verified scoring against SCORING_CRITERIA.md (use after Tier 1 hardening is complete)                                        |
+| [Component Creation Guide](../../COMPONENT_CREATION_GUIDE.md)     | End-to-end workflow for building new components                                                                                                      |
+| [Library Conventions](../../LIBRARY_CONVENTIONS.md)               | Non-negotiable architectural rules — always provide to AI alongside these prompts                                                                    |
+| [Accessibility Guide](../reference/systems/ACCESSIBILITY.md)      | Detailed a11y standards for Phase 3                                                                                                                  |
+| [Performance Guide](../reference/systems/PERFORMANCE.md)          | Performance targets for Phase 4                                                                                                                      |
