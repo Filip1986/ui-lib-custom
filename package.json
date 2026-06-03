@@ -53,7 +53,9 @@
     "docs:i18n": "node scripts/generate-i18n-catalogue.mjs",
     "docs:i18n:check": "node scripts/generate-i18n-catalogue.mjs --check",
     "competitive:primeng": "node scripts/extract-primeng-api.mjs",
+    "competitive:primeng:check": "node scripts/extract-primeng-api.mjs --check",
     "competitive:surfaces": "node scripts/competitive-surfaces.mjs",
+    "competitive:metrics": "node scripts/component-quality-metrics.mjs",
     "check:i18n": "node scripts/check-i18n.mjs"
   },
   "engines": {

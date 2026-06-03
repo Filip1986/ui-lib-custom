@@ -19,7 +19,7 @@
  *   docs/_generated/primeng-api-surface.md     # human-eyeball digest (unless --json-only)
  */
 
-import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -36,7 +36,7 @@ const REPO_ROOT = resolve(__dirname, '..');
 const OUT_DIR = resolve(REPO_ROOT, 'docs/_generated');
 
 function parseArgs(argv) {
-  const args = { version: '19', jsonOnly: false };
+  const args = { version: '19', jsonOnly: false, check: false };
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index];
     if (token === '--version') {
@@ -44,9 +44,54 @@ function parseArgs(argv) {
       index += 1;
     } else if (token === '--json-only') {
       args.jsonOnly = true;
+    } else if (token === '--check') {
+      args.check = true;
     }
   }
   return args;
+}
+
+/**
+ * Freshness guard: diff a freshly-extracted surface against the committed snapshot. Reports
+ * per-component input/output drift and components added/removed, and signals via exit code.
+ * Catches a new upstream release quietly aging the committed benchmark entries.
+ */
+function runCheck(freshComponents, jsonPath) {
+  if (!existsSync(jsonPath)) {
+    process.stderr.write(
+      `No committed snapshot at ${relative(REPO_ROOT, jsonPath)} — run without --check first.\n`,
+    );
+    process.exitCode = 1;
+    return;
+  }
+  const committed = JSON.parse(readFileSync(jsonPath, 'utf8')).components;
+  const keys = new Set([...Object.keys(committed), ...Object.keys(freshComponents)]);
+  const drift = [];
+  for (const key of [...keys].sort()) {
+    const before = committed[key];
+    const after = freshComponents[key];
+    if (!before) drift.push(`+ ${key} (new component)`);
+    else if (!after) drift.push(`- ${key} (removed)`);
+    else {
+      for (const field of ['inputs', 'outputs']) {
+        const added = after[field].filter((name) => !before[field].includes(name));
+        const removed = before[field].filter((name) => !after[field].includes(name));
+        if (added.length) drift.push(`~ ${key} ${field} added: ${added.join(', ')}`);
+        if (removed.length) drift.push(`~ ${key} ${field} removed: ${removed.join(', ')}`);
+      }
+    }
+  }
+  if (drift.length === 0) {
+    process.stdout.write('Surface unchanged — committed benchmark snapshot is fresh.\n');
+    return;
+  }
+  process.stderr.write(
+    `Surface drift vs committed snapshot (${drift.length}):\n${drift.join('\n')}\n`,
+  );
+  process.stderr.write(
+    'Benchmark entries may be stale. Re-run without --check and review affected entries.\n',
+  );
+  process.exitCode = 1;
 }
 
 function main() {
@@ -60,9 +105,14 @@ function main() {
     const components = extractSurfaceFromDir(packageRoot);
     const payload = buildPayload('primeng', version, components);
     const sortedKeys = Object.keys(payload.components);
+    const jsonPath = join(OUT_DIR, 'primeng-api-surface.json');
+
+    if (args.check) {
+      runCheck(payload.components, jsonPath);
+      return;
+    }
 
     if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive: true });
-    const jsonPath = join(OUT_DIR, 'primeng-api-surface.json');
     writeFileSync(jsonPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
     process.stdout.write(
       `Wrote ${relative(REPO_ROOT, jsonPath)} (${sortedKeys.length} declarations)\n`,

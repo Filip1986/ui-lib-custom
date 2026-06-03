@@ -37,3 +37,20 @@ npm run coverage:summary
 ```powershell
 node scripts/coverage-summary.js --json
 ```
+
+## Competitive Benchmarks
+
+Support tooling for `docs/COMPETITIVE_BENCHMARKS.md` — extracts competitor API surfaces from their
+shipped `.d.ts` so benchmark rows are built from ground truth, not memory. Shared parsing lives in
+`lib/ng-surface.mjs`. Generated artifacts land in `docs/_generated/` (scaffolds are gitignored;
+surface dumps + coverage + metrics are committed as dated evidence).
+
+```powershell
+npm run competitive:primeng          # PrimeNG surface only → primeng-api-surface.{json,md}
+npm run competitive:primeng:check    # CI freshness guard — non-zero exit if upstream surface drifted
+npm run build; npm run competitive:surfaces   # ui-lib + PrimeNG + Material surfaces, per-component
+                                              # diff scaffolds, and the component coverage report
+npm run build; npm run competitive:metrics    # per-component --uilib-* token count + public `any` leakage
+```
+
+The `:surfaces` and `:metrics` runs read ui-lib from its build output — run `npm run build` first.
