@@ -2,7 +2,8 @@
 
 Welcome to the UI Components Library documentation! This documentation is organized to help you find what you need quickly.
 
-> 🌟 **New here?** Start with the **[Vision — why this library exists and where it's going](VISION.md)**.
+> 🌟 **New here?** Read canonical vision in **`platform/docs/VISION.md`** and library craft in **`platform/docs/LIBRARY-AMBITION.md`**.
+> Legacy copy: [VISION.md](VISION.md) (superseded — historical only).
 
 ## 📖 Documentation Structure
 
