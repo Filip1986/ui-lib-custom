@@ -52,3 +52,7 @@ storybook-static
 .claude/worktrees/
 # Local Claude settings (machine-specific, never commit)
 .claude/settings.local.json
+
+# Competitive-benchmark scaffolds are transient working files (filled-in results live in
+# docs/COMPETITIVE_BENCHMARKS.md). The dated surface dumps + coverage report ARE committed.
+docs/_generated/scaffolds/
