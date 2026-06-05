@@ -168,6 +168,21 @@ npm run build-storybook
 
 ---
 
+## 🔬 Research
+
+**Implementation research and competitive parity notes:**
+
+- **[Research Index](research/README.md)** - Overview of all research docs
+- **[DataGrid Research](research/DATAGRID_RESEARCH.md)** - Competitive analysis and v0.1.0 enterprise graduation plan for `SenseDataGrid`
+- **[DataView Research](research/DATAVIEW_RESEARCH.md)** - DataView parity and implementation analysis
+- **[Chart Research](research/CHART_RESEARCH.md)** - Chart components research and architecture notes
+- **[InputMask Research](research/INPUTMASK_RESEARCH.md)** - Input masking parity and implementation notes
+- **[InputNumber Research](research/INPUTNUMBER_RESEARCH.md)** - Numeric input parity and implementation notes
+- **[SpeedDial Research](research/SPEEDDIAL_RESEARCH.md)** - SpeedDial parity and behavior analysis
+- **[SplitButton Research](research/SPLITBUTTON_RESEARCH.md)** - SplitButton parity and implementation analysis
+
+---
+
 ## 🌟 Vision & Strategy
 
 **Understand the why behind the library and the path to launch:**

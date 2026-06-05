@@ -9,6 +9,7 @@ This folder contains implementation research and parity analysis used to plan co
 - [Chart Research](CHART_RESEARCH.md)
 - [SpeedDial Research](SPEEDDIAL_RESEARCH.md)
 - [SplitButton Research](SPLITBUTTON_RESEARCH.md)
+- [DataGrid Research](DATAGRID_RESEARCH.md)
 
 ## Notes
 

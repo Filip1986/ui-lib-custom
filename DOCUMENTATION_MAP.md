@@ -114,6 +114,14 @@ docs/
 
 → [docs/research/README.md](docs/research/README.md)
 
+- [DataGrid Research](docs/research/DATAGRID_RESEARCH.md)
+- [DataView Research](docs/research/DATAVIEW_RESEARCH.md)
+- [Chart Research](docs/research/CHART_RESEARCH.md)
+- [InputMask Research](docs/research/INPUTMASK_RESEARCH.md)
+- [InputNumber Research](docs/research/INPUTNUMBER_RESEARCH.md)
+- [SpeedDial Research](docs/research/SPEEDDIAL_RESEARCH.md)
+- [SplitButton Research](docs/research/SPLITBUTTON_RESEARCH.md)
+
 ### 📖 I want to publish the library
 
 → [docs/guides/PUBLISHING_GUIDE.md](docs/guides/PUBLISHING_GUIDE.md)
