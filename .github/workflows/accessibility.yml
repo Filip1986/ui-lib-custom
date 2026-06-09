@@ -30,7 +30,7 @@ jobs:
         run: npm run test:a11y -- --ci --coverage
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         with:
           files: ./coverage/a11y/lcov.info
           flags: accessibility
